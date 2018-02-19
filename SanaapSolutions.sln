@@ -3,9 +3,66 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{8649F034-C391-416A-8A28-86AF1F21222D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanaap.Model", "Server\Sanaap.Model\Sanaap.Model.csproj", "{7558C765-2CE3-496E-A50B-F9FB5CF2AE39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannap.Data", "Server\Sannap.Data\Sannap.Data.csproj", "{2DB71938-0DE0-4D99-975E-4CDF295BA1E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanaap.Service", "Server\Sanaap.Service\Sanaap.Service.csproj", "{F6235594-3F0C-4BD3-A25A-8934563A8014}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanaap.Dto", "Server\Sanaap.Dto\Sanaap.Dto.csproj", "{291CE220-5082-41AA-868E-032B6837E089}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanaap.Test", "Server\Sanaap.Test\Sanaap.Test.csproj", "{84D48C53-AF88-4DBE-8353-2B4FB414CEA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanaap.Api", "Server\Sanaap.Api\Sanaap.Api.csproj", "{46F56EE0-EDEF-43C7-B346-8A2A795F7A63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{062F1981-EBB2-4251-93C5-9BBDCD07BA67}"
+	ProjectSection(SolutionItems) = preProject
+		ToDo.txt = ToDo.txt
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7558C765-2CE3-496E-A50B-F9FB5CF2AE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7558C765-2CE3-496E-A50B-F9FB5CF2AE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7558C765-2CE3-496E-A50B-F9FB5CF2AE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7558C765-2CE3-496E-A50B-F9FB5CF2AE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB71938-0DE0-4D99-975E-4CDF295BA1E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB71938-0DE0-4D99-975E-4CDF295BA1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB71938-0DE0-4D99-975E-4CDF295BA1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB71938-0DE0-4D99-975E-4CDF295BA1E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6235594-3F0C-4BD3-A25A-8934563A8014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6235594-3F0C-4BD3-A25A-8934563A8014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6235594-3F0C-4BD3-A25A-8934563A8014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6235594-3F0C-4BD3-A25A-8934563A8014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291CE220-5082-41AA-868E-032B6837E089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291CE220-5082-41AA-868E-032B6837E089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291CE220-5082-41AA-868E-032B6837E089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291CE220-5082-41AA-868E-032B6837E089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D48C53-AF88-4DBE-8353-2B4FB414CEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D48C53-AF88-4DBE-8353-2B4FB414CEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D48C53-AF88-4DBE-8353-2B4FB414CEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D48C53-AF88-4DBE-8353-2B4FB414CEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F56EE0-EDEF-43C7-B346-8A2A795F7A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F56EE0-EDEF-43C7-B346-8A2A795F7A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F56EE0-EDEF-43C7-B346-8A2A795F7A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F56EE0-EDEF-43C7-B346-8A2A795F7A63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7558C765-2CE3-496E-A50B-F9FB5CF2AE39} = {8649F034-C391-416A-8A28-86AF1F21222D}
+		{2DB71938-0DE0-4D99-975E-4CDF295BA1E6} = {8649F034-C391-416A-8A28-86AF1F21222D}
+		{F6235594-3F0C-4BD3-A25A-8934563A8014} = {8649F034-C391-416A-8A28-86AF1F21222D}
+		{291CE220-5082-41AA-868E-032B6837E089} = {8649F034-C391-416A-8A28-86AF1F21222D}
+		{84D48C53-AF88-4DBE-8353-2B4FB414CEA6} = {8649F034-C391-416A-8A28-86AF1F21222D}
+		{46F56EE0-EDEF-43C7-B346-8A2A795F7A63} = {8649F034-C391-416A-8A28-86AF1F21222D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {429BF966-C954-47AF-B7FF-82878BA4E10E}

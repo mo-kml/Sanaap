@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Server/Sanaap.Api/*.edmx
+/Server/Sanaap.Api/System.Data.Entity.Migrations.History.LegacyHistoryContext.edmx
+/Server/Sanaap.Api/System.Data.Entity.Internal.EdmMetadataContext.edmx
+/Server/Sanaap.Api/Sannap.Data.SanaapDbContext.edmx

@@ -1,0 +1,25 @@
+﻿[
+  {
+    "Name": "Development",
+    "IsActive": true,
+    "DebugMode": true,
+    "AppInfo": {
+      "Name": "Sanaap",
+      "Version": "1"
+    },
+    "Security": {
+      "ClientId": "Sanaap",
+      "ClientSecret": "secret"
+    },
+    "Configs": [
+      {
+        "Key": "IdentityCertificatePassword",
+        "Value": "P@ssw0rd"
+      },
+      {
+        "Key": "SanaapDbConnectionString",
+        "Value": "Data Source=soft\\sqlexpress;Initial Catalog=SanaapDb;Integrated Security=True;Application Name=Sanaap;"
+      }
+    ]
+  }
+]
