@@ -25,8 +25,6 @@ namespace Sanaap.Api.Implementations.Security
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentException(nameof(password));
 
-            username = username.ToLower();
-
             User user = null;
 
             using (IDependencyResolver resolver = DependencyManager.CreateChildDependencyResolver())
@@ -48,7 +46,7 @@ namespace Sanaap.Api.Implementations.Security
             {
                 IUsersRepository usersRepository = resolver.Resolve<IUsersRepository>();
 
-                User user = await usersRepository.GetUserById(userId, CancellationToken.None);
+                User user = await usersRepository.GetUserById(Guid.Parse(userId), CancellationToken.None);
 
                 return user != null;
             }

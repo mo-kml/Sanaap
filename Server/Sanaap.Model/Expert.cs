@@ -14,5 +14,16 @@ namespace Sanaap.Model
         public virtual string FirstName { get; set; }
 
         public virtual string LastName { get; set; }
+
+        public virtual Gender Gender { get; set; }
+
+        public virtual bool IsActive { get; set; }
+
+        public virtual string MobileNumber { get; set; }
+
+        [ForeignKey(nameof(CityId))]
+        public virtual City City { get; set; }
+
+        public virtual Guid CityId { get; set; }
     }
 }
