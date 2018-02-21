@@ -60,6 +60,9 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterAspNetCoreSingleSignOnClient();
 
+            services.AddWebApiCore();
+            dependencyManager.RegisterAspNetCoreMiddleware<SanaapWebApiCoreMvcMiddlewareConfiguration>();
+
             dependencyManager.RegisterDefaultWebApiAndODataConfiguration();
 
             dependencyManager.RegisterWebApiMiddleware(webApiDependencyManager =>
