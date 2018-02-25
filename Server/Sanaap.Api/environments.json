@@ -18,7 +18,7 @@
       },
       {
         "Key": "SanaapDbConnectionString",
-        "Value": "Data Source=.;Initial Catalog=SanaapDb;Integrated Security=True;Application Name=Sanaap;"
+        "Value": "Data Source=.\\sqlexpress;Initial Catalog=SanaapDb;Integrated Security=True;Application Name=Sanaap;"
       }
     ]
   }

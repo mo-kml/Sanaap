@@ -67,10 +67,11 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterWebApiMiddleware(webApiDependencyManager =>
             {
-                webApiDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
-                {
-                    httpConfiguration.Filters.Add(new System.Web.Http.AuthorizeAttribute());
-                });
+                // Enable webApi AuthorizeAttribute
+                //webApiDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
+                //{
+                //    httpConfiguration.Filters.Add(new System.Web.Http.AuthorizeAttribute());
+                //});
 
                 webApiDependencyManager.RegisterGlobalWebApiCustomizerUsing(httpConfiguration =>
                 {
@@ -87,10 +88,11 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterODataMiddleware(odataDependencyManager =>
             {
-                odataDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
-                {
-                    httpConfiguration.Filters.Add(new DefaultODataAuthorizeAttribute());
-                });
+                // Enable odata AuthorizeAttribute
+                //odataDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
+                //{
+                //    httpConfiguration.Filters.Add(new DefaultODataAuthorizeAttribute());
+                //});
 
                 odataDependencyManager.RegisterGlobalWebApiCustomizerUsing(httpConfiguration =>
                 {
