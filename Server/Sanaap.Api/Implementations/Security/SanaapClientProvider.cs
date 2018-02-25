@@ -14,10 +14,15 @@ namespace Sanaap.Api.Implementations.Security
             {
                 GetResourceOwnerFlowClient(new BitResourceOwnerFlowClient
                 {
-                    ClientId = "Sanaap-ResOwner",
-                    ClientName = "Sanaap-ResOwner",
-                    Secret = "secret",
-                    TokensLifetime = TimeSpan.FromDays(7)
+                    //ClientId = "Sanaap-ResOwner",
+                    //ClientName = "Sanaap-ResOwner",
+                    //Secret = "secret",
+                    //TokensLifetime = TimeSpan.FromDays(7)
+
+                    ClientId = "1",
+                    ClientName = "1",
+                    Secret = "1",
+                    TokensLifetime = TimeSpan.FromDays(9999)
                 })
             };
         }
