@@ -18,6 +18,16 @@ namespace Sannap.Data
         {
             AutomaticMigrationDataLossAllowed = AutomaticMigrationsEnabled = true;
         }
+
+        protected override void Seed(SanaapDbContext context)
+        {
+            if (!context.Set<User>().AsNoTracking().Any())
+            {
+                context.Set<User>().Add(new User { UserName = "Test", Password = "Test" });
+            }
+
+            base.Seed(context);
+        }
     }
 
     [DbConfigurationType(typeof(UseDefaultModelStoreDbConfiguration))]
