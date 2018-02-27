@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bit.Data.EntityFramework" Version="0.9.2" />
+    <PackageReference Include="Bit.Data.EntityFramework" Version="0.9.3" />
     <PackageReference Include="BitCodeAnalyzer" Version="1.1.9.8" />
   </ItemGroup>
 

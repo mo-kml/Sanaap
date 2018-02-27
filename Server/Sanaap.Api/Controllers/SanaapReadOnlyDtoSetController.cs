@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.OData;
 using Bit.Model.Contracts;
+using Bit.Owin.Exceptions;
 
 namespace Sanaap.Api.Controllers
 {

@@ -36,13 +36,13 @@ namespace Sanaap.Api
 
         public override IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            DefaultDependenciesManagerProvider.Current = new SanaapDependenciesManager();
+            DefaultAppModulesProvider.Current = new SanaapAppModulesProvider();
 
             return base.ConfigureServices(services);
         }
     }
 
-    public class SanaapDependenciesManager : IDependenciesManagerProvider, IAspNetCoreDependenciesManager
+    public class SanaapAppModulesProvider : IAppModulesProvider, IAspNetCoreAppModule
     {
         public virtual void ConfigureDependencies(IServiceProvider serviceProvider, IServiceCollection services, IDependencyManager dependencyManager)
         {
@@ -59,9 +59,6 @@ namespace Sanaap.Api
             dependencyManager.RegisterMinimalAspNetCoreMiddlewares();
 
             dependencyManager.RegisterAspNetCoreSingleSignOnClient();
-
-            services.AddWebApiCore();
-            dependencyManager.RegisterAspNetCoreMiddleware<SanaapWebApiCoreMvcMiddlewareConfiguration>();
 
             dependencyManager.RegisterDefaultWebApiAndODataConfiguration();
 
@@ -80,7 +77,7 @@ namespace Sanaap.Api
                         EnvironmentAppInfo appInfo = DefaultAppEnvironmentProvider.Current.GetActiveAppEnvironment().AppInfo;
                         c.SingleApiVersion($"v{appInfo.Version}", $"{appInfo.Name}-Api");
                         c.ApplyDefaultApiConfig(httpConfiguration);
-                    }).EnableSwaggerUi();
+                    }).EnableBitSwaggerUi();
                 });
 
                 webApiDependencyManager.RegisterWebApiMiddlewareUsingDefaultConfiguration();
@@ -101,7 +98,7 @@ namespace Sanaap.Api
                         EnvironmentAppInfo appInfo = DefaultAppEnvironmentProvider.Current.GetActiveAppEnvironment().AppInfo;
                         c.SingleApiVersion($"v{appInfo.Version}", $"{appInfo.Name}-Api");
                         c.ApplyDefaultODataConfig(httpConfiguration);
-                    }).EnableSwaggerUi();
+                    }).EnableBitSwaggerUi();
                 });
 
                 odataDependencyManager.RegisterODataServiceBuilder<BitODataServiceBuilder>();
@@ -126,9 +123,9 @@ namespace Sanaap.Api
             dependencyManager.Register<ISmsService, DefaultSmsService>();
         }
 
-        public IEnumerable<IDependenciesManager> GetDependenciesManagers()
+        public IEnumerable<IAppModule> GetAppModules()
         {
-            yield return new SanaapDependenciesManager();
+            yield return this;
         }
     }
 }

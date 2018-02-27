@@ -18,7 +18,7 @@ namespace Sanaap.Test
         {
             args = args ?? new TestEnvironmentArgs();
 
-            args.CustomDependenciesManagerProvider = args.CustomDependenciesManagerProvider ?? new SanaapDependenciesManager();
+            args.CustomAppModulesProvider = args.CustomAppModulesProvider ?? new SanaapAppModulesProvider();
 
             args.UseAspNetCore = true;
 
@@ -29,7 +29,7 @@ namespace Sanaap.Test
         {
             List<Func<TypeInfo, bool>> baseList = base.GetAutoProxyCreationIncludeRules();
 
-            baseList.Add(implementationType => implementationType.Assembly == typeof(SanaapDependenciesManager).GetTypeInfo().Assembly);
+            baseList.Add(implementationType => implementationType.Assembly == typeof(SanaapAppModulesProvider).GetTypeInfo().Assembly);
 
             return baseList;
         }
