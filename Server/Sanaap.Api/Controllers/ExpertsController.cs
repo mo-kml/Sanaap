@@ -2,7 +2,6 @@
 using Bit.Owin.Exceptions;
 using Sanaap.Dto;
 using Sanaap.Model;
-using Sanaap.Service.Contracts;
 using Sannap.Data.Contracts;
 using System;
 using System.Linq;
@@ -15,8 +14,6 @@ namespace Sanaap.Api.Controllers
     public class ExpertsController : SanaapDtoSetController<ExpertDto, Expert>
     {
         public virtual IExpertsRepository ExpertsRepository { get; set; }
-
-        public virtual ISmsService SmsService { get; set; }
 
         [Function]
         public virtual async Task<IQueryable<ExpertDto>> GetManExperts(CancellationToken cancellationToken)
@@ -43,8 +40,6 @@ namespace Sanaap.Api.Controllers
             expertToDeactivate.IsActive = false;
 
             await ExpertsRepository.UpdateAsync(expertToDeactivate, cancellation);
-
-            await SmsService.SendSms("/-:", expertToDeactivate.MobileNumber);
         }
 
         [Function]

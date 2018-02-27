@@ -14,9 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Sanaap.Api.Implementations;
 using Sanaap.Api.Implementations.Security;
 using Sanaap.Dto.Implementations;
-using Sanaap.Service.Contracts;
-using Sanaap.Service.Implementations;
 using Sannap.Data;
+using Sannap.Data.Contracts;
 using Sannap.Data.Implementations;
 using Swashbuckle.Application;
 using System;
@@ -120,7 +119,7 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapClientProvider>();
 
-            dependencyManager.Register<ISmsService, DefaultSmsService>();
+            dependencyManager.Register<IHashService, DefaultHashService>(lifeCycle: DependencyLifeCycle.SingleInstance);
         }
 
         public IEnumerable<IAppModule> GetAppModules()

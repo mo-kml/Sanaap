@@ -10,6 +10,8 @@ namespace Sannap.Data.Implementations
 {
     public class UsersRepository : SanaapEfRepository<User>, IUsersRepository
     {
+        public virtual IHashService HashService { get; set; }
+
         public virtual async Task<User> GetUserById(Guid userId, CancellationToken cancellationToken)
         {
             return await GetByIdAsync(cancellationToken, userId);
@@ -25,8 +27,15 @@ namespace Sannap.Data.Implementations
 
             userName = userName.ToLower();
 
-            return await (await GetAllAsync(cancellationToken))
-                .FirstOrDefaultAsync(u => u.UserName.ToLower() == userName && u.Password == password, cancellationToken);
+            User user = await (await GetAllAsync(cancellationToken))
+                .SingleOrDefaultAsync(u => u.UserName.ToLower() == userName, cancellationToken);
+
+            if (user == null)
+                throw new InvalidOperationException("UserNotFound");
+
+            HashService.VerifyHash(password, user.Password);
+
+            return user;
         }
     }
 }
