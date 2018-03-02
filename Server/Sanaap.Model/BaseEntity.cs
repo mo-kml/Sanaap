@@ -13,10 +13,5 @@ namespace Sanaap.Model
 
         public DateTimeOffset AddDate { set; get; }
         public DateTimeOffset? EditDate { set; get; }
-
-        //public EntityState State { get; set; }
-
-        //[Timestamp]
-        //public byte[] RowVersion { set; get; }
     }
 }

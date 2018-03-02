@@ -10,8 +10,21 @@ namespace Sanaap.Dto.Implementations
         {
             mapperConfigExpression.ValidateInlineMaps = false;
 
-            //mapperConfigExpression.CreateMap<Expert, ExpertDto>()
-            //    .ForMember(c => c.FullName, cnfg => cnfg.MapFrom(c => c.FirstName + " " + c.LastName));
+            mapperConfigExpression.CreateMap<Customer, CustomerDto>()
+                .ForMember(src => src.FullName, cnfg => cnfg.MapFrom(src => src.FirstName + " " + src.LastName))
+                .AfterMap((src, dest) => dest.NationalCodeStr = "abcdefg");
+        }
+
+        public string GetNationalCodeStr(long NationalCode)
+        {
+            string str = NationalCode.ToString();
+            int zeroCount = 10 - str.Length;
+            string zeros = "";
+            for (int i = 0; i < zeroCount; i++)
+            {
+                zeros += "0";
+            }
+            return zeros + str;
         }
     }
 }

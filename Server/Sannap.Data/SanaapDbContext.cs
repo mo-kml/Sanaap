@@ -74,31 +74,22 @@ namespace Sannap.Data
 
         }
 
-        public DbSet<User> Users { set; get; }
-        public DbSet<Customer> Customers { set; get; }
+        //public DbSet<User> Users { set; get; }
+        //public DbSet<Customer> Customers { set; get; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            var asm = Assembly.GetExecutingAssembly();
-            var entityTypes = asm.GetTypes()
-                                    .Where(type => type.BaseType != null &&
-                                           type.Namespace == "Sanaap.Model" &&
-                                           type.BaseType.IsAbstract &&
-                                           type.BaseType == typeof(BaseEntity))
-                                    .ToList();
-            entityTypes.ForEach(modelBuilder.RegisterEntityType);
+            foreach (TypeInfo entityType in typeof(User)
+                .GetTypeInfo()
+                .Assembly
+                .GetLoadableExportedTypes()
+                .Where(t => t.IsClass && !t.IsAbstract && typeof(IEntity).GetTypeInfo().IsAssignableFrom(t)))
+            {
+                if (entityType == typeof(BaseEntity).GetTypeInfo())
+                    continue;
+                modelBuilder.RegisterEntityType(entityType);
+            }
 
-
-
-            //foreach (TypeInfo entityType in typeof(User)
-            //    .GetTypeInfo()
-            //    .Assembly
-            //    .GetLoadableExportedTypes()
-            //    .Where(t => typeof(IEntity).GetTypeInfo().IsAssignableFrom(t)))
-            //{
-            //    modelBuilder.RegisterEntityType(entityType);
-            //}
-
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
