@@ -10,8 +10,8 @@ namespace Sanaap.Dto.Implementations
         {
             mapperConfigExpression.ValidateInlineMaps = false;
 
-            mapperConfigExpression.CreateMap<Expert, ExpertDto>()
-                .ForMember(c => c.FullName, cnfg => cnfg.MapFrom(c => c.FirstName + " " + c.LastName));
+            //mapperConfigExpression.CreateMap<Expert, ExpertDto>()
+            //    .ForMember(c => c.FullName, cnfg => cnfg.MapFrom(c => c.FirstName + " " + c.LastName));
         }
     }
 }

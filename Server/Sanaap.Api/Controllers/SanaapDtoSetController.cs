@@ -11,10 +11,6 @@ namespace Sanaap.Api.Controllers
         where TDto : class, IDto
         where TEntity : class, IEntity
     {
-        public async override Task<TDto> Create(TDto dto, CancellationToken cancellationToken)
-        {
-            return await base.Create(dto, cancellationToken);
-        }
 
         public async override Task<TDto> Update(Guid key, TDto dto, CancellationToken cancellationToken)
         {

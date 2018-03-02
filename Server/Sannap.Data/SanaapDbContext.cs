@@ -35,15 +35,15 @@ namespace Sannap.Data
                 });
             }
 
-            if (!context.Set<City>().AsNoTracking().Any())
-            {
-                context.Set<City>().Add(new City
-                {
-                    Name = "Tehran",
-                    Location = new Location { Lat = 100, Lon = 100 },
-                    Version = 1
-                });
-            }
+            //if (!context.Set<City>().AsNoTracking().Any())
+            //{
+            //    context.Set<City>().Add(new City
+            //    {
+            //        Name = "Tehran",
+            //        Location = new Location { Lat = 100, Lon = 100 },
+            //        Version = 1
+            //    });
+            //}
 
             base.Seed(context);
         }
@@ -74,18 +74,31 @@ namespace Sannap.Data
 
         }
 
+        public DbSet<User> Users { set; get; }
+        public DbSet<Customer> Customers { set; get; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            foreach (TypeInfo entityType in typeof(User)
-                .GetTypeInfo()
-                .Assembly
-                .GetLoadableExportedTypes()
-                .Where(t => typeof(IEntity).GetTypeInfo().IsAssignableFrom(t)))
-            {
-                modelBuilder.RegisterEntityType(entityType);
-            }
+            var asm = Assembly.GetExecutingAssembly();
+            var entityTypes = asm.GetTypes()
+                                    .Where(type => type.BaseType != null &&
+                                           type.Namespace == "Sanaap.Model" &&
+                                           type.BaseType.IsAbstract &&
+                                           type.BaseType == typeof(BaseEntity))
+                                    .ToList();
+            entityTypes.ForEach(modelBuilder.RegisterEntityType);
 
-            base.OnModelCreating(modelBuilder);
+
+
+            //foreach (TypeInfo entityType in typeof(User)
+            //    .GetTypeInfo()
+            //    .Assembly
+            //    .GetLoadableExportedTypes()
+            //    .Where(t => typeof(IEntity).GetTypeInfo().IsAssignableFrom(t)))
+            //{
+            //    modelBuilder.RegisterEntityType(entityType);
+            //}
+
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }
