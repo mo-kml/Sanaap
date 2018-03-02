@@ -1,8 +1,4 @@
-﻿using Bit.Model.Contracts;
-using Sanaap.Model.Contracts;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
 namespace Sanaap.Model
 {
@@ -14,6 +10,6 @@ namespace Sanaap.Model
 
         public virtual long NationalCode { get; set; }
 
-        public virtual long Mobile { get; set; }
+        public virtual IList<CustomerMobile> CustomerMobiles { set; get; }
     }
 }

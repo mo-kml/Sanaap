@@ -12,6 +12,7 @@ namespace Sanaap.Dto.Implementations
 
             mapperConfigExpression.CreateMap<Customer, CustomerDto>()
                 .ForMember(src => src.FullName, cnfg => cnfg.MapFrom(src => src.FirstName + " " + src.LastName))
+                //.ForMember(src => src.MobileStr, cnfg => cnfg.MapFrom(src => "0" + src.Mobile))
                 .AfterMap((src, dest) => dest.NationalCodeStr = "abcdefg");
         }
 
