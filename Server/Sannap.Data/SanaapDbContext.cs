@@ -35,15 +35,15 @@ namespace Sannap.Data
                 });
             }
 
-            //if (!context.Set<City>().AsNoTracking().Any())
-            //{
-            //    context.Set<City>().Add(new City
-            //    {
-            //        Name = "Tehran",
-            //        Location = new Location { Lat = 100, Lon = 100 },
-            //        Version = 1
-            //    });
-            //}
+            if (!context.Set<City>().AsNoTracking().Any())
+            {
+                context.Set<City>().Add(new City
+                {
+                    Name = "تهران",
+                    Location = new Location { Lat = 100, Lon = 100 },
+                    Version = 1
+                });
+            }
 
             base.Seed(context);
         }

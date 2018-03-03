@@ -1,5 +1,7 @@
 ﻿using Bit.Model.Contracts;
+using Sanaap.Model;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Dto
 {
@@ -10,5 +12,7 @@ namespace Sanaap.Dto
         public virtual long Mobile { get; set; }
 
         public virtual string MobileStr { get; set; }
+
+        public virtual Guid Customer_Id { get; set; }
     }
 }
