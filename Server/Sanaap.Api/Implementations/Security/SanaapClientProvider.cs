@@ -17,7 +17,8 @@ namespace Sanaap.Api.Implementations.Security
                     ClientId = "Sanaap-ResOwner",
                     ClientName = "Sanaap-ResOwner",
                     Secret = "secret",
-                    TokensLifetime = TimeSpan.FromDays(7)
+                    TokensLifetime = TimeSpan.FromDays(7),
+                    Enabled = true
                 })
             };
         }
