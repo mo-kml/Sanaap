@@ -7,10 +7,6 @@
       "Name": "Sanaap",
       "Version": "1"
     },
-    "Security": {
-      "ClientId": "Sanaap",
-      "ClientSecret": "secret"
-    },
     "Configs": [
       {
         "Key": "IdentityCertificatePassword",
