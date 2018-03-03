@@ -1,5 +1,4 @@
 ﻿using Bit.Model.Contracts;
-using Sanaap.Model;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +12,9 @@ namespace Sanaap.Dto
 
         public virtual string MobileStr { get; set; }
 
-        public virtual Guid Customer_Id { get; set; }
+        [ForeignKey(nameof(CustomerId))]
+        public virtual CustomerDto Customer { get; set; }
+        
+        public virtual Guid CustomerId { get; set; }
     }
 }

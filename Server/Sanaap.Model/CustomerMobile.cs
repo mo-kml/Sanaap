@@ -7,7 +7,9 @@ namespace Sanaap.Model
     {
         public virtual long Mobile { get; set; }
 
-
+        [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; }
+
+        public virtual Guid CustomerId { get; set; }
     }
 }

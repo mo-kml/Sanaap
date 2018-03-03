@@ -17,8 +17,6 @@ namespace Sanaap.Dto
 
         public virtual long NationalCode { get; set; }
 
-        public virtual string NationalCodeStr { get; set; }
-
-        public virtual IList<CustomerMobile> CustomerMobiles { set; get; }
+        public virtual IList<CustomerMobileDto> CustomerMobiles { set; get; }
     }
 }
