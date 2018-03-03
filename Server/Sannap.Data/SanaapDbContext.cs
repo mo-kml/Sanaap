@@ -74,8 +74,6 @@ namespace Sannap.Data
 
         }
 
-        //public DbSet<User> Users { set; get; }
-        //public DbSet<Customer> Customers { set; get; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             foreach (TypeInfo entityType in typeof(User)

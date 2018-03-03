@@ -120,6 +120,8 @@ namespace Sanaap.Api
             dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapClientProvider>();
 
             dependencyManager.Register<IHashService, DefaultHashService>(lifeCycle: DependencyLifeCycle.SingleInstance);
+
+            dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
         }
 
         public IEnumerable<IAppModule> GetAppModules()
