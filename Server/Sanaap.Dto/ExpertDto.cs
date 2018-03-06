@@ -19,7 +19,6 @@ namespace Sanaap.Dto
 
         [ForeignKey(nameof(CityId))]
         public virtual CityDto City { get; set; }
-
         public virtual Guid CityId { get; set; }
     }
 }

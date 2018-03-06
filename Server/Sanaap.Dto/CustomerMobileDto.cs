@@ -14,7 +14,6 @@ namespace Sanaap.Dto
 
         [ForeignKey(nameof(CustomerId))]
         public virtual CustomerDto Customer { get; set; }
-        
         public virtual Guid CustomerId { get; set; }
     }
 }

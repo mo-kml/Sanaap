@@ -1,6 +1,7 @@
 ﻿using Bit.Model.Contracts;
 using Sanaap.Model;
 using System;
+using System.Collections.Generic;
 
 namespace Sanaap.Dto
 {
@@ -15,5 +16,7 @@ namespace Sanaap.Dto
         public virtual bool IsArchived { get; set; }
 
         public virtual Location Location { get; set; }
+
+        public virtual IList<ExpertDto> Experts { set; get; }
     }
 }

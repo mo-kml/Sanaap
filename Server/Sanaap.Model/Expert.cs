@@ -23,7 +23,6 @@ namespace Sanaap.Model
 
         [ForeignKey(nameof(CityId))]
         public virtual City City { get; set; }
-
         public virtual Guid CityId { get; set; }
     }
 }
