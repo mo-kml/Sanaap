@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
 {
@@ -18,8 +19,14 @@ namespace Sanaap.Model
 
         [Display(Name = "کد ملی")]
         [Range(10000000, 9999999999)]
-        //[Index(IsUnique = true)]
+        [Index(IsUnique = true)]
+        [Required]
         public virtual long NationalCode { get; set; }
+
+        [Display(Name = "شماره موبایل")]
+        [Required]
+        [Range(1000000000, 9999999999)]
+        public virtual long Mobile { get; set; }
 
         public virtual int OTP { get; set; }
 

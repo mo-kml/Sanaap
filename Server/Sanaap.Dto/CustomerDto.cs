@@ -19,6 +19,8 @@ namespace Sanaap.Dto
 
         public virtual long NationalCode { get; set; }
 
+        public virtual long Mobile { get; set; }
+
         public virtual int OTP { get; set; }
 
         public virtual bool IsActive { get; set; }
