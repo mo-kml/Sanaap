@@ -44,7 +44,7 @@ namespace Sanaap.Test.Api
             {
                 TokenResponse token = await testEnvironment.Server.Login("ValidUserName", "ValidPassword", "Sanaap-ResOwner", "secret");
 
-                ODataClient odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
+                IODataClient odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
 
                 Guid expertId = Guid.NewGuid();
 
@@ -90,7 +90,7 @@ namespace Sanaap.Test.Api
             {
                 TokenResponse token = await testEnvironment.Server.Login("ValidUserName", "ValidPassword", "Sanaap-ResOwner", "secret");
 
-                ODataClient odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
+                IODataClient odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
 
                 Guid someCityId = await odataClient.Controller<CitiesController, CityDto>()
                     .Top(1)

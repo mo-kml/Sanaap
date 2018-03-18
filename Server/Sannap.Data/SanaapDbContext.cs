@@ -1,5 +1,6 @@
 ﻿using Bit.Core.Contracts;
 using Bit.Core.Implementations;
+using Bit.Core.Models;
 using Bit.Data.Contracts;
 using Bit.Data.EntityFramework.Implementations;
 using Bit.Model.Contracts;
@@ -63,13 +64,13 @@ namespace Sannap.Data
         }
 
         public SanaapDbContext()
-            : base(new SqlConnection(DefaultAppEnvironmentProvider.Current.GetActiveAppEnvironment().GetConfig<string>("SanaapDbConnectionString")), contextOwnsConnection: true)
+            : base(new SqlConnection(DefaultAppEnvironmentsProvider.Current.GetActiveAppEnvironment().GetConfig<string>("SanaapDbConnectionString")), contextOwnsConnection: true)
         {
 
         }
 
-        public SanaapDbContext(IAppEnvironmentProvider appEnvironmentProvider, IDbConnectionProvider dbConnectionProvider)
-            : base(appEnvironmentProvider.GetActiveAppEnvironment().GetConfig<string>("SanaapDbConnectionString"), dbConnectionProvider)
+        public SanaapDbContext(AppEnvironment appEnvironment, IDbConnectionProvider dbConnectionProvider)
+            : base(appEnvironment.GetConfig<string>("SanaapDbConnectionString"), dbConnectionProvider)
         {
 
         }

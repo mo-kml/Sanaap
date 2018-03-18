@@ -73,7 +73,7 @@ namespace Sanaap.Api
                 {
                     httpConfiguration.EnableSwagger(c =>
                     {
-                        EnvironmentAppInfo appInfo = DefaultAppEnvironmentProvider.Current.GetActiveAppEnvironment().AppInfo;
+                        EnvironmentAppInfo appInfo = DefaultAppEnvironmentsProvider.Current.GetActiveAppEnvironment().AppInfo;
                         c.SingleApiVersion($"v{appInfo.Version}", $"{appInfo.Name}-Api");
                         c.ApplyDefaultApiConfig(httpConfiguration);
                     }).EnableBitSwaggerUi();
@@ -94,7 +94,7 @@ namespace Sanaap.Api
                 {
                     httpConfiguration.EnableSwagger(c =>
                     {
-                        EnvironmentAppInfo appInfo = DefaultAppEnvironmentProvider.Current.GetActiveAppEnvironment().AppInfo;
+                        EnvironmentAppInfo appInfo = DefaultAppEnvironmentsProvider.Current.GetActiveAppEnvironment().AppInfo;
                         c.SingleApiVersion($"v{appInfo.Version}", $"{appInfo.Name}-Api");
                         c.ApplyDefaultODataConfig(httpConfiguration);
                     }).EnableBitSwaggerUi();

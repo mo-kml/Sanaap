@@ -12,7 +12,7 @@ namespace Sanaap.Api.Implementations.Security
 {
     public class SanaapUserService : UserService
     {
-        public virtual IDependencyManager DependencyManager { get; set; }
+        public virtual IUsersRepository UsersRepository { get; set; }
 
         public override async Task<string> GetUserIdByLocalAuthenticationContextAsync(LocalAuthenticationContext context)
         {
@@ -27,12 +27,7 @@ namespace Sanaap.Api.Implementations.Security
 
             User user = null;
 
-            using (IDependencyResolver resolver = DependencyManager.CreateChildDependencyResolver())
-            {
-                IUsersRepository usersRepository = resolver.Resolve<IUsersRepository>();
-
-                user = await usersRepository.GetUserByUserNameAndPassword(context.UserName, context.Password, CancellationToken.None);
-            }
+            user = await UsersRepository.GetUserByUserNameAndPassword(context.UserName, context.Password, CancellationToken.None);
 
             if (user == null)
                 throw new DomainLogicException("LoginFailed");
@@ -42,14 +37,9 @@ namespace Sanaap.Api.Implementations.Security
 
         public override async Task<bool> UserIsActiveAsync(IsActiveContext context, string userId)
         {
-            using (IDependencyResolver resolver = DependencyManager.CreateChildDependencyResolver())
-            {
-                IUsersRepository usersRepository = resolver.Resolve<IUsersRepository>();
+            User user = await UsersRepository.GetUserById(Guid.Parse(userId), CancellationToken.None);
 
-                User user = await usersRepository.GetUserById(Guid.Parse(userId), CancellationToken.None);
-
-                return user != null;
-            }
+            return user != null;
         }
     }
 }

@@ -11,12 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bit.Data.EntityFramework" Version="0.9.4" />
-    <PackageReference Include="Bit.IdentityServer" Version="0.9.4" />
-    <PackageReference Include="Bit.OData" Version="0.9.4" />
-    <PackageReference Include="Bit.OwinCore" Version="0.9.4" />
-    <PackageReference Include="Bit.OwinCore.AspNetCore2Upgrade" Version="0.9.4" />
-    <PackageReference Include="BitCodeAnalyzer" Version="1.1.9.8" />
+    <PackageReference Include="Bit.Data.EntityFramework" Version="0.9.7" />
+    <PackageReference Include="Bit.IdentityServer" Version="0.9.7" />
+    <PackageReference Include="Bit.OData" Version="0.9.7" />
+    <PackageReference Include="Bit.OwinCore" Version="0.9.7" />
+    <PackageReference Include="Bit.OwinCore.AspNetCore2Upgrade" Version="0.9.7" />
+    <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.2" />
   </ItemGroup>
 
   <ItemGroup>
