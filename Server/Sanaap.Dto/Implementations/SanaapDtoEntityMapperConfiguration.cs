@@ -13,8 +13,7 @@ namespace Sanaap.Dto.Implementations
             mapperConfigExpression.CreateMap<Customer, CustomerDto>()
                 .ForMember(src => src.FullName, cnfg => cnfg.MapFrom(src => src.FirstName + " " + src.LastName));
 
-            mapperConfigExpression.CreateMap<Customer, CustomerDto>().MaxDepth(1);
-            mapperConfigExpression.CreateMap<CustomerMobile, CustomerMobileDto>().MaxDepth(1);
+            //mapperConfigExpression.CreateMap<Customer, CustomerDto>().MaxDepth(1);
 
             // IsMovedToBit
             //mapperConfigExpression.ForAllPropertyMaps(p => (p.DestinationProperty.GetCustomAttribute<ForeignKeyAttribute>() != null || p.DestinationProperty.GetCustomAttribute<InversePropertyAttribute>() != null)

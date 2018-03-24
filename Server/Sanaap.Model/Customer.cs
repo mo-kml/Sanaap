@@ -32,8 +32,5 @@ namespace Sanaap.Model
 
         [Display(Name = "فعال است؟")]
         public virtual bool IsActive { get; set; }
-
-
-        public virtual IList<CustomerMobile> CustomerMobiles { set; get; }
     }
 }

@@ -10,7 +10,6 @@ namespace Sanaap.Dto
     {
         public virtual Guid Id { get; set; }
 
-        [Display(Name = "نام")]
         public virtual string FirstName { get; set; }
 
         public virtual string LastName { get; set; }
@@ -24,7 +23,5 @@ namespace Sanaap.Dto
         public virtual int OTP { get; set; }
 
         public virtual bool IsActive { get; set; }
-
-        public virtual IList<CustomerMobileDto> CustomerMobiles { set; get; }
     }
 }
