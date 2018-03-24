@@ -38,30 +38,25 @@ namespace Sanaap.Api.Controllers
             return await Repository.AddAsync(customer, cancellation);
         }
 
-        [Action]
-        public virtual async Task<Customer> LoginCustomer(Customer customer, CancellationToken cancellation)
-        {
-            Customer existingCustomer = (await Repository.GetAllAsync(cancellation))
-                .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile).FirstOrDefault();
-            if (existingCustomer == null)
-                throw new ResourceNotFoundException("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.");
-            return existingCustomer;
-            //return ((await Repository.GetAllAsync(cancellation))
-            //    .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile).FirstOrDefault()) == null
-            //    ? throw new Exception("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.")
-            //    : ((await Repository.GetAllAsync(cancellation))
-            //    .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile).FirstOrDefault());
-        }
-
         //[Action]
-        //public virtual async Task<SingleResult<CustomerDto>> LoginCustomer(Customer customer, CancellationToken cancellationToken)
+        //public virtual async Task<Customer> LoginCustomer(Customer customer, CancellationToken cancellation)
         //{
-        //    SingleResult<CustomerDto> customerDto = SingleResult.Create(DtoEntityMapper.FromEntityQueryToDtoQuery((await Repository.GetAllAsync(cancellationToken)))
-        //    .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile));
-        //    if (customerDto == null)
+        //    Customer existingCustomer = (await Repository.GetAllAsync(cancellation))
+        //        .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile).FirstOrDefault();
+        //    if (existingCustomer == null)
         //        throw new ResourceNotFoundException("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.");
-        //    return customerDto;
+        //    return existingCustomer;
         //}
+
+        [Action]
+        public virtual async Task<SingleResult<CustomerDto>> LoginCustomer(Customer customer, CancellationToken cancellationToken)
+        {
+            SingleResult<CustomerDto> customerDto = SingleResult.Create(DtoEntityMapper.FromEntityQueryToDtoQuery((await Repository.GetAllAsync(cancellationToken)))
+            .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile));
+            if (customerDto == null)
+                throw new ResourceNotFoundException("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.");
+            return customerDto;
+        }
 
         [Function]
         public virtual async Task<bool> ConfirmOTP(Guid customerId, int otp, CancellationToken cancellation)
