@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sanaap.Dto\Sanaap.Dto.csproj" />
     <ProjectReference Include="..\Sanaap.Model\Sanaap.Model.csproj" />
     <ProjectReference Include="..\Sanaap.Service\Sanaap.Service.csproj" />
     <ProjectReference Include="..\Sannap.Data\Sannap.Data.csproj" />

@@ -15,7 +15,7 @@ namespace Sanaap.Test.Api
         {
             using (SanaapTestEnvironment testEnvironment = new SanaapTestEnvironment())
             {
-                IODataClient odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap");
+                IODataClient oDataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap");
 
                 CustomerDto customer = new CustomerDto
                 {
@@ -25,7 +25,7 @@ namespace Sanaap.Test.Api
                     NationalCode = 1270345565
                 };
 
-                int otp = await odataClient.Controller<CustomersController, CustomerDto>()
+                int otp = await oDataClient.Controller<CustomersController, CustomerDto>()
                     .Action(nameof(CustomersController.RegisterCustomer))
                     .Set(new CustomersController.RegisterCustomerArgs
                     {
@@ -33,13 +33,13 @@ namespace Sanaap.Test.Api
                     })
                     .ExecuteAsScalarAsync<int>();
 
-                TokenResponse token = await testEnvironment.Server.Login(customer.NationalCode.ToString(), otp.ToString(), "TestResOwner", "secret");
+                TokenResponse token = await testEnvironment.Server.Login(customer.NationalCode.ToString(), otp.ToString(), "SanaapResOwner", "secret");
 
                 Assert.IsFalse(token.IsError);
 
-                odataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
+                oDataClient = testEnvironment.Server.BuildODataClient(odataRouteName: "Sanaap", token: token);
 
-                CustomerDto customer2 = await odataClient.Controller<CustomersController, CustomerDto>()
+                CustomerDto customer2 = await oDataClient.Controller<CustomersController, CustomerDto>()
                     .Function(nameof(CustomersController.GetCurrentCustomer))
                     .FindEntryAsync();
 

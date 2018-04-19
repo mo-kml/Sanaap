@@ -46,7 +46,7 @@ namespace Sanaap.Api.Controllers
                 .AnyAsync(cancellationToken);
 
             if (existingCustomer == true)
-                throw new DomainLogicException("قبلا با این کد ملی ثبت نام کرده اید. لطفا وارد شوید.");
+                throw new DomainLogicException("CustomerIsAlreadyRegistered");
 
             customer.OTP = OtpNumberGenerator.GetOtpNumber();
 

@@ -9,9 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sanaap.Dto\Sanaap.Dto.csproj" />
     <ProjectReference Include="..\Sanaap.Model\Sanaap.Model.csproj" />
     <ProjectReference Include="..\Sannap.Data\Sannap.Data.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\Shared\Sanaap.Codes\Sanaap.Codes.projitems" Label="Shared" />
+
+  <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
 
 </Project>

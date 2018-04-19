@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.RegisterView" Title="ثبت نام" FlowDirection="RightToLeft">
+    <StackLayout>
+        <Entry Placeholder="نام" Text="{Binding Customer.FirstName}" />
+        <Entry Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+        <Entry Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
+        <Entry Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
+        <Button Text="ثبت نام" Command="{Binding ConfirmOtp}" />
+        <Button Text="ورود" Command="{Binding Login}" />
+    </StackLayout>
+</ContentPage>
