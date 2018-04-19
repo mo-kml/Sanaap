@@ -1,5 +1,4 @@
-﻿using Bit.Core.Contracts;
-using Bit.Core.Implementations;
+﻿using Bit.Core.Implementations;
 using Bit.Core.Models;
 using Bit.Data.Contracts;
 using Bit.Data.EntityFramework.Implementations;
@@ -22,30 +21,8 @@ namespace Sannap.Data
             AutomaticMigrationDataLossAllowed = AutomaticMigrationsEnabled = true;
         }
 
-        public virtual IHashService HashSevice { get; set; } = new DefaultHashService { };
-
         protected override void Seed(SanaapDbContext context)
         {
-            if (!context.Set<User>().AsNoTracking().Any())
-            {
-                context.Set<User>().Add(new User
-                {
-                    UserName =
-                    "Test",
-                    Password = HashSevice.Hash("Test")
-                });
-            }
-
-            if (!context.Set<City>().AsNoTracking().Any())
-            {
-                context.Set<City>().Add(new City
-                {
-                    Name = "تهران",
-                    Location = new Location { Lat = 100, Lon = 100 },
-                    Version = 1
-                });
-            }
-
             base.Seed(context);
         }
     }
@@ -77,14 +54,12 @@ namespace Sannap.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            foreach (TypeInfo entityType in typeof(User)
+            foreach (TypeInfo entityType in typeof(BaseEntity)
                 .GetTypeInfo()
                 .Assembly
                 .GetLoadableExportedTypes()
                 .Where(t => t.IsClass && !t.IsAbstract && typeof(IEntity).GetTypeInfo().IsAssignableFrom(t)))
             {
-                if (entityType == typeof(BaseEntity).GetTypeInfo())
-                    continue;
                 modelBuilder.RegisterEntityType(entityType);
             }
 

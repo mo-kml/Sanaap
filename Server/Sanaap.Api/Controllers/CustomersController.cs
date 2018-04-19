@@ -1,8 +1,13 @@
-﻿using Bit.OData.ODataControllers;
+﻿using Bit.Core.Contracts;
+using Bit.Model.Contracts;
+using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
 using Sanaap.Dto;
 using Sanaap.Model;
+using Sanaap.Service.Contracts;
+using Sannap.Data.Contracts;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,76 +15,56 @@ using System.Web.Http;
 
 namespace Sanaap.Api.Controllers
 {
-    public class CustomersController : SanaapDtoSetController<CustomerDto, Customer>
+    public class CustomersController : DtoController<CustomerDto>
     {
-        //public override Task<CustomerDto> Create(CustomerDto dto, CancellationToken cancellationToken)
-        //{
-        //    SingleResult<CustomerDto> customerDto = SingleResult.Create(DtoEntityMapper.FromEntityQueryToDtoQuery((await Repository.GetAllAsync(cancellationToken)))
-        //    .Where(cu => cu.NationalCode == 1));
-        //    if (customerDto != null)
-        //        throw new Exception("قبلا با این کد ملی ثبت نام کرده اید. لطفا وارد شوید.");
-        //    dto.OTP = GenerateRandomNo();
-        //    dto.IsActive = false;
-        //    SendOtpSms("0" + dto.Mobile, "کد ورودی شما در سناپ : " + dto.OTP);
-        //    //return await Repository.AddAsync(customer, cancellation);
+        public virtual ISmsService SmsService { get; set; }
 
-        //    return base.Create(dto, cancellationToken);
-        //}
+        public virtual IOtpNumberGenerator OtpNumberGenerator { get; set; }
 
-        [Action]
-        public virtual async Task<Customer> AddCustomer(Customer customer, CancellationToken cancellation)
+        public virtual ICustomerValidator CustomerValidator { get; set; }
+
+        public virtual ISanaapRepository<Customer> CustomersRepository { get; set; }
+
+        public virtual IDtoEntityMapper<CustomerDto, Customer> DtoEntityMapper { get; set; }
+
+        public class RegisterCustomerArgs
         {
-            Customer existingCustomer = (await Repository.GetAllAsync(cancellation)).Where(cu => cu.NationalCode == customer.NationalCode).FirstOrDefault();
-            if (existingCustomer != null)
-                throw new Exception("قبلا با این کد ملی ثبت نام کرده اید. لطفا وارد شوید.");
-            customer.OTP = GenerateRandomNo();
-            customer.IsActive = false;
-            SendOtpSms("0" + customer.Mobile, "کد ورودی شما در سناپ : " + customer.OTP);
-            return await Repository.AddAsync(customer, cancellation);
+            public CustomerDto customer { get; set; }
         }
 
-        //[Action]
-        //public virtual async Task<Customer> LoginCustomer(Customer customer, CancellationToken cancellation)
-        //{
-        //    Customer existingCustomer = (await Repository.GetAllAsync(cancellation))
-        //        .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile).FirstOrDefault();
-        //    if (existingCustomer == null)
-        //        throw new ResourceNotFoundException("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.");
-        //    return existingCustomer;
-        //}
-
         [Action]
-        public virtual async Task<SingleResult<CustomerDto>> LoginCustomer(Customer customer, CancellationToken cancellationToken)
+        [AllowAnonymous]
+        public virtual async Task<int> RegisterCustomer(RegisterCustomerArgs args, CancellationToken cancellationToken)
         {
-            SingleResult<CustomerDto> customerDto = SingleResult.Create(DtoEntityMapper.FromEntityQueryToDtoQuery((await Repository.GetAllAsync(cancellationToken)))
-            .Where(cu => cu.NationalCode == customer.NationalCode && cu.Mobile == customer.Mobile));
-            if (customerDto == null)
-                throw new ResourceNotFoundException("کاربری با این مشخصات یافت نشد. لطفا با دقت اطلاعات را وارد نمائید.");
-            return customerDto;
+            if (!CustomerValidator.IsValid(args.customer, out string errorMessage))
+                throw new DomainLogicException(errorMessage);
+
+            Customer customer = DtoEntityMapper.FromDtoToEntity(args.customer);
+
+            bool existingCustomer = await (await CustomersRepository.GetAllAsync(cancellationToken))
+                .Where(cu => cu.NationalCode == customer.NationalCode)
+                .AnyAsync(cancellationToken);
+
+            if (existingCustomer == true)
+                throw new DomainLogicException("قبلا با این کد ملی ثبت نام کرده اید. لطفا وارد شوید.");
+
+            customer.OTP = OtpNumberGenerator.GetOtpNumber();
+
+            await SmsService.SendSms("0" + customer.Mobile, "کد ورودی شما در سناپ : " + customer.OTP); // Use background job worker
+
+            DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
+
+            return customer.OTP; // For now, we've no sms service. So we return OTP to show that to customer in a popup. // After we configured sms service, this action will have no return value.
         }
+
+        public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
         [Function]
-        public virtual async Task<bool> ConfirmOTP(Guid customerId, int otp, CancellationToken cancellation)
+        public virtual async Task<CustomerDto> GetCurrentCustomer(CancellationToken cancellationToken)
         {
-            Customer existingCustomer = (await Repository.GetAllAsync(cancellation)).Where(cu => cu.Id == customerId).FirstOrDefault();
-            if (existingCustomer.OTP == otp)
-            {
-                existingCustomer.IsActive = true;
-                await Repository.UpdateAsync(existingCustomer, cancellation);
-                return true;
-            }
-            else return false;
-        }
+            Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
-
-        private void SendOtpSms(string mobile, string content)
-        {
-
-        }
-
-        private int GenerateRandomNo()
-        {
-            int min = 1000, max = 9999; Random random = new Random(); return random.Next(min, max);
+            return DtoEntityMapper.FromEntityToDto(await CustomersRepository.GetByIdAsync(cancellationToken, customerId));
         }
     }
 }

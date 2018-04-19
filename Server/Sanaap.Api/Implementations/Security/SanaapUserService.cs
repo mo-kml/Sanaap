@@ -1,10 +1,10 @@
-﻿using Bit.Core.Contracts;
-using Bit.IdentityServer.Implementations;
+﻿using Bit.IdentityServer.Implementations;
 using Bit.Owin.Exceptions;
 using IdentityServer3.Core.Models;
 using Sanaap.Model;
 using Sannap.Data.Contracts;
 using System;
+using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace Sanaap.Api.Implementations.Security
 {
     public class SanaapUserService : UserService
     {
-        public virtual IUsersRepository UsersRepository { get; set; }
+        public virtual ISanaapRepository<Customer> CustomersRepository { get; set; }
 
         public override async Task<string> GetUserIdByLocalAuthenticationContextAsync(LocalAuthenticationContext context)
         {
@@ -25,21 +25,46 @@ namespace Sanaap.Api.Implementations.Security
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentException(nameof(password));
 
-            User user = null;
+            long nationalCode = long.Parse(username);
 
-            user = await UsersRepository.GetUserByUserNameAndPassword(context.UserName, context.Password, CancellationToken.None);
+            if (password.Length == 4) // OTP, First login
+            {
+                int otp = int.Parse(password);
 
-            if (user == null)
-                throw new DomainLogicException("LoginFailed");
+                Customer customer = await (await CustomersRepository
+                    .GetAllAsync(CancellationToken.None))
+                    .SingleOrDefaultAsync(c => c.OTP == otp && c.NationalCode == nationalCode);
 
-            return user.Id.ToString();
+                if (customer == null)
+                    throw new ResourceNotFoundException("CustomerCouldNotBeFound");
+
+                if (customer.IsActive == true)
+                    throw new DomainLogicException("CustomerHasToUseMobileNumberAndNationalCodeForLogin");
+
+                customer.IsActive = true;
+
+                await CustomersRepository.UpdateAsync(customer, CancellationToken.None);
+
+                return customer.Id.ToString();
+            }
+            else
+            {
+                long mobileNumber = long.Parse(password);
+
+                Customer customer = await (await CustomersRepository
+                    .GetAllAsync(CancellationToken.None))
+                    .SingleOrDefaultAsync(c => c.Mobile == mobileNumber && c.NationalCode == nationalCode);
+
+                if (customer == null)
+                    throw new ResourceNotFoundException("CustomerCouldNotBeFound");
+
+                return customer.Id.ToString();
+            }
         }
 
         public override async Task<bool> UserIsActiveAsync(IsActiveContext context, string userId)
         {
-            User user = await UsersRepository.GetUserById(Guid.Parse(userId), CancellationToken.None);
-
-            return user != null;
+            return true;
         }
     }
 }

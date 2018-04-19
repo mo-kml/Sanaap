@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Sannap.Data\Sannap.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
-
 </Project>

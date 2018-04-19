@@ -13,9 +13,9 @@ using Bit.OwinCore.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Sanaap.Api.Implementations;
 using Sanaap.Api.Implementations.Security;
-using Sanaap.Dto.Implementations;
+using Sanaap.Service.Contracts;
+using Sanaap.Service.Implementations;
 using Sannap.Data;
-using Sannap.Data.Contracts;
 using Sannap.Data.Implementations;
 using Swashbuckle.Application;
 using System;
@@ -63,11 +63,10 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterWebApiMiddleware(webApiDependencyManager =>
             {
-                // Enable webApi AuthorizeAttribute
-                //webApiDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
-                //{
-                //    httpConfiguration.Filters.Add(new System.Web.Http.AuthorizeAttribute());
-                //});
+                webApiDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
+                {
+                    httpConfiguration.Filters.Add(new System.Web.Http.AuthorizeAttribute());
+                });
 
                 webApiDependencyManager.RegisterGlobalWebApiCustomizerUsing(httpConfiguration =>
                 {
@@ -84,11 +83,10 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterODataMiddleware(odataDependencyManager =>
             {
-                // Enable odata AuthorizeAttribute
-                //odataDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
-                //{
-                //    httpConfiguration.Filters.Add(new DefaultODataAuthorizeAttribute());
-                //});
+                odataDependencyManager.RegisterGlobalWebApiActionFiltersUsing(httpConfiguration =>
+                {
+                    httpConfiguration.Filters.Add(new DefaultODataAuthorizeAttribute());
+                });
 
                 odataDependencyManager.RegisterGlobalWebApiCustomizerUsing(httpConfiguration =>
                 {
@@ -107,8 +105,6 @@ namespace Sanaap.Api
             });
 
             dependencyManager.RegisterRepository(typeof(SanaapEfRepository<>).GetTypeInfo());
-            dependencyManager.RegisterRepository(typeof(UsersRepository).GetTypeInfo());
-            dependencyManager.RegisterRepository(typeof(ExpertsRepository).GetTypeInfo());
 
             dependencyManager.RegisterEfDbContext<SanaapDbContext>();
 
@@ -119,9 +115,11 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapClientProvider>();
 
-            dependencyManager.Register<IHashService, DefaultHashService>(lifeCycle: DependencyLifeCycle.SingleInstance);
-
             dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
+
+            dependencyManager.Register<ISmsService, DefaultSmsService>();
+            dependencyManager.Register<IOtpNumberGenerator, DefaultOTPNumberGenerator>();
+            dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
         }
 
         public IEnumerable<IAppModule> GetAppModules()

@@ -1,8 +1,5 @@
 ﻿using Bit.Model.Contracts;
-using Sanaap.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Sanaap.Dto
 {

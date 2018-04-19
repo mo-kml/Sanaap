@@ -1,6 +1,6 @@
 ﻿using Bit.Data.EntityFramework.Implementations;
 using Bit.Model.Contracts;
-using Sanaap.Model;
+using Sanaap.Model.Contracts;
 using Sannap.Data.Contracts;
 using System;
 using System.Data.Entity;
@@ -13,11 +13,6 @@ namespace Sannap.Data.Implementations
     public class SanaapEfRepository<TEntity> : EfRepository<TEntity>, ISanaapRepository<TEntity>
         where TEntity : class, IEntity
     {
-        public async override Task<TEntity> AddAsync(TEntity entityToAdd, CancellationToken cancellationToken)
-        {
-            return await base.AddAsync(entityToAdd, cancellationToken);
-        }
-
         public override void SaveChanges()
         {
             ApplyDefaultValues();
@@ -32,19 +27,24 @@ namespace Sannap.Data.Implementations
 
         protected virtual void ApplyDefaultValues()
         {
-            DateTimeOffset Today = DateTimeProvider.GetCurrentUtcDateTime();
+            DateTimeOffset now = DateTimeProvider.GetCurrentUtcDateTime();
 
-            foreach (DbEntityEntry<BaseEntity> entry in DbContext.ChangeTracker.Entries<BaseEntity>())
+            foreach (DbEntityEntry entry in DbContext.ChangeTracker.Entries())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.AddDate = Today;
-                        break;
-
+                        {
+                            if (entry.Entity is IChangeTrackEnableEntity addedChangeTrackEnableEntity)
+                                addedChangeTrackEnableEntity.CreatedOn = now;
+                            break;
+                        }
                     case EntityState.Modified:
-                        entry.Entity.EditDate = Today;
-                        break;
+                        {
+                            if (entry.Entity is IChangeTrackEnableEntity modifiedChangeTrackEnableEntity)
+                                modifiedChangeTrackEnableEntity.ModifiedOn = now;
+                            break;
+                        }
                 }
             }
         }
