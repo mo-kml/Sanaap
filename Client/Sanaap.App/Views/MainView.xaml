@@ -6,6 +6,7 @@
     <StackLayout>
         <maps:Map
             IsShowingUser="true"
-            MapType="Street" />
+            MapType="Street" 
+            />
     </StackLayout>
 </ContentPage>

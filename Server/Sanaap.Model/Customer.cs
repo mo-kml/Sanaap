@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
@@ -26,5 +27,7 @@ namespace Sanaap.Model
         public virtual int OTP { get; set; }
 
         public virtual bool IsActive { get; set; }
+
+        public virtual IList<EvlRequest> EvlRequests { set; get; }
     }
 }

@@ -23,7 +23,36 @@ namespace Sanaap.Service.Implementations
                 return false;
             }
 
-            // ToDo: Validate MobileNumber & NationalCode here.
+            if (string.IsNullOrEmpty(customer.NationalCode.ToString()))
+            {
+                message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
+                return false;
+            }
+
+            if (customer.NationalCode.ToString().Length != 10)
+            {
+                message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(customer.Mobile.ToString()))
+            {
+                message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
+                return false;
+            }
+
+            if (customer.Mobile.ToString().Length != 11)
+            {
+                message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
+                return false;
+            }
+
+            if (customer.Mobile.ToString().Substring(0, 2) != "09")
+            {
+                message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
+                return false;
+            }
+
 
             message = null;
             return true;

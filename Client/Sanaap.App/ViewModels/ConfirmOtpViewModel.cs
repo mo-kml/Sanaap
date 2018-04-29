@@ -13,8 +13,7 @@ namespace Sanaap.App.ViewModels
 
         public virtual BitDelegateCommand Confirm { get; set; }
 
-        public ConfirmOtpViewModel(INavigationService navigationService,
-            ISecurityService securityService)
+        public ConfirmOtpViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             _navigationService = navigationService;
             _securityService = securityService;

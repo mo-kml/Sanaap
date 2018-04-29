@@ -29,10 +29,10 @@ namespace Sanaap.App.ViewModels
             {
                 if (!customerValidator.IsValid(Customer, out string errorMessage))
                 {
-                    await pageDialogService.DisplayAlertAsync("/-:", errorMessage, ")-:");
+                    await pageDialogService.DisplayAlertAsync("مشکلی رخ داد", errorMessage, "باشه");
                 }
 
-                int optCode = await oDataClient.For<CustomerDto>("Customers")
+                int otpCode = await oDataClient.For<CustomerDto>("Customers")
                     .Action("RegisterCustomer")
                     .Set(new
                     {
@@ -40,7 +40,7 @@ namespace Sanaap.App.ViewModels
                     })
                     .ExecuteAsScalarAsync<int>();
 
-                await pageDialogService.DisplayAlertAsync("OTP", optCode.ToString(), "(-:");
+                await pageDialogService.DisplayAlertAsync("OTP", otpCode.ToString(), "باشه");
 
                 await navigationService.NavigateAsync("ConfirmOtp", new NavigationParameters
                 {

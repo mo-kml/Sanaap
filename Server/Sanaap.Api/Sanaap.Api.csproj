@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\InsuranceTypeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="System.Data.Entity.Internal.EdmMetadataContext.edmx" />
     <None Remove="System.Data.Entity.Migrations.History.LegacyHistoryContext.edmx" />
     <None Remove="System.Data.Entity.Migrations.Utilities.EmptyContext.edmx" />
