@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sanaap.App.Views.ConfirmOtpView" Title="تایید" FlowDirection="RightToLeft">
-    <StackLayout>
-        <Entry Placeholder="کد دریافت شده" Text="{Binding ReceivedCode}" />
-        <Button Command="{Binding Confirm}" Text="Confirm" />
-    </StackLayout>
-</ContentPage>

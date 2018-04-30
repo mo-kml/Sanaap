@@ -1,6 +1,8 @@
 ﻿using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Sanaap.Service.Implementations
 {
@@ -23,39 +25,57 @@ namespace Sanaap.Service.Implementations
                 return false;
             }
 
-            if (string.IsNullOrEmpty(customer.NationalCode.ToString()))
+            if (string.IsNullOrEmpty(customer.NationalCode))
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
                 return false;
             }
 
-            if (customer.NationalCode.ToString().Length != 10)
+            customer.NationalCode = customer.NationalCode.Trim();
+
+            if (!IsValidIranianNationalCode(customer.NationalCode))
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
                 return false;
             }
 
-            if (string.IsNullOrEmpty(customer.Mobile.ToString()))
+            if (string.IsNullOrEmpty(customer.Mobile))
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
                 return false;
             }
 
-            if (customer.Mobile.ToString().Length != 11)
+            customer.Mobile = customer.Mobile.Trim();
+
+            if (customer.Mobile.Length != 11)
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;
             }
 
-            if (customer.Mobile.ToString().Substring(0, 2) != "09")
+            if (customer.Mobile.Substring(0, 2) != "09")
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;
             }
-
 
             message = null;
+
             return true;
+        }
+
+        public virtual bool IsValidIranianNationalCode(string input)
+        {
+            if (!Regex.IsMatch(input, @"^\d{10}$"))
+                return false;
+
+            int check = Convert.ToInt32(input.Substring(9, 1));
+
+            int sum = Enumerable.Range(0, 9)
+                .Select(x => Convert.ToInt32(input.Substring(x, 1)) * (10 - x))
+                .Sum() % 11;
+
+            return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
         }
     }
 }

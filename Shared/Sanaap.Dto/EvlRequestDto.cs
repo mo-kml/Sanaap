@@ -1,13 +1,17 @@
 ﻿using Bit.Model.Contracts;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Dto
 {
-    public class EvlRequestDto : IDto
+    public partial class EvlRequestDto : IDto
     {
         public virtual Guid Id { get; set; }
 
         public virtual Guid CustomerId { get; set; }
+
+        [ForeignKey(nameof(CustomerId))]
+        public virtual CustomerDto Customer { get; set; }
 
         public virtual Guid InsuranceTypeId { get; set; }
 

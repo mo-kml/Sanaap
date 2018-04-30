@@ -7,7 +7,7 @@
         <Entry Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
         <Entry Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
         <Entry Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
-        <Button Text="ثبت نام" Command="{Binding ConfirmOtp}" />
+        <Button Text="ثبت نام" Command="{Binding StartRegisteration}" />
         <Button Text="ورود" Command="{Binding Login}" />
     </StackLayout>
 </ContentPage>

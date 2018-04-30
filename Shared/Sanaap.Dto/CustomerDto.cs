@@ -1,9 +1,10 @@
 ﻿using Bit.Model.Contracts;
 using System;
+using System.Collections.Generic;
 
 namespace Sanaap.Dto
 {
-    public class CustomerDto : IDto
+    public partial class CustomerDto : IDto
     {
         public virtual Guid Id { get; set; }
 
@@ -11,14 +12,10 @@ namespace Sanaap.Dto
 
         public virtual string LastName { get; set; }
 
-        public virtual string FullName { get; set; }
+        public virtual string NationalCode { get; set; }
 
-        public virtual long NationalCode { get; set; }
+        public virtual string Mobile { get; set; }
 
-        public virtual long Mobile { get; set; }
-
-        public virtual int OTP { get; set; }
-
-        public virtual bool IsActive { get; set; }
+        public virtual IList<EvlRequestDto> EvlRequests { set; get; }
     }
 }

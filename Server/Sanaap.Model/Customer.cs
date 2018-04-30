@@ -6,27 +6,23 @@ namespace Sanaap.Model
 {
     public class Customer : BaseEntity
     {
+        [StringLength(50, MinimumLength = 3)]
         [Required]
-        [MaxLength(50)]
         public virtual string FirstName { get; set; }
 
+        [StringLength(50, MinimumLength = 3)]
         [Required]
-        [MaxLength(50)]
         public virtual string LastName { get; set; }
 
-        [Range(10000000, 9999999999)]
         [Index(IsUnique = true)]
         [Required]
-        public virtual long NationalCode { get; set; }
+        [StringLength(10, MinimumLength = 10)]
+        public virtual string NationalCode { get; set; }
 
         [Required]
-        [Range(1000000000, 9999999999)]
         [Index(IsUnique = true)]
-        public virtual long Mobile { get; set; }
-
-        public virtual int OTP { get; set; }
-
-        public virtual bool IsActive { get; set; }
+        [StringLength(11, MinimumLength = 11)]
+        public virtual string Mobile { get; set; }
 
         public virtual IList<EvlRequest> EvlRequests { set; get; }
     }

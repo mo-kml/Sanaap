@@ -11,7 +11,7 @@ namespace Sanaap.App.ViewModels
     {
         public virtual BitDelegateCommand Login { get; set; }
 
-        public virtual BitDelegateCommand ConfirmOtp { get; set; }
+        public virtual BitDelegateCommand StartRegisteration { get; set; }
 
         public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
 
@@ -25,27 +25,21 @@ namespace Sanaap.App.ViewModels
                 await navigationService.NavigateAsync("Login");
             });
 
-            ConfirmOtp = new BitDelegateCommand(async () =>
+            StartRegisteration = new BitDelegateCommand(async () =>
             {
                 if (!customerValidator.IsValid(Customer, out string errorMessage))
                 {
-                    await pageDialogService.DisplayAlertAsync("مشکلی رخ داد", errorMessage, "باشه");
+                    await pageDialogService.DisplayAlertAsync("اشکال در ثبت اطلاعات", errorMessage, "باشه");
+                    return;
                 }
 
-                int otpCode = await oDataClient.For<CustomerDto>("Customers")
+                await oDataClient.For<CustomerDto>("Customers")
                     .Action("RegisterCustomer")
                     .Set(new
                     {
                         customer = Customer
                     })
-                    .ExecuteAsScalarAsync<int>();
-
-                await pageDialogService.DisplayAlertAsync("OTP", otpCode.ToString(), "باشه");
-
-                await navigationService.NavigateAsync("ConfirmOtp", new NavigationParameters
-                {
-                    { "nationalCode", Customer.NationalCode }
-                });
+                    .ExecuteAsync();
             });
         }
     }

@@ -5,29 +5,16 @@
     "iis": {
       "applicationUrl": "http://localhost/Sanaap.Api",
       "sslPort": 0
-    },
-    "iisExpress": {
-      "applicationUrl": "http://localhost:14335/",
-      "sslPort": 0
     }
   },
   "profiles": {
-    "IIS Express": {
+    "IIS": {
       "commandName": "IIS",
       "launchBrowser": true,
       "launchUrl": "odata/swagger/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Sanaap.Api": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "odata/swagger/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      },
-      "applicationUrl": "http://localhost:14336/"
     }
   }
 }

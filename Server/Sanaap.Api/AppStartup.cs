@@ -6,7 +6,7 @@ using Bit.Data;
 using Bit.Data.Contracts;
 using Bit.Model.Implementations;
 using Bit.OData.ActionFilters;
-using Bit.OData.Implementations;
+using Bit.OData.Contracts;
 using Bit.Owin.Implementations;
 using Bit.OwinCore;
 using Bit.OwinCore.Contracts;
@@ -22,6 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Reflection;
+
+[assembly: ODataModule("Sanaap")]
 
 namespace Sanaap.Api
 {
@@ -98,10 +100,7 @@ namespace Sanaap.Api
                     }).EnableBitSwaggerUi();
                 });
 
-                odataDependencyManager.RegisterODataServiceBuilder<BitODataServiceBuilder>();
-                odataDependencyManager.RegisterODataServiceBuilder<SanaapODataServiceBuilder>();
                 odataDependencyManager.RegisterWebApiODataMiddlewareUsingDefaultConfiguration();
-
             });
 
             dependencyManager.RegisterRepository(typeof(SanaapEfRepository<>).GetTypeInfo());
@@ -113,12 +112,10 @@ namespace Sanaap.Api
             dependencyManager.RegisterDtoEntityMapperConfiguration<DefaultDtoEntityMapperConfiguration>();
             dependencyManager.RegisterDtoEntityMapperConfiguration<SanaapDtoEntityMapperConfiguration>();
 
-            dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapClientProvider>();
+            dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapOAuthClientsProvider>();
 
             dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
 
-            dependencyManager.Register<ISmsService, DefaultSmsService>();
-            dependencyManager.Register<IOtpNumberGenerator, DefaultOTPNumberGenerator>();
             dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
         }
 

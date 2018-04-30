@@ -21,19 +21,19 @@ namespace Sanaap.Test.Api
                 {
                     FirstName = "Test",
                     LastName = "Test",
-                    Mobile = 9124659995,
-                    NationalCode = 1270345565
+                    Mobile = "09124659995",
+                    NationalCode = "1270340050"
                 };
 
-                int otp = await oDataClient.Controller<CustomersController, CustomerDto>()
+                await oDataClient.Controller<CustomersController, CustomerDto>()
                     .Action(nameof(CustomersController.RegisterCustomer))
                     .Set(new CustomersController.RegisterCustomerArgs
                     {
                         customer = customer
                     })
-                    .ExecuteAsScalarAsync<int>();
+                    .ExecuteAsync();
 
-                TokenResponse token = await testEnvironment.Server.Login(customer.NationalCode.ToString(), otp.ToString(), "SanaapResOwner", "secret");
+                TokenResponse token = await testEnvironment.Server.Login(customer.NationalCode, customer.Mobile, "SanaapResOwner", "secret");
 
                 Assert.IsFalse(token.IsError);
 
@@ -45,7 +45,6 @@ namespace Sanaap.Test.Api
 
                 Assert.AreEqual(customer.FirstName, customer2.FirstName);
                 Assert.AreEqual(customer.LastName, customer2.LastName);
-                Assert.AreEqual(customer2.IsActive, true);
             }
         }
     }

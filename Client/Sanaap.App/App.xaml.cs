@@ -37,18 +37,16 @@ namespace Sanaap.App
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("Nav/Main");
+            bool isLoggedIn = Container.Resolve<ISecurityService>().IsLoggedIn();
 
-            //bool isLoggedIn = Container.Resolve<ISecurityService>().IsLoggedIn();
-
-            //if (isLoggedIn)
-            //{
-            //    await NavigationService.NavigateAsync("Nav/Main");
-            //}
-            //else
-            //{
-            //    await NavigationService.NavigateAsync("Register");
-            //}
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync("Nav/Main");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("Register");
+            }
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -65,11 +63,10 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
-            containerRegistry.RegisterForNavigation<ConfirmOtpView, ConfirmOtpViewModel>("ConfirmOtp");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://192.168.1.51/Sanaap.Api/"),
+                HostUri = new Uri("http://192.168.1.106/Sanaap.Api/"),
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"

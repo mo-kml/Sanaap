@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Sanaap.App.Views.MainView" Title="سناپ" FlowDirection="RightToLeft">
-    <StackLayout>
-        <maps:Map
+    <maps:Map
             IsShowingUser="true"
-            MapType="Street" 
-            />
-    </StackLayout>
+            MapType="Street" />
 </ContentPage>

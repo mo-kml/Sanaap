@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Sanaap.Api.Implementations.Security
 {
-    public class SanaapClientProvider : ClientProvider
+    public class SanaapOAuthClientsProvider : OAuthClientsProvider
     {
         public override IEnumerable<Client> GetClients()
         {

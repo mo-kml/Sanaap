@@ -9,13 +9,10 @@ namespace Sanaap.Api.Implementations
     {
         public virtual void Configure(IMapperConfigurationExpression mapperConfigExpression)
         {
-            mapperConfigExpression.CreateMap<Customer, CustomerDto>()
-                .ForMember(src => src.FullName, cnfg => cnfg.MapFrom(src => src.FirstName + " " + src.LastName));
+            mapperConfigExpression.CreateMap<Customer, CustomerDto>();
 
             mapperConfigExpression.CreateMap<CustomerDto, Customer>()
-                .ForMember(c => c.Id, cnfg => cnfg.Ignore())
-                .ForMember(c => c.OTP, cnfg => cnfg.Ignore())
-                .ForMember(c => c.IsActive, cnfg => cnfg.Ignore());
+                .ForMember(c => c.Id, cnfg => cnfg.Ignore());
         }
     }
 }
