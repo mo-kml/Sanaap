@@ -12,6 +12,8 @@ namespace Sanaap.Dto
 
         public virtual string LastName { get; set; }
 
+        public virtual string FullName { get; set; }
+
         public virtual string NationalCode { get; set; }
 
         public virtual string Mobile { get; set; }

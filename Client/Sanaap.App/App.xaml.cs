@@ -66,7 +66,7 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://192.168.1.106/Sanaap.Api/"),
+                HostUri = new Uri("http://10.0.2.2/Sanaap.Api/"),
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"

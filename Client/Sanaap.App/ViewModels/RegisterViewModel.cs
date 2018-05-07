@@ -4,6 +4,7 @@ using Prism.Services;
 using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using Simple.OData.Client;
+using System;
 
 namespace Sanaap.App.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Sanaap.App.ViewModels
         {
             Login = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("Login");
+                await navigationService.NavigateAsync("Main");
             });
 
             StartRegisteration = new BitDelegateCommand(async () =>
@@ -33,13 +34,20 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
-                await oDataClient.For<CustomerDto>("Customers")
-                    .Action("RegisterCustomer")
-                    .Set(new
-                    {
-                        customer = Customer
-                    })
-                    .ExecuteAsync();
+                try
+                {
+                    await oDataClient.For<CustomerDto>("Customers")
+                        .Action("RegisterCustomer")
+                        .Set(new
+                        {
+                            customer = Customer
+                        })
+                        .ExecuteAsync();
+                }
+                catch (Exception ex)
+                {
+                    var a = ex.Message;
+                }
             });
         }
     }
