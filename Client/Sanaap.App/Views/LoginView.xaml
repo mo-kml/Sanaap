@@ -6,8 +6,8 @@
     <StackLayout>
         <ScrollView Orientation="Vertical" >
             <StackLayout Orientation="Vertical" >
-                <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
-                <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
+                <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding loginDto.NationalCode}" />
+                <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding loginDto.Mobile}" />
                 <Button Text="ورود" BorderRadius="10" Command="{Binding StartLogin}" />
                 <Label Text="" />
                 <Label Text="" />

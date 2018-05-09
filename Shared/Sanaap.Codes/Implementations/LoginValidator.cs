@@ -8,37 +8,42 @@ namespace Sanaap.Service.Implementations
 {
     public class LoginValidator : ILoginValidator
     {
-        public bool IsValid(string NationalCode, string Mobile, out string message)
+        public bool IsValid(LoginDto loginDto, out string message)
         {
-            if (NationalCode == null)
-                throw new ArgumentNullException(nameof(NationalCode));
-            if (Mobile == null)
-                throw new ArgumentNullException(nameof(Mobile));
-
-            NationalCode = NationalCode.Trim();
-            if (string.IsNullOrEmpty(NationalCode))
+            if (loginDto.NationalCode == null)
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
                 return false;
             }
-            if (!IsValidIranianNationalCode(NationalCode))
+            loginDto.NationalCode = loginDto.NationalCode.Trim();
+            if (string.IsNullOrEmpty(loginDto.NationalCode))
+            {
+                message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
+                return false;
+            }
+            if (!IsValidIranianNationalCode(loginDto.NationalCode))
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
                 return false;
             }
 
-            Mobile = Mobile.Trim();
-            if (string.IsNullOrEmpty(Mobile))
+            if (loginDto.Mobile == null)
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
                 return false;
             }
-            if (Mobile.Length != 11)
+            loginDto.Mobile = loginDto.Mobile.Trim();
+            if (string.IsNullOrEmpty(loginDto.Mobile))
+            {
+                message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
+                return false;
+            }
+            if (loginDto.Mobile.Length != 11)
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;
             }
-            if (Mobile.Substring(0, 2) != "09")
+            if (loginDto.Mobile.Substring(0, 2) != "09")
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;

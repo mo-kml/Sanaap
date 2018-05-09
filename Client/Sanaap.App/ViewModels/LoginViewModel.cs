@@ -10,7 +10,7 @@ namespace Sanaap.App.ViewModels
 {
     public class LoginViewModel : BitViewModelBase
     {
-        public virtual LoginDto Customer { get; set; } = new LoginDto { };
+        public virtual LoginDto loginDto { get; set; } = new LoginDto { };
 
         public virtual BitDelegateCommand StartLogin { get; set; }
 
@@ -18,7 +18,7 @@ namespace Sanaap.App.ViewModels
         {
             StartLogin = new BitDelegateCommand(async () =>
             {
-                if (!loginValidator.IsValid(Customer.NationalCode, Customer.Mobile, out string errorMessage))
+                if (!loginValidator.IsValid(loginDto, out string errorMessage))
                 {
                     await pageDialogService.DisplayAlertAsync("اشکال در ثبت اطلاعات", errorMessage, "باشه");
                     return;
@@ -26,13 +26,13 @@ namespace Sanaap.App.ViewModels
 
                 try
                 {
-                    //await oDataClient.For<CustomerDto>("Customers")
-                    //    .Action("RegisterCustomer")
-                    //    .Set(new
-                    //    {
-                    //        customer = login
-                    //    })
-                    //    .ExecuteAsync();
+                    await oDataClient.For<LoginDto>("Customers")
+                        .Action("Login")
+                        .Set(new
+                        {
+                            loginDto = loginDto
+                        })
+                        .ExecuteAsync();
 
                     await navigationService.NavigateAsync("Main");
                 }
