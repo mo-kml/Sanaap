@@ -50,12 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bit.CSharpClient.All">
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.0.3" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.354232-pre3" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>3.0.0.354232-pre3</Version>
+      <Version>3.0.0.446417</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
