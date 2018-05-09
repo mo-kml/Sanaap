@@ -38,13 +38,12 @@ namespace Sanaap.Api.Controllers
             Customer customer = DtoEntityMapper.FromDtoToEntity(args.customer);
 
             bool existingCustomer = await (await CustomersRepository.GetAllAsync(cancellationToken))
-                .Where(cu => cu.NationalCode == customer.NationalCode)
+                .Where(cu => cu.NationalCode == customer.NationalCode || cu.Mobile == customer.Mobile)
                 .AnyAsync(cancellationToken);
-
-            if (existingCustomer == true)
+            if (existingCustomer)
                 throw new DomainLogicException("CustomerIsAlreadyRegistered");
 
-            DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
+            else DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
         }
 
         public virtual IUserInformationProvider UserInformationProvider { get; set; }

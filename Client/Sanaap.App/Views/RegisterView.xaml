@@ -2,12 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.RegisterView" Title="ثبت نام" FlowDirection="RightToLeft">
+    
     <StackLayout>
-        <Entry Placeholder="نام" Text="{Binding Customer.FirstName}" />
-        <Entry Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
-        <Entry Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
-        <Entry Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
-        <Button Text="ثبت نام" Command="{Binding StartRegisteration}" />
-        <Button Text="ورود" Command="{Binding Login}" />
+        <ScrollView Orientation="Vertical" >
+            <StackLayout Orientation="Vertical" >
+                <Entry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
+                <Entry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+                <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
+                <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
+                <Button BackgroundColor="Green" BorderRadius="10" Text="ثبت نام" Command="{Binding StartRegisteration}" />
+                <Label HorizontalTextAlignment="Center" Text="قبلا ثبت نام کرده اید؟"/>
+                <Button Text="ورود" BorderRadius="10" Command="{Binding Login}" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+                <Label Text="" />
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
+    
 </ContentPage>

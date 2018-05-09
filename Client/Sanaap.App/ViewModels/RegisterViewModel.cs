@@ -23,7 +23,7 @@ namespace Sanaap.App.ViewModels
         {
             Login = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("Main");
+                await navigationService.NavigateAsync("Login");
             });
 
             StartRegisteration = new BitDelegateCommand(async () =>
@@ -43,9 +43,12 @@ namespace Sanaap.App.ViewModels
                             customer = Customer
                         })
                         .ExecuteAsync();
+
+                    await navigationService.NavigateAsync("Main");
                 }
                 catch (Exception ex)
                 {
+                    await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
                     var a = ex.Message;
                 }
             });

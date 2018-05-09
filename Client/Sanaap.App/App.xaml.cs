@@ -78,6 +78,7 @@ namespace Sanaap.App
             containerRegistry.RegisterIdentityClient();
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
+            containerRegistry.Register<ILoginValidator, LoginValidator>();
 
             base.RegisterTypes(containerRegistry);
         }
