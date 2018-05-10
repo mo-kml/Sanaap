@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
@@ -19,7 +20,8 @@ namespace Sanaap.App.ViewModels
         public RegisterViewModel(INavigationService navigationService,
             IODataClient oDataClient,
             ICustomerValidator customerValidator,
-            IPageDialogService pageDialogService)
+            IPageDialogService pageDialogService,
+            ISecurityService securityService)
         {
             Login = new BitDelegateCommand(async () =>
             {
@@ -43,6 +45,8 @@ namespace Sanaap.App.ViewModels
                             customer = Customer
                         })
                         .ExecuteAsync();
+
+                    await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
 
                     await navigationService.NavigateAsync("Main");
                 }

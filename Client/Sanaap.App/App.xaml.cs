@@ -64,6 +64,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
+            containerRegistry.RegisterForNavigation<SubmitEvlRequestView, SubmitEvlRequestViewModel>("SubmitEvlRequest");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {

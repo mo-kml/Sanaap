@@ -4,6 +4,7 @@ using Bit.Data.Contracts;
 using Bit.Data.EntityFramework.Implementations;
 using Bit.Model.Contracts;
 using Sanaap.Model;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
@@ -22,6 +23,27 @@ namespace Sannap.Data
         protected override void Seed(SanaapDbContext context)
         {
             base.Seed(context);
+
+            if (!context.Set<InsuranceType>().AsNoTracking().Any())
+            {
+                context.Set<InsuranceType>().AddRange(new[]
+                {
+                    new InsuranceType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "ثالث",
+                        Code = 1
+                    },
+                    new InsuranceType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "بدنه",
+                        Code = 2
+                    }
+                });
+            }
         }
     }
 

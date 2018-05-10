@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
-             x:Class="Sanaap.App.Views.MainView" Title="سناپ" FlowDirection="RightToLeft">
-    <maps:Map
-            IsShowingUser="true"
-            MapType="Street" props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
+             x:Class="Sanaap.App.Views.MainView">
+    <StackLayout>
+        <Button Text="MyEvlRequests" Command="{Binding MyEvlRequests}" />
+        <Button Text="SubmitEvlRequest" Command="{Binding SubmitEvlRequest}" />
+        <Button Text="Logout" Command="{Binding Logout}" />
+    </StackLayout>
 </ContentPage>

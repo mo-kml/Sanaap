@@ -20,8 +20,8 @@ namespace Sanaap.Model
 
         public virtual Guid InsuranceTypeId { get; set; }
 
-        public long Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public long Longitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

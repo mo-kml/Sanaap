@@ -12,5 +12,7 @@ namespace Sanaap.Model
         public virtual string Name { get; set; }
 
         public virtual IList<EvlRequest> EvlRequests { set; get; }
+
+        public virtual int Code { get; set; }
     }
 }

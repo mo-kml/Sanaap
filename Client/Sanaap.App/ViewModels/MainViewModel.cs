@@ -1,28 +1,34 @@
 ﻿using Bit.ViewModel;
-using Plugin.Geolocator.Abstractions;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 
 namespace Sanaap.App.ViewModels
 {
     public class MainViewModel : BitViewModelBase
     {
-        private readonly IGeolocator _geolocator;
+        public BitDelegateCommand Logout { get; set; }
 
-        public MainViewModel(IGeolocator geolocator)
+        public BitDelegateCommand SubmitEvlRequest { get; set; }
+
+        public BitDelegateCommand MyEvlRequests { get; set; }
+
+        public MainViewModel(INavigationService navigationService, ISecurityService securityService)
         {
-            _geolocator = geolocator;
-        }
-
-        public virtual Position CurrentPosition { get; set; }
-
-        public async override void OnNavigatedTo(NavigationParameters parameters)
-        {
-            if (_geolocator.IsGeolocationAvailable)
+            Logout = new BitDelegateCommand(async () =>
             {
-                CurrentPosition = await _geolocator.GetPositionAsync();
-            }
+                await securityService.Logout();
+                await navigationService.NavigateAsync("/Login");
+            });
 
-            base.OnNavigatedTo(parameters);
+            SubmitEvlRequest = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("SubmitEvlRequest");
+            });
+
+            MyEvlRequests = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("MyEvlRequests");
+            });
         }
     }
 }

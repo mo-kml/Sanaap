@@ -2,9 +2,7 @@
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.Dto;
 using Sanaap.Service.Contracts;
-using Simple.OData.Client;
 using System;
 
 namespace Sanaap.App.ViewModels
@@ -34,7 +32,7 @@ namespace Sanaap.App.ViewModels
                 {
                     await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
 
-                    await navigationService.NavigateAsync("Main");
+                    await navigationService.NavigateAsync("/Main");
                 }
                 catch (Exception ex)
                 {

@@ -8,15 +8,10 @@ namespace Sanaap.Dto
     {
         public virtual Guid Id { get; set; }
 
-        public virtual Guid CustomerId { get; set; }
-
-        [ForeignKey(nameof(CustomerId))]
-        public virtual CustomerDto Customer { get; set; }
-
         public virtual Guid InsuranceTypeId { get; set; }
 
-        public long Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public long Longitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
