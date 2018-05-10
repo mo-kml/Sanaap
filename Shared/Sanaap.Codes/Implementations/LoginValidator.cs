@@ -8,42 +8,37 @@ namespace Sanaap.Service.Implementations
 {
     public class LoginValidator : ILoginValidator
     {
-        public bool IsValid(LoginDto loginDto, out string message)
+        public bool IsValid(string nationalCode, string mobile, out string message)
         {
-            if (loginDto.NationalCode == null)
+            if (string.IsNullOrEmpty(nationalCode))
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
                 return false;
             }
-            loginDto.NationalCode = loginDto.NationalCode.Trim();
-            if (string.IsNullOrEmpty(loginDto.NationalCode))
-            {
-                message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
-                return false;
-            }
-            if (!IsValidIranianNationalCode(loginDto.NationalCode))
+
+            nationalCode = nationalCode.Trim();
+
+            if (!IsValidIranianNationalCode(nationalCode))
             {
                 message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
                 return false;
             }
 
-            if (loginDto.Mobile == null)
+            if (string.IsNullOrEmpty(mobile))
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
                 return false;
             }
-            loginDto.Mobile = loginDto.Mobile.Trim();
-            if (string.IsNullOrEmpty(loginDto.Mobile))
-            {
-                message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
-                return false;
-            }
-            if (loginDto.Mobile.Length != 11)
+
+            mobile = mobile.Trim();
+
+            if (mobile.Length != 11)
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;
             }
-            if (loginDto.Mobile.Substring(0, 2) != "09")
+
+            if (mobile.Substring(0, 2) != "09")
             {
                 message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;

@@ -46,10 +46,10 @@ namespace Sanaap.App.ViewModels
 
                     await navigationService.NavigateAsync("Main");
                 }
-                catch (Exception ex)
+                catch
                 {
                     await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
-                    var a = ex.Message;
+                    throw;
                 }
             });
         }

@@ -3,27 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.LoginView" Title="ورود" FlowDirection="RightToLeft">
 
-    <StackLayout>
-        <ScrollView Orientation="Vertical" >
-            <StackLayout Orientation="Vertical" >
-                <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding loginDto.NationalCode}" />
-                <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding loginDto.Mobile}" />
-                <Button Text="ورود" BorderRadius="10" Command="{Binding StartLogin}" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-                <Label Text="" />
-            </StackLayout>
-        </ScrollView>
+    <StackLayout Orientation="Vertical" >
+        <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding NationalCode}" />
+        <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding Mobile}" />
+        <Button Text="ورود" Command="{Binding StartLogin}" />
     </StackLayout>
-    
+
 </ContentPage>
     

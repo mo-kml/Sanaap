@@ -51,7 +51,7 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterMinimalDependencies();
 
-            dependencyManager.RegisterDefaultLogger(typeof(DebugLogStore).GetTypeInfo(), typeof(ConsoleLogStore).GetTypeInfo());
+            dependencyManager.RegisterDefaultLogger(typeof(DebugLogStore).GetTypeInfo(), typeof(ConsoleLogStore).GetTypeInfo(), typeof(WindowsEventsLogStore).GetTypeInfo());
 
             dependencyManager.Register<IDbConnectionProvider, DefaultDbConnectionProvider<SqlConnection>>();
 

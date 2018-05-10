@@ -3,6 +3,7 @@ using Bit;
 using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
+using Plugin.Geolocator;
 using Prism;
 using Prism.Autofac;
 using Prism.Events;
@@ -79,6 +80,8 @@ namespace Sanaap.App
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ILoginValidator, LoginValidator>();
+
+            containerRegistry.RegisterInstance(CrossGeolocator.Current);
 
             base.RegisterTypes(containerRegistry);
         }

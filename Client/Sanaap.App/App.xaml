@@ -3,4 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.All"
              x:Class="Sanaap.App.App">
+    <bit:BitApplication.Resources>
+        <StyleSheet Source="/Views/Styles.css" />
+        <Style TargetType="Button">
+            <Setter Property="BorderRadius" Value="10" />
+        </Style>
+    </bit:BitApplication.Resources>
 </bit:BitApplication>

@@ -18,6 +18,7 @@ namespace Sanaap.Service.Implementations
                 message = $"{nameof(CustomerDto.FirstName)}IsEmpty";
                 return false;
             }
+
             if (customer.FirstName.Length < 3)
             {
                 message = $"{nameof(CustomerDto.FirstName)}MustAtLeast3Character";
@@ -29,6 +30,7 @@ namespace Sanaap.Service.Implementations
                 message = $"{nameof(CustomerDto.LastName)}IsEmpty";
                 return false;
             }
+
             if (customer.LastName.Length < 3)
             {
                 message = $"{nameof(CustomerDto.LastName)}MustAtLeast3Character";

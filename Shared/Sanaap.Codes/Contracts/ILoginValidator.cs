@@ -4,6 +4,6 @@ namespace Sanaap.Service.Contracts
 {
     public interface ILoginValidator
     {
-        bool IsValid(LoginDto loginDto, out string errorMessage);
+        bool IsValid(string nationalCode, string mobile, out string errorMessage);
     }
 }
