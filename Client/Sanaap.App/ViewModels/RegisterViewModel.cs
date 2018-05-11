@@ -50,7 +50,7 @@ namespace Sanaap.App.ViewModels
 
                     await navigationService.NavigateAsync("Main");
                 }
-                catch
+                catch(Exception ex)
                 {
                     await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
                     throw;

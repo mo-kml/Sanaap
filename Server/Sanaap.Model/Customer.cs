@@ -6,11 +6,11 @@ namespace Sanaap.Model
 {
     public class Customer : BaseEntity
     {
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2)]
         [Required]
         public virtual string FirstName { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2)]
         [Required]
         public virtual string LastName { get; set; }
 

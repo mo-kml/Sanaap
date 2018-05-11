@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sanaap.App.Views.RegisterView" Title="ثبت نام" FlowDirection="RightToLeft">
+             x:Class="Sanaap.App.Views.RegisterView" Title="" FlowDirection="RightToLeft">
 
     <ScrollView>
         <StackLayout>
@@ -9,7 +9,7 @@
             <Entry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
             <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
             <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل" Text="{Binding Customer.Mobile}" />
-            <Button Text="ثبت نام" Command="{Binding StartRegisteration}" />
+            <Button Text="ثبت نام" BackgroundColor="LightGreen" Command="{Binding StartRegisteration}" />
             <Label HorizontalTextAlignment="Center" Text="قبلا ثبت نام کرده اید؟"/>
             <Button Text="ورود" Command="{Binding Login}" />
         </StackLayout>

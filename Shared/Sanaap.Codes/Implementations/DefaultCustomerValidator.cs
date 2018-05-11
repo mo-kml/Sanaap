@@ -15,31 +15,36 @@ namespace Sanaap.Service.Implementations
 
             if (string.IsNullOrEmpty(customer.FirstName))
             {
-                message = $"{nameof(CustomerDto.FirstName)}IsEmpty";
+                //message = $"{nameof(CustomerDto.FirstName)}IsEmpty";
+                message = "نام را وارد نمائید";
                 return false;
             }
 
-            if (customer.FirstName.Length < 3)
+            if (customer.FirstName.Length < 2)
             {
-                message = $"{nameof(CustomerDto.FirstName)}MustAtLeast3Character";
+                //message = $"{nameof(CustomerDto.FirstName)}MustAtLeast3Character";
+                message = "نام باید حداقل 2 کاراکتر باشد";
                 return false;
             }
 
             if (string.IsNullOrEmpty(customer.LastName))
             {
-                message = $"{nameof(CustomerDto.LastName)}IsEmpty";
+                //message = $"{nameof(CustomerDto.LastName)}IsEmpty";
+                message = "نام خانوادگی را وارد نمائید";
                 return false;
             }
 
-            if (customer.LastName.Length < 3)
+            if (customer.LastName.Length < 2)
             {
-                message = $"{nameof(CustomerDto.LastName)}MustAtLeast3Character";
+                //message = $"{nameof(CustomerDto.LastName)}MustAtLeast3Character";
+                message = "نام خانوادگی باید حداقل 2 کاراکتر باشد";
                 return false;
             }
 
             if (string.IsNullOrEmpty(customer.NationalCode))
             {
-                message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
+                //message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
+                message = "کد ملی را وارد نمائید";
                 return false;
             }
 
@@ -47,27 +52,24 @@ namespace Sanaap.Service.Implementations
 
             if (!IsValidIranianNationalCode(customer.NationalCode))
             {
-                message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
+                //message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
+                message = "کد ملی معتبر نیست";
                 return false;
             }
 
             if (string.IsNullOrEmpty(customer.Mobile))
             {
-                message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
+                //message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
+                message = "موبایل را وارد نمائید";
                 return false;
             }
 
             customer.Mobile = customer.Mobile.Trim();
 
-            if (customer.Mobile.Length != 11)
+            if (customer.Mobile.Length != 11 || customer.Mobile.Substring(0, 2) != "09")
             {
-                message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
-                return false;
-            }
-
-            if (customer.Mobile.Substring(0, 2) != "09")
-            {
-                message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
+                //message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
+                message = "موبایل معتبر نیست";
                 return false;
             }
 
