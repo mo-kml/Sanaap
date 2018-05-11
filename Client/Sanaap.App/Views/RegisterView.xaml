@@ -5,12 +5,12 @@
 
     <ScrollView>
         <StackLayout>
-            <Entry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
+            <Entry MaxLength="20" Placeholder="نام" Margin="15, 30, 15, 0" Text="{Binding Customer.FirstName}" />
             <Entry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
             <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
             <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
             <Button Text="ثبت نام" BackgroundColor="LightGreen" Command="{Binding StartRegisteration}" />
-            <Label HorizontalTextAlignment="Center" Margin="0, 15, 0, 0" Text="قبلا ثبت نام کرده اید؟"/>
+            <Label HorizontalTextAlignment="Center" Margin="0, 60, 0, 0" Text="قبلا ثبت نام کرده اید؟"/>
             <Button Text="وارد شوید" Command="{Binding Login}" />
         </StackLayout>
     </ScrollView>

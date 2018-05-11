@@ -4,7 +4,7 @@
              x:Class="Sanaap.App.Views.LoginView" Title="" FlowDirection="RightToLeft">
 
     <StackLayout Orientation="Vertical" >
-        <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Margin="0, 30, 0, 0" Text="{Binding NationalCode}" />
+        <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Margin="15, 30, 15, 0" Text="{Binding NationalCode}" />
         <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Mobile}" />
         <Button Text="ورود" Command="{Binding StartLogin}" />
     </StackLayout>
