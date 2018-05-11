@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MainView">
     <StackLayout>
-        <Button Text="درخواست ارزیاب" Command="{Binding SubmitEvlRequest}" />
-        <Button Text="درخواستهای من" Command="{Binding MyEvlRequests}" />
-        <Button Text="خروج" Command="{Binding Logout}" />
+        <Button Text="درخواست ارزیاب خسارت" Margin="15, 50, 15, 0" Command="{Binding SubmitEvlRequest}" />
+        <Button Text="درخواستهای من" Margin="15, 50, 15, 0" Command="{Binding MyEvlRequests}" />
+        <Button BackgroundColor="#ff5949" Text="خروج" Margin="15, 150, 15, 0" Command="{Binding Logout}" />
     </StackLayout>
 </ContentPage>

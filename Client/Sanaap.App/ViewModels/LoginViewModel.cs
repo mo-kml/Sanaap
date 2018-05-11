@@ -24,7 +24,7 @@ namespace Sanaap.App.ViewModels
             {
                 if (!loginValidator.IsValid(NationalCode, Mobile, out string errorMessage))
                 {
-                    await pageDialogService.DisplayAlertAsync("اشکال در ثبت اطلاعات", errorMessage, "باشه");
+                    await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
                     return;
                 }
 

@@ -7,6 +7,10 @@
         <StyleSheet Source="/Views/Styles.css" />
         <Style TargetType="Button">
             <Setter Property="BorderRadius" Value="10" />
+            <Setter Property="Margin" Value="15, 0, 15, 0" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="Margin" Value="15, 2, 15, 0" />
         </Style>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

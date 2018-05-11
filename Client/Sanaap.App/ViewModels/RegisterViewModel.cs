@@ -32,7 +32,7 @@ namespace Sanaap.App.ViewModels
             {
                 if (!customerValidator.IsValid(Customer, out string errorMessage))
                 {
-                    await pageDialogService.DisplayAlertAsync("اشکال در ثبت اطلاعات", errorMessage, "باشه");
+                    await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
                     return;
                 }
 
