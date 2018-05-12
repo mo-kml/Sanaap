@@ -36,10 +36,16 @@ namespace Sanaap.App.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    if(ex.Message.Contains("invalid_grant"))
+                    if (ex.Message.Contains("invalid_grant"))
+                    {
                         await pageDialogService.DisplayAlertAsync("", "کاربری یافت نشد", "باشه");
+                        return;
+                    }
                     else
-                    await pageDialogService.DisplayAlertAsync(ex.Message, errorMessage, "باشه");
+                    {
+                        await pageDialogService.DisplayAlertAsync(ex.Message, errorMessage, "باشه");
+                        return;
+                    }
                     throw;
                 }
             });

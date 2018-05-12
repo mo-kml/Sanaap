@@ -54,6 +54,7 @@ namespace Sanaap.App.ViewModels
                 {
                     await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
                     throw;
+                    return;
                 }
             });
         }
