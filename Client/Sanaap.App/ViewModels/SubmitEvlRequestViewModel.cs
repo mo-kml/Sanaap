@@ -1,9 +1,9 @@
 ﻿using Bit.ViewModel;
 using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.Dto;
 using Simple.OData.Client;
-using System;
 using System.Linq;
 
 namespace Sanaap.App.ViewModels
@@ -19,7 +19,7 @@ namespace Sanaap.App.ViewModels
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
 
-        public SubmitEvlRequestViewModel(IGeolocator geolocator, IODataClient odataClient)
+        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
@@ -37,10 +37,15 @@ namespace Sanaap.App.ViewModels
                     .Action("SubmitEvlRequest")
                     .Set(new { evlReq })
                     .ExecuteAsync();
+                pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
+                navigationService.NavigateAsync("Main");
             }, () => CurrentPosition != null && SelectedInsuranceType != null);
 
             SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
             SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
+
+            //pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
+            //navigationService.NavigateAsync("Main");
         }
 
         public virtual Position CurrentPosition { get; set; }

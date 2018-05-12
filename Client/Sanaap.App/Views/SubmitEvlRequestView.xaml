@@ -7,6 +7,6 @@
     <StackLayout>
         <maps:Map IsShowingUser="true" MapType="Street" props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
         <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
-        <Button Text="SubmitEvlRequest" Command="{Binding SubmitEvlRequest}" />
+        <Button Text="درخواست کارشناس" Command="{Binding SubmitEvlRequest}" />
     </StackLayout>
 </ContentPage>
