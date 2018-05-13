@@ -13,7 +13,7 @@ namespace Sanaap.App.Views.Props
 
                     if (newValue is Plugin.Geolocator.Abstractions.Position position)
                     {
-                        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMeters(100)));
+                        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMeters(200)));
                     }
                 });
     }

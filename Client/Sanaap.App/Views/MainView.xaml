@@ -5,6 +5,6 @@
     <StackLayout>
         <Button Text="درخواست کارشناس ارزیاب خسارت" Margin="15, 50, 15, 0" Command="{Binding SubmitEvlRequest}" />
         <!--<Button Text="درخواستهای من" Margin="15, 50, 15, 0" Command="{Binding MyEvlRequests}" />-->
-        <Button BackgroundColor="#ff5949" Text="خروج" Margin="15, 100, 15, 2" Command="{Binding Logout}" />
+        <Button BackgroundColor="#ff9d9d" Text="خروج" Margin="15, 200, 15, 2" Command="{Binding Logout}" />
     </StackLayout>
 </ContentPage>
