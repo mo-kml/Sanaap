@@ -5,7 +5,7 @@
              xmlns:props="clr-namespace:Sanaap.App.Views.Props"
              x:Class="Sanaap.App.Views.SubmitEvlRequestView">
     <StackLayout>
-        <maps:Map IsShowingUser="true" MapType="Street" props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
+        <maps:Map IsShowingUser="true" MapType="Street " props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
         <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
         <Button Text="درخواست کارشناس" Command="{Binding SubmitEvlRequest}" />
     </StackLayout>

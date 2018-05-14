@@ -37,9 +37,9 @@ namespace Sanaap.App.ViewModels
                     .Action("SubmitEvlRequest")
                     .Set(new { evlReq })
                     .ExecuteAsync();
-                pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
-                navigationService.NavigateAsync("Main");
-            }, () => CurrentPosition != null && SelectedInsuranceType != null);
+                await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
+                await navigationService.NavigateAsync("Main");
+            }, () => SelectedInsuranceType != null);
 
             SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
             SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
@@ -48,7 +48,7 @@ namespace Sanaap.App.ViewModels
             //navigationService.NavigateAsync("Main");
         }
 
-        public virtual Position CurrentPosition { get; set; }
+        public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {

@@ -5,6 +5,7 @@ using Bit.ViewModel.Implementations;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
 using Prism.Ioc;
+using Sanaap.App.Views.Props;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
