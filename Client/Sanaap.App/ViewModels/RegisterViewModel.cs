@@ -17,15 +17,16 @@ namespace Sanaap.App.ViewModels
 
         public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
 
-        public RegisterViewModel(INavigationService navigationService,
-            IODataClient oDataClient,
-            ICustomerValidator customerValidator,
-            IPageDialogService pageDialogService,
-            ISecurityService securityService)
+        public bool IsBusy { get; set; } = false;
+
+        public RegisterViewModel(INavigationService navigationService, IODataClient oDataClient, ICustomerValidator customerValidator,
+            IPageDialogService pageDialogService, ISecurityService securityService)
         {
             Login = new BitDelegateCommand(async () =>
             {
+                IsBusy = true;
                 await navigationService.NavigateAsync("Login");
+                IsBusy = false;
             });
 
             StartRegisteration = new BitDelegateCommand(async () =>
@@ -38,6 +39,7 @@ namespace Sanaap.App.ViewModels
 
                 try
                 {
+                    IsBusy = true;
                     await oDataClient.For<CustomerDto>("Customers")
                         .Action("RegisterCustomer")
                         .Set(new
@@ -49,11 +51,13 @@ namespace Sanaap.App.ViewModels
                     await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
 
                     await navigationService.NavigateAsync("Main");
+
+                    IsBusy = false;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
-                    throw;
+                    IsBusy = false;
                     return;
                 }
             });

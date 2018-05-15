@@ -12,12 +12,16 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand MyEvlRequests { get; set; }
 
+        public bool IsBusy { get; set; } = false;
+
         public MainViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             Logout = new BitDelegateCommand(async () =>
             {
+                IsBusy = true;
                 await securityService.Logout();
                 await navigationService.NavigateAsync("/Login");
+                IsBusy = false;
             });
 
             SubmitEvlRequest = new BitDelegateCommand(async () =>

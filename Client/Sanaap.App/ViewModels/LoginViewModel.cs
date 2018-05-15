@@ -15,6 +15,8 @@ namespace Sanaap.App.ViewModels
 
         public virtual BitDelegateCommand StartLogin { get; set; }
 
+        public bool IsBusy { get; set; } = false;
+
         public LoginViewModel(INavigationService navigationService,
             ISecurityService securityService,
             ILoginValidator loginValidator,
@@ -25,17 +27,20 @@ namespace Sanaap.App.ViewModels
                 if (!loginValidator.IsValid(NationalCode, Mobile, out string errorMessage))
                 {
                     await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
+                    IsBusy = false;
                     return;
                 }
 
                 try
                 {
+                    IsBusy = true;
                     await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-
                     await navigationService.NavigateAsync("/Main");
+                    IsBusy = false;
                 }
                 catch (Exception ex)
                 {
+                    IsBusy = false;
                     if (ex.Message.Contains("invalid_grant"))
                     {
                         await pageDialogService.DisplayAlertAsync("", "کاربری یافت نشد", "باشه");

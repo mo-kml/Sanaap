@@ -4,6 +4,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
 using Simple.OData.Client;
+using System;
 using System.Linq;
 
 namespace Sanaap.App.ViewModels
@@ -16,55 +17,81 @@ namespace Sanaap.App.ViewModels
 
         public InsuranceTypeDto SelectedInsuranceType { get; set; }
 
+        public bool IsBusy { get; set; } = false;
+
+        public bool CanSend { get; set; } = false;
+
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
 
-        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
+        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient
+            , IPageDialogService pageDialogService)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
 
-            SubmitEvlRequest = new BitDelegateCommand(async () =>
+            try
             {
-                EvlRequestDto evlReq = new EvlRequestDto
+                SubmitEvlRequest = new BitDelegateCommand(async () =>
                 {
-                    InsuranceTypeId = SelectedInsuranceType.Id,
-                    Latitude = CurrentPosition.Latitude,
-                    Longitude = CurrentPosition.Longitude
-                };
+                    EvlRequestDto evlReq = new EvlRequestDto
+                    {
+                        InsuranceTypeId = SelectedInsuranceType.Id,
+                        Latitude = CurrentPosition.Latitude,
+                        Longitude = CurrentPosition.Longitude
+                    };
+                    bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
+                    if (confirmed)
+                    {
+                        IsBusy = true;
+                        await odataClient.For<EvlRequestDto>("EvlRequests")
+                           .Action("SubmitEvlRequest")
+                           .Set(new { evlReq })
+                           .ExecuteAsync();
+                        IsBusy = false;
+                        await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
+                        await navigationService.NavigateAsync("Main");
+                    }
+                    else return;
+                });
 
-                await odataClient.For<EvlRequestDto>("EvlRequests")
-                    .Action("SubmitEvlRequest")
-                    .Set(new { evlReq })
-                    .ExecuteAsync();
-                await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
-                await navigationService.NavigateAsync("Main");
-            }, () => SelectedInsuranceType != null);
-
-            SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
-            SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
-
-            //pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
-            //navigationService.NavigateAsync("Main");
+                SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
+                SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
+            }
+            catch (Exception ex)
+            {
+                pageDialogService.DisplayAlertAsync("", ex.Message, "باشه");
+                return;
+            }
         }
 
         public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
 
+
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
-            InsuranceTypes = (await _odataClient.For<InsuranceTypeDto>("InsuranceTypes")
-                .OrderBy(it => it.Code)
-                .FindEntriesAsync())
-                .ToArray();
-
-            SelectedInsuranceType = InsuranceTypes.First();
-
-            if (_geolocator.IsGeolocationAvailable)
+            try
             {
-                CurrentPosition = await _geolocator.GetPositionAsync();
-            }
+                InsuranceTypes = (await _odataClient.For<InsuranceTypeDto>("InsuranceTypes")
+                    .OrderBy(it => it.Code)
+                    .FindEntriesAsync())
+                    .ToArray();
 
-            base.OnNavigatedTo(parameters);
+                SelectedInsuranceType = InsuranceTypes.First();
+
+                if (_geolocator.IsGeolocationAvailable)
+                {
+                    IsBusy = true; CanSend = false;
+                    CurrentPosition = await _geolocator.GetPositionAsync();
+                    IsBusy = false; CanSend = true;
+                }
+
+                base.OnNavigatedTo(parameters);
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
 }

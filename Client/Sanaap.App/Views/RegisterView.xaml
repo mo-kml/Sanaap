@@ -10,6 +10,7 @@
             <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
             <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
             <Button Text="ثبت نام" BackgroundColor="LightGreen" Command="{Binding StartRegisteration}" />
+            <ActivityIndicator Color="Green" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
             <Label HorizontalTextAlignment="Center" Margin="0, 60, 0, 0" Text="قبلا ثبت نام کرده اید؟"/>
             <Button Text="وارد شوید" Command="{Binding Login}" />
         </StackLayout>
