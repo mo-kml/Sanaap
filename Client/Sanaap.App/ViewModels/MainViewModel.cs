@@ -1,6 +1,8 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
+using System;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
@@ -9,6 +11,8 @@ namespace Sanaap.App.ViewModels
         public BitDelegateCommand Logout { get; set; }
 
         public BitDelegateCommand SubmitEvlRequest { get; set; }
+
+        public BitDelegateCommand SubmitEvlRequestByCall { get; set; }
 
         public BitDelegateCommand MyEvlRequests { get; set; }
 
@@ -27,6 +31,11 @@ namespace Sanaap.App.ViewModels
             SubmitEvlRequest = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("SubmitEvlRequest");
+            });
+
+            SubmitEvlRequestByCall = new BitDelegateCommand(() =>
+            {
+                Device.OpenUri(new Uri("tel://02184228"));
             });
 
             MyEvlRequests = new BitDelegateCommand(async () =>
