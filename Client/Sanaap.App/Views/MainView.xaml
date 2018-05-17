@@ -3,11 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MainView">
     <StackLayout>
-        <ActivityIndicator Color="Green" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-        <Button Text="درخواست سیستمی کارشناس ارزیاب خسارت" Margin="15, 50, 15, 0" Command="{Binding SubmitEvlRequest}" />
-        <Button Text="درخواست تلفنی کارشناس ارزیاب خسارت" Margin="15, 50, 15, 0" Command="{Binding SubmitEvlRequestByCall}" />
-        <!--<Button Text="درخواستهای من" Margin="15, 50, 15, 0" Command="{Binding MyEvlRequests}" />-->
-        <Button BackgroundColor="#ff9d9d" Text="خروج" Margin="15, 100, 15, 2" Command="{Binding Logout}" />
-        
+
+        <StackLayout VerticalOptions="Start">
+        </StackLayout>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Button Text="درخواست سیستمی کارشناس ارزیاب خسارت" Margin="15, 10, 15, 0" Command="{Binding SubmitEvlRequest}" />
+            <Button Text="درخواست تلفنی کارشناس ارزیاب خسارت" Margin="15, 10, 15, 0" Command="{Binding SubmitEvlRequestByCall}" />
+        </StackLayout>
+
+        <StackLayout VerticalOptions="End" HorizontalOptions="Center">
+            <Button BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="10"/>
+        </StackLayout>
+
     </StackLayout>
+
 </ContentPage>
