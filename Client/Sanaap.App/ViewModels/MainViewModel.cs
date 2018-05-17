@@ -1,6 +1,7 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using Xamarin.Forms;
 
@@ -18,14 +19,22 @@ namespace Sanaap.App.ViewModels
 
         public bool IsBusy { get; set; } = false;
 
-        public MainViewModel(INavigationService navigationService, ISecurityService securityService)
+        public MainViewModel(INavigationService navigationService,
+            ISecurityService securityService,
+            IDeviceService deviceService)
         {
             Logout = new BitDelegateCommand(async () =>
             {
                 IsBusy = true;
-                await securityService.Logout();
-                await navigationService.NavigateAsync("/Login");
-                IsBusy = false;
+                try
+                {
+                    await securityService.Logout();
+                    await navigationService.NavigateAsync("/Login");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             });
 
             SubmitEvlRequest = new BitDelegateCommand(async () =>
@@ -35,7 +44,7 @@ namespace Sanaap.App.ViewModels
 
             SubmitEvlRequestByCall = new BitDelegateCommand(() =>
             {
-                Device.OpenUri(new Uri("tel://02184228"));
+                deviceService.OpenUri(new Uri("tel://02184228"));
             });
 
             MyEvlRequests = new BitDelegateCommand(async () =>

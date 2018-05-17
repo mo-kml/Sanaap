@@ -15,7 +15,7 @@ namespace Sanaap.App.ViewModels
 
         public virtual BitDelegateCommand StartLogin { get; set; }
 
-        public bool IsBusy { get; set; } = false;
+        public bool IsBusy { get; set; }
 
         public LoginViewModel(INavigationService navigationService,
             ISecurityService securityService,
@@ -24,34 +24,38 @@ namespace Sanaap.App.ViewModels
         {
             StartLogin = new BitDelegateCommand(async () =>
             {
-                if (!loginValidator.IsValid(NationalCode, Mobile, out string errorMessage))
-                {
-                    await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
-                    IsBusy = false;
-                    return;
-                }
+                IsBusy = true;
 
                 try
                 {
-                    IsBusy = true;
-                    await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                    await navigationService.NavigateAsync("/Main");
-                    IsBusy = false;
+                    if (!loginValidator.IsValid(NationalCode, Mobile, out string errorMessage))
+                    {
+                        await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
+                        return;
+                    }
+
+                    try
+                    {
+                        await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
+                        await navigationService.NavigateAsync("/Main");
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Contains("invalid_grant"))
+                        {
+                            await pageDialogService.DisplayAlertAsync("", "کاربری یافت نشد", "باشه");
+                            return;
+                        }
+                        else
+                        {
+                            await pageDialogService.DisplayAlertAsync(ex.Message, errorMessage, "باشه");
+                            return;
+                        }
+                    }
                 }
-                catch (Exception ex)
+                finally
                 {
                     IsBusy = false;
-                    if (ex.Message.Contains("invalid_grant"))
-                    {
-                        await pageDialogService.DisplayAlertAsync("", "کاربری یافت نشد", "باشه");
-                        return;
-                    }
-                    else
-                    {
-                        await pageDialogService.DisplayAlertAsync(ex.Message, errorMessage, "باشه");
-                        return;
-                    }
-                    throw;
                 }
             });
         }

@@ -30,9 +30,11 @@ namespace Sanaap.App.ViewModels
             _geolocator = geolocator;
             _odataClient = odataClient;
 
-            try
+            SubmitEvlRequest = new BitDelegateCommand(async () =>
             {
-                SubmitEvlRequest = new BitDelegateCommand(async () =>
+                IsBusy = true;
+
+                try
                 {
                     EvlRequestDto evlReq = new EvlRequestDto
                     {
@@ -43,26 +45,23 @@ namespace Sanaap.App.ViewModels
                     bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
                     if (confirmed)
                     {
-                        IsBusy = true;
                         await odataClient.For<EvlRequestDto>("EvlRequests")
                            .Action("SubmitEvlRequest")
                            .Set(new { evlReq })
                            .ExecuteAsync();
-                        IsBusy = false;
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
                         await navigationService.NavigateAsync("Main");
                     }
                     else return;
-                });
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            });
 
-                SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
-                SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
-            }
-            catch (Exception ex)
-            {
-                pageDialogService.DisplayAlertAsync("", ex.Message, "باشه");
-                return;
-            }
+            SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
+            SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
         }
 
         public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
@@ -82,15 +81,22 @@ namespace Sanaap.App.ViewModels
                 if (_geolocator.IsGeolocationAvailable)
                 {
                     IsBusy = true; CanSend = false;
-                    CurrentPosition = await _geolocator.GetPositionAsync();
-                    IsBusy = false; CanSend = true;
+                    try
+                    {
+                        CurrentPosition = await _geolocator.GetPositionAsync();
+                        CanSend = true;
+                    }
+                    finally
+                    {
+                        IsBusy = false;
+                    }
                 }
 
                 base.OnNavigatedTo(parameters);
             }
             catch (Exception ex)
             {
-                return;
+
             }
         }
     }

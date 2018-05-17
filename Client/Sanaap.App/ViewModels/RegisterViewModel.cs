@@ -25,40 +25,51 @@ namespace Sanaap.App.ViewModels
             Login = new BitDelegateCommand(async () =>
             {
                 IsBusy = true;
-                await navigationService.NavigateAsync("Login");
-                IsBusy = false;
+                try
+                {
+                    await navigationService.NavigateAsync("Login");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             });
 
             StartRegisteration = new BitDelegateCommand(async () =>
             {
-                if (!customerValidator.IsValid(Customer, out string errorMessage))
-                {
-                    await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
-                    return;
-                }
+                IsBusy = true;
 
                 try
                 {
-                    IsBusy = true;
-                    await oDataClient.For<CustomerDto>("Customers")
-                        .Action("RegisterCustomer")
-                        .Set(new
-                        {
-                            customer = Customer
-                        })
-                        .ExecuteAsync();
+                    if (!customerValidator.IsValid(Customer, out string errorMessage))
+                    {
+                        await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
+                        return;
+                    }
 
-                    await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
+                    try
+                    {
+                        await oDataClient.For<CustomerDto>("Customers")
+                            .Action("RegisterCustomer")
+                            .Set(new
+                            {
+                                customer = Customer
+                            })
+                            .ExecuteAsync();
 
-                    await navigationService.NavigateAsync("Main");
+                        await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
 
-                    IsBusy = false;
+                        await navigationService.NavigateAsync("Main");
+                    }
+                    catch (Exception ex)
+                    {
+                        await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
+                        return;
+                    }
                 }
-                catch (Exception ex)
+                finally
                 {
-                    await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
                     IsBusy = false;
-                    return;
                 }
             });
         }

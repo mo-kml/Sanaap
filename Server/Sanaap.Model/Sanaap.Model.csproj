@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.5" />
-    <PackageReference Include="Bit.Model" Version="1.0.5" />
+    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.6" />
+    <PackageReference Include="Bit.Model" Version="1.0.6" />
     <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.2" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.1" PrivateAssets="All" />
   </ItemGroup>
