@@ -56,6 +56,9 @@
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.0.0.482510</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.LiveReload">
+      <Version>0.3.27</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

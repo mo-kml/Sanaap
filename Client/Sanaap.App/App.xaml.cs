@@ -22,16 +22,14 @@ namespace Sanaap.App
 {
     public partial class App : BitApplication
     {
-        public App()
-            : base(null)
+        public App() : base(null)
         {
-
+            
         }
 
-        public App(IPlatformInitializer initializer)
-                    : base(initializer)
+        public App(IPlatformInitializer initializer) : base(initializer)
         {
-
+            LiveReload.Init();
         }
 
         protected override async void OnInitialized()
