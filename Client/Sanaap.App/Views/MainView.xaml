@@ -5,11 +5,12 @@
     <StackLayout>
 
         <StackLayout VerticalOptions="Start">
+            <Button Text="درخواست سیستمی کارشناس ارزیاب خسارت" Margin="15, 60, 15, 0" Command="{Binding SubmitEvlRequest}" />
+            <Button Text="درخواست های من" Margin="15, 10, 15, 0" />
         </StackLayout>
 
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Button Text="درخواست سیستمی کارشناس ارزیاب خسارت" Margin="15, -40, 15, 0" Command="{Binding SubmitEvlRequest}" />
-            <Button Text="درخواست تلفنی کارشناس ارزیاب خسارت" Margin="15, 10, 15, 0" Command="{Binding SubmitEvlRequestByCall}" />
+            <Button Text="درخواست تلفنی کارشناس ارزیاب خسارت" Margin="15, 0, 15, 0" Command="{Binding SubmitEvlRequestByCall}" />
         </StackLayout>
 
         <StackLayout VerticalOptions="End" HorizontalOptions="Center">
