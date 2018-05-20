@@ -6,7 +6,7 @@
 
         <StackLayout VerticalOptions="Start">
             <Button Text="درخواست سیستمی کارشناس ارزیاب خسارت" Margin="15, 60, 15, 0" Command="{Binding SubmitEvlRequest}" />
-            <Button Text="درخواست های من" Margin="15, 10, 15, 0" />
+            <Button Text="درخواست های من" Margin="15, 10, 15, 0" Command="{Binding GoToMyEvlRequests}" />
         </StackLayout>
 
         <StackLayout VerticalOptions="CenterAndExpand">

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.MyEvlRequestsView">
+
+    <ListView ItemsSource="{Binding items}" RowHeight="60">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="8">
+
+                        <Label Text="{Binding Id}" FontAttributes="Bold" />
+                        <Label Text="{Binding Latitude}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+
+</ContentPage>

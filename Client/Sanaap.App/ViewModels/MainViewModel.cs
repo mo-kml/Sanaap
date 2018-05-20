@@ -15,7 +15,7 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand SubmitEvlRequestByCall { get; set; }
 
-        public BitDelegateCommand MyEvlRequests { get; set; }
+        public BitDelegateCommand GoToMyEvlRequests { get; set; }
 
         public bool IsBusy { get; set; } = false;
 
@@ -47,7 +47,7 @@ namespace Sanaap.App.ViewModels
                 deviceService.OpenUri(new Uri("tel://02184228"));
             });
 
-            MyEvlRequests = new BitDelegateCommand(async () =>
+            GoToMyEvlRequests = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("MyEvlRequests");
             });

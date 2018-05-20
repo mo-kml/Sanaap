@@ -14,6 +14,12 @@
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\MyEvlRequestsView.xaml.cs">
+      <DependentUpon>MyEvlRequestsView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
   <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
   <Import Project="..\..\Shared\Sanaap.Codes\Sanaap.Codes.projitems" Label="Shared" />
 
