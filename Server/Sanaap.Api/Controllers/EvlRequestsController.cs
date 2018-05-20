@@ -5,12 +5,13 @@ using Bit.OData.ODataControllers;
 using Sanaap.Dto;
 using Sanaap.Model;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sanaap.Api.Controllers
 {
-    public class EvlRequestController : DtoController<EvlRequestDto>
+    public class EvlRequestsController : DtoController<EvlRequestDto>
     {
         public class SubmitEvlRequestArgs
         {
@@ -37,6 +38,16 @@ namespace Sanaap.Api.Controllers
             };
 
             await Repository.AddAsync(req, cancellationToken);
+        }
+
+        [Function]
+        public virtual async Task<IQueryable<EvlRequestDto>> GetMyEvlRequests(CancellationToken cancellationToken)
+        {
+            Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+
+            return Mapper.FromEntityQueryToDtoQuery((await Repository
+                .GetAllAsync(cancellationToken))
+                .Where(evlR => evlR.CustomerId == customerId));
         }
     }
 }

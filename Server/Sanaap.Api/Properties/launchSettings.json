@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/Sanaap.Api/",
+      "applicationUrl": "http://localhost/",
       "sslPort": 0
     },
     "iisExpress": {
@@ -13,7 +13,7 @@
   },
   "profiles": {
     "IIS": {
-      "commandName": "IISExpress",
+      "commandName": "IIS",
       "launchBrowser": true,
       "launchUrl": "odata/swagger/",
       "environmentVariables": {

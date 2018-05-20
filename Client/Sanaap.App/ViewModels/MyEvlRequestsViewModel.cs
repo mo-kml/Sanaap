@@ -4,37 +4,33 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
 using Simple.OData.Client;
-using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Sanaap.App.ViewModels
 {
     public class MyEvlRequestsViewModel : BitViewModelBase
     {
-        private ObservableCollection<EvlRequestDto> items;
+        private readonly IODataClient _odataClient;
 
-        public MyEvlRequestsViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient
-            , IPageDialogService pageDialogService)
+        public EvlRequestDto[] MyEvlRequests { get; set; }
+
+        public MyEvlRequestsViewModel(INavigationService navigationService,
+            IGeolocator geolocator,
+            IODataClient odataClient,
+            IPageDialogService pageDialogService)
         {
-            items = new ObservableCollection<EvlRequestDto>() {
-            new EvlRequestDto()
-            {
-                Id = new Guid(),
-                InsuranceTypeId = new Guid("73AAA9F9-EB55-E811-80D0-00155D0A0301"),
-                Latitude = 35,
-                Longitude = 51
-            }
-            //,
-            //  new EvlRequestDto()
-            //{
-            //    Id = new Guid(),
-            //    InsuranceTypeId = new Guid("73AAA9F9-EB55-E811-80D0-00155D0A0301"),
-            //    Latitude = 35,
-            //    Longitude = 51
-            //},
+            _odataClient = odataClient;
+        }
 
-            };
+        public async override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            MyEvlRequests = (await _odataClient.For<EvlRequestDto>("EvlRequests")
+                    .Function("GetMyEvlRequests")
+                    .OrderBy(it => it.ModifiedOn)
+                    .FindEntriesAsync())
+                    .ToArray();
+
+            base.OnNavigatedTo(parameters);
         }
     }
 }

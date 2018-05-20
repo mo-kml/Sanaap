@@ -22,9 +22,10 @@ namespace Sanaap.App
 {
     public partial class App : BitApplication
     {
-        public App() : base(null)
+        public App()
+            : base(null)
         {
-            
+
         }
 
         public App(IPlatformInitializer initializer) : base(initializer)
@@ -36,7 +37,7 @@ namespace Sanaap.App
         {
             InitializeComponent();
 
-            bool isLoggedIn = Container.Resolve<ISecurityService>().IsLoggedIn();
+            bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
             if (isLoggedIn)
             {
@@ -58,6 +59,7 @@ namespace Sanaap.App
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
+            ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
 
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
@@ -67,8 +69,8 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                //HostUri = new Uri("http://10.0.2.2/Sanaap.Api/"),
-                HostUri = new Uri("http://84.241.25.3:8220/"),
+                HostUri = new Uri("http://10.0.2.2/"),
+                //HostUri = new Uri("http://84.241.25.3:8220/"),
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
@@ -82,7 +84,8 @@ namespace Sanaap.App
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ILoginValidator, LoginValidator>();
 
-            containerRegistry.RegisterInstance(CrossGeolocator.Current);
+            containerBuilder.Register(c => CrossGeolocator.Current)
+                .SingleInstance();
 
             base.RegisterTypes(containerRegistry);
         }

@@ -52,7 +52,6 @@ namespace Sanaap.App.ViewModels
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
                         await navigationService.NavigateAsync("Main");
                     }
-                    else return;
                 }
                 finally
                 {
@@ -65,7 +64,6 @@ namespace Sanaap.App.ViewModels
         }
 
         public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
-
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {

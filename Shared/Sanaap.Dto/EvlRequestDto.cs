@@ -13,5 +13,7 @@ namespace Sanaap.Dto
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }
+
+        public virtual DateTimeOffset ModifiedOn { set; get; }
     }
 }

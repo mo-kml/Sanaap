@@ -5,7 +5,6 @@ using Bit.ViewModel.Implementations;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
 using Prism.Ioc;
-using Sanaap.App.Views.Props;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -25,7 +24,7 @@ namespace Sanaap.App.Droid
 
             CrossCurrentActivity.Current.Init(this, bundle);
 
-            FormsMaps.Init(this, bundle);
+            FormsGoogleMaps.Init(this, bundle);
 
             Forms.Init(this, bundle);
 

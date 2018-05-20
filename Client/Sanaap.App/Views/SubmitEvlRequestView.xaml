@@ -1,20 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="Sanaap.App.Views.SubmitEvlRequestView">
-    <!--<StackLayout>
-        <ActivityIndicator Color="Green" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
-          RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height}" HorizontalOptions="FillAndExpand"/>
-        <maps:Map IsShowingUser="true" MapType="Street " props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
-        <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
-        <Button Text="درخواست کارشناس" Command="{Binding SubmitEvlRequest}" />
-    </StackLayout>-->
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <maps:Map IsShowingUser="true" MapType="Street " props:MapProps.CurrentPosition="{Binding CurrentPosition}" />
+            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60"
+                      VerticalOptions="FillAndExpand" />
             <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
             <Button Text="درخواست کارشناس" Command="{Binding SubmitEvlRequest}" IsVisible="{Binding CanSend}" IsEnabled="False"/>
         </StackLayout>
@@ -25,5 +19,7 @@
             <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="Green"/>
             <Label Text="در حال پردازش ..." HorizontalOptions="Center" TextColor="Green"/>
         </StackLayout>
+        
     </AbsoluteLayout>
+    
 </ContentPage>
