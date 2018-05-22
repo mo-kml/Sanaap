@@ -2,8 +2,10 @@
 <bit:BitApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.All"
+             xmlns:convs="clr-namespace:Sanaap.App.Views.Converters"
              x:Class="Sanaap.App.App">
     <bit:BitApplication.Resources>
+        <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
         <StyleSheet Source="/Views/Styles.css" />
         <Style TargetType="ContentPage">
             <Setter Property="FlowDirection" Value="RightToLeft" />

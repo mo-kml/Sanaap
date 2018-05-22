@@ -17,5 +17,7 @@ namespace Sanaap.Dto
         public double Longitude { get; set; }
 
         public virtual DateTimeOffset ModifiedOn { set; get; }
+
+        public virtual string InsuranceTypeName { get; set; }
     }
 }

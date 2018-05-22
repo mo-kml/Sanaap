@@ -36,7 +36,7 @@ namespace Sannap.Data.Implementations
                     case EntityState.Added:
                         {
                             if (entry.Entity is IChangeTrackEnableEntity addedChangeTrackEnableEntity)
-                                addedChangeTrackEnableEntity.CreatedOn = now;
+                                addedChangeTrackEnableEntity.CreatedOn = addedChangeTrackEnableEntity.ModifiedOn = now;
                             break;
                         }
                     case EntityState.Modified:

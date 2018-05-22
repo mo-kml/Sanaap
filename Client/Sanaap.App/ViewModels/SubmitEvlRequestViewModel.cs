@@ -68,10 +68,6 @@ namespace Sanaap.App.ViewModels
                     IsBusy = false;
                 }
             });
-
-            SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
-            SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
-            SubmitEvlRequest.ObservesProperty(() => SelectedCarType);
         }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)

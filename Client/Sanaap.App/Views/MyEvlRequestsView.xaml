@@ -12,8 +12,8 @@
                         <StackLayout Margin="8">
                             <Label Text="{Binding Latitude, StringFormat='عرض جغرافیایی : {0:F3}'}" />
                             <Label Text="{Binding Longitude, StringFormat='طول جغرافیایی : {0:F3}'}" />
-                            <Label Text="{Binding InsuranceTypeId, StringFormat='رشته بیمه ای : {0}'}" />
-                            <Label Text="{Binding ModifiedOn, StringFormat='تاریخ درخواست : {0}'}" />
+                            <Label Text="{Binding InsuranceTypeName, StringFormat='رشته بیمه ای : {0}'}" />
+                            <Label Text="{Binding ModifiedOn , Converter={StaticResource DateTimeOffsetToSolarDateConverter}, ConverterParameter='تاریخ درخواست : {0}'}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
