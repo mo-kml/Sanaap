@@ -1,0 +1,17 @@
+<linker>
+  <assembly fullname="Prism.Forms">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Prism">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Bit.CSharpClient.All">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Sanaap.App">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Simple.OData.Client.V4.Adapter">
+    <type fullname="*" />
+  </assembly>
+</linker>

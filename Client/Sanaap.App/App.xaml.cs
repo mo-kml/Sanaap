@@ -28,9 +28,12 @@ namespace Sanaap.App
 
         }
 
-        public App(IPlatformInitializer initializer) : base(initializer)
+        public App(IPlatformInitializer initializer) 
+            : base(initializer)
         {
+#if DEBUG
             LiveReload.Init();
+#endif
         }
 
         protected override async void OnInitialized()
