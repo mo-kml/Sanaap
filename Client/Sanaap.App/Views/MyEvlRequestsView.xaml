@@ -3,19 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MyEvlRequestsView">
 
-    <ListView ItemsSource="{Binding MyEvlRequests}" RowHeight="60">
-
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Margin="8">
-                        <Label Text="{Binding Id}" FontAttributes="Bold" />
-                        <Label Text="{Binding Latitude}" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-
-    </ListView>
+    <StackLayout>
+        <ActivityIndicator/>
+        <ListView ItemsSource="{Binding MyEvlRequests}" RowHeight="120">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="8">
+                            <Label Text="{Binding Latitude, StringFormat='عرض جغرافیایی : {0:F3}'}" />
+                            <Label Text="{Binding Longitude, StringFormat='طول جغرافیایی : {0:F3}'}" />
+                            <Label Text="{Binding InsuranceTypeId, StringFormat='رشته بیمه ای : {0}'}" />
+                            <Label Text="{Binding ModifiedOn, StringFormat='تاریخ درخواست : {0}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 
 </ContentPage>

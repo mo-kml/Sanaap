@@ -15,10 +15,19 @@ namespace Sanaap.Model
         [Required]
         public virtual Guid CustomerId { get; set; }
 
+
         [ForeignKey(nameof(InsuranceTypeId))]
         public virtual InsuranceType InsuranceType { get; set; }
 
         public virtual Guid InsuranceTypeId { get; set; }
+
+
+        [Required]
+        [ForeignKey(nameof(CarTypeId))]
+        public virtual CarType CarType { get; set; }
+
+        public virtual Guid CarTypeId { get; set; }
+
 
         public double Latitude { get; set; }
 

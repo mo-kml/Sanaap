@@ -33,6 +33,7 @@ namespace Sanaap.Api.Controllers
             {
                 CustomerId = customerId,
                 InsuranceTypeId = args.evlReq.InsuranceTypeId,
+                CarTypeId = args.evlReq.CarTypeId,
                 Latitude = args.evlReq.Latitude,
                 Longitude = args.evlReq.Longitude
             };

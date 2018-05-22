@@ -5,12 +5,20 @@
              x:Class="Sanaap.App.App">
     <bit:BitApplication.Resources>
         <StyleSheet Source="/Views/Styles.css" />
+        <Style TargetType="ContentPage">
+            <Setter Property="FlowDirection" Value="RightToLeft" />
+        </Style>
         <Style TargetType="Button">
             <Setter Property="BorderRadius" Value="10" />
             <Setter Property="Margin" Value="15, 2, 15, 2" />
         </Style>
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="15, 2, 15, 0" />
+        </Style>
+        <Style TargetType="ActivityIndicator">
+            <Setter Property="Color" Value="Green" />
+            <Setter Property="IsRunning" Value="{Binding IsBusy}" />
+            <Setter Property="IsVisible" Value="{Binding IsBusy}" />
         </Style>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

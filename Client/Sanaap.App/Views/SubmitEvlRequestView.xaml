@@ -7,16 +7,25 @@
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60"
-                      VerticalOptions="FillAndExpand" />
-            <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
+            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60" VerticalOptions="FillAndExpand" />
+            
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                    <Picker ItemsSource="{Binding CarTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCarType}" />
+                </StackLayout>
+                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                    <Picker ItemsSource="{Binding InsuranceTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedInsuranceType}" />
+                </StackLayout>
+            </StackLayout>
+            
             <Button Text="درخواست کارشناس" Command="{Binding SubmitEvlRequest}" IsVisible="{Binding CanSend}" IsEnabled="False"/>
+            
         </StackLayout>
 
         <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
                  AbsoluteLayout.LayoutFlags="PositionProportional"
                  AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
-            <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="Green"/>
+            <ActivityIndicator/>
             <Label Text="در حال پردازش ..." HorizontalOptions="Center" TextColor="Green"/>
         </StackLayout>
         

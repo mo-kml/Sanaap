@@ -15,17 +15,21 @@ namespace Sanaap.App.ViewModels
 
         public InsuranceTypeDto[] InsuranceTypes { get; set; }
 
+        public CarTypeDto[] CarTypes { get; set; }
+
         public InsuranceTypeDto SelectedInsuranceType { get; set; }
+
+        public CarTypeDto SelectedCarType { get; set; }
 
         public bool IsBusy { get; set; } = false;
 
         public bool CanSend { get; set; } = false;
 
+        public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
 
-        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient
-            , IPageDialogService pageDialogService)
+        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
@@ -39,6 +43,7 @@ namespace Sanaap.App.ViewModels
                     EvlRequestDto evlReq = new EvlRequestDto
                     {
                         InsuranceTypeId = SelectedInsuranceType.Id,
+                        CarTypeId = SelectedCarType.Id,
                         Latitude = CurrentPosition.Latitude,
                         Longitude = CurrentPosition.Longitude
                     };
@@ -53,6 +58,11 @@ namespace Sanaap.App.ViewModels
                         await navigationService.NavigateAsync("Main");
                     }
                 }
+                catch(Exception ex)
+                {
+                    await pageDialogService.DisplayAlertAsync("", ex.Message, "باشه");
+                    return;
+                }
                 finally
                 {
                     IsBusy = false;
@@ -61,9 +71,8 @@ namespace Sanaap.App.ViewModels
 
             SubmitEvlRequest.ObservesProperty(() => CurrentPosition);
             SubmitEvlRequest.ObservesProperty(() => SelectedInsuranceType);
+            SubmitEvlRequest.ObservesProperty(() => SelectedCarType);
         }
-
-        public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
@@ -74,7 +83,13 @@ namespace Sanaap.App.ViewModels
                     .FindEntriesAsync())
                     .ToArray();
 
+                CarTypes = (await _odataClient.For<CarTypeDto>("CarTypes")
+                    .OrderBy(it => it.Code)
+                    .FindEntriesAsync())
+                    .ToArray();
+
                 SelectedInsuranceType = InsuranceTypes.First();
+                SelectedCarType = CarTypes.First();
 
                 if (_geolocator.IsGeolocationAvailable)
                 {
@@ -94,7 +109,7 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-
+                
             }
         }
     }

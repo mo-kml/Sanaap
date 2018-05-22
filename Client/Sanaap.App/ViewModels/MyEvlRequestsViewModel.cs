@@ -12,6 +12,8 @@ namespace Sanaap.App.ViewModels
     {
         private readonly IODataClient _odataClient;
 
+        public bool IsBusy { get; set; }
+
         public EvlRequestDto[] MyEvlRequests { get; set; }
 
         public MyEvlRequestsViewModel(INavigationService navigationService,
@@ -24,13 +26,21 @@ namespace Sanaap.App.ViewModels
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
-            MyEvlRequests = (await _odataClient.For<EvlRequestDto>("EvlRequests")
+            IsBusy = true;
+            try
+            {
+                MyEvlRequests = (await _odataClient.For<EvlRequestDto>("EvlRequests")
                     .Function("GetMyEvlRequests")
                     .OrderBy(it => it.ModifiedOn)
                     .FindEntriesAsync())
                     .ToArray();
 
-            base.OnNavigatedTo(parameters);
+                base.OnNavigatedTo(parameters);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

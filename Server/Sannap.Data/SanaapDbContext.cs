@@ -44,6 +44,48 @@ namespace Sannap.Data
                     }
                 });
             }
+
+            if (!context.Set<CarType>().AsNoTracking().Any())
+            {
+                context.Set<CarType>().AddRange(new[]
+                {
+                    new CarType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "سواری",
+                        Code = 1
+                    },
+                    new CarType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "بارکش",
+                        Code = 2
+                    },
+                    new CarType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "موتور سیکلت",
+                        Code = 3
+                    },
+                    new CarType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "اتوکار",
+                        Code = 4
+                    },
+                    new CarType
+                    {
+                        CreatedOn = DateTimeOffset.UtcNow,
+                        ModifiedOn = DateTimeOffset.UtcNow,
+                        Name = "یدک",
+                        Code = 5
+                    }
+                });
+            }
         }
     }
 

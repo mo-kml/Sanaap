@@ -10,6 +10,8 @@ namespace Sanaap.Dto
 
         public virtual Guid InsuranceTypeId { get; set; }
 
+        public virtual Guid CarTypeId { get; set; }
+
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }

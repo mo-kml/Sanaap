@@ -44,7 +44,7 @@ namespace Sanaap.App.ViewModels
 
             SubmitEvlRequestByCall = new BitDelegateCommand(() =>
             {
-                deviceService.OpenUri(new Uri("tel://02184228"));
+                deviceService.OpenUri(new Uri("tel://02141558"));
             });
 
             GoToMyEvlRequests = new BitDelegateCommand(async () =>
