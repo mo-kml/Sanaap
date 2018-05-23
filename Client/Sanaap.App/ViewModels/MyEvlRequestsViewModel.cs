@@ -8,15 +8,15 @@ using System.Linq;
 
 namespace Sanaap.App.ViewModels
 {
-    public class MyEvlRequestsViewModel : BitViewModelBase
+    public class MySosRequestsViewModel : BitViewModelBase
     {
         private readonly IODataClient _odataClient;
 
         public bool IsBusy { get; set; }
 
-        public EvlRequestDto[] MyEvlRequests { get; set; }
+        public SosRequestDto[] MySosRequests { get; set; }
 
-        public MyEvlRequestsViewModel(INavigationService navigationService,
+        public MySosRequestsViewModel(INavigationService navigationService,
             IGeolocator geolocator,
             IODataClient odataClient,
             IPageDialogService pageDialogService)
@@ -29,8 +29,8 @@ namespace Sanaap.App.ViewModels
             IsBusy = true;
             try
             {
-                MyEvlRequests = (await _odataClient.For<EvlRequestDto>("EvlRequests")
-                    .Function("GetMyEvlRequests")
+                MySosRequests = (await _odataClient.For<SosRequestDto>("SosRequests")
+                    .Function("GetMySosRequests")
                     .OrderBy(it => it.ModifiedOn)
                     .FindEntriesAsync())
                     .ToArray();

@@ -9,17 +9,15 @@ using System.Linq;
 
 namespace Sanaap.App.ViewModels
 {
-    public class SubmitEvlRequestViewModel : BitViewModelBase
+    public class SubmitSosRequestViewModel : BitViewModelBase
     {
-        public BitDelegateCommand SubmitEvlRequest { get; set; }
+        public BitDelegateCommand SubmitSosRequest { get; set; }
 
-        public InsuranceTypeDto[] InsuranceTypes { get; set; }
+        public SosRequestStatusDto SosRequestStatus { get; set; }
 
-        public CarTypeDto[] CarTypes { get; set; }
+        public SosRequestStatusDto SelectedSosRequestStatus { get; set; }
 
-        public InsuranceTypeDto SelectedInsuranceType { get; set; }
-
-        public CarTypeDto SelectedCarType { get; set; }
+        public string Description { get; set; }
 
         public bool IsBusy { get; set; } = false;
 
@@ -29,36 +27,36 @@ namespace Sanaap.App.ViewModels
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
 
-        public SubmitEvlRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
+        public SubmitSosRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
 
-            SubmitEvlRequest = new BitDelegateCommand(async () =>
+            SubmitSosRequest = new BitDelegateCommand(async () =>
             {
                 IsBusy = true;
 
                 try
                 {
-                    EvlRequestDto evlReq = new EvlRequestDto
+                    SosRequestDto sosReq = new SosRequestDto
                     {
-                        InsuranceTypeId = SelectedInsuranceType.Id,
-                        CarTypeId = SelectedCarType.Id,
+                        SosRequestStatusId = SosRequestStatus.Id,
                         Latitude = CurrentPosition.Latitude,
-                        Longitude = CurrentPosition.Longitude
+                        Longitude = CurrentPosition.Longitude,
+                        Description = Description
                     };
                     bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
                     if (confirmed)
                     {
-                        await odataClient.For<EvlRequestDto>("EvlRequests")
-                           .Action("SubmitEvlRequest")
-                           .Set(new { evlReq })
+                        await odataClient.For<SosRequestDto>("SosRequests")
+                           .Action("SubmitSosRequest")
+                           .Set(new { sosReq })
                            .ExecuteAsync();
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
                         await navigationService.NavigateAsync("Main");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await pageDialogService.DisplayAlertAsync("", ex.Message, "باشه");
                     return;
@@ -74,18 +72,10 @@ namespace Sanaap.App.ViewModels
         {
             try
             {
-                InsuranceTypes = (await _odataClient.For<InsuranceTypeDto>("InsuranceTypes")
+                SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
                     .OrderBy(it => it.Code)
                     .FindEntriesAsync())
-                    .ToArray();
-
-                CarTypes = (await _odataClient.For<CarTypeDto>("CarTypes")
-                    .OrderBy(it => it.Code)
-                    .FindEntriesAsync())
-                    .ToArray();
-
-                SelectedInsuranceType = InsuranceTypes.First();
-                SelectedCarType = CarTypes.First();
+                    .ToArray().FirstOrDefault();
 
                 if (_geolocator.IsGeolocationAvailable)
                 {
@@ -105,7 +95,7 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-                
+
             }
         }
     }

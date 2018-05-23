@@ -11,11 +11,11 @@ namespace Sanaap.App.ViewModels
     {
         public BitDelegateCommand Logout { get; set; }
 
-        public BitDelegateCommand SubmitEvlRequest { get; set; }
+        public BitDelegateCommand SubmitSosRequest { get; set; }
 
-        public BitDelegateCommand SubmitEvlRequestByCall { get; set; }
+        public BitDelegateCommand SubmitSosRequestByCall { get; set; }
 
-        public BitDelegateCommand GoToMyEvlRequests { get; set; }
+        public BitDelegateCommand GoToMySosRequests { get; set; }
 
         public bool IsBusy { get; set; } = false;
 
@@ -37,19 +37,19 @@ namespace Sanaap.App.ViewModels
                 }
             });
 
-            SubmitEvlRequest = new BitDelegateCommand(async () =>
+            SubmitSosRequest = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("SubmitEvlRequest");
+                await navigationService.NavigateAsync("SubmitSosRequest");
             });
 
-            SubmitEvlRequestByCall = new BitDelegateCommand(() =>
+            SubmitSosRequestByCall = new BitDelegateCommand(() =>
             {
                 deviceService.OpenUri(new Uri("tel://02141558"));
             });
 
-            GoToMyEvlRequests = new BitDelegateCommand(async () =>
+            GoToMySosRequests = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("MyEvlRequests");
+                await navigationService.NavigateAsync("MySosRequests");
             });
         }
     }

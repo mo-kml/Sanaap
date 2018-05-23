@@ -2,9 +2,9 @@
 
 namespace Sanaap.App.Views
 {
-    public partial class SubmitEvlRequestView : ContentPage
+    public partial class SubmitSosRequestView : ContentPage
 	{
-		public SubmitEvlRequestView ()
+		public SubmitSosRequestView ()
 		{
 			InitializeComponent ();
 		}

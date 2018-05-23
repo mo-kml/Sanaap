@@ -11,44 +11,44 @@ using System.Threading.Tasks;
 
 namespace Sanaap.Api.Controllers
 {
-    public class EvlRequestsController : DtoController<EvlRequestDto>
+    public class SosRequestsController : DtoController<SosRequestDto>
     {
-        public class SubmitEvlRequestArgs
+        public class SubmitSosRequestArgs
         {
-            public EvlRequestDto evlReq { get; set; }
+            public SosRequestDto sosReq { get; set; }
         }
 
         public IUserInformationProvider UserInformationProvider { get; set; }
 
-        public IDtoEntityMapper<EvlRequestDto, EvlRequest> Mapper { get; set; }
+        public IDtoEntityMapper<SosRequestDto, SosRequest> Mapper { get; set; }
 
-        public IRepository<EvlRequest> Repository { get; set; }
+        public IRepository<SosRequest> Repository { get; set; }
 
         [Action]
-        public virtual async Task SubmitEvlRequest(SubmitEvlRequestArgs args, CancellationToken cancellationToken)
+        public virtual async Task SubmitSosRequest(SubmitSosRequestArgs args, CancellationToken cancellationToken)
         {
             Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
-            EvlRequest req = new EvlRequest
+            SosRequest req = new SosRequest
             {
                 CustomerId = customerId,
-                InsuranceTypeId = args.evlReq.InsuranceTypeId,
-                CarTypeId = args.evlReq.CarTypeId,
-                Latitude = args.evlReq.Latitude,
-                Longitude = args.evlReq.Longitude
+                SosRequestStatusId = args.sosReq.SosRequestStatusId,
+                Latitude = args.sosReq.Latitude,
+                Longitude = args.sosReq.Longitude,
+                Description = args.sosReq.Description
             };
 
             await Repository.AddAsync(req, cancellationToken);
         }
 
         [Function]
-        public virtual async Task<IQueryable<EvlRequestDto>> GetMyEvlRequests(CancellationToken cancellationToken)
+        public virtual async Task<IQueryable<SosRequestDto>> GetMySosRequests(CancellationToken cancellationToken)
         {
             Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
             return Mapper.FromEntityQueryToDtoQuery((await Repository
                 .GetAllAsync(cancellationToken))
-                .Where(evlR => evlR.CustomerId == customerId));
+                .Where(sosR => sosR.CustomerId == customerId));
         }
     }
 }

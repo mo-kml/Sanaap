@@ -23,7 +23,7 @@ namespace Sanaap.Service.Implementations
             if (customer.FirstName.Length < 2)
             {
                 //message = $"{nameof(CustomerDto.FirstName)}MustAtLeast3Character";
-                message = "نام باید حداقل 2 کاراکتر باشد";
+                message = "نام باید حداقل 2 حرف باشد";
                 return false;
             }
 
@@ -37,7 +37,7 @@ namespace Sanaap.Service.Implementations
             if (customer.LastName.Length < 2)
             {
                 //message = $"{nameof(CustomerDto.LastName)}MustAtLeast3Character";
-                message = "نام خانوادگی باید حداقل 2 کاراکتر باشد";
+                message = "نام خانوادگی باید حداقل 2 حرف باشد";
                 return false;
             }
 

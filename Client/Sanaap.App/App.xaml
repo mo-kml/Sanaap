@@ -17,6 +17,9 @@
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="15, 2, 15, 0" />
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
         <Style TargetType="ActivityIndicator">
             <Setter Property="Color" Value="Green" />
             <Setter Property="IsRunning" Value="{Binding IsBusy}" />

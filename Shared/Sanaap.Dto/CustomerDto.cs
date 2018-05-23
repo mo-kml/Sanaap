@@ -16,6 +16,6 @@ namespace Sanaap.Dto
 
         public virtual string Mobile { get; set; }
 
-        public virtual IList<EvlRequestDto> EvlRequests { set; get; }
+        public virtual IList<SosRequestDto> SosRequests { set; get; }
     }
 }

@@ -24,65 +24,30 @@ namespace Sannap.Data
         {
             base.Seed(context);
 
-            if (!context.Set<InsuranceType>().AsNoTracking().Any())
+            if (!context.Set<SosRequestStatus>().AsNoTracking().Any())
             {
-                context.Set<InsuranceType>().AddRange(new[]
+                context.Set<SosRequestStatus>().AddRange(new[]
                 {
-                    new InsuranceType
+                    new SosRequestStatus
                     {
                         CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "ثالث",
+                        Name = "ارسال اولیه",
                         Code = 1
                     },
-                    new InsuranceType
+                    new SosRequestStatus
                     {
                         CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "بدنه",
-                        Code = 2
-                    }
-                });
-            }
-
-            if (!context.Set<CarType>().AsNoTracking().Any())
-            {
-                context.Set<CarType>().AddRange(new[]
-                {
-                    new CarType
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "سواری",
-                        Code = 1
-                    },
-                    new CarType
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "بارکش",
+                        Name = "بررسی اپراتور",
                         Code = 2
                     },
-                    new CarType
+                    new SosRequestStatus
                     {
                         CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "موتور سیکلت",
+                        Name = "اعزام کارشناس",
                         Code = 3
-                    },
-                    new CarType
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "اتوکار",
-                        Code = 4
-                    },
-                    new CarType
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "یدک",
-                        Code = 5
                     }
                 });
             }

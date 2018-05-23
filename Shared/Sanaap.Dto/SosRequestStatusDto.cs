@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Sanaap.Dto
 {
-    public partial class InsuranceTypeDto : IDto
+    public partial class SosRequestStatusDto : IDto
     {
         public virtual Guid Id { get; set; }
 
@@ -12,6 +12,6 @@ namespace Sanaap.Dto
 
         public virtual int Code { get; set; }
 
-        public virtual IList<EvlRequestDto> EvlRequests { set; get; }
+        public virtual IList<SosRequestStatusDto> SosRequestStatuses { set; get; }
     }
 }

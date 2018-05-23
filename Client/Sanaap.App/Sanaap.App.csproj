@@ -15,8 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\MyEvlRequestsView.xaml.cs">
-      <DependentUpon>MyEvlRequestsView.xaml</DependentUpon>
+    <Compile Update="Views\MySosRequestsView.xaml.cs">
+      <DependentUpon>MySosRequestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SubmitSosRequestView.xaml.cs">
+      <DependentUpon>SubmitSosRequestView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

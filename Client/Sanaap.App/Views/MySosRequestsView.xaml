@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.MySosRequestsView" FlowDirection="RightToLeft">
+
+    <StackLayout>
+        <ActivityIndicator/>
+        <ListView ItemsSource="{Binding MySosRequests}" RowHeight="140">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="8">
+                            
+                            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Vertical"  HorizontalOptions="Start">
+                                    <Label Text="{Binding Latitude, StringFormat='عرض جغرافیایی : {0:F3}'}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical"  HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding Longitude, StringFormat='طول جغرافیایی : {0:F3}'}" />
+                                </StackLayout>
+                            </StackLayout>
+
+                            <Label Text="{Binding Description, StringFormat='توضیحات : {0}'}" />
+                            <Label Text="{Binding SosRequestStatusName, StringFormat='وضعیت : {0}'}" />
+                            <Label Text="{Binding ModifiedOn , Converter={StaticResource DateTimeOffsetToSolarDateConverter}, ConverterParameter='تاریخ درخواست : {0}'}" />
+                           
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

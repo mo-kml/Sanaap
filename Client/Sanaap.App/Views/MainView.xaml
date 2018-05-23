@@ -5,12 +5,12 @@
     <StackLayout>
 
         <StackLayout VerticalOptions="Start">
-            <Button Text="کمکم کنید" Margin="15, 60, 15, 0" Command="{Binding SubmitEvlRequest}" />
-            <Button Text="درخواست های من" Margin="15, 10, 15, 0" Command="{Binding GoToMyEvlRequests}" />
+            <Button Text="کمکم کنید" Margin="15, 60, 15, 0" Command="{Binding SubmitSosRequest}" />
+            <Button Text="درخواست های من" Margin="15, 10, 15, 0" Command="{Binding GoToMySosRequests}" />
         </StackLayout>
 
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Button Text="درخواست کمک تلفنی" Margin="15, 0, 15, 0" Command="{Binding SubmitEvlRequestByCall}" />
+            <Button Text="درخواست کمک تلفنی" Margin="15, 0, 15, 0" Command="{Binding SubmitSosRequestByCall}" />
         </StackLayout>
 
         <StackLayout VerticalOptions="End" HorizontalOptions="Center">
