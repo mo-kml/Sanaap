@@ -28,7 +28,7 @@ namespace Sanaap.App
 
         }
 
-        public App(IPlatformInitializer initializer) 
+        public App(IPlatformInitializer initializer)
             : base(initializer)
         {
 #if DEBUG

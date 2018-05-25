@@ -5,7 +5,7 @@
 
     <StackLayout>
         <ActivityIndicator/>
-        <ListView ItemsSource="{Binding MySosRequests}" RowHeight="140">
+        <ListView ItemsSource="{Binding MySosRequests}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

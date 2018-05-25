@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\iran.png" />
+    <None Remove="img\phone.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="img\iran.png" />
+    <EmbeddedResource Include="img\phone.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bit.CSharpClient.All" Version="1.0.6" />
     <PackageReference Include="Fody" Version="3.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.5.6" />
@@ -21,6 +31,12 @@
     <Compile Update="Views\SubmitSosRequestView.xaml.cs">
       <DependentUpon>SubmitSosRequestView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MainView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />

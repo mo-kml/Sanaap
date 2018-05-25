@@ -3,20 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MainView">
     <StackLayout>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <StackLayout VerticalOptions="Start">
-            <Button Text="کمکم کنید" Margin="15, 60, 15, 0" Command="{Binding SubmitSosRequest}" />
-            <Button Text="درخواست های من" Margin="15, 10, 15, 0" Command="{Binding GoToMySosRequests}" />
+                <Image Grid.Row="0" x:Name="imgIran" />
+                <Button Grid.Row="1" BackgroundColor="#abebc6" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="120" HeightRequest="120" BorderRadius="60" Text="کمکم کنید"  Command="{Binding SubmitSosRequest}" />
+                <Image Grid.Row="2" x:Name="imgPhone" WidthRequest="5"/>
+                <Button Grid.Row="3" BackgroundColor="#abebc6" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="120" HeightRequest="120" BorderRadius="60" FontSize="Medium" Text="کمکم کنید" Margin="15, 0, 15, 0" Command="{Binding SubmitSosRequestByCall}" />
+            </Grid>
+            
         </StackLayout>
 
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <Button Text="درخواست کمک تلفنی" Margin="15, 0, 15, 0" Command="{Binding SubmitSosRequestByCall}" />
+        <StackLayout VerticalOptions="End">
+            <Button HorizontalOptions="Center" Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
+            <Button HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
         </StackLayout>
-
-        <StackLayout VerticalOptions="End" HorizontalOptions="Center">
-            <Button BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="10"/>
-        </StackLayout>
-
+        
     </StackLayout>
-
 </ContentPage>

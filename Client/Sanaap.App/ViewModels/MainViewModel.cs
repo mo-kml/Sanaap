@@ -3,7 +3,6 @@ using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using System;
-using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
