@@ -44,7 +44,7 @@ namespace Sanaap.App
 
             if (isLoggedIn)
             {
-                await NavigationService.NavigateAsync("Nav/Main");
+                await NavigationService.NavigateAsync("Nav/MD");
             }
             else
             {
@@ -69,6 +69,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
+            containerRegistry.RegisterForNavigation<MD, MDViewModel>("MD");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
