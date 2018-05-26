@@ -25,9 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\MasterDetailPage1MenuItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\MySosRequestsView.xaml.cs">
       <DependentUpon>MySosRequestsView.xaml</DependentUpon>
     </Compile>
@@ -38,15 +35,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\MainView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\MasterDetailPage1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\MasterDetailPage1Detail.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\MasterDetailPage1Master.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MenuView.xaml">
