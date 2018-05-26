@@ -55,4 +55,3 @@ namespace Sanaap.App.Droid
         }
     }
 }
-

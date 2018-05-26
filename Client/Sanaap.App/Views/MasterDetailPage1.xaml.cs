@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Sanaap.App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MD : MasterDetailPage
+    public partial class MasterDetailPage1 : MasterDetailPage
     {
-        public MD()
+        public MasterDetailPage1()
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
@@ -20,7 +20,7 @@ namespace Sanaap.App.Views
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MDMenuItem;
+            var item = e.SelectedItem as MasterDetailPage1MenuItem;
             if (item == null)
                 return;
 

@@ -17,19 +17,16 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
 namespace Sanaap.App
 {
     public partial class App : BitApplication
     {
-        public App()
-            : base(null)
+        public App() : base(null)
         {
 
         }
 
-        public App(IPlatformInitializer initializer)
-            : base(initializer)
+        public App(IPlatformInitializer initializer) : base(initializer)
         {
 #if DEBUG
             LiveReload.Init();
@@ -44,7 +41,7 @@ namespace Sanaap.App
 
             if (isLoggedIn)
             {
-                await NavigationService.NavigateAsync("Nav/MD");
+                await NavigationService.NavigateAsync("Nav/Menu");
             }
             else
             {
@@ -69,7 +66,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
-            containerRegistry.RegisterForNavigation<MD, MDViewModel>("MD");
+            containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
@@ -88,8 +85,7 @@ namespace Sanaap.App
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ILoginValidator, LoginValidator>();
 
-            containerBuilder.Register(c => CrossGeolocator.Current)
-                .SingleInstance();
+            containerBuilder.Register(c => CrossGeolocator.Current).SingleInstance();
 
             base.RegisterTypes(containerRegistry);
         }

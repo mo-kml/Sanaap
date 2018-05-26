@@ -53,7 +53,7 @@ namespace Sanaap.App.ViewModels
                            .Set(new { sosReq })
                            .ExecuteAsync();
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
-                        await navigationService.NavigateAsync("Main");
+                        await navigationService.NavigateAsync("Menu");
                     }
                 }
                 catch (Exception ex)

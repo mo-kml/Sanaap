@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Sanaap.App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MDDetail : ContentPage
+    public partial class MasterDetailPage1Detail : ContentPage
     {
-        public MDDetail()
+        public MasterDetailPage1Detail()
         {
             InitializeComponent();
         }

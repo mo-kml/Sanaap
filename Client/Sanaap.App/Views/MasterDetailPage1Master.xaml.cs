@@ -13,31 +13,31 @@ using Xamarin.Forms.Xaml;
 namespace Sanaap.App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MDMaster : ContentPage
+    public partial class MasterDetailPage1Master : ContentPage
     {
         public ListView ListView;
 
-        public MDMaster()
+        public MasterDetailPage1Master()
         {
             InitializeComponent();
 
-            BindingContext = new MDMasterViewModel();
+            BindingContext = new MasterDetailPage1MasterViewModel();
             ListView = MenuItemsListView;
         }
 
-        class MDMasterViewModel : INotifyPropertyChanged
+        class MasterDetailPage1MasterViewModel : INotifyPropertyChanged
         {
-            public ObservableCollection<MDMenuItem> MenuItems { get; set; }
+            public ObservableCollection<MasterDetailPage1MenuItem> MenuItems { get; set; }
             
-            public MDMasterViewModel()
+            public MasterDetailPage1MasterViewModel()
             {
-                MenuItems = new ObservableCollection<MDMenuItem>(new[]
+                MenuItems = new ObservableCollection<MasterDetailPage1MenuItem>(new[]
                 {
-                    new MDMenuItem { Id = 0, Title = "Page 1" },
-                    new MDMenuItem { Id = 1, Title = "Page 2" },
-                    new MDMenuItem { Id = 2, Title = "Page 3" },
-                    new MDMenuItem { Id = 3, Title = "Page 4" },
-                    new MDMenuItem { Id = 4, Title = "Page 5" },
+                    new MasterDetailPage1MenuItem { Id = 0, Title = "Page 1" },
+                    new MasterDetailPage1MenuItem { Id = 1, Title = "Page 2" },
+                    new MasterDetailPage1MenuItem { Id = 2, Title = "Page 3" },
+                    new MasterDetailPage1MenuItem { Id = 3, Title = "Page 4" },
+                    new MasterDetailPage1MenuItem { Id = 4, Title = "Page 5" },
                 });
             }
             

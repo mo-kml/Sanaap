@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Sanaap.App.Views
 {
 
-    public class MDMenuItem
+    public class MasterDetailPage1MenuItem
     {
-        public MDMenuItem()
+        public MasterDetailPage1MenuItem()
         {
-            TargetType = typeof(MDDetail);
+            TargetType = typeof(MasterDetailPage1Detail);
         }
         public int Id { get; set; }
         public string Title { get; set; }

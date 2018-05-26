@@ -37,7 +37,7 @@ namespace Sanaap.App.ViewModels
                     try
                     {
                         await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                        await navigationService.NavigateAsync("/Main");
+                        await navigationService.NavigateAsync("/Menu");
                     }
                     catch (Exception ex)
                     {

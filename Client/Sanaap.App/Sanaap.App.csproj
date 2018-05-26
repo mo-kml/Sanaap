@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\MDMenuItem.cs">
+    <Compile Update="Views\MasterDetailPage1MenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MySosRequestsView.xaml.cs">
@@ -40,13 +40,16 @@
     <EmbeddedResource Update="Views\MainView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MD.xaml">
+    <EmbeddedResource Update="Views\MasterDetailPage1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MDDetail.xaml">
+    <EmbeddedResource Update="Views\MasterDetailPage1Detail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MDMaster.xaml">
+    <EmbeddedResource Update="Views\MasterDetailPage1Master.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MenuView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
