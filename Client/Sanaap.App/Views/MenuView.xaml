@@ -7,9 +7,19 @@
 
     <MasterDetailPage.Master>
         <ContentPage Title="منو">
-            <StackLayout Orientation="Vertical">
-                <Button HorizontalOptions="Center" Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
-            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+
+                    <StackLayout VerticalOptions="Start">
+                        <Button Margin="20"  Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
+                    </StackLayout>
+
+                    <StackLayout VerticalOptions="EndAndExpand">
+                        <Button HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
         </ContentPage>
     </MasterDetailPage.Master>
 
