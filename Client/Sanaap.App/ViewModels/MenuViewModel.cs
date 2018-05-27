@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 
 namespace Sanaap.App.ViewModels
@@ -9,7 +10,7 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Logout { get; set; }
 
-        public MenuViewModel(INavigationService navigationService)
+        public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
@@ -18,16 +19,8 @@ namespace Sanaap.App.ViewModels
 
             Logout = new BitDelegateCommand(async () =>
             {
-                IsBusy = true;
-                try
-                {
-                    await securityService.Logout();
-                    await navigationService.NavigateAsync("/Login");
-                }
-                finally
-                {
-                    IsBusy = false;
-                }
+                await securityService.Logout();
+                await navigationService.NavigateAsync("/Login");
             });
         }
     }
