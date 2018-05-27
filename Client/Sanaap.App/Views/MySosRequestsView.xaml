@@ -10,20 +10,16 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Margin="8">
-                            
+
                             <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                                <StackLayout Orientation="Vertical"  HorizontalOptions="Start">
-                                    <Label Text="{Binding Latitude, StringFormat='عرض جغرافیایی : {0:F3}'}" />
-                                </StackLayout>
-                                <StackLayout Orientation="Vertical"  HorizontalOptions="EndAndExpand">
-                                    <Label Text="{Binding Longitude, StringFormat='طول جغرافیایی : {0:F3}'}" />
-                                </StackLayout>
+                                <Label HorizontalOptions="Start" Text="{Binding Latitude, StringFormat='عرض جغرافیایی : {0:F3}'}" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Longitude, StringFormat='طول جغرافیایی : {0:F3}'}" />
                             </StackLayout>
 
                             <Label Text="{Binding Description, StringFormat='توضیحات : {0}'}" />
                             <Label Text="{Binding SosRequestStatusName, StringFormat='وضعیت : {0}'}" />
                             <Label Text="{Binding ModifiedOn , Converter={StaticResource DateTimeOffsetToSolarDateConverter}, ConverterParameter='تاریخ درخواست : {0}'}" />
-                           
+
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

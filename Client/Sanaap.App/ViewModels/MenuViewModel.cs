@@ -14,7 +14,7 @@ namespace Sanaap.App.ViewModels
         {
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("Menu/MySosRequests");
+                await navigationService.NavigateAsync("MySosRequests");
             });
 
             Logout = new BitDelegateCommand(async () =>

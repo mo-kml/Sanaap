@@ -1,9 +1,12 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
+using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Service.Contracts;
 using System;
+using System.Collections.Generic;
 
 namespace Sanaap.App.ViewModels
 {
@@ -20,7 +23,9 @@ namespace Sanaap.App.ViewModels
         public LoginViewModel(INavigationService navigationService,
             ISecurityService securityService,
             ILoginValidator loginValidator,
-            IPageDialogService pageDialogService)
+            IPageDialogService pageDialogService,
+            ITranslateService translateService,
+            IConnectivity connectivity)
         {
             StartLogin = new BitDelegateCommand(async () =>
             {
@@ -30,26 +35,36 @@ namespace Sanaap.App.ViewModels
                 {
                     if (!loginValidator.IsValid(NationalCode, Mobile, out string errorMessage))
                     {
-                        await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
+                        await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
+                        return;
+                    }
+
+                    if (connectivity.IsConnected == false)
+                    {
+                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
                         return;
                     }
 
                     try
                     {
                         await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                        await navigationService.NavigateAsync("/Menu");
+                        await navigationService.NavigateAsync("/Main");
                     }
                     catch (Exception ex)
                     {
-                        if (ex.Message.Contains("invalid_grant"))
+                        Crashes.TrackError(ex, new Dictionary<string, string>
                         {
-                            await pageDialogService.DisplayAlertAsync("", "کاربری یافت نشد", "باشه");
-                            return;
+                            { "Message", ex.GetMessage() },
+                            { "ViewModel", nameof(LoginViewModel) }
+                        });
+
+                        if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                        {
+                            await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
                         }
                         else
                         {
-                            await pageDialogService.DisplayAlertAsync(ex.Message, errorMessage, "باشه");
-                            return;
+                            await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
                         }
                     }
                 }

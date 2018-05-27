@@ -117,6 +117,7 @@ namespace Sanaap.Api
             dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
 
             dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
+            dependencyManager.Register<ITranslateService, DefaultTranslateService>(lifeCycle: DependencyLifeCycle.SingleInstance);
         }
 
         public IEnumerable<IAppModule> GetAppModules()

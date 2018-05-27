@@ -12,8 +12,7 @@ namespace Sanaap.Service.Implementations
         {
             if (string.IsNullOrEmpty(nationalCode))
             {
-                //message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
-                message = "کد ملی را وارد نمائید";
+                message = $"{nameof(CustomerDto.NationalCode)}IsEmpty";
                 return false;
             }
 
@@ -21,15 +20,13 @@ namespace Sanaap.Service.Implementations
 
             if (!IsValidIranianNationalCode(nationalCode))
             {
-                //message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
-                message = "کد ملی معتبر نیست";
+                message = $"{nameof(CustomerDto.NationalCode)}IsInvalid";
                 return false;
             }
 
             if (string.IsNullOrEmpty(mobile))
             {
-                //message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
-                message = "موبایل را وارد نمائید";
+                message = $"{nameof(CustomerDto.Mobile)}IsEmpty";
                 return false;
             }
 
@@ -37,8 +34,7 @@ namespace Sanaap.Service.Implementations
 
             if (mobile.Length != 11 || mobile.Substring(0, 2) != "09")
             {
-                //message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
-                message = "موبایل معتبر نیست";
+                message = $"{nameof(CustomerDto.Mobile)}IsInvalid";
                 return false;
             }
 

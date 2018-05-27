@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage x:Name="masterDetail" xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MenuView"
-             xmlns:pages="clr-namespace:Sanaap.App.Views;assembly=Sanaap.App" 
              Title="منو">
 
     <MasterDetailPage.Master>
@@ -10,25 +9,13 @@
             <ScrollView>
                 <StackLayout>
 
-                    <StackLayout VerticalOptions="Start">
-                        <Button Margin="20"  Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
-                    </StackLayout>
+                    <Button VerticalOptions="Start" Margin="20" Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
 
-                    <StackLayout VerticalOptions="EndAndExpand">
-                        <Button HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
-                    </StackLayout>
+                    <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
 
                 </StackLayout>
             </ScrollView>
         </ContentPage>
     </MasterDetailPage.Master>
-
-    <MasterDetailPage.Detail Title="">
-        <NavigationPage>
-            <x:Arguments>
-                <pages:MainView />
-            </x:Arguments>
-        </NavigationPage>
-    </MasterDetailPage.Detail>
 
 </MasterDetailPage>

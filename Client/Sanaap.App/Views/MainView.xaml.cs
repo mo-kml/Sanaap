@@ -7,8 +7,6 @@ namespace Sanaap.App.Views
 		public MainView ()
 		{
 			InitializeComponent ();
-            imgIran.Source = ImageSource.FromResource("Sanaap.App.img.iran.png");
-            imgPhone.Source = ImageSource.FromResource("Sanaap.App.img.phone.jpg");
         }
 	}
 }

@@ -1,4 +1,6 @@
 ﻿using Bit.ViewModel;
+using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
 using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
@@ -23,14 +25,22 @@ namespace Sanaap.App.ViewModels
 
         public bool CanSend { get; set; } = false;
 
-        public virtual Position CurrentPosition { get; set; } = new Position(35, 51);
+        public Position CurrentPosition { get; set; } = new Position(35, 51);
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
+        private readonly IPageDialogService _pageDialogService;
+        private readonly IConnectivity _connectivity;
 
-        public SubmitSosRequestViewModel(INavigationService navigationService, IGeolocator geolocator, IODataClient odataClient, IPageDialogService pageDialogService)
+        public SubmitSosRequestViewModel(INavigationService navigationService,
+            IGeolocator geolocator,
+            IODataClient odataClient,
+            IPageDialogService pageDialogService,
+            IConnectivity connectivity)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
+            _pageDialogService = pageDialogService;
+            _connectivity = connectivity;
 
             SubmitSosRequest = new BitDelegateCommand(async () =>
             {
@@ -38,6 +48,12 @@ namespace Sanaap.App.ViewModels
 
                 try
                 {
+                    if (connectivity.IsConnected == false)
+                    {
+                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
+                        return;
+                    }
+
                     SosRequestDto sosReq = new SosRequestDto
                     {
                         SosRequestStatusId = SosRequestStatus.Id,
@@ -45,7 +61,9 @@ namespace Sanaap.App.ViewModels
                         Longitude = CurrentPosition.Longitude,
                         Description = Description
                     };
+
                     bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
+
                     if (confirmed)
                     {
                         await odataClient.For<SosRequestDto>("SosRequests")
@@ -53,13 +71,13 @@ namespace Sanaap.App.ViewModels
                            .Set(new { sosReq })
                            .ExecuteAsync();
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
-                        await navigationService.NavigateAsync("Menu");
+                        await navigationService.NavigateAsync("Main");
                     }
                 }
                 catch (Exception ex)
                 {
-                    await pageDialogService.DisplayAlertAsync("", ex.Message, "باشه");
-                    return;
+                    Crashes.TrackError(ex);
+                    await pageDialogService.DisplayAlertAsync("", "خطای نامشخص", "باشه");
                 }
                 finally
                 {
@@ -72,6 +90,14 @@ namespace Sanaap.App.ViewModels
         {
             try
             {
+                if (_connectivity.IsConnected == false)
+                {
+                    await _pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
+                    return;
+                }
+
+                IsBusy = true; CanSend = false;
+
                 SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
                     .OrderBy(it => it.Code)
                     .FindEntriesAsync())
@@ -79,14 +105,13 @@ namespace Sanaap.App.ViewModels
 
                 if (_geolocator.IsGeolocationAvailable)
                 {
-                    IsBusy = true; CanSend = false;
                     try
                     {
                         CurrentPosition = await _geolocator.GetPositionAsync();
-                        CanSend = true;
                     }
                     finally
                     {
+                        CanSend = true;
                         IsBusy = false;
                     }
                 }
@@ -95,7 +120,8 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
+                await _pageDialogService.DisplayAlertAsync("", "خطای نامشخص", "باشه");
             }
         }
     }

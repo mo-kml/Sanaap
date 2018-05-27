@@ -1,30 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:SVG.Forms.Plugin.Abstractions;assembly=SVG.Forms.Plugin.Abstractions"
+             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
              x:Class="Sanaap.App.Views.MainView" Title="سناپ">
-    <StackLayout>
-        <StackLayout VerticalOptions="StartAndExpand">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="1" />
-                </Grid.RowDefinitions>
-
-                <Image Grid.Row="0" x:Name="imgIran" />
-                <Button Grid.Row="1" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="140" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequest}" />
-                <Image Grid.Row="2" x:Name="imgPhone" WidthRequest="5"/>
-                <Button Grid.Row="3" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="140" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequestByCall}" />
-            </Grid>
-            
-        </StackLayout>
-
-        <!--<StackLayout VerticalOptions="End">
-            <Button HorizontalOptions="Center" Text="درخواست های من" Command="{Binding GoToMySosRequests}" />
-            <Button HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
-        </StackLayout>-->
-        
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+        <abstractions:SvgImage props:SVGProps.FileName="SosRequest.svg" Grid.Row="0" />
+        <Button Grid.Row="1" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="140" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequest}" />
+        <abstractions:SvgImage props:SVGProps.FileName="SosRequest.svg" Grid.Row="2" />
+        <Button Grid.Row="3" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="140" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequestByCall}" />
+    </Grid>
 </ContentPage>

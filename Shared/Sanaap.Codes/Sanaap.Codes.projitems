@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\ILoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\ICustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\ITranslateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Implementations\DefaultTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Implementations\LoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Implementations\DefaultCustomerValidator.cs" />
   </ItemGroup>

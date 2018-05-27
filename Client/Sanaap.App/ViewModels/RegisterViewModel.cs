@@ -1,11 +1,14 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
+using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using Simple.OData.Client;
 using System;
+using System.Collections.Generic;
 
 namespace Sanaap.App.ViewModels
 {
@@ -17,10 +20,15 @@ namespace Sanaap.App.ViewModels
 
         public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
 
-        public bool IsBusy { get; set; } = false;
+        public bool IsBusy { get; set; }
 
-        public RegisterViewModel(INavigationService navigationService, IODataClient oDataClient, ICustomerValidator customerValidator,
-            IPageDialogService pageDialogService, ISecurityService securityService)
+        public RegisterViewModel(INavigationService navigationService,
+            IODataClient oDataClient,
+            ICustomerValidator customerValidator,
+            IPageDialogService pageDialogService,
+            ISecurityService securityService,
+            ITranslateService translateService,
+            IConnectivity connectivity)
         {
             Login = new BitDelegateCommand(async () =>
             {
@@ -41,9 +49,15 @@ namespace Sanaap.App.ViewModels
 
                 try
                 {
+                    if (connectivity.IsConnected == false)
+                    {
+                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
+                        return;
+                    }
+
                     if (!customerValidator.IsValid(Customer, out string errorMessage))
                     {
-                        await pageDialogService.DisplayAlertAsync("", errorMessage, "باشه");
+                        await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
                         return;
                     }
 
@@ -63,8 +77,20 @@ namespace Sanaap.App.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        await pageDialogService.DisplayAlertAsync("قبلا ثبت نام شده اید", errorMessage, "باشه");
-                        return;
+                        Crashes.TrackError(ex, new Dictionary<string, string>
+                        {
+                            { "Message", ex.GetMessage() },
+                            { "ViewModel", nameof(LoginViewModel) }
+                        });
+
+                        if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                        {
+                            await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
+                        }
+                        else
+                        {
+                            await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
+                        }
                     }
                 }
                 finally

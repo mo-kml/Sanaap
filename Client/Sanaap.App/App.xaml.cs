@@ -17,6 +17,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace Sanaap.App
 {
     public partial class App : BitApplication
@@ -41,7 +42,7 @@ namespace Sanaap.App
 
             if (isLoggedIn)
             {
-                await NavigationService.NavigateAsync("Nav/Menu");
+                await NavigationService.NavigateAsync("Nav/Main");
             }
             else
             {
@@ -84,6 +85,7 @@ namespace Sanaap.App
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ILoginValidator, LoginValidator>();
+            containerRegistry.RegisterSingleton<ITranslateService, DefaultTranslateService>();
 
             containerBuilder.Register(c => CrossGeolocator.Current).SingleInstance();
 
