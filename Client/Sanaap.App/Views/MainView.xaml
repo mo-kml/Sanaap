@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:abstractions="clr-namespace:SVG.Forms.Plugin.Abstractions;assembly=SVG.Forms.Plugin.Abstractions"
-             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
-             x:Class="Sanaap.App.Views.MainView" Title="سناپ"
-		xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="Sanaap.App.Views.MainView" Title="سناپ">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -12,11 +10,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--<abstractions:SvgImage props:SVGProps.FileName="111.svg" Grid.Row="0" WidthRequest="10"/>-->
-        <!--WidthRequest="1000" HeightRequest="1000"-->
-        <ffimageloadingsvg:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.SosRequest.svg"/>
+        <ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.SosRequest.svg"/>
         <Button Grid.Row="1" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="110" HeightRequest="110" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequest}" />
-        <ffimageloadingsvg:SvgCachedImage Grid.Row="2" Source="resource://Sanaap.App.Images.Operator.svg"/>
+        <ff:SvgCachedImage Grid.Row="2" Source="resource://Sanaap.App.Images.Operator.svg"/>
         <Button Grid.Row="3" BackgroundColor="Red" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="110" HeightRequest="110" BorderRadius="10" FontSize="Medium" Text="کمکم کنید" Command="{Binding SubmitSosRequestByCall}" />
     </Grid>
 </ContentPage>
