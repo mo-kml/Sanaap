@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Bit.ViewModel.Implementations;
+using FFImageLoading.Forms.Droid;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -21,6 +22,8 @@ namespace Sanaap.App.Droid
         protected override void OnCreate(Bundle bundle)
         {
             AppCenter.Start("7f0039a1-0052-4787-93af-36c5e1617617", typeof(Analytics), typeof(Crashes));
+
+            CachedImageRenderer.Init(true);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
