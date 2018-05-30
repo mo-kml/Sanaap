@@ -7,19 +7,12 @@
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60" VerticalOptions="FillAndExpand" />
             
-            <!--<StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                    <Picker ItemsSource="{Binding CarTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCarType}" />
-                </StackLayout>
-                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                    <Picker ItemsSource="{Binding SosRequestStatuses}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedSosRequestStatus}" />
-                </StackLayout>
-            </StackLayout>-->
+            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60" VerticalOptions="FillAndExpand" />
 
             <Entry MaxLength="8000" Placeholder="توضیحات (اختیاری)" Margin="15, 30, 15, 0" Text="{Binding Description}" />
-            <Button Text="درخواست کمک" Command="{Binding SubmitSosRequest}" IsVisible="{Binding CanSend}" IsEnabled="{Binding CanSend}"/>
+
+            <Button Text="درخواست کمک" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}" IsVisible="{Binding CanSend}" IsEnabled="{Binding CanSend}"/>
             
         </StackLayout>
 
