@@ -70,7 +70,7 @@ namespace Sanaap.App.ViewModels
                            .Action("SubmitSosRequest")
                            .Set(new { sosReq })
                            .ExecuteAsync();
-                        await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد", "ممنون");
+                        await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد ، با شما تماس میگیریم", "ممنون");
                         await navigationService.NavigateAsync("Main");
                     }
                 }

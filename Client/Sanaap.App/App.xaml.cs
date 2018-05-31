@@ -24,7 +24,7 @@ namespace Sanaap.App
     {
         public App() : base(null)
         {
-
+            MainPage = new NavigationPage(new MainView());
         }
 
         public App(IPlatformInitializer initializer) : base(initializer)

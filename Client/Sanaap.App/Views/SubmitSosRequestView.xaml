@@ -12,7 +12,7 @@
 
             <Entry MaxLength="8000" Placeholder="توضیحات (اختیاری)" Margin="15, 30, 15, 0" Text="{Binding Description}" />
 
-            <Button Text="درخواست کمک" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}" IsVisible="{Binding CanSend}" IsEnabled="{Binding CanSend}"/>
+            <Button Text="ارسال درخواست" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}" IsVisible="{Binding CanSend}" IsEnabled="{Binding CanSend}"/>
             
         </StackLayout>
 

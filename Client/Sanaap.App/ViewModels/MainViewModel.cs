@@ -29,7 +29,7 @@ namespace Sanaap.App.ViewModels
             Logout = new BitDelegateCommand(async () =>
             {
                 await securityService.Logout();
-                await navigationService.NavigateAsync("Main/Login");
+                await navigationService.NavigateAsync("/Login");
             });
 
             SubmitSosRequest = new BitDelegateCommand(async () =>

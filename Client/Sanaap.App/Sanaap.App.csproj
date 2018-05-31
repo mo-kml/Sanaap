@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Props\SVGProps.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Images\Operator.svg" />
     <None Remove="Images\SosRequest.svg" />
   </ItemGroup>
@@ -26,6 +30,10 @@
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="2.3.0" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Props\" />
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
