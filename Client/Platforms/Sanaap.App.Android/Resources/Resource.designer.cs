@@ -26,7 +26,6 @@ namespace Sanaap.App.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::NGraphics.Android.Custom.Resource.String.library_name = global::Sanaap.App.Droid.Resource.String.library_name;
 			global::PCLCrypto.Resource.String.ApplicationName = global::Sanaap.App.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::Sanaap.App.Droid.Resource.String.Hello;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Sanaap.App.Droid.Resource.Animation.slide_in_right;
@@ -130,7 +129,6 @@ namespace Sanaap.App.Droid
 			global::Xamarin.Auth.Resource.Layout.notification_template_media_custom = global::Sanaap.App.Droid.Resource.Layout.notification_template_media_custom;
 			global::Xamarin.Auth.Resource.Layout.notification_template_part_chronometer = global::Sanaap.App.Droid.Resource.Layout.notification_template_part_chronometer;
 			global::Xamarin.Auth.Resource.Layout.notification_template_part_time = global::Sanaap.App.Droid.Resource.Layout.notification_template_part_time;
-			global::Xamarin.Auth.Resource.String.library_name = global::Sanaap.App.Droid.Resource.String.library_name;
 			global::Xamarin.Auth.Resource.String.status_bar_notification_info_overflow = global::Sanaap.App.Droid.Resource.String.status_bar_notification_info_overflow;
 			global::Xamarin.Auth.Resource.String.title_activity_webview = global::Sanaap.App.Droid.Resource.String.title_activity_webview;
 			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification = global::Sanaap.App.Droid.Resource.Style.TextAppearance_Compat_Notification;
@@ -4475,9 +4473,6 @@ namespace Sanaap.App.Droid
 			
 			// aapt resource value: 0x7f09000f
 			public const int common_signin_button_text_long = 2131296271;
-			
-			// aapt resource value: 0x7f090050
-			public const int library_name = 2131296336;
 			
 			// aapt resource value: 0x7f090012
 			public const int mr_button_content_description = 2131296274;
