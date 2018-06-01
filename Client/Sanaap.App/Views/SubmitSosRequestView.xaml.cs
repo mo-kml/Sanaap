@@ -3,10 +3,11 @@
 namespace Sanaap.App.Views
 {
     public partial class SubmitSosRequestView : ContentPage
-	{
-		public SubmitSosRequestView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    {
+        public SubmitSosRequestView()
+        {
+            InitializeComponent();
+            map.UiSettings.MyLocationButtonEnabled = true;
+        }
+    }
 }

@@ -25,7 +25,7 @@ namespace Sanaap.App.ViewModels
 
         public bool CanSend { get; set; } = false;
 
-        public Position CurrentPosition { get; set; } = new Position(35, 51);
+        public Position CurrentPosition { get; set; }
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
         private readonly IPageDialogService _pageDialogService;

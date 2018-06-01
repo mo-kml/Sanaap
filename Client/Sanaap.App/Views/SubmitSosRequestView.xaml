@@ -5,15 +5,17 @@
              x:Class="Sanaap.App.Views.SubmitSosRequestView">
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        
+
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            
-            <maps:Map InitialCameraUpdate="-23.68, -46.87, 13, 30, 60" VerticalOptions="FillAndExpand" />
+
+            <maps:Map x:Name="map" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
+                   MyLocationEnabled="True" VerticalOptions="FillAndExpand">
+            </maps:Map>
 
             <Entry MaxLength="8000" Placeholder="توضیحات (اختیاری)" Margin="15, 30, 15, 0" Text="{Binding Description}" />
 
-            <Button Text="ارسال درخواست" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}" IsVisible="{Binding CanSend}" IsEnabled="{Binding CanSend}"/>
-            
+            <Button Text="ارسال درخواست" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}"  IsEnabled="{Binding CanSend}"/>
+
         </StackLayout>
 
         <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
@@ -22,7 +24,7 @@
             <ActivityIndicator/>
             <Label Text="در حال پردازش ..." HorizontalOptions="Center" TextColor="Green"/>
         </StackLayout>
-        
+
     </AbsoluteLayout>
-    
+
 </ContentPage>
