@@ -23,34 +23,6 @@ namespace Sannap.Data
         protected override void Seed(SanaapDbContext context)
         {
             base.Seed(context);
-
-            if (!context.Set<SosRequestStatus>().AsNoTracking().Any())
-            {
-                context.Set<SosRequestStatus>().AddRange(new[]
-                {
-                    new SosRequestStatus
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "ارسال اولیه",
-                        Code = 1
-                    },
-                    new SosRequestStatus
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "بررسی اپراتور",
-                        Code = 2
-                    },
-                    new SosRequestStatus
-                    {
-                        CreatedOn = DateTimeOffset.UtcNow,
-                        ModifiedOn = DateTimeOffset.UtcNow,
-                        Name = "اعزام کارشناس",
-                        Code = 3
-                    }
-                });
-            }
         }
     }
 

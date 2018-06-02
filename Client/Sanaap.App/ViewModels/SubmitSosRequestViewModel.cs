@@ -15,10 +15,6 @@ namespace Sanaap.App.ViewModels
     {
         public BitDelegateCommand SubmitSosRequest { get; set; }
 
-        public SosRequestStatusDto SosRequestStatus { get; set; }
-
-        public SosRequestStatusDto SelectedSosRequestStatus { get; set; }
-
         public string Description { get; set; }
 
         public bool IsBusy { get; set; } = false;
@@ -54,9 +50,11 @@ namespace Sanaap.App.ViewModels
                         return;
                     }
 
+                    var aaaa = CurrentPosition.Latitude;
+
                     SosRequestDto sosReq = new SosRequestDto
                     {
-                        SosRequestStatusId = SosRequestStatus.Id,
+                        EnumSosRequestStatus = EnumSosRequestStatus.SabteAvalie,
                         Latitude = CurrentPosition.Latitude,
                         Longitude = CurrentPosition.Longitude,
                         Description = Description
@@ -98,10 +96,10 @@ namespace Sanaap.App.ViewModels
 
                 IsBusy = true; CanSend = false;
 
-                SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
-                    .OrderBy(it => it.Code)
-                    .FindEntriesAsync())
-                    .ToArray().FirstOrDefault();
+                //SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
+                //.OrderBy(it => it.Code)
+                //.FindEntriesAsync())
+                //.ToArray().FirstOrDefault();
 
                 if (_geolocator.IsGeolocationAvailable)
                 {

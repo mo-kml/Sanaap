@@ -32,7 +32,7 @@ namespace Sanaap.Api.Controllers
             SosRequest req = new SosRequest
             {
                 CustomerId = customerId,
-                SosRequestStatusId = args.sosReq.SosRequestStatusId,
+                EnumSosRequest = EnumSosRequestStatus.SabteAvalie,
                 Latitude = args.sosReq.Latitude,
                 Longitude = args.sosReq.Longitude,
                 Description = args.sosReq.Description

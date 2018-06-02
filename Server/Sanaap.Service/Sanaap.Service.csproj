@@ -21,6 +21,4 @@
 
   <Import Project="..\..\Shared\Sanaap.Codes\Sanaap.Codes.projitems" Label="Shared" />
 
-  <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
-
 </Project>

@@ -9,7 +9,6 @@
     <Import_RootNamespace>Sanaap.Dto</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SosRequestStatusDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SosRequestDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomerDto.cs" />
   </ItemGroup>

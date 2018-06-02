@@ -11,4 +11,6 @@
     <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.1" PrivateAssets="All" />
   </ItemGroup>
 
+  <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
+
 </Project>

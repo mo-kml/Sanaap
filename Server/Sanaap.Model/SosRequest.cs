@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sanaap.Dto;
 
 namespace Sanaap.Model
 {
@@ -17,8 +18,6 @@ namespace Sanaap.Model
 
         public string Description { get; set; }
 
-        [ForeignKey(nameof(SosRequestStatusId))]
-        public virtual SosRequestStatus SosRequestStatus { get; set; }
-        public virtual Guid SosRequestStatusId { get; set; }
+        public EnumSosRequestStatus EnumSosRequest { get; set; }
     }
 }

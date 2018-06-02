@@ -1,5 +1,6 @@
 ﻿using Bit.Model.Contracts;
 using System;
+using Sanaap.Dto;
 
 namespace Sanaap.Dto
 {
@@ -13,9 +14,14 @@ namespace Sanaap.Dto
 
         public string Description { get; set; }
 
-        public virtual Guid SosRequestStatusId { get; set; }
-        public virtual string SosRequestStatusName { get; set; }
+        public EnumSosRequestStatus EnumSosRequestStatus { get; set; }
 
         public virtual DateTimeOffset ModifiedOn { set; get; }
+    }
+
+    public enum EnumSosRequestStatus
+    {
+        SabteAvalie = 1,
+        MoshahedeOperator = 2
     }
 }
