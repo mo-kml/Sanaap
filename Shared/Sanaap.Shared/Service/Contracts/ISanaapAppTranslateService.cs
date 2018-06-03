@@ -1,6 +1,6 @@
 ﻿namespace Sanaap.Service.Contracts
 {
-    public interface ITranslateService
+    public interface ISanaapAppTranslateService
     {
         bool Translate(string str, out string translateResult);
 

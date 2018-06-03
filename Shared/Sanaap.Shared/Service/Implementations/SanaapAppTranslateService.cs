@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Sanaap.Service.Implementations
 {
-    public class DefaultTranslateService : ITranslateService
+    public class SanaapAppTranslateService : ISanaapAppTranslateService
     {
         public virtual bool Translate(string str, out string translateResult)
         {

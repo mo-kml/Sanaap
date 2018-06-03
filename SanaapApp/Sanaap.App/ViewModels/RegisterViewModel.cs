@@ -27,7 +27,7 @@ namespace Sanaap.App.ViewModels
             ICustomerValidator customerValidator,
             IPageDialogService pageDialogService,
             ISecurityService securityService,
-            ITranslateService translateService,
+            ISanaapAppTranslateService translateService,
             IConnectivity connectivity)
         {
             Login = new BitDelegateCommand(async () =>

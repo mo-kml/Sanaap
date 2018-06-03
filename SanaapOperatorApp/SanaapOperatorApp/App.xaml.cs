@@ -3,22 +3,19 @@ using Bit;
 using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
-using Plugin.Geolocator;
 using Prism;
 using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
-using Sanaap.App.ViewModels;
-using Sanaap.App.Views;
-using Sanaap.Service.Contracts;
-using Sanaap.Service.Implementations;
+using SanaapOperatorApp.ViewModels;
+using SanaapOperatorApp.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
-namespace Sanaap.App
+namespace SanaapOperatorApp
 {
     public partial class App : BitApplication
     {
@@ -32,15 +29,15 @@ namespace Sanaap.App
             : base(initializer)
         {
 #if DEBUG
-            LiveReload.Init();
+            //LiveReload.Init();
 #endif
         }
 
-        protected override async void OnInitialized()
+        protected async override void OnInitialized()
         {
             InitializeComponent();
 
-            bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
+            bool isLoggedIn = Container.Resolve<ISecurityService>().IsLoggedIn();
 
             if (isLoggedIn)
             {
@@ -48,7 +45,7 @@ namespace Sanaap.App
             }
             else
             {
-                await NavigationService.NavigateAsync("/Register");
+                await NavigationService.NavigateAsync("/Login");
             }
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -65,11 +62,11 @@ namespace Sanaap.App
 
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
-            containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
-            containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
-            containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
-            containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
-            containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
+            //containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
+            //containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
+            //containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
+            //containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
+            //containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
@@ -84,12 +81,6 @@ namespace Sanaap.App
             containerRegistry.RegisterHttpClient();
             containerRegistry.RegisterODataClient();
             containerRegistry.RegisterIdentityClient();
-
-            containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
-            containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
-            containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
-
-            containerBuilder.Register(c => CrossGeolocator.Current).SingleInstance();
 
             base.RegisterTypes(containerRegistry);
         }

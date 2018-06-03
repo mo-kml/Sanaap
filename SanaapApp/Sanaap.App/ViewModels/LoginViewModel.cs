@@ -16,18 +16,18 @@ namespace Sanaap.App.ViewModels
 
         public virtual string Mobile { get; set; }
 
-        public virtual BitDelegateCommand StartLogin { get; set; }
+        public virtual BitDelegateCommand Login { get; set; }
 
         public bool IsBusy { get; set; }
 
         public LoginViewModel(INavigationService navigationService,
             ISecurityService securityService,
-            ILoginValidator loginValidator,
+            ISanaapAppLoginValidator loginValidator,
             IPageDialogService pageDialogService,
-            ITranslateService translateService,
+            ISanaapAppTranslateService translateService,
             IConnectivity connectivity)
         {
-            StartLogin = new BitDelegateCommand(async () =>
+            Login = new BitDelegateCommand(async () =>
             {
                 IsBusy = true;
 

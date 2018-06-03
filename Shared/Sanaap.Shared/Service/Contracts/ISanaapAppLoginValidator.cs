@@ -1,8 +1,6 @@
-﻿using Sanaap.Dto;
-
-namespace Sanaap.Service.Contracts
+﻿namespace Sanaap.Service.Contracts
 {
-    public interface ILoginValidator
+    public interface ISanaapAppLoginValidator
     {
         bool IsValid(string nationalCode, string mobile, out string errorMessage);
     }

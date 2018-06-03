@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Sanaap.Service.Implementations
 {
-    public class LoginValidator : ILoginValidator
+    public class SanaapAppLoginValidator : ISanaapAppLoginValidator
     {
         public bool IsValid(string nationalCode, string mobile, out string message)
         {

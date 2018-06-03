@@ -11,12 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Enum\EnumSosRequestStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ILoginValidator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ITranslateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppLoginValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultTranslateService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\LoginValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppTranslateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestDto.cs" />
   </ItemGroup>
   <ItemGroup>
