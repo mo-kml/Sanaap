@@ -35,7 +35,6 @@
     <Folder Include="Views\Props\" />
   </ItemGroup>
 
-  <Import Project="..\..\Shared\Sanaap.Dto\Sanaap.Dto.projitems" Label="Shared" />
-  <Import Project="..\..\Shared\Sanaap.Codes\Sanaap.Codes.projitems" Label="Shared" />
+  <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />
 
 </Project>

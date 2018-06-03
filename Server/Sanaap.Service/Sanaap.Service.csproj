@@ -19,6 +19,4 @@
     <Folder Include="Implementations\" />
   </ItemGroup>
 
-  <Import Project="..\..\Shared\Sanaap.Codes\Sanaap.Codes.projitems" Label="Shared" />
-
 </Project>

@@ -6,15 +6,16 @@ namespace Sanaap.App.ViewModels
 {
     public class MenuViewModel : BitViewModelBase
     {
-        public BitDelegateCommand GoToMySosRequests { get; set; }
+        public BitDelegateCommand<string> GoToPage { get; set; }
 
         public BitDelegateCommand Logout { get; set; }
 
-        public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
+        public MenuViewModel(INavigationService navigationService,
+            ISecurityService securityService)
         {
-            GoToMySosRequests = new BitDelegateCommand(async () =>
+            GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
-                await navigationService.NavigateAsync("Menu/MySosRequests");
+                await navigationService.NavigateAsync(page);
             });
 
             Logout = new BitDelegateCommand(async () =>

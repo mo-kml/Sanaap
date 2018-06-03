@@ -3,6 +3,7 @@ using Bit.Data.Contracts;
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Sanaap.Dto;
+using Sanaap.Enum;
 using Sanaap.Model;
 using System;
 using System.Linq;

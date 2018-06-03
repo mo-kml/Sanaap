@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>824697b0-2721-45a8-b42c-688701d835e1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Sanaap</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\EnumSosRequestStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ILoginValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ITranslateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultTranslateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\LoginValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Dto\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Service\" />
+  </ItemGroup>
+</Project>

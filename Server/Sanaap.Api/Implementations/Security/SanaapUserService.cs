@@ -25,11 +25,11 @@ namespace Sanaap.Api.Implementations.Security
                 throw new BadRequestException("InvalidUserNameOrPassword");
 
             string nationalCode = username;
-            string mobileNumber = password;
+            string mobile = password;
 
             Customer customer = await (await CustomersRepository
                 .GetAllAsync(cancellationToken))
-                .SingleOrDefaultAsync(c => c.Mobile == mobileNumber && c.NationalCode == nationalCode);
+                .SingleOrDefaultAsync(c => c.Mobile == mobile && c.NationalCode == nationalCode);
 
             if (customer == null)
                 throw new ResourceNotFoundException("CustomerCouldNotBeFound");

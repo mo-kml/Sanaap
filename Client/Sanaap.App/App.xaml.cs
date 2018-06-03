@@ -22,12 +22,14 @@ namespace Sanaap.App
 {
     public partial class App : BitApplication
     {
-        public App() : base(null)
+        public App()
+            : this(null)
         {
-            MainPage = new NavigationPage(new MainView());
+
         }
 
-        public App(IPlatformInitializer initializer) : base(initializer)
+        public App(IPlatformInitializer initializer)
+            : base(initializer)
         {
 #if DEBUG
             LiveReload.Init();
@@ -42,11 +44,11 @@ namespace Sanaap.App
 
             if (isLoggedIn)
             {
-                await NavigationService.NavigateAsync("Nav/Main");
+                await NavigationService.NavigateAsync("Menu/Nav/Main");
             }
             else
             {
-                await NavigationService.NavigateAsync("Register");
+                await NavigationService.NavigateAsync("/Register");
             }
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -59,9 +61,9 @@ namespace Sanaap.App
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
 
+            containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
@@ -71,9 +73,8 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://10.0.2.2:53148/"),       // Local
+                HostUri = new Uri("http://192.168.1.207:53148/"),       // Local
                 //HostUri = new Uri("http://84.241.25.3:8220/"),   // Server
-
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"

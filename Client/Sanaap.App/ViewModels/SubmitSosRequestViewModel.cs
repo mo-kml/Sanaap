@@ -5,9 +5,9 @@ using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
+using Sanaap.Enum;
 using Simple.OData.Client;
 using System;
-using System.Linq;
 
 namespace Sanaap.App.ViewModels
 {
@@ -50,26 +50,26 @@ namespace Sanaap.App.ViewModels
                         return;
                     }
 
-                    var aaaa = CurrentPosition.Latitude;
-
-                    SosRequestDto sosReq = new SosRequestDto
-                    {
-                        EnumSosRequestStatus = EnumSosRequestStatus.SabteAvalie,
-                        Latitude = CurrentPosition.Latitude,
-                        Longitude = CurrentPosition.Longitude,
-                        Description = Description
-                    };
-
                     bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
 
                     if (confirmed)
                     {
+                        SosRequestDto sosReq = new SosRequestDto
+                        {
+                            EnumSosRequestStatus = EnumSosRequestStatus.SabteAvalie,
+                            Latitude = CurrentPosition.Latitude,
+                            Longitude = CurrentPosition.Longitude,
+                            Description = Description
+                        };
+
                         await odataClient.For<SosRequestDto>("SosRequests")
                            .Action("SubmitSosRequest")
                            .Set(new { sosReq })
                            .ExecuteAsync();
+
                         await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد ، با شما تماس میگیریم", "ممنون");
-                        await navigationService.NavigateAsync("Main");
+
+                        await navigationService.NavigateAsync("/Menu/Nav/Main");
                     }
                 }
                 catch (Exception ex)

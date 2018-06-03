@@ -4,7 +4,6 @@ using Bit.Data.Contracts;
 using Bit.Data.EntityFramework.Implementations;
 using Bit.Model.Contracts;
 using Sanaap.Model;
-using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
