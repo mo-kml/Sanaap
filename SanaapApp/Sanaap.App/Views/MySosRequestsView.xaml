@@ -5,7 +5,7 @@
 
     <StackLayout>
         <ActivityIndicator/>
-        <!--<ListView ItemsSource="{Binding MySosRequests}" HasUnevenRows="True">
+        <ListView ItemsSource="{Binding MySosRequests}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -17,16 +17,14 @@
                             </StackLayout>
 
                             <Label Text="{Binding Description, StringFormat='توضیحات : {0}'}" />
-                            -->
-        <!--<Label Text="{Binding SosRequestStatusName, StringFormat='وضعیت : {0}'}" />-->
-        <!--
+                            <!--<Label Text="{Binding SosRequestStatusName, StringFormat='وضعیت : {0}'}" />-->
                             <Label Text="{Binding ModifiedOn , Converter={StaticResource DateTimeOffsetToSolarDateConverter}, ConverterParameter='تاریخ درخواست : {0}'}" />
 
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
+        </ListView>
     </StackLayout>
 
 </ContentPage>
