@@ -17,7 +17,7 @@ namespace Sanaap.Api.Implementations.Security
                     ClientName = "SanaapResOwner",
                     ClientId = "SanaapResOwner",
                     Secret = "secret",
-                    TokensLifetime = TimeSpan.FromDays(7),
+                    TokensLifetime = TimeSpan.FromDays(9999),
                     Enabled = true
                 }),
                 GetResourceOwnerFlowClient(new BitResourceOwnerFlowClient

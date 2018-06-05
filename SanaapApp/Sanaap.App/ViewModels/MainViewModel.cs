@@ -40,7 +40,7 @@ namespace Sanaap.App.ViewModels
 
             SubmitSosRequestByCall = new BitDelegateCommand(() =>
             {
-                deviceService.OpenUri(new Uri("tel://02141558"));
+                deviceService.OpenUri(new Uri("tel://0211401"));
             });
         }
     }
