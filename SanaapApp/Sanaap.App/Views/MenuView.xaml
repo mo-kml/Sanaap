@@ -9,7 +9,7 @@
             <ScrollView>
                 <StackLayout>
                     <Button VerticalOptions="Start" Margin="20" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
-                    <Button VerticalOptions="Start" Margin="20" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/MySosRequests" />
+                    <Button VerticalOptions="Start" Margin="20" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="MySosRequests" />
                     <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
                 </StackLayout>
             </ScrollView>

@@ -12,9 +12,9 @@
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--<ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.SosRequest.svg"/>-->
+        <ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.SosRequest.svg"/>
         <Button Grid.Row="1" BackgroundColor="#ed1c24" TextColor="White" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="110" HeightRequest="110" BorderRadius="10" Text="کمکم کنید" Command="{Binding SubmitSosRequest}" />
-        <!--<ff:SvgCachedImage Grid.Row="3" Source="resource://Sanaap.App.Images.Operator.svg"/>-->
+        <ff:SvgCachedImage Grid.Row="3" Source="resource://Sanaap.App.Images.Operator.svg"/>
         <Button Grid.Row="4" BackgroundColor="#ed1c24" TextColor="White" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="110" HeightRequest="110" BorderRadius="10" Text="کمکم کنید" Command="{Binding SubmitSosRequestByCall}" />
     </Grid>
 </ContentPage>

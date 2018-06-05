@@ -21,10 +21,8 @@ namespace Sanaap.App.ViewModels
         public SosRequestDto[] MySosRequests { get; set; }
 
         public MySosRequestsViewModel(
-            INavigationService navigationService,
-            IODataClient odataClient,
-            IConnectivity connectivity,
-            IPageDialogService pageDialogService)
+            INavigationService navigationService, IODataClient odataClient,
+            IConnectivity connectivity, IPageDialogService pageDialogService)
         {
             _odataClient = odataClient;
             _connectivity = connectivity;

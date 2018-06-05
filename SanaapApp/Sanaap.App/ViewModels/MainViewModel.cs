@@ -19,8 +19,7 @@ namespace Sanaap.App.ViewModels
         public bool IsBusy { get; set; } = false;
 
         public MainViewModel(INavigationService navigationService,
-            ISecurityService securityService,
-            IDeviceService deviceService)
+            ISecurityService securityService, IDeviceService deviceService)
         {
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
