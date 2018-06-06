@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
              x:Class="Sanaap.App.Views.SubmitSosRequestView" Title="ارسال">
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -9,7 +10,7 @@
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
 
             <maps:Map x:Name="map" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
-                   MyLocationEnabled="True" VerticalOptions="FillAndExpand">
+                   MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}">
             </maps:Map>
 
             <Entry MaxLength="8000" Placeholder="توضیحات (اختیاری)" Margin="15, 30, 15, 0" Text="{Binding Description}" />

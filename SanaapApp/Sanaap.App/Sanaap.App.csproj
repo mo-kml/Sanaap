@@ -34,10 +34,6 @@
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Props\" />
-  </ItemGroup>
-
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />
 
 </Project>
