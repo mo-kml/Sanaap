@@ -24,8 +24,8 @@ namespace Sanaap.App.Droid
         {
             AppCenter.Start("7f0039a1-0052-4787-93af-36c5e1617617", typeof(Analytics), typeof(Crashes));
 
-            CachedImageRenderer.Init(true);
-            var ignore = typeof(SvgCachedImage);
+            CachedImageRenderer.Init(enableFastRenderer: false);
+            SvgCachedImage.Init();
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
