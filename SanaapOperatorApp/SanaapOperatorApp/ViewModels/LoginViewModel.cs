@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace SanaapOperatorApp.ViewModels
 
         public bool IsBusy { get; set; }
 
-        public LoginViewModel()
+        public LoginViewModel(ISecurityService securityService)
         {
             Login = new BitDelegateCommand(async () =>
             {
@@ -25,7 +26,7 @@ namespace SanaapOperatorApp.ViewModels
                 {
                     try
                     {
-
+                        await securityService.LoginWithCredentials(UserName, Password, "SanaapOperatorAppResOwner", "secret");
                     }
                     catch (Exception ex)
                     {

@@ -13,6 +13,8 @@ using Bit.OwinCore.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Sanaap.Api.Implementations;
 using Sanaap.Api.Implementations.Security;
+using Sanaap.Data.Contracts;
+using Sanaap.Data.Implementations;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using Sannap.Data;
@@ -118,6 +120,8 @@ namespace Sanaap.Api
 
             dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
             dependencyManager.Register<ISanaapAppTranslateService, SanaapAppTranslateService>(lifeCycle: DependencyLifeCycle.SingleInstance);
+
+            dependencyManager.Register<IHashUtils, DefaultHashUtils>(lifeCycle: DependencyLifeCycle.SingleInstance);
         }
 
         public IEnumerable<IAppModule> GetAppModules()

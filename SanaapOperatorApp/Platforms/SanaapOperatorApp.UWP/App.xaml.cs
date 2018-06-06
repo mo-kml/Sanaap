@@ -28,10 +28,8 @@ namespace SanaapOperatorApp.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                // AppCenter
-
                 CachedImageRenderer.Init();
-                var ignore = typeof(SvgCachedImage);
+                SvgCachedImage.Init();
 
                 FormsGoogleMaps.Init();
 

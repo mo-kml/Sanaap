@@ -3,4 +3,28 @@
              xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.All"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SanaapOperatorApp.App" />
+             x:Class="SanaapOperatorApp.App">
+    <bit:BitApplication.Resources>
+        <!--<convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />-->
+        <!--<StyleSheet Source="/Views/Styles.css" />-->
+        <Style TargetType="ContentPage">
+            <Setter Property="FlowDirection" Value="RightToLeft" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderRadius" Value="10" />
+            <Setter Property="Margin" Value="15, 2, 15, 2" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="Margin" Value="15, 2, 15, 0" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
+        <Style TargetType="ActivityIndicator">
+            <Setter Property="Color" Value="Green" />
+            <Setter Property="IsRunning" Value="{Binding IsBusy}" />
+            <Setter Property="IsVisible" Value="{Binding IsBusy}" />
+        </Style>
+    </bit:BitApplication.Resources>
+</bit:BitApplication>
