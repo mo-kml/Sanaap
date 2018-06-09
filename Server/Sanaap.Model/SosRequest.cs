@@ -18,6 +18,6 @@ namespace Sanaap.Model
 
         public string Description { get; set; }
 
-        public EnumSosRequestStatus EnumSosRequest { get; set; }
+        public EnumSosRequestStatus SosRequestStatus { get; set; }
     }
 }

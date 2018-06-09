@@ -18,17 +18,17 @@ namespace Sanaap.Service.Implementations
 
         private readonly IDictionary<string, string> translateKeys = new Dictionary<string, string>
         {
-            { "InvalidUserNameOrPassword" , "نام کاربری یا رمز عبور به درستی وارد نشده است" },
-            { "CustomerCouldNotBeFound" , "اطلاعات شما یافت نشد" },
-            { "CustomerIsAlreadyRegistered" , "اطلاعات مد نظر قبلا ثبت شده است" },
+            { "InvalidUserNameOrPassword" , "نام کاربری یا رمز عبور اشتباه است" },
+            { "CustomerCouldNotBeFound" , "کاربری با این مشخصات یافت نشد" },
+            { "CustomerIsAlreadyRegistered" , "این کاربر قبلا ثبت نام شده است" },
             { $"{nameof(CustomerDto.NationalCode)}IsEmpty" , "کد ملی خالی است" },
             { $"{nameof(CustomerDto.NationalCode)}IsInvalid" , "کد ملی اشتباه است" },
             { $"{nameof(CustomerDto.FirstName)}IsEmpty" , "نام خالی است" },
-            { $"{nameof(CustomerDto.FirstName)}MustAtLeast2Characters" , "نام باید حداقل دو کارکتر باشد" },
+            { $"{nameof(CustomerDto.FirstName)}MustAtLeast2Characters" , "نام باید حداقل دو حرف باشد" },
             { $"{nameof(CustomerDto.LastName)}IsEmpty", "نام خانوادگی خالی است" },
-            { $"{nameof(CustomerDto.LastName)}MustAtLeast2Characters" , "نام خانوادگی باید لااقل دو کارکتر باشد" },
+            { $"{nameof(CustomerDto.LastName)}MustAtLeast2Characters" , "نام خانوادگی باید حداقل دو حرف باشد" },
             { $"{nameof(CustomerDto.Mobile)}IsEmpty", "شماره تلفن خالی است" },
-            { $"{nameof(CustomerDto.Mobile)}IsInvalid" , "شماره تلفن غلط است. مثال درست 09123456789" }
+            { $"{nameof(CustomerDto.Mobile)}IsInvalid" , "شماره تلفن اشتباه است. مثال درست : 09121234567" }
         };
     }
 }

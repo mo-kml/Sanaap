@@ -2,15 +2,15 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MenuView" FlowDirection="RightToLeft"
-             Title="برنامه">
+             Title="سناپ">
 
     <MasterDetailPage.Master>
-        <ContentPage Title="منو">
+        <ContentPage Title="سناپ">
             <ScrollView>
                 <StackLayout>
                     <Button VerticalOptions="Start" Margin="20" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
                     <Button VerticalOptions="Start" Margin="20" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/MySosRequests" />
-                    <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج" Command="{Binding Logout}" Margin="5"/>
+                    <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
                 </StackLayout>
             </ScrollView>
         </ContentPage>

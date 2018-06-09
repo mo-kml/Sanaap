@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sanaap.Enum
+﻿namespace Sanaap.Enum
 {
     public enum EnumSosRequestStatus
     {

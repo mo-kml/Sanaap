@@ -58,14 +58,16 @@ namespace Sanaap.App.ViewModels
                             { "ViewModel", nameof(LoginViewModel) }
                         });
 
+                        if (ex.Message.Contains("CustomerCouldNotBeFound"))
+                        {
+                            await pageDialogService.DisplayAlertAsync("", "کاربری با این مشخصات یافت نشد", "باشه");
+                            return;
+                        }
+
                         if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
-                        {
                             await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
-                        }
                         else
-                        {
                             await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
-                        }
                     }
                 }
                 finally

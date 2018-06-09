@@ -14,7 +14,7 @@ namespace Sanaap.Dto
 
         public string Description { get; set; }
 
-        public EnumSosRequestStatus EnumSosRequestStatus { get; set; }
+        public EnumSosRequestStatus SosRequestStatus { get; set; }
 
         public virtual DateTimeOffset ModifiedOn { set; get; }
     }

@@ -7,6 +7,7 @@ namespace Sanaap.App.Views
         public SubmitSosRequestView()
         {
             InitializeComponent();
+            map.UiSettings.MyLocationButtonEnabled = true;
         }
     }
 }
