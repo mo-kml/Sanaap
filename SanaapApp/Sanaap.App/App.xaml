@@ -14,6 +14,7 @@
             <Setter Property="BorderRadius" Value="10" />
             <Setter Property="Margin" Value="15, 2, 15, 2" />
             <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="TextColor" Value="White" />
         </Style>
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="15, 2, 15, 0" />

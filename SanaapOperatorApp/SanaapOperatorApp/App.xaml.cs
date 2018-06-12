@@ -29,7 +29,7 @@ namespace SanaapOperatorApp
             : base(initializer)
         {
 #if DEBUG
-            //LiveReload.Init();
+            LiveReload.Init();
 #endif
         }
 
@@ -70,8 +70,8 @@ namespace SanaapOperatorApp
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                //HostUri = new Uri("http://192.168.1.207:53148/"),       // Local
-                HostUri = new Uri("http://84.241.25.3:8220/"),            // Server
+                HostUri = new Uri("http://localhost:53148/"),       // Local
+                //HostUri = new Uri("http://84.241.25.3:8220/"),            // Server
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"

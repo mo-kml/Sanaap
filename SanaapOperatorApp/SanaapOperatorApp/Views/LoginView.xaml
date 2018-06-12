@@ -3,9 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SanaapOperatorApp.Views.LoginView">
     <StackLayout Orientation="Vertical">
-        <Entry Text="{Binding UserName}" />
-        <Entry Text="{Binding Password}" />
-        <Button Text="ورود" Command="{Binding Login}" />
-        <ActivityIndicator/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="60*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Entry Grid.Row="1" Grid.Column="1" FlowDirection="LeftToRight" VerticalOptions="Center" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
+            <Entry Grid.Row="2" Grid.Column="1" MaxLength="15" FlowDirection="LeftToRight" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور"/>
+            <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" Text="ورود" Command="{Binding Login}" />
+            <ActivityIndicator/>
+        </Grid>
+
     </StackLayout>
 </ContentPage>
