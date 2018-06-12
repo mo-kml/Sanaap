@@ -1,6 +1,10 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Microsoft.AppCenter.Crashes;
+using Plugin.Connectivity.Abstractions;
+using Prism.Navigation;
+using Prism.Services;
+using Sanaap.Service.Contracts;
 using System;
 using System.Collections.Generic;
 
@@ -16,7 +20,12 @@ namespace SanaapOperatorApp.ViewModels
 
         public bool IsBusy { get; set; }
 
-        public LoginViewModel(ISecurityService securityService)
+        public LoginViewModel(ISecurityService securityService,
+            INavigationService navigationService,
+            ISanaapOperatorAppLoginValidator loginValidator,
+            IPageDialogService pageDialogService,
+            ISanaapAppTranslateService translateService,
+            IConnectivity connectivity)
         {
             Login = new BitDelegateCommand(async () =>
             {
@@ -24,6 +33,18 @@ namespace SanaapOperatorApp.ViewModels
 
                 try
                 {
+                    if (!loginValidator.IsValid(UserName, Password, out string errorMessage))
+                    {
+                        await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
+                        return;
+                    }
+
+                    if (connectivity.IsConnected == false)
+                    {
+                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
+                        return;
+                    }
+
                     try
                     {
                         await securityService.LoginWithCredentials(UserName, Password, "SanaapOperatorAppResOwner", "secret");

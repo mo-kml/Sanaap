@@ -7,6 +7,8 @@ using Prism;
 using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
+using Sanaap.Service.Contracts;
+using Sanaap.Service.Implementations;
 using SanaapOperatorApp.ViewModels;
 using SanaapOperatorApp.Views;
 using System;
@@ -81,6 +83,9 @@ namespace SanaapOperatorApp
             containerRegistry.RegisterHttpClient();
             containerRegistry.RegisterODataClient();
             containerRegistry.RegisterIdentityClient();
+
+            containerRegistry.Register<ISanaapOperatorAppLoginValidator, SanaapOperatorAppLoginValidator>();
+            containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
             base.RegisterTypes(containerRegistry);
         }
