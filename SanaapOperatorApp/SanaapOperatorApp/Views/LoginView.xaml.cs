@@ -10,6 +10,7 @@ namespace SanaapOperatorApp.Views
         public LoginView()
         {
             InitializeComponent();
+            txtUserName.Focus();
         }
     }
 }

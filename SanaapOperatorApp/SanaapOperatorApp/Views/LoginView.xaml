@@ -10,14 +10,14 @@
                 <ColumnDefinition Width="20*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <Entry Grid.Row="1" Grid.Column="1" FlowDirection="LeftToRight" VerticalOptions="Center" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
-            <Entry Grid.Row="2" Grid.Column="1" MaxLength="15" FlowDirection="LeftToRight" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور"/>
-            <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" Text="ورود" Command="{Binding Login}" Margin="20" />
+            <Entry x:Name="txtUserName" Grid.Row="1" Grid.Column="1" FlowDirection="LeftToRight" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
+            <Entry Grid.Row="2" Grid.Column="1" FlowDirection="LeftToRight" MaxLength="15" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور"/>
+            <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" WidthRequest="100" Text="ورود" Command="{Binding Login}" />
             <ActivityIndicator/>
         </Grid>
 
