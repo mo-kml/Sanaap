@@ -16,6 +16,7 @@ namespace Sanaap.Model
 
         [Index(IsUnique = true)]
         [Required]
+        [MaxLength(50)]
         public virtual string UserName { get; set; }
 
         [Required]

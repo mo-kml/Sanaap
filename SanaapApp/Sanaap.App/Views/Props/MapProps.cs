@@ -15,5 +15,15 @@ namespace Sanaap.App.Views.Props
                       map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMeters(200)));
                   }
               });
+
+        public static string GetCenterRegion(BindableObject view)
+        {
+            return (string)view.GetValue(CenterRegionProperty);
+        }
+
+        public static void SetCenterRegion(BindableObject view, Plugin.Geolocator.Abstractions.Position value)
+        {
+            view.SetValue(CenterRegionProperty, value);
+        }
     }
 }

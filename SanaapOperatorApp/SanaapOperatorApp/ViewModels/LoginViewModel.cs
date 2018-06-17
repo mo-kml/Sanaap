@@ -20,8 +20,8 @@ namespace SanaapOperatorApp.ViewModels
 
         public bool IsBusy { get; set; }
 
-        public LoginViewModel(ISecurityService securityService,
-            INavigationService navigationService,
+        public LoginViewModel(INavigationService navigationService,
+            ISecurityService securityService,
             ISanaapOperatorAppLoginValidator loginValidator,
             IPageDialogService pageDialogService,
             ISanaapAppTranslateService translateService,

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:props="clr-namespace:SanaapOperatorApp.Views.Props"
              x:Class="SanaapOperatorApp.Views.LoginView">
     <StackLayout Orientation="Vertical">
         <Grid>
@@ -15,7 +16,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <Entry x:Name="txtUserName" Grid.Row="1" Grid.Column="1" FlowDirection="LeftToRight" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
+            <Entry props:VisualElementProps.IsFocused="True" Grid.Row="1" Grid.Column="1" FlowDirection="LeftToRight" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
             <Entry Grid.Row="2" Grid.Column="1" FlowDirection="LeftToRight" MaxLength="15" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور"/>
             <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" WidthRequest="100" Text="ورود" Command="{Binding Login}" />
             <ActivityIndicator/>

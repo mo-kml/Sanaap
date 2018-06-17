@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sanaap.Model\Sanaap.Model.csproj" />
     <ProjectReference Include="..\Sannap.Data\Sannap.Data.csproj" />
-    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.1" PrivateAssets="All" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.2" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

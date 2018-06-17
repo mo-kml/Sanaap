@@ -9,7 +9,7 @@
 
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
 
-            <maps:Map x:Name="map" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
+            <maps:Map InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
                    MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}">
             </maps:Map>
 
