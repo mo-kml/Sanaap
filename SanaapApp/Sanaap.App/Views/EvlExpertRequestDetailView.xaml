@@ -17,15 +17,17 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView>
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <!--0-->
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -34,29 +36,30 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <!--8-->
                 </Grid.RowDefinitions>
 
-                <Picker ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}"/>
-                <Label Text="نوع بیمه نامه" Grid.Column="1"/>
+                <Label Grid.Row="0" Grid.Column="0" Text="نوع بیمه نامه" />
+                <Picker Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}"/>
 
-                <Picker Grid.Row="1" ItemsSource="{Binding Companies}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCompany}"/>
-                <Label Text="شرکت بیمه گر" Grid.Row="1" Grid.Column="1"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="شرکت بیمه گر"  />
+                <Picker Grid.Row="1" Grid.Column="1" SelectedIndex="1" ItemsSource="{Binding Companies}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCompany}" />
 
-                <Picker Grid.Row="2" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
-                <Label Text="نوع خودرو" Grid.Row="2" Grid.Column="1"/>
+                <Label Grid.Row="2" Grid.Column="0" Text="نوع خودرو"  />
+                <Picker Grid.Row="2" Grid.Column="1" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
 
-                <DatePicker Grid.Row="3" Date="{Binding AccidentDate}"/>
-                <Label Text="تاریخ وقوع حادثه" Grid.Row="3" Grid.Column="1"/>
+                <Label Grid.Row="3" Grid.Column="0" Text="تاریخ وقوع حادثه"  />
+                <DatePicker Grid.Row="3" Grid.Column="1" Date="{Binding AccidentDate}"/>
 
-                <Entry Text="{Binding InsuranceNumber}" Placeholder="شماره بیمه نامه" Grid.ColumnSpan="2" Grid.Row="4"/>
+                <Entry Grid.Row="4" Text="{Binding InsuranceNumber}" Placeholder="شماره بیمه نامه" Grid.ColumnSpan="2" />
 
-                <Entry Text="{Binding OwnerFullName}" Placeholder="نام و نام خانوادگی مالک" Grid.ColumnSpan="2" Grid.Row="5"/>
+                <Entry Grid.Row="5" Text="{Binding OwnerFullName}" Placeholder="نام و نام خانوادگی مالک" Grid.ColumnSpan="2" />
 
-                <Entry Text="{Binding OwnerMobileNumber}" Placeholder="شماره تماس مالک" Grid.ColumnSpan="2" Grid.Row="6"/>
+                <Entry Grid.Row="6" Text="{Binding OwnerMobileNumber}" Placeholder="شماره تماس مالک" Grid.ColumnSpan="2" />
 
-                <Entry Text="{Binding Description}" Placeholder="توضیحات" Grid.ColumnSpan="2" Grid.Row="7"/>
+                <Entry Grid.Row="7" Text="{Binding Description}" Placeholder="توضیحات" Grid.ColumnSpan="2" />
 
-                <Button Command="{Binding GoToNextPage}" Text="ادامه" Grid.Row="8" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="8" Command="{Binding GoToNextPage}" Text="ادامه" Grid.ColumnSpan="2"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

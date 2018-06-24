@@ -6,13 +6,13 @@ using System;
 
 namespace Sanaap.App.ViewModels
 {
-    public class MainViewModel : BitViewModelBase
+    public class SosRequestViewModel : BitViewModelBase
     {
         public BitDelegateCommand GoToMySosRequests { get; set; }
 
         public BitDelegateCommand Logout { get; set; }
 
-        public BitDelegateCommand SosRequest { get; set; }
+        public BitDelegateCommand SubmitSosRequest { get; set; }
 
         public BitDelegateCommand EvlExpertRequest { get; set; }
 
@@ -20,9 +20,10 @@ namespace Sanaap.App.ViewModels
 
         public bool IsBusy { get; set; } = false;
 
-        public MainViewModel(INavigationService navigationService,
+        public SosRequestViewModel(INavigationService navigationService,
             ISecurityService securityService, IDeviceService deviceService)
         {
+
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("MySosRequests");
@@ -39,9 +40,9 @@ namespace Sanaap.App.ViewModels
                 await navigationService.NavigateAsync("/Login");
             });
 
-            SosRequest = new BitDelegateCommand(async () =>
+            SubmitSosRequest = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("SosRequest");
+                await navigationService.NavigateAsync("SubmitSosRequest");
             });
 
             SubmitSosRequestByCall = new BitDelegateCommand(() =>

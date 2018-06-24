@@ -71,6 +71,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
+            containerRegistry.RegisterForNavigation<SosRequestView, SosRequestViewModel>("SosRequest");
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
             containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
             containerRegistry.RegisterForNavigation<EvlExpertRequestView, EvlExpertRequestViewModel>("EvlExpertRequest");

@@ -6,8 +6,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="ff:SvgCachedImage">
-                <Setter Property="WidthRequest" Value="80"/>
-                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="120"/>
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="Margin" Value="10"/>
             </Style>
 
             <Style TargetType="Label">
@@ -15,10 +16,10 @@
             </Style>
 
             <Style TargetType="Frame">
-                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Padding" Value="0.8"/>
                 <Setter Property="HasShadow" Value="False"/>
-                <Setter Property="BackgroundColor" Value="Black"/>
-                <Setter Property="Margin" Value="10"/>
+                <Setter Property="BackgroundColor" Value="Gray"/>
+                <Setter Property="Margin" Value="5,5,5,-5"/>
             </Style>
 
             <Style TargetType="StackLayout">
@@ -26,6 +27,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,17 +43,17 @@
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding EvlExpertRequest}"/>
                 </StackLayout.GestureRecognizers>
-                <ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.SosRequest.svg"/>
-                <Label Text="درخواست کارشناس ارزیاب خسارت" />
+                <ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.Accident.svg" VerticalOptions="Center"/>
+                <Label Text="درخواست کارشناس ارزیاب خسارت" VerticalOptions="Center"/>
             </StackLayout>
         </Frame>
 
         <Frame Grid.Row="1">
             <StackLayout>
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SubmitSosRequest}"/>
+                    <TapGestureRecognizer Command="{Binding SosRequest}"/>
                 </StackLayout.GestureRecognizers>
-                <ff:SvgCachedImage HeightRequest="80" WidthRequest="80" Source="resource://Sanaap.App.Images.SosRequest.svg"/>
+                <ff:SvgCachedImage Source="resource://Sanaap.App.Images.SOS.svg"/>
                 <Label Text="درخواست امداد و نجات" />
             </StackLayout>
         </Frame>

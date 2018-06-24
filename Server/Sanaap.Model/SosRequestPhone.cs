@@ -1,7 +1,7 @@
-﻿using Sanaap.Enum;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Model
 {

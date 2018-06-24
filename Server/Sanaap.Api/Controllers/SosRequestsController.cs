@@ -3,12 +3,12 @@ using Bit.Data.Contracts;
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Sanaap.Dto;
-using Sanaap.Enum;
 using Sanaap.Model;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Api.Controllers
 {

@@ -11,15 +11,21 @@ namespace Sanaap.App.ViewModels
     public class EvlExpertRequestDetailViewModel : BitViewModelBase
     {
         Plugin.Geolocator.Abstractions.Position position;
+
+        public int SelectedIndex { get; set; }
+
         public string[] InsuranceTypeEnums { get; set; }
+
         public string SelectedInsuranceTypeEnum { get; set; }
 
         public InsuranceTypeEnum insuranceType { get; set; }
 
         public CompanyDto[] Companies { get; set; }
+
         public CompanyDto SelectedCompany { get; set; }
 
         public VehicleKindDto[] VehicleKinds { get; set; }
+
         public VehicleKindDto SelectedVehicleKind { get; set; }
 
         public DateTime AccidentDate { get; set; } = DateTime.Now;

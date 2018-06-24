@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\Accident.svg" />
     <None Remove="Images\map.svg" />
+    <None Remove="Images\SOS.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +34,9 @@
   <ItemGroup>
     <Compile Update="Views\EvlExpertRequestView.xaml.cs">
       <DependentUpon>EvlExpertRequestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SosRequestView.xaml.cs">
+      <DependentUpon>SosRequestView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
