@@ -2,10 +2,20 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MenuView" FlowDirection="RightToLeft"
+             xmlns:view="clr-namespace:Sanaap.App.Views"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              Title="سناپ">
 
     <MasterDetailPage.Master>
         <ContentPage Title="سناپ">
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Frame">
+                        <Setter Property="HeightRequest" Value="200"/>
+                        <Setter Property="WidthRequest" Value="200"/>
+                    </Style>
+                </ResourceDictionary>
+            </ContentPage.Resources>
             <ScrollView>
                 <StackLayout>
                     <Button VerticalOptions="Start" Margin="20" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />

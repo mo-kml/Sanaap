@@ -1,8 +1,4 @@
-﻿using Sanaap.Dto;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Sanaap.App.ViewModels;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Views
@@ -12,6 +8,11 @@ namespace Sanaap.App.Views
         public MySosRequestsView()
         {
             InitializeComponent();
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            ((MySosRequestsViewModel)BindingContext).GoBack.Execute();
+            return true;
         }
     }
 }

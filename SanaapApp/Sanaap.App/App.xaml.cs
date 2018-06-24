@@ -4,6 +4,7 @@ using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
 using Plugin.Geolocator;
+using Plugin.Media;
 using Prism;
 using Prism.Autofac;
 using Prism.Events;
@@ -42,14 +43,16 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync("Menu/Nav/Main");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync("/Register");
-            }
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync("Menu/Nav/Main");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync("/Register");
+            //}
+
+            await NavigationService.NavigateAsync("Menu/Nav/Main");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -70,6 +73,9 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
             containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
+            containerRegistry.RegisterForNavigation<EvlExpertRequestView, EvlExpertRequestViewModel>("EvlExpertRequest");
+            containerRegistry.RegisterForNavigation<EvlExpertRequestDetailView, EvlExpertRequestDetailViewModel>("EvlExpertRequestDetail");
+            containerRegistry.RegisterForNavigation<EvlExpertRequestFilesView, EvlExpertRequestFilesViewModel>("EvlExpertRequestFiles");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
@@ -92,6 +98,7 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
             containerBuilder.Register(c => CrossGeolocator.Current).SingleInstance();
+            containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
 
             base.RegisterTypes(containerRegistry);
         }

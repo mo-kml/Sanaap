@@ -27,7 +27,14 @@ namespace Sanaap.App.ViewModels
             _odataClient = odataClient;
             _connectivity = connectivity;
             _pageDialogService = pageDialogService;
+
+            GoBack = new BitDelegateCommand(() =>
+            {
+                navigationService.GoBackAsync();
+            });
         }
+
+        public BitDelegateCommand GoBack { get; set; }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {

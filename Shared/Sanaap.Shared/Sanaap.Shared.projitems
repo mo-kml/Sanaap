@@ -9,15 +9,17 @@
     <Import_RootNamespace>Sanaap</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enum\EnumSosRequestStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapOperatorAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\EnumHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapOperatorAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppLoginValidator.cs" />

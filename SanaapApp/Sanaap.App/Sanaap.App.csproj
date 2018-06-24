@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\map.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bit.CSharpClient.All" Version="1.0.6" />
     <PackageReference Include="Fody" Version="3.0.4" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.1" />
@@ -18,10 +22,32 @@
     <PackageReference Include="Plugin.Toast" Version="2.0.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.5.7" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="2.3.0" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\EvlExpertRequestView.xaml.cs">
+      <DependentUpon>EvlExpertRequestView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\SanaapMap.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EvlExpertRequestDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EvlExpertRequestFilesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EvlExpertRequestView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />

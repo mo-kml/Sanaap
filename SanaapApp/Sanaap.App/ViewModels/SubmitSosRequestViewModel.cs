@@ -5,9 +5,10 @@ using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
-using Sanaap.Enum;
 using Simple.OData.Client;
 using System;
+using Xamarin.Forms.GoogleMaps;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.App.ViewModels
 {
@@ -15,13 +16,15 @@ namespace Sanaap.App.ViewModels
     {
         public BitDelegateCommand SubmitSosRequest { get; set; }
 
+        public BitDelegateCommand<Map> UpdateCurrentLocation { get; set; }
+
         public string Description { get; set; }
 
         public bool IsBusy { get; set; } = false;
 
         public bool CanSend { get; set; } = false;
 
-        public Position CurrentPosition { get; set; }
+        public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
         private readonly IPageDialogService _pageDialogService;
@@ -82,6 +85,13 @@ namespace Sanaap.App.ViewModels
                     IsBusy = false;
                 }
             });
+
+            UpdateCurrentLocation = new BitDelegateCommand<Map>((map) =>
+              {
+                  Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
+
+                  CurrentPosition = new Plugin.Geolocator.Abstractions.Position { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
+              });
         }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)

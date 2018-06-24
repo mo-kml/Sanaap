@@ -1,6 +1,6 @@
 ﻿using Bit.Model.Contracts;
-using Sanaap.Enum;
 using System;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Dto
 {

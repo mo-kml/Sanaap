@@ -14,6 +14,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand SubmitSosRequest { get; set; }
 
+        public BitDelegateCommand EvlExpertRequest { get; set; }
+
         public BitDelegateCommand SubmitSosRequestByCall { get; set; }
 
         public bool IsBusy { get; set; } = false;
@@ -24,6 +26,11 @@ namespace Sanaap.App.ViewModels
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("MySosRequests");
+            });
+
+            EvlExpertRequest = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("EvlExpertRequest");
             });
 
             Logout = new BitDelegateCommand(async () =>

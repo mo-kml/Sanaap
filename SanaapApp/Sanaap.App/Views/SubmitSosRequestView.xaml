@@ -3,19 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:props="clr-namespace:Sanaap.App.Views.Props"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.SubmitSosRequestView" Title="">
 
-    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-
-            <maps:Map InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+        <StackLayout Spacing="0" Padding="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
+                <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
                    MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}">
-            </maps:Map>
+                    <maps:Map.Behaviors>
+                        <b:EventToCommandBehavior EventName="CameraChanged" 
+                                      Command="{Binding UpdateCurrentLocation}"
+                                      CommandParameter="{x:Reference map} " />
+                    </maps:Map.Behaviors>
+                </maps:Map>
 
-            <Entry MaxLength="8000" FlowDirection="RightToLeft" HorizontalTextAlignment="Start" Placeholder="توضیحات (اختیاری)" Margin="15, 30, 15, 0" Text="{Binding Description}" />
+                <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" Source="resource://Sanaap.App.Images.map.svg"/>
+            </AbsoluteLayout>
 
-            <Button Text="ارسال درخواست" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}"  IsEnabled="{Binding CanSend}"/>
+
+            <Entry VerticalOptions="End" MaxLength="8000" FlowDirection="RightToLeft" HorizontalTextAlignment="Start" Placeholder="توضیحات (اختیاری)" Margin="15, 5, 15, 0" Text="{Binding Description}" />
+
+            <Button VerticalOptions="End" Text="ارسال درخواست" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding SubmitSosRequest}"  IsEnabled="{Binding CanSend}"/>
 
         </StackLayout>
 
@@ -25,7 +35,6 @@
             <ActivityIndicator/>
             <Label Text="در حال پردازش ..." HorizontalOptions="Center" TextColor="Green"/>
         </StackLayout>
-
     </AbsoluteLayout>
 
 </ContentPage>
