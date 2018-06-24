@@ -12,8 +12,6 @@ namespace Sanaap.App.ViewModels
     {
         Plugin.Geolocator.Abstractions.Position position;
 
-        public int SelectedIndex { get; set; }
-
         public string[] InsuranceTypeEnums { get; set; }
 
         public string SelectedInsuranceTypeEnum { get; set; }
@@ -79,10 +77,13 @@ namespace Sanaap.App.ViewModels
         public void SyncData()
         {
             Companies = new CompanyDto[] { new CompanyDto { Id = 1, Name = "دانا" }, new CompanyDto { Id = 2, Name = "ایران" }, new CompanyDto { Id = 3, Name = "پارسیان" } };
+            SelectedCompany = Companies.First();
 
             VehicleKinds = new VehicleKindDto[] { new VehicleKindDto { Id = 1, Name = "پژو 405" }, new VehicleKindDto { Id = 2, Name = "پژو 208" }, new VehicleKindDto { Id = 3, Name = "پژو 206" } };
+            SelectedVehicleKind = VehicleKinds.First();
 
             InsuranceTypeEnums = EnumHelper<InsuranceTypeEnum>.GetDisplayValues(insuranceType).ToArray();
+            SelectedInsuranceTypeEnum = InsuranceTypeEnums.First();
         }
     }
 }

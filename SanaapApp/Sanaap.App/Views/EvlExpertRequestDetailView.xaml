@@ -40,10 +40,10 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Text="نوع بیمه نامه" />
-                <Picker Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}"/>
+                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}" />
 
                 <Label Grid.Row="1" Grid.Column="0" Text="شرکت بیمه گر"  />
-                <Picker Grid.Row="1" Grid.Column="1" SelectedIndex="1" ItemsSource="{Binding Companies}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCompany}" />
+                <Picker Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding Companies}"  SelectedItem="{Binding SelectedCompany}" ItemDisplayBinding="{Binding Name}" />
 
                 <Label Grid.Row="2" Grid.Column="0" Text="نوع خودرو"  />
                 <Picker Grid.Row="2" Grid.Column="1" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
