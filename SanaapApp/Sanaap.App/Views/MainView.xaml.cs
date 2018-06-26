@@ -1,4 +1,5 @@
 ﻿using Plugin.Toast;
+using Sanaap.App.Helpers;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Views
@@ -6,9 +7,10 @@ namespace Sanaap.App.Views
     public partial class MainView : ContentPage
     {
         int count = 0;
-
-        public MainView()
+        private readonly IUtility _utility;
+        public MainView(IUtility utility)
         {
+            _utility = utility;
             InitializeComponent();
         }
 
@@ -21,7 +23,10 @@ namespace Sanaap.App.Views
                     CrossToastPopUp.Current.ShowToastMessage("برای بستن برنامه یک بار دیگر بازگشت را بزنید");
             }
             if (count == 2)
+            {
+                _utility.Exit();
                 return false;
+            }
             else return true;
         }
 

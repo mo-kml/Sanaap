@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncmaskededit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
              x:Class="Sanaap.App.Views.EvlExpertRequestDetailView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -49,7 +50,7 @@
                 <Picker Grid.Row="2" Grid.Column="1" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
 
                 <Label Grid.Row="3" Grid.Column="0" Text="تاریخ وقوع حادثه"  />
-                <DatePicker Grid.Row="3" Grid.Column="1" Date="{Binding AccidentDate}"/>
+                <syncmaskededit:SfMaskedEdit Grid.Row="3" Grid.Column="1" x:Name="maskedEdit" Value="{Binding AccidentDate}" Mask="0000/00/00"/>
 
                 <Entry Grid.Row="4" Text="{Binding InsuranceNumber}" Placeholder="شماره بیمه نامه" Grid.ColumnSpan="2" />
 

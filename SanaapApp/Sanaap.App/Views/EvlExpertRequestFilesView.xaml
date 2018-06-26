@@ -5,21 +5,27 @@
              x:Name="fileView">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="text"/>
             <ListView ItemsSource="{Binding FileTypes}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label TextColor="Black" Text="{Binding Name}"/>
-                                <Button Text="TakePhoto" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>
-                                <Button Text="Gallery" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
-                                <Image Aspect="Fill" Source="{Binding ItemSource}"/>
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label TextColor="Black" Text="{Binding FileType.Name}"/>
+                                <Button Grid.Column="1" Text="TakePhoto" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>
+                                <Button Grid.Column="2" Text="Gallery" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
+                                <Image Grid.Column="3" Aspect="Fill" Source="{Binding ItemSource,Mode=TwoWay}"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="تایید نهایی" Command="{Binding Submit}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

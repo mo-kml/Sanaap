@@ -1,16 +1,22 @@
-﻿using Bit.ViewModel;
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
+using Newtonsoft.Json;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.Dto;
+using Sanaap.Constants;
 using Sanaap.Service.Implementations;
 using System;
 using System.Linq;
+using System.Net.Http;
 using static Sanaap.Enums.Enums;
 
 namespace Sanaap.App.ViewModels
 {
     public class EvlExpertRequestDetailViewModel : BitViewModelBase
     {
-        Plugin.Geolocator.Abstractions.Position position;
+        private EvlExpertRequestDto evlExpertRequestDto;
 
         public string[] InsuranceTypeEnums { get; set; }
 
@@ -26,7 +32,7 @@ namespace Sanaap.App.ViewModels
 
         public VehicleKindDto SelectedVehicleKind { get; set; }
 
-        public DateTime AccidentDate { get; set; } = DateTime.Now;
+        public string AccidentDate { get; set; } = Helpers.Helpers.ConvertDateToShamsi(DateTimeOffset.Now);
 
         public string InsuranceNumber { get; set; }
 
@@ -38,52 +44,83 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand GoToNextPage { get; set; }
 
-
-        public EvlExpertRequestDetailViewModel(INavigationService navigationService)
+        private readonly HttpClient _httpClient;
+        private readonly IClientAppProfile _clientAppProfile;
+        private readonly IUserDialogs _userDialogs;
+        public EvlExpertRequestDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService, HttpClient httpClient, IClientAppProfile clientAppProfile, IUserDialogs userDialogs)
         {
-            GoToNextPage = new BitDelegateCommand(() =>
-            {
-                EvlExpertRequestDto evlExpertRequestDto = new EvlExpertRequestDto
-                {
-                    Description = Description,
-                    OwnerFullName = OwnerFullName,
-                    OwnerMobileNumber = OwnerMobileNumber,
-                    Latitude = position.Latitude,
-                    Longitude = position.Longitude,
-                    AccidentDate = DateTimeOffset.Now,
-                    CompanyId = SelectedCompany.Id,
-                    VehicleKindId = SelectedVehicleKind.Id,
-                    InsuranceNumber = InsuranceNumber,
-                    InsuranceTypeEnum = (InsuranceTypeEnum)Array.IndexOf(InsuranceTypeEnums, SelectedInsuranceTypeEnum),
-                };
+            _httpClient = httpClient;
+            _clientAppProfile = clientAppProfile;
+            _userDialogs = userDialogs;
 
-                navigationService.NavigateAsync("EvlExpertRequestFiles");
+            SyncData();
+
+            GoToNextPage = new BitDelegateCommand(async () =>
+            {
+                if (!Helpers.Helpers.IsShamsiDateValid(AccidentDate))
+                {
+                    await pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+                    return;
+                }
+
+                evlExpertRequestDto.Description = Description;
+                evlExpertRequestDto.OwnerFullName = OwnerFullName;
+                evlExpertRequestDto.OwnerMobileNumber = OwnerMobileNumber;
+                evlExpertRequestDto.AccidentDate = Helpers.Helpers.ConvertShamsiToMiladi(AccidentDate);
+                evlExpertRequestDto.CompanyId = SelectedCompany.Id;
+                evlExpertRequestDto.VehicleKindId = SelectedVehicleKind.Id;
+                evlExpertRequestDto.InsuranceNumber = InsuranceNumber;
+                evlExpertRequestDto.InsuranceTypeEnum = (InsuranceTypeEnum)Array.IndexOf(InsuranceTypeEnums, SelectedInsuranceTypeEnum);
+
+                var navigationParameters = new NavigationParameters();
+                navigationParameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
+
+                await navigationService.NavigateAsync("EvlExpertRequestFiles", navigationParameters);
 
             }, () => SelectedCompany != null && SelectedVehicleKind != null);
             GoToNextPage.ObservesProperty(() => SelectedCompany);
             GoToNextPage.ObservesProperty(() => SelectedVehicleKind);
         }
+        public override void OnNavigatedFrom(NavigationParameters parameters)
+        {
+            parameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
 
+            base.OnNavigatedFrom(parameters);
+        }
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            if (!parameters.TryGetValue("Position", out position))
-                throw new ArgumentNullException("Position Argumet is Null");
+            parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
 
-            SyncData();
+            if (evlExpertRequestDto.CompanyId != 0)
+            {
+                Description = evlExpertRequestDto.Description;
+                OwnerFullName = evlExpertRequestDto.OwnerFullName;
+                OwnerMobileNumber = evlExpertRequestDto.OwnerMobileNumber;
+                AccidentDate = Helpers.Helpers.ConvertDateToShamsi(evlExpertRequestDto.AccidentDate);
+                SelectedCompany = Companies.FirstOrDefault(c => c.Id == evlExpertRequestDto.CompanyId);
+                SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == evlExpertRequestDto.VehicleKindId);
+                InsuranceNumber = evlExpertRequestDto.InsuranceNumber;
+                SelectedInsuranceTypeEnum = evlExpertRequestDto.InsuranceTypeEnum.ToString();
+            }
 
             base.OnNavigatedTo(parameters);
         }
 
-        public void SyncData()
+        public async void SyncData()
         {
-            Companies = new CompanyDto[] { new CompanyDto { Id = 1, Name = "دانا" }, new CompanyDto { Id = 2, Name = "ایران" }, new CompanyDto { Id = 3, Name = "پارسیان" } };
-            SelectedCompany = Companies.First();
+            using (_userDialogs.Loading(ConstantStrings.Loading))
+            {
+                _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
 
-            VehicleKinds = new VehicleKindDto[] { new VehicleKindDto { Id = 1, Name = "پژو 405" }, new VehicleKindDto { Id = 2, Name = "پژو 208" }, new VehicleKindDto { Id = 3, Name = "پژو 206" } };
-            SelectedVehicleKind = VehicleKinds.First();
+                Companies = JsonConvert.DeserializeObject<CompanyDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/Companies/GetAll"));
+                SelectedCompany = Companies.First();
 
-            InsuranceTypeEnums = EnumHelper<InsuranceTypeEnum>.GetDisplayValues(insuranceType).ToArray();
-            SelectedInsuranceTypeEnum = InsuranceTypeEnums.First();
+                VehicleKinds = JsonConvert.DeserializeObject<VehicleKindDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/VehicleKinds/GetAll"));
+                SelectedVehicleKind = VehicleKinds.First();
+
+                InsuranceTypeEnums = EnumHelper<InsuranceTypeEnum>.GetDisplayValues(insuranceType).ToArray();
+                SelectedInsuranceTypeEnum = InsuranceTypeEnums.First();
+            }
         }
     }
 }

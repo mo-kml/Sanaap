@@ -20,9 +20,7 @@ namespace Sanaap.App.ViewModels
 
         public string Description { get; set; }
 
-        public bool IsBusy { get; set; } = false;
-
-        public bool CanSend { get; set; } = false;
+        public bool IsPositionSelected { get; set; }
 
         public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
         private readonly IGeolocator _geolocator;
@@ -43,8 +41,6 @@ namespace Sanaap.App.ViewModels
 
             SubmitSosRequest = new BitDelegateCommand(async () =>
             {
-                IsBusy = true;
-
                 try
                 {
                     if (connectivity.IsConnected == false)
@@ -80,10 +76,6 @@ namespace Sanaap.App.ViewModels
                     Crashes.TrackError(ex);
                     await pageDialogService.DisplayAlertAsync("", "خطای نامشخص", "باشه");
                 }
-                finally
-                {
-                    IsBusy = false;
-                }
             });
 
             UpdateCurrentLocation = new BitDelegateCommand<Map>((map) =>
@@ -91,11 +83,15 @@ namespace Sanaap.App.ViewModels
                   Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
 
                   CurrentPosition = new Plugin.Geolocator.Abstractions.Position { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
+
+                  IsPositionSelected = true;
               });
         }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
+            IsPositionSelected = false;
+
             try
             {
                 if (_connectivity.IsConnected == false)
@@ -103,8 +99,6 @@ namespace Sanaap.App.ViewModels
                     await _pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
                     return;
                 }
-
-                IsBusy = true; CanSend = false;
 
                 //SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
                 //.OrderBy(it => it.Code)
@@ -117,11 +111,7 @@ namespace Sanaap.App.ViewModels
                     {
                         CurrentPosition = await _geolocator.GetPositionAsync();
                     }
-                    finally
-                    {
-                        CanSend = true;
-                        IsBusy = false;
-                    }
+                    catch { }
                 }
 
                 base.OnNavigatedTo(parameters);

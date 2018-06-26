@@ -10,15 +10,14 @@
     <StackLayout Spacing="0" Padding="0">
         <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
             <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
-                   MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}">
-                <maps:Map.Behaviors>
-                    <b:EventToCommandBehavior EventName="CameraChanged" 
-                                      Command="{Binding UpdateCurrentLocation}"
-                                      CommandParameter="{x:Reference map} " />
-                </maps:Map.Behaviors>
-            </maps:Map>
+                   MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-            <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" Source="resource://Sanaap.App.Images.map.svg"/>
+            <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" Source="resource://Sanaap.App.Images.map.svg">
+                <ff:SvgCachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdateCurrentLocation}"
+                                      CommandParameter="{x:Reference map} "/>
+                </ff:SvgCachedImage.GestureRecognizers>
+            </ff:SvgCachedImage>
         </AbsoluteLayout>
 
         <Button VerticalOptions="End" Text="ادامه" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding GoToNextPage}"/>

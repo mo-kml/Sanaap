@@ -15,7 +15,7 @@ namespace Sanaap.App.ViewModels
         private readonly IODataClient _odataClient;
         private IConnectivity _connectivity;
         private readonly IPageDialogService _pageDialogService;
-
+        private readonly INavigationService _navigationService;
         public bool IsBusy { get; set; }
 
         public SosRequestDto[] MySosRequests { get; set; }
@@ -27,17 +27,12 @@ namespace Sanaap.App.ViewModels
             _odataClient = odataClient;
             _connectivity = connectivity;
             _pageDialogService = pageDialogService;
-
-            GoBack = new BitDelegateCommand(() =>
-            {
-                navigationService.GoBackAsync();
-            });
+            _navigationService = navigationService;
         }
-
-        public BitDelegateCommand GoBack { get; set; }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
+            string path = _navigationService.GetNavigationUriPath();
             IsBusy = true;
 
             try
