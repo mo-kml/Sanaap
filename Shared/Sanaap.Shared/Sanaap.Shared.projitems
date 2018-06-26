@@ -10,8 +10,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlExpertRequestDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\FileTypeDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\RequestFilesDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapOperatorAppLoginValidator.cs" />
