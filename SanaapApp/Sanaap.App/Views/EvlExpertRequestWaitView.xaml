@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="Sanaap.App.Views.EvlExpertRequestWaitView">
+
+    <StackLayout>
+        <Label Text="در حال یافتن نزدیکترین کارشناس ارزیاب خسارت"/>
+        <Button Text="انصراف" Command="{Binding GoToMain}"/>
+
+        <Label Text="نام کارشناس"/>
+        <Label Text="{Binding FullName}"/>
+
+        <ff:SvgCachedImage Source="{Binding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
+    </StackLayout>
+
+</ContentPage>

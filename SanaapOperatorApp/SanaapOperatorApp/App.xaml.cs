@@ -9,6 +9,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
+using SanaapOperatorApp.MainModels;
 using SanaapOperatorApp.ViewModels;
 using SanaapOperatorApp.Views;
 using System;
@@ -39,16 +40,9 @@ namespace SanaapOperatorApp
         {
             InitializeComponent();
 
-            bool isLoggedIn = Container.Resolve<ISecurityService>().IsLoggedIn();
+            await Container.Resolve<ISecurityService>().Logout();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync("Menu/Nav/Main");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync("/Login");
-            }
+            await NavigationService.NavigateAsync("Login");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -64,6 +58,8 @@ namespace SanaapOperatorApp
 
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
+            containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
+            containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             //containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             //containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
             //containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");

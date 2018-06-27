@@ -48,6 +48,8 @@ namespace SanaapOperatorApp.ViewModels
                     try
                     {
                         await securityService.LoginWithCredentials(UserName, Password, "SanaapOperatorAppResOwner", "secret");
+
+                        await navigationService.NavigateAsync("Menu/Nav/Main");
                     }
                     catch (Exception ex)
                     {
@@ -62,6 +64,8 @@ namespace SanaapOperatorApp.ViewModels
                 {
                     IsBusy = false;
                 }
+
+
             });
         }
     }

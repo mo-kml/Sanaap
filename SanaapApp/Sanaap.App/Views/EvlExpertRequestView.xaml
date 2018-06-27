@@ -19,9 +19,6 @@
                 </ff:SvgCachedImage.GestureRecognizers>
             </ff:SvgCachedImage>
         </AbsoluteLayout>
-
-        <Button VerticalOptions="End" Text="ادامه" BackgroundColor="Red" TextColor="White" FontSize="Medium" Command="{Binding GoToNextPage}"/>
-
     </StackLayout>
 
 </ContentPage>

@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:props="clr-namespace:SanaapOperatorApp.Views.Props"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             x:Class="SanaapOperatorApp.Views.LoginView">
+             x:Class="SanaapOperatorApp.Views.MainView">
     <StackLayout Orientation="Vertical">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -17,15 +16,10 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <Entry props:VisualElementProps.IsFocused="True" Grid.Row="1" Grid.Column="1" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
-            <Entry Grid.Row="2" Grid.Column="1" MaxLength="15" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور">
-                <Entry.Behaviors>
-                    <b:EventToCommandBehavior EventName="Completed" 
-                                      Command="{Binding Login}"/>
-                </Entry.Behaviors>
-            </Entry>
-
-            <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" WidthRequest="100" Text="ورود" Command="{Binding Login}" />
+            <Label Text="سنـــــــــــــــــــــــــــــــــــــــــاپ"/>
+            <!--<Entry props:VisualElementProps.IsFocused="True" Grid.Row="1" Grid.Column="1" MaxLength="15" Text="{Binding UserName}" Placeholder="نام کاربری" />
+            <Entry Grid.Row="2" Grid.Column="1" MaxLength="15" IsPassword="True" Text="{Binding Password}" Placeholder="رمز عبور"/>
+            <Button Grid.Row="3" Grid.Column="1" BackgroundColor="Green" WidthRequest="100" Text="ورود" Command="{Binding Login}" />-->
             <ActivityIndicator/>
         </Grid>
 

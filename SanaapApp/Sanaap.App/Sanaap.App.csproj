@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\EvlExpertRequestWaitView.xaml.cs">
+      <DependentUpon>EvlExpertRequestWaitView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\EvlExpertRequestView.xaml.cs">
       <DependentUpon>EvlExpertRequestView.xaml</DependentUpon>
     </Compile>

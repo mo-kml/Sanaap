@@ -7,7 +7,6 @@ using Bit.Data.Contracts;
 using Bit.Model.Implementations;
 using Bit.OData.ActionFilters;
 using Bit.OData.Contracts;
-using Bit.Owin.Contracts;
 using Bit.Owin.Implementations;
 using Bit.OwinCore;
 using Bit.OwinCore.Contracts;
@@ -119,7 +118,6 @@ namespace Sanaap.Api
 
             dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
 
-            dependencyManager.Register<IUserSettingProvider, SanaapUserSettingProvider>();
             dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
             dependencyManager.Register<ISanaapAppTranslateService, SanaapAppTranslateService>(lifeCycle: DependencyLifeCycle.SingleInstance);
 

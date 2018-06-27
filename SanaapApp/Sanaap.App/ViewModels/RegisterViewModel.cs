@@ -1,9 +1,11 @@
-﻿using Bit.ViewModel;
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Microsoft.AppCenter.Crashes;
 using Plugin.Connectivity.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using Simple.OData.Client;
@@ -20,82 +22,73 @@ namespace Sanaap.App.ViewModels
 
         public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
 
-        public bool IsBusy { get; set; }
-
         public RegisterViewModel(INavigationService navigationService,
-            IODataClient oDataClient,
-            ICustomerValidator customerValidator,
-            IPageDialogService pageDialogService,
-            ISecurityService securityService,
-            ISanaapAppTranslateService translateService,
-            IConnectivity connectivity)
+            IODataClient oDataClient, ICustomerValidator customerValidator,
+            IPageDialogService pageDialogService, ISecurityService securityService,
+            ISanaapAppTranslateService translateService, IConnectivity connectivity, IUserDialogs userDialogs)
         {
             Login = new BitDelegateCommand(async () =>
             {
-                IsBusy = true;
                 try
                 {
                     await navigationService.NavigateAsync("Login");
                 }
-                finally
-                {
-                    IsBusy = false;
-                }
+                catch (Exception ex)
+                { }
             });
 
             StartRegisteration = new BitDelegateCommand(async () =>
             {
-                IsBusy = true;
-
-                try
+                using (userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    if (connectivity.IsConnected == false)
-                    {
-                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
-                        return;
-                    }
-
-                    if (!customerValidator.IsValid(Customer, out string errorMessage))
-                    {
-                        await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
-                        return;
-                    }
-
                     try
                     {
-                        await oDataClient.For<CustomerDto>("Customers")
-                            .Action("RegisterCustomer")
-                            .Set(new
-                            {
-                                customer = Customer
-                            })
-                            .ExecuteAsync();
+                        if (connectivity.IsConnected == false)
+                        {
+                            await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
+                            return;
+                        }
 
-                        await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
+                        if (!customerValidator.IsValid(Customer, out string errorMessage))
+                        {
+                            await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
+                            return;
+                        }
 
-                        await navigationService.NavigateAsync("/Menu/Nav/Main");
-                    }
-                    catch (Exception ex)
-                    {
-                        Crashes.TrackError(ex, new Dictionary<string, string>
+                        try
+                        {
+                            await oDataClient.For<CustomerDto>("Customers")
+                                .Action("RegisterCustomer")
+                                .Set(new
+                                {
+                                    customer = Customer
+                                })
+                                .ExecuteAsync();
+
+                            await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
+
+                            await navigationService.NavigateAsync("/Menu/Nav/Main");
+                        }
+                        catch (Exception ex)
+                        {
+                            Crashes.TrackError(ex, new Dictionary<string, string>
                         {
                             { "Message", ex.GetMessage() },
                             { "ViewModel", nameof(LoginViewModel) }
                         });
 
-                        if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
-                        {
-                            await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
-                        }
-                        else
-                        {
-                            await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
+                            if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                            {
+                                await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
+                            }
+                            else
+                            {
+                                await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
+                            }
                         }
                     }
-                }
-                finally
-                {
-                    IsBusy = false;
+                    catch (Exception ex)
+                    { }
                 }
             });
         }

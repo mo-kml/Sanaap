@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SanaapOperatorApp.Views.MenuView" 
+             FlowDirection="RightToLeft"
+             Title="سناپ">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="سناپ">
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Frame">
+                        <Setter Property="HeightRequest" Value="200"/>
+                        <Setter Property="WidthRequest" Value="200"/>
+                    </Style>
+                </ResourceDictionary>
+            </ContentPage.Resources>
+            <ScrollView>
+
+                <StackLayout Orientation="Vertical">
+                    <Button VerticalOptions="Start" Margin="20" Text="درخواستهای امداد و نجات" Command="{Binding GoToSosList}" CommandParameter="Nav/Main/SosRequestsList" />
+                </StackLayout>
+
+            </ScrollView>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

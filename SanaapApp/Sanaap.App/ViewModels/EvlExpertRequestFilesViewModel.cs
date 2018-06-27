@@ -1,9 +1,11 @@
-﻿using Bit.ViewModel;
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Newtonsoft.Json;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
 using Sanaap.App.Dto;
+using Sanaap.Constants;
 using Simple.OData.Client;
 using System;
 using System.Collections.Generic;
@@ -23,19 +25,23 @@ namespace Sanaap.App.ViewModels
         private readonly INavigationService _navigationService;
         private readonly HttpClient _httpClient;
         private readonly IClientAppProfile _clientAppProfile;
-        public EvlExpertRequestFilesViewModel(IMedia media, IODataClient oDataClient, INavigationService navigationService, HttpClient httpClient, IClientAppProfile clientAppProfile)
+        private readonly IUserDialogs _userDialogs;
+
+        public EvlExpertRequestFilesViewModel(IMedia media, IODataClient oDataClient, INavigationService navigationService
+            , HttpClient httpClient, IClientAppProfile clientAppProfile, IUserDialogs userDialogs)
         {
             _oDataClinet = oDataClient;
             _navigationService = navigationService;
             _httpClient = httpClient;
             _clientAppProfile = clientAppProfile;
+            _userDialogs = userDialogs;
 
             TakePhoto = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
-              {
-                  Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
+             {
+                 Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
 
-                  parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
-              });
+                 parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+             });
 
             PickFromGallery = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
             {
@@ -45,35 +51,48 @@ namespace Sanaap.App.ViewModels
             });
 
             Submit = new BitDelegateCommand(async () =>
-              {
-                  if (evlExpertRequestDto.Id == Guid.Empty)
-                  {
-                      _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}api/EvlExpertRequests/SaveEvlExpert");
-                      var myContent = JsonConvert.SerializeObject(evlExpertRequestDto);
-                      var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            {
+                using (userDialogs.Loading(ConstantStrings.SendingRequest))
+                {
+                    _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
+                    if (evlExpertRequestDto.Id == Guid.Empty)
+                    {
+                        string evlExpertJson = JsonConvert.SerializeObject(evlExpertRequestDto);
+                        var stringContent = new StringContent(evlExpertJson, UnicodeEncoding.UTF8, "application/json");
 
-                      var a = await _httpClient.PostAsync(_httpClient.BaseAddress, stringContent);
-                      //evlExpertRequestDto = (await _oDataClinet.For<EvlExpertRequestDto>("EvlExpertRequests")
-                      //.Set(evlExpertRequestDto)
-                      //.InsertEntryAsync());
-                  }
-                  List<RequestFilesDto> requestFiles = new List<RequestFilesDto>();
+                        evlExpertRequestDto = JsonConvert.DeserializeObject<EvlExpertRequestDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/EvlExpertRequests/SaveEvlExpert", stringContent)).Content.ReadAsStringAsync());
 
-                  foreach (var item in FileTypes.Where(f => f.File != null))
-                  {
-                      RequestFilesDto requestFile = new RequestFilesDto
-                      {
-                          EvlExpertRequestId = evlExpertRequestDto.Id,
-                          File = item.File,
-                          FileTypeId = item.FileType.Id,
-                      };
+                        //evlExpertRequestDto = (await _oDataClinet.For<EvlExpertRequestDto>("EvlExpertRequests")
+                        //.Set(evlExpertRequestDto)
+                        //.InsertEntryAsync());
+                    }
+                }
 
-                      requestFile = (await _oDataClinet.For<RequestFilesDto>("RequestFiles")
-                      .Set(requestFile)
-                      .InsertEntryAsync());
-                  }
-              });
+                using (userDialogs.Loading(ConstantStrings.SendingPictures))
+                {
+                    List<RequestFilesDto> requestFiles = new List<RequestFilesDto>();
+
+                    foreach (var item in FileTypes.Where(f => f.File != null))
+                    {
+                        RequestFilesDto requestFile = new RequestFilesDto
+                        {
+                            EvlExpertRequestId = evlExpertRequestDto.Id,
+                            File = item.File,
+                            FileTypeId = item.FileType.Id,
+                        };
+
+                        var fileJson = JsonConvert.SerializeObject(requestFile);
+                        var stringContent = new StringContent(fileJson, UnicodeEncoding.UTF8, "application/json");
+
+                        requestFile = JsonConvert.DeserializeObject<RequestFilesDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/RequestFiles/SaveFile", stringContent)).Content.ReadAsStringAsync());
+
+                    }
+
+                    await navigationService.NavigateAsync("/EvlExpertRequestWait");
+                }
+            });
         }
+
         public ObservableCollection<FileListViewItem> FileTypes { get; set; }
 
         public BitDelegateCommand<FileListViewItem> TakePhoto { get; set; }
@@ -81,33 +100,33 @@ namespace Sanaap.App.ViewModels
         public BitDelegateCommand<FileListViewItem> PickFromGallery { get; set; }
 
         public BitDelegateCommand Submit { get; set; }
+
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
-            parameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
-
-            base.OnNavigatedFrom(parameters);
+            using (_userDialogs.Loading(ConstantStrings.Loading))
+            {
+                parameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
+                base.OnNavigatedFrom(parameters);
+            }
         }
+
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
-            parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
-
-            string path = _navigationService.GetNavigationUriPath();
-
-            //var a = await _oDataClinet.For<FileTypeDto>("FileTypes")
-            //          .FindEntriesAsync();
-
-            List<FileListViewItem> files = new List<FileListViewItem>
+            using (_userDialogs.Loading(ConstantStrings.Loading))
             {
+                parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
 
-                new FileListViewItem{ FileType=new FileTypeDto { Id = Guid.NewGuid(), Name = "کد ملی" } },
-                new FileListViewItem{FileType=new FileTypeDto { Id=Guid.NewGuid(), Name="شناسنامه"} },
-                new FileListViewItem{FileType=new FileTypeDto { Id=Guid.NewGuid(), Name="کد ملی" } },
-                new FileListViewItem{FileType=new FileTypeDto { Id=Guid.NewGuid(), Name="کد ملی"} },
-            };
+                string path = _navigationService.GetNavigationUriPath();
 
-            FileTypes = new ObservableCollection<FileListViewItem>(files);
+                //var a = await _oDataClinet.For<FileTypeDto>("FileTypes")
+                //          .FindEntriesAsync();
 
-            base.OnNavigatedTo(parameters);
+                FileTypeDto[] fileTypes = JsonConvert.DeserializeObject<FileTypeDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/FileTypes/GetAll"));
+
+                FileTypes = new ObservableCollection<FileListViewItem>(fileTypes.Select(f => new FileListViewItem { FileType = f }));
+
+                base.OnNavigatedTo(parameters);
+            }
         }
     }
 

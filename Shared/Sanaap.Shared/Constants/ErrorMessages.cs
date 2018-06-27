@@ -3,6 +3,8 @@
     public class ConstantStrings
     {
         public static string Loading = "در حال پردازش ...";
+        public static string SendingPictures = "ارسال تصاویر ...";
+        public static string SendingRequest = "ارسال درخواست ...";
     }
 
     public class ErrorMessages

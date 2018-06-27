@@ -43,6 +43,8 @@ namespace Sanaap.Api.Implementations.Security
             }
             else
             {
+                //await UsersRepository.AddAsync(new User { UserName = "test", Password = HashUtils.HashPassword("test") }, cancellationToken);
+
                 User user = await (await UsersRepository
                     .GetAllAsync(cancellationToken))
                     .SingleOrDefaultAsync(u => u.UserName == username);

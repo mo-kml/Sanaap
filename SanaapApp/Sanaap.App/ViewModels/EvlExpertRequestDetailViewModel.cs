@@ -16,37 +16,25 @@ namespace Sanaap.App.ViewModels
 {
     public class EvlExpertRequestDetailViewModel : BitViewModelBase
     {
-        private EvlExpertRequestDto evlExpertRequestDto;
-
-        public string[] InsuranceTypeEnums { get; set; }
-
-        public string SelectedInsuranceTypeEnum { get; set; }
-
-        public InsuranceTypeEnum insuranceType { get; set; }
-
-        public CompanyDto[] Companies { get; set; }
-
-        public CompanyDto SelectedCompany { get; set; }
-
-        public VehicleKindDto[] VehicleKinds { get; set; }
-
-        public VehicleKindDto SelectedVehicleKind { get; set; }
-
-        public string AccidentDate { get; set; } = Helpers.Helpers.ConvertDateToShamsi(DateTimeOffset.Now);
-
-        public string InsuranceNumber { get; set; }
-
-        public string OwnerFullName { get; set; }
-
-        public string OwnerMobileNumber { get; set; }
-
-        public string Description { get; set; }
-
-        public BitDelegateCommand GoToNextPage { get; set; }
-
         private readonly HttpClient _httpClient;
         private readonly IClientAppProfile _clientAppProfile;
         private readonly IUserDialogs _userDialogs;
+
+        private EvlExpertRequestDto evlExpertRequestDto;
+        public string[] InsuranceTypeEnums { get; set; }
+        public string SelectedInsuranceTypeEnum { get; set; }
+        public InsuranceTypeEnum insuranceType { get; set; }
+        public CompanyDto[] Companies { get; set; }
+        public CompanyDto SelectedCompany { get; set; }
+        public VehicleKindDto[] VehicleKinds { get; set; }
+        public VehicleKindDto SelectedVehicleKind { get; set; }
+        public string AccidentDate { get; set; } = Helpers.Helpers.ConvertDateToShamsi(DateTimeOffset.Now);
+        public string InsuranceNumber { get; set; }
+        public string OwnerFullName { get; set; }
+        public string OwnerMobileNumber { get; set; }
+        public string Description { get; set; }
+        public BitDelegateCommand GoToNextPage { get; set; }
+
         public EvlExpertRequestDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService, HttpClient httpClient, IClientAppProfile clientAppProfile, IUserDialogs userDialogs)
         {
             _httpClient = httpClient;
@@ -63,6 +51,8 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
+                using (userDialogs.Loading(ConstantStrings.Loading))
+                {
                 evlExpertRequestDto.Description = Description;
                 evlExpertRequestDto.OwnerFullName = OwnerFullName;
                 evlExpertRequestDto.OwnerMobileNumber = OwnerMobileNumber;
@@ -75,18 +65,20 @@ namespace Sanaap.App.ViewModels
                 var navigationParameters = new NavigationParameters();
                 navigationParameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
 
-                await navigationService.NavigateAsync("EvlExpertRequestFiles", navigationParameters);
-
+                    await navigationService.NavigateAsync("EvlExpertRequestFiles", navigationParameters);
+                }
             }, () => SelectedCompany != null && SelectedVehicleKind != null);
             GoToNextPage.ObservesProperty(() => SelectedCompany);
             GoToNextPage.ObservesProperty(() => SelectedVehicleKind);
         }
+
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
             parameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
 
             base.OnNavigatedFrom(parameters);
         }
+
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);

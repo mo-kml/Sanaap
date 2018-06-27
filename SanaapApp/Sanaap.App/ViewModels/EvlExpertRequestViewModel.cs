@@ -16,11 +16,8 @@ namespace Sanaap.App.ViewModels
     {
         private EvlExpertRequestDto evlExpertRequestDto;
 
-        public BitDelegateCommand GoToNextPage { get; set; }
-
         public BitDelegateCommand<Map> UpdateCurrentLocation { get; set; }
 
-        public bool IsPositionSelected { get; set; } = false;
         public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
         private readonly IGeolocator _geolocator;
         private readonly IPageDialogService _pageDialogService;
@@ -37,7 +34,7 @@ namespace Sanaap.App.ViewModels
             _connectivity = connectivity;
             _userDialogs = userDialogs;
 
-            GoToNextPage = new BitDelegateCommand(async () =>
+            UpdateCurrentLocation = new BitDelegateCommand<Map>(async (map) =>
             {
                 try
                 {
@@ -46,13 +43,16 @@ namespace Sanaap.App.ViewModels
                         await pageDialogService.DisplayAlertAsync(string.Empty, ErrorMessages.UnreachableNetwork, ErrorMessages.Ok);
                         return;
                     }
+
+                    Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
+
                     var navigationParameter = new NavigationParameters();
 
                     if (evlExpertRequestDto == null)
                         evlExpertRequestDto = new EvlExpertRequestDto();
 
-                    evlExpertRequestDto.Latitude = CurrentPosition.Latitude;
-                    evlExpertRequestDto.Longitude = CurrentPosition.Longitude;
+                    evlExpertRequestDto.Latitude = centerPosition.Latitude;
+                    evlExpertRequestDto.Longitude = centerPosition.Longitude;
 
                     navigationParameter.Add("EvlExpertRequestDto", evlExpertRequestDto);
 
@@ -64,27 +64,11 @@ namespace Sanaap.App.ViewModels
                     await _pageDialogService.DisplayAlertAsync(string.Empty, ErrorMessages.UnknownError, ErrorMessages.Ok);
 
                 }
-            }, () => IsPositionSelected == true);
-            GoToNextPage.ObservesProperty(() => IsPositionSelected);
-
-            UpdateCurrentLocation = new BitDelegateCommand<Map>((map) =>
-            {
-                Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
-
-                CurrentPosition = new Plugin.Geolocator.Abstractions.Position
-                {
-                    Latitude = centerPosition.Latitude,
-                    Longitude = centerPosition.Longitude
-                };
-
-                IsPositionSelected = true;
             });
         }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
-            IsPositionSelected = false;
-
             if (parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto))
             {
                 CurrentPosition = new Plugin.Geolocator.Abstractions.Position
