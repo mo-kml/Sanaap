@@ -1,31 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="Sanaap.App.Views.EvlExpertRequestFilesView"
              x:Name="fileView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding FileTypes}">
+
+            <Label Text="ارسال تصاویر اختیاری است" HorizontalOptions="Center" TextColor="Black" Margin="10"/>
+
+            <ListView ItemsSource="{Binding FileTypes}" RowHeight="80" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0.8*"/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.1*"/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.6*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label TextColor="Black" Text="{Binding FileType.Name}"/>
-                                <Button Grid.Column="1" Text="TakePhoto" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>
-                                <Button Grid.Column="2" Text="Gallery" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
-                                <Image Grid.Column="3" Aspect="Fill" Source="{Binding ItemSource,Mode=TwoWay}"/>
+                                <Label Grid.Column="0" Text="{Binding FileType.Name,StringFormat='{0} :'}" VerticalOptions="Center"/>
+                                <ff:SvgCachedImage Grid.Column="1" Source="resource://Sanaap.App.Images.camera.svg">
+                                    <ff:SvgCachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>
+                                    </ff:SvgCachedImage.GestureRecognizers>
+                                </ff:SvgCachedImage>
+                                <!--<Button Grid.Column="1" Text="دوربین" FontSize="Micro" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>-->
+                                <ff:SvgCachedImage Grid.Column="3" Source="resource://Sanaap.App.Images.gallery.svg" HorizontalOptions="EndAndExpand">
+                                    <ff:SvgCachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
+                                    </ff:SvgCachedImage.GestureRecognizers>
+                                </ff:SvgCachedImage>
+                                <!--<Button Grid.Column="2" Text="Gallery" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>-->
+                                <ff:SvgCachedImage Grid.Column="4" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>
+                                <!--<Label Grid.Column="4" Text="{Binding ItemSource,Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Image Grid.Column="3" Aspect="Fill" Source="{Binding ItemSource,Mode=TwoWay}"/>-->
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="تایید نهایی" Command="{Binding Submit}"/>
+
+            <Button Text="تایید نهایی" Command="{Binding Submit}" TextColor="White" VerticalOptions="EndAndExpand"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

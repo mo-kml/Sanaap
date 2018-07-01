@@ -20,6 +20,14 @@ namespace Sanaap.App.ViewModels
 {
     public class EvlExpertRequestFilesViewModel : BitViewModelBase
     {
+        public ObservableCollection<FileListViewItem> FileTypes { get; set; }
+
+        public BitDelegateCommand<FileListViewItem> TakePhoto { get; set; }
+
+        public BitDelegateCommand<FileListViewItem> PickFromGallery { get; set; }
+
+        public BitDelegateCommand Submit { get; set; }
+
         private EvlExpertRequestDto evlExpertRequestDto;
         private readonly IODataClient _oDataClinet;
         private readonly INavigationService _navigationService;
@@ -38,16 +46,22 @@ namespace Sanaap.App.ViewModels
 
             TakePhoto = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
              {
-                 Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
-
-                 parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                 try
+                 {
+                     Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
+                     parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                 }
+                 catch { }
              });
 
             PickFromGallery = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
             {
-                Stream file = (await media.PickPhotoAsync(new PickMediaOptions { RotateImage = true })).GetStream();
-
-                parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                try
+                {
+                    Stream file = (await media.PickPhotoAsync(new PickMediaOptions { RotateImage = true })).GetStream();
+                    parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                }
+                catch { }
             });
 
             Submit = new BitDelegateCommand(async () =>
@@ -92,14 +106,6 @@ namespace Sanaap.App.ViewModels
                 }
             });
         }
-
-        public ObservableCollection<FileListViewItem> FileTypes { get; set; }
-
-        public BitDelegateCommand<FileListViewItem> TakePhoto { get; set; }
-
-        public BitDelegateCommand<FileListViewItem> PickFromGallery { get; set; }
-
-        public BitDelegateCommand Submit { get; set; }
 
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
