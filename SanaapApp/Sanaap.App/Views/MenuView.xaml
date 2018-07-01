@@ -6,6 +6,18 @@
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              Title="سناپ">
 
+    <MasterDetailPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BorderColor" Value="Green"/>
+                <Setter Property="BorderWidth" Value="0.5"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="Margin" Value="10,10"/>
+            </Style>
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
+
     <MasterDetailPage.Master>
         <ContentPage Title="سناپ">
             <ContentPage.Resources>
@@ -18,9 +30,9 @@
             </ContentPage.Resources>
             <ScrollView>
                 <StackLayout>
-                    <Button VerticalOptions="Start" Margin="20" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
-                    <Button VerticalOptions="Start" Margin="20" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />
-                    <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center" BackgroundColor="#ff9d9d" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
+                    <Button BackgroundColor="Transparent" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
+                    <Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />
+                    <Button BorderColor="Red" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
                 </StackLayout>
             </ScrollView>
         </ContentPage>

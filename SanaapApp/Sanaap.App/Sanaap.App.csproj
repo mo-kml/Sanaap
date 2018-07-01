@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Remove="Images\Accident.svg" />
+    <None Remove="Images\crash.svg" />
     <None Remove="Images\map.svg" />
     <None Remove="Images\SOS.svg" />
   </ItemGroup>

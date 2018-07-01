@@ -41,7 +41,7 @@ namespace Sanaap.App.ViewModels
             _clientAppProfile = clientAppProfile;
             _userDialogs = userDialogs;
 
-            SyncData();
+            //SyncData();
 
             GoToNextPage = new BitDelegateCommand(async () =>
             {
@@ -53,17 +53,17 @@ namespace Sanaap.App.ViewModels
 
                 using (userDialogs.Loading(ConstantStrings.Loading))
                 {
-                evlExpertRequestDto.Description = Description;
-                evlExpertRequestDto.OwnerFullName = OwnerFullName;
-                evlExpertRequestDto.OwnerMobileNumber = OwnerMobileNumber;
-                evlExpertRequestDto.AccidentDate = Helpers.Helpers.ConvertShamsiToMiladi(AccidentDate);
-                evlExpertRequestDto.CompanyId = SelectedCompany.Id;
-                evlExpertRequestDto.VehicleKindId = SelectedVehicleKind.Id;
-                evlExpertRequestDto.InsuranceNumber = InsuranceNumber;
-                evlExpertRequestDto.InsuranceTypeEnum = (InsuranceTypeEnum)Array.IndexOf(InsuranceTypeEnums, SelectedInsuranceTypeEnum);
+                    evlExpertRequestDto.Description = Description;
+                    evlExpertRequestDto.OwnerFullName = OwnerFullName;
+                    evlExpertRequestDto.OwnerMobileNumber = OwnerMobileNumber;
+                    evlExpertRequestDto.AccidentDate = Helpers.Helpers.ConvertShamsiToMiladi(AccidentDate);
+                    evlExpertRequestDto.CompanyId = SelectedCompany.Id;
+                    evlExpertRequestDto.VehicleKindId = SelectedVehicleKind.Id;
+                    evlExpertRequestDto.InsuranceNumber = InsuranceNumber;
+                    evlExpertRequestDto.InsuranceTypeEnum = (InsuranceTypeEnum)Array.IndexOf(InsuranceTypeEnums, SelectedInsuranceTypeEnum);
 
-                var navigationParameters = new NavigationParameters();
-                navigationParameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
+                    var navigationParameters = new NavigationParameters();
+                    navigationParameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
 
                     await navigationService.NavigateAsync("EvlExpertRequestFiles", navigationParameters);
                 }
@@ -81,6 +81,8 @@ namespace Sanaap.App.ViewModels
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
+            SyncData();
+
             parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
 
             if (evlExpertRequestDto.CompanyId != 0)
