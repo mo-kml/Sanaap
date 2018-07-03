@@ -60,7 +60,7 @@
 
                 <Entry Grid.Row="7" Text="{Binding Description}" Placeholder="توضیحات (اختیاری)" Grid.ColumnSpan="2" />
 
-                <Button Grid.Row="8" Command="{Binding GoToNextPage}" Text="ادامه" TextColor="White" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="8" Command="{Binding GoToNextPage}" Text="ادامه" TextColor="White" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

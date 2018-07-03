@@ -7,13 +7,13 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="ارسال تصاویر اختیاری است" HorizontalOptions="Center" TextColor="Black" Margin="10"/>
+            <Label Text="ارسال تصاویر اختیاری است" HorizontalOptions="Center" Margin="10"/>
 
             <ListView ItemsSource="{Binding FileTypes}" RowHeight="80" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid VerticalOptions="Center">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.8*"/>
                                     <ColumnDefinition Width="0.6*"/>
@@ -34,7 +34,7 @@
                                     </ff:SvgCachedImage.GestureRecognizers>
                                 </ff:SvgCachedImage>
                                 <!--<Button Grid.Column="2" Text="Gallery" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>-->
-                                <ff:SvgCachedImage Grid.Column="4" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>
+                                <ff:SvgCachedImage Grid.Column="4" IsVisible="{Binding IsVisible}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>
                                 <!--<Label Grid.Column="4" Text="{Binding ItemSource,Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Image Grid.Column="3" Aspect="Fill" Source="{Binding ItemSource,Mode=TwoWay}"/>-->
                             </Grid>
