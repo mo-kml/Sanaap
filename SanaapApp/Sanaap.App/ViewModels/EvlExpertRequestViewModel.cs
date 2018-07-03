@@ -69,6 +69,8 @@ namespace Sanaap.App.ViewModels
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
+            CurrentPosition = await _geolocator.GetPositionAsync();
+
             if (parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto))
             {
                 CurrentPosition = new Plugin.Geolocator.Abstractions.Position
@@ -81,25 +83,24 @@ namespace Sanaap.App.ViewModels
             {
                 try
                 {
-                    using (_userDialogs.Loading(ConstantStrings.Loading))
+
+                    if (_connectivity.IsConnected == false)
                     {
-                        if (_connectivity.IsConnected == false)
-                        {
-                            await _pageDialogService.DisplayAlertAsync(string.Empty, ErrorMessages.UnknownError, ErrorMessages.Ok);
-                            return;
-                        }
-
-                        if (_geolocator.IsGeolocationAvailable)
-                        {
-                            try
-                            {
-                                CurrentPosition = await _geolocator.GetPositionAsync();
-
-                                //CurrentPosition = null;
-                            }
-                            catch (Exception ex) { throw ex; }
-                        }
+                        await _pageDialogService.DisplayAlertAsync(string.Empty, ErrorMessages.UnknownError, ErrorMessages.Ok);
+                        return;
                     }
+
+                    if (_geolocator.IsGeolocationAvailable)
+                    {
+                        try
+                        {
+                            CurrentPosition = await _geolocator.GetPositionAsync();
+
+                            //CurrentPosition = null;
+                        }
+                        catch (Exception ex) { throw ex; }
+                    }
+
 
                 }
                 catch (Exception ex)

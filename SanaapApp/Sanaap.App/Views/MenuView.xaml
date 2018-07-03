@@ -2,9 +2,7 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MenuView" FlowDirection="RightToLeft"
-             xmlns:view="clr-namespace:Sanaap.App.Views"
-             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             Title="سناپ">
+             Title="">
 
     <MasterDetailPage.Resources>
         <ResourceDictionary>

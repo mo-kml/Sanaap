@@ -9,5 +9,10 @@ namespace Sanaap.App.Views
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

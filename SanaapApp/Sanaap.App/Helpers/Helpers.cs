@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Media.Abstractions;
+using System;
 using System.Globalization;
 using System.IO;
 
@@ -12,6 +13,18 @@ namespace Sanaap.App.Helpers
             using (var memoryStream = new MemoryStream())
             {
                 stream.CopyTo(memoryStream);
+                bytes = memoryStream.ToArray();
+            }
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        public static string ConvertMediaFileToBase64(MediaFile stream)
+        {
+            byte[] bytes;
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.GetStream().CopyTo(memoryStream);
                 bytes = memoryStream.ToArray();
             }
 

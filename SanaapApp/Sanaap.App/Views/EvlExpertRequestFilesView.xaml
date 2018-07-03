@@ -9,6 +9,12 @@
 
             <Label Text="ارسال تصاویر اختیاری است" HorizontalOptions="Center" Margin="10"/>
 
+            <!--<StackLayout Spacing="10" Padding="10">
+                <Button x:Name="takePhoto" Text="Take Photo"/>
+                <Button x:Name="pickPhoto" Text="Pick Photo"/>
+                <Image x:Name="image"/>
+            </StackLayout>-->
+
             <ListView ItemsSource="{Binding FileTypes}" RowHeight="80" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -27,22 +33,28 @@
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>
                                     </ff:SvgCachedImage.GestureRecognizers>
                                 </ff:SvgCachedImage>
-                                <!--<Button Grid.Column="1" Text="دوربین" FontSize="Micro" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding .}"/>-->
+
                                 <ff:SvgCachedImage Grid.Column="3" Source="resource://Sanaap.App.Images.gallery.svg" HorizontalOptions="EndAndExpand">
                                     <ff:SvgCachedImage.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
                                     </ff:SvgCachedImage.GestureRecognizers>
                                 </ff:SvgCachedImage>
-                                <!--<Button Grid.Column="2" Text="Gallery" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>-->
-                                <ff:SvgCachedImage Grid.Column="4" IsVisible="{Binding IsVisible}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>
-                                <!--<Label Grid.Column="4" Text="{Binding ItemSource,Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Image Grid.Column="3" Aspect="Fill" Source="{Binding ItemSource,Mode=TwoWay}"/>-->
+
+                                <Button Grid.Column="2" Text="Gallery" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
+
+                                <!--<ff:SvgCachedImage Grid.Column="4" IsVisible="{Binding IsVisible}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>-->
+                                <Image Grid.Column="4" Aspect="AspectFit" Source="{Binding ItemSource}"/>
+
+                                <!--<Image Grid.Column="4" Aspect="Fill" Source="{Binding ImageSource,Mode=TwoWay}"/>-->
+                                <!--<Label Grid.Column="4" Text="{Binding lbl}"/>-->
+
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            <!--<Image Aspect="Fill" Source="{Binding ImageSource}"/>-->
+            <Label Text="{Binding lbl}"/>
             <Button Text="تایید نهایی" Command="{Binding Submit}" TextColor="White" VerticalOptions="EndAndExpand"/>
 
         </StackLayout>

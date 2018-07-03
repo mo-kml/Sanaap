@@ -2,15 +2,17 @@
 using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Newtonsoft.Json;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
+using Prism.Services;
+using PropertyChanged;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
 using Simple.OData.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -28,6 +30,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Submit { get; set; }
 
+        public ImageSource ImageSource { get; set; }
+
         private EvlExpertRequestDto evlExpertRequestDto;
         private readonly IODataClient _oDataClinet;
         private readonly INavigationService _navigationService;
@@ -36,7 +40,7 @@ namespace Sanaap.App.ViewModels
         private readonly IUserDialogs _userDialogs;
 
         public EvlExpertRequestFilesViewModel(IMedia media, IODataClient oDataClient, INavigationService navigationService
-            , HttpClient httpClient, IClientAppProfile clientAppProfile, IUserDialogs userDialogs)
+            , HttpClient httpClient, IClientAppProfile clientAppProfile, IUserDialogs userDialogs, IPageDialogService pageDialogService)
         {
             _oDataClinet = oDataClient;
             _navigationService = navigationService;
@@ -46,22 +50,85 @@ namespace Sanaap.App.ViewModels
 
             TakePhoto = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
              {
-                 try
+                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                  {
-                     Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
-                     parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                     await pageDialogService.DisplayAlertAsync("", "دسترسی به دوربین وجود ندارد", "باشه");
+                     return;
                  }
-                 catch { }
+
+                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                 {
+                     SaveToAlbum = true,
+                     PhotoSize = PhotoSize.Small,
+                     DefaultCamera = CameraDevice.Rear,
+                     AllowCropping = true,
+                 });
+
+                 //await pageDialogService.DisplayAlertAsync("", file.Path, "باشه");
+
+                 ImageSource = ImageSource.FromStream(() =>
+                 {
+                     var stream = file.GetStream();
+                     file.Dispose();
+                     return stream;
+                 });
+
+                 if (file == null)
+                 {
+                     return;
+                 }
+                 else
+                 {
+                     parameter.ItemSource = ImageSource;
+                     parameter.File = Helpers.Helpers.ConvertMediaFileToBase64(file);
+                 }
+
+
+                 //parameter.IsVisible = true;
+                 //int index = FileTypes.IndexOf(parameter);
+                 //FileTypes.First().IsVisible = true;
+
+                 //await CrossMedia.Current.Initialize();
+
+                 //try
+                 //{
+                 //    Stream file = (await media.TakePhotoAsync(new StoreCameraMediaOptions { PhotoSize = PhotoSize.Small, AllowCropping = true, DefaultCamera = CameraDevice.Rear, RotateImage = true })).GetStream();
+                 //    parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                 //}
+                 //catch { }
              });
 
             PickFromGallery = new BitDelegateCommand<FileListViewItem>(async (parameter) =>
             {
-                try
+                if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    Stream file = (await media.PickPhotoAsync(new PickMediaOptions { RotateImage = true })).GetStream();
-                    parameter.File = Helpers.Helpers.ConvertStreamToBase64(file);
+                    await pageDialogService.DisplayAlertAsync("", "دسترسی به تصاویر وجود ندارد", "باشه");
+                    return;
                 }
-                catch { }
+
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    PhotoSize = PhotoSize.Small,
+                    RotateImage = true,
+                });
+
+                ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+
+                if (file == null)
+                {
+                    return;
+                }
+                else
+                {
+                    parameter.ItemSource = ImageSource;
+                    parameter.File = Helpers.Helpers.ConvertMediaFileToBase64(file);
+                }
+
             });
 
             Submit = new BitDelegateCommand(async () =>
@@ -118,6 +185,8 @@ namespace Sanaap.App.ViewModels
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
+            await CrossMedia.Current.Initialize();
+
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
                 parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
@@ -136,6 +205,7 @@ namespace Sanaap.App.ViewModels
         }
     }
 
+    [AddINotifyPropertyChangedInterface]
     public class FileListViewItem
     {
         public FileTypeDto FileType { get; set; } = new FileTypeDto();
@@ -143,5 +213,7 @@ namespace Sanaap.App.ViewModels
         public ImageSource ItemSource { get; set; }
 
         public string File { get; set; }
+
+        public bool IsVisible { get; set; }
     }
 }
