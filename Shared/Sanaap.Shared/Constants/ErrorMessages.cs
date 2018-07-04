@@ -1,12 +1,5 @@
 ﻿namespace Sanaap.Constants
 {
-    public class ConstantStrings
-    {
-        public static string Loading = "در حال پردازش ...";
-        public static string SendingPictures = "ارسال تصاویر ...";
-        public static string SendingRequest = "ارسال درخواست ...";
-    }
-
     public class ErrorMessages
     {
         public static string UnknownError = "خطای نامشخص";
@@ -14,6 +7,14 @@
         public static string Error = "خطا";
         public static string UnreachableNetwork = "ارتباط با اینترنت برقرار نیست";
         public static string IncorrectDateFormat = "تاریخ وارد شده صحیح نیست";
+    }
+
+    public class ConstantStrings
+    {
+        public static string Loading = "در حال پردازش ...";
+        public static string SendingPictures = "ارسال تصاویر ...";
+        public static string SendingRequest = "ارسال درخواست ...";
+        public static string SoltaniApis = "http://5.144.128.234:8800/";
     }
 
     public class DisplayNames

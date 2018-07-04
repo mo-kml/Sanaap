@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlExpertRequestDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\SoltaniApis.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ExpertDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\FileTypeDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />

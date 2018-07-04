@@ -8,6 +8,8 @@ namespace Sanaap.App.Views
         public EvlExpertRequestWaitView()
         {
             InitializeComponent();
+
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         protected override bool OnBackButtonPressed()

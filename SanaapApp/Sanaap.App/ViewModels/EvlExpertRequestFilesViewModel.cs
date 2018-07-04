@@ -169,7 +169,7 @@ namespace Sanaap.App.ViewModels
 
                     }
 
-                    await navigationService.NavigateAsync("/EvlExpertRequestWait");
+                    await navigationService.NavigateAsync("EvlExpertRequestWait");
                 }
             });
         }

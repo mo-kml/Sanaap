@@ -3,7 +3,9 @@ using Bit.ViewModel.Contracts;
 using Newtonsoft.Json;
 using Prism.Navigation;
 using Sanaap.App.Dto;
+using Sanaap.Constants;
 using Sanaap.Dto;
+using Simple.OData.Client;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -16,7 +18,13 @@ namespace Sanaap.App.ViewModels
     public class EvlExpertRequestWaitViewModel : BitViewModelBase
     {
         private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClientLogin;
+        private readonly HttpClient _httpClientNearestExpert;
         private readonly IClientAppProfile _clientAppProfile;
+        private readonly IODataClient _odataClient;
+
+        private CustomerDto customerDto;
+
         private EvlExpertRequestDto evlExpertRequestDto;
 
         public string FullName { get; set; }
@@ -25,25 +33,31 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand GoToMain { get; set; }
 
-        public EvlExpertRequestWaitViewModel(INavigationService navigationService, HttpClient httpClient, IClientAppProfile clientAppProfile)
+        public bool IsVisible { get; set; } = true;
+
+        public string Message { get; set; }
+
+        public EvlExpertRequestWaitViewModel(INavigationService navigationService, HttpClient httpClient
+            , IClientAppProfile clientAppProfile, IODataClient odataClient)
         {
             _httpClient = httpClient;
             _clientAppProfile = clientAppProfile;
+            _odataClient = odataClient;
 
             GoToMain = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("/Menu/Nav/Main");
-            }, () => FullName == null);
+            });
         }
 
         public async override void OnNavigatedTo(NavigationParameters parameters)
         {
+            Message = "در حال یافتن نزدیکترین کارشناس ارزیاب خسارت ...";
             parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
-
-            ExpertDto expert = await GetExpert();
-
-            FullName = expert.FullName;
-
+            SoltaniFindNearExpert expert = await GetExpert2();
+            Message = "کارشناس ارزیاب خسارت اتومبیل شما یافت شد.";
+            IsVisible = false;
+            FullName = expert.ExpName.Trim();
             base.OnNavigatedTo(parameters);
         }
 
@@ -57,6 +71,39 @@ namespace Sanaap.App.ViewModels
             ExpertDto expert = JsonConvert.DeserializeObject<ExpertDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/EvlExpertRequests/GetExpert", stringContent)).Content.ReadAsStringAsync());
 
             return expert;
+        }
+
+        public async Task<SoltaniFindNearExpert> GetExpert2()
+        {
+            _httpClientLogin.BaseAddress = new Uri(ConstantStrings.SoltaniApis);
+            SoltaniLoginParams soltaniLoginParams = new SoltaniLoginParams();
+            string soltaniLoginParamsJson = JsonConvert.SerializeObject(soltaniLoginParams);
+            var stringContent = new StringContent(soltaniLoginParamsJson, UnicodeEncoding.UTF8, "application/json");
+            SoltaniLogin soltaniLogin = JsonConvert.DeserializeObject<SoltaniLogin>(
+                await (await _httpClientLogin.PostAsync(_httpClientLogin.BaseAddress + "api/Portal/Login", stringContent)).Content.ReadAsStringAsync());
+
+            customerDto = await _odataClient.For<CustomerDto>("Customers").Function("GetCurrentCustomer").ExecuteAsSingleAsync();
+
+            _httpClientNearestExpert.BaseAddress = new Uri(ConstantStrings.SoltaniApis);
+            SoltaniFindNearExpertParams soltaniFindNearExpertParams = new SoltaniFindNearExpertParams();
+            soltaniFindNearExpertParams.UserID = evlExpertRequestDto.CustomerId.ToString();
+            soltaniFindNearExpertParams.RequestID = evlExpertRequestDto.Id.ToString();
+            soltaniFindNearExpertParams.Type = "1";
+            soltaniFindNearExpertParams.MapLat = evlExpertRequestDto.Latitude.ToString();
+            soltaniFindNearExpertParams.MapLng = evlExpertRequestDto.Longitude.ToString();
+            soltaniFindNearExpertParams.LostName = evlExpertRequestDto.OwnerFullName.Trim().Length > 1 ? evlExpertRequestDto.OwnerFullName.Trim() : customerDto.FirstName;
+            soltaniFindNearExpertParams.LostFamily = evlExpertRequestDto.OwnerFullName.Trim().Length > 1 ? "" : customerDto.LastName;
+            soltaniFindNearExpertParams.LostMobile = evlExpertRequestDto.OwnerMobileNumber;
+            soltaniFindNearExpertParams.LostInsuranceID = "0";
+            soltaniFindNearExpertParams.LostInsuranceNO = evlExpertRequestDto.InsuranceNumber;
+            soltaniFindNearExpertParams.LostCarID = "12608";
+            soltaniFindNearExpertParams.LostCarType = "415";
+            string soltaniFindNearExpertParamsJson = JsonConvert.SerializeObject(soltaniFindNearExpertParams);
+            var stringContentNearExpert = new StringContent(soltaniFindNearExpertParamsJson, UnicodeEncoding.UTF8, "application/json");
+            SoltaniFindNearExpert soltaniFindNearExpert = JsonConvert.DeserializeObject<SoltaniFindNearExpert>(
+                await (await _httpClientNearestExpert.PostAsync(_httpClientNearestExpert.BaseAddress + "api/Portal/FindNearExpert", stringContentNearExpert)).Content.ReadAsStringAsync());
+
+            return soltaniFindNearExpert;
         }
     }
 }

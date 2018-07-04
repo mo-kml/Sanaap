@@ -31,7 +31,7 @@ namespace Sanaap.Api.Controllers
         [HttpPost]
         public virtual async Task<ExpertDto> GetExpert(EvlExpertRequestDto evlExpertRequestDto, CancellationToken cancellationToken)
         {
-            await Task.Delay(5000);
+            await Task.Delay(9000);
 
             return new ExpertDto
             {

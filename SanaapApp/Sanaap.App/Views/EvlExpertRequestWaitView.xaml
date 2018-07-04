@@ -6,19 +6,19 @@
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="Sanaap.App.Views.EvlExpertRequestWaitView">
+             x:Class="Sanaap.App.Views.EvlExpertRequestWaitView" BackgroundColor="Transparent">
 
     <StackLayout>
-        <Label Text="در حال یافتن نزدیکترین کارشناس ارزیاب خسارت" VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10"/>
+        <Label Text="{Binding Message}" HorizontalOptions="Center" Margin="10"/>
         <forms:AnimationView x:Name="animationView" Animation="motorcycle.json" 
             Loop="True" AutoPlay="True"
             Margin="0,0,0,100" WidthRequest="10" HeightRequest="300"
-            IsVisible="True" />
-        <Button Text="انصراف" Command="{Binding GoToMain}" VerticalOptions="EndAndExpand"/>
+            IsVisible="{Binding IsVisible}" BackgroundColor="Transparent" />
+        <Button Text="انصراف" IsVisible="{Binding IsVisible}" Command="{Binding GoToMain}" VerticalOptions="EndAndExpand"/>
 
+        <Label Text="{Binding FullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" Margin="0,90,0,0"/>
 
         <!--<Label Text="نام کارشناس"/>
-        <Label Text="{Binding FullName}"/>
         <Button VerticalOptions="EndAndExpand" Text="انصراف" Command="{Binding GoToMain}"/>-->
 
         <ff:SvgCachedImage Source="{Binding Image}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100"/>
