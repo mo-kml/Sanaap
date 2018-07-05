@@ -11,10 +11,12 @@
 
     public class ConstantStrings
     {
+        public static string SoltaniApis = "http://5.144.128.234:8800/";
         public static string Loading = "در حال پردازش ...";
         public static string SendingPictures = "ارسال تصاویر ...";
         public static string SendingRequest = "ارسال درخواست ...";
-        public static string SoltaniApis = "http://5.144.128.234:8800/";
+        public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما یافت شد";
+        public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
     }
 
     public class DisplayNames

@@ -32,6 +32,6 @@ namespace Sanaap.App.Dto
 
         public string InsuranceNumber { get; set; }
 
-        public EnumSosRequestStatus SosRequestStatus { get; set; }
+        public EnumRequestStatus RequestStatus { get; set; }
     }
 }

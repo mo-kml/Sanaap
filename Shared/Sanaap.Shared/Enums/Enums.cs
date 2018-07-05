@@ -14,7 +14,7 @@ namespace Sanaap.Enums
             Badane
         }
 
-        public enum EnumSosRequestStatus
+        public enum EnumRequestStatus
         {
             [Display(Name = DisplayNames.SabteAvalie)]
             SabteAvalie = 1,

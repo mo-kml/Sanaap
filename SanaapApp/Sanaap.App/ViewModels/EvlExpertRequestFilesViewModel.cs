@@ -83,7 +83,6 @@ namespace Sanaap.App.ViewModels
                      parameter.File = Helpers.Helpers.ConvertMediaFileToBase64(file);
                  }
 
-
                  //parameter.IsVisible = true;
                  //int index = FileTypes.IndexOf(parameter);
                  //FileTypes.First().IsVisible = true;
@@ -133,43 +132,49 @@ namespace Sanaap.App.ViewModels
 
             Submit = new BitDelegateCommand(async () =>
             {
-                using (userDialogs.Loading(ConstantStrings.SendingRequest))
+
+                bool confirmed = await pageDialogService.DisplayAlertAsync("مطمئن هستید؟", "درخواست ارسال شود؟", "بله", "خیر");
+
+                if (confirmed)
                 {
-                    _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
-                    if (evlExpertRequestDto.Id == Guid.Empty)
+                    using (userDialogs.Loading(ConstantStrings.SendingRequest))
                     {
-                        string evlExpertJson = JsonConvert.SerializeObject(evlExpertRequestDto);
-                        var stringContent = new StringContent(evlExpertJson, UnicodeEncoding.UTF8, "application/json");
-
-                        evlExpertRequestDto = JsonConvert.DeserializeObject<EvlExpertRequestDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/EvlExpertRequests/SaveEvlExpert", stringContent)).Content.ReadAsStringAsync());
-
-                        //evlExpertRequestDto = (await _oDataClinet.For<EvlExpertRequestDto>("EvlExpertRequests")
-                        //.Set(evlExpertRequestDto)
-                        //.InsertEntryAsync());
-                    }
-                }
-
-                using (userDialogs.Loading(ConstantStrings.SendingPictures))
-                {
-                    List<RequestFilesDto> requestFiles = new List<RequestFilesDto>();
-
-                    foreach (var item in FileTypes.Where(f => f.File != null))
-                    {
-                        RequestFilesDto requestFile = new RequestFilesDto
+                        _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
+                        if (evlExpertRequestDto.Id == Guid.Empty)
                         {
-                            EvlExpertRequestId = evlExpertRequestDto.Id,
-                            File = item.File,
-                            FileTypeId = item.FileType.Id,
-                        };
+                            string evlExpertJson = JsonConvert.SerializeObject(evlExpertRequestDto);
+                            var stringContent = new StringContent(evlExpertJson, UnicodeEncoding.UTF8, "application/json");
 
-                        var fileJson = JsonConvert.SerializeObject(requestFile);
-                        var stringContent = new StringContent(fileJson, UnicodeEncoding.UTF8, "application/json");
+                            evlExpertRequestDto = JsonConvert.DeserializeObject<EvlExpertRequestDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/EvlExpertRequests/SaveEvlExpert", stringContent)).Content.ReadAsStringAsync());
 
-                        requestFile = JsonConvert.DeserializeObject<RequestFilesDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/RequestFiles/SaveFile", stringContent)).Content.ReadAsStringAsync());
-
+                            //evlExpertRequestDto = (await _oDataClinet.For<EvlExpertRequestDto>("EvlExpertRequests")
+                            //.Set(evlExpertRequestDto)
+                            //.InsertEntryAsync());
+                        }
                     }
 
-                    await navigationService.NavigateAsync("EvlExpertRequestWait");
+                    using (userDialogs.Loading(ConstantStrings.SendingPictures))
+                    {
+                        List<RequestFilesDto> requestFiles = new List<RequestFilesDto>();
+
+                        foreach (var item in FileTypes.Where(f => f.File != null))
+                        {
+                            RequestFilesDto requestFile = new RequestFilesDto
+                            {
+                                EvlExpertRequestId = evlExpertRequestDto.Id,
+                                File = item.File,
+                                FileTypeId = item.FileType.Id,
+                            };
+
+                            var fileJson = JsonConvert.SerializeObject(requestFile);
+                            var stringContent = new StringContent(fileJson, UnicodeEncoding.UTF8, "application/json");
+
+                            requestFile = JsonConvert.DeserializeObject<RequestFilesDto>(await (await _httpClient.PostAsync(_httpClient.BaseAddress + "api/RequestFiles/SaveFile", stringContent)).Content.ReadAsStringAsync());
+
+                        }
+
+                        await navigationService.NavigateAsync("EvlExpertRequestWait");
+                    }
                 }
             });
         }

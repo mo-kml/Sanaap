@@ -55,7 +55,7 @@ namespace Sanaap.App.ViewModels
                     {
                         SosRequestDto sosReq = new SosRequestDto
                         {
-                            SosRequestStatus = EnumSosRequestStatus.SabteAvalie,
+                            SosRequestStatus = EnumRequestStatus.SabteAvalie,
                             Latitude = CurrentPosition.Latitude,
                             Longitude = CurrentPosition.Longitude,
                             Description = Description

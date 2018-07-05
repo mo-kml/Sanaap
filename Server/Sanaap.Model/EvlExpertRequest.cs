@@ -38,6 +38,6 @@ namespace Sanaap.Model
 
         public string InsuranceNumber { get; set; }
 
-        public EnumSosRequestStatus SosRequestStatus { get; set; }
+        public EnumRequestStatus SosRequestStatus { get; set; }
     }
 }

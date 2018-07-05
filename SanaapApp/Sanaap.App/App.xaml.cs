@@ -44,15 +44,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            //if (isLoggedIn)
-            //    await NavigationService.NavigateAsync("Menu/Nav/Main");
-            //else
-            //    await NavigationService.NavigateAsync("/Register");
+            if (isLoggedIn)
+                await NavigationService.NavigateAsync("Menu/Nav/Main");
+            else
+                await NavigationService.NavigateAsync("/Register");
 
             //await NavigationService.NavigateAsync("Menu/Nav/Main");
             //await NavigationService.NavigateAsync("Menu/Nav/EvlExpertRequestWait");
             //await NavigationService.NavigateAsync("Menu/Nav/EvlExpertRequestFiles");
-            await NavigationService.NavigateAsync("EvlExpertRequestWait");
+            //await NavigationService.NavigateAsync("EvlExpertRequestWait");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -81,8 +81,8 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                //HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
-                HostUri = new Uri("http://192.168.10.112:53148/"),       // ip Iranian Pooshesh
+                HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
+                //HostUri = new Uri("http://192.168.10.112:53148/"),       // ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
                 // OAuthRedirectUri = new Uri("Test://oauth2redirect"),
