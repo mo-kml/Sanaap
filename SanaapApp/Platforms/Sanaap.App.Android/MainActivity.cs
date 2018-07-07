@@ -23,7 +23,7 @@ using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace Sanaap.App.Droid
 {
-    [Activity(Label = "Sanaap", Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
+    [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
