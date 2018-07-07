@@ -6,22 +6,24 @@
              x:Class="Sanaap.App.Views.EvlExpertRequestWaitView" BackgroundColor="Transparent">
 
     <StackLayout>
+
         <ff:SvgCachedImage IsVisible="{Binding IsVisibleAfter}" Source="resource://Sanaap.App.Images.checked.svg" 
                            HorizontalOptions="Center" WidthRequest="60" Margin="0,10,0,0"/>
         <Label Text="{Binding Message}" HorizontalOptions="Center" Margin="10"/>
+
         <forms:AnimationView x:Name="animationView" Animation="motorcycle.json"
             Loop="True" AutoPlay="True"
             Margin="0,0,0,100" WidthRequest="10" HeightRequest="300"
             IsVisible="{Binding IsVisibleBefore}" BackgroundColor="Transparent" />
 
-        <Image Source="{Binding ImageSource}"/>
+        <Image Source="{Binding ImageSource}" HeightRequest="100"/>
         <Label Text="{Binding FullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" Margin="0,90,0,0" IsVisible="{Binding IsVisibleAfter}"/>
         <Label FontFamily="IRYekan.ttf#yekan" Text="{Binding Mobile, StringFormat='موبایل کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
         <Button Text="        تماس با کارشناس        " FontSize="Small" BackgroundColor="Transparent" HorizontalOptions="Center" BorderWidth="1.5" Command="{Binding Call}" IsVisible="{Binding IsVisibleAfter}"/>
 
         <Button Text="انصراف" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleBefore}" Command="{Binding GoToMain}" VerticalOptions="End"/>
 
-        <Button Text="بازگشت به صفحه نخست" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleAfter}" VerticalOptions="EndAndExpand" Command="{Binding GoToMain}"/>
+        <Button Text="بازگشت به صفحه نخست" Margin="0,50,0,0" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleAfter}" VerticalOptions="EndAndExpand" Command="{Binding GoToMain}"/>
 
         <!--<Label Text="نام کارشناس"/>
         <Button VerticalOptions="EndAndExpand" Text="انصراف" Command="{Binding GoToMain}"/>-->
