@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\motorcycle.json" />
+    <AndroidAsset Include="Assets\IRYekan.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

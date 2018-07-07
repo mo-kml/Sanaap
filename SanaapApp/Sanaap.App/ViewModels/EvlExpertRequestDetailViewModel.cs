@@ -10,6 +10,7 @@ using Sanaap.Service.Implementations;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using static Sanaap.Enums.Enums;
 
 namespace Sanaap.App.ViewModels
@@ -40,8 +41,6 @@ namespace Sanaap.App.ViewModels
             _httpClient = httpClient;
             _clientAppProfile = clientAppProfile;
             _userDialogs = userDialogs;
-
-            //SyncData();
 
             GoToNextPage = new BitDelegateCommand(async () =>
             {
@@ -75,13 +74,13 @@ namespace Sanaap.App.ViewModels
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
             parameters.Add("EvlExpertRequestDto", evlExpertRequestDto);
-
             base.OnNavigatedFrom(parameters);
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public async override void OnNavigatedTo(NavigationParameters parameters)
         {
-            SyncData();
+            if (Companies == null || VehicleKinds == null)
+                await SyncData();
 
             parameters.TryGetValue("EvlExpertRequestDto", out evlExpertRequestDto);
 
@@ -94,26 +93,26 @@ namespace Sanaap.App.ViewModels
                 SelectedCompany = Companies.FirstOrDefault(c => c.Id == evlExpertRequestDto.CompanyId);
                 SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == evlExpertRequestDto.VehicleKindId);
                 InsuranceNumber = evlExpertRequestDto.InsuranceNumber;
-                SelectedInsuranceTypeEnum = evlExpertRequestDto.InsuranceTypeEnum.ToString();
+                SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault(i => i == EnumHelper<InsuranceTypeEnum>.GetDisplayValue(evlExpertRequestDto.InsuranceTypeEnum));
             }
 
             base.OnNavigatedTo(parameters);
         }
 
-        public async void SyncData()
+        public async Task SyncData()
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
                 _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
 
                 Companies = JsonConvert.DeserializeObject<CompanyDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/Companies/GetAll"));
-                SelectedCompany = Companies.First();
+                SelectedCompany = Companies.FirstOrDefault();
 
                 VehicleKinds = JsonConvert.DeserializeObject<VehicleKindDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/VehicleKinds/GetAll"));
-                SelectedVehicleKind = VehicleKinds.First();
+                SelectedVehicleKind = VehicleKinds.FirstOrDefault();
 
                 InsuranceTypeEnums = EnumHelper<InsuranceTypeEnum>.GetDisplayValues(insuranceType).ToArray();
-                SelectedInsuranceTypeEnum = InsuranceTypeEnums.First();
+                SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault();
             }
         }
     }

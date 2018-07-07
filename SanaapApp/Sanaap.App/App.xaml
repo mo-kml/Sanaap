@@ -15,13 +15,16 @@
             <Setter Property="Margin" Value="15, 2, 15, 2" />
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
         </Style>
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="15, 2, 15, 0" />
+            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
             <!--<Setter Property="HorizontalTextAlignment" Value="End" />-->
         </Style>
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="Medium" />
+            <!--<Setter Property="FontSize" Value="Medium" />-->
+            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
         </Style>
         <Style TargetType="ActivityIndicator">
             <Setter Property="Color" Value="Green" />

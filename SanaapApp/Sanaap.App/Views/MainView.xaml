@@ -43,8 +43,8 @@
                     <TapGestureRecognizer Command="{Binding EvlExpertRequest}"/>
                 </StackLayout.GestureRecognizers>
                 <ff:SvgCachedImage Grid.Row="0" Source="resource://Sanaap.App.Images.crash.svg" VerticalOptions="Center"/>
-                <Label Text="درخواست کارشناس سیار اتومبیل" VerticalOptions="Center"/>
-                <Label Text="ارزیابی خسارت / صدور بیمه بدنه" VerticalOptions="Center" />
+                <Label x:Name="lbl1" Text="درخواست کارشناس سیار اتومبیل" VerticalOptions="Center"/>
+                <Label FontFamily="IRYekan.ttf#yekan" Text="ارزیابی خسارت / صدور بیمه بدنه" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
 

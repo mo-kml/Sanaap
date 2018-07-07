@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Api.Controllers
 {
@@ -25,8 +26,26 @@ namespace Sanaap.Api.Controllers
         {
             evlExpertRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
-            return DtoEntityMapper.FromEntityToDto(await EvlExpertRequestRepository.AddAsync(DtoEntityMapper.FromDtoToEntity(evlExpertRequest), cancellationToken));
+            return DtoEntityMapper.FromEntityToDto(await EvlExpertRequestRepository.AddAsync(
+                DtoEntityMapper.FromDtoToEntity(evlExpertRequest), cancellationToken));
         }
+
+        [HttpPost, Route("UpdateRequestStatus")]
+        public virtual async void UpdateRequestStatus(Guid evlExpertRequestId, EnumRequestStatus enumRequestStatus, CancellationToken cancellationToken)
+        {
+            EvlExpertRequest req = EvlExpertRequestRepository.GetById(evlExpertRequestId);
+            req.SosRequestStatus = enumRequestStatus;
+            await EvlExpertRequestRepository.UpdateAsync(req, cancellationToken);
+        }
+
+        //[Action]
+        //[AllowAnonymous]
+        //public virtual async Task UpdateRequestStatus(Guid evlExpertRequestId, EnumRequestStatus enumRequestStatus, CancellationToken cancellationToken)
+        //{
+        //    EvlExpertRequest req = EvlExpertRequestRepository.GetById(evlExpertRequestId);
+        //    req.SosRequestStatus = enumRequestStatus;
+        //    await EvlExpertRequestRepository.UpdateAsync(req, cancellationToken);
+        //}
 
         [HttpPost]
         public virtual async Task<ExpertDto> GetExpert(EvlExpertRequestDto evlExpertRequestDto, CancellationToken cancellationToken)

@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static Sanaap.Enums.Enums;
 
 namespace Sanaap.App.ViewModels
 {
@@ -21,6 +22,7 @@ namespace Sanaap.App.ViewModels
         private readonly HttpClient _httpClient;
         private readonly HttpClient _httpClientLogin;
         private readonly HttpClient _httpClientNearestExpert;
+        private readonly ODataClient _oDataClient;
         private readonly IClientAppProfile _clientAppProfile;
         private readonly IODataClient _odataClient;
 
@@ -43,7 +45,7 @@ namespace Sanaap.App.ViewModels
         public string Message { get; set; }
 
         public EvlExpertRequestWaitViewModel(INavigationService navigationService, HttpClient httpClient
-            , IClientAppProfile clientAppProfile, IODataClient odataClient, IDeviceService deviceService)
+            , IClientAppProfile clientAppProfile, IODataClient odataClient, IDeviceService deviceService, IODataClient oDataClient)
         {
             _httpClient = httpClient;
             _httpClientLogin = httpClient;
@@ -72,8 +74,10 @@ namespace Sanaap.App.ViewModels
             IsVisibleAfter = true;
             FullName = expert.ExpName.Trim();
             Mobile = expert.ExpMobile.Trim();
-            byte[] imageAsBytes = Encoding.ASCII.GetBytes(expert.ExpPhoto);
+            byte[] imageAsBytes = Convert.FromBase64String(expert.ExpPhoto.Split(',')[1]);
             ImageSource = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
+
+            UpdateRequestStatus(evlExpertRequestDto.Id, EnumRequestStatus.TaeenKarshenas);
 
             base.OnNavigatedTo(parameters);
         }
@@ -124,5 +128,29 @@ namespace Sanaap.App.ViewModels
 
             return soltaniFindNearExpert;
         }
+
+        public async void UpdateRequestStatus(Guid evlExpertRequestId, EnumRequestStatus enumRequestStatus)
+        {
+            //await _oDataClient.For<EvlExpertRequestDto>("Customers")
+            //                    .Action("RegisterCustomer")
+            //                    .Set(new
+            //                    {
+            //                        customer = Customer
+            //                    })
+            //                    .ExecuteAsync();
+
+            _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
+
+            string evlExpertJson = JsonConvert.SerializeObject(new EvlExpertRequestUpdateStatusArgs { EvlExpertRequestId = evlExpertRequestDto.Id, EnumRequestStatus = EnumRequestStatus.TaeenKarshenas });
+            var stringContent = new StringContent(evlExpertJson, UnicodeEncoding.UTF8, "application/json");
+
+            await _httpClient.PostAsync(_httpClient.BaseAddress + "api/EvlExpertRequests/UpdateRequestStatus", stringContent);
+        }
+    }
+    public class EvlExpertRequestUpdateStatusArgs
+    {
+        public Guid EvlExpertRequestId { get; set; }
+
+        public EnumRequestStatus EnumRequestStatus { get; set; }
     }
 }
