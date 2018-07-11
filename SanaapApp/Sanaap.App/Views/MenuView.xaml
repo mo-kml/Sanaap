@@ -2,6 +2,7 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.MenuView" FlowDirection="RightToLeft"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              Title="">
 
     <MasterDetailPage.Resources>
@@ -28,8 +29,11 @@
             </ContentPage.Resources>
             <ScrollView>
                 <StackLayout>
+                    <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,10,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.Logo.svg"  />
+                    <Label FontSize="Medium" Text="سناپ" HorizontalOptions="Center" />
+                    <Label FontSize="Micro" Text="سامانه نرم افزاری ایرانیان پوشش" HorizontalOptions="Center"/>
                     <Button BackgroundColor="Transparent" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
-                    <Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />
+                    <!--<Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />-->
                     <Button BorderColor="Red" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
                 </StackLayout>
             </ScrollView>

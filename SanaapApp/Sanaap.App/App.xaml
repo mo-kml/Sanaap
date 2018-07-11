@@ -13,7 +13,7 @@
         <Style TargetType="Button">
             <Setter Property="BorderRadius" Value="10" />
             <Setter Property="Margin" Value="15, 2, 15, 2" />
-            <Setter Property="FontSize" Value="Medium" />
+            <!--<Setter Property="FontSize" Value="Medium" />-->
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
         </Style>

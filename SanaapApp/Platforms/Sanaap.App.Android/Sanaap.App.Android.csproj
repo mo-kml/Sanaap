@@ -43,8 +43,8 @@
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidSupportedAbis />
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AotAssemblies>true</AotAssemblies>
-    <EnableLLVM>true</EnableLLVM>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>true</BundleAssemblies>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <EnableProguard>false</EnableProguard>

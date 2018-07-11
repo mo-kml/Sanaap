@@ -21,10 +21,10 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.8*"/>
                                     <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.5*"/>
                                     <ColumnDefinition Width="0.1*"/>
-                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.5*"/>
                                     <ColumnDefinition Width="0.6*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Text="{Binding FileType.Name,StringFormat='{0} :'}" VerticalOptions="Center"/>
