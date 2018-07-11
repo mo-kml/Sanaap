@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Images\Accident.svg" />
     <None Remove="Images\crash.svg" />
-    <None Remove="Images\evlreq.svg" />
     <None Remove="Images\Logo.svg" />
     <None Remove="Images\map.svg" />
     <None Remove="Images\SOS.svg" />
