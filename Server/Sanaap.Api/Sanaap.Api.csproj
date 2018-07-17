@@ -11,19 +11,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.6" />
-    <PackageReference Include="Bit.IdentityServer" Version="1.0.6" />
-    <PackageReference Include="Bit.OData" Version="1.0.6" />
-    <PackageReference Include="Bit.OwinCore" Version="1.0.6" />
-    <PackageReference Include="Bit.OwinCore.AspNetCore2Upgrade" Version="1.0.6" />
-    <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.2" />
-    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.2" PrivateAssets="All" />
+    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.8" />
+    <PackageReference Include="Bit.IdentityServer" Version="1.0.8" />
+    <PackageReference Include="Bit.OData" Version="1.0.8" />
+    <PackageReference Include="Bit.OwinCore" Version="1.0.8" />
+    <PackageReference Include="Bit.OwinCore.AspNetCore21Upgrade" Version="1.0.8" />
+    <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.9" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.1" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Sanaap.Model\Sanaap.Model.csproj" />
     <ProjectReference Include="..\Sanaap.Service\Sanaap.Service.csproj" />
-    <ProjectReference Include="..\Sannap.Data\Sannap.Data.csproj" />
+    <ProjectReference Include="..\Sanaap.Data\Sanaap.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

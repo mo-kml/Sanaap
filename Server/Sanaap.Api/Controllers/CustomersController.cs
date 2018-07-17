@@ -2,10 +2,10 @@
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
+using Sanaap.Data.Contracts;
 using Sanaap.Dto;
 using Sanaap.Model;
 using Sanaap.Service.Contracts;
-using Sannap.Data.Contracts;
 using System;
 using System.Data.Entity;
 using System.Linq;

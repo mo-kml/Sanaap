@@ -11,25 +11,30 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlExpertRequestDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\SoltaniApis.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\ExpertDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\FileTypeDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestFileTypeDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestExpertDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\RequestFilesDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\EvlRequestStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\InsuranceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapOperatorAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\EnumHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultDateTimeUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\EnumUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapOperatorAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
   </ItemGroup>
 </Project>

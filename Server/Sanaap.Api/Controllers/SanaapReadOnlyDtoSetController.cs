@@ -1,10 +1,9 @@
-﻿using System;
-using System.IdentityModel;
+﻿using Bit.Model.Contracts;
+using Bit.Owin.Exceptions;
+using Microsoft.AspNet.OData;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.OData;
-using Bit.Model.Contracts;
-using Bit.Owin.Exceptions;
 
 namespace Sanaap.Api.Controllers
 {

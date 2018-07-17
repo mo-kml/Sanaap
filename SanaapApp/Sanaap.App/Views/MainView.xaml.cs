@@ -7,8 +7,8 @@ namespace Sanaap.App.Views
     public partial class MainView : ContentPage
     {
         int count = 0;
-        private readonly IUtility _utility;
-        public MainView(IUtility utility)
+        private readonly IAppUtilities _utility;
+        public MainView(IAppUtilities utility)
         {
             _utility = utility;
             InitializeComponent();

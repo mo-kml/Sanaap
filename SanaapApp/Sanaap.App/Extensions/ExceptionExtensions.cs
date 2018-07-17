@@ -20,7 +20,7 @@ namespace System
         {
             if (exp is WebRequestException webReq && webReq.Message == "KnownError")
             {
-                return JsonConvert.DeserializeObject<ResponseErrorRoot>(webReq.Response).error.message;
+                return JsonConvert.DeserializeObject<ResponseErrorRoot>(webReq.Response)?.error?.message ?? exp.ToString();
             }
 
             return exp.Message;

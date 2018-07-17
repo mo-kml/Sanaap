@@ -26,10 +26,5 @@
             <!--<Setter Property="FontSize" Value="Medium" />-->
             <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
         </Style>
-        <Style TargetType="ActivityIndicator">
-            <Setter Property="Color" Value="Green" />
-            <Setter Property="IsRunning" Value="{Binding IsBusy}" />
-            <Setter Property="IsVisible" Value="{Binding IsBusy}" />
-        </Style>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

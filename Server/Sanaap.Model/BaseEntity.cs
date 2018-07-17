@@ -12,6 +12,7 @@ namespace Sanaap.Model
         public virtual Guid Id { get; set; }
 
         public virtual DateTimeOffset CreatedOn { set; get; }
+
         public virtual DateTimeOffset ModifiedOn { set; get; }
     }
 }

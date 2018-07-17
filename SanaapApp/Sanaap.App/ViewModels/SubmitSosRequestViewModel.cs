@@ -1,14 +1,11 @@
 ﻿using Bit.ViewModel;
-using Microsoft.AppCenter.Crashes;
-using Plugin.Connectivity.Abstractions;
 using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
 using Simple.OData.Client;
-using System;
+using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
-using static Sanaap.Enums.Enums;
 
 namespace Sanaap.App.ViewModels
 {
@@ -23,104 +20,63 @@ namespace Sanaap.App.ViewModels
         public bool IsPositionSelected { get; set; }
 
         public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
+
         private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
         private readonly IPageDialogService _pageDialogService;
-        private readonly IConnectivity _connectivity;
 
         public SubmitSosRequestViewModel(INavigationService navigationService,
             IGeolocator geolocator,
             IODataClient odataClient,
-            IPageDialogService pageDialogService,
-            IConnectivity connectivity)
+            IPageDialogService pageDialogService)
         {
             _geolocator = geolocator;
             _odataClient = odataClient;
             _pageDialogService = pageDialogService;
-            _connectivity = connectivity;
 
             SubmitSosRequest = new BitDelegateCommand(async () =>
             {
-                try
+                if (await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر"))
                 {
-                    if (connectivity.IsConnected == false)
+                    SosRequestDto sosReq = new SosRequestDto
                     {
-                        await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
-                        return;
-                    }
+                        SosRequestStatus = Enums.EvlRequestStatus.SabteAvalie,
+                        Latitude = CurrentPosition.Latitude,
+                        Longitude = CurrentPosition.Longitude,
+                        Description = Description
+                    };
 
-                    bool confirmed = await pageDialogService.DisplayAlertAsync("", "مطمئن هستید؟", "بله", "خیر");
+                    await odataClient.For<SosRequestDto>("SosRequests")
+                       .Action("SubmitSosRequest")
+                       .Set(new { sosReq })
+                       .ExecuteAsync();
 
-                    if (confirmed)
-                    {
-                        SosRequestDto sosReq = new SosRequestDto
-                        {
-                            SosRequestStatus = EnumRequestStatus.SabteAvalie,
-                            Latitude = CurrentPosition.Latitude,
-                            Longitude = CurrentPosition.Longitude,
-                            Description = Description
-                        };
+                    await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد ، با شما تماس میگیریم", "ممنون");
 
-                        await odataClient.For<SosRequestDto>("SosRequests")
-                           .Action("SubmitSosRequest")
-                           .Set(new { sosReq })
-                           .ExecuteAsync();
-
-                        await pageDialogService.DisplayAlertAsync("", "درخواست شما با موفقیت ارسال شد ، با شما تماس میگیریم", "ممنون");
-
-                        await navigationService.NavigateAsync("/Menu/Nav/Main");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Crashes.TrackError(ex);
-                    await pageDialogService.DisplayAlertAsync("", "خطای نامشخص", "باشه");
+                    await navigationService.NavigateAsync("/Menu/Nav/Main");
                 }
             });
 
-            UpdateCurrentLocation = new BitDelegateCommand<Map>((map) =>
-              {
-                  Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
+            UpdateCurrentLocation = new BitDelegateCommand<Map>(async (map) =>
+            {
+                Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
 
-                  CurrentPosition = new Plugin.Geolocator.Abstractions.Position { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
+                CurrentPosition = new Plugin.Geolocator.Abstractions.Position { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
 
-                  IsPositionSelected = true;
-              });
+                IsPositionSelected = true;
+            });
         }
 
-        public async override void OnNavigatedTo(NavigationParameters parameters)
+        public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
             IsPositionSelected = false;
 
-            try
+            if (_geolocator.IsGeolocationAvailable)
             {
-                if (_connectivity.IsConnected == false)
-                {
-                    await _pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
-                    return;
-                }
-
-                //SosRequestStatus = (await _odataClient.For<SosRequestStatusDto>("SosRequestStatuses")
-                //.OrderBy(it => it.Code)
-                //.FindEntriesAsync())
-                //.ToArray().FirstOrDefault();
-
-                if (_geolocator.IsGeolocationAvailable)
-                {
-                    try
-                    {
-                        CurrentPosition = await _geolocator.GetPositionAsync();
-                    }
-                    catch { }
-                }
-
-                base.OnNavigatedTo(parameters);
+                CurrentPosition = await _geolocator.GetPositionAsync();
             }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                await _pageDialogService.DisplayAlertAsync("", "خطای نامشخص", "باشه");
-            }
+
+            await base.OnNavigatedToAsync(parameters);
         }
     }
 }

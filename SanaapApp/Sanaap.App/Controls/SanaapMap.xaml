@@ -8,6 +8,7 @@
              x:Class="Sanaap.App.Controls.SanaapMap">
     <ContentView.Content>
         <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
+
             <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
                    MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}">
                 <maps:Map.Behaviors>
@@ -18,6 +19,7 @@
             </maps:Map>
 
             <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" Source="resource://Sanaap.App.Images.map.svg"/>
+
         </AbsoluteLayout>
     </ContentView.Content>
 </ContentView>

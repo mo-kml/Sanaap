@@ -4,7 +4,6 @@
              x:Class="Sanaap.App.Views.MySosRequestsView" Title="">
 
     <StackLayout>
-        <ActivityIndicator/>
         <ListView ItemsSource="{Binding MySosRequests}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -1,4 +1,4 @@
-﻿namespace Sanaap.Data.Contracts
+﻿namespace Sanaap.Service.Contracts
 {
     public interface IHashUtils
     {

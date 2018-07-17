@@ -3,7 +3,7 @@ using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.Constants;
+using Sanaap.Enums;
 using System;
 
 namespace Sanaap.App.ViewModels
@@ -16,43 +16,56 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand SosRequest { get; set; }
 
-        public BitDelegateCommand EvlExpertRequest { get; set; }
+        public BitDelegateCommand GotoEvlRequestMapSales { get; set; }
+        public BitDelegateCommand GotoEvlRequestMapBadane { get; set; }
+        public BitDelegateCommand GotoDetail { get; set; }
 
         public BitDelegateCommand SubmitSosRequestByCall { get; set; }
-
-        public bool IsBusy { get; set; } = false;
 
         public MainViewModel(INavigationService navigationService,
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs)
         {
-            using (userDialogs.Loading(ConstantStrings.Loading))
-            {
-                GoToMySosRequests = new BitDelegateCommand(async () =>
+            GoToMySosRequests = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("MySosRequests");
             });
 
-                EvlExpertRequest = new BitDelegateCommand(async () =>
+            GotoEvlRequestMapSales = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
                 {
-                    await navigationService.NavigateAsync("EvlExpertRequest");
+                    { "InsuranceType", InsuranceType.Sales }
                 });
+            });
 
-                Logout = new BitDelegateCommand(async () =>
+            GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
                 {
-                    await securityService.Logout();
-                    await navigationService.NavigateAsync("/Login");
+                    { "InsuranceType", InsuranceType.Badane }
                 });
+            });
 
-                SosRequest = new BitDelegateCommand(async () =>
-                {
-                    await navigationService.NavigateAsync("SosRequest");
-                });
+            GotoDetail = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("EvlRequestDetail");
+            });
 
-                SubmitSosRequestByCall = new BitDelegateCommand(() =>
-                {
-                    deviceService.OpenUri(new Uri("tel://0211401"));
-                });
-            }
+            Logout = new BitDelegateCommand(async () =>
+            {
+                await securityService.Logout();
+                await navigationService.NavigateAsync("/Login");
+            });
+
+            SosRequest = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("SosRequest");
+            });
+
+            SubmitSosRequestByCall = new BitDelegateCommand(async () =>
+            {
+                deviceService.OpenUri(new Uri("tel://0211401"));
+            });
         }
     }
 }

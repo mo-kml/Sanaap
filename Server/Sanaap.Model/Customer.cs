@@ -24,6 +24,8 @@ namespace Sanaap.Model
         [StringLength(11, MinimumLength = 11)]
         public virtual string Mobile { get; set; }
 
-        public virtual IList<SosRequest> SosRequests { set; get; }
+        public virtual List<SosRequest> SosRequests { set; get; }
+
+        public virtual List<EvlRequest> EvlRequests { get; set; }
     }
 }

@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.6" />
-    <PackageReference Include="Bit.Model" Version="1.0.6" />
-    <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.2" />
-    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.2" PrivateAssets="All" />
+    <PackageReference Include="Bit.Data.EntityFramework" Version="1.0.8" />
+    <PackageReference Include="Bit.Model" Version="1.0.8" />
+    <PackageReference Include="BitCodeAnalyzer" Version="1.2.6.9" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />

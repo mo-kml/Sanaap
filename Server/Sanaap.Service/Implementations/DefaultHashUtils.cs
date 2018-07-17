@@ -1,7 +1,7 @@
-﻿using Sanaap.Data.Contracts;
+﻿using Sanaap.Service.Contracts;
 using System;
 
-namespace Sanaap.Data.Implementations
+namespace Sanaap.Service.Implementations
 {
     public class DefaultHashUtils : IHashUtils
     {

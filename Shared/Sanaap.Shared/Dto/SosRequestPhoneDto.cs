@@ -1,6 +1,6 @@
 ﻿using Bit.Model.Contracts;
+using Sanaap.Enums;
 using System;
-using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Dto
 {
@@ -14,7 +14,7 @@ namespace Sanaap.Dto
 
         public string Description { get; set; }
 
-        public EnumRequestStatus SosRequestStatus { get; set; }
+        public EvlRequestStatus SosRequestStatus { get; set; }
 
         public virtual DateTimeOffset ModifiedOn { set; get; }
     }

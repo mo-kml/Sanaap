@@ -1,25 +1,24 @@
 ﻿using Bit.Model.Contracts;
+using Bit.OData.ODataControllers;
 using Sanaap.App.Dto;
 using Sanaap.Model;
-using Sannap.Data.Contracts;
+using Sanaap.Data.Contracts;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Sanaap.Api.Controllers
 {
-    [RoutePrefix("Companies")]
-    public class CompaniesController : ApiController
+    public class CompaniesController : DtoController<CompanyDto>
     {
-        public virtual ISanaapRepository<Company> CompanyRepository { get; set; }
+        public virtual ISanaapRepository<Company> CompaniesRepository { get; set; }
 
         public virtual IDtoEntityMapper<CompanyDto, Company> DtoEntityMapper { get; set; }
 
-        [HttpGet, Route("GetAll")]
+        [Get]
         public virtual async Task<IQueryable<CompanyDto>> GetAll(CancellationToken cancellationToken)
         {
-            return DtoEntityMapper.FromEntityQueryToDtoQuery(await CompanyRepository.GetAllAsync(cancellationToken));
+            return DtoEntityMapper.FromEntityQueryToDtoQuery(await CompaniesRepository.GetAllAsync(cancellationToken));
         }
     }
 }

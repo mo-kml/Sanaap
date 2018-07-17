@@ -11,8 +11,7 @@
                 <Entry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
                 <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
                 <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
-                <Button Text="ثبت نام" Command="{Binding StartRegisteration}" />
-                <ActivityIndicator/>
+                <Button Text="ثبت نام" Command="{Binding Register}" />
             </StackLayout>
 
             <StackLayout VerticalOptions="EndAndExpand">

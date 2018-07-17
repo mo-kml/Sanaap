@@ -3,7 +3,7 @@ using Bit.Owin.Exceptions;
 using IdentityServer3.Core.Models;
 using Sanaap.Data.Contracts;
 using Sanaap.Model;
-using Sannap.Data.Contracts;
+using Sanaap.Service.Contracts;
 using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;

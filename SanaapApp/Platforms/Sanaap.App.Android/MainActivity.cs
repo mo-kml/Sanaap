@@ -4,8 +4,8 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
+using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
-using FFImageLoading.Forms.Droid;
 using FFImageLoading.Svg.Forms;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -15,6 +15,7 @@ using Plugin.Permissions;
 using Prism.Ioc;
 using Sanaap.App.Droid.Helpers;
 using Sanaap.App.Helpers;
+using Sanaap.App.ViewModels;
 using System.Threading.Tasks;
 using Xamarin;
 using Xamarin.Forms;
@@ -30,9 +31,12 @@ namespace Sanaap.App.Droid
         {
             AppCenter.Start("7f0039a1-0052-4787-93af-36c5e1617617", typeof(Analytics), typeof(Crashes));
 
-            CachedImageRenderer.Init(enableFastRenderer: false);
+            BitExceptionHandler.Current = new SanaapExceptionHandler();
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: false);
             SvgCachedImage.Init();
-            UserDialogs.Init(() => (Activity)Forms.Context);
+            UserDialogs.Init(() => this);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -67,7 +71,7 @@ namespace Sanaap.App.Droid
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IUtility, Utility>();
+            containerRegistry.Register<IAppUtilities, AndroidAppUtilities>();
             base.RegisterTypes(containerRegistry);
         }
     }
@@ -75,17 +79,13 @@ namespace Sanaap.App.Droid
     [Activity(Theme = "@style/MainTheme.Splash", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
-        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
-        {
-            base.OnCreate(savedInstanceState, persistentState);
-        }
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(() => { SimulateStartup(); });
-            startupWork.Start();
+
+            Task.Factory.StartNew(StartMainActivity);
         }
-        async void SimulateStartup()
+        void StartMainActivity()
         {
             StartActivity(new Intent(ApplicationContext, typeof(MainActivity)));
         }

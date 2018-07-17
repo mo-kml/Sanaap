@@ -9,16 +9,13 @@ using Bit.OData.ActionFilters;
 using Bit.OData.Contracts;
 using Bit.Owin.Implementations;
 using Bit.OwinCore;
-using Bit.OwinCore.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Sanaap.Api.Implementations;
 using Sanaap.Api.Implementations.Security;
-using Sanaap.Data.Contracts;
+using Sanaap.Data;
 using Sanaap.Data.Implementations;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
-using Sannap.Data;
-using Sannap.Data.Implementations;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
@@ -45,9 +42,9 @@ namespace Sanaap.Api
         }
     }
 
-    public class SanaapAppModulesProvider : IAppModulesProvider, IAspNetCoreAppModule
+    public class SanaapAppModulesProvider : IAppModulesProvider, IAppModule
     {
-        public virtual void ConfigureDependencies(IServiceProvider serviceProvider, IServiceCollection services, IDependencyManager dependencyManager)
+        public virtual void ConfigureDependencies(IServiceCollection services, IDependencyManager dependencyManager)
         {
             AssemblyContainer.Current.Init();
 
@@ -122,6 +119,11 @@ namespace Sanaap.Api
             dependencyManager.Register<ISanaapAppTranslateService, SanaapAppTranslateService>(lifeCycle: DependencyLifeCycle.SingleInstance);
 
             dependencyManager.Register<IHashUtils, DefaultHashUtils>(lifeCycle: DependencyLifeCycle.SingleInstance);
+
+            services.AddHttpClient("SoltaniHttpClient", httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("http://5.144.128.234:8800/");
+            });
         }
 
         public IEnumerable<IAppModule> GetAppModules()

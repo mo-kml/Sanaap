@@ -3,12 +3,12 @@ using Bit.Data.Contracts;
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Sanaap.Dto;
+using Sanaap.Enums;
 using Sanaap.Model;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static Sanaap.Enums.Enums;
 
 namespace Sanaap.Api.Controllers
 {
@@ -19,11 +19,11 @@ namespace Sanaap.Api.Controllers
             public SosRequestDto sosReq { get; set; }
         }
 
-        public IUserInformationProvider UserInformationProvider { get; set; }
+        public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
-        public IDtoEntityMapper<SosRequestDto, SosRequest> Mapper { get; set; }
+        public virtual IDtoEntityMapper<SosRequestDto, SosRequest> Mapper { get; set; }
 
-        public IRepository<SosRequest> Repository { get; set; }
+        public virtual IRepository<SosRequest> Repository { get; set; }
 
         [Action]
         public virtual async Task SubmitSosRequest(SubmitSosRequestArgs args, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ namespace Sanaap.Api.Controllers
             SosRequest req = new SosRequest
             {
                 CustomerId = customerId,
-                SosRequestStatus = EnumRequestStatus.SabteAvalie,
+                SosRequestStatus = EvlRequestStatus.SabteAvalie,
                 Latitude = args.sosReq.Latitude,
                 Longitude = args.sosReq.Longitude,
                 Description = args.sosReq.Description

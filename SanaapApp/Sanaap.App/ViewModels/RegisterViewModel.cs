@@ -1,8 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
-using Microsoft.AppCenter.Crashes;
-using Plugin.Connectivity.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Constants;
@@ -10,7 +8,7 @@ using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using Simple.OData.Client;
 using System;
-using System.Collections.Generic;
+using System.Threading;
 
 namespace Sanaap.App.ViewModels
 {
@@ -18,77 +16,59 @@ namespace Sanaap.App.ViewModels
     {
         public virtual BitDelegateCommand Login { get; set; }
 
-        public virtual BitDelegateCommand StartRegisteration { get; set; }
+        public virtual BitDelegateCommand Register { get; set; }
 
         public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
 
+        private CancellationTokenSource registerCancellationTokenSource;
+
         public RegisterViewModel(INavigationService navigationService,
-            IODataClient oDataClient, ICustomerValidator customerValidator,
-            IPageDialogService pageDialogService, ISecurityService securityService,
-            ISanaapAppTranslateService translateService, IConnectivity connectivity, IUserDialogs userDialogs)
+            IODataClient oDataClient,
+            ICustomerValidator customerValidator,
+            IPageDialogService pageDialogService,
+            ISecurityService securityService,
+            ISanaapAppTranslateService translateService,
+            IUserDialogs userDialogs)
         {
             Login = new BitDelegateCommand(async () =>
             {
-                try
-                {
-                    await navigationService.NavigateAsync("Login");
-                }
-                catch (Exception ex)
-                { }
+                await navigationService.NavigateAsync("Login");
             });
 
-            StartRegisteration = new BitDelegateCommand(async () =>
+            Register = new BitDelegateCommand(async () =>
             {
-                using (userDialogs.Loading(ConstantStrings.Loading))
+                registerCancellationTokenSource?.Cancel();
+                registerCancellationTokenSource = new CancellationTokenSource();
+
+                using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
                 {
+                    if (!customerValidator.IsValid(Customer, out string errorMessage))
+                    {
+                        await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
+                        return;
+                    }
+
                     try
                     {
-                        if (connectivity.IsConnected == false)
-                        {
-                            await pageDialogService.DisplayAlertAsync("", "ارتباط با اینترنت برقرار نیست", "باشه");
-                            return;
-                        }
-
-                        if (!customerValidator.IsValid(Customer, out string errorMessage))
-                        {
-                            await pageDialogService.DisplayAlertAsync("", translateService.Translate(errorMessage), "باشه");
-                            return;
-                        }
-
-                        try
-                        {
-                            await oDataClient.For<CustomerDto>("Customers")
-                                .Action("RegisterCustomer")
-                                .Set(new
-                                {
-                                    customer = Customer
-                                })
-                                .ExecuteAsync();
-
-                            await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret");
-
-                            await navigationService.NavigateAsync("/Menu/Nav/Main");
-                        }
-                        catch (Exception ex)
-                        {
-                            Crashes.TrackError(ex, new Dictionary<string, string>
-                        {
-                            { "Message", ex.GetMessage() },
-                            { "ViewModel", nameof(LoginViewModel) }
-                        });
-
-                            if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                        await oDataClient.For<CustomerDto>("Customers")
+                            .Action("RegisterCustomer")
+                            .Set(new
                             {
-                                await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
-                            }
-                            else
-                            {
-                                await pageDialogService.DisplayAlertAsync("خطای نامشخص", errorMessage, "باشه");
-                            }
-                        }
+                                customer = Customer
+                            })
+                            .ExecuteAsync(registerCancellationTokenSource.Token);
+
+                        await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret", cancellationToken: registerCancellationTokenSource.Token);
+
+                        await navigationService.NavigateAsync("/Menu/Nav/Main");
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                            await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
+                        else
+                            throw;
+                    }
                 }
             });
         }

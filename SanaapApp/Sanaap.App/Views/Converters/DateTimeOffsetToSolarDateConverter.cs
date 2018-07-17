@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Bit;
+using Prism.Ioc;
+using Sanaap.Service.Contracts;
+using System;
 using System.Globalization;
 using Xamarin.Forms;
 
@@ -6,12 +9,13 @@ namespace Sanaap.App.Views.Converters
 {
     public class DateTimeOffsetToSolarDateConverter : IValueConverter
     {
-        private readonly PersianCalendar persianCalendar = new PersianCalendar();
+        private static readonly Lazy<IDateTimeUtils> DateTimeUtils = new Lazy<IDateTimeUtils>(((BitApplication)App.Current).Container.Resolve<IDateTimeUtils>);
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is DateTimeOffset dateTimeOffset)
-                return Helpers.Helpers.ConvertDateToShamsi(dateTimeOffset);
+                return DateTimeUtils.Value.ConvertDateToShamsi(dateTimeOffset);
+
             return string.Empty;
         }
 
@@ -19,6 +23,5 @@ namespace Sanaap.App.Views.Converters
         {
             throw new NotImplementedException();
         }
-
     }
 }

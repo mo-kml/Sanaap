@@ -1,0 +1,102 @@
+﻿using Bit.Core.Contracts;
+using Bit.Model.Contracts;
+using Bit.OData.ODataControllers;
+using Bit.Owin.Exceptions;
+using Newtonsoft.Json;
+using Sanaap.App.Dto;
+using Sanaap.Data.Contracts;
+using Sanaap.Enums;
+using Sanaap.Model;
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
+
+namespace Sanaap.Api.Controllers
+{
+    public class EvlRequestsController : DtoController<EvlRequestDto>
+    {
+        public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
+
+        public class UpdateRequestStatusArgs
+        {
+            public Guid evlRequestId { get; set; }
+
+            public EvlRequestStatus status { get; set; }
+        }
+
+        [Action]
+        public virtual async Task UpdateRequestStatus(UpdateRequestStatusArgs args, CancellationToken cancellationToken)
+        {
+            EvlRequest evlReq = await EvlRequestsRepository.GetByIdAsync(cancellationToken, args.evlRequestId);
+            evlReq.Status = args.status;
+            await EvlRequestsRepository.UpdateAsync(evlReq, cancellationToken);
+        }
+    }
+
+    [RoutePrefix("evl-requests")]
+    public class EvlRequestsApiController : ApiController
+    {
+        public virtual ISanaapRepository<EvlRequestFile> EvlRequestFilesRepository { get; set; }
+
+        public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
+
+        public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> Mapper { get; set; }
+
+        public virtual IUserInformationProvider UserInformationProvider { get; set; }
+
+        [HttpPost, Route("submit-evl-request")]
+        public virtual async Task<EvlRequestDto> SubmitEvlRequest(CancellationToken cancellationToken)
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+
+            MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+
+            await Request.Content.ReadAsMultipartAsync(provider, cancellationToken);
+
+            bool isFirstPart = true;
+            EvlRequestDto evlRequestDto = null;
+
+            foreach (HttpContent requestPart in provider.Contents)
+            {
+                if (isFirstPart == true)
+                {
+                    evlRequestDto = JsonConvert.DeserializeObject<EvlRequestDto>(await requestPart.ReadAsStringAsync());
+
+                    evlRequestDto.RequestStatus = EvlRequestStatus.SabteAvalie;
+
+                    EvlRequest evlRequest = Mapper.FromDtoToEntity(evlRequestDto);
+                    evlRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+
+                    evlRequestDto = Mapper.FromEntityToDto(await EvlRequestsRepository.AddAsync(evlRequest, cancellationToken));
+
+                    isFirstPart = false;
+
+                    continue;
+                }
+                else
+                {
+                    byte[] data = await requestPart.ReadAsByteArrayAsync();
+
+                    string filename = Path.GetFileName(requestPart.Headers.ContentDisposition.FileName.Trim('\"'));
+
+                    await EvlRequestFilesRepository.AddAsync(new EvlRequestFile
+                    {
+                        EvlRequestId = evlRequestDto.Id,
+                        FileTypeId = Guid.Parse(filename),
+                        File = data
+                    }, cancellationToken);
+                }
+            }
+
+            if (evlRequestDto == null)
+                throw new BadRequestException($"{nameof(EvlRequestDto)} is null");
+
+            return evlRequestDto;
+        }
+    }
+}

@@ -16,6 +16,6 @@ namespace Sanaap.Dto
 
         public virtual string Password { get; set; }
 
-        public virtual IList<SosRequestPhoneDto> SosRequestPhoneDtos { set; get; }
+        public virtual List<SosRequestPhoneDto> SosRequestPhoneDtos { set; get; }
     }
 }

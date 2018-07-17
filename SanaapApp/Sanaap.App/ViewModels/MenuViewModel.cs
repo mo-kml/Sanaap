@@ -10,8 +10,7 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Logout { get; set; }
 
-        public MenuViewModel(INavigationService navigationService,
-            ISecurityService securityService)
+        public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
