@@ -36,31 +36,31 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <!--<RowDefinition Height="*"/>-->
                     <!--8-->
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Text="نوع بیمه نامه :" />
-                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}" />
+                <!--<Label Grid.Row="0" Grid.Column="0" Text="نوع بیمه نامه :" />
+                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding InsuranceTypeEnums}" SelectedItem="{Binding SelectedInsuranceTypeEnum}" />-->
 
-                <Label Grid.Row="1" Grid.Column="0" Text="شرکت بیمه گر :"  />
-                <Picker Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding Companies}"  SelectedItem="{Binding SelectedCompany}" ItemDisplayBinding="{Binding Name}" />
+                <Label Grid.Row="0" Grid.Column="0" Text="شرکت بیمه گر :"  />
+                <Picker Grid.Row="0" Grid.Column="1"  ItemsSource="{Binding Companies}"  SelectedItem="{Binding SelectedCompany}" ItemDisplayBinding="{Binding Name}" />
 
-                <Label Grid.Row="2" Grid.Column="0" Text="نوع خودرو :"  />
-                <Picker Grid.Row="2" Grid.Column="1" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="نوع خودرو :"  />
+                <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VehicleKinds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleKind}"/>
 
-                <Label Grid.Row="3" Grid.Column="0" Text="تاریخ وقوع حادثه :"  />
-                <syncmaskededit:SfMaskedEdit FontFamily="IRYekan.ttf#yekan" Grid.Row="3" Grid.Column="1" x:Name="maskedEdit" Value="{Binding AccidentDate}" Mask="0000/00/00"/>
+                <Label Grid.Row="2" Grid.Column="0" Text="تاریخ وقوع حادثه :"  />
+                <syncmaskededit:SfMaskedEdit Keyboard="Numeric" FontFamily="IRYekan.ttf#yekan" Grid.Row="2" Grid.Column="1" x:Name="maskedEdit" Value="{Binding AccidentDate}" Mask="0000/00/00"/>
 
-                <Entry Grid.Row="4" Text="{Binding InsuranceNumber}" Placeholder="شماره بیمه نامه (اختیاری)" Grid.ColumnSpan="2" />
+                <Entry Grid.Row="3" Text="{Binding InsuranceNumber}" Placeholder="شماره بیمه نامه (اختیاری)" Grid.ColumnSpan="2" />
 
-                <Entry Grid.Row="5" Text="{Binding OwnerFullName}" Placeholder="نام و نام خانوادگی مالک (اختیاری)" Grid.ColumnSpan="2" />
+                <Entry Grid.Row="4" Text="{Binding OwnerFullName}" Placeholder="نام و نام خانوادگی مالک (اختیاری)" Grid.ColumnSpan="2" />
 
-                <Entry Grid.Row="6" Text="{Binding OwnerMobileNumber}" Placeholder="شماره تماس مالک (اختیاری)" Grid.ColumnSpan="2" />
+                <Entry Grid.Row="5" Text="{Binding OwnerMobileNumber}" Placeholder="شماره تماس مالک (اختیاری)" Grid.ColumnSpan="2" />
 
-                <Entry Grid.Row="7" Text="{Binding Description}" Placeholder="توضیحات (اختیاری)" Grid.ColumnSpan="2" />
+                <Entry Grid.Row="6" Text="{Binding Description}" Placeholder="توضیحات (اختیاری)" Grid.ColumnSpan="2" />
 
-                <Button Grid.Row="8" Command="{Binding GoToNextPage}" Text="ادامه" TextColor="White" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"/>
+                <Button Grid.Row="7" Command="{Binding GoToNextPage}" Text="ادامه" TextColor="White" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

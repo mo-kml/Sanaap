@@ -21,17 +21,18 @@ namespace Sanaap.App.ViewModels
         private readonly IPageDialogService _pageDialogService;
         private readonly IODataClient _odataClient;
         private readonly IDateTimeUtils _dateTimeUtils;
-        private EvlRequestDto _evlRequestDto;
+        private readonly INavigationService _navigationService;
+        private EvlRequestDto evlRequestDto;
         private InsuranceType insuranceType;
 
         public CompanyDto[] Companies { get; set; }
         public CompanyDto SelectedCompany { get; set; }
         public VehicleKindDto[] VehicleKinds { get; set; }
         public VehicleKindDto SelectedVehicleKind { get; set; }
-        public string[] InsuranceTypeEnums { get; set; }
+        //public string[] InsuranceTypeEnums { get; set; }
         public string AccidentDate { get; set; }
         public string InsuranceNumber { get; set; }
-        public string SelectedInsuranceTypeEnum { get; set; }
+        //public string SelectedInsuranceTypeEnum { get; set; }
         public string OwnerFullName { get; set; }
         public string OwnerMobileNumber { get; set; }
         public string Description { get; set; }
@@ -48,6 +49,7 @@ namespace Sanaap.App.ViewModels
             _pageDialogService = pageDialogService;
             _odataClient = oDataClient;
             _dateTimeUtils = dateTimeUtils;
+            _navigationService = navigationService;
 
             AccidentDate = _dateTimeUtils.ConvertDateToShamsi(dateTimeProvider.GetCurrentUtcDateTime());
 
@@ -59,18 +61,19 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
-                _evlRequestDto.Description = Description;
-                _evlRequestDto.OwnerFullName = OwnerFullName;
-                _evlRequestDto.OwnerMobileNumber = OwnerMobileNumber;
-                _evlRequestDto.AccidentDate = _dateTimeUtils.ConvertShamsiToMiladi(AccidentDate);
-                _evlRequestDto.CompanyId = SelectedCompany.Id;
-                _evlRequestDto.VehicleKindId = SelectedVehicleKind.Id;
-                _evlRequestDto.InsuranceNumber = InsuranceNumber;
-                _evlRequestDto.InsuranceTypeEnum = insuranceType;
+                evlRequestDto.Description = Description;
+                evlRequestDto.OwnerFullName = OwnerFullName;
+                evlRequestDto.OwnerMobileNumber = OwnerMobileNumber;
+                evlRequestDto.AccidentDate = _dateTimeUtils.ConvertShamsiToMiladi(AccidentDate);
+                evlRequestDto.CompanyId = SelectedCompany.Id;
+                evlRequestDto.VehicleKindId = SelectedVehicleKind.Id;
+                evlRequestDto.InsuranceNumber = InsuranceNumber;
+
+                //evlRequestDto.InsuranceTypeEnum = insuranceType;
 
                 await navigationService.NavigateAsync("EvlRequestFiles", new NavigationParameters
                 {
-                    { "EvlRequestDto", _evlRequestDto }
+                    { "EvlRequestDto", evlRequestDto }
                 });
 
             }, () => SelectedCompany != null && SelectedVehicleKind != null);
@@ -79,39 +82,75 @@ namespace Sanaap.App.ViewModels
             GoToNextPage.ObservesProperty(() => SelectedVehicleKind);
         }
 
+        public override Task OnNavigatedFromAsync(NavigationParameters parameters)
+        {
+            if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
+            {
+                _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+                // ????????
+            }
+            evlRequestDto.CompanyId = SelectedCompany.Id;
+            evlRequestDto.VehicleKindId = SelectedVehicleKind.Id;
+            evlRequestDto.Description = Description;
+            evlRequestDto.OwnerFullName = OwnerFullName;
+            evlRequestDto.OwnerMobileNumber = OwnerMobileNumber;
+            evlRequestDto.AccidentDate = _dateTimeUtils.ConvertShamsiToMiladi(AccidentDate);
+            evlRequestDto.InsuranceNumber = InsuranceNumber;
+            parameters.Add("EvlRequestDto", evlRequestDto);
+            return base.OnNavigatedFromAsync(parameters);
+        }
+
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            if (parameters.GetNavigationMode() == NavigationMode.New)
+            evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto"); // Get Parameter
+
+            if (evlRequestDto.CompanyId == 0)
             {
                 using (_userDialogs.Loading(ConstantStrings.Loading))
-                {
+                    await SetDefaultValues();
+            }
+            else
+            {
+                if (Companies == null)
                     Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).ToArray();
-
-                    SelectedCompany = Companies.FirstOrDefault();
-
+                SelectedCompany = Companies.FirstOrDefault(c => c.Id == evlRequestDto.CompanyId);
+                if (VehicleKinds == null)
                     VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
-
-                    SelectedVehicleKind = VehicleKinds.FirstOrDefault();
-
-                    InsuranceTypeEnums = EnumHelper<InsuranceType>.GetDisplayValues(insuranceType).ToArray();
-
-                    SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault();
-
-                    _evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
-
-                    Description = _evlRequestDto.Description;
-                    OwnerFullName = _evlRequestDto.OwnerFullName;
-                    OwnerMobileNumber = _evlRequestDto.OwnerMobileNumber;
-                    AccidentDate = _dateTimeUtils.ConvertDateToShamsi(_evlRequestDto.AccidentDate);
-                    SelectedCompany = Companies.FirstOrDefault(c => c.Id == _evlRequestDto.CompanyId);
-                    SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == _evlRequestDto.VehicleKindId);
-                    InsuranceNumber = _evlRequestDto.InsuranceNumber;
-
-                    SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault(i => i == EnumHelper<InsuranceType>.GetDisplayValue(_evlRequestDto.InsuranceTypeEnum));
-                }
+                SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == evlRequestDto.VehicleKindId);
+                AccidentDate = _dateTimeUtils.ConvertDateToShamsi(evlRequestDto.AccidentDate);
+                InsuranceNumber = evlRequestDto.InsuranceNumber;
+                OwnerFullName = evlRequestDto.OwnerFullName;
+                OwnerMobileNumber = evlRequestDto.OwnerMobileNumber;
+                Description = evlRequestDto.Description;
             }
 
+            //if (parameters.GetNavigationMode() == NavigationMode.Back)
+            //{
+            //    Description = evlRequestDto.Description;
+            //    OwnerFullName = evlRequestDto.OwnerFullName;
+            //    OwnerMobileNumber = evlRequestDto.OwnerMobileNumber;
+            //    AccidentDate = _dateTimeUtils.ConvertDateToShamsi(evlRequestDto.AccidentDate);
+            //    SelectedCompany = Companies.FirstOrDefault(c => c.Id == evlRequestDto.CompanyId);
+            //    SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == evlRequestDto.VehicleKindId);
+            //    InsuranceNumber = evlRequestDto.InsuranceNumber;
+            //    //SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault(i => i == EnumHelper<InsuranceType>.GetDisplayValue(evlRequestDto.InsuranceTypeEnum));
+            //}
+
             await base.OnNavigatedToAsync(parameters);
+        }
+
+        public async Task SetDefaultValues()
+        {
+            Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).ToArray();
+            SelectedCompany = Companies.FirstOrDefault();
+
+            VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
+            SelectedVehicleKind = VehicleKinds.FirstOrDefault();
+
+            AccidentDate = _dateTimeUtils.ConvertDateToShamsi(DateTimeOffset.UtcNow);
+
+            //InsuranceTypeEnums = EnumHelper<InsuranceType>.GetDisplayValues(insuranceType).ToArray();
+            //SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault();
         }
     }
 }

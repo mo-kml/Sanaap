@@ -16,7 +16,7 @@ namespace Sanaap.App.ViewModels
         private EvlRequestDto evlRequestDto;
         private InsuranceType insuranceType;
 
-        public BitDelegateCommand<Map> UpdateCurrentLocation { get; set; }
+        public BitDelegateCommand<Map> UpdateLocationAndGotoDetail { get; set; }
 
         public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
 
@@ -33,7 +33,7 @@ namespace Sanaap.App.ViewModels
             _pageDialogService = pageDialogService;
             _userDialogs = userDialogs;
 
-            UpdateCurrentLocation = new BitDelegateCommand<Map>(async (map) =>
+            UpdateLocationAndGotoDetail = new BitDelegateCommand<Map>(async (map) =>
             {
                 Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
 
@@ -53,26 +53,27 @@ namespace Sanaap.App.ViewModels
 
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            insuranceType = parameters.GetValue<InsuranceType>("InsuranceType");
-
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            if (parameters.GetNavigationMode() == NavigationMode.New)
             {
-                if (parameters.GetNavigationMode() == NavigationMode.Back)
-                {
-                    evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
+                insuranceType = parameters.GetValue<InsuranceType>("InsuranceType"); // Get Parameter
 
+                if (_geolocator.IsGeolocationAvailable)
+                {
+                    CurrentPosition = await _geolocator.GetPositionAsync();
+                }
+            }
+
+            if (parameters.GetNavigationMode() == NavigationMode.Back)
+            {
+                evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
+
+                using (_userDialogs.Loading(ConstantStrings.Loading))
+                {
                     CurrentPosition = new Plugin.Geolocator.Abstractions.Position
                     {
                         Latitude = evlRequestDto.Latitude,
                         Longitude = evlRequestDto.Longitude
                     };
-                }
-                else
-                {
-                    if (_geolocator.IsGeolocationAvailable)
-                    {
-                        CurrentPosition = await _geolocator.GetPositionAsync();
-                    }
                 }
 
                 await base.OnNavigatedToAsync(parameters);

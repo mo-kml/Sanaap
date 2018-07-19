@@ -8,17 +8,23 @@
              x:Class="Sanaap.App.Views.EvlRequestMapView">
 
     <StackLayout Spacing="0" Padding="0">
-        <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
-            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0"
-                   MyLocationEnabled="True" VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-            <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" Source="resource://Sanaap.App.Images.map.svg">
+        <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
+            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                      InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="True" WidthRequest="10"
+                      VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
+
+            <ff:SvgCachedImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3" 
+                               Source="resource://Sanaap.App.Images.pin.svg" WidthRequest="250">
+
                 <ff:SvgCachedImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding UpdateCurrentLocation}"
-                                      CommandParameter="{x:Reference map} "/>
+                    <TapGestureRecognizer Command="{Binding UpdateLocationAndGotoDetail}" CommandParameter="{x:Reference map} "/>
                 </ff:SvgCachedImage.GestureRecognizers>
+
             </ff:SvgCachedImage>
+
         </AbsoluteLayout>
+
     </StackLayout>
 
 </ContentPage>

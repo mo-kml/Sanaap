@@ -25,7 +25,7 @@
     <None Remove="Images\fender-bender.svg" />
     <None Remove="Images\lifter.svg" />
     <None Remove="Images\Logo.svg" />
-    <None Remove="Images\map.svg" />
+    <None Remove="Images\pin.svg" />
     <None Remove="Images\rear-end-collision.svg" />
     <None Remove="Images\SOS.svg" />
   </ItemGroup>

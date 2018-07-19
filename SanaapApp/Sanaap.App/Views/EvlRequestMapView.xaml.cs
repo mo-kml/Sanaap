@@ -8,6 +8,7 @@ namespace Sanaap.App.Views
         public EvlRequestMapView()
         {
             InitializeComponent();
+            map.UiSettings.MyLocationButtonEnabled = true;
         }
     }
 }

@@ -96,14 +96,20 @@ namespace Sanaap.App.ViewModels
 
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
+            evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto"); // Get Parameter
+
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
                 await CrossMedia.Current.Initialize();
 
-                evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
-
                 await base.OnNavigatedToAsync(parameters);
             }
+        }
+
+        public override Task OnNavigatedFromAsync(NavigationParameters parameters)
+        {
+            parameters.Add("EvlRequestDto", evlRequestDto);
+            return base.OnNavigatedFromAsync(parameters);
         }
     }
 }
