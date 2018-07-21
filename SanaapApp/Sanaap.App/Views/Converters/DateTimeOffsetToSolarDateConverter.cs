@@ -14,7 +14,7 @@ namespace Sanaap.App.Views.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is DateTimeOffset dateTimeOffset)
-                return DateTimeUtils.Value.ConvertDateToShamsi(dateTimeOffset);
+                return DateTimeUtils.Value.ConvertMiladiToShamsi(dateTimeOffset);
 
             return string.Empty;
         }

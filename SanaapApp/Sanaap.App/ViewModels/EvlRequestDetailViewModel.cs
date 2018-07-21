@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels
 {
-    public class EvlRequestDetailViewModel : BitViewModelBase
+    public class EvlRequestDetailViewModel : BitViewModelBase, IConfirmNavigationAsync
     {
         private readonly IUserDialogs _userDialogs;
         private readonly IPageDialogService _pageDialogService;
@@ -51,7 +51,7 @@ namespace Sanaap.App.ViewModels
             _dateTimeUtils = dateTimeUtils;
             _navigationService = navigationService;
 
-            AccidentDate = _dateTimeUtils.ConvertDateToShamsi(dateTimeProvider.GetCurrentUtcDateTime());
+            AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(dateTimeProvider.GetCurrentUtcDateTime());
 
             GoToNextPage = new BitDelegateCommand(async () =>
             {
@@ -87,8 +87,9 @@ namespace Sanaap.App.ViewModels
             if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
             {
                 _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
-                // ????????
+                return null;
             }
+
             evlRequestDto.CompanyId = SelectedCompany.Id;
             evlRequestDto.VehicleKindId = SelectedVehicleKind.Id;
             evlRequestDto.Description = Description;
@@ -117,7 +118,7 @@ namespace Sanaap.App.ViewModels
                 if (VehicleKinds == null)
                     VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
                 SelectedVehicleKind = VehicleKinds.FirstOrDefault(v => v.Id == evlRequestDto.VehicleKindId);
-                AccidentDate = _dateTimeUtils.ConvertDateToShamsi(evlRequestDto.AccidentDate);
+                AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(evlRequestDto.AccidentDate);
                 InsuranceNumber = evlRequestDto.InsuranceNumber;
                 OwnerFullName = evlRequestDto.OwnerFullName;
                 OwnerMobileNumber = evlRequestDto.OwnerMobileNumber;
@@ -147,10 +148,20 @@ namespace Sanaap.App.ViewModels
             VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
             SelectedVehicleKind = VehicleKinds.FirstOrDefault();
 
-            AccidentDate = _dateTimeUtils.ConvertDateToShamsi(DateTimeOffset.UtcNow);
+            AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(DateTimeOffset.UtcNow);
 
             //InsuranceTypeEnums = EnumHelper<InsuranceType>.GetDisplayValues(insuranceType).ToArray();
             //SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault();
+        }
+
+        public async Task<bool> CanNavigateAsync(NavigationParameters parameters)
+        {
+            if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
+            {
+                await _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+                return false;
+            }
+            else return true;
         }
     }
 }

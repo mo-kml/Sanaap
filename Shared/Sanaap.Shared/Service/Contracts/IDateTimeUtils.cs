@@ -4,7 +4,7 @@ namespace Sanaap.Service.Contracts
 {
     public interface IDateTimeUtils
     {
-        string ConvertDateToShamsi(DateTimeOffset dateTimeOffset);
+        string ConvertMiladiToShamsi(DateTimeOffset dateTimeOffset);
 
         DateTimeOffset ConvertShamsiToMiladi(string shamsiDate);
 
