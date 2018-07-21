@@ -84,11 +84,11 @@ namespace Sanaap.App.ViewModels
 
         public override Task OnNavigatedFromAsync(NavigationParameters parameters)
         {
-            if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
-            {
-                _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
-                return null;
-            }
+            //if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
+            //{
+            //    _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+            //    return null;
+            //}
 
             evlRequestDto.CompanyId = SelectedCompany.Id;
             evlRequestDto.VehicleKindId = SelectedVehicleKind.Id;

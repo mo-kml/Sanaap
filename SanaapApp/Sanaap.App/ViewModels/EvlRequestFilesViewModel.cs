@@ -7,6 +7,8 @@ using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
 using Simple.OData.Client;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -15,6 +17,8 @@ namespace Sanaap.App.ViewModels
 {
     public class EvlRequestFilesViewModel : BitViewModelBase
     {
+        public ObservableCollection<FileListViewItem> fileListViewItems { get; set; }
+
         public BitDelegateCommand<FileListViewItem> TakePhoto { get; set; }
 
         public BitDelegateCommand<FileListViewItem> PickFromGallery { get; set; }
@@ -22,7 +26,7 @@ namespace Sanaap.App.ViewModels
         public BitDelegateCommand Submit { get; set; }
 
         private EvlRequestDto evlRequestDto;
-        private readonly IODataClient _oDataClinet;
+        private readonly IODataClient oDataClient;
         private readonly INavigationService _navigationService;
         private readonly HttpClient _httpClient;
         private readonly IUserDialogs _userDialogs;
@@ -30,7 +34,7 @@ namespace Sanaap.App.ViewModels
         public EvlRequestFilesViewModel(IMedia media, IODataClient oDataClient, INavigationService navigationService
             , HttpClient httpClient, IUserDialogs userDialogs, IPageDialogService pageDialogService)
         {
-            _oDataClinet = oDataClient;
+            this.oDataClient = oDataClient;
             _navigationService = navigationService;
             _httpClient = httpClient;
             _userDialogs = userDialogs;
@@ -96,7 +100,25 @@ namespace Sanaap.App.ViewModels
 
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto"); // Get Parameter
+            await CrossMedia.Current.Initialize();
+
+            using (_userDialogs.Loading(ConstantStrings.Loading))
+            {
+                evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto"); // Get Parameter
+
+                string path = _navigationService.GetNavigationUriPath();
+
+                //var a = await _oDataClinet.For<FileTypeDto>("FileTypes")
+                //          .FindEntriesAsync();
+
+                EvlRequestFileTypeDto[] fileTypes = (await oDataClient.For<EvlRequestFileTypeDto>("EvlRequestFileTypes").FindEntriesAsync()).ToArray();
+                //JsonConvert.DeserializeObject<EvlRequestFileTypeDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/FileTypes/GetAll"));
+
+                fileListViewItems = new ObservableCollection<FileListViewItem>(fileTypes.Select(f => new FileListViewItem { FileType = f }));
+
+                base.OnNavigatedTo(parameters);
+            }
+
 
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {

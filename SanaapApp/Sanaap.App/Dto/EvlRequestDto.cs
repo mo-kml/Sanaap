@@ -8,6 +8,8 @@ namespace Sanaap.App.Dto
 {
     public class FileListViewItem : BindableBase
     {
+        public EvlRequestFileTypeDto FileType { get; set; } = new EvlRequestFileTypeDto();
+
         public ImageSource ItemSource { get; set; }
 
         public Stream ImageStream { get; set; }
