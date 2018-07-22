@@ -53,22 +53,21 @@ namespace Sanaap.App.ViewModels
 
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            if (parameters.GetNavigationMode() == NavigationMode.New)
+            using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                insuranceType = parameters.GetValue<InsuranceType>("InsuranceType"); // Get Parameter
-
-                if (_geolocator.IsGeolocationAvailable)
+                if (parameters.GetNavigationMode() == NavigationMode.New)
                 {
-                    CurrentPosition = await _geolocator.GetPositionAsync();
+                    insuranceType = parameters.GetValue<InsuranceType>("InsuranceType"); // Get Parameter
+
+                    if (_geolocator.IsGeolocationAvailable)
+                    {
+                        CurrentPosition = await _geolocator.GetPositionAsync();
+                    }
                 }
-            }
 
-            if (parameters.GetNavigationMode() == NavigationMode.Back)
-            {
-                evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
-
-                using (_userDialogs.Loading(ConstantStrings.Loading))
+                if (parameters.GetNavigationMode() == NavigationMode.Back)
                 {
+                    evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
                     CurrentPosition = new Plugin.Geolocator.Abstractions.Position
                     {
                         Latitude = evlRequestDto.Latitude,

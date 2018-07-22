@@ -1,20 +1,20 @@
-﻿using FFImageLoading.Work;
-using Prism.Mvvm;
+﻿using PropertyChanged;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 
 namespace Sanaap.App.Dto
 {
-    public class FileListViewItem : BindableBase
+    [AddINotifyPropertyChangedInterface]
+    public class FileListViewItem
     {
-        public EvlRequestFileTypeDto FileType { get; set; } = new EvlRequestFileTypeDto();
+        public EvlRequestFileTypeDto evlRequestFileTypeDto { get; set; } = new EvlRequestFileTypeDto();
 
-        public ImageSource ItemSource { get; set; }
+        public Xamarin.Forms.ImageSource imageSource { get; set; }
 
-        public Stream ImageStream { get; set; }
+        public Stream stream { get; set; }
 
-        public bool IsVisible { get; set; }
+        public bool isVisible { get; set; }
     }
 
     public partial class EvlRequestDto

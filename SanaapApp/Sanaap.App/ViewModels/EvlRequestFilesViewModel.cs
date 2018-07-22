@@ -25,7 +25,7 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Submit { get; set; }
 
-        public ImageSource ImageSource { get; set; }
+        public Xamarin.Forms.ImageSource ImageSource { get; set; }
 
         private EvlRequestDto evlRequestDto;
         private readonly IODataClient oDataClient;
@@ -41,7 +41,7 @@ namespace Sanaap.App.ViewModels
             _httpClient = httpClient;
             _userDialogs = userDialogs;
 
-            TakePhoto = new BitDelegateCommand<FileListViewItem>(async (newImage) =>
+            TakePhoto = new BitDelegateCommand<FileListViewItem>(async (fileListViewItem) =>
             {
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
@@ -49,25 +49,70 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
-                MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     SaveToAlbum = true,
                     PhotoSize = PhotoSize.Small,
                     DefaultCamera = CameraDevice.Rear,
                     AllowCropping = true,
-                    CompressionQuality = 0
                 });
+
+                //await pageDialogService.DisplayAlertAsync("", file.Path, "باشه");
 
                 ImageSource = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
+                    file.Dispose();
                     return stream;
                 });
 
-                //newImage.ImageStream = file.GetStream();
-                ImageSource imageSource = ImageSource.FromStream(() => newImage.ImageStream);
+                if (file == null)
+                {
+                    return;
+                }
+                else
+                {
+                    fileListViewItem.imageSource = ImageSource;
+                    //fileListViewItem.ImageStream = Helpers.Helpers.ConvertMediaFile64(file);
+                }
 
-                //evlRequestDto.fileListViewItems.Add(newImage);
+                //await CrossMedia.Current.Initialize();
+
+                //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                //{
+                //    await pageDialogService.DisplayAlertAsync("", "دسترسی به دوربین وجود ندارد", "باشه");
+                //    return;
+                //}
+
+                //MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                //{
+                //    SaveToAlbum = true,
+                //    PhotoSize = PhotoSize.Small,
+                //    DefaultCamera = CameraDevice.Rear,
+                //    AllowCropping = true,
+                //    CompressionQuality = 0
+                //});
+
+                //ImageSource = ImageSource.FromStream(() =>
+                //{
+                //    var stream = file.GetStream();
+                //    return stream;
+                //});
+
+                //if (file == null)
+                //{
+                //    return;
+                //}
+                //else
+                //{
+                //    fileListViewItem.ImageSource = ImageSource;
+                //    //fileListViewItem.FileType = Helpers.IAppUtilities.ConvertMediaFileToBase64(file);
+                //}
+
+                //fileListViewItem.ImageStream = file.GetStream();
+                //ImageSource imageSource = ImageSource.FromStream(() => fileListViewItem.ImageStream);
+
+                //evlRequestDto.fileListViewItems.Add(fileListViewItem);
             });
 
             PickFromGallery = new BitDelegateCommand<FileListViewItem>(async (newImage) =>
@@ -85,8 +130,8 @@ namespace Sanaap.App.ViewModels
                     CompressionQuality = 0
                 });
 
-                newImage.ImageStream = file.GetStream();
-                ImageSource imageSource = ImageSource.FromStream(() => newImage.ImageStream);
+                newImage.stream = file.GetStream();
+                ImageSource imageSource = ImageSource.FromStream(() => newImage.stream);
 
                 evlRequestDto.fileListViewItems.Add(newImage);
             });
@@ -122,7 +167,7 @@ namespace Sanaap.App.ViewModels
                 EvlRequestFileTypeDto[] fileTypes = (await oDataClient.For<EvlRequestFileTypeDto>("EvlRequestFileTypes").FindEntriesAsync()).ToArray();
                 //JsonConvert.DeserializeObject<EvlRequestFileTypeDto[]>(await _httpClient.GetStringAsync(_httpClient.BaseAddress + "api/FileTypes/GetAll"));
 
-                fileListViewItems = new ObservableCollection<FileListViewItem>(fileTypes.Select(f => new FileListViewItem { FileType = f }));
+                fileListViewItems = new ObservableCollection<FileListViewItem>(fileTypes.Select(f => new FileListViewItem { evlRequestFileTypeDto = f }));
 
                 base.OnNavigatedTo(parameters);
             }
