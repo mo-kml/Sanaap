@@ -25,6 +25,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Submit { get; set; }
 
+        public ImageSource ImageSource { get; set; }
+
         private EvlRequestDto evlRequestDto;
         private readonly IODataClient oDataClient;
         private readonly INavigationService _navigationService;
@@ -56,10 +58,16 @@ namespace Sanaap.App.ViewModels
                     CompressionQuality = 0
                 });
 
-                newImage.ImageStream = file.GetStream();
+                ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+
+                //newImage.ImageStream = file.GetStream();
                 ImageSource imageSource = ImageSource.FromStream(() => newImage.ImageStream);
 
-                evlRequestDto.Images.Add(newImage);
+                //evlRequestDto.fileListViewItems.Add(newImage);
             });
 
             PickFromGallery = new BitDelegateCommand<FileListViewItem>(async (newImage) =>
@@ -80,7 +88,7 @@ namespace Sanaap.App.ViewModels
                 newImage.ImageStream = file.GetStream();
                 ImageSource imageSource = ImageSource.FromStream(() => newImage.ImageStream);
 
-                evlRequestDto.Images.Add(newImage);
+                evlRequestDto.fileListViewItems.Add(newImage);
             });
 
             Submit = new BitDelegateCommand(async () =>

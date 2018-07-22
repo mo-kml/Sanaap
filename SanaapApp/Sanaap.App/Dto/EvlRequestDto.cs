@@ -20,6 +20,6 @@ namespace Sanaap.App.Dto
     public partial class EvlRequestDto
     {
         [NotMapped]
-        public List<FileListViewItem> Images { get; set; } = new List<FileListViewItem>();
+        public List<FileListViewItem> fileListViewItems { get; set; } = new List<FileListViewItem>();
     }
 }

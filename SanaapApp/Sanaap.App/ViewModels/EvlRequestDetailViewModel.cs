@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels
 {
-    public class EvlRequestDetailViewModel : BitViewModelBase, IConfirmNavigationAsync
+    public class EvlRequestDetailViewModel : BitViewModelBase, IConfirmNavigation
     {
         private readonly IUserDialogs _userDialogs;
         private readonly IPageDialogService _pageDialogService;
@@ -154,11 +154,21 @@ namespace Sanaap.App.ViewModels
             //SelectedInsuranceTypeEnum = InsuranceTypeEnums.FirstOrDefault();
         }
 
-        public async Task<bool> CanNavigateAsync(NavigationParameters parameters)
+        //public async Task<bool> CanNavigateAsync(NavigationParameters parameters)
+        //{
+        //    if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
+        //    {
+        //        await _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+        //        return false;
+        //    }
+        //    else return true;
+        //}
+
+        public bool CanNavigate(NavigationParameters parameters)
         {
             if (!_dateTimeUtils.IsValidShamsiDate(AccidentDate))
             {
-                await _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
+                _pageDialogService.DisplayAlertAsync(ErrorMessages.Error, ErrorMessages.IncorrectDateFormat, ErrorMessages.Ok);
                 return false;
             }
             else return true;
