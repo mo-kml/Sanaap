@@ -43,7 +43,7 @@
                                 <Button Grid.Column="2" Text="Gallery" TextColor="White" Command="{Binding Source={x:Reference fileView}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding .}"/>
 
                                 <!--<ff:SvgCachedImage Grid.Column="4" IsVisible="{Binding IsVisible}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="30"/>-->
-                                <Image Grid.Column="4" Aspect="AspectFit" Source="{Binding ItemSource}" Margin="2,0,0,0"/>
+                                <Image Grid.Column="4" Aspect="AspectFit" Source="{Binding imageSource}" Margin="2,0,0,0"/>
 
                                 <!--<Image Grid.Column="4" Aspect="Fill" Source="{Binding ImageSource,Mode=TwoWay}"/>-->
                                 <!--<Label Grid.Column="4" Text="{Binding lbl}"/>-->
