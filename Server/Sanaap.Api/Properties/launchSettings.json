@@ -1,20 +1,13 @@
-{
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:9860/",
-      "sslPort": 0
-    }
-  },
+﻿{
   "profiles": {
     "Sanaap.Api": {
       "commandName": "Project",
+      "launchBrowser": false,
       "launchUrl": "odata/swagger",
+      "applicationUrl": "http://localhost:53148",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:53148/"
+      }
     }
   }
 }

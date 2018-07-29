@@ -4,7 +4,6 @@ using Bit;
 using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
-using Plugin.Geolocator;
 using Plugin.Media;
 using Prism;
 using Prism.Autofac;
@@ -79,8 +78,8 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
-                //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
+                //HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
+                HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
@@ -97,7 +96,6 @@ namespace Sanaap.App
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
-            containerBuilder.Register(c => CrossGeolocator.Current).SingleInstance();
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
 

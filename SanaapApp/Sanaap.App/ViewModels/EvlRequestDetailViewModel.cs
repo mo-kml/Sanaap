@@ -143,10 +143,8 @@ namespace Sanaap.App.ViewModels
         public async Task SetDefaultValues()
         {
             Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).ToArray();
-            SelectedCompany = Companies.FirstOrDefault();
 
             VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
-            SelectedVehicleKind = VehicleKinds.FirstOrDefault();
 
             AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(DateTimeOffset.UtcNow);
 

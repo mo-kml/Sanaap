@@ -1,10 +1,10 @@
 ﻿using Bit.ViewModel;
-using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
 
 namespace Sanaap.App.ViewModels
@@ -19,18 +19,15 @@ namespace Sanaap.App.ViewModels
 
         public bool IsPositionSelected { get; set; }
 
-        public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
+        public Location CurrentPosition { get; set; }
 
-        private readonly IGeolocator _geolocator;
         private readonly IODataClient _odataClient;
         private readonly IPageDialogService _pageDialogService;
 
         public SubmitSosRequestViewModel(INavigationService navigationService,
-            IGeolocator geolocator,
             IODataClient odataClient,
             IPageDialogService pageDialogService)
         {
-            _geolocator = geolocator;
             _odataClient = odataClient;
             _pageDialogService = pageDialogService;
 
@@ -59,9 +56,9 @@ namespace Sanaap.App.ViewModels
 
             UpdateCurrentLocation = new BitDelegateCommand<Map>(async (map) =>
             {
-                Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
+                Position centerPosition = map.VisibleRegion.Center;
 
-                CurrentPosition = new Plugin.Geolocator.Abstractions.Position { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
+                CurrentPosition = new Location { Latitude = centerPosition.Latitude, Longitude = centerPosition.Longitude };
 
                 IsPositionSelected = true;
             });
@@ -71,10 +68,7 @@ namespace Sanaap.App.ViewModels
         {
             IsPositionSelected = false;
 
-            if (_geolocator.IsGeolocationAvailable)
-            {
-                CurrentPosition = await _geolocator.GetPositionAsync();
-            }
+            CurrentPosition = await GeolocationExtensions.GetLocation();
 
             await base.OnNavigatedToAsync(parameters);
         }

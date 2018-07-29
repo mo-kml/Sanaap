@@ -169,7 +169,7 @@ namespace Sanaap.App.ViewModels
 
                 fileListViewItems = new ObservableCollection<FileListViewItem>(fileTypes.Select(f => new FileListViewItem { evlRequestFileTypeDto = f }));
 
-                base.OnNavigatedTo(parameters);
+                await base.OnNavigatedToAsync(parameters);
             }
 
 

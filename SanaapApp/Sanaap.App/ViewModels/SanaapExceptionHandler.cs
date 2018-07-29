@@ -4,14 +4,15 @@ using Bit.ViewModel;
 using Microsoft.AppCenter.Crashes;
 using Prism.Ioc;
 using System;
+using System.Collections.Generic;
 
 namespace Sanaap.App.ViewModels
 {
     public class SanaapExceptionHandler : BitExceptionHandler
     {
-        public async override void OnExceptionReceived(Exception exp)
+        public async override void OnExceptionReceived(Exception exp, IDictionary<string, string> properties = null)
         {
-            Crashes.TrackError(exp);
+            Crashes.TrackError(exp, properties);
 
             try
             {

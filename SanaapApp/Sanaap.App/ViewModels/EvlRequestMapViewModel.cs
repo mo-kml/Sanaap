@@ -1,12 +1,12 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Plugin.Geolocator.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
 using Sanaap.Enums;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
 
 namespace Sanaap.App.ViewModels
@@ -18,18 +18,15 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand<Map> UpdateLocationAndGotoDetail { get; set; }
 
-        public Plugin.Geolocator.Abstractions.Position CurrentPosition { get; set; }
+        public Location CurrentPosition { get; set; }
 
-        private readonly IGeolocator _geolocator;
         private readonly IPageDialogService _pageDialogService;
         private readonly IUserDialogs _userDialogs;
 
         public EvlRequestMapViewModel(INavigationService navigationService,
-            IGeolocator geolocator,
             IPageDialogService pageDialogService,
             IUserDialogs userDialogs)
         {
-            _geolocator = geolocator;
             _pageDialogService = pageDialogService;
             _userDialogs = userDialogs;
 
@@ -59,16 +56,13 @@ namespace Sanaap.App.ViewModels
                 {
                     insuranceType = parameters.GetValue<InsuranceType>("InsuranceType"); // Get Parameter
 
-                    if (_geolocator.IsGeolocationAvailable)
-                    {
-                        CurrentPosition = await _geolocator.GetPositionAsync();
-                    }
+                    CurrentPosition = await GeolocationExtensions.GetLocation();
                 }
 
                 if (parameters.GetNavigationMode() == NavigationMode.Back)
                 {
                     evlRequestDto = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
-                    CurrentPosition = new Plugin.Geolocator.Abstractions.Position
+                    CurrentPosition = new Location
                     {
                         Latitude = evlRequestDto.Latitude,
                         Longitude = evlRequestDto.Longitude

@@ -35,7 +35,7 @@ namespace Sanaap.App.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: false);
             SvgCachedImage.Init();
-            UserDialogs.Init(() => this);
+            UserDialogs.Init(this);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -83,11 +83,7 @@ namespace Sanaap.App.Droid
         {
             base.OnResume();
 
-            Task.Factory.StartNew(StartMainActivity);
-        }
-        void StartMainActivity()
-        {
-            StartActivity(new Intent(ApplicationContext, typeof(MainActivity)));
+            Task.Run(() => StartActivity(new Intent(ApplicationContext, typeof(MainActivity))));
         }
     }
 }
