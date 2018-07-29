@@ -1,25 +1,11 @@
-﻿using PropertyChanged;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
+﻿using Prism.Mvvm;
 
 namespace Sanaap.App.Dto
 {
-    [AddINotifyPropertyChangedInterface]
-    public class FileListViewItem
+    public class EvlRequestFile : BindableBase
     {
-        public EvlRequestFileTypeDto evlRequestFileTypeDto { get; set; } = new EvlRequestFileTypeDto();
+        public byte[] Data { get; set; }
 
-        public Xamarin.Forms.ImageSource imageSource { get; set; }
-
-        public Stream stream { get; set; }
-
-        public bool isVisible { get; set; }
-    }
-
-    public partial class EvlRequestDto
-    {
-        [NotMapped]
-        public List<FileListViewItem> fileListViewItems { get; set; } = new List<FileListViewItem>();
+        public EvlRequestFileTypeDto FileType { get; set; }
     }
 }

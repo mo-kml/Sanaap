@@ -56,6 +56,8 @@ namespace Sanaap.App
             eventAggregator.GetEvent<TokenExpiredEvent>()
                 .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync("Login"), ThreadOption.UIThread);
 
+            await CrossMedia.Current.Initialize();
+
             await base.OnInitializedAsync();
         }
 

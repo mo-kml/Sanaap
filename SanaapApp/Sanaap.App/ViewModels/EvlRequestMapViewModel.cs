@@ -54,7 +54,7 @@ namespace Sanaap.App.ViewModels
             {
                 if (parameters.GetNavigationMode() == NavigationMode.New)
                 {
-                    insuranceType = parameters.GetValue<InsuranceType>("InsuranceType"); // Get Parameter
+                    insuranceType = parameters.GetValue<InsuranceType>("InsuranceType");
 
                     CurrentPosition = await GeolocationExtensions.GetLocation();
                 }

@@ -1,16 +1,18 @@
 ﻿using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Dto;
+using Sanaap.Dto;
 using Simple.OData.Client;
 using System;
-using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels
 {
     public class EvlRequestWaitViewModel : BitViewModelBase, IDestructible
     {
-        private readonly HttpClient _httpClient;
         private readonly IODataClient _odataClient;
+        private EvlRequestDto _evlRequest;
 
         public string ExpertFullName { get; set; }
         public string ExpertMobileNo { get; set; }
@@ -24,12 +26,10 @@ namespace Sanaap.App.ViewModels
         public string Message { get; set; }
 
         public EvlRequestWaitViewModel(INavigationService navigationService,
-            HttpClient httpClient,
             IODataClient odataClient,
             IDeviceService deviceService,
             IODataClient oDataClient)
         {
-            _httpClient = httpClient;
             _odataClient = odataClient;
 
             GoToMain = new BitDelegateCommand(async () =>
@@ -41,6 +41,20 @@ namespace Sanaap.App.ViewModels
             {
                 deviceService.OpenUri(new Uri("tel://" + ExpertMobileNo + ""));
             });
+        }
+
+        public async override Task OnNavigatingToAsync(NavigationParameters parameters)
+        {
+            _evlRequest = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
+
+            EvlRequestExpertDto evlRequestExpert = await _odataClient.For<EvlRequestExpertDto>("EvlRequestExperts")
+                .Function("FindEvlRequestExpert")
+                .Set(new { evlRequestId = _evlRequest.Id })
+                .FindEntryAsync();
+
+            ExpertFullName = evlRequestExpert.ExpName;
+
+            await base.OnNavigatingToAsync(parameters);
         }
     }
 }

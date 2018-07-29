@@ -26,22 +26,23 @@ namespace Sanaap.Test.Api
 
                 HttpClient httpClient = testEnv.Server.BuildHttpClient(token);
 
-                MultipartFormDataContent content = new MultipartFormDataContent();
-
-                content.Add(new StringContent(JsonConvert.SerializeObject(new EvlRequestDto
+                MultipartFormDataContent content = new MultipartFormDataContent
                 {
-                    AccidentDate = DateTimeOffset.UtcNow,
-                    CompanyId = 1,
-                    Description = "Test",
-                    InsuranceNumber = "123-456",
-                    InsuranceTypeEnum = InsuranceType.Sales,
-                    Latitude = 12,
-                    Longitude = 12,
-                    VehicleKindId = 1,
-                    VehicleNumber = "ایران - ب 44 678"
-                }), Encoding.UTF8, "application/json"));
+                    new StringContent(JsonConvert.SerializeObject(new EvlRequestDto
+                    {
+                        AccidentDate = DateTimeOffset.UtcNow,
+                        CompanyId = 1,
+                        Description = "Test",
+                        InsuranceNumber = "123-456",
+                        InsuranceTypeEnum = InsuranceType.Sales,
+                        Latitude = 12,
+                        Longitude = 12,
+                        VehicleKindId = 1,
+                        VehicleNumber = "ایران - ب 44 678"
+                    }), Encoding.UTF8, "application/json"),
 
-                content.Add(new StreamContent(File.OpenRead(@"C:\Users\SOFT\Desktop\Mohammad.png")), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString(), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString());
+                    { new StreamContent(File.OpenRead(@"C:\Users\SOFT\Desktop\Mohammad.png")), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString(), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString() }
+                };
 
                 HttpRequestMessage submitEvlRequest = new HttpRequestMessage(HttpMethod.Post, "api/evl-requests/submit-evl-request")
                 {
