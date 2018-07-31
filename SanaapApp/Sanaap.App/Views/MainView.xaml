@@ -56,7 +56,7 @@
                         <TapGestureRecognizer Command="{Binding GotoEvlRequestMapBadane}"/>
                     </StackLayout.GestureRecognizers>
                     <ff:SvgCachedImage Margin="0,5,0,0" Source="resource://Sanaap.App.Images.car.svg"/>
-                    <Label Margin="0,-20,0,0" TextColor="White" Text="درخواست کارشناس سیار بازدید اولیه بیمه بدنه" />
+                    <Label Margin="0,-20,0,0" TextColor="White" Text="درخواست کارشناس سیار بیمه بدنه اتومبیل" />
                 </StackLayout>
             </Frame>
 

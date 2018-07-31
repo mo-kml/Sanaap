@@ -8,11 +8,11 @@
 
     <StackLayout Spacing="0" Padding="0">
         <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">
-            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                       InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="True" WidthRequest="10"
                       VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-            <ff:SvgCachedImage Grid.Row="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.6,0.6" Source="resource://Sanaap.App.Images.pin.svg">
+            <ff:SvgCachedImage Grid.Row="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.1,0.1" Source="resource://Sanaap.App.Images.pinn.svg">
                 <ff:SvgCachedImage.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding UpdateLocationAndGotoDetail}" CommandParameter="{x:Reference map} "/>
                 </ff:SvgCachedImage.GestureRecognizers>

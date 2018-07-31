@@ -16,6 +16,7 @@
         public static string SendingRequestAndPictures = "ارسال درخواست ...";
         public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما یافت شد";
         public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
+        public static string FindNearExpertError = "خطا در یافتن کارشناس";
     }
 
     public class EnumDisplayNames

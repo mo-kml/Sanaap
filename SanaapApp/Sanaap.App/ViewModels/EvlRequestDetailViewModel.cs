@@ -117,9 +117,11 @@ namespace Sanaap.App.ViewModels
 
         public async Task LoadInitialData()
         {
-            Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).ToArray();
+            Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).OrderBy(o => o.Name).ToArray();
+            SelectedCompany = Companies.First();
 
-            VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).ToArray();
+            VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).OrderBy(o => o.Name).ToArray();
+            SelectedVehicleKind = VehicleKinds.First();
 
             AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(DateTimeOffset.UtcNow);
         }

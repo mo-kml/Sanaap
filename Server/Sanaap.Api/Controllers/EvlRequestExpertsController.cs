@@ -51,15 +51,15 @@ namespace Sanaap.Api.Controllers
 
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(soltaniLoginParams), UnicodeEncoding.UTF8, "application/json");
 
-            HttpResponseMessage soltaniLoginRawResponse = await httpClient.PostAsync("api/Portal/Login", stringContent);
-
+            HttpResponseMessage soltaniLoginRawResponse;
             try
             {
+                soltaniLoginRawResponse = await httpClient.PostAsync("api/Portal/Login", stringContent);
                 soltaniLoginRawResponse.EnsureSuccessStatusCode();
             }
             catch (Exception ex)
             {
-                throw new DomainLogicException("Retriving token from soltani api failed", ex);
+                throw new DomainLogicException("Retriving Login token from api failed", ex);
             }
 
             SoltaniLoginResponse soltaniLoginResponse = JsonConvert.DeserializeObject<SoltaniLoginResponse>(await soltaniLoginRawResponse.Content.ReadAsStringAsync());
@@ -69,7 +69,7 @@ namespace Sanaap.Api.Controllers
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "1" : "2";
+            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "3" : "1";
             soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
             soltaniFindExpertParams.MapLng = evlRequest.Longitude.ToString();
             soltaniFindExpertParams.LostName = evlRequest.OwnerFullName != null ? evlRequest.OwnerFullName.Trim() : customer.FirstName;
@@ -79,6 +79,7 @@ namespace Sanaap.Api.Controllers
             soltaniFindExpertParams.LostInsuranceNO = evlRequest.InsuranceNumber;
             soltaniFindExpertParams.LostCarID = "12608";
             soltaniFindExpertParams.LostCarType = "415";
+            soltaniFindExpertParams.Address = "";
 
             HttpRequestMessage findNearExpertRequest = new HttpRequestMessage(HttpMethod.Post, "api/Portal/FindNearExpert")
             {
@@ -121,6 +122,7 @@ namespace Sanaap.Api.Controllers
             public string LostInsuranceNO { get; set; }
             public string LostCarID { get; set; }
             public string LostCarType { get; set; }
+            public string Address { get; set; }
         }
     }
 }

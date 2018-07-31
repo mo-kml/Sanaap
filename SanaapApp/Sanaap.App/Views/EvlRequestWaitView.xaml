@@ -16,11 +16,11 @@
             Margin="0,0,0,100" WidthRequest="10" HeightRequest="300"
             IsVisible="{Binding IsVisibleBefore}" BackgroundColor="Transparent" />
 
-        <Image Source="{Binding ImageSource}" HeightRequest="100"/>
+        <Image Source="{Binding ExpertImage}" HeightRequest="100"/>
 
-        <Label Text="{Binding FullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
+        <Label Text="{Binding ExpertFullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
 
-        <Label FontFamily="IRYekan.ttf#yekan" Text="{Binding Mobile, StringFormat='موبایل کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
+        <Label FontFamily="IRYekan.ttf#yekan" Text="{Binding ExpertMobileNo, StringFormat='موبایل کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
 
         <Button HorizontalOptions="FillAndExpand" Text="تماس با کارشناس" FontSize="Small" BackgroundColor="Transparent" BorderWidth="1.5" Command="{Binding Call}" IsVisible="{Binding IsVisibleAfter}"/>
 
