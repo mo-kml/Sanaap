@@ -8,7 +8,9 @@ using Sanaap.Data.Contracts;
 using Sanaap.Enums;
 using Sanaap.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -35,6 +37,25 @@ namespace Sanaap.Api.Controllers
             evlReq.Status = args.status;
             await EvlRequestsRepository.UpdateAsync(evlReq, cancellationToken);
         }
+
+        [Function]
+        public virtual async Task<List<EvlRequest>> GetCustomerEvlRequests(Guid customerId, CancellationToken cancellationToken)
+        {
+            return (await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.CustomerId == customerId).ToList();
+        }
+
+        [Function]
+        public virtual async Task<List<EvlRequest>> GetExpertEvlRequests(int expertId, CancellationToken cancellationToken)
+        {
+            return (await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.EvlRequestExpert.Expert.ExpertID == expertId).ToList();
+        }
+
+        //[Function]
+        //public virtual async Task<List<EvlRequest>> GetCustomerEvlRequests(Guid customerId, CancellationToken cancellationToken)
+        //{
+        //    return (await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.EvlRequestExpert. == customerId).ToList();
+        //}
+
     }
 
     [RoutePrefix("evl-requests")]

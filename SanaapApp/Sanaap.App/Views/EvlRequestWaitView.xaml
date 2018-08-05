@@ -3,20 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="Sanaap.App.Views.EvlRequestWaitView" BackgroundColor="Transparent">
+             x:Class="Sanaap.App.Views.EvlRequestWaitView" BackgroundColor="Transparent"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
 
-    <StackLayout>
+    <StackLayout HorizontalOptions="Center">
 
-        <ff:SvgCachedImage IsVisible="{Binding IsVisibleAfter}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="60" Margin="0,10,0,0"/>
+        <ff:SvgCachedImage IsVisible="{Binding IsVisibleAfter}" Source="resource://Sanaap.App.Images.checked.svg" HorizontalOptions="Center" WidthRequest="60" Margin="0,5,0,0"/>
 
-        <Label Text="{Binding Message}" HorizontalOptions="Center" Margin="0,10,0,50"/>
+        <Label Text="{Binding Message}" HorizontalOptions="Center" Margin="0,0,0,50"/>
 
         <forms:AnimationView Animation="motorcycle.json"
             Loop="True" AutoPlay="True"
             Margin="0,0,0,100" WidthRequest="10" HeightRequest="300"
             IsVisible="{Binding IsVisibleBefore}" BackgroundColor="Transparent" />
 
-        <Image Source="{Binding ExpertImage}" HeightRequest="100"/>
+        <Image Source="{Binding ExpertImage}" HeightRequest="30" />
 
         <Label Text="{Binding ExpertFullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
 
@@ -24,7 +26,20 @@
 
         <Button HorizontalOptions="FillAndExpand" Text="تماس با کارشناس" FontSize="Small" BackgroundColor="Transparent" BorderWidth="1.5" Command="{Binding Call}" IsVisible="{Binding IsVisibleAfter}"/>
 
-        <Button Text="بازگشت به صفحه نخست" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleAfter}" VerticalOptions="EndAndExpand" Command="{Binding GoToMain}"/>
+        <Label Text="به این کارشناس نمره دهید :" HorizontalOptions="Center" Margin="0, 0, 0, 0" IsVisible="{Binding IsVisibleAfter}"/>
+
+
+        <rating:SfRating ItemSize="40" ItemSpacing="15" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleAfter}">
+            <rating:SfRating.RatingSettings>
+                <rating:SfRatingSettings RatedFill="Yellow"/>
+            </rating:SfRating.RatingSettings>
+
+            <!--<rating:SfRating.Behaviors>
+                <b:EventToCommandBehavior EventName="ValueChanged" EventArgsParameterPath="Value" Command="{Binding RatingValueChanged}" />
+            </rating:SfRating.Behaviors>-->
+        </rating:SfRating>
+
+        <Button Text="بازگشت به صفحه نخست" Margin="70, 10, 70, 2" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleAfter}" VerticalOptions="EndAndExpand" Command="{Binding GoToMain}"/>
 
     </StackLayout>
 

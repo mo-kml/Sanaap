@@ -5,6 +5,7 @@ using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
 using Sanaap.Enums;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
@@ -22,6 +23,8 @@ namespace Sanaap.App.ViewModels
 
         private readonly IPageDialogService _pageDialogService;
         private readonly IUserDialogs _userDialogs;
+
+        private CancellationTokenSource registerCancellationTokenSource;
 
         public EvlRequestMapViewModel(INavigationService navigationService,
             IPageDialogService pageDialogService,
@@ -50,7 +53,9 @@ namespace Sanaap.App.ViewModels
 
         public async override Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            registerCancellationTokenSource?.Cancel();
+            registerCancellationTokenSource = new CancellationTokenSource();
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
             {
                 if (parameters.GetNavigationMode() == NavigationMode.New)
                 {

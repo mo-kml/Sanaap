@@ -23,6 +23,8 @@
     {
         public const string SabteAvalie = "ثبت اولیه";
         public const string TaeenKarshenas = "تعیین کارشناس";
+        public const string Cancel = "انصراف";
+        public const string Complete = "تکمیل فرایند";
         public const string Sales = "ثالث";
         public const string Badane = "بدنه";
     }
