@@ -12,7 +12,6 @@ using Sanaap.Model;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -36,7 +35,7 @@ namespace Sanaap.Api.Controllers
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
 
         [Function]
-        public virtual async Task<SingleResult<EvlRequestExpertDto>> FindEvlRequestExpert(Guid evlRequestId, CancellationToken cancellationToken)
+        public virtual async Task<string> FindEvlRequestExpert(Guid evlRequestId, CancellationToken cancellationToken)
         {
             EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, evlRequestId);
             if (evlRequest == null)
@@ -67,7 +66,7 @@ namespace Sanaap.Api.Controllers
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "3" : "1";
+            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "2" : "1";
             DefaultDateTimeUtils defaultDateTimeUtils = new DefaultDateTimeUtils();
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
             soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
@@ -80,7 +79,7 @@ namespace Sanaap.Api.Controllers
             soltaniFindExpertParams.LostCarID = "12608"; // 12608
             soltaniFindExpertParams.LostCarType = "415"; // 415
             soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";
-            HttpRequestMessage findNearExpertRequest = new HttpRequestMessage(HttpMethod.Post, "api/Portal/FindNearExpertTest")
+            HttpRequestMessage findNearExpertRequest = new HttpRequestMessage(HttpMethod.Post, "api/Portal/FindNearExpert")
             {
                 Content = new StringContent(JsonConvert.SerializeObject(soltaniFindExpertParams), UnicodeEncoding.UTF8, "application/json")
             };
@@ -95,6 +94,11 @@ namespace Sanaap.Api.Controllers
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
             EvlRequestExpertDto evlRequestExpertDto = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+            if (evlRequestExpertDto.Expert == null || evlRequestExpertDto.FileID == 0)
+            {
+                return "NotResult";
+            }
+
             evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
             await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
             var result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
@@ -113,9 +117,17 @@ namespace Sanaap.Api.Controllers
 
             //return SingleResult.Create(new EvlRequestExpertDto[] { evlRequestExpertDto }).ToArray();// evlRequestExpertDto;
 
-            return SingleResult.Create(new[] { evlRequestExpertDto }.AsQueryable());
+            //return SingleResult.Create(new[] { evlRequestExpertDto }.AsQueryable());
+
+            ExpertResultDto expertResult = new ExpertResultDto();
+            expertResult.Name = result.Name;
+            expertResult.Mobile = result.Mobile;
+            expertResult.Photo = result.Photo;
+            return result.Name + "^" + result.Mobile + "^" + result.Photo;
         }
     }
+
+
 
     public class SoltaniFindExpertRequest
     {
@@ -204,6 +216,8 @@ namespace Sanaap.Api.Controllers
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
             EvlRequestExpertDto evlRequestExpertDto = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+
+
             evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
             await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
             var result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);

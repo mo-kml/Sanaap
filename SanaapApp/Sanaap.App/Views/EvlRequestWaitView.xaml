@@ -18,7 +18,7 @@
             Margin="0,0,0,100" WidthRequest="10" HeightRequest="300"
             IsVisible="{Binding IsVisibleBefore}" BackgroundColor="Transparent" />
 
-        <Image Source="{Binding ExpertImage}" HeightRequest="30" />
+        <Image Source="{Binding ExpertImage}" HeightRequest="70" Margin="0,-30,0,0"/>
 
         <Label Text="{Binding ExpertFullName, StringFormat='نام کارشناس : {0}'}" HorizontalOptions="Center" IsVisible="{Binding IsVisibleAfter}"/>
 
@@ -26,7 +26,7 @@
 
         <Button HorizontalOptions="FillAndExpand" Text="تماس با کارشناس" FontSize="Small" BackgroundColor="Transparent" BorderWidth="1.5" Command="{Binding Call}" IsVisible="{Binding IsVisibleAfter}"/>
 
-        <Label Text="به این کارشناس نمره دهید :" HorizontalOptions="Center" Margin="0, 0, 0, 0" IsVisible="{Binding IsVisibleAfter}"/>
+        <Label Text="به این کارشناس نمره دهید :" HorizontalOptions="Center" Margin="0, 20, 0, 0" IsVisible="{Binding IsVisibleAfter}"/>
 
 
         <rating:SfRating ItemSize="40" ItemSpacing="15" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleAfter}">

@@ -1,16 +1,11 @@
 ﻿using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
-using Newtonsoft.Json;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
-using Sanaap.Dto;
 using Simple.OData.Client;
 using System;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,9 +13,6 @@ namespace Sanaap.App.ViewModels
 {
     public class EvlRequestWaitViewModel : BitViewModelBase, IDestructible
     {
-        private readonly HttpClient _httpClient;
-        private readonly IClientAppProfile _clientAppProfile;
-
         private readonly IODataClient _odataClient;
         private EvlRequestDto _evlRequest;
 
@@ -44,15 +36,11 @@ namespace Sanaap.App.ViewModels
             IODataClient odataClient,
             IDeviceService deviceService,
             IODataClient oDataClient,
-            IPageDialogService pageDialogService,
-            HttpClient httpClient,
-            IClientAppProfile clientAppProfile)
+            IPageDialogService pageDialogService)
         {
             _odataClient = odataClient;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-            _httpClient = httpClient;
-            _clientAppProfile = clientAppProfile;
 
             GoToMain = new BitDelegateCommand(async () =>
             {
@@ -78,21 +66,14 @@ namespace Sanaap.App.ViewModels
             IsVisibleBefore = true;
             IsVisibleAfter = false;
 
-            EvlRequestExpertDto evlRequestExpert = null;
+            string result = null;
             try
             {
-                _httpClient.BaseAddress = new Uri($"{_clientAppProfile.HostUri}");
+                result = await _odataClient.For<string>("EvlRequestExperts")
+                    .Function("FindEvlRequestExpert")
+                    .Set(new { evlRequestId = _evlRequest.Id })
+                    .FindEntryAsync();
 
-                string evlRequestIdJson = JsonConvert.SerializeObject(_evlRequest.Id);
-                var stringContent = new StringContent(evlRequestIdJson, UnicodeEncoding.UTF8, "application/json");
-
-                evlRequestExpert = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await (await _httpClient.PostAsync(
-                    _httpClient.BaseAddress + "api/EvlRequestExperts/FindNearExpert", stringContent)).Content.ReadAsStringAsync());
-
-
-                //evlRequestExpert = await _odataClient.For<EvlRequestExpertDto>("EvlRequestExperts")
-                //    .Function("FindEvlRequestExpert")
-                //    .FindEntryAsync();
             }
             catch (Exception ex)
             {
@@ -100,15 +81,23 @@ namespace Sanaap.App.ViewModels
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertError, ErrorMessages.Ok);
             }
 
+            if (result == "NotResult")
+            {
+                await _navigationService.NavigateAsync("/Menu/Nav/Main");
+                await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertNotResult, ErrorMessages.Ok);
+                return;
+            }
+
+
             IsVisibleBefore = false;
             IsVisibleAfter = true;
-
             Message = ConstantStrings.ExpertFind;
-            if (evlRequestExpert != null)
+            if (result != null)
             {
-                ExpertFullName = evlRequestExpert.Expert.Name.Trim();
-                ExpertMobileNo = evlRequestExpert.Expert.Mobile.Trim();
-                byte[] imageAsBytes = Convert.FromBase64String(evlRequestExpert.Expert.Photo.Split(',')[1]);
+                string[] res = result.Split('^');
+                ExpertFullName = res[0];
+                ExpertMobileNo = res[1];
+                byte[] imageAsBytes = Convert.FromBase64String(res[2].Split(',')[1]);
                 ExpertImage = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
             }
 

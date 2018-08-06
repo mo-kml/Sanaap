@@ -6,7 +6,7 @@ namespace Sanaap.Model
     public class EvlRequestExpert
     {
         public string Token { get; set; }
-        public string FileID { get; set; }
+        public int FileID { get; set; }
 
         //public EvlRequestExpertExpert Expert { get; set; }
         public virtual EvlRequestExpertExpert Expert { get; set; } = new EvlRequestExpertExpert { };

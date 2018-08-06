@@ -7,7 +7,7 @@ namespace Sanaap.Dto
     {
         [Key]
         public string Token { get; set; }
-        public string FileID { get; set; }
+        public int FileID { get; set; }
         public EvlRequestExpertExpertDto Expert { get; set; }
         public string ExpertDistance { get; set; }
     }
@@ -29,5 +29,12 @@ namespace Sanaap.Dto
         public string LastRequestTime { get; set; }
         public string ConnectionId { get; set; }
         public bool IsBusy { get; set; }
+    }
+
+    public class ExpertResultDto
+    {
+        public string Name { get; set; }
+        public string Mobile { get; set; }
+        public string Photo { get; set; }
     }
 }
