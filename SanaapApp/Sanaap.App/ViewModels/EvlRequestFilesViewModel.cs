@@ -55,7 +55,7 @@ namespace Sanaap.App.ViewModels
 
                 using (MediaFile newFile = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    PhotoSize = PhotoSize.Small,
+                    PhotoSize = PhotoSize.Medium,
                     RotateImage = true,
                     CompressionQuality = 0
                 }))
@@ -81,7 +81,7 @@ namespace Sanaap.App.ViewModels
 
                 using (MediaFile newFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                 {
-                    PhotoSize = PhotoSize.Small,
+                    PhotoSize = PhotoSize.Medium,
                     RotateImage = true,
                     CompressionQuality = 0
                 }))
