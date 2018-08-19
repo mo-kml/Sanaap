@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\insurance.svg" />
     <None Remove="Images\pinn.svg" />
   </ItemGroup>
 
@@ -33,6 +34,12 @@
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.0" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MainInsuranceView.xaml.cs">
+      <DependentUpon>MainInsuranceView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />

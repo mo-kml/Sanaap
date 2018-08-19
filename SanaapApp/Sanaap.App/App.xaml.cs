@@ -68,6 +68,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
+            containerRegistry.RegisterForNavigation<MainInsuranceView, MainInsuranceViewModel>("MainInsurance");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
             containerRegistry.RegisterForNavigation<SosRequestView, SosRequestViewModel>("SosRequest");
@@ -80,10 +81,11 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
+                //HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
-                //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
+                HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
+
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"

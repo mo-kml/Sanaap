@@ -11,7 +11,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="ارسال تصاویر اختیاری است" HorizontalOptions="Center" Margin="10" />
+            <Label Text="" HorizontalOptions="Center" Margin="10" />
 
             <ListView ItemsSource="{Binding Files}" RowHeight="80" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>

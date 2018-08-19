@@ -117,7 +117,7 @@ namespace Sanaap.App.ViewModels
 
         public async Task LoadInitialData()
         {
-            Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).OrderBy(o => o.Name).ToArray();
+            Companies = (await _odataClient.For<CompanyDto>("Companies").FindEntriesAsync()).ToArray();
             SelectedCompany = Companies.First();
 
             VehicleKinds = (await _odataClient.For<VehicleKindDto>("VehicleKinds").FindEntriesAsync()).OrderBy(o => o.Name).ToArray();

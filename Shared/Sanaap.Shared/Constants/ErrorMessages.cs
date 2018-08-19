@@ -14,7 +14,7 @@
         public static string Loading = "در حال پردازش ...";
         public static string Loading_Cancel = "";
         public static string SendingRequestAndPictures = "ارسال درخواست ...";
-        public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما یافت شد";
+        public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما تعیین شد منتظر تماس کارشناس باشید";
         public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
         public static string FindNearExpertError = "خطا در یافتن کارشناس";
         public static string FindNearExpertNotResult = "کارشناسی پاسخ گو نیست";

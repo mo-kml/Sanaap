@@ -29,15 +29,17 @@
         <Label Text="به این کارشناس نمره دهید :" HorizontalOptions="Center" Margin="0, 20, 0, 0" IsVisible="{Binding IsVisibleAfter}"/>
 
 
-        <rating:SfRating ItemSize="40" ItemSpacing="15" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleAfter}">
+        <!--<rating:SfRating ItemSize="40" ItemSpacing="15" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleAfter}">
             <rating:SfRating.RatingSettings>
                 <rating:SfRatingSettings RatedFill="Yellow"/>
             </rating:SfRating.RatingSettings>
 
-            <!--<rating:SfRating.Behaviors>
+            -->
+        <!--<rating:SfRating.Behaviors>
                 <b:EventToCommandBehavior EventName="ValueChanged" EventArgsParameterPath="Value" Command="{Binding RatingValueChanged}" />
             </rating:SfRating.Behaviors>-->
-        </rating:SfRating>
+        <!--
+        </rating:SfRating>-->
 
         <Button Text="بازگشت به صفحه نخست" Margin="70, 10, 70, 2" BackgroundColor="Purple" TextColor="White" IsVisible="{Binding IsVisibleAfter}" VerticalOptions="EndAndExpand" Command="{Binding GoToMain}"/>
 

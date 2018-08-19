@@ -53,22 +53,30 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
-                using (MediaFile newFile = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                MediaFile newFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
-                    PhotoSize = PhotoSize.Medium,
+                    PhotoSize = PhotoSize.Small,
+                    SaveToAlbum = true,
+                    DefaultCamera = CameraDevice.Rear,
+                    AllowCropping = true,
                     RotateImage = true,
-                    CompressionQuality = 0
-                }))
+                    CompressionQuality = 25
+                });
+
+                if (newFile == null)
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    return;
+                }
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (Stream stream = newFile.GetStream())
                     {
-                        using (Stream stream = newFile.GetStream())
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                            file.Data = memoryStream.ToArray();
-                        }
+                        await stream.CopyToAsync(memoryStream);
+                        file.Data = memoryStream.ToArray();
                     }
                 }
+
             });
 
             PickFromGallery = new BitDelegateCommand<EvlRequestFile>(async (file) =>
@@ -79,22 +87,27 @@ namespace Sanaap.App.ViewModels
                     return;
                 }
 
-                using (MediaFile newFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                MediaFile newFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                 {
-                    PhotoSize = PhotoSize.Medium,
+                    PhotoSize = PhotoSize.Small,
                     RotateImage = true,
-                    CompressionQuality = 0
-                }))
+                    CompressionQuality = 25
+                });
+
+                if (newFile == null)
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    return;
+                }
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (Stream stream = newFile.GetStream())
                     {
-                        using (Stream stream = newFile.GetStream())
-                        {
-                            await stream.CopyToAsync(memoryStream);
-                            file.Data = memoryStream.ToArray();
-                        }
+                        await stream.CopyToAsync(memoryStream);
+                        file.Data = memoryStream.ToArray();
                     }
                 }
+
             });
 
             Submit = new BitDelegateCommand(async () =>

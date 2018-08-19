@@ -8,7 +8,7 @@ using System;
 
 namespace Sanaap.App.ViewModels
 {
-    public class MainViewModel : BitViewModelBase
+    public class MainInsuranceViewModel : BitViewModelBase
     {
         public BitDelegateCommand GoToMySosRequests { get; set; }
 
@@ -16,13 +16,13 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand SosRequest { get; set; }
 
-        public BitDelegateCommand GotoMainInsurance { get; set; }
+        public BitDelegateCommand GotoEvlRequestMapSales { get; set; }
         public BitDelegateCommand GotoEvlRequestMapBadane { get; set; }
         public BitDelegateCommand GotoDetail { get; set; }
 
         public BitDelegateCommand SubmitSosRequestByCall { get; set; }
 
-        public MainViewModel(INavigationService navigationService,
+        public MainInsuranceViewModel(INavigationService navigationService,
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs)
         {
             GoToMySosRequests = new BitDelegateCommand(async () =>
@@ -30,9 +30,12 @@ namespace Sanaap.App.ViewModels
                 await navigationService.NavigateAsync("MySosRequests");
             });
 
-            GotoMainInsurance = new BitDelegateCommand(async () =>
+            GotoEvlRequestMapSales = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("MainInsurance");
+                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
+                {
+                    { "InsuranceType", InsuranceType.Sales }
+                });
             });
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
