@@ -27,14 +27,13 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="170" />
                 <RowDefinition Height="170" />
                 <RowDefinition Height="170" />
-                <!--<RowDefinition Height="160" />-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -47,23 +46,22 @@
                         <TapGestureRecognizer Command="{Binding GotoMainInsurance}"/>
                     </StackLayout.GestureRecognizers>
                     <ff:SvgCachedImage Grid.Row="0" Margin="0,7,0,0" Source="resource://Sanaap.App.Images.insurance.svg"/>
-                    <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="کارشناس سیار ارزیاب خسارت بیمه" VerticalOptions="Center" />
+                    <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="کارشناس سیار ارزیاب صدور بیمه" VerticalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-
             <Frame Grid.Row="0" Grid.Column="1" Margin="1,1,-2,-2">
-                <StackLayout BackgroundColor="#2a2a86">
+                <StackLayout BackgroundColor="#970000">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Grid.Row="1" Margin="0,10,0,0" Source="resource://Sanaap.App.Images.crane-truck.svg" />
-                    <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست جرثقیل" />
+                    <ff:SvgCachedImage Grid.Row="1" Margin="0,10,0,0" Source="resource://Sanaap.App.Images.fender-bender.svg" />
+                    <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="کارشناس سیار ارزیاب خسارت بیمه" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="1" Grid.Column="0" Margin="-2,-2,1,-2">
-                <StackLayout BackgroundColor="#970000">
+                <StackLayout BackgroundColor="#2a2a86">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
@@ -83,7 +81,7 @@
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="0" Margin="-2,-2,1,-2">
-                <StackLayout BackgroundColor="#d55ba2">
+                <StackLayout BackgroundColor="#de761c">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
@@ -93,12 +91,12 @@
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="1" Margin="1,-2,-2,-2">
-                <StackLayout BackgroundColor="#de761c">
+                <StackLayout BackgroundColor="#d55ba2">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Grid.Row="1" Margin="0,20,0,0" Source="resource://Sanaap.App.Images.doctor.svg" />
-                    <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست پزشک سیار" />
+                    <ff:SvgCachedImage Grid.Row="1" Margin="0,20,0,0" Source="resource://Sanaap.App.Images.crane-truck.svg" />
+                    <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست جرثقیل" />
                 </StackLayout>
             </Frame>
 
