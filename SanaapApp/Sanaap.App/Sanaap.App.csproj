@@ -37,9 +37,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ContactUsView.xaml.cs">
+      <DependentUpon>ContactUsView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MainInsuranceView.xaml.cs">
       <DependentUpon>MainInsuranceView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ContactUsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />

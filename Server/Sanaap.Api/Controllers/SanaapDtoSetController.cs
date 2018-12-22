@@ -11,27 +11,27 @@ namespace Sanaap.Api.Controllers
         where TDto : class, IDto
         where TEntity : class, IEntity
     {
-        public async override Task<TDto> Create(TDto dto, CancellationToken cancellationToken)
+        public override async Task<TDto> Create(TDto dto, CancellationToken cancellationToken)
         {
             return await base.Create(dto, cancellationToken);
         }
 
-        public async override Task<TDto> Update(Guid key, TDto dto, CancellationToken cancellationToken)
+        public override async Task<TDto> Update(Guid key, TDto dto, CancellationToken cancellationToken)
         {
             return await base.Update(key, dto, cancellationToken);
         }
 
-        public async override Task Delete(Guid key, CancellationToken cancellationToken)
+        public override async Task Delete(Guid key, CancellationToken cancellationToken)
         {
             await base.Delete(key, cancellationToken);
         }
 
-        protected async override Task<TDto> GetById(Guid key, CancellationToken cancellationToken)
+        protected override async Task<TDto> GetById(Guid key, CancellationToken cancellationToken)
         {
             return await base.GetById(key, cancellationToken);
         }
 
-        public async override Task<IQueryable<TDto>> GetAll(CancellationToken cancellationToken)
+        public override async Task<IQueryable<TDto>> GetAll(CancellationToken cancellationToken)
         {
             return await base.GetAll(cancellationToken);
         }

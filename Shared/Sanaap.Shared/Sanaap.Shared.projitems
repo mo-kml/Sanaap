@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\EvlRequestStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\InsuranceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\SexType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />

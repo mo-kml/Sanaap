@@ -39,7 +39,9 @@ namespace Sanaap.Api.Controllers
         {
             EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, evlRequestId);
             if (evlRequest == null)
+            {
                 throw new ResourceNotFoundException("evlRequest is null");
+            }
             //if (!string.IsNullOrEmpty(evlRequest.EvlRequestExpert.Token))
             //{
             //    return SingleResult.Create(new EvlRequestExpertDto[] Mapper.Map<EvlRequestExpertDto>(evlRequest.EvlRequestExpert);
@@ -101,7 +103,7 @@ namespace Sanaap.Api.Controllers
 
             evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
             await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
-            var result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
+            EvlRequestExpertExpertDto result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
 
             evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.Token;
             evlRequest.EvlRequestExpert.FileID = evlRequestExpertDto.FileID;
@@ -161,7 +163,10 @@ namespace Sanaap.Api.Controllers
         {
             EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, evlRequestId);
             if (evlRequest == null)
+            {
                 throw new ResourceNotFoundException("evlRequest is null");
+            }
+
             if (!string.IsNullOrEmpty(evlRequest.EvlRequestExpert.Token))
             {
                 return Mapper.Map<EvlRequestExpertExpertDto>(evlRequest.EvlRequestExpert);
@@ -220,7 +225,7 @@ namespace Sanaap.Api.Controllers
 
             evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
             await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
-            var result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
+            EvlRequestExpertExpertDto result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
 
             evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.Token;
             evlRequest.EvlRequestExpert.FileID = evlRequestExpertDto.FileID;

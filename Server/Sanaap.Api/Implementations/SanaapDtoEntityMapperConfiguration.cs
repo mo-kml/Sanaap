@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Bit.Model.Contracts;
-using Sanaap.Dto;
-using Sanaap.Model;
 
 namespace Sanaap.Api.Implementations
 {
@@ -9,7 +7,7 @@ namespace Sanaap.Api.Implementations
     {
         public virtual void Configure(IMapperConfigurationExpression mapperConfigExpression)
         {
-            
+
         }
     }
 }

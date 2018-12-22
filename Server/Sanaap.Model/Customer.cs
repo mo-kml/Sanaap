@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Sanaap.Enums;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +20,18 @@ namespace Sanaap.Model
         [Required]
         [StringLength(10, MinimumLength = 10)]
         public virtual string NationalCode { get; set; }
+
+        public SexType SexType { get; set; }
+
+        public string MobileOS { get; set; }
+
+        public DateTimeOffset LastestLogin { get; set; }
+
+        public string VerifyCode { get; set; }
+
+        public string CountFailedVerify { get; set; }
+
+        public bool IsActive { get; set; }
 
         [Required]
         [Index(IsUnique = true)]

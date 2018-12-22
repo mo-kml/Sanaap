@@ -36,20 +36,31 @@ namespace SanaapOperatorApp
 #endif
         }
 
-        protected async override void OnInitialized()
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            await Container.Resolve<ISecurityService>().Logout();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjI1MUAzMTM2MmUzMjJlMzBMc1YxeXdSMEJCd0pWcUI0STRtL2djTGFkQUhVUTdXVGtoQm0rRGZZUlRBPQ==;MjI1MkAzMTM2MmUzMjJlMzBHK1VXS3MrZFFqQmNFK3RtR0FaTGRCaWY2VHFRdGhZbDJCS3ZyZmRsUzBZPQ==;MjI1M0AzMTM2MmUzMjJlMzBrbU1DU3orbUJaeFY4Q1cybTFpU0dzTVZNSWF1dHd3OUVuRFA2VVN1SmFrPQ==;MjI1NEAzMTM2MmUzMjJlMzBkSUhlT1VHU3ZYMjhRSVdCcFFhY1dXdTVuYmMrN1ZBckY1SlZRVHAxc2VVPQ==;MjI1NUAzMTM2MmUzMjJlMzBvb2V4WHZ1bk40cjVmRmVKcnk1ZUp3MHFLVUJhK3FlczlteUpwUEh6YUxVPQ==;MjI1NkAzMTM2MmUzMjJlMzBjWWhadEF1eHFTQzd0RHU0ZVVQN1FoUlBRcWZTdm8zamtEVXZXVEZCQ2w0PQ==;MjI1N0AzMTM2MmUzMjJlMzBMTUxaNXdiYkJ6ejBEKzg5VlM4SzN5ZDNvUUV3VElaVXM2SnkvaFIvejA0PQ==;MjI1OEAzMTM2MmUzMjJlMzBrRlE3Ykp2dTBnWEpVTlZwYWJyQW9CYkExTUl3SVI3TGE0ZUFmNWxUaXlJPQ==;MjI1OUAzMTM2MmUzMjJlMzBjNFczQVBZTkFQQU80WFR2bTdhZXJuSmZheEl3KzRQWE55Rzg1cWFXb2hvPQ==");
 
-            await NavigationService.NavigateAsync("Login");
+            bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
+
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync("Menu/Nav/Main");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/Register");
+            }
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
             eventAggregator.GetEvent<TokenExpiredEvent>()
-                .Subscribe(async tokenExpiredEvent => await NavigationService.NavigateAsync("Login"), ThreadOption.UIThread);
+                .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync("Login"), ThreadOption.UIThread);
 
-            base.OnInitialized();
+            await CrossMedia.Current.Initialize();
+
+            await base.OnInitializedAsync();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

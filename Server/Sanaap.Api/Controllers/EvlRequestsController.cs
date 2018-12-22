@@ -73,7 +73,9 @@ namespace Sanaap.Api.Controllers
         public virtual async Task<EvlRequestDto> SubmitEvlRequest(CancellationToken cancellationToken)
         {
             if (!Request.Content.IsMimeMultipartContent())
+            {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
 
             MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
 
@@ -115,7 +117,9 @@ namespace Sanaap.Api.Controllers
             }
 
             if (evlRequestDto == null)
+            {
                 throw new BadRequestException($"{nameof(EvlRequestDto)} is null");
+            }
 
             return evlRequestDto;
         }

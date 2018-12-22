@@ -29,7 +29,9 @@ namespace System
             DisplayAttribute descriptionAttribute = fieldInfo.GetCustomAttributes<DisplayAttribute>().FirstOrDefault();
 
             if (descriptionAttribute == null)
+            {
                 return string.Empty;
+            }
 
             return descriptionAttribute.Name;
         }

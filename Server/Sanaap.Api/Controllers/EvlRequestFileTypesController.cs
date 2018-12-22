@@ -1,8 +1,8 @@
 ﻿using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Sanaap.App.Dto;
-using Sanaap.Model;
 using Sanaap.Data.Contracts;
+using Sanaap.Model;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

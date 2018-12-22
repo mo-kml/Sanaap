@@ -47,9 +47,13 @@ namespace Sanaap.App
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
             if (isLoggedIn)
+            {
                 await NavigationService.NavigateAsync("Menu/Nav/Main");
+            }
             else
-                await NavigationService.NavigateAsync("/Register");
+            {
+                await NavigationService.NavigateAsync("/Login");
+            }
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -67,6 +71,7 @@ namespace Sanaap.App
 
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
+            containerRegistry.RegisterForNavigation<ContactUsView, ContactUsViewModel>("ContactUs");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<MainInsuranceView, MainInsuranceViewModel>("MainInsurance");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
@@ -84,7 +89,8 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
-                HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
+                //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
+                HostUri = new Uri("http://fac2a08e.ngrok.io/"),         // Kamali
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",

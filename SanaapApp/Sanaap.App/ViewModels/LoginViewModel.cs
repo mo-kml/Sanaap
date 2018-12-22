@@ -18,6 +18,8 @@ namespace Sanaap.App.ViewModels
 
         public virtual BitDelegateCommand Login { get; set; }
 
+        public BitDelegateCommand Register { get; set; }
+
         private CancellationTokenSource registerCancellationTokenSource;
 
         public LoginViewModel(INavigationService navigationService,
@@ -47,13 +49,24 @@ namespace Sanaap.App.ViewModels
                     catch (Exception ex)
                     {
                         if (ex.Message.Contains("CustomerCouldNotBeFound"))
+                        {
                             await pageDialogService.DisplayAlertAsync("", "کاربری با این مشخصات یافت نشد", "باشه");
+                        }
                         else if (translateService.Translate(ex.GetMessage(), out string translateErrorMessage))
+                        {
                             await pageDialogService.DisplayAlertAsync("", translateErrorMessage, "باشه");
+                        }
                         else
+                        {
                             throw;
+                        }
                     }
                 }
+            });
+
+            Register = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("Register");
             });
         }
     }

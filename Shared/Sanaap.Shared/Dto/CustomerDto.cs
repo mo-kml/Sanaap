@@ -16,6 +16,12 @@ namespace Sanaap.Dto
 
         public virtual string Mobile { get; set; }
 
+        public virtual string VerifyCode { get; set; }
+
+        public virtual string CountFailedVerify { get; set; }
+
+        public virtual bool IsActive { get; set; }
+
         public virtual List<SosRequestDto> SosRequests { set; get; }
     }
 }

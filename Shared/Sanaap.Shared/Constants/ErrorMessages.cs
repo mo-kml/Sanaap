@@ -11,6 +11,8 @@
 
     public class ConstantStrings
     {
+        public static string Ok = "باشه";
+        public static string Error = "خطا";
         public static string Loading = "در حال پردازش ...";
         public static string Loading_Cancel = "";
         public static string SendingRequestAndPictures = "ارسال درخواست ...";
@@ -18,6 +20,7 @@
         public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
         public static string FindNearExpertError = "خطا در یافتن کارشناس";
         public static string FindNearExpertNotResult = "کارشناسی پاسخ گو نیست";
+        public static string InvalidVerifyCode = "کد تایید وارد شده معتبر نیست لطفا دوباره تلاش کنید";
     }
 
     public class EnumDisplayNames

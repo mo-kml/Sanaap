@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sanaap.App.Controls"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             x:Class="Sanaap.App.Views.ContactUsView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="local:IconButton">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
+
+            <Label Text="آدرس : میرداماد - خیابان"/>
+            <Label Text="شماره تماس : 77499855"/>
+            <Label Text="فکس : 4645645"/>
+            <Label Text="وب سایت: google.com"/>
+            <Label Text="ساعات کاری : 6-12"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <local:IconButton Type="Brands" Text="&#xf232;" Command="{Binding WhatsApp}"/>
+                <local:IconButton Type="Solid" Text="&#xf2a0;" Command="{Binding Call}"/>
+                <local:IconButton Type="Brands" Text="&#xf2c6;" Command="{Binding Telegram}"/>
+                <local:IconButton Type="Brands" Text="&#xf16d;" Command="{Binding Instagram}"/>
+            </StackLayout>
+
+            <Button Text="مسیریابی" Command="{Binding Route}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

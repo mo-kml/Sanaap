@@ -1,7 +1,7 @@
 ﻿using Bit.Data.EntityFramework.Implementations;
 using Bit.Model.Contracts;
-using Sanaap.Model.Contracts;
 using Sanaap.Data.Contracts;
+using Sanaap.Model.Contracts;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -19,7 +19,7 @@ namespace Sanaap.Data.Implementations
             base.SaveChanges();
         }
 
-        public async override Task SaveChangesAsync(CancellationToken cancellationToken)
+        public override async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             ApplyDefaultValues();
             await base.SaveChangesAsync(cancellationToken);
@@ -36,13 +36,19 @@ namespace Sanaap.Data.Implementations
                     case EntityState.Added:
                         {
                             if (entry.Entity is IChangeTrackEnableEntity addedChangeTrackEnableEntity)
+                            {
                                 addedChangeTrackEnableEntity.CreatedOn = addedChangeTrackEnableEntity.ModifiedOn = now;
+                            }
+
                             break;
                         }
                     case EntityState.Modified:
                         {
                             if (entry.Entity is IChangeTrackEnableEntity modifiedChangeTrackEnableEntity)
+                            {
                                 modifiedChangeTrackEnableEntity.ModifiedOn = now;
+                            }
+
                             break;
                         }
                 }

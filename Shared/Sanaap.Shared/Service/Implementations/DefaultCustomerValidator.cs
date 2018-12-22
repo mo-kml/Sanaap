@@ -11,7 +11,9 @@ namespace Sanaap.Service.Implementations
         public bool IsValid(CustomerDto customer, out string message)
         {
             if (customer == null)
+            {
                 throw new ArgumentNullException(nameof(customer));
+            }
 
             if (string.IsNullOrEmpty(customer.FirstName))
             {
@@ -73,7 +75,9 @@ namespace Sanaap.Service.Implementations
         public virtual bool IsValidIranianNationalCode(string input)
         {
             if (!Regex.IsMatch(input, @"^\d{10}$"))
+            {
                 return false;
+            }
 
             int check = Convert.ToInt32(input.Substring(9, 1));
 

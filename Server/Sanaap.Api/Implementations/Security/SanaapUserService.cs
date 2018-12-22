@@ -22,10 +22,14 @@ namespace Sanaap.Api.Implementations.Security
             string password = context.Password;
 
             if (string.IsNullOrEmpty(username))
+            {
                 throw new BadRequestException("InvalidUserNameOrPassword");
+            }
 
             if (string.IsNullOrEmpty(password))
+            {
                 throw new BadRequestException("InvalidUserNameOrPassword");
+            }
 
             if (context.SignInMessage.ClientId == "SanaapResOwner")
             {
@@ -37,7 +41,9 @@ namespace Sanaap.Api.Implementations.Security
                     .SingleOrDefaultAsync(c => c.Mobile == mobile && c.NationalCode == nationalCode);
 
                 if (customer == null)
+                {
                     throw new ResourceNotFoundException("CustomerCouldNotBeFound");
+                }
 
                 return customer.Id.ToString();
             }
@@ -50,10 +56,14 @@ namespace Sanaap.Api.Implementations.Security
                     .SingleOrDefaultAsync(u => u.UserName == username);
 
                 if (user == null)
+                {
                     throw new ResourceNotFoundException("UserCouldNotBeFound");
+                }
 
                 if (!HashUtils.VerifyHash(password, user.Password))
+                {
                     throw new BadRequestException("InvalidUserNameOrPassword");
+                }
 
                 return user.Id.ToString();
             }

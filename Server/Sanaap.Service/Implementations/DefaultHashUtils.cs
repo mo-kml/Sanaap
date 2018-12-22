@@ -8,7 +8,9 @@ namespace Sanaap.Service.Implementations
         public virtual string HashPassword(string password)
         {
             if (password == null)
+            {
                 throw new ArgumentNullException(nameof(password));
+            }
 
             return BCrypt.Net.BCrypt.HashPassword(password);
         }

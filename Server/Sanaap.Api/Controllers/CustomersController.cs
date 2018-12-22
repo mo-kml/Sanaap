@@ -2,6 +2,7 @@
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
+using Sanaap.Api.Implementations;
 using Sanaap.Data.Contracts;
 using Sanaap.Dto;
 using Sanaap.Model;
@@ -32,10 +33,12 @@ namespace Sanaap.Api.Controllers
 
         [Action]
         [AllowAnonymous]
-        public virtual async Task RegisterCustomer(RegisterCustomerArgs args, CancellationToken cancellationToken)
+        public virtual async Task<CustomerDto> RegisterCustomer(RegisterCustomerArgs args, CancellationToken cancellationToken)
         {
             if (!CustomerValidator.IsValid(args.customer, out string errorMessage))
+            {
                 throw new DomainLogicException(errorMessage);
+            }
 
             Customer customer = DtoEntityMapper.FromDtoToEntity(args.customer);
 
@@ -44,9 +47,35 @@ namespace Sanaap.Api.Controllers
                 .AnyAsync(cancellationToken);
 
             if (existingCustomer)
+            {
                 throw new DomainLogicException("CustomerIsAlreadyRegistered");
+            }
             else
-                DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
+            {
+                customer.VerifyCode = VerificationCode.SendVerifyCode(customer.Mobile);
+
+                return DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
+            }
+        }
+
+        [Action]
+        [AllowAnonymous]
+        public virtual async Task<CustomerDto> SendVerificationCodeAgain(RegisterCustomerArgs args, CancellationToken cancellationToken)
+        {
+            if (!CustomerValidator.IsValid(args.customer, out string errorMessage))
+            {
+                throw new DomainLogicException(errorMessage);
+            }
+
+            Customer customer = DtoEntityMapper.FromDtoToEntity(args.customer);
+
+            customer = await (await CustomersRepository.GetAllAsync(cancellationToken))
+                .Where(cu => cu.NationalCode == customer.NationalCode || cu.Mobile == customer.Mobile)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            customer.VerifyCode = VerificationCode.SendVerifyCode(customer.Mobile);
+
+            return DtoEntityMapper.FromEntityToDto(await CustomersRepository.UpdateAsync(customer, cancellationToken));
         }
 
         [Function]
