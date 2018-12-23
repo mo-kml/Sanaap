@@ -75,6 +75,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<ContactUsView, ContactUsViewModel>("ContactUs");
             containerRegistry.RegisterForNavigation<ContentListView, ContentListViewModel>("ContentList");
+            containerRegistry.RegisterForNavigation<ShowContentView, ShowContentViewModel>("ShowContent");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<MainInsuranceView, MainInsuranceViewModel>("MainInsurance");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");

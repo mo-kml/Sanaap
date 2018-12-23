@@ -3,11 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              FlowDirection="LeftToRight"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView">
     <ContentPage.Content>
         <AbsoluteLayout>
             <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Contents}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                              EventArgsParameterPath="Item" 
+                                              Command="{Binding ShowContent}" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

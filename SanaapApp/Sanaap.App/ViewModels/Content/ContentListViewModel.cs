@@ -3,6 +3,7 @@ using Bit.ViewModel;
 using Prism.Navigation;
 using Sanaap.Dto;
 using Simple.OData.Client;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -13,12 +14,22 @@ namespace Sanaap.App.ViewModels.Content
     {
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
-        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs)
+        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INavigationService navigationService)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
+
+            ShowContent = new BitDelegateCommand<ContentListDto>(async (content) =>
+              {
+                  NavigationParameters parameters = new NavigationParameters();
+                  parameters.Add("ContentId", Guid.Parse("890f984f-f5aa-4cd3-870a-02f9e15e1037"));
+
+                  await navigationService.NavigateAsync("ShowContent", parameters);
+              });
         }
         public ObservableCollection<ContentListDto> Contents { get; set; }
+
+        public BitDelegateCommand<ContentListDto> ShowContent { get; set; }
 
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
