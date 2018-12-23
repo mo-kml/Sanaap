@@ -12,6 +12,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand ContactUs { get; set; }
 
+        public BitDelegateCommand Contents { get; set; }
+
         public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
@@ -27,8 +29,13 @@ namespace Sanaap.App.ViewModels
 
             ContactUs = new BitDelegateCommand(async () =>
               {
-                  await navigationService.NavigateAsync("ContactUs");
+                  await navigationService.NavigateAsync("/Menu/Nav/Main/ContactUs");
               });
+
+            Contents = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("/Menu/Nav/Main/ContentList");
+            });
         }
     }
 }

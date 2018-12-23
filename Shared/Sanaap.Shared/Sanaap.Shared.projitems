@@ -10,16 +10,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\CommentDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentCategoryDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentLikeDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentListDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestFileTypeDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestExpertDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\CommentType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\EvlRequestStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\InsuranceType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\SexType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\StatusType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />

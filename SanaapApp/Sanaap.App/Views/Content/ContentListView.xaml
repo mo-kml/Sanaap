@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sanaap.App.Controls"
+             FlowDirection="LeftToRight"
+             x:Class="Sanaap.App.Views.Content.ContentListView">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                      ItemsSource="{Binding Contents}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Padding="5">
+                                    <local:IconLabel Type="Solid" Text="{Binding LikesCount,StringFormat='&#xf004; {0}'}" VerticalOptions="StartAndExpand"/>
+
+                                    <Label Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>
+                                </StackLayout>
+
+                                <Label Grid.Column="1" Text="{Binding Title}" HorizontalTextAlignment="End" VerticalOptions="StartAndExpand"/>
+
+                                <Image HeightRequest="80" WidthRequest="80" Grid.Column="2" Source="{Binding Image}" Aspect="AspectFill"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <local:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

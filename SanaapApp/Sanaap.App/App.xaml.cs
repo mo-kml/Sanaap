@@ -10,7 +10,9 @@ using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
 using Sanaap.App.ViewModels;
+using Sanaap.App.ViewModels.Content;
 using Sanaap.App.Views;
+using Sanaap.App.Views.Content;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using System;
@@ -72,6 +74,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<ContactUsView, ContactUsViewModel>("ContactUs");
+            containerRegistry.RegisterForNavigation<ContentListView, ContentListViewModel>("ContentList");
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>("Main");
             containerRegistry.RegisterForNavigation<MainInsuranceView, MainInsuranceViewModel>("MainInsurance");
             containerRegistry.RegisterForNavigation<RegisterView, RegisterViewModel>("Register");
@@ -90,7 +93,7 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://fac2a08e.ngrok.io/"),         // Kamali
+                HostUri = new Uri("http://25d167b9.ngrok.io/"),         // Kamali
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",

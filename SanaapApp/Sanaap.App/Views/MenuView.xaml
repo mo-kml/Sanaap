@@ -34,6 +34,7 @@
                     <Label FontSize="Micro" Text="سامانه نرم افزاری ایرانیان پوشش" HorizontalOptions="Center"/>
                     <Button BackgroundColor="Transparent" Text="خانه" Command="{Binding GoToPage}" CommandParameter="Nav/Main" />
                     <Button BackgroundColor="Transparent" Text="تماس با ما" Command="{Binding ContactUs}" CommandParameter="Nav/Main" />
+                    <Button BackgroundColor="Transparent" Text="اخبار و اطلاعیه ها" Command="{Binding Contents}" CommandParameter="Nav/Main" />
                     <!--<Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />-->
                     <Button BorderColor="Red" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
                 </StackLayout>
