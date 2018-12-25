@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="Sanaap.App.Views.Comment.CreateCommentView">
+    <ContentPage.Content>
+        <StackLayout>
+            <syncCombobox:SfComboBox DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" IsEditableMode="False" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Entry Text="{Binding Comment.FirstName}"/>
+                <Label Text="نام" Grid.Column="1"/>
+
+                <Entry Text="{Binding Comment.LastName}" Grid.Row="1"/>
+                <Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>
+
+                <Entry Keyboard="Numeric" MaxLength="11" Text="{Binding Comment.Mobile}" Grid.Row="2"/>
+                <Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+            <Label Text="متن شکایت/ پیشنهاد"/>
+
+            <Editor Text="{Binding Comment.Description}" HeightRequest="100"/>
+
+            <Button Text="ثبت" Command="{Binding Submit}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

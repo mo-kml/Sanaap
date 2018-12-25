@@ -28,12 +28,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\SexType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\StatusType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICommentValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapOperatorAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCommentValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultDateTimeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\EnumUtils.cs" />

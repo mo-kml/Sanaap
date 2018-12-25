@@ -7,9 +7,7 @@
     <bit:BitApplication.Resources>
         <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
         <StyleSheet Source="/Views/Styles.css" />
-        <Style TargetType="ContentPage">
-            <Setter Property="FlowDirection" Value="RightToLeft" />
-        </Style>
+
         <Style TargetType="Button">
             <Setter Property="BorderRadius" Value="10" />
             <Setter Property="Margin" Value="15, 2, 15, 2" />

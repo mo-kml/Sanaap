@@ -1,5 +1,6 @@
 ﻿using Sanaap.Enums;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
 {
@@ -12,7 +13,7 @@ namespace Sanaap.Model
 
         public string Lastname { get; set; }
 
-        public string MobileNumber { get; set; }
+        public string Mobile { get; set; }
 
         public string Description { get; set; }
 
@@ -22,5 +23,10 @@ namespace Sanaap.Model
 
         public DateTimeOffset AnswerTime { get; set; }
 
+        [ForeignKey(nameof(CustomerId))]
+        public Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
+
+        public long Code { get; set; }
     }
 }

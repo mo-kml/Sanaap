@@ -8,11 +8,11 @@ namespace Sanaap.Dto
     {
         public CommentType CommentType { get; set; }
 
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
 
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
 
-        public string MobileNumber { get; set; }
+        public string Mobile { get; set; }
 
         public string Description { get; set; }
 
@@ -27,5 +27,11 @@ namespace Sanaap.Dto
         public DateTimeOffset CreatedOn { set; get; }
 
         public DateTimeOffset ModifiedOn { set; get; }
+
+        public CustomerDto Customer { get; set; }
+
+        public Guid CustomerId { get; set; }
+
+        public long Code { get; set; }
     }
 }

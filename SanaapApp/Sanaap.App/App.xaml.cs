@@ -10,8 +10,10 @@ using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
 using Sanaap.App.ViewModels;
+using Sanaap.App.ViewModels.Comment;
 using Sanaap.App.ViewModels.Content;
 using Sanaap.App.Views;
+using Sanaap.App.Views.Comment;
 using Sanaap.App.Views.Content;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
@@ -87,6 +89,8 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<EvlRequestDetailView, EvlRequestDetailViewModel>("EvlRequestDetail");
             containerRegistry.RegisterForNavigation<EvlRequestFilesView, EvlRequestFilesViewModel>("EvlRequestFiles");
             containerRegistry.RegisterForNavigation<EvlRequestWaitView, EvlRequestWaitViewModel>("EvlRequestWait");
+            containerRegistry.RegisterForNavigation<CreateCommentView, CreateCommentViewModel>("CreateComment");
+            containerRegistry.RegisterForNavigation<CommentListView, CommentListViewModel>("CommentList");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
@@ -94,7 +98,7 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://25d167b9.ngrok.io/"),         // Kamali
+                HostUri = new Uri("http://d82169e9.ngrok.io/"),         // Kamali
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
@@ -107,6 +111,7 @@ namespace Sanaap.App
             containerRegistry.RegisterIdentityClient();
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
+            containerRegistry.Register<ICommentValidator, DefaultCommentValidator>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
