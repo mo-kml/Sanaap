@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ListView AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
+                      ItemsSource="{Binding Policies}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                              EventArgsParameterPath="Item" 
+                                              Command="{Binding ShowPolicy}" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding CarName}"/>
+                                <Label Text="{Binding ColorName}"/>
+                                <Label Text="{Binding InsuranceType}"/>
+                                <Label Text="{Binding CarName}"/>
+                                <Label Text="{Binding PlateNumber}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="اضافه کردن بیمه نامه" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding CreatePolicy}"/>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
