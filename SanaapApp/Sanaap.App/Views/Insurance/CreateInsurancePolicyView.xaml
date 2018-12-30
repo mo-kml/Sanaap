@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="نام خودرو"/>
+            <syncCombobox:SfComboBox DataSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" />
+
+            <Label Text="رنگ خودرو"/>
+            <syncCombobox:SfComboBox DataSource="{Binding Colors}" SelectedItem="{Binding SelectedColor}" />
+
+            <Label Text="شماره شاسی"/>
+            <Entry Text="{Binding Policy.ChasisNo}"/>
+
+            <Label Text="بیمه ها"/>
+            <ScrollView Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal"/>
+            </ScrollView>
+
+            <Label Text="شماره بیمه نامه"/>
+            <Entry Text="{Binding Policy.InsurerNo}"/>
+
+            <Label Text="پلاک"/>
+            <Entry Text="{Binding Policy.Plate}"/>
+
+            <Label Text="نوع بیمه نامه"/>
+            <syncCombobox:SfComboBox DataSource="{Binding InsuranceTypes}" SelectedItem="{Binding SelectedInsuranceType}" />
+
+            <Button Text="{Binding SubmitButtonText}" Command="{Binding Submit}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

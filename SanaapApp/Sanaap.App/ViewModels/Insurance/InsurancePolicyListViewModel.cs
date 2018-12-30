@@ -1,11 +1,9 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
-using PropertyChanged;
+using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
-using Sanaap.Dto;
-using Sanaap.Enums;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -68,13 +66,5 @@ namespace Sanaap.App.ViewModels.Insurance
         }
     }
 
-    [AddINotifyPropertyChangedInterface]
-    public class PolicyItemSource : InsurancePolicyDto
-    {
-        public string ColorName { get; set; }
 
-        public string CarName { get; set; }
-
-        public string InsuranceTypeName => EnumHelper<InsuranceType>.GetDisplayValue(InsuranceType);
-    }
 }

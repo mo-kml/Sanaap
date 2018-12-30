@@ -9,12 +9,16 @@ using Prism;
 using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
+using Sanaap.App.Services.Contracts;
+using Sanaap.App.Services.Implementations;
 using Sanaap.App.ViewModels;
 using Sanaap.App.ViewModels.Comment;
 using Sanaap.App.ViewModels.Content;
+using Sanaap.App.ViewModels.Insurance;
 using Sanaap.App.Views;
 using Sanaap.App.Views.Comment;
 using Sanaap.App.Views.Content;
+using Sanaap.App.Views.Insurance;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using System;
@@ -91,6 +95,8 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<EvlRequestWaitView, EvlRequestWaitViewModel>("EvlRequestWait");
             containerRegistry.RegisterForNavigation<CreateCommentView, CreateCommentViewModel>("CreateComment");
             containerRegistry.RegisterForNavigation<CommentListView, CommentListViewModel>("CommentList");
+            containerRegistry.RegisterForNavigation<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>("CreatePolicy");
+            containerRegistry.RegisterForNavigation<InsurancePolicyListView, InsurancePolicyListViewModel>("PolicyList");
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
@@ -112,6 +118,7 @@ namespace Sanaap.App
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ICommentValidator, DefaultCommentValidator>();
+            containerRegistry.Register<IPolicyService, PolicyService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 

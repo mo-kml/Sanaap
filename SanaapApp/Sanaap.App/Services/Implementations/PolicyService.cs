@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
-using Sanaap.App.ViewModels.Insurance;
 using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
