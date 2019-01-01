@@ -1,4 +1,6 @@
 ﻿using Sanaap.Enums;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
 {
@@ -17,5 +19,9 @@ namespace Sanaap.Model
         public string PlateNumber { get; set; }
 
         public InsuranceType InsuranceType { get; set; }
+
+        [ForeignKey(nameof(CustomerId))]
+        public Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
     }
 }

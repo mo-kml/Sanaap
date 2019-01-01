@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.Insurance
 {
+    public enum EditMethod
+    {
+        Create,
+        Update
+    }
     public class InsurancePolicyListViewModel : BitViewModelBase
     {
         private readonly IPolicyService _policyService;

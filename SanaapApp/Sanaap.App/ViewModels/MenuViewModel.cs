@@ -16,6 +16,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Comments { get; set; }
 
+        public BitDelegateCommand InsurancePolicyList { get; set; }
+
         public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
@@ -42,6 +44,11 @@ namespace Sanaap.App.ViewModels
             Comments = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("/Menu/Nav/Main/CommentList");
+            });
+
+            InsurancePolicyList = new BitDelegateCommand(async () =>
+            {
+                await navigationService.NavigateAsync("/Menu/Nav/Main/InsurancePolicyList");
             });
         }
     }

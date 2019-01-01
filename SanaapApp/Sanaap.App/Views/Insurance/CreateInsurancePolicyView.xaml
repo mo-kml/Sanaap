@@ -2,33 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="نام خودرو"/>
-            <syncCombobox:SfComboBox DataSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" />
+        <ScrollView>
+            <StackLayout>
+                <Label Text="نام خودرو"/>
+                <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCar}" />
 
-            <Label Text="رنگ خودرو"/>
-            <syncCombobox:SfComboBox DataSource="{Binding Colors}" SelectedItem="{Binding SelectedColor}" />
+                <Label Text="رنگ خودرو"/>
+                <syncCombobox:SfComboBox DataSource="{Binding Colors}" AllowFiltering="True" IsEditableMode="True" DisplayMemberPath="Name" SelectedItem="{Binding SelectedColor}" />
 
-            <Label Text="شماره شاسی"/>
-            <Entry Text="{Binding Policy.ChasisNo}"/>
+                <Label Text="شماره شاسی"/>
+                <Entry Text="{Binding Policy.ChasisNo}"/>
 
-            <Label Text="بیمه ها"/>
-            <ScrollView Orientation="Horizontal">
-                <StackLayout Orientation="Horizontal"/>
-            </ScrollView>
+                <Label Text="شماره VIN"/>
+                <Entry Text="{Binding Policy.VIN}"/>
 
-            <Label Text="شماره بیمه نامه"/>
-            <Entry Text="{Binding Policy.InsurerNo}"/>
+                <Label Text="بیمه ها"/>
+                <renderedViews:HorizontalListView 
+                                  ItemSpacing="15"
+                                  ItemHeight="80"
+                                  ItemWidth="80"
+                                  ItemsSource="{Binding Insurers}"
+                                  SnapStyle="Center">
+                    <renderedViews:HorizontalListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Image Source="{Binding Image}" HeightRequest="60"/>
+                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </renderedViews:HorizontalListView.ItemTemplate>
+                </renderedViews:HorizontalListView>
 
-            <Label Text="پلاک"/>
-            <Entry Text="{Binding Policy.Plate}"/>
+                <Label Text="شماره بیمه نامه"/>
+                <Entry Text="{Binding Policy.InsurerNo}"/>
 
-            <Label Text="نوع بیمه نامه"/>
-            <syncCombobox:SfComboBox DataSource="{Binding InsuranceTypes}" SelectedItem="{Binding SelectedInsuranceType}" />
+                <Label Text="پلاک"/>
+                <Entry Text="{Binding Policy.Plate}"/>
 
-            <Button Text="{Binding SubmitButtonText}" Command="{Binding Submit}"/>
-        </StackLayout>
+                <Label Text="نوع بیمه نامه"/>
+                <syncCombobox:SfComboBox DataSource="{Binding InsuranceTypes}" DisplayMemberPath="InsuranceTypeName" SelectedItem="{Binding SelectedInsuranceType}" />
+
+                <Button Text="{Binding SubmitButtonText}" Command="{Binding Submit}"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
