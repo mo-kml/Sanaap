@@ -54,7 +54,7 @@ namespace Sanaap.App.ViewModels
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
+                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
                 {
                     { "InsuranceType", InsuranceType.Badane }
                 });

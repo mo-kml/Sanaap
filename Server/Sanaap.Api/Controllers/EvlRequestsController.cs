@@ -3,8 +3,8 @@ using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
 using Newtonsoft.Json;
-using Sanaap.App.Dto;
 using Sanaap.Data.Contracts;
+using Sanaap.Dto;
 using Sanaap.Enums;
 using Sanaap.Model;
 using System;
@@ -90,7 +90,7 @@ namespace Sanaap.Api.Controllers
                 {
                     evlRequestDto = JsonConvert.DeserializeObject<EvlRequestDto>(await requestPart.ReadAsStringAsync());
 
-                    evlRequestDto.RequestStatus = EvlRequestStatus.SabteAvalie;
+                    evlRequestDto.Status = EvlRequestStatus.SabteAvalie;
 
                     EvlRequest evlRequest = Mapper.FromDtoToEntity(evlRequestDto);
                     evlRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());

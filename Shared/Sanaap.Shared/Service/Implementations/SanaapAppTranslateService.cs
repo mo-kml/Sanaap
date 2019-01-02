@@ -33,6 +33,14 @@ namespace Sanaap.Service.Implementations
             { $"{nameof(InsurancePolicyDto.InsurerNo)}IsEmpty" , "لطفا شماره بیمه نامه را وارد کنید" },
             { $"{nameof(InsurancePolicyDto.PlateNumber)}IsEmpty" , "لطفا شماره پلاک را وارد کنید" },
             { $"{nameof(InsurancePolicyDto.VIN)}IsEmpty" , "لطفا شماره VIN را وارد کنید" },
+            { $"{nameof(EvlRequestDto.AccidentReason)}IsEmpty" , "لطفا علت حادثه را وارد کنید" },
+            { $"{nameof(EvlRequestDto.OwnerFirstName)}IsEmpty" , "نام بیمه گذار خالی میباشد" },
+            { $"{nameof(EvlRequestDto.OwnerLastName)}IsEmpty", "نام خانوادگی بیمه گذار خالی میباشد" },
+            { $"{nameof(EvlRequestDto.AccidentDate)}IsEmpty" , "لطفا تاریخ بروز حادثه را وارد کنید" },
+            { $"{nameof(EvlRequestDto.LostFirstName)}IsEmpty" , "لطفا نام زیان دیده را وارد کنید" },
+            { $"{nameof(EvlRequestDto.LostLastName)}IsEmpty" , "لطفا نام خانوادگی زیان دیده را وارد کنید" },
+            { $"{nameof(EvlRequestDto.LostPlateNumber)}IsEmpty" , "لطفا شماره پلاک زیان دیده را وارد کنید" },
+            { $"{nameof(EvlRequestDto.LostCarId)}IsEmpty" , "لطفا خودرو زیان دیده را انتخاب کنید" },
     };
     }
 }

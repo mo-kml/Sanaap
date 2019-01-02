@@ -43,8 +43,11 @@
     <Compile Update="Views\ContactUsView.xaml.cs">
       <DependentUpon>ContactUsView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainInsuranceView.xaml.cs">
-      <DependentUpon>MainInsuranceView.xaml</DependentUpon>
+    <Compile Update="Views\EvaluationRequest\EvaluationRequestFilesView.xaml.cs">
+      <DependentUpon>EvaluationRequestFilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -62,6 +65,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Content\ShowContentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EvaluationRequest\EvaluationRequestDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Insurance\CreateInsurancePolicyView.xaml">

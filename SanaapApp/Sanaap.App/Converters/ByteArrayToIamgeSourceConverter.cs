@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using Xamarin.Forms;
 
-namespace Sanaap.App.Views.Converters
+namespace Sanaap.App.Converters
 {
     public class ByteArrayToImageSourceConverter : IValueConverter
     {

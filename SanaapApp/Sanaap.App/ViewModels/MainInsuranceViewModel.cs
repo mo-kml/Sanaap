@@ -19,17 +19,17 @@ namespace Sanaap.App.ViewModels
         {
             GotoEvlRequestMapSales = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
+                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
                 {
-                    { "InsuranceType", InsuranceType.Sales }
+                    { nameof(InsuranceType), InsuranceType.Sales }
                 });
             });
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestMap", new NavigationParameters
+                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
                 {
-                    { "InsuranceType", InsuranceType.Badane }
+                    { nameof(InsuranceType), InsuranceType.Badane }
                 });
             });
         }

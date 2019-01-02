@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
-             xmlns:props="clr-namespace:Sanaap.App.Views.Props"
+             xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             x:Class="Sanaap.App.Views.EvlRequestMapView">
+             x:Class="Sanaap.App.Views.MapView">
 
     <StackLayout Spacing="0" Padding="0">
         <AbsoluteLayout VerticalOptions="FillAndExpand" Padding="0">

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+             xmlns:enum="clr-namespace:Sanaap.Enums"
+             x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDetailView"
+             x:Name="requestDetailView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="بیمه گذار/مقصر"/>
+                    <Button Text="{Binding SelectFromInsurances}"/>
+                </StackLayout>
+
+                <Label Text="نام"/>
+                <Entry Text="{Binding Request.OwnerFirstName}"/>
+
+                <Label Text="نام خانوادگی"/>
+                <Entry Text="{Binding Request.OwnerLastName}"/>
+
+                <Label Text="بیمه"/>
+                <renderedViews:HorizontalListView 
+                                  ItemSpacing="15"
+                                  ItemHeight="80"
+                                  ItemWidth="80"
+                                  ItemsSource="{Binding Insurers}"
+                    
+                                  SnapStyle="Center">
+                    <renderedViews:HorizontalListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="White"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="{Binding Image}" HeightRequest="60"/>
+                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </renderedViews:HorizontalListView.ItemTemplate>
+                </renderedViews:HorizontalListView>
+
+                <Label Text="نام خودرو"/>
+                <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCar}" />
+
+                <Label Text="شماره بیمه نامه"/>
+                <Entry Text="{Binding Request.InsurerNo}"/>
+
+                <Label Text="پلاک"/>
+                <Entry Text="{Binding Request.PlateNumber}"/>
+
+                <StackLayout>
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout"
+                                 Binding="{Binding Request.InsuranceType}" Value="Sales">
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="StackLayout"
+                                 Binding="{Binding Request.InsuranceType}" Value="Badane">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+
+                    <Label Text="زیان دیده"/>
+
+
+                    <Label Text="نام"/>
+                    <Entry Text="{Binding Request.LostFirstName}"/>
+
+                    <Label Text="نام خانوادگی"/>
+                    <Entry Text="{Binding Request.LostLastName}"/>
+
+                    <Label Text="نام خودرو"/>
+                    <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding LostSelectedCar}" />
+
+                    <Label Text="پلاک"/>
+                    <Entry Text="{Binding Request.LostPlateNumber}"/>
+                </StackLayout>
+
+                <Label Text="تاریخ وقوع حادثه"/>
+
+                <Label Text="علت وقوع حادثه"/>
+                <Editor Text="{Binding Request.AccidentReason}" HeightRequest="200"/>
+
+                <Button Text="انتخاب محل بازدید" Command="{Binding SelectViewPlace}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

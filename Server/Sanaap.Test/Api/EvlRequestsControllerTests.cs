@@ -2,14 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Sanaap.Api.Controllers;
-using Sanaap.App.Dto;
 using Sanaap.Dto;
-using Sanaap.Enums;
 using Simple.OData.Client;
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Sanaap.Test.Api
@@ -28,18 +25,18 @@ namespace Sanaap.Test.Api
 
                 MultipartFormDataContent content = new MultipartFormDataContent
                 {
-                    new StringContent(JsonConvert.SerializeObject(new EvlRequestDto
-                    {
-                        AccidentDate = DateTimeOffset.UtcNow,
-                        CompanyId = 1,
-                        Description = "Test",
-                        InsuranceNumber = "123-456",
-                        InsuranceTypeEnum = InsuranceType.Sales,
-                        Latitude = 12,
-                        Longitude = 12,
-                        VehicleKindId = 1,
-                        VehicleNumber = "ایران - ب 44 678"
-                    }), Encoding.UTF8, "application/json"),
+                    //new StringContent(JsonConvert.SerializeObject(new EvlRequestDto
+                    //{
+                    //    AccidentDate = DateTimeOffset.UtcNow,
+                    //    CompanyId = 1,
+                    //    AccidentReason = "Test",
+                    //    InsuranceNumber = "123-456",
+                    //    InsuranceTypeEnum = InsuranceType.Sales,
+                    //    Latitude = 12,
+                    //    Longitude = 12,
+                    //    VehicleKindId = 1,
+                    //    VehicleNumber = "ایران - ب 44 678"
+                    //}), Encoding.UTF8, "application/json"),
 
                     { new StreamContent(File.OpenRead(@"C:\Users\SOFT\Desktop\Mohammad.png")), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString(), Guid.Parse("9bbd650e-3415-494d-b382-623a0840ab5a").ToString() }
                 };

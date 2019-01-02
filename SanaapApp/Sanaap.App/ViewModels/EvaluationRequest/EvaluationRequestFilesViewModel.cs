@@ -7,6 +7,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.Constants;
+using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.IO;
@@ -14,10 +15,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms.GoogleMaps;
 
 namespace Sanaap.App.ViewModels
 {
-    public class EvlRequestFilesViewModel : BitViewModelBase
+    public class EvaluationRequestFilesViewModel : BitViewModelBase
     {
         public BitDelegateCommand<EvlRequestFile> TakePhoto { get; set; }
 
@@ -27,13 +29,14 @@ namespace Sanaap.App.ViewModels
 
         public List<EvlRequestFile> Files { get; set; }
 
-        private EvlRequestDto _evlRequest;
+        public EvlRequestDto Request { get; set; }
+
         private readonly IODataClient _oDataClient;
         private readonly INavigationService _navigationService;
         private readonly IUserDialogs _userDialogs;
         private readonly HttpClient _httpClient;
 
-        public EvlRequestFilesViewModel(IMedia media,
+        public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
             INavigationService navigationService,
             IUserDialogs userDialogs,
@@ -118,7 +121,7 @@ namespace Sanaap.App.ViewModels
                     {
                         MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
                         {
-                            new StringContent(JsonConvert.SerializeObject(_evlRequest), Encoding.UTF8, "application/json")
+                            new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
                         };
 
                         foreach (EvlRequestFile file in Files.Where(f => f.Data != null))
@@ -135,22 +138,27 @@ namespace Sanaap.App.ViewModels
 
                         submitEvlRequestExpertResponse.EnsureSuccessStatusCode();
 
-                        _evlRequest = JsonConvert.DeserializeObject<EvlRequestDto>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
+                        Request = JsonConvert.DeserializeObject<EvlRequestDto>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
 
                         await navigationService.NavigateAsync("EvlRequestWait", new NavigationParameters
                         {
-                            { "EvlRequestDto", _evlRequest }
+                            { "EvlRequestDto", Request }
                         });
                     }
                 }
             });
         }
 
-        public async override Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                _evlRequest = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
+                Request = parameters.GetValue<EvlRequestDto>(nameof(EvlRequestDto));
+
+                parameters.TryGetValue(nameof(Position), out Position position);
+
+                Request.Latitude = position.Latitude;
+                Request.Longitude = position.Longitude;
 
                 EvlRequestFileTypeDto[] fileTypes = (await _oDataClient.For<EvlRequestFileTypeDto>("EvlRequestFileTypes").FindEntriesAsync()).ToArray();
 
@@ -162,7 +170,8 @@ namespace Sanaap.App.ViewModels
 
         public override Task OnNavigatedFromAsync(NavigationParameters parameters)
         {
-            parameters.Add("EvlRequestDto", _evlRequest);
+            parameters.Add(nameof(EvlRequestDto), Request);
+            parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
             return base.OnNavigatedFromAsync(parameters);
         }
     }

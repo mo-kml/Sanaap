@@ -1,7 +1,6 @@
 ﻿using Sanaap.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
@@ -10,42 +9,43 @@ namespace Sanaap.Model
     {
         [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; }
-
-        [Required]
         public virtual Guid CustomerId { get; set; }
 
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }
 
-        public string Description { get; set; }
+        public string AccidentReason { get; set; }
 
-        public string OwnerFullName { get; set; }
+        public string OwnerFirstName { get; set; }
 
-        public string OwnerMobileNumber { get; set; }
+        public string OwnerLastName { get; set; }
 
-        public string VehicleNumber { get; set; }
+        public string InsurerNo { get; set; }
 
-        [ForeignKey(nameof(VehicleKindId))]
-        public VehicleKind VehicleKind { get; set; }
+        public int InsurerId { get; set; }
 
-        public int VehicleKindId { get; set; }
+        public int CarId { get; set; }
 
-        [ForeignKey(nameof(CompanyId))]
-        public Company Company { get; set; }
+        public string PlateNumber { get; set; }
 
-        public int CompanyId { get; set; }
-
-        public InsuranceType InsuranceTypeEnum { get; set; }
+        public InsuranceType InsuranceType { get; set; }
 
         public DateTimeOffset AccidentDate { get; set; }
-
-        public string InsuranceNumber { get; set; }
 
         public EvlRequestStatus Status { get; set; }
 
         public List<EvlRequestFile> Files { get; set; }
 
         public virtual EvlRequestExpert EvlRequestExpert { get; set; } = new EvlRequestExpert { };
+
+        //زیان دیده
+        public string LostFirstName { get; set; }
+
+        public string LostLastName { get; set; }
+
+        public int LostCarId { get; set; }
+
+        public string LostPlateNumber { get; set; }
     }
 }

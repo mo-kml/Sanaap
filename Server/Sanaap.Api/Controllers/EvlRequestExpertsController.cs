@@ -4,7 +4,6 @@ using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
 using Newtonsoft.Json;
-using Sanaap.App.Dto;
 using Sanaap.Data.Contracts;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -68,16 +67,14 @@ namespace Sanaap.Api.Controllers
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "2" : "1";
+            soltaniFindExpertParams.Type = evlRequest.InsuranceType == InsuranceType.Sales ? "2" : "1";
             DefaultDateTimeUtils defaultDateTimeUtils = new DefaultDateTimeUtils();
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
             soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
             soltaniFindExpertParams.MapLng = evlRequest.Longitude.ToString();
-            soltaniFindExpertParams.LostName = evlRequest.OwnerFullName != null ? evlRequest.OwnerFullName.Trim() : customer.FirstName;
-            soltaniFindExpertParams.LostFamily = evlRequest.OwnerFullName != null ? "" : customer.LastName;
-            soltaniFindExpertParams.LostMobile = evlRequest.OwnerMobileNumber != null ? evlRequest.OwnerMobileNumber : customer.Mobile;
+            soltaniFindExpertParams.LostName = evlRequest.LostFirstName;
+            soltaniFindExpertParams.LostFamily = evlRequest.LostLastName;
             soltaniFindExpertParams.LostInsuranceID = "1"; // 1
-            soltaniFindExpertParams.LostInsuranceNO = evlRequest.InsuranceNumber;
             soltaniFindExpertParams.LostCarID = "12608"; // 12608
             soltaniFindExpertParams.LostCarType = "415"; // 415
             soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";
@@ -193,16 +190,14 @@ namespace Sanaap.Api.Controllers
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceTypeEnum == InsuranceType.Sales ? "3" : "1";
+            soltaniFindExpertParams.Type = evlRequest.InsuranceType == InsuranceType.Sales ? "3" : "1";
             DefaultDateTimeUtils defaultDateTimeUtils = new DefaultDateTimeUtils();
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
             soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
             soltaniFindExpertParams.MapLng = evlRequest.Longitude.ToString();
-            soltaniFindExpertParams.LostName = evlRequest.OwnerFullName != null ? evlRequest.OwnerFullName.Trim() : customer.FirstName;
-            soltaniFindExpertParams.LostFamily = evlRequest.OwnerFullName != null ? "" : customer.LastName;
-            soltaniFindExpertParams.LostMobile = evlRequest.OwnerMobileNumber != null ? evlRequest.OwnerMobileNumber : customer.Mobile;
+            soltaniFindExpertParams.LostName = evlRequest.LostFirstName;
+            soltaniFindExpertParams.LostFamily = evlRequest.LostLastName;
             soltaniFindExpertParams.LostInsuranceID = "1"; // 1
-            soltaniFindExpertParams.LostInsuranceNO = evlRequest.InsuranceNumber;
             soltaniFindExpertParams.LostCarID = "12608"; // 12608
             soltaniFindExpertParams.LostCarType = "415"; // 415
             soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";

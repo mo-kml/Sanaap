@@ -18,8 +18,7 @@
                             <StackLayout>
                                 <Label Text="{Binding CarName}"/>
                                 <Label Text="{Binding ColorName}"/>
-                                <Label Text="{Binding InsuranceType}"/>
-                                <Label Text="{Binding CarName}"/>
+                                <Label Text="{Binding InsuranceTypeName}"/>
                                 <Label Text="{Binding PlateNumber}"/>
                             </StackLayout>
                         </ViewCell>

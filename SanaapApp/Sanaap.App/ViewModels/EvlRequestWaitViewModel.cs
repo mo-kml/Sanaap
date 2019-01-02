@@ -1,8 +1,8 @@
 ﻿using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.App.Dto;
 using Sanaap.Constants;
+using Sanaap.Dto;
 using Simple.OData.Client;
 using System;
 using System.IO;
@@ -58,7 +58,7 @@ namespace Sanaap.App.ViewModels
             //});
         }
 
-        public async override Task OnNavigatingToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             _evlRequest = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
 

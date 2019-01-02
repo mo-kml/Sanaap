@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
-namespace Sanaap.App.Views.Props
+namespace Sanaap.App.Props
 {
     public static class MapProps
     {

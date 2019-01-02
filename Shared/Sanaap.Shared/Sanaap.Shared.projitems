@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\StatusType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICommentValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IEvlRequestValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IInsuranceValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />
@@ -37,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppLoginValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapAppTranslateService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultEvlRequestValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCommentValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultInsuranceValidator.cs" />

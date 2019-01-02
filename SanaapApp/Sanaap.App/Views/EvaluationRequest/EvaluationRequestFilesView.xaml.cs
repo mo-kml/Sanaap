@@ -2,9 +2,9 @@
 
 namespace Sanaap.App.Views
 {
-    public partial class EvlRequestFilesView : ContentPage
+    public partial class EvaluationRequestFilesView : ContentPage
     {
-        public EvlRequestFilesView()
+        public EvaluationRequestFilesView()
         {
             InitializeComponent();
         }

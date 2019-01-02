@@ -2,8 +2,8 @@
 using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.App.Dto;
 using Sanaap.Constants;
+using Sanaap.Dto;
 using Sanaap.Enums;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,11 +38,13 @@ namespace Sanaap.App.ViewModels
                 Xamarin.Forms.GoogleMaps.Position centerPosition = map.VisibleRegion.Center;
 
                 if (evlRequestDto == null)
+                {
                     evlRequestDto = new EvlRequestDto();
+                }
 
                 evlRequestDto.Latitude = centerPosition.Latitude;
                 evlRequestDto.Longitude = centerPosition.Longitude;
-                evlRequestDto.InsuranceTypeEnum = insuranceType;
+                evlRequestDto.InsuranceType = insuranceType;
 
                 await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
                 {
@@ -51,7 +53,7 @@ namespace Sanaap.App.ViewModels
             });
         }
 
-        public async override Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
             registerCancellationTokenSource?.Cancel();
             registerCancellationTokenSource = new CancellationTokenSource();

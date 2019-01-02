@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace Sanaap.App.Views
 {
-    public partial class EvlRequestMapView : ContentPage
+    public partial class MapView : ContentPage
     {
-        public EvlRequestMapView()
+        public MapView()
         {
             InitializeComponent();
             map.UiSettings.MyLocationButtonEnabled = true;

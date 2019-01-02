@@ -1,0 +1,122 @@
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
+using Prism.Navigation;
+using Prism.Services;
+using Sanaap.App.ItemSources;
+using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views;
+using Sanaap.Constants;
+using Sanaap.Dto;
+using Sanaap.Enums;
+using Sanaap.Service.Contracts;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Sanaap.App.ViewModels.EvaluationRequest
+{
+    public class EvaluationRequestDetailViewModel : BitViewModelBase
+    {
+        private readonly IUserDialogs _userDialogs;
+        private IInitialDataService _initialDataService;
+        private IInsurerService _insurerService;
+        public EvaluationRequestDetailViewModel(
+            IUserDialogs userDialogs,
+            IInitialDataService initialDataService,
+            IInsurerService insurerService,
+            IEvlRequestValidator evlRequestValidator,
+            IPageDialogService dialogService,
+            ISanaapAppTranslateService translateService,
+            INavigationService navigationService)
+        {
+            _userDialogs = userDialogs;
+            _initialDataService = initialDataService;
+            _insurerService = insurerService;
+
+            SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
+            {
+                foreach (InsurersItemSource insurer in Insurers)
+                {
+                    insurer.IsSelected = false;
+                }
+
+                parameter.IsSelected = true;
+
+                SelectedInsurer = parameter;
+            });
+
+            SelectViewPlace = new BitDelegateCommand(async () =>
+              {
+                  requestCancellationTokenSource?.Cancel();
+                  requestCancellationTokenSource = new CancellationTokenSource();
+
+                  using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
+                  {
+                      Request.CarId = SelectedCar.PrmID;
+                      Request.InsurerId = SelectedInsurer.Id;
+                      Request.LostCarId = LostSelectedCar == null ? 0 : LostSelectedCar.PrmID;
+
+                      if (!evlRequestValidator.IsValid(Request, out string message))
+                      {
+                          await dialogService.DisplayAlertAsync(string.Empty, translateService.Translate(message), ConstantStrings.Ok);
+                          return;
+                      }
+
+                      NavigationParameters Parameters = new NavigationParameters();
+                      Parameters.Add(nameof(EvlRequestDto), Request);
+                      Parameters.Add("NextPage", "EvlRequestFiles");
+
+                      await navigationService.NavigateAsync(nameof(MapView), Parameters);
+                  }
+              }, () => SelectedCar != null && SelectedInsurer != null);
+            SelectViewPlace.ObservesProperty(() => SelectedCar);
+            SelectViewPlace.ObservesProperty(() => SelectedInsurer);
+        }
+        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        {
+            requestCancellationTokenSource?.Cancel();
+            requestCancellationTokenSource = new CancellationTokenSource();
+
+            if (parameters.TryGetValue(nameof(EvlRequestDto), out EvlRequestDto requestDto))
+            {
+                Request = requestDto;
+            }
+
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
+            {
+                await syncData();
+            }
+
+            if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
+            {
+                Request.InsuranceType = insuranceType;
+            }
+        }
+
+        public async Task syncData()
+        {
+            Cars = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetCars());
+
+            Insurers = new ObservableCollection<InsurersItemSource>(_insurerService.GetAllInsurers());
+        }
+        public EvlRequestDto Request { get; set; } = new EvlRequestDto();
+
+        public ObservableCollection<ExternalEntityDto> Cars { get; set; }
+
+        public ObservableCollection<InsurersItemSource> Insurers { get; set; }
+
+        public InsurersItemSource SelectedInsurer { get; set; }
+
+        public ExternalEntityDto SelectedCar { get; set; }
+
+        public ExternalEntityDto LostSelectedCar { get; set; }
+
+        public BitDelegateCommand<InsurersItemSource> SelectInsurer { get; set; }
+
+        public BitDelegateCommand SelectViewPlace { get; set; }
+
+        public BitDelegateCommand SelectFromInsurances { get; set; }
+
+        public CancellationTokenSource requestCancellationTokenSource { get; set; }
+    }
+}
