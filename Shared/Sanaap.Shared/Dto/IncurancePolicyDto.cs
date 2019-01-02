@@ -1,10 +1,9 @@
-﻿using Bit.Model.Contracts;
-using Sanaap.Enums;
+﻿using Sanaap.Enums;
 using System;
 
 namespace Sanaap.Dto
 {
-    public class InsurancePolicyDto : IDto
+    public class InsurancePolicyDto : ISanaapDto
     {
         public Guid Id { get; set; }
 
@@ -18,10 +17,16 @@ namespace Sanaap.Dto
 
         public string InsurerNo { get; set; }
 
+        public int InsurerId { get; set; }
+
         public string PlateNumber { get; set; }
 
         public InsuranceType InsuranceType { get; set; }
 
         public Guid CustomerId { get; set; }
+
+        public DateTimeOffset CreatedOn { get; set; }
+
+        public DateTimeOffset ModifiedOn { get; set; }
     }
 }

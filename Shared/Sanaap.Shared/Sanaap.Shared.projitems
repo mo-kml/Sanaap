@@ -10,17 +10,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ErrorMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentListDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ExternalEntityDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CommentDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentCategoryDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentLikeDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentListDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestFileTypeDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestExpertDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\IncurancePolicyDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ISanaapDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
@@ -31,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\StatusType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IAppUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICommentValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IInsuranceValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ICustomerValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\IDateTimeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Contracts\ISanaapOperatorAppLoginValidator.cs" />
@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CustomerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCommentValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultCustomerValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultInsuranceValidator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\DefaultDateTimeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\EnumUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Implementations\SanaapOperatorAppLoginValidator.cs" />

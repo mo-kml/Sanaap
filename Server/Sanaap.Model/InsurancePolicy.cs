@@ -16,6 +16,8 @@ namespace Sanaap.Model
 
         public string InsurerNo { get; set; }
 
+        public int InsurerId { get; set; }
+
         public string PlateNumber { get; set; }
 
         public InsuranceType InsuranceType { get; set; }

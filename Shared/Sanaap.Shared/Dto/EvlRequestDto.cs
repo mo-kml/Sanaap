@@ -1,10 +1,10 @@
-﻿using Bit.Model.Contracts;
+﻿using Sanaap.Dto;
 using Sanaap.Enums;
 using System;
 
 namespace Sanaap.App.Dto
 {
-    public partial class EvlRequestDto : IDto
+    public partial class EvlRequestDto : ISanaapDto
     {
         public Guid Id { get; set; }
 
@@ -31,5 +31,7 @@ namespace Sanaap.App.Dto
         public string InsuranceNumber { get; set; }
 
         public EvlRequestStatus RequestStatus { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset ModifiedOn { get; set; }
     }
 }

@@ -29,6 +29,10 @@ namespace Sanaap.Service.Implementations
             { $"{nameof(CustomerDto.LastName)}MustAtLeast2Characters" , "نام خانوادگی باید حداقل دو حرف باشد" },
             { $"{nameof(CustomerDto.Mobile)}IsEmpty", "شماره تلفن خالی است" },
             { $"{nameof(CustomerDto.Mobile)}IsInvalid" , "شماره تلفن اشتباه است. مثال درست : 09121234567" },
+            { $"{nameof(InsurancePolicyDto.ChasisNo)}IsEmpty" , "شماره شاسی خالی است" },
+            { $"{nameof(InsurancePolicyDto.InsurerNo)}IsEmpty" , "لطفا شماره بیمه نامه را وارد کنید" },
+            { $"{nameof(InsurancePolicyDto.PlateNumber)}IsEmpty" , "لطفا شماره پلاک را وارد کنید" },
+            { $"{nameof(InsurancePolicyDto.VIN)}IsEmpty" , "لطفا شماره VIN را وارد کنید" },
     };
     }
 }

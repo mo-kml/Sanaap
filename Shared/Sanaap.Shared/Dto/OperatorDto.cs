@@ -1,10 +1,9 @@
-﻿using Bit.Model.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Sanaap.Dto
 {
-    public partial class OperatorDto : IDto
+    public partial class OperatorDto : ISanaapDto
     {
         public virtual Guid Id { get; set; }
 
@@ -17,5 +16,9 @@ namespace Sanaap.Dto
         public virtual string Password { get; set; }
 
         public virtual List<SosRequestPhoneDto> SosRequestPhoneDtos { set; get; }
+
+        public virtual DateTimeOffset ModifiedOn { set; get; }
+
+        public DateTimeOffset CreatedOn { get; set; }
     }
 }

@@ -1,10 +1,9 @@
-﻿using Bit.Model.Contracts;
-using Sanaap.Enums;
+﻿using Sanaap.Enums;
 using System;
 
 namespace Sanaap.Dto
 {
-    public partial class SosRequestPhoneDto : IDto
+    public partial class SosRequestPhoneDto : ISanaapDto
     {
         public virtual Guid Id { get; set; }
 
@@ -17,5 +16,7 @@ namespace Sanaap.Dto
         public EvlRequestStatus SosRequestStatus { get; set; }
 
         public virtual DateTimeOffset ModifiedOn { set; get; }
+
+        public DateTimeOffset CreatedOn { get; set; }
     }
 }

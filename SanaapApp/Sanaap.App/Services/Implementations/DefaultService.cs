@@ -1,11 +1,12 @@
 ﻿using Sanaap.App.Services.Contracts;
+using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.Services.Implementations
 {
-    public class DefaultService<T> : IService<T> where T : class
+    public class DefaultService<T> : IService<T> where T : class, ISanaapDto
     {
         private readonly IODataClient _oDataClient;
         protected readonly string controllerName;
@@ -40,6 +41,7 @@ namespace Sanaap.App.Services.Implementations
         public virtual async Task<T> UpdateAsync(T dto)
         {
             return await _oDataClient.For<T>(controllerName)
+                                .Key(dto.Id)
                                 .Set(dto)
                                 .UpdateEntryAsync();
         }

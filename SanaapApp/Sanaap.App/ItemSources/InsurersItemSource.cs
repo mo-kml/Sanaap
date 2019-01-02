@@ -11,5 +11,7 @@ namespace Sanaap.App.ItemSources
         public string Name { get; set; }
 
         public ImageSource Image { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

@@ -1,10 +1,9 @@
-﻿using Bit.Model.Contracts;
-using Sanaap.Enums;
+﻿using Sanaap.Enums;
 using System;
 
 namespace Sanaap.Dto
 {
-    public class CommentDto : IDto
+    public class CommentDto : ISanaapDto
     {
         public CommentType CommentType { get; set; }
 

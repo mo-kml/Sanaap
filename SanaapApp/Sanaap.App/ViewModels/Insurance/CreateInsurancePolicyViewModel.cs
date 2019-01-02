@@ -1,15 +1,18 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
+using Sanaap.Service.Contracts;
 using Simple.OData.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Reactive.Linq;
 using System.Threading;
@@ -24,15 +27,25 @@ namespace Sanaap.App.ViewModels.Insurance
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
         private readonly IUserDialogs _userDialogs;
-        public CreateInsurancePolicyViewModel(IInsurerService insurerService, IUserDialogs userDialogs, HttpClient httpClient, IInitialDataService initialDataService)
+        private readonly IInsurerService _insurerService;
+        public CreateInsurancePolicyViewModel(IInsurerService insurerService,
+            IUserDialogs userDialogs,
+            HttpClient httpClient,
+            IInitialDataService initialDataService,
+            IODataClient oDataClient,
+            IInsuranceValidator insuranceValidator,
+            IPageDialogService pageDialogService,
+            IPolicyService policyService,
+            INavigationService navigationService,
+            ISanaapAppTranslateService translateService
+            )
         {
-            //_oDataClient = oDataClient;
-            //_httpClient = httpClient;
+            _oDataClient = oDataClient;
             _userDialogs = userDialogs;
-
+            _insurerService = insurerService;
             _initialDataService = initialDataService;
 
-            Insurers = insurerService.GetAllInsurers();
+
 
             foreach (InsuranceType item in (InsuranceType[])Enum.GetValues(typeof(InsuranceType)))
             {
@@ -45,53 +58,120 @@ namespace Sanaap.App.ViewModels.Insurance
 
             Submit = new BitDelegateCommand(async () =>
               {
+                  insuranceCancellationTokenSource?.Cancel();
+                  insuranceCancellationTokenSource = new CancellationTokenSource();
 
-
-                  policyCancellationTokenSource?.Cancel();
-                  policyCancellationTokenSource = new CancellationTokenSource();
-
-                  using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: policyCancellationTokenSource.Cancel))
+                  using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
                   {
-                      if (method == EditMethod.Create)
+                      if (!insuranceValidator.IsValid(Policy, out string errorMessage))
                       {
-                          //await oDataClient.For<InsurancePolicyDto>("InsurancePolicies")
-                          //.Set(Policy)
-                          //.InsertEntryAsync();
+                          await pageDialogService.DisplayAlertAsync(string.Empty, translateService.Translate(errorMessage), ConstantStrings.Ok);
+                          return;
                       }
-                      else
+
+                      Policy.ColorId = SelectedColor.PrmID;
+                      Policy.CarId = SelectedCar.PrmID;
+                      Policy.InsuranceType = SelectedInsuranceType.InsuranceType;
+                      Policy.InsurerId = SelectedInsurer.Id;
+
+                      policyCancellationTokenSource?.Cancel();
+                      policyCancellationTokenSource = new CancellationTokenSource();
+
+                      using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: policyCancellationTokenSource.Cancel))
                       {
-                          //await oDataClient.For<InsurancePolicyDto>("InsurancePolicies")
-                          //.Set(Policy)
-                          //.UpdateEntryAsync();
+                          if (method == EditMethod.Create)
+                          {
+                              await policyService.AddAsync(Policy);
+                          }
+                          else
+                          {
+                              await policyService.UpdateAsync(Policy);
+                          }
                       }
                   }
-              });
+                  await pageDialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
+
+                  await navigationService.GoBackAsync();
+
+              }, () => SelectedCar != null && SelectedColor != null && SelectedInsuranceType != null && SelectedInsurer != null);
+            Submit.ObservesProperty(() => SelectedCar);
+            Submit.ObservesProperty(() => SelectedColor);
+            Submit.ObservesProperty(() => SelectedInsuranceType);
+            Submit.ObservesProperty(() => SelectedInsurer);
+
+            SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
+            {
+                foreach (InsurersItemSource insurer in Insurers)
+                {
+                    insurer.IsSelected = false;
+                }
+
+                parameter.IsSelected = true;
+
+                SelectedInsurer = parameter;
+            });
         }
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            parameters.TryGetValue("Method", out method);
+            insuranceCancellationTokenSource?.Cancel();
+            insuranceCancellationTokenSource = new CancellationTokenSource();
 
-            if (method == EditMethod.Create)
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
             {
-                SubmitButtonText = "اضافه کردن";
-            }
-            else
-            {
-                SubmitButtonText = "ویرایش";
-            }
+                await syncData();
 
-            using (_userDialogs.Loading(ConstantStrings.Loading))
-            {
-                Cars = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetCars());
+                parameters.TryGetValue("Method", out method);
 
-                Colors = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetColors());
+                if (parameters.TryGetValue("Policy", out InsurancePolicyDto policy))
+                {
+                    Policy = new InsurancePolicyDto
+                    {
+                        CarId = policy.CarId,
+                        ChasisNo = policy.ChasisNo,
+                        ColorId = policy.ColorId,
+                        CustomerId = policy.CustomerId,
+                        Id = policy.Id,
+                        InsuranceType = policy.InsuranceType,
+                        InsurerId = policy.InsurerId,
+                        InsurerNo = policy.InsurerNo,
+                        PlateNumber = policy.PlateNumber,
+                        VIN = policy.VIN
+                    };
+
+                    SelectedColor = Colors.FirstOrDefault(c => c.PrmID == Policy.ColorId);
+                    SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Policy.CarId);
+                    SelectedInsuranceType = InsuranceTypes.FirstOrDefault(c => c.InsuranceType == Policy.InsuranceType);
+                    SelectedInsurer = Insurers.FirstOrDefault(c => c.Id == Policy.InsurerId);
+                    SelectedInsurer.IsSelected = true;
+                }
+
+                if (method == EditMethod.Create)
+                {
+                    SubmitButtonText = "اضافه کردن";
+                }
+                else
+                {
+                    SubmitButtonText = "ویرایش";
+                }
             }
         }
-        public InsurancePolicyDto Policy { get; set; }
+
+        public async Task syncData()
+        {
+            Cars = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetCars());
+
+            Colors = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetColors());
+
+            Insurers = new ObservableCollection<InsurersItemSource>(_insurerService.GetAllInsurers());
+        }
+
+        public InsurancePolicyDto Policy { get; set; } = new InsurancePolicyDto();
 
         public BitDelegateCommand Submit { get; set; }
 
         public BitDelegateCommand SearchInCars { get; set; }
+
+        public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
 
         public string CarSearchText { get; set; }
 
@@ -101,11 +181,20 @@ namespace Sanaap.App.ViewModels.Insurance
 
         public ObservableCollection<ExternalEntityDto> Cars { get; set; }
 
-        public InsurersItemSource[] Insurers { get; set; }
+        public ObservableCollection<InsurersItemSource> Insurers { get; set; }
+
+        public InsurersItemSource SelectedInsurer { get; set; }
 
         public List<InsuranceTypeItemSource> InsuranceTypes { get; set; } = new List<InsuranceTypeItemSource>();
 
         public InsuranceTypeItemSource SelectedInsuranceType { get; set; }
+
+        public ExternalEntityDto SelectedColor { get; set; }
+
+        public ExternalEntityDto SelectedCar { get; set; }
+
+
+        public BitDelegateCommand<InsurersItemSource> SelectInsurer { get; set; }
 
         public CancellationTokenSource policyCancellationTokenSource { get; set; }
     }

@@ -21,6 +21,7 @@
         public static string FindNearExpertError = "خطا در یافتن کارشناس";
         public static string FindNearExpertNotResult = "کارشناسی پاسخ گو نیست";
         public static string InvalidVerifyCode = "کد تایید وارد شده معتبر نیست لطفا دوباره تلاش کنید";
+        public static string SuccessfulProcess = "عملیات با موفقیت انجام شد";
         public static string SanapLogin = "sanapLogin";
     }
 

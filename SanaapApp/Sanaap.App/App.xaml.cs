@@ -109,7 +109,7 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://d82169e9.ngrok.io/"),         // Kamali
+                HostUri = new Uri("http://04a26666.ngrok.io/"),         // Kamali
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
@@ -128,6 +128,7 @@ namespace Sanaap.App
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
             containerRegistry.Register<ICommentValidator, DefaultCommentValidator>();
+            containerRegistry.Register<IInsuranceValidator, DefaultInsuranceValidator>();
             containerRegistry.Register<IPolicyService, PolicyService>();
             containerRegistry.Register<IInsurerService, InsurerService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();

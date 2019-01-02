@@ -5,7 +5,7 @@
              x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <ListView AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
+            <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Policies}">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" 

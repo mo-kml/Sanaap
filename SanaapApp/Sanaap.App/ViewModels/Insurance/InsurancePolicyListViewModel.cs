@@ -4,7 +4,6 @@ using Prism.Navigation;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +26,9 @@ namespace Sanaap.App.ViewModels.Insurance
 
             CreatePolicy = new BitDelegateCommand(async () =>
               {
+                  NavigationParameters parameters = new NavigationParameters();
+                  parameters.Add("Method", EditMethod.Create);
+
                   await navigationService.NavigateAsync("CreatePolicy");
               });
 
@@ -34,13 +36,20 @@ namespace Sanaap.App.ViewModels.Insurance
               {
                   NavigationParameters parameters = new NavigationParameters();
                   parameters.Add("Policy", policy);
+                  parameters.Add("Method", EditMethod.Update);
 
                   await navigationService.NavigateAsync("CreatePolicy", parameters);
               });
         }
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            await loadInsurances();
+            insuranceCancellationTokenSource?.Cancel();
+            insuranceCancellationTokenSource = new CancellationTokenSource();
+
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
+            {
+                await loadInsurances();
+            }
         }
         public ObservableCollection<PolicyItemSource> Policies { get; set; }
 
@@ -52,24 +61,8 @@ namespace Sanaap.App.ViewModels.Insurance
 
         public async Task loadInsurances()
         {
-
-            try
-            {
-                insuranceCancellationTokenSource?.Cancel();
-                insuranceCancellationTokenSource = new CancellationTokenSource();
-
-                using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
-                {
-                    Policies = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurances());
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
+            Policies = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurances());
         }
+
     }
-
-
 }

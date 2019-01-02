@@ -4,7 +4,8 @@
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView">
+             x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView"
+             x:Name="createInsuranceView">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -26,11 +27,25 @@
                                   ItemHeight="80"
                                   ItemWidth="80"
                                   ItemsSource="{Binding Insurers}"
+                    
                                   SnapStyle="Center">
                     <renderedViews:HorizontalListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout>
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="White"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference createInsuranceView}}" CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
                                     <Image Source="{Binding Image}" HeightRequest="60"/>
                                     <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
                                 </StackLayout>
@@ -43,7 +58,7 @@
                 <Entry Text="{Binding Policy.InsurerNo}"/>
 
                 <Label Text="پلاک"/>
-                <Entry Text="{Binding Policy.Plate}"/>
+                <Entry Text="{Binding Policy.PlateNumber}"/>
 
                 <Label Text="نوع بیمه نامه"/>
                 <syncCombobox:SfComboBox DataSource="{Binding InsuranceTypes}" DisplayMemberPath="InsuranceTypeName" SelectedItem="{Binding SelectedInsuranceType}" />

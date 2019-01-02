@@ -44,6 +44,7 @@ namespace Sanaap.App.Services.Implementations
                     ColorId = insurance.ColorId,
                     Id = insurance.Id,
                     InsurerNo = insurance.InsurerNo,
+                    InsurerId = insurance.InsurerId,
                     PlateNumber = insurance.PlateNumber,
                     VIN = insurance.VIN,
                     ColorName = colors.FirstOrDefault(c => c.PrmID == insurance.ColorId)?.Name,
