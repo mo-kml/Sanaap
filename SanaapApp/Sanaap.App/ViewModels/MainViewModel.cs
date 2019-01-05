@@ -52,6 +52,8 @@ namespace Sanaap.App.ViewModels
                 await navigationService.NavigateAsync("MainInsurance");
             });
 
+
+
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
@@ -123,6 +125,8 @@ namespace Sanaap.App.ViewModels
             await _initialDataService.GetCars();
 
             await _initialDataService.GetColors();
+
+            await _initialDataService.GetCurrentUserInfo();
         }
     }
 }

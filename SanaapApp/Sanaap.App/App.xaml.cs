@@ -9,6 +9,8 @@ using Prism;
 using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
+using Sanaap.App.Helpers.Contracts;
+using Sanaap.App.Helpers.Implementations;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Services.Implementations;
 using Sanaap.App.ViewModels;
@@ -68,7 +70,7 @@ namespace Sanaap.App
                 await NavigationService.NavigateAsync("/Login");
             }
 
-            //await NavigationService.NavigateAsync("CreatePolicy");
+            //await NavigationService.NavigateAsync("EvlRequestFile");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -98,12 +100,14 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
             containerRegistry.RegisterForNavigation<MapView, MapViewModel>();
             containerRegistry.RegisterForNavigation<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>("EvlRequestDetail");
-            containerRegistry.RegisterForNavigation<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>("EvlRequestFiles");
+            containerRegistry.RegisterForNavigation<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>("EvlRequestFile");
             containerRegistry.RegisterForNavigation<EvlRequestWaitView, EvlRequestWaitViewModel>("EvlRequestWait");
             containerRegistry.RegisterForNavigation<CreateCommentView, CreateCommentViewModel>("CreateComment");
             containerRegistry.RegisterForNavigation<CommentListView, CommentListViewModel>("CommentList");
             containerRegistry.RegisterForNavigation<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>("CreatePolicy");
             containerRegistry.RegisterForNavigation<InsurancePolicyListView, InsurancePolicyListViewModel>("InsurancePolicyList");
+            containerRegistry.RegisterForNavigation<EvlRequestProgressView, EvlRequestProgressViewModel>("EvlRequestProgress");
+            containerRegistry.RegisterForNavigation<EvaluationRequestListView, EvaluationRequestListViewModel>("EvlRequestList");
 
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
@@ -112,7 +116,7 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://04a26666.ngrok.io/"),         // Kamali
+                HostUri = new Uri("http://29ca3b9f.ngrok.io/"),
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",
@@ -138,6 +142,8 @@ namespace Sanaap.App
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<IInitialDataService, InitialDataService>();
+            containerRegistry.RegisterSingleton<IPhotoHelper, PhotoHelper>();
+            containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();

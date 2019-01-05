@@ -1,11 +1,16 @@
 ﻿using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.ItemSources;
+using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
 using Sanaap.Dto;
+using Sanaap.Enums;
+using Sanaap.Service.Contracts;
 using Simple.OData.Client;
 using System;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -31,16 +36,23 @@ namespace Sanaap.App.ViewModels
 
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
-
+        private readonly IDateTimeUtils _dateTimeUtils;
+        private IInitialDataService _initialDataService;
+        private readonly HttpClient _httpClient;
         public EvlRequestWaitViewModel(INavigationService navigationService,
             IODataClient odataClient,
             IDeviceService deviceService,
             IODataClient oDataClient,
+            HttpClient httpClient,
+            IDateTimeUtils dateTimeUtils,
+            IInitialDataService initialDataService,
             IPageDialogService pageDialogService)
         {
             _odataClient = odataClient;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
+            _initialDataService = initialDataService;
+            _httpClient = httpClient;
 
             GoToMain = new BitDelegateCommand(async () =>
             {
@@ -60,7 +72,7 @@ namespace Sanaap.App.ViewModels
 
         public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            _evlRequest = parameters.GetValue<EvlRequestDto>("EvlRequestDto");
+            _evlRequest = parameters.GetValue<EvlRequestDto>(nameof(EvlRequestItemSource));
 
             Message = ConstantStrings.ExpertFinding;
             IsVisibleBefore = true;
@@ -69,11 +81,22 @@ namespace Sanaap.App.ViewModels
             string result = null;
             try
             {
-                result = await _odataClient.For<string>("EvlRequestExperts")
-                    .Function("FindEvlRequestExpert")
-                    .Set(new { evlRequestId = _evlRequest.Id })
-                    .FindEntryAsync();
+                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
+                FindExpertRequestDto findExpertDto = new FindExpertRequestDto();
+                findExpertDto.UserID = customer.Id.ToString();
+                findExpertDto.RequestID = _evlRequest.Id.ToString();
+                findExpertDto.Type = _evlRequest.InsuranceType == InsuranceType.Sales ? 2 : 1;
+                findExpertDto.AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(_evlRequest.AccidentDate);
+                findExpertDto.MapLat = _evlRequest.Latitude.ToString();
+                findExpertDto.MapLng = _evlRequest.Longitude.ToString();
+                findExpertDto.LostName = _evlRequest.LostFirstName;
+                findExpertDto.LostFamily = _evlRequest.LostLastName;
+                findExpertDto.LostInsuranceID = 1; // 1
+                findExpertDto.LostCarID = _evlRequest.LostCarId;
+                findExpertDto.LostCarType = "415"; // 415
+                findExpertDto.Address = "یوسف آباد کوچه هفتم";
 
+                //_httpClient.PostAsync("FindNearExpert",)
             }
             catch (Exception ex)
             {

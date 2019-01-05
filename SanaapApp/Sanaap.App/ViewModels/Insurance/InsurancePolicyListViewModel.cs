@@ -35,10 +35,20 @@ namespace Sanaap.App.ViewModels.Insurance
             ShowPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
               {
                   NavigationParameters parameters = new NavigationParameters();
-                  parameters.Add("Policy", policy);
-                  parameters.Add("Method", EditMethod.Update);
 
-                  await navigationService.NavigateAsync("CreatePolicy", parameters);
+                  if (Selective)
+                  {
+                      parameters.Add("Policy", policy);
+
+                      await navigationService.GoBackAsync(parameters);
+                  }
+                  else
+                  {
+                      parameters.Add("Policy", policy);
+                      parameters.Add("Method", EditMethod.Update);
+
+                      await navigationService.NavigateAsync("CreatePolicy", parameters);
+                  }
               });
         }
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
@@ -50,12 +60,19 @@ namespace Sanaap.App.ViewModels.Insurance
             {
                 await loadInsurances();
             }
+
+            if (parameters.TryGetValue(nameof(Selective), out bool selective))
+            {
+                Selective = selective;
+            }
         }
         public ObservableCollection<PolicyItemSource> Policies { get; set; }
 
         public BitDelegateCommand CreatePolicy { get; set; }
 
         public BitDelegateCommand<PolicyItemSource> ShowPolicy { get; set; }
+
+        public bool Selective { get; set; } = false;
 
         public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
 

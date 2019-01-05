@@ -9,5 +9,7 @@ namespace Sanaap.App.Services.Contracts
         Task<IEnumerable<ExternalEntityDto>> GetCars();
 
         Task<IEnumerable<ExternalEntityDto>> GetColors();
+
+        Task<CustomerDto> GetCurrentUserInfo();
     }
 }

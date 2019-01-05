@@ -8,18 +8,18 @@
              x:Name="requestDetailView">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Padding="10">
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="بیمه گذار/مقصر"/>
-                    <Button Text="{Binding SelectFromInsurances}"/>
+                    <Button Command="{Binding SelectFromInsurances}"/>
                 </StackLayout>
 
                 <Label Text="نام"/>
-                <Entry Text="{Binding Request.OwnerFirstName}"/>
+                <Entry Text="{Binding Request.OwnerFirstName,Mode=TwoWay}"/>
 
                 <Label Text="نام خانوادگی"/>
-                <Entry Text="{Binding Request.OwnerLastName}"/>
+                <Entry Text="{Binding Request.OwnerLastName,Mode=TwoWay}"/>
 
                 <Label Text="بیمه"/>
                 <renderedViews:HorizontalListView 
@@ -63,17 +63,7 @@
                 <Label Text="پلاک"/>
                 <Entry Text="{Binding Request.PlateNumber}"/>
 
-                <StackLayout>
-                    <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout"
-                                 Binding="{Binding Request.InsuranceType}" Value="Sales">
-                            <Setter Property="IsVisible" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger TargetType="StackLayout"
-                                 Binding="{Binding Request.InsuranceType}" Value="Badane">
-                            <Setter Property="IsVisible" Value="False"/>
-                        </DataTrigger>
-                    </StackLayout.Triggers>
+                <StackLayout IsVisible="{Binding Request.IsSales}">
 
                     <Label Text="زیان دیده"/>
 

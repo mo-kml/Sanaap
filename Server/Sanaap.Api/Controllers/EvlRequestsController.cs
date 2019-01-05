@@ -21,7 +21,12 @@ namespace Sanaap.Api.Controllers
 {
     public class EvlRequestsController : DtoController<EvlRequestDto>
     {
+        public virtual IUserInformationProvider UserInformationProvider { get; set; }
+
         public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
+
+        public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> Mapper { get; set; }
+
 
         public class UpdateRequestStatusArgs
         {
@@ -39,9 +44,11 @@ namespace Sanaap.Api.Controllers
         }
 
         [Function]
-        public virtual async Task<List<EvlRequest>> GetCustomerEvlRequests(Guid customerId, CancellationToken cancellationToken)
+        public virtual async Task<IQueryable<EvlRequestDto>> GetCustomerEvlRequests(CancellationToken cancellationToken)
         {
-            return (await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.CustomerId == customerId).ToList();
+            Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+
+            return Mapper.FromEntityQueryToDtoQuery((await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.CustomerId == customerId));
         }
 
         [Function]
@@ -64,6 +71,8 @@ namespace Sanaap.Api.Controllers
         public virtual ISanaapRepository<EvlRequestFile> EvlRequestFilesRepository { get; set; }
 
         public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
+
+        public virtual ISanaapRepository<EvlRequestProgress> EvlRequestProgressesRepository { get; set; }
 
         public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> Mapper { get; set; }
 
@@ -94,8 +103,11 @@ namespace Sanaap.Api.Controllers
 
                     EvlRequest evlRequest = Mapper.FromDtoToEntity(evlRequestDto);
                     evlRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+                    evlRequest.Code = DateTimeOffset.UtcNow.Ticks;
 
                     evlRequestDto = Mapper.FromEntityToDto(await EvlRequestsRepository.AddAsync(evlRequest, cancellationToken));
+
+                    await EvlRequestProgressesRepository.AddAsync(new EvlRequestProgress { EvlRequestId = evlRequestDto.Id, EvlRequestStatus = EvlRequestStatus.SabteAvalie }, cancellationToken);
 
                     isFirstPart = false;
 
@@ -105,12 +117,12 @@ namespace Sanaap.Api.Controllers
                 {
                     byte[] data = await requestPart.ReadAsByteArrayAsync();
 
-                    string filename = Path.GetFileName(requestPart.Headers.ContentDisposition.FileName.Trim('\"'));
+                    int typeId = int.Parse(Path.GetFileName(requestPart.Headers.ContentDisposition.FileName.Trim('\"')));
 
                     await EvlRequestFilesRepository.AddAsync(new EvlRequestFile
                     {
                         EvlRequestId = evlRequestDto.Id,
-                        FileTypeId = Guid.Parse(filename),
+                        TypeId = typeId,
                         File = data
                     }, cancellationToken);
                 }

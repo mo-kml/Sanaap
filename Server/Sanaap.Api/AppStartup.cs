@@ -122,7 +122,7 @@ namespace Sanaap.Api
 
             services.AddHttpClient("SoltaniHttpClient", httpClient =>
             {
-                httpClient.BaseAddress = new Uri("http://5.144.128.234:8800/");
+                httpClient.BaseAddress = new Uri("http://5.144.128.234:8800/api/Portal");
             });
         }
 

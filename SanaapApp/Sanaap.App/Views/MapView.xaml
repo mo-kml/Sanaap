@@ -14,7 +14,7 @@
 
             <ff:SvgCachedImage Grid.Row="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.14,0.14" Source="resource://Sanaap.App.Images.pinn.svg">
                 <ff:SvgCachedImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding UpdateLocationAndGotoDetail}" CommandParameter="{x:Reference map} "/>
+                    <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
                 </ff:SvgCachedImage.GestureRecognizers>
 
             </ff:SvgCachedImage>

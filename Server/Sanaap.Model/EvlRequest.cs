@@ -35,6 +35,8 @@ namespace Sanaap.Model
 
         public EvlRequestStatus Status { get; set; }
 
+        public EvlRequestType EvlRequestType { get; set; }
+
         public List<EvlRequestFile> Files { get; set; }
 
         public virtual EvlRequestExpert EvlRequestExpert { get; set; } = new EvlRequestExpert { };
@@ -47,5 +49,7 @@ namespace Sanaap.Model
         public int LostCarId { get; set; }
 
         public string LostPlateNumber { get; set; }
+
+        public long Code { get; set; }
     }
 }

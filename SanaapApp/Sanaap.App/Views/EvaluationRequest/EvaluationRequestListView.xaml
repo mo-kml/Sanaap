@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                              EventArgsParameterPath="Item" 
+                                              Command="{Binding ShowRequestProgress}" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Code}"/>
+                                <Label Text="{Binding RequestTypeName}"/>
+                                <Label Text="{Binding Date}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

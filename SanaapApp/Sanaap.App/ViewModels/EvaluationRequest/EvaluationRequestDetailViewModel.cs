@@ -10,6 +10,7 @@ using Sanaap.Dto;
 using Sanaap.Enums;
 using Sanaap.Service.Contracts;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,6 +46,14 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 SelectedInsurer = parameter;
             });
 
+            SelectFromInsurances = new BitDelegateCommand(async () =>
+              {
+                  NavigationParameters parameters = new NavigationParameters();
+                  parameters.Add("Selective", true);
+
+                  await navigationService.NavigateAsync("InsurancePolicyList", parameters);
+              });
+
             SelectViewPlace = new BitDelegateCommand(async () =>
               {
                   requestCancellationTokenSource?.Cancel();
@@ -63,8 +72,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       }
 
                       NavigationParameters Parameters = new NavigationParameters();
-                      Parameters.Add(nameof(EvlRequestDto), Request);
-                      Parameters.Add("NextPage", "EvlRequestFiles");
+                      Parameters.Add(nameof(EvlRequestItemSource), Request);
+                      Parameters.Add("NextPage", "EvlRequestFile");
 
                       await navigationService.NavigateAsync(nameof(MapView), Parameters);
                   }
@@ -77,9 +86,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             requestCancellationTokenSource?.Cancel();
             requestCancellationTokenSource = new CancellationTokenSource();
 
-            if (parameters.TryGetValue(nameof(EvlRequestDto), out EvlRequestDto requestDto))
+            if (parameters.TryGetValue(nameof(EvlRequestItemSource), out EvlRequestItemSource requestItemSource))
             {
-                Request = requestDto;
+                Request = requestItemSource;
             }
 
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
@@ -90,6 +99,29 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
             {
                 Request.InsuranceType = insuranceType;
+
+                Request.IsSales = insuranceType == InsuranceType.Sales;
+            }
+
+            if (parameters.TryGetValue("Policy", out PolicyItemSource policy))
+            {
+                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
+
+                insuranceType = Request.InsuranceType;
+
+                Request = new EvlRequestItemSource
+                {
+                    OwnerFirstName = customer.FirstName,
+                    OwnerLastName = customer.LastName,
+                    InsurerNo = policy.InsurerNo,
+                    PlateNumber = policy.PlateNumber,
+                    InsuranceType = insuranceType
+                };
+
+                SelectedInsurer = Insurers.FirstOrDefault(i => i.Id == policy.InsurerId);
+                SelectedInsurer.IsSelected = true;
+
+                SelectedCar = Cars.FirstOrDefault(c => c.PrmID == policy.CarId);
             }
         }
 
@@ -99,7 +131,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             Insurers = new ObservableCollection<InsurersItemSource>(_insurerService.GetAllInsurers());
         }
-        public EvlRequestDto Request { get; set; } = new EvlRequestDto();
+        public EvlRequestItemSource Request { get; set; } = new EvlRequestItemSource();
 
         public ObservableCollection<ExternalEntityDto> Cars { get; set; }
 

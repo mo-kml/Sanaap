@@ -37,6 +37,8 @@ namespace Sanaap.Dto
 
         public EvlRequestStatus Status { get; set; }
 
+        public EvlRequestType EvlRequestType { get; set; }
+
         //زیان دیده
         public string LostFirstName { get; set; }
 
@@ -45,5 +47,7 @@ namespace Sanaap.Dto
         public int LostCarId { get; set; }
 
         public string LostPlateNumber { get; set; }
+
+        public long Code { get; set; }
     }
 }

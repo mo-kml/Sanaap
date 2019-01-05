@@ -2,10 +2,11 @@
 
 namespace Sanaap.App.Dto
 {
-    public class EvlRequestFile : BindableBase
+    public class EvlRequestFileDto : BindableBase
     {
         public byte[] Data { get; set; }
 
-        public EvlRequestFileTypeDto FileType { get; set; }
+        public int TypeId { get; set; }
+
     }
 }

@@ -1,149 +1,115 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Newtonsoft.Json;
-using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Dto;
+using Sanaap.App.Helpers.Contracts;
+using Sanaap.App.ItemSources;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace Sanaap.App.ViewModels
 {
     public class EvaluationRequestFilesViewModel : BitViewModelBase
     {
-        public BitDelegateCommand<EvlRequestFile> TakePhoto { get; set; }
-
-        public BitDelegateCommand<EvlRequestFile> PickFromGallery { get; set; }
+        public BitDelegateCommand<EvlRequestFileItemSource> TakePhoto { get; set; }
 
         public BitDelegateCommand Submit { get; set; }
 
-        public List<EvlRequestFile> Files { get; set; }
+        public ObservableCollection<EvlRequestFileItemSource> Files { get; set; }
 
-        public EvlRequestDto Request { get; set; }
+        public EvlRequestItemSource Request { get; set; }
 
         private readonly IODataClient _oDataClient;
         private readonly INavigationService _navigationService;
         private readonly IUserDialogs _userDialogs;
-        private readonly HttpClient _httpClient;
-
         public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
             INavigationService navigationService,
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService,
-            HttpClient httpClient)
+            IPhotoHelper photoHelper,
+            IClientAppProfile clientApp,
+            ISecurityService securityService)
         {
             _oDataClient = oDataClient;
             _navigationService = navigationService;
             _userDialogs = userDialogs;
-            _httpClient = httpClient;
 
-            TakePhoto = new BitDelegateCommand<EvlRequestFile>(async (file) =>
+            TakePhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (file) =>
             {
-                if (!CrossMedia.Current.IsTakePhotoSupported)
+                if (file.TypeName == "بیشتر")
                 {
-                    await pageDialogService.DisplayAlertAsync("", "دسترسی به دوربین وجود ندارد", "باشه");
-                    return;
+                    Files.Add(new EvlRequestFileItemSource { TypeId = file.TypeId, TypeName = file.TypeName, Image = file.Image });
                 }
 
-                MediaFile newFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                {
-                    PhotoSize = PhotoSize.Small,
-                    SaveToAlbum = true,
-                    DefaultCamera = CameraDevice.Rear,
-                    AllowCropping = true,
-                    RotateImage = true,
-                    CompressionQuality = 25
-                });
+                MediaFile mediaFile = await photoHelper.TakePhoto();
 
-                if (newFile == null)
+                if (mediaFile != null)
                 {
-                    return;
-                }
-
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    using (Stream stream = newFile.GetStream())
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        await stream.CopyToAsync(memoryStream);
-                        file.Data = memoryStream.ToArray();
+                        mediaFile.GetStream().CopyTo(ms);
+                        file.Data = ms.ToArray();
                     }
+
+                    file.Image = ImageSource.FromStream(() => mediaFile.GetStream());
                 }
-
-            });
-
-            PickFromGallery = new BitDelegateCommand<EvlRequestFile>(async (file) =>
-            {
-                if (!CrossMedia.Current.IsPickPhotoSupported)
-                {
-                    await pageDialogService.DisplayAlertAsync("", "دسترسی به تصاویر وجود ندارد", "باشه");
-                    return;
-                }
-
-                MediaFile newFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
-                {
-                    PhotoSize = PhotoSize.Small,
-                    RotateImage = true,
-                    CompressionQuality = 25
-                });
-
-                if (newFile == null)
-                {
-                    return;
-                }
-
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    using (Stream stream = newFile.GetStream())
-                    {
-                        await stream.CopyToAsync(memoryStream);
-                        file.Data = memoryStream.ToArray();
-                    }
-                }
-
             });
 
             Submit = new BitDelegateCommand(async () =>
             {
                 if (await pageDialogService.DisplayAlertAsync("مطمئن هستید؟", "درخواست ارسال شود؟", "بله", "خیر"))
                 {
-                    using (userDialogs.Loading(ConstantStrings.SendingRequestAndPictures))
+                    using (HttpClient http = new HttpClient())
                     {
-                        MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
-                        {
-                            new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
-                        };
+                        http.BaseAddress = clientApp.HostUri;
 
-                        foreach (EvlRequestFile file in Files.Where(f => f.Data != null))
+                        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (await securityService.GetCurrentTokenAsync()).access_token);
+
+                        using (userDialogs.Loading(ConstantStrings.SendingRequestAndPictures))
                         {
-                            submitEvlRequestContents.Add(new ByteArrayContent(file.Data), file.FileType.Id.ToString(), file.FileType.Id.ToString());
+                            MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
+                            {
+                                new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
+                            };
+
+                            foreach (EvlRequestFileDto file in Files.Where(f => f.Data != null))
+                            {
+                                submitEvlRequestContents.Add(new ByteArrayContent(file.Data), file.TypeId.ToString(), file.TypeId.ToString());
+                            }
+
+                            HttpRequestMessage submitEvlRequest = new HttpRequestMessage(HttpMethod.Post, "api/evl-requests/submit-evl-request")
+                            {
+                                Content = submitEvlRequestContents
+                            };
+
+                            HttpResponseMessage submitEvlRequestExpertResponse = await http.SendAsync(submitEvlRequest);
+
+                            submitEvlRequestExpertResponse.EnsureSuccessStatusCode();
+
+                            Request = JsonConvert.DeserializeObject<EvlRequestItemSource>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
+
+                            await navigationService.NavigateAsync("EvlRequestWait", new NavigationParameters
+                            {
+                                { nameof(EvlRequestItemSource), Request }
+                            });
                         }
 
-                        HttpRequestMessage submitEvlRequest = new HttpRequestMessage(HttpMethod.Post, "api/evl-requests/submit-evl-request")
-                        {
-                            Content = submitEvlRequestContents
-                        };
-
-                        HttpResponseMessage submitEvlRequestExpertResponse = await _httpClient.SendAsync(submitEvlRequest);
-
-                        submitEvlRequestExpertResponse.EnsureSuccessStatusCode();
-
-                        Request = JsonConvert.DeserializeObject<EvlRequestDto>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
-
-                        await navigationService.NavigateAsync("EvlRequestWait", new NavigationParameters
-                        {
-                            { "EvlRequestDto", Request }
-                        });
                     }
                 }
             });
@@ -153,16 +119,25 @@ namespace Sanaap.App.ViewModels
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                Request = parameters.GetValue<EvlRequestDto>(nameof(EvlRequestDto));
+                Request = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
 
                 parameters.TryGetValue(nameof(Position), out Position position);
 
                 Request.Latitude = position.Latitude;
                 Request.Longitude = position.Longitude;
 
-                EvlRequestFileTypeDto[] fileTypes = (await _oDataClient.For<EvlRequestFileTypeDto>("EvlRequestFileTypes").FindEntriesAsync()).ToArray();
+                List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
+                {
+                    new ExternalEntityDto{Name="کارت ملی", PrmID=52},
+                    new ExternalEntityDto{Name="عکس خودرو", PrmID=56},
+                    new ExternalEntityDto{Name="بیمه نامه ثالث", PrmID=58},
+                    new ExternalEntityDto{Name="شناسنامه", PrmID=57},
+                    new ExternalEntityDto{Name="بیشتر", PrmID=59},
+                };
 
-                Files = new List<EvlRequestFile>(fileTypes.Select(fileType => new EvlRequestFile { FileType = fileType }));
+                List<EvlRequestFileItemSource> files = ImageFileTypes.Select(i => new EvlRequestFileItemSource { TypeId = i.PrmID, TypeName = i.Name, Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg") }).ToList();
+
+                Files = new ObservableCollection<EvlRequestFileItemSource>(files);
 
                 await base.OnNavigatedToAsync(parameters);
             }
@@ -170,8 +145,9 @@ namespace Sanaap.App.ViewModels
 
         public override Task OnNavigatedFromAsync(NavigationParameters parameters)
         {
-            parameters.Add(nameof(EvlRequestDto), Request);
+            parameters.Add(nameof(EvlRequestItemSource), Request);
             parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
+            parameters.Add("NextPage", "EvlRequestFile");
             return base.OnNavigatedFromAsync(parameters);
         }
     }

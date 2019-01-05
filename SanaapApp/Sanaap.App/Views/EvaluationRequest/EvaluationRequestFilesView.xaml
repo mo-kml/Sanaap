@@ -4,50 +4,28 @@
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              x:Class="Sanaap.App.Views.EvaluationRequestFilesView"
-             x:Name="evlRequestFiles">
+             xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+             x:Name="evlRequestFile">
     <ContentPage.Resources>
         <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="" HorizontalOptions="Center" Margin="10" />
-
-            <ListView ItemsSource="{Binding Files}" RowHeight="80" VerticalOptions="FillAndExpand">
-                <ListView.ItemTemplate>
+            <l:RepeatableWrapLayout FlowDirection="RightToLeft" UniformColumns="3" ItemsSource="{Binding Files}" HorizontalOptions="FillAndExpand">
+                <l:RepeatableWrapLayout.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.6*"/>
-                                    <ColumnDefinition Width="0.4*"/>
-                                    <ColumnDefinition Width="0.1*"/>
-                                    <ColumnDefinition Width="0.5*"/>
-                                    <ColumnDefinition Width="0.6*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Column="0" Margin="0,0,5,0" Text="{Binding FileType.Name,StringFormat='{0} :'}" VerticalOptions="Center"/>
-
-                                <ff:SvgCachedImage Grid.Column="1" Source="resource://Sanaap.App.Images.camera.svg">
-                                    <ff:SvgCachedImage.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference evlRequestFiles}, Path=BindingContext.TakePhoto}" CommandParameter="{Binding}"/>
-                                    </ff:SvgCachedImage.GestureRecognizers>
-                                </ff:SvgCachedImage>
-
-                                <ff:SvgCachedImage Grid.Column="3" Source="resource://Sanaap.App.Images.gallery.svg" HorizontalOptions="EndAndExpand">
-                                    <ff:SvgCachedImage.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference evlRequestFiles}, Path=BindingContext.PickFromGallery}" CommandParameter="{Binding}"/>
-                                    </ff:SvgCachedImage.GestureRecognizers>
-                                </ff:SvgCachedImage>
-
-                                <Image Grid.Column="4" Aspect="AspectFit" Source="{Binding Data, Converter={StaticResource ByteArrayToImageSourceConverter}}" Margin="2,0,0,0"/>
-
-                            </Grid>
-                        </ViewCell>
+                        <StackLayout>
+                            <Image Source="{Binding Image}" HeightRequest="100" WidthRequest="100">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.TakePhoto,Source={x:Reference evlRequestFile}}" CommandParameter="{Binding .}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding TypeName}" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+                </l:RepeatableWrapLayout.ItemTemplate>
+            </l:RepeatableWrapLayout>
             <Button Text="تایید نهایی" Command="{Binding Submit}" TextColor="White" VerticalOptions="EndAndExpand"/>
 
         </StackLayout>
