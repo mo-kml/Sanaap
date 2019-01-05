@@ -5,12 +5,9 @@
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestInquiryView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="انتخاب نوع پرونده"/>
-
-            <syncCombobox:SfComboBox DataSource="{Binding RequestTypes}" SelectedItem="{Binding SelectedRequestType}" IsEditableMode="False" />
 
             <Label Text="شماره پرونده"/>
-            <Entry Text="{Binding DocumentNumber}"/>
+            <Entry Text="{Binding DocumentNumber}" Keyboard="Numeric"/>
 
             <Button Text="استعلام" Command="{Binding Inquiry}"/>
 

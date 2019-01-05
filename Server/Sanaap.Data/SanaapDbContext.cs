@@ -25,7 +25,13 @@ namespace Sanaap.Data
 
         protected override void Seed(SanaapDbContext context)
         {
-            context.Database.ExecuteSqlCommand("CREATE SEQUENCE RequestNrSequence AS INT START WITH 100 NO CACHE;");
+            try
+            {
+                context.Database.ExecuteSqlCommand("CREATE SEQUENCE RequestNrSequence AS INT START WITH 100 NO CACHE;");
+            }
+            catch (Exception)
+            {
+            }
 
             if (!context.Set<Company>().AsNoTracking().Any())
             {

@@ -19,7 +19,7 @@ using System.Web.Http;
 
 namespace Sanaap.Api.Controllers
 {
-    public class EvlRequestsController : DtoController<EvlRequestDto>
+    public class EvlRequestsController : SanaapDtoSetController<EvlRequestDto, EvlRequest>
     {
         public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
@@ -49,12 +49,6 @@ namespace Sanaap.Api.Controllers
             Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
             return Mapper.FromEntityQueryToDtoQuery((await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.CustomerId == customerId));
-        }
-
-        [Function]
-        public virtual async Task<EvlRequestDto> SearchByCode(long code, CancellationToken cancellationToken)
-        {
-            return Mapper.FromEntityToDto((await EvlRequestsRepository.GetAllAsync(cancellationToken)).FirstOrDefault(r => r.Code == code));
         }
 
         [Function]

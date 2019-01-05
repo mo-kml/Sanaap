@@ -108,6 +108,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<InsurancePolicyListView, InsurancePolicyListViewModel>("InsurancePolicyList");
             containerRegistry.RegisterForNavigation<EvlRequestProgressView, EvlRequestProgressViewModel>("EvlRequestProgress");
             containerRegistry.RegisterForNavigation<EvaluationRequestListView, EvaluationRequestListViewModel>("EvlRequestList");
+            containerRegistry.RegisterForNavigation<EvlRequestInquiryView, EvlRequestInquiryViewModel>("EvlRequestInquiry");
 
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
@@ -116,7 +117,7 @@ namespace Sanaap.App
                 //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
                 //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://29ca3b9f.ngrok.io/"),
+                HostUri = new Uri("http://6e3be68f.ngrok.io/"),
 
                 //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
                 AppName = "Sanaap",

@@ -1,4 +1,5 @@
-﻿using Bit.ViewModel;
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -13,32 +14,36 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvlRequestInquiryViewModel : BitViewModelBase
     {
 
-        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService, INavigationService navigationService)
+        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService, INavigationService navigationService, IUserDialogs userDialogs)
         {
 
             Inquiry = new BitDelegateCommand(async () =>
               {
-                  EvlRequestDto requestDto = await evlRequestService.SearchByCode(DocumentNumber);
+                  using (userDialogs.Loading(ConstantStrings.Loading))
+                  {
+                      EvlRequestDto requestDto = await evlRequestService.SearchByCode(DocumentNumber);
 
-                  if (requestDto == null)
-                  {
-                      await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.RequestDosentExist, ConstantStrings.Ok);
-                      DocumentNumber = 0;
-                      return;
-                  }
-                  else
-                  {
-                      NavigationParameters parameter = new NavigationParameters();
-                      parameter.Add(nameof(EvlRequestListItemSource), new EvlRequestListItemSource
+                      if (requestDto == null)
                       {
-                          Code = requestDto.Code,
-                          RequestId = requestDto.Id,
-                          RequestTypeName = EnumHelper<EvlRequestType>.GetDisplayValue(requestDto.EvlRequestType)
-                      });
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.RequestDosentExist, ConstantStrings.Ok);
+                          DocumentNumber = 0;
+                          return;
+                      }
+                      else
+                      {
+                          NavigationParameters parameter = new NavigationParameters();
+                          parameter.Add(nameof(EvlRequestListItemSource), new EvlRequestListItemSource
+                          {
+                              Code = requestDto.Code,
+                              RequestId = requestDto.Id,
+                              RequestTypeName = EnumHelper<EvlRequestType>.GetDisplayValue(requestDto.EvlRequestType)
+                          });
 
-                      await navigationService.NavigateAsync("EvlRequestProgress", parameter);
+                          await navigationService.NavigateAsync("EvlRequestProgress", parameter);
+                      }
                   }
-              });
+              }, () => DocumentNumber != 0);
+            Inquiry.ObservesProperty(() => DocumentNumber);
         }
         public BitDelegateCommand Inquiry { get; set; }
 
