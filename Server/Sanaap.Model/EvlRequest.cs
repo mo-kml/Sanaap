@@ -50,6 +50,6 @@ namespace Sanaap.Model
 
         public string LostPlateNumber { get; set; }
 
-        public long Code { get; set; }
+        public int Code { get; set; }
     }
 }

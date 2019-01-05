@@ -52,6 +52,12 @@ namespace Sanaap.Api.Controllers
         }
 
         [Function]
+        public virtual async Task<EvlRequestDto> SearchByCode(long code, CancellationToken cancellationToken)
+        {
+            return Mapper.FromEntityToDto((await EvlRequestsRepository.GetAllAsync(cancellationToken)).FirstOrDefault(r => r.Code == code));
+        }
+
+        [Function]
         public virtual async Task<List<EvlRequest>> GetExpertEvlRequests(int expertId, CancellationToken cancellationToken)
         {
             return (await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.EvlRequestExpert.Expert.ExpertID == expertId).ToList();
@@ -103,7 +109,7 @@ namespace Sanaap.Api.Controllers
 
                     EvlRequest evlRequest = Mapper.FromDtoToEntity(evlRequestDto);
                     evlRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
-                    evlRequest.Code = DateTimeOffset.UtcNow.Ticks;
+                    evlRequest.Code = await EvlRequestsRepository.GetNextSequenceValue();
 
                     evlRequestDto = Mapper.FromEntityToDto(await EvlRequestsRepository.AddAsync(evlRequest, cancellationToken));
 

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestInquiryView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="انتخاب نوع پرونده"/>
+
+            <syncCombobox:SfComboBox DataSource="{Binding RequestTypes}" SelectedItem="{Binding SelectedRequestType}" IsEditableMode="False" />
+
+            <Label Text="شماره پرونده"/>
+            <Entry Text="{Binding DocumentNumber}"/>
+
+            <Button Text="استعلام" Command="{Binding Inquiry}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

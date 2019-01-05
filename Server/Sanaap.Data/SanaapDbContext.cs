@@ -25,6 +25,8 @@ namespace Sanaap.Data
 
         protected override void Seed(SanaapDbContext context)
         {
+            context.Database.ExecuteSqlCommand("CREATE SEQUENCE RequestNrSequence AS INT START WITH 100 NO CACHE;");
+
             if (!context.Set<Company>().AsNoTracking().Any())
             {
                 context.Set<Company>().AddRange(new List<Company>
@@ -96,6 +98,7 @@ namespace Sanaap.Data
             modelBuilder.Entity<EvlRequestFileType>()
                 .Property(evlExpReqFileType => evlExpReqFileType.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
 
             base.OnModelCreating(modelBuilder);
         }

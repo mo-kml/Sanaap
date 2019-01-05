@@ -28,5 +28,13 @@ namespace Sanaap.App.Services.Implementations
                 .Function("GetCustomerEvlRequests")
                 .FindEntriesAsync();
         }
+
+        public async Task<EvlRequestDto> SearchByCode(int code)
+        {
+            return await _oDataClient.For<EvlRequestDto>(controllerName)
+                .Function("SearchByCode")
+                .Set(new { code })
+                .FindEntryAsync();
+        }
     }
 }

@@ -19,6 +19,13 @@ namespace Sanaap.Data.Implementations
             base.SaveChanges();
         }
 
+        public async Task<int> GetNextSequenceValue()
+        {
+            DbRawSqlQuery<int> rawQuery = base.DbContext.Database.SqlQuery<int>("SELECT NEXT VALUE FOR RequestNrSequence;");
+
+            return await rawQuery.SingleAsync();
+        }
+
         public override async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             ApplyDefaultValues();

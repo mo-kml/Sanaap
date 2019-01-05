@@ -10,5 +10,7 @@ namespace Sanaap.App.Services.Contracts
         Task<IEnumerable<EvlRequestDto>> GetAllRequests();
 
         Task<IEnumerable<EvlRequestProgressDto>> GetAllProgressesByRequestId(Guid requestId);
+
+        Task<EvlRequestDto> SearchByCode(int code);
     }
 }
