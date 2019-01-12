@@ -26,7 +26,6 @@ using Sanaap.App.Views.Insurance;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -113,20 +112,10 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                //HostUri = new Uri("http://10.0.2.2:53148/"),            // Emulator
-                //HostUri = new Uri("http://192.168.10.112:53148/"),       // Device : ip Iranian Pooshesh
-                //HostUri = new Uri("http://192.168.1.207:53148/"),       // Device : ip Moradi
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://6e3be68f.ngrok.io/"),
-
-                //OAuthRedirectUri = new Uri("Test://oauth2redirect"),
+                HostUri = new Uri("http://dd5166ef.ngrok.io/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
-            }).SingleInstance();
-
-            containerBuilder.Register(c => new HttpClient
-            {
-                BaseAddress = new Uri("http://5.144.128.234:8800/api/Portal/"),
             }).SingleInstance();
 
             containerRegistry.RegisterRequiredServices();
@@ -139,7 +128,6 @@ namespace Sanaap.App
             containerRegistry.Register<IInsuranceValidator, DefaultInsuranceValidator>();
             containerRegistry.Register<IEvlRequestValidator, DefaultEvlRequestValidator>();
             containerRegistry.Register<IPolicyService, PolicyService>();
-            containerRegistry.Register<IInsurerService, InsurerService>();
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<IInitialDataService, InitialDataService>();

@@ -2,7 +2,7 @@
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
-using Sanaap.Api.Implementations;
+using Sanaap.Api.Contracts;
 using Sanaap.Data.Contracts;
 using Sanaap.Dto;
 using Sanaap.Model;
@@ -19,6 +19,8 @@ namespace Sanaap.Api.Controllers
     public class CustomersController : DtoController<CustomerDto>
     {
         public virtual ICustomerValidator CustomerValidator { get; set; }
+
+        public virtual ISmsService SmsService { get; set; }
 
         public virtual ISanaapRepository<Customer> CustomersRepository { get; set; }
 
@@ -52,7 +54,7 @@ namespace Sanaap.Api.Controllers
             }
             else
             {
-                customer.VerifyCode = VerificationCode.SendVerifyCode(customer.Mobile);
+                customer.VerifyCode = await SmsService.SendVerifyCode(customer.Mobile);
 
                 return DtoEntityMapper.FromEntityToDto(await CustomersRepository.AddAsync(customer, cancellationToken));
             }
@@ -73,7 +75,7 @@ namespace Sanaap.Api.Controllers
                 .Where(cu => cu.NationalCode == customer.NationalCode || cu.Mobile == customer.Mobile)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            customer.VerifyCode = VerificationCode.SendVerifyCode(customer.Mobile);
+            customer.VerifyCode = await SmsService.SendVerifyCode(customer.Mobile);
 
             return DtoEntityMapper.FromEntityToDto(await CustomersRepository.UpdateAsync(customer, cancellationToken));
         }

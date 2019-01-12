@@ -1,8 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Services.Contracts;
@@ -10,7 +8,6 @@ using Sanaap.Constants;
 using Sanaap.Enums;
 using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -93,30 +90,12 @@ namespace Sanaap.App.ViewModels
 
                 using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: loginCancellationToken.Cancel))
                 {
-                    await loginToExternalProject();
+                    await syncInitialData();
                 }
             }
             catch (Exception ex)
             {
 
-            }
-        }
-
-        public async Task loginToExternalProject()
-        {
-            string json = JsonConvert.SerializeObject(new { username = "sanap", password = "10431044" });
-
-            StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage result = await _httpClient.PostAsync("Login", stringContent);
-
-            if (result.IsSuccessStatusCode)
-            {
-                JObject credential = JObject.Parse(await result.Content.ReadAsStringAsync());
-
-                _httpClient.DefaultRequestHeaders.Add("auth", credential["token"].ToString());
-
-                await syncInitialData();
             }
         }
 
@@ -127,6 +106,8 @@ namespace Sanaap.App.ViewModels
             await _initialDataService.GetColors();
 
             await _initialDataService.GetCurrentUserInfo();
+
+            await _initialDataService.GetInsurers();
         }
     }
 }

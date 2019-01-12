@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestExpertDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\FindExpertRequestDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\IncurancePolicyDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\InsurerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ISanaapDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />

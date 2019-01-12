@@ -10,6 +10,7 @@ using Bit.OData.Contracts;
 using Bit.Owin.Implementations;
 using Bit.OwinCore;
 using Microsoft.Extensions.DependencyInjection;
+using Sanaap.Api.Contracts;
 using Sanaap.Api.Implementations;
 using Sanaap.Api.Implementations.Security;
 using Sanaap.Data;
@@ -116,14 +117,19 @@ namespace Sanaap.Api
             dependencyManager.Register<IStringCorrector, YeKeStringCorrector>(overwriteExciting: false);
 
             dependencyManager.Register<ICustomerValidator, DefaultCustomerValidator>();
+            dependencyManager.Register<ISmsService, SmsService>();
             dependencyManager.Register<ISanaapAppTranslateService, SanaapAppTranslateService>(lifeCycle: DependencyLifeCycle.SingleInstance);
+            dependencyManager.Register<ISanaapTokenService, SanaapTokenService>(lifeCycle: DependencyLifeCycle.SingleInstance);
+            dependencyManager.Register<IExternalApiService, ExternalApiService>(lifeCycle: DependencyLifeCycle.SingleInstance);
+
+            dependencyManager.Register<SanaapHttpMessageHandler, SanaapHttpMessageHandler>();
 
             dependencyManager.Register<IHashUtils, DefaultHashUtils>(lifeCycle: DependencyLifeCycle.SingleInstance);
 
             services.AddHttpClient("SoltaniHttpClient", httpClient =>
             {
-                httpClient.BaseAddress = new Uri("http://5.144.128.234:8800/api/Portal");
-            });
+                httpClient.BaseAddress = new Uri("https://ipinsur.com/Mobile/api/Portal/");
+            }).AddHttpMessageHandler<SanaapHttpMessageHandler>();
         }
 
         public IEnumerable<IAppModule> GetAppModules()

@@ -27,8 +27,7 @@ namespace Sanaap.App.ViewModels.Insurance
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
         private readonly IUserDialogs _userDialogs;
-        private readonly IInsurerService _insurerService;
-        public CreateInsurancePolicyViewModel(IInsurerService insurerService,
+        public CreateInsurancePolicyViewModel(
             IUserDialogs userDialogs,
             HttpClient httpClient,
             IInitialDataService initialDataService,
@@ -42,7 +41,6 @@ namespace Sanaap.App.ViewModels.Insurance
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
-            _insurerService = insurerService;
             _initialDataService = initialDataService;
 
 
@@ -72,7 +70,7 @@ namespace Sanaap.App.ViewModels.Insurance
                       Policy.ColorId = SelectedColor.PrmID;
                       Policy.CarId = SelectedCar.PrmID;
                       Policy.InsuranceType = SelectedInsuranceType.InsuranceType;
-                      Policy.InsurerId = SelectedInsurer.Id;
+                      Policy.InsurerId = SelectedInsurer.ID;
 
                       policyCancellationTokenSource?.Cancel();
                       policyCancellationTokenSource = new CancellationTokenSource();
@@ -141,7 +139,7 @@ namespace Sanaap.App.ViewModels.Insurance
                     SelectedColor = Colors.FirstOrDefault(c => c.PrmID == Policy.ColorId);
                     SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Policy.CarId);
                     SelectedInsuranceType = InsuranceTypes.FirstOrDefault(c => c.InsuranceType == Policy.InsuranceType);
-                    SelectedInsurer = Insurers.FirstOrDefault(c => c.Id == Policy.InsurerId);
+                    SelectedInsurer = Insurers.FirstOrDefault(c => c.ID == Policy.InsurerId);
                     SelectedInsurer.IsSelected = true;
                 }
 
@@ -162,7 +160,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
             Colors = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetColors());
 
-            Insurers = new ObservableCollection<InsurersItemSource>(_insurerService.GetAllInsurers());
+            Insurers = new ObservableCollection<InsurersItemSource>(await _initialDataService.GetInsurers());
         }
 
         public InsurancePolicyDto Policy { get; set; } = new InsurancePolicyDto();
