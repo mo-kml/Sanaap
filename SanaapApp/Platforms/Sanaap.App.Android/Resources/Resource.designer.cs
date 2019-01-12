@@ -2380,6 +2380,16 @@ namespace Sanaap.App.Droid
 			global::Com.Syncfusion.Navigationdrawer.Resource.Styleable.SfNavigationDrawer_navIsOpen = global::Sanaap.App.Droid.Resource.Styleable.SfNavigationDrawer_navIsOpen;
 			global::Com.Syncfusion.Navigationdrawer.Resource.Styleable.SfNavigationDrawer_navPosition = global::Sanaap.App.Droid.Resource.Styleable.SfNavigationDrawer_navPosition;
 			global::Com.Syncfusion.Navigationdrawer.Resource.Styleable.SfNavigationDrawer_navTransition = global::Sanaap.App.Droid.Resource.Styleable.SfNavigationDrawer_navTransition;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.inputlayout_togglecollapseicon = global::Sanaap.App.Droid.Resource.Drawable.inputlayout_togglecollapseicon;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.inputlayout_togglevisibleicon = global::Sanaap.App.Droid.Resource.Drawable.inputlayout_togglevisibleicon;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_close_icon = global::Sanaap.App.Droid.Resource.Drawable.popup_forms_android_close_icon;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_shadow = global::Sanaap.App.Droid.Resource.Drawable.popup_forms_android_shadow;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Id.BorderView = global::Sanaap.App.Droid.Resource.Id.BorderView;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.accept = global::Sanaap.App.Droid.Resource.String.accept;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.decline = global::Sanaap.App.Droid.Resource.String.decline;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.library_name = global::Sanaap.App.Droid.Resource.String.library_name;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.popup_message = global::Sanaap.App.Droid.Resource.String.popup_message;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.title = global::Sanaap.App.Droid.Resource.String.title;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Sanaap.App.Droid.Resource.Animation.slide_in_right;
 			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::Sanaap.App.Droid.Resource.Animation.slide_out_left;
 			global::Xamarin.Auth.Resource.Attribute.font = global::Sanaap.App.Droid.Resource.Attribute.font;
@@ -5048,26 +5058,26 @@ namespace Sanaap.App.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020150
-			public const int avd_hide_password_1 = 2130837840;
-			
-			// aapt resource value: 0x7f020151
-			public const int avd_hide_password_2 = 2130837841;
-			
 			// aapt resource value: 0x7f020152
-			public const int avd_hide_password_3 = 2130837842;
+			public const int avd_hide_password_1 = 2130837842;
+			
+			// aapt resource value: 0x7f020153
+			public const int avd_hide_password_2 = 2130837843;
+			
+			// aapt resource value: 0x7f020154
+			public const int avd_hide_password_3 = 2130837844;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020153
-			public const int avd_show_password_1 = 2130837843;
-			
-			// aapt resource value: 0x7f020154
-			public const int avd_show_password_2 = 2130837844;
-			
 			// aapt resource value: 0x7f020155
-			public const int avd_show_password_3 = 2130837845;
+			public const int avd_show_password_1 = 2130837845;
+			
+			// aapt resource value: 0x7f020156
+			public const int avd_show_password_2 = 2130837846;
+			
+			// aapt resource value: 0x7f020157
+			public const int avd_show_password_3 = 2130837847;
 			
 			// aapt resource value: 0x7f020055
 			public const int common_full_open_on_phone = 2130837589;
@@ -5792,11 +5802,11 @@ namespace Sanaap.App.Droid
 			// aapt resource value: 0x7f020145
 			public const int notification_icon_background = 2130837829;
 			
-			// aapt resource value: 0x7f02014e
-			public const int notification_template_icon_bg = 2130837838;
+			// aapt resource value: 0x7f020150
+			public const int notification_template_icon_bg = 2130837840;
 			
-			// aapt resource value: 0x7f02014f
-			public const int notification_template_icon_low_bg = 2130837839;
+			// aapt resource value: 0x7f020151
+			public const int notification_template_icon_low_bg = 2130837841;
 			
 			// aapt resource value: 0x7f020146
 			public const int notification_tile_bg = 2130837830;
@@ -5805,22 +5815,28 @@ namespace Sanaap.App.Droid
 			public const int notify_panel_notification_icon_bg = 2130837831;
 			
 			// aapt resource value: 0x7f020148
-			public const int roundedbg = 2130837832;
+			public const int popup_forms_android_close_icon = 2130837832;
 			
 			// aapt resource value: 0x7f020149
-			public const int roundedbgdark = 2130837833;
+			public const int popup_forms_android_shadow = 2130837833;
 			
 			// aapt resource value: 0x7f02014a
-			public const int splash_background = 2130837834;
+			public const int roundedbg = 2130837834;
 			
 			// aapt resource value: 0x7f02014b
-			public const int splashScreen = 2130837835;
+			public const int roundedbgdark = 2130837835;
 			
 			// aapt resource value: 0x7f02014c
-			public const int tooltip_frame_dark = 2130837836;
+			public const int splash_background = 2130837836;
 			
 			// aapt resource value: 0x7f02014d
-			public const int tooltip_frame_light = 2130837837;
+			public const int splashScreen = 2130837837;
+			
+			// aapt resource value: 0x7f02014e
+			public const int tooltip_frame_dark = 2130837838;
+			
+			// aapt resource value: 0x7f02014f
+			public const int tooltip_frame_light = 2130837839;
 			
 			static Drawable()
 			{
@@ -5837,6 +5853,9 @@ namespace Sanaap.App.Droid
 			
 			// aapt resource value: 0x7f0d003e
 			public const int ALT = 2131558462;
+			
+			// aapt resource value: 0x7f0d00e7
+			public const int BorderView = 2131558631;
 			
 			// aapt resource value: 0x7f0d0065
 			public const int Bottom = 2131558501;
@@ -6872,11 +6891,11 @@ namespace Sanaap.App.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f0a0052
-			public const int ApplicationName = 2131361874;
+			// aapt resource value: 0x7f0a0056
+			public const int ApplicationName = 2131361878;
 			
-			// aapt resource value: 0x7f0a0051
-			public const int Hello = 2131361873;
+			// aapt resource value: 0x7f0a0055
+			public const int Hello = 2131361877;
 			
 			// aapt resource value: 0x7f0a0027
 			public const int abc_action_bar_home_description = 2131361831;
@@ -6965,8 +6984,11 @@ namespace Sanaap.App.Droid
 			// aapt resource value: 0x7f0a0037
 			public const int abc_toolbar_collapse_description = 2131361847;
 			
-			// aapt resource value: 0x7f0a0050
-			public const int app_name = 2131361872;
+			// aapt resource value: 0x7f0a0051
+			public const int accept = 2131361873;
+			
+			// aapt resource value: 0x7f0a0054
+			public const int app_name = 2131361876;
 			
 			// aapt resource value: 0x7f0a0045
 			public const int appbar_scrolling_view_behavior = 2131361861;
@@ -7028,8 +7050,11 @@ namespace Sanaap.App.Droid
 			// aapt resource value: 0x7f0a0010
 			public const int common_signin_button_text_long = 2131361808;
 			
-			// aapt resource value: 0x7f0a004f
-			public const int hello = 2131361871;
+			// aapt resource value: 0x7f0a0052
+			public const int decline = 2131361874;
+			
+			// aapt resource value: 0x7f0a0053
+			public const int hello = 2131361875;
 			
 			// aapt resource value: 0x7f0a004e
 			public const int library_name = 2131361870;
@@ -7112,11 +7137,17 @@ namespace Sanaap.App.Droid
 			// aapt resource value: 0x7f0a004c
 			public const int path_password_strike_through = 2131361868;
 			
+			// aapt resource value: 0x7f0a0050
+			public const int popup_message = 2131361872;
+			
 			// aapt resource value: 0x7f0a0038
 			public const int search_menu_title = 2131361848;
 			
 			// aapt resource value: 0x7f0a004d
 			public const int status_bar_notification_info_overflow = 2131361869;
+			
+			// aapt resource value: 0x7f0a004f
+			public const int title = 2131361871;
 			
 			// aapt resource value: 0x7f0a0011
 			public const int title_activity_webview = 2131361809;
