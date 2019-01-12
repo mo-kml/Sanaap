@@ -2,27 +2,58 @@
 <bit:BitApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.All"
+             xmlns:control="clr-namespace:Sanaap.App.Controls"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:convs="clr-namespace:Sanaap.App.Converters"
              x:Class="Sanaap.App.App">
     <bit:BitApplication.Resources>
-        <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
-        <StyleSheet Source="/Views/Styles.css" />
+        <ResourceDictionary>
+            <ControlTemplate x:Key="MasterTemplate">
 
-        <Style TargetType="Button">
-            <Setter Property="BorderRadius" Value="10" />
-            <Setter Property="Margin" Value="15, 2, 15, 2" />
-            <!--<Setter Property="FontSize" Value="Medium" />-->
-            <Setter Property="TextColor" Value="White" />
-            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-        </Style>
-        <Style TargetType="Entry">
-            <Setter Property="Margin" Value="15, 2, 15, 0" />
-            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-            <!--<Setter Property="HorizontalTextAlignment" Value="End" />-->
-        </Style>
-        <Style TargetType="Label">
-            <!--<Setter Property="FontSize" Value="Medium" />-->
-            <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-        </Style>
+                <navigationdrawer:SfNavigationDrawer Position="Right" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+                    <navigationdrawer:SfNavigationDrawer.ContentView>
+                        <StackLayout>
+                            <Grid HeightRequest="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <control:IconButton HorizontalOptions="End" Grid.Column="1" Type="Brands" Text="&#xf2c6;" BindingContext="{x:Reference navigationDrawer}" Clicked="ToggleMenu"/>
+                            </Grid>
+                            <ContentPresenter VerticalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </navigationdrawer:SfNavigationDrawer.ContentView>
+                    <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                        <control:MenuView/>
+                    </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                </navigationdrawer:SfNavigationDrawer>
+            </ControlTemplate>
+            <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
+            <StyleSheet Source="/Views/Styles.css" />
+
+            <Style TargetType="Button">
+                <Setter Property="BorderRadius" Value="10" />
+                <Setter Property="Margin" Value="15, 2, 15, 2" />
+                <!--<Setter Property="FontSize" Value="Medium" />-->
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="Margin" Value="15, 2, 15, 0" />
+                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
+                <!--<Setter Property="HorizontalTextAlignment" Value="End" />-->
+            </Style>
+            <Style TargetType="Label">
+                <!--<Setter Property="FontSize" Value="Medium" />-->
+                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
+            </Style>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="ControlTemplate" Value="{StaticResource MasterTemplate}"/>
+                <Setter Property="BackgroundColor" Value="Red"/>
+                <!--<Setter Property="FontSize" Value="Medium" />-->
+                <Setter Property="FlowDirection" Value="RightToLeft" />
+            </Style>
+        </ResourceDictionary>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

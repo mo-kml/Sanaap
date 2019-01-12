@@ -48,6 +48,12 @@ namespace Sanaap.App.Droid
 
             Forms.Init(this, bundle);
 
+            string cultureName = "fa-IR";
+            Java.Util.Locale locale = new Java.Util.Locale(cultureName);
+            Java.Util.Locale.Default = locale;
+            Android.Content.Res.Configuration config = new Android.Content.Res.Configuration { Locale = locale };
+            BaseContext.Resources.UpdateConfiguration(config, BaseContext.Resources.DisplayMetrics);
+
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));
 
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()

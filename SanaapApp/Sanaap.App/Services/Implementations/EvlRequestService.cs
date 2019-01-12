@@ -15,6 +15,14 @@ namespace Sanaap.App.Services.Implementations
             _oDataClient = oDataClient;
         }
 
+        public async Task<EvlRequestExpertDto> FindEvlRequestExpert(Guid evlRequestId)
+        {
+            return await _oDataClient.For<EvlRequestExpertDto>("EvlRequestExperts")
+                .Set(evlRequestId)
+                .Function("FindEvlRequestExpert")
+                .FindEntryAsync();
+        }
+
         public async Task<IEnumerable<EvlRequestProgressDto>> GetAllProgressesByRequestId(Guid requestId)
         {
             return await _oDataClient.For<EvlRequestProgressDto>("EvlRequestProgresses")

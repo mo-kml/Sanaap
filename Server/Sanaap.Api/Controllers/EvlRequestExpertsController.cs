@@ -27,6 +27,8 @@ namespace Sanaap.Api.Controllers
 
         public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> EvlRequestDtoEntityMapper { get; set; }
 
+        public virtual IDtoEntityMapper<EvlRequestExpertDto, EvlRequestExpert> EvlRequestExpertDtoEntityMapper { get; set; }
+
         public virtual IMapper Mapper { get; set; }
 
         public virtual ISanaapRepository<Customer> CustomersRepository { get; set; }
@@ -34,7 +36,7 @@ namespace Sanaap.Api.Controllers
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
 
         [Function]
-        public virtual async Task<string> FindEvlRequestExpert(Guid evlRequestId, CancellationToken cancellationToken)
+        public virtual async Task<EvlRequestExpertDto> FindEvlRequestExpert(Guid evlRequestId, CancellationToken cancellationToken)
         {
             EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, evlRequestId);
             if (evlRequest == null)
@@ -48,20 +50,6 @@ namespace Sanaap.Api.Controllers
 
 
             HttpClient httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
-            var soltaniLoginParams = new { Username = "sanap", Password = "10431044" };
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(soltaniLoginParams), UnicodeEncoding.UTF8, "application/json");
-            HttpResponseMessage soltaniLoginRawResponse;
-            try
-            {
-                soltaniLoginRawResponse = await httpClient.PostAsync("api/Portal/Login", stringContent);
-                soltaniLoginRawResponse.EnsureSuccessStatusCode();
-            }
-            catch (Exception ex)
-            {
-                throw new DomainLogicException("Retriving Login token from api failed", ex);
-            }
-            SoltaniLoginResponse soltaniLoginResponse = JsonConvert.DeserializeObject<SoltaniLoginResponse>(await soltaniLoginRawResponse.Content.ReadAsStringAsync());
-
 
             Customer customer = await CustomersRepository.GetByIdAsync(cancellationToken, Guid.Parse(UserInformationProvider.GetCurrentUserId()));
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
@@ -75,15 +63,13 @@ namespace Sanaap.Api.Controllers
             soltaniFindExpertParams.LostName = evlRequest.LostFirstName;
             soltaniFindExpertParams.LostFamily = evlRequest.LostLastName;
             soltaniFindExpertParams.LostInsuranceID = "1"; // 1
-            soltaniFindExpertParams.LostCarID = "12608"; // 12608
+            soltaniFindExpertParams.LostCarID = evlRequest.LostCarId.ToString(); // 12608
             soltaniFindExpertParams.LostCarType = "415"; // 415
             soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";
-            HttpRequestMessage findNearExpertRequest = new HttpRequestMessage(HttpMethod.Post, "api/Portal/FindNearExpert")
-            {
-                Content = new StringContent(JsonConvert.SerializeObject(soltaniFindExpertParams), UnicodeEncoding.UTF8, "application/json")
-            };
-            findNearExpertRequest.Headers.Add("auth", soltaniLoginResponse.token);
-            HttpResponseMessage findExpertRawResponse = await httpClient.SendAsync(findNearExpertRequest);
+
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(soltaniFindExpertParams), UnicodeEncoding.UTF8, "application/json");
+
+            HttpResponseMessage findExpertRawResponse = await httpClient.PostAsync("FindNearExpert", stringContent);
             try
             {
                 findExpertRawResponse.EnsureSuccessStatusCode();
@@ -92,10 +78,12 @@ namespace Sanaap.Api.Controllers
             {
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
+
             EvlRequestExpertDto evlRequestExpertDto = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+
             if (evlRequestExpertDto.Expert == null || evlRequestExpertDto.FileID == 0)
             {
-                return "NotResult";
+                throw new DomainLogicException("NotFound");
             }
 
             evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
@@ -118,11 +106,11 @@ namespace Sanaap.Api.Controllers
 
             //return SingleResult.Create(new[] { evlRequestExpertDto }.AsQueryable());
 
-            ExpertResultDto expertResult = new ExpertResultDto();
-            expertResult.Name = result.Name;
-            expertResult.Mobile = result.Mobile;
-            expertResult.Photo = result.Photo;
-            return result.Name + "^" + result.Mobile + "^" + result.Photo;
+            //ExpertResultDto expertResult = new ExpertResultDto();
+            //expertResult.Name = result.Name;
+            //expertResult.Mobile = result.Mobile;
+            //expertResult.Photo = result.Photo;
+            return evlRequestExpertDto;
         }
     }
 
