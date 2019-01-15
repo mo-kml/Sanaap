@@ -9,6 +9,7 @@ using Prism;
 using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
+using Sanaap.App.Controls;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.Helpers.Implementations;
 using Sanaap.App.Services.Contracts;
@@ -29,6 +30,7 @@ using Sanaap.App.Views.News;
 using Sanaap.App.Views.TheFiles;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
+using Syncfusion.SfNavigationDrawer.XForms;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -64,16 +66,16 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync("Menu/Nav/Main");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync("/Login");
-            }
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync("Menu/Nav/Main");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync("/Login");
+            //}
 
-            //await NavigationService.NavigateAsync("EvlRequestFile");
+            await NavigationService.NavigateAsync(nameof(SampleView));
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -90,6 +92,7 @@ namespace Sanaap.App
             ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
 
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
+            containerRegistry.RegisterForNavigation<SampleView>();
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<ContactUsView, ContactUsViewModel>("ContactUs");
             containerRegistry.RegisterForNavigation<ContentListView, ContentListViewModel>("ContentList");
@@ -100,7 +103,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<SubmitSosRequestView, SubmitSosRequestViewModel>("SubmitSosRequest");
             containerRegistry.RegisterForNavigation<SosRequestView, SosRequestViewModel>("SosRequest");
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>("MySosRequests");
-            containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
+            //containerRegistry.RegisterForNavigation<MenuView, MenuViewModel>("Menu");
             containerRegistry.RegisterForNavigation<MapView, MapViewModel>();
             containerRegistry.RegisterForNavigation<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>("EvlRequestDetail");
             containerRegistry.RegisterForNavigation<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>("EvlRequestFile");
@@ -149,6 +152,11 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
 
             base.RegisterTypes(containerRegistry);
+        }
+
+        private void ToggleMenu(object sender, EventArgs e)
+        {
+            ((SfNavigationDrawer)((IconButton)sender).BindingContext).ToggleDrawer();
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Bit.Model.Contracts;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
 {
     [ComplexType]
-    public class EvlRequestExpert
+    public class EvlRequestExpert : IEntity
     {
         public string Token { get; set; }
         public int FileID { get; set; }

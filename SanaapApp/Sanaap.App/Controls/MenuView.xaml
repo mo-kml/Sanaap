@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Controls.MenuView">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="Hello Xamarin.Forms!" />
+            <Button Text="click" Command="{Binding Submit}"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

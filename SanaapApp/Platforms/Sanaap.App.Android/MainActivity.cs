@@ -48,6 +48,8 @@ namespace Sanaap.App.Droid
 
             Forms.Init(this, bundle);
 
+            Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
+
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));
 
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()

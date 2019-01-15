@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             x:Class="Sanaap.App.Views.SampleView">
+    <ContentPage.Content>
+        <sfPopup:SfPopupLayout x:Name="popupLayout">
+            <sfPopup:SfPopupLayout.PopupView>
+                <sfPopup:PopupView>
+                    <sfPopup:PopupView.ContentTemplate>
+                        <DataTemplate>
+                            <Label Text="This is SfPopupLayout" BackgroundColor="SkyBlue"
+                           HorizontalTextAlignment="Center"/>
+                        </DataTemplate>
+                    </sfPopup:PopupView.ContentTemplate>
+                </sfPopup:PopupView>
+            </sfPopup:SfPopupLayout.PopupView>
+            <sfPopup:SfPopupLayout.Content>
+                <StackLayout x:Name="layout">
+                    <Button x:Name="clickToShowPopup" Text="ClickToShowPopup" VerticalOptions="Start" 
+               HorizontalOptions="FillAndExpand"  Clicked="ClickToShowPopup_Clicked" />
+                </StackLayout>
+            </sfPopup:SfPopupLayout.Content>
+        </sfPopup:SfPopupLayout>
+    </ContentPage.Content>
+</ContentPage>

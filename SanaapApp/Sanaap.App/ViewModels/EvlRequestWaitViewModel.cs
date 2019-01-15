@@ -19,7 +19,7 @@ namespace Sanaap.App.ViewModels
     public class EvlRequestWaitViewModel : BitViewModelBase, IDestructible
     {
         private readonly IODataClient _odataClient;
-        private EvlRequestDto _evlRequest;
+        private EvlRequestItemSource _evlRequest;
 
         public string ExpertFullName { get; set; }
         public string ExpertMobileNo { get; set; }
@@ -37,10 +37,12 @@ namespace Sanaap.App.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
         private readonly IDateTimeUtils _dateTimeUtils;
+        private readonly IEvlRequestService _evlRequestService;
         private IInitialDataService _initialDataService;
         private readonly HttpClient _httpClient;
         public EvlRequestWaitViewModel(INavigationService navigationService,
             IODataClient odataClient,
+            IEvlRequestService evlRequestService,
             IDeviceService deviceService,
             IODataClient oDataClient,
             HttpClient httpClient,
@@ -49,10 +51,12 @@ namespace Sanaap.App.ViewModels
             IPageDialogService pageDialogService)
         {
             _odataClient = odataClient;
+            _evlRequestService = evlRequestService;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
             _initialDataService = initialDataService;
             _httpClient = httpClient;
+            _dateTimeUtils = dateTimeUtils;
 
             GoToMain = new BitDelegateCommand(async () =>
             {
@@ -72,7 +76,9 @@ namespace Sanaap.App.ViewModels
 
         public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            _evlRequest = parameters.GetValue<EvlRequestDto>(nameof(EvlRequestItemSource));
+            _evlRequest = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
+
+            EvlRequestExpertDto expertDto = await _evlRequestService.FindEvlRequestExpert(_evlRequest.Id);
 
             Message = ConstantStrings.ExpertFinding;
             IsVisibleBefore = true;
@@ -86,7 +92,7 @@ namespace Sanaap.App.ViewModels
                 findExpertDto.UserID = customer.Id.ToString();
                 findExpertDto.RequestID = _evlRequest.Id.ToString();
                 findExpertDto.Type = _evlRequest.InsuranceType == InsuranceType.Sales ? 2 : 1;
-                findExpertDto.AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(_evlRequest.AccidentDate);
+                findExpertDto.AccidentDate = _dateTimeUtils.ConvertMiladiToShamsi(DateTimeOffset.Now);
                 findExpertDto.MapLat = _evlRequest.Latitude.ToString();
                 findExpertDto.MapLng = _evlRequest.Longitude.ToString();
                 findExpertDto.LostName = _evlRequest.LostFirstName;
@@ -95,6 +101,7 @@ namespace Sanaap.App.ViewModels
                 findExpertDto.LostCarID = _evlRequest.LostCarId;
                 findExpertDto.LostCarType = "415"; // 415
                 findExpertDto.Address = "یوسف آباد کوچه هفتم";
+
 
                 //_httpClient.PostAsync("FindNearExpert",)
             }
