@@ -14,16 +14,60 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Code}"/>
-                                <Label Text="{Binding CreatedOn,StringFormat='{0:M/d/yy}'}"/>
-                                <Label Text="{Binding StatusTypeName}"/>
+                            <StackLayout Padding="10,10,10,10">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="17"/>
+                                        <RowDefinition Height="20*"/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <Label  Text="کد پیگیری" FontSize="12"  HorizontalOptions="Center" Grid.Column="0"/>
+
+                                    <Label Text="{Binding Code}" FontSize="12" Margin="0,-5,0,0" TextColor="Black" Grid.Column="0" HorizontalOptions="Center" FontAttributes="Bold" Grid.Row="1"/>
+
+
+                                    <BoxView Margin="0,7,0,7"  WidthRequest="1" Grid.Column="2" Grid.RowSpan="2"  BackgroundColor="Gray"  />
+
+
+
+                                    <Label  Text="وضعیت" Grid.Column="4"/>
+
+                                    <Label  Text="{Binding StatusTypeName}" Margin="0,-5,0,0" Grid.Column="4" TextColor="Black" FontSize="15" FontAttributes="Bold" Grid.Row="1">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                     Binding="{Binding StatusTypeName}"
+                                                     Value="پاسخ داده شد">
+                                                <Setter Property="TextColor" Value="Navy"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+
+                                    <StackLayout Orientation="Horizontal" Grid.Column="5" Margin="0,-7,0,0" HorizontalOptions="End"  Padding="2,5,0,0" Grid.Row="1">
+
+                                        <Label Text="تاریخ ثبت" FontSize="12"/>
+
+                                        <Label Text="{Binding CreatedOn,StringFormat='{0:M/d/yy}'}" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
+
+                                    </StackLayout>
+
+                                </Grid>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="+" Command="{Binding CreateComment}" AbsoluteLayout.LayoutBounds="0,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Button Text="ثبت پیام یا شکایت جدید +" Command="{Binding CreateComment}" AbsoluteLayout.LayoutBounds="0,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Navy"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
