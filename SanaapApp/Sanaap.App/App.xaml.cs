@@ -92,7 +92,6 @@ namespace Sanaap.App
         {
             ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
 
-            containerRegistry.RegisterPopupService();
             containerRegistry.RegisterForNavigation<SampleView>();
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNavigation<ContactUsView, ContactUsViewModel>();
@@ -106,8 +105,6 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<MySosRequestsView, MySosRequestsViewModel>();
             //containerRegistry.RegisterForNavigation<Views.MenuView, MenuViewModel>();
             containerRegistry.RegisterForNavigation<MapView, MapViewModel>();
-            containerRegistry.RegisterForPopup<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>(nameof(EvaluationRequestDetailView));
-            containerRegistry.RegisterForNavigation<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>();
             containerRegistry.RegisterForNavigation<EvlRequestWaitView, EvlRequestWaitViewModel>();
             containerRegistry.RegisterForNavigation<CreateCommentView, CreateCommentViewModel>();
             containerRegistry.RegisterForNavigation<CommentListView, CommentListViewModel>();
@@ -121,6 +118,12 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<NewsDetailView, NewsDetailViewModel>();
             containerRegistry.RegisterForNavigation<TheFilesView, TheFilesViewModel>();
             containerRegistry.RegisterForNavigation<NewsListView, NewsDetailViewModel>();
+
+            containerRegistry.RegisterPopupService();
+            containerRegistry.RegisterForPopup<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>(nameof(EvaluationRequestDetailView));
+            containerRegistry.RegisterForPopup<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>(nameof(EvaluationRequestFilesView));
+            containerRegistry.RegisterForPopup<EvaluationRequestLostDetailView, EvaluationRequestLostDetailViewModel>(nameof(EvaluationRequestLostDetailView));
+            containerRegistry.RegisterForPopup<EvaluationRequestDescriptionView, EvaluationRequestDescriptionViewModel>(nameof(EvaluationRequestDescriptionView));
 
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile

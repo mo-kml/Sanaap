@@ -16,7 +16,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
-            await _popupNavigationService.PushAsync(nameof(EvaluationRequestDetailView));
+            await _popupNavigationService.PushAsync(nameof(EvaluationRequestLostDetailView));
         }
     }
 }
