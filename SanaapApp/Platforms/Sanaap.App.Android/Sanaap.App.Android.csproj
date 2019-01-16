@@ -65,13 +65,16 @@
     <PackageReference Include="Bit.CSharpClient.All">
       <Version>1.0.9</Version>
     </PackageReference>
+    <PackageReference Include="Bit.CSharpClient.Controls">
+      <Version>1.6.2</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfMaskedEdit">
       <Version>16.2.0.42</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1009999" />
     <PackageReference Include="System.Reactive.Linq" Version="3.0.0" PrivateAssets="All" />
     <PackageReference Include="System.Reactive.PlatformServices" Version="3.0.0" PrivateAssets="All" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps">
@@ -82,6 +85,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderers\SanaapEntryRenderer.cs" />
     <Compile Include="Helpers\AndroidAppUtilities.cs" />
     <Compile Include="Implementations\DroidRoutingService.cs" />
     <Compile Include="MainActivity.cs" />
@@ -108,7 +112,6 @@
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomRenderers\" />
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
