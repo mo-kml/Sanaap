@@ -45,5 +45,6 @@ namespace Sanaap.App.Controls.ViewModels
               });
 
         }
+        public BitDelegateCommand Submit { get; set; }
     }
 }

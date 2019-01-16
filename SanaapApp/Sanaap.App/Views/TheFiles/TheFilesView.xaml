@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.TheFiles.TheFilesView">
+
+
+    <!--<ContentPage.Resources>
+        <Style TargetType="Image">
+            <Setter Property="BackgroundColor" Value="Gray"/>
+        </Style>
+        <Style x:Name="NegMargin" x:Key="NegMargin" TargetType="Label">
+            <Setter Property="Margin" Value="0,-10,0,0"/>
+        </Style>
+        <Style x:Key="PipeBoxView" TargetType="BoxView">
+            <Setter Property="WidthRequest" Value="1"/>
+            <Setter Property="BackgroundColor" Value="Gray"/>
+        </Style>
+        <Style x:Name="HeaderLabel" x:Key="Header" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="NegMHL" BasedOn="HeaderLabel" TargetType="Label">
+            <Setter Property="Margin" Value="0,-10,0,0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="BackgroundColor" Value="DarkBlue"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="BorderRadius" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+    </ContentPage.Resources>-->
+    
+    <ContentPage.Content>
+        <StackLayout></StackLayout>
+        <!--
+        <StackLayout FlowDirection="RightToLeft">
+            <ListView HasUnevenRows="True" ItemsSource="{Binding FilesList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="5,10,5,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
+                                <Label Text="{Binding Code}" Grid.Row="1" HorizontalOptions="Center" Style="{StaticResource NegMargin}"/>
+                                <BoxView Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource PipeBoxView}"/>
+                                <Image Grid.RowSpan="2" Grid.Column="2" Source="{Binding Image}" />
+                                <Label Grid.Column="3" Text="پرونده" />
+                                <Label Grid.Column="3" Grid.Row="1" Text="{Binding FileType}" Style="{StaticResource NegMHL}"/>
+                                <Label Grid.Column="3" Grid.Row="1"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Column="4" Grid.Row="1">
+                                    <Label Text="تاریخ ثبت" Style="{StaticResource NegMargin}"/>
+                                    <Label Text="{Binding CreatedDate}" Style="{StaticResource NegMargin}"/>
+                                </StackLayout>
+
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="استعلام پرونده"/>
+
+        </StackLayout>
+        -->
+        
+    </ContentPage.Content>
+</ContentPage>

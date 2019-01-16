@@ -19,11 +19,15 @@ using Sanaap.App.ViewModels.Comment;
 using Sanaap.App.ViewModels.Content;
 using Sanaap.App.ViewModels.EvaluationRequest;
 using Sanaap.App.ViewModels.Insurance;
+using Sanaap.App.ViewModels.News;
+using Sanaap.App.ViewModels.TheFiles;
 using Sanaap.App.Views;
 using Sanaap.App.Views.Comment;
 using Sanaap.App.Views.Content;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.App.Views.Insurance;
+using Sanaap.App.Views.News;
+using Sanaap.App.Views.TheFiles;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using Syncfusion.SfNavigationDrawer.XForms;
@@ -113,11 +117,15 @@ namespace Sanaap.App
             containerRegistry.RegisterForNavigation<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNavigation<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
 
+            containerRegistry.RegisterForNavigation<NewsDetailView, NewsDetailViewModel>();
+            containerRegistry.RegisterForNavigation<TheFilesView, TheFilesViewModel>();
+            containerRegistry.RegisterForNavigation<NewsListView, NewsDetailViewModel>();
+
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://4178a344.ngrok.io/"),
+                HostUri = new Uri("http://cbba180d.ngrok.io"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();

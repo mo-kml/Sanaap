@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.News.NewsListView">
+    <ContentPage.Content>
+        <StackLayout>
+        </StackLayout>
+        <!--Propertys Must Be Added As Style-->
+        <!--<StackLayout FlowDirection="RightToLeft">
+
+            <ListView HasUnevenRows="True" ItemsSource="{Binding NewsSource}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="7,5,7,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="15"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200*"/>
+                                </Grid.ColumnDefinitions>
+                                <Frame CornerRadius="5" Grid.RowSpan="2" Margin="10,0,0,0">
+                                    <Image Aspect="AspectFill"  Source="{Binding Image}" BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
+                                </Frame>
+                                <Label TextColor="Black" FontSize="17" FontAttributes="Bold" Text="{Binding Header}"  Grid.Column="1"/>
+                                <Label FontSize="12" Text="{Binding MainText}"  Grid.Column="1" Grid.Row="1" LineBreakMode="TailTruncation" HeightRequest="30"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
+                                    <Label HorizontalOptions="Start" FontSize="12">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                     Binding="{Binding IsLiked}"
+                                                     Value="true">
+                                                <Setter Property="Text" Value="Liked"/>
+                                                <Setter Property="TextColor" Value="Green"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                     Binding="{Binding IsLiked}"
+                                                     Value="false">
+                                                <Setter Property="Text" Value="Not Liked"/>
+                                                <Setter Property="TextColor" Value="red"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding LikeCount}" Margin="0,0,0,-5" FontSize="12"/>
+                                </StackLayout>
+                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreatedDate}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>
