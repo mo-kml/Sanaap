@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Sanaap.App.Controls"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.RegisterView" Title="">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -45,15 +46,15 @@
             </StackLayout>
 
             <StackLayout VerticalOptions="Start" IsVisible="{Binding IsEnterDataVisible}">
-                <Entry MaxLength="20" Placeholder="نام" Margin="15, 30, 15, 0" Text="{Binding Customer.FirstName}" />
-                <Entry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
-                <Entry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
-                <Entry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
+                <controls:SanaapEntry MaxLength="20" Placeholder="نام" Margin="15, 30, 15, 0" Text="{Binding Customer.FirstName}" />
+                <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+                <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
+                <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
                 <Button Text="ثبت نام" Command="{Binding Register}" />
             </StackLayout>
 
             <StackLayout VerticalOptions="Start" IsVisible="{Binding IsVerifySectionVisible}">
-                <Entry Keyboard="Numeric" MaxLength="5" Placeholder="لطفا کد تایید را وارد نمایید" Margin="15, 30, 15, 0" Text="{Binding VerificationCode}" />
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="لطفا کد تایید را وارد نمایید" Margin="15, 30, 15, 0" Text="{Binding VerificationCode}" />
                 <Button Text="تایید" Command="{Binding VerifyCode}" />
                 <Button Text="{Binding TimerValue,StringFormat='ارسال مجدد کد{0}'}" Command="{Binding SendVerificationCodeAgain}" />
             </StackLayout>

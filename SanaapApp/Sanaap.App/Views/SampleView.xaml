@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
-             xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
-             xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              x:Class="Sanaap.App.Views.SampleView">
+             <!--xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
+             xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"-->
+             
     <ContentPage.Content>
 
         <sfPopup:SfPopupLayout x:Name="popupLayout">
@@ -22,13 +23,13 @@
                 <StackLayout x:Name="layout">
                     <Button x:Name="clickToShowPopup" Text="ClickToShowPopup" VerticalOptions="Start" 
                HorizontalOptions="FillAndExpand"  Clicked="ClickToShowPopup_Clicked" />
-                    <bitControls:BitDatePicker
+                    <!--<bitControls:BitDatePicker
                             Text="لطفا یک روز را انتخاب کنید"
                             Culture="Fa"
                             DateDisplayFormat="dd MMM yyyy"
                             CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
                             FlowDirection="RightToLeft"
-                            SelectedDate ="{Binding SelectedDate}"/>
+                            SelectedDate ="{Binding SelectedDate}"/>-->
                 </StackLayout>
             </sfPopup:SfPopupLayout.Content>
         </sfPopup:SfPopupLayout>

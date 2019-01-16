@@ -4,6 +4,7 @@
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:enum="clr-namespace:Sanaap.Enums"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDetailView"
              x:Name="requestDetailView">
     <ContentPage.Content>
@@ -16,10 +17,10 @@
                 </StackLayout>
 
                 <Label Text="نام"/>
-                <Entry Text="{Binding Request.OwnerFirstName,Mode=TwoWay}"/>
+                <controls:SanaapEntry Text="{Binding Request.OwnerFirstName,Mode=TwoWay}"/>
 
                 <Label Text="نام خانوادگی"/>
-                <Entry Text="{Binding Request.OwnerLastName,Mode=TwoWay}"/>
+                <controls:SanaapEntry Text="{Binding Request.OwnerLastName,Mode=TwoWay}"/>
 
                 <Label Text="بیمه"/>
                 <renderedViews:HorizontalListView 
@@ -58,10 +59,10 @@
                 <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCar}" />
 
                 <Label Text="شماره بیمه نامه"/>
-                <Entry Text="{Binding Request.InsurerNo}"/>
+                <controls:SanaapEntry Text="{Binding Request.InsurerNo}"/>
 
                 <Label Text="پلاک"/>
-                <Entry Text="{Binding Request.PlateNumber}"/>
+                <controls:SanaapEntry Text="{Binding Request.PlateNumber}"/>
 
                 <StackLayout IsVisible="{Binding Request.IsSales}">
 
@@ -69,16 +70,16 @@
 
 
                     <Label Text="نام"/>
-                    <Entry Text="{Binding Request.LostFirstName}"/>
+                    <controls:SanaapEntry Text="{Binding Request.LostFirstName}"/>
 
                     <Label Text="نام خانوادگی"/>
-                    <Entry Text="{Binding Request.LostLastName}"/>
+                    <controls:SanaapEntry Text="{Binding Request.LostLastName}"/>
 
                     <Label Text="نام خودرو"/>
                     <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding LostSelectedCar}" />
 
                     <Label Text="پلاک"/>
-                    <Entry Text="{Binding Request.LostPlateNumber}"/>
+                    <controls:SanaapEntry Text="{Binding Request.LostPlateNumber}"/>
                 </StackLayout>
 
                 <Label Text="تاریخ وقوع حادثه"/>
