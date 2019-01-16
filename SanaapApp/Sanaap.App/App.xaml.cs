@@ -80,8 +80,8 @@ namespace Sanaap.App
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
-            eventAggregator.GetEvent<TokenExpiredEvent>()
-                .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
+            //eventAggregator.GetEvent<TokenExpiredEvent>()
+            //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
 
             await CrossMedia.Current.Initialize();
 
