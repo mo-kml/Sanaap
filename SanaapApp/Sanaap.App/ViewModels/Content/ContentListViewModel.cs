@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
+using Sanaap.App.Views.Content;
 using Sanaap.Dto;
 using Simple.OData.Client;
 using System;
@@ -24,7 +25,7 @@ namespace Sanaap.App.ViewModels.Content
                   NavigationParameters parameters = new NavigationParameters();
                   parameters.Add("ContentId", Guid.Parse("890f984f-f5aa-4cd3-870a-02f9e15e1037"));
 
-                  await navigationService.NavigateAsync("ShowContent", parameters);
+                  await navigationService.NavigateAsync(nameof(ShowContentView), parameters);
               });
         }
         public ObservableCollection<ContentListDto> Contents { get; set; }

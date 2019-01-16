@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             x:Class="Sanaap.App.Views.MainView" Title="سناپ  -  Sanaap"
-             ControlTemplate="{StaticResource MasterTemplate}">
+             x:Class="Sanaap.App.Views.MainView" Title="سناپ  -  Sanaap" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="ff:SvgCachedImage">
@@ -32,9 +31,9 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="170" />
-                <RowDefinition Height="170" />
-                <RowDefinition Height="170" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -42,61 +41,55 @@
             </Grid.ColumnDefinitions>
 
             <Frame Grid.Row="0" Grid.Column="0"  Margin="-2,1,1,-2">
-                <StackLayout BackgroundColor="#186f38">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GotoMainInsurance}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Grid.Row="0" Margin="0,7,0,0" Source="resource://Sanaap.App.Images.insurance.svg"/>
                     <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="اعلام خسارت" VerticalOptions="Center" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="0" Grid.Column="1" Margin="1,1,-2,-2">
-                <StackLayout BackgroundColor="#970000">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Grid.Row="1" Margin="0,10,0,0" Source="resource://Sanaap.App.Images.fender-bender.svg" />
                     <Label Margin="0,-5,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست صدور بیمه نامه" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="1" Grid.Column="0" Margin="-2,-2,1,-2">
-                <StackLayout BackgroundColor="#2a2a86" Opacity="10">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Margin="0,10,0,0" Grid.Row="1" Source="resource://Sanaap.App.Images.ambulance.svg" />
                     <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست آمبولانسسس" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="1" Grid.Column="1" Margin="1,-2,-2,-2">
-                <StackLayout BackgroundColor="#aa9a33" Opacity="10">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Margin="0,20,0,0" Source="resource://Sanaap.App.Images.emdadkhodro.svg" />
                     <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="امداد خودرو" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="0" Margin="-2,-2,1,-2">
-                <StackLayout BackgroundColor="#de761c" Opacity="10">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Margin="0,20,0,0" Source="resource://Sanaap.App.Images.lifter.svg" />
                     <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="تعمیر گاه" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="1" Margin="1,-2,-2,-2">
-                <StackLayout BackgroundColor="#d55ba2" Opacity="10">
+                <StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                     </StackLayout.GestureRecognizers>
-                    <ff:SvgCachedImage Grid.Row="1" Margin="0,20,0,0" Source="resource://Sanaap.App.Images.crane-truck.svg" />
                     <Label Margin="0,0,0,0" TextColor="White" FontFamily="IRYekan.ttf#yekan" Text="درخواست جرثقیل" />
                 </StackLayout>
             </Frame>

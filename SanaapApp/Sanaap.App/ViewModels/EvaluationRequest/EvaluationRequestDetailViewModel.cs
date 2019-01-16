@@ -5,6 +5,7 @@ using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views;
+using Sanaap.App.Views.Insurance;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -48,7 +49,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   NavigationParameters parameters = new NavigationParameters();
                   parameters.Add("Selective", true);
 
-                  await navigationService.NavigateAsync("InsurancePolicyList", parameters);
+                  await navigationService.NavigateAsync(nameof(InsurancePolicyListView), parameters);
               });
 
             SelectViewPlace = new BitDelegateCommand(async () =>

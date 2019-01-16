@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
+using Bit;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
 using FFImageLoading.Svg.Forms;
@@ -46,7 +47,12 @@ namespace Sanaap.App.Droid
 
             FormsGoogleMaps.Init(this, bundle);
 
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+
+            BitCSharpClientControls.Init();
+
             Forms.Init(this, bundle);
+
 
             Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
 

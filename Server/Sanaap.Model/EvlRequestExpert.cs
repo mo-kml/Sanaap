@@ -1,10 +1,8 @@
 ﻿using Bit.Model.Contracts;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Model
 {
-    [ComplexType]
-    public class EvlRequestExpert : IEntity
+    public class EvlRequestExpert : BaseEntity
     {
         public string Token { get; set; }
         public int FileID { get; set; }
@@ -15,7 +13,7 @@ namespace Sanaap.Model
         public string ExpertDistance { get; set; }
     }
 
-    public class EvlRequestExpertExpert
+    public class EvlRequestExpertExpert : IEntity
     {
         public int ID { get; set; }
         public int ExpertID { get; set; }

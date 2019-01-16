@@ -2,10 +2,37 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Controls.MenuView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame">
+                <Setter Property="HeightRequest" Value="200"/>
+                <Setter Property="WidthRequest" Value="200"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BorderColor" Value="Green"/>
+                <Setter Property="BorderWidth" Value="0.5"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="Margin" Value="10,10"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
-            <Button Text="click" Command="{Binding Submit}"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+
+                <Label FontSize="Medium" Text="سناپ" HorizontalOptions="Center" />
+                <Label FontSize="Micro" Text="سامانه نرم افزاری ایرانیان پوشش" HorizontalOptions="Center"/>
+                <Button BackgroundColor="Transparent" Text="خانه" Command="{Binding GoToPage}" CommandParameter="MainView" />
+                <Button BackgroundColor="Transparent" Text="تماس با ما" Command="{Binding GoToPage}" CommandParameter="ContactUsView" />
+                <Button BackgroundColor="Transparent" Text="اخبار و اطلاعیه ها" Command="{Binding GoToPage}" CommandParameter="ContentListView" />
+                <Button BackgroundColor="Transparent" Text="ثبت نظرات" Command="{Binding GoToPage}" CommandParameter="CommentListView" />
+                <Button BackgroundColor="Transparent" Text="بیمه نامه های من" Command="{Binding GoToPage}" CommandParameter="InsurancePolicyListView" />
+                <Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="EvaluationRequestListView" />
+                <Button BackgroundColor="Transparent" Text="استعلام درخواست" Command="{Binding GoToPage}" CommandParameter="EvlRequestInquiryView" />
+                <!--<Button BackgroundColor="Transparent" Text="درخواست های من" Command="{Binding GoToPage}" CommandParameter="Nav/Main/MySosRequests" />-->
+                <Button BorderColor="Red" BackgroundColor="Transparent" VerticalOptions="EndAndExpand" Text="خروج از حساب کاربری" Command="{Binding Logout}" Margin="5"/>
+            </StackLayout>
+        </ScrollView>
     </ContentView.Content>
 </ContentView>

@@ -4,6 +4,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -39,7 +40,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                               RequestTypeName = EnumHelper<EvlRequestType>.GetDisplayValue(requestDto.EvlRequestType)
                           });
 
-                          await navigationService.NavigateAsync("EvlRequestProgress", parameter);
+                          await navigationService.NavigateAsync(nameof(EvlRequestProgressView), parameter);
                       }
                   }
               }, () => DocumentNumber != 0);

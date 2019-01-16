@@ -4,6 +4,8 @@ using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Enums;
 using System;
@@ -41,19 +43,19 @@ namespace Sanaap.App.ViewModels
 
             GoToMySosRequests = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("MySosRequests");
+                await navigationService.NavigateAsync(nameof(MySosRequestsView));
             });
 
             GotoMainInsurance = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("MainInsurance");
+                await navigationService.NavigateAsync(nameof(MainInsuranceView));
             });
 
 
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
+                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { "InsuranceType", InsuranceType.Badane }
                 });
@@ -61,7 +63,10 @@ namespace Sanaap.App.ViewModels
 
             GotoDetail = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestDetail");
+                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
+                {
+                    { "InsuranceType", InsuranceType.Sales}
+                });
             });
 
             Logout = new BitDelegateCommand(async () =>

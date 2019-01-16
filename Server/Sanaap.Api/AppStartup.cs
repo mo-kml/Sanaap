@@ -122,8 +122,7 @@ namespace Sanaap.Api
             dependencyManager.Register<ISanaapTokenService, SanaapTokenService>(lifeCycle: DependencyLifeCycle.SingleInstance);
             dependencyManager.Register<IExternalApiService, ExternalApiService>(lifeCycle: DependencyLifeCycle.SingleInstance);
 
-            dependencyManager.Register<SanaapHttpMessageHandler, SanaapHttpMessageHandler>();
-
+            dependencyManager.Register<SanaapHttpMessageHandler, SanaapHttpMessageHandler>(lifeCycle: DependencyLifeCycle.Transient);
             dependencyManager.Register<IHashUtils, DefaultHashUtils>(lifeCycle: DependencyLifeCycle.SingleInstance);
 
             services.AddHttpClient("SoltaniHttpClient", httpClient =>

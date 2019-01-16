@@ -3,6 +3,7 @@ using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Enums;
 
 namespace Sanaap.App.ViewModels
@@ -19,7 +20,7 @@ namespace Sanaap.App.ViewModels
         {
             GotoEvlRequestMapSales = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
+                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { nameof(InsuranceType), InsuranceType.Sales }
                 });
@@ -27,7 +28,7 @@ namespace Sanaap.App.ViewModels
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("EvlRequestDetail", new NavigationParameters
+                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { nameof(InsuranceType), InsuranceType.Badane }
                 });

@@ -3,6 +3,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -60,7 +61,7 @@ namespace Sanaap.App.ViewModels
 
             GoToMain = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("/Menu/Nav/Main");
+                await navigationService.NavigateAsync($"/{nameof(MainView)}");
             });
 
             Call = new BitDelegateCommand(async () =>
@@ -78,13 +79,13 @@ namespace Sanaap.App.ViewModels
         {
             _evlRequest = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
 
-            EvlRequestExpertDto expertDto = await _evlRequestService.FindEvlRequestExpert(_evlRequest.Id);
-
             Message = ConstantStrings.ExpertFinding;
             IsVisibleBefore = true;
             IsVisibleAfter = false;
-
             string result = null;
+
+            EvlRequestExpertDto expertDto = await _evlRequestService.FindEvlRequestExpert(_evlRequest.Id);
+
             try
             {
                 CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
@@ -101,19 +102,16 @@ namespace Sanaap.App.ViewModels
                 findExpertDto.LostCarID = _evlRequest.LostCarId;
                 findExpertDto.LostCarType = "415"; // 415
                 findExpertDto.Address = "یوسف آباد کوچه هفتم";
-
-
-                //_httpClient.PostAsync("FindNearExpert",)
             }
             catch (Exception ex)
             {
-                await _navigationService.NavigateAsync("/Menu/Nav/Main");
+                await _navigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertError, ErrorMessages.Ok);
             }
 
             if (result == "NotResult")
             {
-                await _navigationService.NavigateAsync("/Menu/Nav/Main");
+                await _navigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertNotResult, ErrorMessages.Ok);
                 return;
             }

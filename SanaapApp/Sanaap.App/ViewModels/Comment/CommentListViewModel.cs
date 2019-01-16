@@ -2,6 +2,7 @@
 using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Views.Comment;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -28,7 +29,7 @@ namespace Sanaap.App.ViewModels.Comment
 
             CreateComment = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("CreateComment");
+                await navigationService.NavigateAsync(nameof(CreateCommentView));
             });
 
             ShowComment = new BitDelegateCommand<CommentItemSource>(async (comment) =>

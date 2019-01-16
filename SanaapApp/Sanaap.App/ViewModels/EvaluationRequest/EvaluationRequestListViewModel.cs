@@ -3,6 +3,7 @@ using Bit.ViewModel;
 using Prism.Navigation;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -30,7 +31,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 NavigationParameters parameters = new NavigationParameters();
                 parameters.Add(nameof(EvlRequestListItemSource), request);
 
-                await navigationService.NavigateAsync("EvlRequestProgress", parameters);
+                await navigationService.NavigateAsync(nameof(EvlRequestProgressView), parameters);
             });
         }
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)

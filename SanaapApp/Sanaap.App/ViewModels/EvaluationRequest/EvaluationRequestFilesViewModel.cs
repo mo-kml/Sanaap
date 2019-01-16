@@ -8,6 +8,7 @@ using Prism.Services;
 using Sanaap.App.Dto;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
+using Sanaap.App.Views;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Simple.OData.Client;
@@ -104,7 +105,7 @@ namespace Sanaap.App.ViewModels
 
                             Request = JsonConvert.DeserializeObject<EvlRequestItemSource>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
 
-                            await navigationService.NavigateAsync("EvlRequestWait", new NavigationParameters
+                            await navigationService.NavigateAsync(nameof(EvlRequestWaitView), new NavigationParameters
                             {
                                 { nameof(EvlRequestItemSource), Request }
                             });

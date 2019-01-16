@@ -3,6 +3,7 @@ using Bit.ViewModel;
 using Prism.Navigation;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views.Insurance;
 using Sanaap.Constants;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -29,7 +30,7 @@ namespace Sanaap.App.ViewModels.Insurance
                   NavigationParameters parameters = new NavigationParameters();
                   parameters.Add("Method", EditMethod.Create);
 
-                  await navigationService.NavigateAsync("CreatePolicy");
+                  await navigationService.NavigateAsync(nameof(CreateInsurancePolicyView));
               });
 
             ShowPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
@@ -47,7 +48,7 @@ namespace Sanaap.App.ViewModels.Insurance
                       parameters.Add("Policy", policy);
                       parameters.Add("Method", EditMethod.Update);
 
-                      await navigationService.NavigateAsync("CreatePolicy", parameters);
+                      await navigationService.NavigateAsync(nameof(CreateInsurancePolicyView), parameters);
                   }
               });
         }

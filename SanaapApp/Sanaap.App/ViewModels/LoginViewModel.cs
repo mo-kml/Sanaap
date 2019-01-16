@@ -3,6 +3,7 @@ using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Views;
 using Sanaap.Constants;
 using Sanaap.Service.Contracts;
 using System;
@@ -44,7 +45,7 @@ namespace Sanaap.App.ViewModels
                     try
                     {
                         await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                        await navigationService.NavigateAsync("/Menu/Nav/Main");
+                        await navigationService.NavigateAsync($"/{nameof(MainView)}");
                     }
                     catch (Exception ex)
                     {
@@ -66,7 +67,7 @@ namespace Sanaap.App.ViewModels
 
             Register = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("Register");
+                await navigationService.NavigateAsync(nameof(RegisterView));
             });
         }
     }
