@@ -5,10 +5,10 @@
              x:Class="Sanaap.App.Views.MainView" Title="سناپ  -  Sanaap" >
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="ff:SvgCachedImage">
+            <!--<Style TargetType="ff:SvgCachedImage">
                 <Setter Property="HeightRequest" Value="100"/>
-                <!--<Setter Property="Margin" Value="10"/>-->
-                <!--<Setter Property="Margin" Value="0,-10,0,0"/>-->
+                --><!--<Setter Property="Margin" Value="10"/>-->
+                <!--<Setter Property="Margin" Value="0,-10,0,0"/>--><!--
             </Style>
 
             <Style TargetType="Label">
@@ -19,17 +19,20 @@
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="BackgroundColor" Value="Gray"/>
-                <!--<Setter Property="Margin" Value="0,1,1,0"/>-->
+                --><!--<Setter Property="Margin" Value="0,1,1,0"/>--><!--
             </Style>
 
             <Style TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="White"/>
-            </Style>
+            </Style>-->
+            
+            
+            
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
-        <Grid>
+        <!--<Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
@@ -94,7 +97,7 @@
                 </StackLayout>
             </Frame>
 
-            <!--<Frame Grid.Row="3" Grid.Column="1" Margin="1,-4,-2,0">
+            --><!--<Frame Grid.Row="3" Grid.Column="1" Margin="1,-4,-2,0">
                 <StackLayout BackgroundColor="#21aba9">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EvlRequest}"/>
@@ -104,6 +107,50 @@
                 </StackLayout>
             </Frame>-->
 
+        <!--</Grid>-->
+
+        <Grid Padding="1" Margin="1" HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="170"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="170"/>
+            </Grid.ColumnDefinitions>
+
+            <Frame BackgroundColor="Navy" Opacity=".5" HasShadow="True" Padding="1">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1" Grid.Column="1">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1" Grid.Row="1">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1" Grid.Column="1" Grid.Row="1">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1" Grid.Row="2">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1" Grid.Column="1" Grid.Row="2">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
+            <Frame Opacity=".5" HasShadow="True" Padding="1">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="test"/>
+            </Frame>
+
         </Grid>
+
+
+
     </ScrollView>
 </ContentPage>
