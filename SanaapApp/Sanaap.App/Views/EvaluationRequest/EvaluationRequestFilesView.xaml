@@ -1,17 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              x:Class="Sanaap.App.Views.EvaluationRequestFilesView"
              xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+             HasSystemPadding="True" Padding="30,50,30,50" SystemPaddingSides="All"
              x:Name="evlRequestFile">
-    <ContentPage.Resources>
+    <popup:PopupPage.Animation>
+        <animations:ScaleAnimation 
+      PositionIn="Center"
+      PositionOut="Center"
+      ScaleIn="1.2"
+      ScaleOut="0.8"
+      DurationIn="400"
+      DurationOut="300"
+      EasingIn="SinOut"
+      EasingOut="SinIn"
+      HasBackgroundAnimation="True"/>
+    </popup:PopupPage.Animation>
+    <popup:PopupPage.Resources>
         <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
-    </ContentPage.Resources>
-    <ContentPage.Content>
-        <StackLayout>
-
+    </popup:PopupPage.Resources>
+    <Frame CornerRadius="10">
+        <StackLayout BackgroundColor="White">
             <l:RepeatableWrapLayout FlowDirection="RightToLeft" UniformColumns="3" ItemsSource="{Binding Files}" HorizontalOptions="FillAndExpand">
                 <l:RepeatableWrapLayout.ItemTemplate>
                     <DataTemplate>
@@ -27,7 +41,6 @@
                 </l:RepeatableWrapLayout.ItemTemplate>
             </l:RepeatableWrapLayout>
             <Button Text="تایید نهایی" Command="{Binding Submit}" TextColor="White" VerticalOptions="EndAndExpand"/>
-
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </Frame>
+</popup:PopupPage>
