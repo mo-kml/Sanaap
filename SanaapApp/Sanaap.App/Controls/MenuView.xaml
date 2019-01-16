@@ -2,10 +2,44 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Controls.MenuView">
+
+    <ContentView.Resources>
+        <Style x:Key="NavigationButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Navy"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style TargetType="BoxView">
+            <Setter Property="BackgroundColor" Value="Blue"/>
+            <Setter Property="Margin" Value="0,-8,0,0"/>
+            <Setter Property="HeightRequest" Value="1"/>
+        </Style>
+
+        <Style TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="Navy"/>
+        </Style>
+        
+    </ContentView.Resources>
+
     <ContentView.Content>
+
         <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
-            <Button Text="click" Command="{Binding Submit}"/>
+
+            <Button Text="صفحه اصلی" Command="{Binding GoToMainPage}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="پرونده ها" Command="{Binding GoToFiles}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="بیمه نامه ها" Command="{Binding GoToIns}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="اخبار و اطلاعیه ها" Command="{Binding GoToNews}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="شکایات و پیام ها" Command="{Binding GoToMessages}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="تماس با ما" Command="{Binding GoToContactUs}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
+            <Button Text="خروج" Command="{Binding Exit}" Style="{StaticResource NavigationButton}"/>
+            <BoxView/>
         </StackLayout>
+
     </ContentView.Content>
 </ContentView>
