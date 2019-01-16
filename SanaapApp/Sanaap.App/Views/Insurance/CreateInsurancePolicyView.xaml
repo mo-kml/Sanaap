@@ -4,6 +4,7 @@
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView"
              x:Name="createInsuranceView">
     <ContentPage.Content>
@@ -16,10 +17,10 @@
                 <syncCombobox:SfComboBox DataSource="{Binding Colors}" AllowFiltering="True" IsEditableMode="True" DisplayMemberPath="Name" SelectedItem="{Binding SelectedColor}" />
 
                 <Label Text="شماره شاسی"/>
-                <Entry Text="{Binding Policy.ChasisNo}"/>
+                <controls:SanaapEntry Text="{Binding Policy.ChasisNo}"/>
 
                 <Label Text="شماره VIN"/>
-                <Entry Text="{Binding Policy.VIN}"/>
+                <controls:SanaapEntry Text="{Binding Policy.VIN}"/>
 
                 <Label Text="بیمه ها"/>
                 <renderedViews:HorizontalListView 
@@ -55,10 +56,10 @@
                 </renderedViews:HorizontalListView>
 
                 <Label Text="شماره بیمه نامه"/>
-                <Entry Text="{Binding Policy.InsurerNo}"/>
+                <controls:SanaapEntry Text="{Binding Policy.InsurerNo}"/>
 
                 <Label Text="پلاک"/>
-                <Entry Text="{Binding Policy.PlateNumber}"/>
+                <controls:SanaapEntry Text="{Binding Policy.PlateNumber}"/>
 
                 <Label Text="نوع بیمه نامه"/>
                 <syncCombobox:SfComboBox DataSource="{Binding InsuranceTypes}" DisplayMemberPath="InsuranceTypeName" SelectedItem="{Binding SelectedInsuranceType}" />

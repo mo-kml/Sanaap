@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.Comment.CreateCommentView">
     <ContentPage.Content>
         <StackLayout>
@@ -18,13 +19,13 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Entry Text="{Binding Comment.FirstName}"/>
+                <controls:SanaapEntry Text="{Binding Comment.FirstName}"/>
                 <Label Text="نام" Grid.Column="1"/>
 
-                <Entry Text="{Binding Comment.LastName}" Grid.Row="1"/>
+                <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Row="1"/>
                 <Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>
 
-                <Entry Keyboard="Numeric" MaxLength="11" Text="{Binding Comment.Mobile}" Grid.Row="2"/>
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Text="{Binding Comment.Mobile}" Grid.Row="2"/>
                 <Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>
             </Grid>
 

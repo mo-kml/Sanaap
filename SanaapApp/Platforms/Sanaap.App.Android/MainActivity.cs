@@ -49,7 +49,7 @@ namespace Sanaap.App.Droid
 
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
-            BitCSharpClientControls.Init();
+            //BitCSharpClientControls.Init();
 
             //Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
 
