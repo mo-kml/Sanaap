@@ -4,7 +4,6 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
-using Bit;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
 using FFImageLoading.Svg.Forms;
@@ -51,6 +50,7 @@ namespace Sanaap.App.Droid
 
             //BitCSharpClientControls.Init();
 
+            
             //Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
 
             Forms.Init(this, bundle);

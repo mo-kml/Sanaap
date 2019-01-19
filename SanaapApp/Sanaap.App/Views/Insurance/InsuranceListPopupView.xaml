@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sanaap.App.Views.Insurance.InsuranceListPopupView">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="لیست بیمه نامه های ثبت شده" />
+            <Label Text="زیر عنوان" />
+            <ListView ItemsSource="{Binding Insurances}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding CarName}"/>
+                                <Label Text="{Binding ColorName}"/>
+                                <Label Text="{Binding InsuranceTypeName}"/>
+                                <Label Text="{Binding PlateNumber}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

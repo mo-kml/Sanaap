@@ -1,7 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Autofac;
 using Bit;
-using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
 using Plugin.Media;
@@ -76,7 +75,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync(nameof(MainView));
+            await NavigationService.NavigateAsync(nameof(EvaluationRequestView));
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
