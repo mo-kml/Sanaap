@@ -13,6 +13,7 @@
         <ResourceDictionary>
 
             <Color x:Key="primaryGray">#e2e2e2</Color>
+            <Color x:Key="primaryBlue">#172CCB</Color>
 
             <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator"/>
 
