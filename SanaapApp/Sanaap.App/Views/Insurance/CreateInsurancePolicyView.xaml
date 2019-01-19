@@ -5,6 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+
     xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
     xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     x:Name="createInsuranceView">
@@ -34,37 +36,29 @@
         <controls:SanaapEntry Text="{Binding Policy.VIN}" />
 
         <Label Text="بیمه ها" />
-        <!--<renderedViews:HorizontalListView
-                                  ItemSpacing="15"
-                                  ItemHeight="80"
-                                  ItemWidth="80"
-                                  ItemsSource="{Binding Insurers}"
-
-                                  SnapStyle="Center">
-                    <renderedViews:HorizontalListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout>
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="White"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference createInsuranceView}}" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <Image Source="{Binding Image}" HeightRequest="60"/>
-                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </renderedViews:HorizontalListView.ItemTemplate>
-                </renderedViews:HorizontalListView>-->
+        <syncfusion:SfListView Orientation="Horizontal" ItemsSource="{Binding Insurers}">
+          <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+              <StackLayout>
+                <StackLayout.Triggers>
+                  <DataTrigger TargetType="StackLayout"
+                           Binding="{Binding IsSelected}" Value="False">
+                    <Setter Property="BackgroundColor" Value="White"/>
+                  </DataTrigger>
+                  <DataTrigger TargetType="StackLayout"
+                           Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="BackgroundColor" Value="Gray"/>
+                  </DataTrigger>
+                </StackLayout.Triggers>
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="{Binding Image}" HeightRequest="60"/>
+                <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+              </StackLayout>
+            </DataTemplate>
+          </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
 
         <Label Text="شماره بیمه نامه" />
         <controls:SanaapEntry Text="{Binding Policy.InsurerNo}" />

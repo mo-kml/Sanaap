@@ -15,7 +15,7 @@ namespace Sanaap.App.Views
 
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
-            popupLayout.Show();
+            //popupLayout.Show();
         }
     }
 }

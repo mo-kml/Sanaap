@@ -1,37 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              x:Class="Sanaap.App.Views.SampleView">
-             <!--xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
+    <!--xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"-->
-             
+
     <ContentPage.Content>
 
-        <sfPopup:SfPopupLayout x:Name="popupLayout">
-            <sfPopup:SfPopupLayout.PopupView>
-                <sfPopup:PopupView>
-                    <sfPopup:PopupView.ContentTemplate>
-                        <DataTemplate>
-                            <Label Text="This is SfPopupLayout" BackgroundColor="SkyBlue"
-                           HorizontalTextAlignment="Center"/>
-                        </DataTemplate>
-                    </sfPopup:PopupView.ContentTemplate>
-                </sfPopup:PopupView>
-            </sfPopup:SfPopupLayout.PopupView>
-            <sfPopup:SfPopupLayout.Content>
-                <StackLayout x:Name="layout">
-                    <Button x:Name="clickToShowPopup" Text="ClickToShowPopup" VerticalOptions="Start" 
-               HorizontalOptions="FillAndExpand"  Clicked="ClickToShowPopup_Clicked" />
-                    <!--<bitControls:BitDatePicker
-                            Text="لطفا یک روز را انتخاب کنید"
-                            Culture="Fa"
-                            DateDisplayFormat="dd MMM yyyy"
-                            CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
-                            FlowDirection="RightToLeft"
-                            SelectedDate ="{Binding SelectedDate}"/>-->
-                </StackLayout>
-            </sfPopup:SfPopupLayout.Content>
-        </sfPopup:SfPopupLayout>
+        <syncfusion:SfListView Orientation="Horizontal" x:Name="listView" ItemsSource="{Binding Items}">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Text}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
     </ContentPage.Content>
 </ContentPage>

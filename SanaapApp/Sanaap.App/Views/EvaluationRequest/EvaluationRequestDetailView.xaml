@@ -6,6 +6,7 @@
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
@@ -44,37 +45,29 @@
                     <controls:SanaapEntry Text="{Binding Request.OwnerLastName, Mode=TwoWay}" />
 
                     <Label Text="بیمه" />
-                    <!--<renderedViews:HorizontalListView
-                                  ItemSpacing="15"
-                                  ItemHeight="80"
-                                  ItemWidth="80"
-                                  ItemsSource="{Binding Insurers}"
-
-                                  SnapStyle="Center">
-                        <renderedViews:HorizontalListView.ItemTemplate>
+                    <syncfusion:SfListView Orientation="Horizontal" ItemsSource="{Binding Insurers}">
+                        <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout>
-                                        <StackLayout.Triggers>
-                                            <DataTrigger TargetType="StackLayout"
+                                <StackLayout>
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout"
                                                  Binding="{Binding IsSelected}" Value="False">
-                                                <Setter Property="BackgroundColor" Value="White"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="StackLayout"
+                                            <Setter Property="BackgroundColor" Value="White"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="StackLayout"
                                                  Binding="{Binding IsSelected}" Value="True">
-                                                <Setter Property="BackgroundColor" Value="Gray"/>
-                                            </DataTrigger>
-                                        </StackLayout.Triggers>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
-                                        </StackLayout.GestureRecognizers>
-                                        <Image Source="{Binding Image}" HeightRequest="60"/>
-                                        <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
-                                    </StackLayout>
-                                </ViewCell>
+                                            <Setter Property="BackgroundColor" Value="Gray"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="{Binding Image}" HeightRequest="60"/>
+                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                </StackLayout>
                             </DataTemplate>
-                        </renderedViews:HorizontalListView.ItemTemplate>
-                    </renderedViews:HorizontalListView>-->
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
 
                     <Label Text="نام خودرو" />
                     <syncCombobox:SfComboBox
