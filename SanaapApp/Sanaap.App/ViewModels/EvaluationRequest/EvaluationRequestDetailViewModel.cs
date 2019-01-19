@@ -1,10 +1,8 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views;
@@ -30,7 +28,6 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             IEvlRequestValidator evlRequestValidator,
             IPageDialogService dialogService,
             ISanaapAppTranslateService translateService,
-            IPopupNavigationService popupNavigationService,
             INavigationService navigationService)
         {
             _userDialogs = userDialogs;
@@ -48,34 +45,13 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 SelectedInsurer = parameter;
             });
 
-            eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (insurance) =>
-            {
-                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
-
-                InsuranceType insuranceType = Request.InsuranceType;
-
-                Request = new EvlRequestItemSource
-                {
-                    OwnerFirstName = customer.FirstName,
-                    OwnerLastName = customer.LastName,
-                    InsurerNo = insurance.Policy.InsurerNo,
-                    PlateNumber = insurance.Policy.PlateNumber,
-                    InsuranceType = insuranceType,
-                    IsSales = insuranceType == InsuranceType.Sales
-                };
-
-                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == insurance.Policy.InsurerId);
-                SelectedInsurer.IsSelected = true;
-
-                SelectedCar = Cars.FirstOrDefault(c => c.PrmID == insurance.Policy.CarId);
-            });
-
 
             SelectFromInsurances = new BitDelegateCommand(async () =>
               {
-                  await popupNavigationService.PopAsync();
-
-                  eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
+                  await navigationService.GoBackAsync(new NavigationParameters
+                  {
+                      { "OpenInsurancePopup",true }
+                  });
               });
 
             SelectViewPlace = new BitDelegateCommand(async () =>
@@ -95,7 +71,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                           return;
                       }
 
-                      NavigationParameters Parameters = new NavigationParameters();
+                      INavigationParameters Parameters = new NavigationParameters();
                       Parameters.Add(nameof(EvlRequestItemSource), Request);
                       Parameters.Add("NextPage", "EvlRequestFile");
 
@@ -105,7 +81,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             SelectViewPlace.ObservesProperty(() => SelectedCar);
             SelectViewPlace.ObservesProperty(() => SelectedInsurer);
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
             {
@@ -127,7 +103,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 await syncData();
             }
 
-            if (parameters.TryGetValue("Policy", out PolicyItemSource policy))
+            if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
             {
                 CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
 

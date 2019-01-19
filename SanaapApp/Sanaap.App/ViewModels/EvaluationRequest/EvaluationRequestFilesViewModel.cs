@@ -116,7 +116,7 @@ namespace Sanaap.App.ViewModels
             });
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
@@ -144,7 +144,7 @@ namespace Sanaap.App.ViewModels
             }
         }
 
-        public override Task OnNavigatedFromAsync(NavigationParameters parameters)
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
         {
             parameters.Add(nameof(EvlRequestItemSource), Request);
             parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));

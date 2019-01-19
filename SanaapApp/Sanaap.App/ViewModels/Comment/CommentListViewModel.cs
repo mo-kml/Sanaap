@@ -38,7 +38,7 @@ namespace Sanaap.App.ViewModels.Comment
               });
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {

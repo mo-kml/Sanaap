@@ -27,6 +27,7 @@ namespace Sanaap.App.Controls.ViewModels
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
+
                 NavigationDrawer.ToggleDrawer();
                 await navigationService.NavigateAsync(page);
             });

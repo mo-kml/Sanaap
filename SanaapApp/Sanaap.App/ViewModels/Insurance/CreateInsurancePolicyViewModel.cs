@@ -56,6 +56,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
             Submit = new BitDelegateCommand(async () =>
               {
+
                   insuranceCancellationTokenSource?.Cancel();
                   insuranceCancellationTokenSource = new CancellationTokenSource();
 
@@ -109,7 +110,7 @@ namespace Sanaap.App.ViewModels.Insurance
                 SelectedInsurer = parameter;
             });
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             insuranceCancellationTokenSource?.Cancel();
             insuranceCancellationTokenSource = new CancellationTokenSource();

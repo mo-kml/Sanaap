@@ -7,9 +7,9 @@ namespace Sanaap.App.Props
     public static class MapProps
     {
         public static readonly BindableProperty CenterRegionProperty =
-              BindableProperty.CreateAttached(propertyName: "CenterRegion", returnType: typeof(Location), declaringType: typeof(Map), defaultValue: null, propertyChanged: (sender, oldValue, newValue) =>
+              BindableProperty.CreateAttached(propertyName: "CenterRegion", returnType: typeof(Location), declaringType: typeof(Xamarin.Forms.GoogleMaps.Map), defaultValue: null, propertyChanged: (sender, oldValue, newValue) =>
               {
-                  Map map = (Map)sender;
+                  Xamarin.Forms.GoogleMaps.Map map = (Xamarin.Forms.GoogleMaps.Map)sender;
 
                   if (newValue is Location position)
                   {

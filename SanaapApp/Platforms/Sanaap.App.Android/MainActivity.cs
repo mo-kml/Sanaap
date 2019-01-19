@@ -50,9 +50,6 @@ namespace Sanaap.App.Droid
 
             //BitCSharpClientControls.Init();
 
-            
-            //Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
-
             Forms.Init(this, bundle);
 
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));

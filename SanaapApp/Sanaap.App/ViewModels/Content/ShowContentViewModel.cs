@@ -18,7 +18,7 @@ namespace Sanaap.App.ViewModels.Content
             _userDialogs = userDialogs;
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             Guid contentId;
 

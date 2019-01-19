@@ -32,7 +32,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       }
                       else
                       {
-                          NavigationParameters parameter = new NavigationParameters();
+                          INavigationParameters parameter = new NavigationParameters();
                           parameter.Add(nameof(EvlRequestListItemSource), new EvlRequestListItemSource
                           {
                               Code = requestDto.Code,

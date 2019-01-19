@@ -6,6 +6,7 @@ using Prism.Navigation;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -21,17 +22,21 @@ namespace Sanaap.App.ViewModels.Insurance
     {
         private readonly IPolicyService _policyService;
         private readonly IUserDialogs _userDialogs;
-        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs)
+        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, INavigationService navigationService)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
 
             SelectPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
             {
-                eventAggregator.GetEvent<InsuranceEvent>().Publish(new InsuranceEventArgs { Policy = policy });
+                eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
+
+                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters {
+                    { "Insurance",policy}
+                });
             });
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             insuranceCancellationTokenSource?.Cancel();
             insuranceCancellationTokenSource = new CancellationTokenSource();

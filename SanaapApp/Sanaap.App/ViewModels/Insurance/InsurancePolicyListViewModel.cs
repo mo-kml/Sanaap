@@ -27,7 +27,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
             CreatePolicy = new BitDelegateCommand(async () =>
               {
-                  NavigationParameters parameters = new NavigationParameters();
+                  INavigationParameters parameters = new NavigationParameters();
                   parameters.Add("Method", EditMethod.Create);
 
                   await navigationService.NavigateAsync(nameof(CreateInsurancePolicyView));
@@ -35,7 +35,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
             ShowPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
               {
-                  NavigationParameters parameters = new NavigationParameters();
+                  INavigationParameters parameters = new NavigationParameters();
 
                   if (Selective)
                   {
@@ -52,7 +52,7 @@ namespace Sanaap.App.ViewModels.Insurance
                   }
               });
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             insuranceCancellationTokenSource?.Cancel();
             insuranceCancellationTokenSource = new CancellationTokenSource();

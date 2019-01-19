@@ -13,11 +13,11 @@ namespace Sanaap.App.ViewModels
 {
     public class MapViewModel : BitViewModelBase
     {
-        public BitDelegateCommand<Map> UpdateLocation { get; set; }
+        public BitDelegateCommand<Xamarin.Forms.GoogleMaps.Map> UpdateLocation { get; set; }
 
         public Location CurrentPosition { get; set; }
 
-        public NavigationParameters Parameters { get; set; }
+        public INavigationParameters Parameters { get; set; }
 
         private CancellationTokenSource registerCancellationTokenSource;
 
@@ -32,7 +32,7 @@ namespace Sanaap.App.ViewModels
             _pageDialogService = pageDialogService;
             _userDialogs = userDialogs;
 
-            UpdateLocation = new BitDelegateCommand<Map>(async (map) =>
+            UpdateLocation = new BitDelegateCommand<Xamarin.Forms.GoogleMaps.Map>(async (map) =>
              {
                  Position centerPosition = map.VisibleRegion.Center;
 
@@ -42,13 +42,13 @@ namespace Sanaap.App.ViewModels
              });
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             registerCancellationTokenSource?.Cancel();
             registerCancellationTokenSource = new CancellationTokenSource();
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
             {
-                if (parameters.GetNavigationMode() == NavigationMode.New)
+                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.New)
                 {
                     Parameters = parameters;
 
@@ -64,7 +64,7 @@ namespace Sanaap.App.ViewModels
                     CurrentPosition = await GeolocationExtensions.GetLocation();
                 }
 
-                if (parameters.GetNavigationMode() == NavigationMode.Back)
+                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.Back)
                 {
                     if (!parameters.TryGetValue(nameof(Position), out Position position))
                     {
@@ -82,7 +82,7 @@ namespace Sanaap.App.ViewModels
             }
         }
 
-        public override Task OnNavigatedFromAsync(NavigationParameters parameters)
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
         {
             parameters = Parameters;
             return base.OnNavigatedFromAsync(parameters);

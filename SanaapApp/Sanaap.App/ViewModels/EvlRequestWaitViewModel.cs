@@ -75,7 +75,7 @@ namespace Sanaap.App.ViewModels
             //});
         }
 
-        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(INavigationParameters parameters)
         {
             _evlRequest = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
 

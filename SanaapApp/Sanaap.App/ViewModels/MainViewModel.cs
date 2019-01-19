@@ -41,11 +41,6 @@ namespace Sanaap.App.ViewModels
             _httpClient = httpClient;
             _initialDataService = initialDataService;
 
-            GoToMySosRequests = new BitDelegateCommand(async () =>
-            {
-                await navigationService.NavigateAsync(nameof(MySosRequestsView));
-            });
-
             GotoMainInsurance = new BitDelegateCommand(async () =>
             {
                 await navigationService.NavigateAsync(nameof(MainInsuranceView));
@@ -86,7 +81,7 @@ namespace Sanaap.App.ViewModels
             });
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             try
             {

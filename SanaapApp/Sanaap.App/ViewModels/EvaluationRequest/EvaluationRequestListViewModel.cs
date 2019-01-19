@@ -28,13 +28,13 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             ShowRequestProgress = new BitDelegateCommand<EvlRequestListItemSource>(async (request) =>
             {
-                NavigationParameters parameters = new NavigationParameters();
+                INavigationParameters parameters = new NavigationParameters();
                 parameters.Add(nameof(EvlRequestListItemSource), request);
 
                 await navigationService.NavigateAsync(nameof(EvlRequestProgressView), parameters);
             });
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {

@@ -1,5 +1,4 @@
 ﻿using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Navigation;
 using Sanaap.App.Events;
@@ -10,21 +9,24 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestViewModel : BitViewModelBase
     {
-        private readonly IPopupNavigationService _popupNavigationService;
-
-        public EvaluationRequestViewModel(IPopupNavigationService popupNavigationService, IEventAggregator eventAggregator)
+        private readonly INavigationService _navigationService;
+        private readonly IEventAggregator _eventAggregator;
+        public EvaluationRequestViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
-            _popupNavigationService = popupNavigationService;
-
-            eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (insurance) =>
-            {
-                await _popupNavigationService.PushAsync(nameof(EvaluationRequestDetailView));
-            });
+            _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            await _popupNavigationService.PushAsync(nameof(EvaluationRequestDetailView));
+            if (parameters.TryGetValue("OpenInsurancePopup", out bool isOpen))
+            {
+                _eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
+            }
+            else
+            {
+                await _navigationService.NavigateAsync(nameof(EvaluationRequestDetailView));
+            }
         }
 
 

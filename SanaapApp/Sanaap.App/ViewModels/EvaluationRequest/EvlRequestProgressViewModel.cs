@@ -25,7 +25,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             _dateTimeUtils = dateTimeUtils;
             _userDialogs = userDialogs;
         }
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             parameters.TryGetValue(nameof(EvlRequestListItemSource), out EvlRequestListItemSource request);
 

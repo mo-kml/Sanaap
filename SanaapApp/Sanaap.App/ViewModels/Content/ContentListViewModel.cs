@@ -22,7 +22,7 @@ namespace Sanaap.App.ViewModels.Content
 
             ShowContent = new BitDelegateCommand<ContentListDto>(async (content) =>
               {
-                  NavigationParameters parameters = new NavigationParameters();
+                  INavigationParameters parameters = new NavigationParameters();
                   parameters.Add("ContentId", Guid.Parse("890f984f-f5aa-4cd3-870a-02f9e15e1037"));
 
                   await navigationService.NavigateAsync(nameof(ShowContentView), parameters);
@@ -32,7 +32,7 @@ namespace Sanaap.App.ViewModels.Content
 
         public BitDelegateCommand<ContentListDto> ShowContent { get; set; }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             using (_userDialogs.Loading())
             {
