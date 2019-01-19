@@ -35,7 +35,7 @@ namespace Sanaap.App.ViewModels
 
         private CancellationTokenSource registerCancellationTokenSource;
 
-        public RegisterViewModel(INavigationService navigationService,
+        public RegisterViewModel(INavService navigationService,
             IODataClient oDataClient,
             ICustomerValidator customerValidator,
             IPageDialogService pageDialogService,

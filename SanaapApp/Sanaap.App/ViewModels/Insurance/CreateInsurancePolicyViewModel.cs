@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -35,7 +36,7 @@ namespace Sanaap.App.ViewModels.Insurance
             IInsuranceValidator insuranceValidator,
             IPageDialogService pageDialogService,
             IPolicyService policyService,
-            INavigationService navigationService,
+            INavService navigationService,
             ISanaapAppTranslateService translateService
             )
         {

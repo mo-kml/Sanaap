@@ -1,6 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Prism.Navigation;
+using Bit.ViewModel.Contracts;
 using Prism.Services;
 using Sanaap.Constants;
 using Sanaap.Dto;
@@ -21,7 +21,7 @@ namespace Sanaap.App.ViewModels.Comment
             IPageDialogService pageDialogService,
             ISanaapAppTranslateService translateService,
             IODataClient oDataClient,
-            INavigationService navigationService)
+            INavService navigationService)
         {
             CommentTypes = EnumHelper<CommentType>.GetDisplayValues(CommentType.Complaint);
 

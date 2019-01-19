@@ -263,3 +263,4 @@ __pycache__/
 /Server/Sanaap.Api/System.Data.Entity.Migrations.History.LegacyHistoryContext.edmx
 /Server/Sanaap.Api/System.Data.Entity.Internal.EdmMetadataContext.edmx
 /Server/Sanaap.Api/Sanaap.Data.SanaapDbContext.edmx
+/SanaapApp/Platforms/Sanaap.App.Android/Resources/Resource.designer.cs

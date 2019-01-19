@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -15,7 +16,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvlRequestInquiryViewModel : BitViewModelBase
     {
 
-        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService, INavigationService navigationService, IUserDialogs userDialogs)
+        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService, INavService navigationService, IUserDialogs userDialogs)
         {
 
             Inquiry = new BitDelegateCommand(async () =>

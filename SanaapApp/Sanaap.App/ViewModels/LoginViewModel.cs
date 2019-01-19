@@ -23,7 +23,7 @@ namespace Sanaap.App.ViewModels
 
         private CancellationTokenSource registerCancellationTokenSource;
 
-        public LoginViewModel(INavigationService navigationService,
+        public LoginViewModel(INavService navigationService,
             ISecurityService securityService,
             ISanaapAppLoginValidator loginValidator,
             IPageDialogService pageDialogService,

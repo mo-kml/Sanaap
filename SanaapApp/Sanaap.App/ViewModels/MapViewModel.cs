@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Constants;
@@ -25,7 +26,7 @@ namespace Sanaap.App.ViewModels
 
         private readonly IPageDialogService _pageDialogService;
         private readonly IUserDialogs _userDialogs;
-        public MapViewModel(INavigationService navigationService,
+        public MapViewModel(INavService navigationService,
             IPageDialogService pageDialogService,
             IUserDialogs userDialogs)
         {

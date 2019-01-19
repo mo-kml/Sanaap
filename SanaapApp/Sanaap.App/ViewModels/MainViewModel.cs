@@ -34,7 +34,7 @@ namespace Sanaap.App.ViewModels
         private readonly IUserDialogs _userDialogs;
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
-        public MainViewModel(INavigationService navigationService,
+        public MainViewModel(INavService navigationService,
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs, HttpClient httpClient, IInitialDataService initialDataService)
         {
             _userDialogs = userDialogs;

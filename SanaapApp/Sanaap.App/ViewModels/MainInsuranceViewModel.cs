@@ -15,7 +15,7 @@ namespace Sanaap.App.ViewModels
         public BitDelegateCommand GotoEvlRequestMapBadane { get; set; }
 
 
-        public MainInsuranceViewModel(INavigationService navigationService,
+        public MainInsuranceViewModel(INavService navigationService,
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs)
         {
             GotoEvlRequestMapSales = new BitDelegateCommand(async () =>

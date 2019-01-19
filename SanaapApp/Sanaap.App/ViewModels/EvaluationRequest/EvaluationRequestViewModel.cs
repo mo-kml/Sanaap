@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Navigation;
 using Sanaap.App.Events;
@@ -9,9 +10,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestViewModel : BitViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly INavService _navigationService;
         private readonly IEventAggregator _eventAggregator;
-        public EvaluationRequestViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
+        public EvaluationRequestViewModel(INavService navigationService, IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;

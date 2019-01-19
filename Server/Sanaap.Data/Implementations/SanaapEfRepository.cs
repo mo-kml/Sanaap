@@ -13,7 +13,7 @@ namespace Sanaap.Data.Implementations
     public class SanaapEfRepository<TEntity> : EfRepository<TEntity>, ISanaapRepository<TEntity>
         where TEntity : class, IEntity
     {
-        public override void SaveChanges()
+        protected override void SaveChanges()
         {
             ApplyDefaultValues();
             base.SaveChanges();
@@ -26,7 +26,7 @@ namespace Sanaap.Data.Implementations
             return await rawQuery.SingleAsync();
         }
 
-        public override async Task SaveChangesAsync(CancellationToken cancellationToken)
+        protected override async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             ApplyDefaultValues();
             await base.SaveChangesAsync(cancellationToken);

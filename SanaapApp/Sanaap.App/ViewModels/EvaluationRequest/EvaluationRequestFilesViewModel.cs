@@ -36,11 +36,11 @@ namespace Sanaap.App.ViewModels
         public EvlRequestItemSource Request { get; set; }
 
         private readonly IODataClient _oDataClient;
-        private readonly INavigationService _navigationService;
+        private readonly INavService _navigationService;
         private readonly IUserDialogs _userDialogs;
         public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
-            INavigationService navigationService,
+            INavService navigationService,
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService,
             IPhotoHelper photoHelper,

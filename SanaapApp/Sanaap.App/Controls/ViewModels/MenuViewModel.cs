@@ -23,7 +23,7 @@ namespace Sanaap.App.Controls.ViewModels
 
         public SfNavigationDrawer NavigationDrawer { get; set; }
 
-        public MenuViewModel(INavigationService navigationService, ISecurityService securityService)
+        public MenuViewModel(INavService navigationService, ISecurityService securityService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {

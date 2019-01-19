@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -22,7 +23,7 @@ namespace Sanaap.App.ViewModels.Insurance
     {
         private readonly IPolicyService _policyService;
         private readonly IUserDialogs _userDialogs;
-        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, INavigationService navigationService)
+        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, INavService navigationService)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;

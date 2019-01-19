@@ -1,4 +1,4 @@
-﻿using Plugin.Toast;
+﻿using Acr.UserDialogs;
 using Sanaap.App.Helpers;
 using Xamarin.Forms;
 
@@ -19,10 +19,7 @@ namespace Sanaap.App.Views
             count++;
             if (count == 1)
             {
-                if (CrossToastPopUp.IsSupported)
-                {
-                    CrossToastPopUp.Current.ShowToastMessage("برای بستن برنامه یک بار دیگر بازگشت را بزنید");
-                }
+                UserDialogs.Instance.Toast("برای بستن برنامه یک بار دیگر بازگشت را بزنید");
             }
             if (count == 2)
             {

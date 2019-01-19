@@ -109,8 +109,8 @@ namespace Sanaap.Api
 
             dependencyManager.RegisterDtoEntityMapper();
 
-            dependencyManager.RegisterDtoEntityMapperConfiguration<DefaultDtoEntityMapperConfiguration>();
-            dependencyManager.RegisterDtoEntityMapperConfiguration<SanaapDtoEntityMapperConfiguration>();
+            dependencyManager.RegisterMapperConfiguration<DefaultMapperConfiguration>();
+            dependencyManager.RegisterMapperConfiguration<SanaapMapperConfiguration>();
 
             dependencyManager.RegisterSingleSignOnServer<SanaapUserService, SanaapOAuthClientsProvider>();
 

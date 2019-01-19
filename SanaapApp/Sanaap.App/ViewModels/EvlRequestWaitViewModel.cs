@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -35,13 +36,13 @@ namespace Sanaap.App.ViewModels
 
         public string Message { get; set; }
 
-        private readonly INavigationService _navigationService;
+        private readonly INavService _navigationService;
         private readonly IPageDialogService _pageDialogService;
         private readonly IDateTimeUtils _dateTimeUtils;
         private readonly IEvlRequestService _evlRequestService;
         private IInitialDataService _initialDataService;
         private readonly HttpClient _httpClient;
-        public EvlRequestWaitViewModel(INavigationService navigationService,
+        public EvlRequestWaitViewModel(INavService navigationService,
             IODataClient odataClient,
             IEvlRequestService evlRequestService,
             IDeviceService deviceService,

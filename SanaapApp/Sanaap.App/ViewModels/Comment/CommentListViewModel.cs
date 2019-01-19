@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Views.Comment;
@@ -20,7 +21,7 @@ namespace Sanaap.App.ViewModels.Comment
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
         public CommentListViewModel(IODataClient oDataClient,
-            INavigationService navigationService,
+            INavService navigationService,
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService)
         {

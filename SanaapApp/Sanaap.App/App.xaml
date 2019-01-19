@@ -1,45 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<bit:BitApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.All"
-             xmlns:control="clr-namespace:Sanaap.App.Controls"
-             xmlns:resources="clr-namespace:Sanaap.App"
-             xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels"
-             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
-             xmlns:convs="clr-namespace:Sanaap.App.Converters"
-             x:Class="Sanaap.App.App">
+<bit:BitApplication
+    x:Class="Sanaap.App.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.Prism"
+    xmlns:control="clr-namespace:Sanaap.App.Controls"
+    xmlns:convs="clr-namespace:Sanaap.App.Converters"
+    xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+    xmlns:resources="clr-namespace:Sanaap.App"
+    xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
     <bit:BitApplication.Resources>
         <ResourceDictionary>
 
             <Color x:Key="primaryGray">#e2e2e2</Color>
             <Color x:Key="primaryBlue">#172CCB</Color>
 
-            <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator"/>
+            <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator" />
 
             <ControlTemplate x:Key="MasterTemplate">
                 <StackLayout>
-                    <navigationdrawer:SfNavigationDrawer DrawerFooterHeight="0" DrawerHeaderHeight="70" DrawerWidth="200" Position="Right" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+                    <navigationdrawer:SfNavigationDrawer
+                        x:Name="navigationDrawer"
+                        DrawerFooterHeight="0"
+                        DrawerHeaderHeight="70"
+                        DrawerWidth="200"
+                        Position="Right"
+                        VerticalOptions="FillAndExpand">
                         <navigationdrawer:SfNavigationDrawer.ContentView>
                             <StackLayout>
                                 <Grid HeightRequest="40">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="40" />
                                     </Grid.ColumnDefinitions>
-                                    <control:IconButton Grid.Column="2" HorizontalOptions="End" Type="Brands" Text="&#xf2c6;" BindingContext="{x:Reference navigationDrawer}" Clicked="ToggleMenu"/>
-                                    <Label Text="{TemplateBinding Title}" HorizontalTextAlignment="End" Grid.Column="1"/>
+                                    <control:IconButton
+                                        Grid.Column="2"
+                                        BindingContext="{x:Reference navigationDrawer}"
+                                        Clicked="ToggleMenu"
+                                        HorizontalOptions="End"
+                                        Text="&#xf2c6;"
+                                        Type="Brands" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalTextAlignment="End"
+                                        Text="{TemplateBinding Title}" />
                                 </Grid>
-                                <ContentPresenter VerticalOptions="FillAndExpand"/>
+                                <ContentPresenter VerticalOptions="FillAndExpand" />
                             </StackLayout>
                         </navigationdrawer:SfNavigationDrawer.ContentView>
                         <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
-                            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,10,0,-15" HeightRequest="70" Source="resource://Sanaap.App.Images.Logo.svg"  />
+                            <ff:SvgCachedImage
+                                Margin="0,10,0,-15"
+                                BackgroundColor="Transparent"
+                                HeightRequest="70"
+                                Source="resource://Sanaap.App.Images.Logo.svg" />
                         </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
 
                         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                            <control:MenuView BindingContext="{Binding MenuViewModel,Source={StaticResource menuViewModelLocator}}" NavigationDrawer="{x:Reference navigationDrawer}" />
+                            <control:MenuView BindingContext="{Binding MenuViewModel, Source={StaticResource menuViewModelLocator}}" NavigationDrawer="{x:Reference navigationDrawer}" />
                         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
                     </navigationdrawer:SfNavigationDrawer>
                 </StackLayout>
@@ -68,7 +88,7 @@
             <!--<Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="Red"/>
                 <Setter Property="ControlTemplate" Value="{StaticResource MasterTemplate}"/>
-                -->
+            -->
             <!--<Setter Property="FontSize" Value="Medium" />-->
             <!--
                 <Setter Property="FlowDirection" Value="RightToLeft" />

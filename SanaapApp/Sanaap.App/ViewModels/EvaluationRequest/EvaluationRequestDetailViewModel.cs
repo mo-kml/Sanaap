@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
@@ -28,7 +29,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             IEvlRequestValidator evlRequestValidator,
             IPageDialogService dialogService,
             ISanaapAppTranslateService translateService,
-            INavigationService navigationService)
+            INavService navigationService)
         {
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
