@@ -1,11 +1,13 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
+using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views;
-using Sanaap.App.Views.Insurance;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -23,10 +25,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         private IInitialDataService _initialDataService;
         public EvaluationRequestDetailViewModel(
             IUserDialogs userDialogs,
+            IEventAggregator eventAggregator,
             IInitialDataService initialDataService,
             IEvlRequestValidator evlRequestValidator,
             IPageDialogService dialogService,
             ISanaapAppTranslateService translateService,
+            IPopupNavigationService popupNavigationService,
             INavigationService navigationService)
         {
             _userDialogs = userDialogs;
@@ -44,12 +48,34 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 SelectedInsurer = parameter;
             });
 
+            eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (insurance) =>
+            {
+                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
+
+                InsuranceType insuranceType = Request.InsuranceType;
+
+                Request = new EvlRequestItemSource
+                {
+                    OwnerFirstName = customer.FirstName,
+                    OwnerLastName = customer.LastName,
+                    InsurerNo = insurance.Policy.InsurerNo,
+                    PlateNumber = insurance.Policy.PlateNumber,
+                    InsuranceType = insuranceType,
+                    IsSales = insuranceType == InsuranceType.Sales
+                };
+
+                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == insurance.Policy.InsurerId);
+                SelectedInsurer.IsSelected = true;
+
+                SelectedCar = Cars.FirstOrDefault(c => c.PrmID == insurance.Policy.CarId);
+            });
+
+
             SelectFromInsurances = new BitDelegateCommand(async () =>
               {
-                  NavigationParameters parameters = new NavigationParameters();
-                  parameters.Add("Selective", true);
+                  await popupNavigationService.PopAsync();
 
-                  await navigationService.NavigateAsync(nameof(InsurancePolicyListView), parameters);
+                  eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
               });
 
             SelectViewPlace = new BitDelegateCommand(async () =>

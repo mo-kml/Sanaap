@@ -152,6 +152,7 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
             containerBuilder.Register(c => new Controls.ViewModels.MenuViewModel(NavigationService, Container.Resolve<ISecurityService>())).SingleInstance();
+            containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>()));
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
 

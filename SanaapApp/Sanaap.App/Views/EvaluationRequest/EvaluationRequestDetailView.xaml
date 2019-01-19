@@ -5,7 +5,10 @@
              xmlns:renderedViews ="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
+             xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDetailView"
              x:Name="requestDetailView" HasSystemPadding="True" Padding="30,50,30,50" SystemPaddingSides="All">
     <popup:PopupPage.Animation>
@@ -22,85 +25,62 @@
     </popup:PopupPage.Animation>
     <Frame CornerRadius="10">
         <ScrollView BackgroundColor="White">
-            <StackLayout Padding="10">
+            <StackLayout>
+                <StackLayout Padding="10">
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="بیمه گذار/مقصر"/>
-                    <Button Command="{Binding SelectFromInsurances}"/>
-                </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="بیمه گذار/مقصر"/>
+                        <Button Command="{Binding SelectFromInsurances}"/>
+                    </StackLayout>
 
-                <Label Text="نام"/>
-                <controls:SanaapEntry Text="{Binding Request.OwnerFirstName,Mode=TwoWay}"/>
+                    <Label Text="نام"/>
+                    <controls:SanaapEntry Text="{Binding Request.OwnerFirstName,Mode=TwoWay}"/>
 
-                <Label Text="نام خانوادگی"/>
-                <controls:SanaapEntry Text="{Binding Request.OwnerLastName,Mode=TwoWay}"/>
+                    <Label Text="نام خانوادگی"/>
+                    <controls:SanaapEntry Text="{Binding Request.OwnerLastName,Mode=TwoWay}"/>
 
-                <Label Text="بیمه"/>
-                <renderedViews:HorizontalListView 
+                    <Label Text="بیمه"/>
+                    <renderedViews:HorizontalListView 
                                   ItemSpacing="15"
                                   ItemHeight="80"
                                   ItemWidth="80"
                                   ItemsSource="{Binding Insurers}"
                     
                                   SnapStyle="Center">
-                    <renderedViews:HorizontalListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout>
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout"
+                        <renderedViews:HorizontalListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout"
                                                  Binding="{Binding IsSelected}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="White"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="StackLayout"
+                                                <Setter Property="BackgroundColor" Value="White"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="StackLayout"
                                                  Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <Image Source="{Binding Image}" HeightRequest="60"/>
-                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </renderedViews:HorizontalListView.ItemTemplate>
-                </renderedViews:HorizontalListView>
-
-                <Label Text="نام خودرو"/>
-                <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCar}" />
-
-                <Label Text="شماره بیمه نامه"/>
-                <controls:SanaapEntry Text="{Binding Request.InsurerNo}"/>
-
-                <Label Text="پلاک"/>
-                <controls:SanaapEntry Text="{Binding Request.PlateNumber}"/>
-
-                <StackLayout IsVisible="{Binding Request.IsSales}">
-
-                    <Label Text="زیان دیده"/>
-
-
-                    <Label Text="نام"/>
-                    <controls:SanaapEntry Text="{Binding Request.LostFirstName}"/>
-
-                    <Label Text="نام خانوادگی"/>
-                    <controls:SanaapEntry Text="{Binding Request.LostLastName}"/>
+                                                <Setter Property="BackgroundColor" Value="Gray"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Image Source="{Binding Image}" HeightRequest="60"/>
+                                        <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </renderedViews:HorizontalListView.ItemTemplate>
+                    </renderedViews:HorizontalListView>
 
                     <Label Text="نام خودرو"/>
-                    <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding LostSelectedCar}" />
+                    <syncCombobox:SfComboBox AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Cars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCar}" />
+
+                    <Label Text="شماره بیمه نامه"/>
+                    <controls:SanaapEntry Text="{Binding Request.InsurerNo}"/>
 
                     <Label Text="پلاک"/>
-                    <controls:SanaapEntry Text="{Binding Request.LostPlateNumber}"/>
+                    <controls:SanaapEntry Text="{Binding Request.PlateNumber}"/>
                 </StackLayout>
-
-                <Label Text="تاریخ وقوع حادثه"/>
-
-                <Label Text="علت وقوع حادثه"/>
-                <Editor Text="{Binding Request.AccidentReason}" HeightRequest="200"/>
-
-                <Button Text="انتخاب محل بازدید" Command="{Binding SelectViewPlace}"/>
             </StackLayout>
         </ScrollView>
     </Frame>

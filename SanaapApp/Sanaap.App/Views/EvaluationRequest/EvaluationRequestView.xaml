@@ -1,8 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
+             xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestView">
-    <ContentPage.Content>
-        <StackLayout></StackLayout>
-    </ContentPage.Content>
+    <ContentPage.Resources>
+        <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
+    </ContentPage.Resources>
+
+    <navigationdrawer:SfNavigationDrawer DrawerHeight="300" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer.ContentView>
+            <StackLayout></StackLayout>
+        </navigationdrawer:SfNavigationDrawer.ContentView>
+        <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+            <insurancePopup:InsuranceListPopupView BindingContext="{Binding InsuranceListPopupViewModel,Source={StaticResource insuranceListPopupViewModelLocator}}"/>
+        </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+    </navigationdrawer:SfNavigationDrawer>
 </ContentPage>

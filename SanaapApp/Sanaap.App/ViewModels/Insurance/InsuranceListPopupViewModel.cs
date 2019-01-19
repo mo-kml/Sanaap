@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Events;
+using Prism.Ioc;
 using Prism.Navigation;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
@@ -12,6 +13,10 @@ using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.Insurance
 {
+    public class InsuranceListPopupViewModelLocator
+    {
+        public InsuranceListPopupViewModel InsuranceListPopupViewModel => ((App)Xamarin.Forms.Application.Current).Container.Resolve<InsuranceListPopupViewModel>();
+    }
     public class InsuranceListPopupViewModel : BitViewModelBase
     {
         private readonly IPolicyService _policyService;
