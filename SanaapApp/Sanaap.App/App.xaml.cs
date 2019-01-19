@@ -76,12 +76,12 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync(nameof(EvaluationRequestView));
+            await NavigationService.NavigateAsync(nameof(MainView));
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
-            eventAggregator.GetEvent<TokenExpiredEvent>()
-                .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
+            //eventAggregator.GetEvent<TokenExpiredEvent>()
+            //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
 
             await CrossMedia.Current.Initialize();
 
@@ -129,7 +129,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://74644994.ngrok.io"),
+                HostUri = new Uri("http://f97aeb70.ngrok.io"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
