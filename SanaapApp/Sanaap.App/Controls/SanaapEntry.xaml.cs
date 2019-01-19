@@ -54,6 +54,18 @@ namespace Sanaap.App.Controls
             set => SetValue(KeyboardProperty, value);
         }
 
+        public Color TextColor
+        {
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
+        }
+
+        public int FontSize
+        {
+            get => (int)GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
+        }
+
         public static readonly BindableProperty TextProperty =
                 BindableProperty.Create(nameof(Text), typeof(string), typeof(string), null);
 
@@ -77,5 +89,10 @@ namespace Sanaap.App.Controls
         public static readonly BindableProperty KeyboardProperty =
                 BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(Keyboard), Keyboard.Default);
 
+        public static readonly BindableProperty TextColorProperty =
+                BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Color), Color.Black);
+
+        public static readonly BindableProperty FontSizeProperty =
+                BindableProperty.Create(nameof(FontSize), typeof(int), typeof(int), 15);
     }
 }

@@ -22,7 +22,7 @@ namespace Sanaap.App.Droid.CustomRenderers
 
                 int padding = (Control.CompoundPaddingBottom + Control.CompoundPaddingEnd) / 2;
 
-                Control.SetPadding(10, padding, 20, padding);
+                Control.SetPadding(padding, padding, padding, padding);
             }
         }
     }

@@ -85,6 +85,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderers\SanaapComboBoxRenderer.cs" />
     <Compile Include="CustomRenderers\SanaapEntryRenderer.cs" />
     <Compile Include="Helpers\AndroidAppUtilities.cs" />
     <Compile Include="Implementations\DroidRoutingService.cs" />

@@ -7,6 +7,8 @@ namespace Sanaap.App.Views.EvaluationRequest
         public EvaluationRequestLostDetailView()
         {
             InitializeComponent();
+
+
         }
     }
 }

@@ -11,6 +11,9 @@
              x:Class="Sanaap.App.App">
     <bit:BitApplication.Resources>
         <ResourceDictionary>
+
+            <Color x:Key="primaryGray">#e2e2e2</Color>
+
             <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator"/>
 
             <ControlTemplate x:Key="MasterTemplate">
