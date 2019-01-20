@@ -28,12 +28,19 @@ namespace Sanaap.App.ViewModels.Insurance
             _policyService = policyService;
             _userDialogs = userDialogs;
 
+            EvlRequestItemSource _request = new EvlRequestItemSource();
+            eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (request) =>
+            {
+                _request = request;
+            });
+
             SelectPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
             {
                 eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
 
-                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters {
-                    { "Insurance",policy}
+                await navigationService.NavigateAsync(nameof(EvaluationRequestView), new NavigationParameters {
+                    { "Insurance",policy},
+                    {nameof(EvlRequestItemSource),_request }
                 });
             });
         }

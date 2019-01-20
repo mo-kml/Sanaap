@@ -28,8 +28,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             IInitialDataService initialDataService,
             IEvlRequestValidator evlRequestValidator,
             IPageDialogService dialogService,
-            ISanaapAppTranslateService translateService,
-            INavService navigationService)
+            INavService navService,
+            ISanaapAppTranslateService translateService)
         {
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
@@ -49,10 +49,10 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             SelectFromInsurances = new BitDelegateCommand(async () =>
               {
-                  await navigationService.GoBackAsync(new NavigationParameters
-                  {
-                      { "OpenInsurancePopup",true }
-                  });
+                  await NavigationService.GoBackAsync(new NavigationParameters {
+                      {"IsOpenInsurance",true },
+                      {nameof(Request),Request },
+                    });
               });
 
             SelectViewPlace = new BitDelegateCommand(async () =>
@@ -76,7 +76,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       Parameters.Add(nameof(EvlRequestItemSource), Request);
                       Parameters.Add("NextPage", "EvlRequestFile");
 
-                      await navigationService.NavigateAsync(nameof(MapView), Parameters);
+                      await NavigationService.NavigateAsync(nameof(MapView), Parameters);
                   }
               }, () => SelectedCar != null && SelectedInsurer != null);
             SelectViewPlace.ObservesProperty(() => SelectedCar);
@@ -101,7 +101,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
             {
-                await syncData();
+                // await syncData();
             }
 
             if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
