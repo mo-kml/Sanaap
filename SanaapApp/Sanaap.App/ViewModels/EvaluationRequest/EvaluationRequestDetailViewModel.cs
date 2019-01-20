@@ -34,6 +34,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
 
+
+            
+
             SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
             {
                 foreach (InsurersItemSource insurer in Insurers)
@@ -152,5 +155,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public BitDelegateCommand SelectFromInsurances { get; set; }
 
         public CancellationTokenSource requestCancellationTokenSource { get; set; }
+
     }
+
+
+
 }

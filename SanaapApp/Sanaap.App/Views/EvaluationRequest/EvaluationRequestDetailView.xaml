@@ -12,7 +12,7 @@
     xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
     x:Name="requestDetailView"
-    Padding="30,50,30,50"
+    Padding="30,120,30,120"
     HasSystemPadding="True"
     SystemPaddingSides="All">
     <popup:PopupPage.Animation>
@@ -27,62 +27,157 @@
             ScaleIn="1.2"
             ScaleOut="0.8" />
     </popup:PopupPage.Animation>
-    <Frame CornerRadius="10">
-        <ScrollView BackgroundColor="White">
+
+    <popup:PopupPage.Resources>
+
+        <Style TargetType="Label" x:Key="TitleLabel">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+        </Style>
+
+        <Style TargetType="Frame" x:Key="TitleFrame">
+            <Setter Property="WidthRequest" Value="18"/>
+            <Setter Property="HeightRequest" Value="18"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderColor" Value="Gray"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="18"/>
+        </Style>
+
+    </popup:PopupPage.Resources>
+    
+    <popup:PopupPage.Content>
+
+        <Frame CornerRadius="10">
             <StackLayout>
-                <StackLayout Padding="10">
+                <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="بیمه گذار/مقصر" />
-                        <Button Command="{Binding SelectFromInsurances}" />
-                    </StackLayout>
 
-                    <Label Text="نام" />
-                    <controls:SanaapEntry Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" />
 
-                    <Label Text="نام خانوادگی" />
-                    <controls:SanaapEntry Text="{Binding Request.OwnerLastName, Mode=TwoWay}" />
+                    <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
 
-                    <Label Text="بیمه" />
-                    <syncfusion:SfListView Orientation="Horizontal" ItemsSource="{Binding Insurers}">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="White"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <Image Source="{Binding Image}" HeightRequest="60"/>
-                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout HorizontalOptions="Start">
+                                <Label Text="اعلام خسارت" FontAttributes="Bold"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                                <StackLayout HorizontalOptions="Start">
+                                    <StackLayout Orientation="Horizontal">
+
+
+                                        <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="Black" >
+                                            <Label Text="1 عنوان مرحله" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                        </Frame>
+
+                                    </StackLayout>
+                                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource primaryGray}"/>
+
+
+
                                 </StackLayout>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>
 
-                    <Label Text="نام خودرو" />
-                    <syncCombobox:SfComboBox
+                                <Frame Style="{StaticResource TitleFrame}">
+                                    <Label Text="2" Style="{StaticResource TitleLabel}"/>
+                                </Frame>
+                                <Frame  Style="{StaticResource TitleFrame}">
+                                    <Label Text="3" Style="{StaticResource TitleLabel}"/>
+                                </Frame>
+                                <Frame Style="{StaticResource TitleFrame}">
+                                    <Label Text="4" Style="{StaticResource TitleLabel}"/>
+                                </Frame>
+                                <Frame Style="{StaticResource TitleFrame}">
+                                    <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                                </Frame>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <StackLayout Padding="10">
+
+                            <StackLayout Orientation="Horizontal"  Padding="0,0,0,0" >
+                                <Label Text="اطلاعات بیمه گذار/مقصر"  HorizontalOptions="FillAndExpand"/>
+                                <!--Need More Work On Button-->
+                                <Button  HorizontalOptions="FillAndExpand" Margin="0,0,0,0" CornerRadius="5" HeightRequest="10" FontSize="8" Text="انتخاب" Command="{Binding SelectFromInsurances}" BackgroundColor="{StaticResource primaryBlue}"/>
+                            </StackLayout>
+
+                            <!--<Label Text="نام" />-->
+
+
+
+                            <StackLayout Orientation="Horizontal" >
+
+                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" Placeholder="نام"/>
+
+                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+
+                            </StackLayout>
+                            <!--<Label Text="نام خانوادگی" />-->
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label  Text="بیمه" WidthRequest="50" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                <syncfusion:SfListView Orientation="Horizontal"  ItemsSource="{Binding Insurers}" HeightRequest="80" ItemSize="80" ItemSpacing="10,0,0,0">
+                                    <syncfusion:SfListView.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <Frame BorderColor="Black" CornerRadius="5" >
+                                                <StackLayout >
+
+                                                    <StackLayout.Triggers>
+                                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="False">
+                                                            <Setter Property="BackgroundColor" Value="White"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="BackgroundColor" Value="Gray"/>
+                                                        </DataTrigger>
+                                                    </StackLayout.Triggers>
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
+                                                    </StackLayout.GestureRecognizers>
+
+                                                    <Image BackgroundColor="Gray" VerticalOptions="StartAndExpand" Source="{Binding Image}" Aspect="AspectFill" HeightRequest="80" Margin="-20,-20,-20,-40"/>
+
+
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </syncfusion:SfListView.ItemTemplate>
+                                </syncfusion:SfListView>
+
+                            </StackLayout>
+                            <!--<Label Text="شماره بیمه نامه" />-->
+                            <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
+
+                            <Label Text="نام خودرو" />
+                            <syncCombobox:SfComboBox
                         AllowFiltering="True"
                         DataSource="{Binding Cars}"
                         DisplayMemberPath="Name"
                         IsEditableMode="True"
                         SelectedItem="{Binding SelectedCar}" />
 
-                    <Label Text="شماره بیمه نامه" />
-                    <controls:SanaapEntry Text="{Binding Request.InsurerNo}" />
 
-                    <Label Text="پلاک" />
-                    <controls:SanaapEntry Text="{Binding Request.PlateNumber}" />
-                </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="پلاک" />
+                                <!--<controls:SanaapEntry Text="{Binding Request.PlateNumber}" />-->
+                                <controls:SanaapEntry Placeholder="ایران"/>
+                                <controls:SanaapEntry WidthRequest="70" HorizontalOptions="FillAndExpand"/>
+                                <controls:SanaapEntry WidthRequest="70" HorizontalOptions="FillAndExpand" />
+                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Button WidthRequest="100" HeightRequest="50" Margin="-30,0,-30,-20" Text="مرحله بعد" BackgroundColor="{StaticResource primaryBlue}"/>
             </StackLayout>
-        </ScrollView>
-    </Frame>
+        </Frame>
+    </popup:PopupPage.Content>
 </popup:PopupPage>
