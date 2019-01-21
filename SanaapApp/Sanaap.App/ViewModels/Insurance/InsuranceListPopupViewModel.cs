@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -9,6 +8,7 @@ using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,46 +19,50 @@ namespace Sanaap.App.ViewModels.Insurance
     {
         public InsuranceListPopupViewModel InsuranceListPopupViewModel => ((App)Xamarin.Forms.Application.Current).Container.Resolve<InsuranceListPopupViewModel>();
     }
-    public class InsuranceListPopupViewModel : BitViewModelBase
+    public class InsuranceListPopupViewModel : BitViewModelBase, IDisposable
     {
         private readonly IPolicyService _policyService;
         private readonly IUserDialogs _userDialogs;
-        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, INavService navigationService)
+        private readonly SubscriptionToken SubscriptionToken;
+        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
 
             EvlRequestItemSource _request = new EvlRequestItemSource();
-            eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (request) =>
-            {
-                _request = request;
-            });
+            SubscriptionToken = eventAggregator.GetEvent<InsuranceEvent>().SubscribeAsync(async (request) =>
+              {
+                  _request = request;
+
+                  insuranceCancellationTokenSource?.Cancel();
+                  insuranceCancellationTokenSource = new CancellationTokenSource();
+
+                  using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
+                  {
+                      await loadInsurances();
+                  }
+              }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
 
             SelectPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
             {
                 eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
 
-                await navigationService.NavigateAsync(nameof(EvaluationRequestView), new NavigationParameters {
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestView), new NavigationParameters {
                     { "Insurance",policy},
                     {nameof(EvlRequestItemSource),_request }
                 });
             });
-        }
-        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
-        {
-            insuranceCancellationTokenSource?.Cancel();
-            insuranceCancellationTokenSource = new CancellationTokenSource();
-
-            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
-            {
-                await loadInsurances();
-            }
         }
         public ObservableCollection<PolicyItemSource> Insurances { get; set; }
 
         public BitDelegateCommand<PolicyItemSource> SelectPolicy { get; set; }
 
         public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
+
+        public void Dispose()
+        {
+            SubscriptionToken.Dispose();
+        }
 
         public async Task loadInsurances()
         {

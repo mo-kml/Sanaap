@@ -36,7 +36,7 @@ namespace Sanaap.App.ViewModels.Insurance
             IInsuranceValidator insuranceValidator,
             IPageDialogService pageDialogService,
             IPolicyService policyService,
-            INavService navigationService,
+            
             ISanaapAppTranslateService translateService
             )
         {
@@ -91,7 +91,7 @@ namespace Sanaap.App.ViewModels.Insurance
                   }
                   await pageDialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
 
-                  await navigationService.GoBackAsync();
+                  await NavigationService.GoBackAsync();
 
               }, () => SelectedCar != null && SelectedColor != null && SelectedInsuranceType != null && SelectedInsurer != null);
             Submit.ObservesProperty(() => SelectedCar);

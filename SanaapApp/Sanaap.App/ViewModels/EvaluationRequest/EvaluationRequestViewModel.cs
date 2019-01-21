@@ -10,11 +10,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestViewModel : BitViewModelBase
     {
-        private readonly INavService _navigationService;
+        private readonly INavService _NavigationService;
         private readonly IEventAggregator _eventAggregator;
-        public EvaluationRequestViewModel(INavService navigationService, IEventAggregator eventAggregator)
+        public EvaluationRequestViewModel( IEventAggregator eventAggregator)
         {
-            _navigationService = navigationService;
+            _NavigationService = NavigationService;
             _eventAggregator = eventAggregator;
         }
 
@@ -30,7 +30,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             }
             else
             {
-                await _navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), parameters);
+                await _NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), parameters);
             }
         }
     }

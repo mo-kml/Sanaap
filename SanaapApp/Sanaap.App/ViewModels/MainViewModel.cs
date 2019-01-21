@@ -34,7 +34,7 @@ namespace Sanaap.App.ViewModels
         private readonly IUserDialogs _userDialogs;
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
-        public MainViewModel(INavService navigationService,
+        public MainViewModel(
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs, HttpClient httpClient, IInitialDataService initialDataService)
         {
             _userDialogs = userDialogs;
@@ -43,14 +43,14 @@ namespace Sanaap.App.ViewModels
 
             GotoMainInsurance = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(MainInsuranceView));
+                await NavigationService.NavigateAsync(nameof(MainInsuranceView));
             });
 
 
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { "InsuranceType", InsuranceType.Badane }
                 });
@@ -58,7 +58,7 @@ namespace Sanaap.App.ViewModels
 
             GotoDetail = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { "InsuranceType", InsuranceType.Sales}
                 });
@@ -67,12 +67,12 @@ namespace Sanaap.App.ViewModels
             Logout = new BitDelegateCommand(async () =>
             {
                 await securityService.Logout();
-                await navigationService.NavigateAsync("/Login");
+                await NavigationService.NavigateAsync("/Login");
             });
 
             SosRequest = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync("SosRequest");
+                await NavigationService.NavigateAsync("SosRequest");
             });
 
             SubmitSosRequestByCall = new BitDelegateCommand(async () =>

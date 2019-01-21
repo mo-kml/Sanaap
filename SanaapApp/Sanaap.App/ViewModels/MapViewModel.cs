@@ -26,7 +26,7 @@ namespace Sanaap.App.ViewModels
 
         private readonly IPageDialogService _pageDialogService;
         private readonly IUserDialogs _userDialogs;
-        public MapViewModel(INavService navigationService,
+        public MapViewModel(
             IPageDialogService pageDialogService,
             IUserDialogs userDialogs)
         {
@@ -39,7 +39,7 @@ namespace Sanaap.App.ViewModels
 
                  Parameters.Add(nameof(Position), centerPosition);
 
-                 await navigationService.NavigateAsync(NextPage, Parameters);
+                 await NavigationService.NavigateAsync(NextPage, Parameters);
              });
         }
 

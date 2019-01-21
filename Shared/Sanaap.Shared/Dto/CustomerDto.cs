@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Bit.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Sanaap.Dto
 {
-    public partial class CustomerDto : ISanaapDto
+    public partial class CustomerDto : Bindable, ISanaapDto
     {
         public virtual Guid Id { get; set; }
 
