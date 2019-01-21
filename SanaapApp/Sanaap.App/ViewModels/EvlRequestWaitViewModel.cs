@@ -1,5 +1,4 @@
 ﻿using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -36,7 +35,7 @@ namespace Sanaap.App.ViewModels
 
         public string Message { get; set; }
 
-        private readonly INavService _NavigationService;
+
         private readonly IPageDialogService _pageDialogService;
         private readonly IDateTimeUtils _dateTimeUtils;
         private readonly IEvlRequestService _evlRequestService;
@@ -54,7 +53,6 @@ namespace Sanaap.App.ViewModels
         {
             _odataClient = odataClient;
             _evlRequestService = evlRequestService;
-            _NavigationService = NavigationService;
             _pageDialogService = pageDialogService;
             _initialDataService = initialDataService;
             _httpClient = httpClient;
@@ -106,13 +104,13 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-                await _NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertError, ErrorMessages.Ok);
             }
 
             if (result == "NotResult")
             {
-                await _NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertNotResult, ErrorMessages.Ok);
                 return;
             }

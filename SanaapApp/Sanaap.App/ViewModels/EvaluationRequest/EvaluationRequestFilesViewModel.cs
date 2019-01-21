@@ -36,11 +36,10 @@ namespace Sanaap.App.ViewModels
         public EvlRequestItemSource Request { get; set; }
 
         private readonly IODataClient _oDataClient;
-        private readonly INavService _NavigationService;
         private readonly IUserDialogs _userDialogs;
         public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
-            
+
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService,
             IPhotoHelper photoHelper,
@@ -48,7 +47,6 @@ namespace Sanaap.App.ViewModels
             ISecurityService securityService)
         {
             _oDataClient = oDataClient;
-            _NavigationService = NavigationService;
             _userDialogs = userDialogs;
 
             TakePhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (file) =>
