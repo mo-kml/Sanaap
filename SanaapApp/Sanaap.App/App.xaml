@@ -16,6 +16,16 @@
             <Color x:Key="primaryGray">#e2e2e2</Color>
             <Color x:Key="primaryBlue">#172CCB</Color>
 
+            <Style TargetType="Label" x:Key="headerText">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="subHeaderText">
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="Text" Value="{StaticResource primaryGray}"/>
+            </Style>
+            
             <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator" />
 
             <ControlTemplate x:Key="MasterTemplate">

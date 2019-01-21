@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.News.NewsListView">
     <ContentPage.Content>
-        <StackLayout>
-        </StackLayout>
+
         <!--Propertys Must Be Added As Style-->
-        <!--<StackLayout FlowDirection="RightToLeft">
+        <StackLayout FlowDirection="RightToLeft">
 
             <ListView HasUnevenRows="True" ItemsSource="{Binding NewsSource}">
                 <ListView.ItemTemplate>
@@ -53,6 +52,6 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-        </StackLayout>-->
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

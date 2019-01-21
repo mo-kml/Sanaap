@@ -6,7 +6,7 @@
         <StackLayout>
             <!--Propertys Must Be Change Into Setters-->
 
-            <!--<ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
+            <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
             <StackLayout>
                 <Image Aspect="AspectFill" Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMo5G9-BrkMnOTJlvG1hVx2RFo8N6GHMkKV7yU5KDAtdTdITJf" HeightRequest="150"/>
 
@@ -45,7 +45,7 @@
 
             </StackLayout>
 
-        </ScrollView>-->
+        </ScrollView>
             
         </StackLayout>
     </ContentPage.Content>

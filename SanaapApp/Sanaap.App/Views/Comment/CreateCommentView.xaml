@@ -5,35 +5,41 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.Comment.CreateCommentView">
     <ContentPage.Content>
-        <StackLayout>
-            <syncCombobox:SfComboBox DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" IsEditableMode="False" />
+        <StackLayout FlowDirection="RightToLeft">
+
+            <Label Text="ثبت پیام یا شکایت جدید" Margin="10,0,5,0" Style="{StaticResource headerText}"/>
+            <Label Text="متنی برای زیر عنوان" Margin="10,-15,5,0" Style="{StaticResource subHeaderText}"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <!--<RowDefinition Height="*"/>-->
                 </Grid.RowDefinitions>
 
-                <controls:SanaapEntry Text="{Binding Comment.FirstName}"/>
-                <Label Text="نام" Grid.Column="1"/>
+                <controls:SanaapEntry Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="5,0,5,0"/>
+                <!--<Label Text="نام" Grid.Column="1"/>-->
 
-                <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Row="1"/>
-                <Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>
+                <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Column="1" Padding="5,0,5,0" Placeholder="نام خانوادگی"/>
+                <!--<Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>-->
 
-                <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Text="{Binding Comment.Mobile}" Grid.Row="2"/>
-                <Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Grid.ColumnSpan="2" Text="{Binding Comment.Mobile}" Padding="5,0,5,0" Placeholder="شماره تماس" Grid.Row="1"/>
+                <!--<Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>-->
+
+                
+
             </Grid>
 
-            <Label Text="متن شکایت/ پیشنهاد"/>
+            <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن شکایت / پیشنهاد" HeightRequest="100" Padding="5,0,5,0" />
+            <!--<Label Text="متن شکایت/ پیشنهاد"/>-->
 
-            <Editor Text="{Binding Comment.Description}" HeightRequest="100"/>
+            <syncCombobox:SfComboBox DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="5,0,5,0" IsEditableMode="False" />
 
-            <Button Text="ثبت" Command="{Binding Submit}"/>
+            <Button Text="ثبت" Command="{Binding Submit}" Margin="-40,0,-40,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
