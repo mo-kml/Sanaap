@@ -4,7 +4,7 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:Controls="clr-namespace:Sanaap.App.Controls"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             HasSystemPadding="True" Padding="30,180,30,180" SystemPaddingSides="All"
+             HasSystemPadding="True" Padding="30,235,30,235" SystemPaddingSides="All"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDescriptionView">
     <popup:PopupPage.Animation>
         <animations:ScaleAnimation 

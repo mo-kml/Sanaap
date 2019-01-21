@@ -47,7 +47,7 @@
     </popup:PopupPage.Resources>
     <Frame CornerRadius="20">
         <AbsoluteLayout>
-            <StackLayout BackgroundColor="White" Padding="0" Spacing="15">
+            <StackLayout BackgroundColor="White" Padding="0" Spacing="15" FlowDirection="RightToLeft">
                 <StackLayout Orientation="Horizontal">
                     <StackLayout HorizontalOptions="Start">
                         <Label Text="اعلام خسارت" FontAttributes="Bold"/>
@@ -101,7 +101,7 @@
 
 
             </StackLayout>
-            <Button BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد" AbsoluteLayout.LayoutBounds="-100,350,450,99"/>
+            <Button BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد" AbsoluteLayout.LayoutBounds="-50,400,450,99"/>
             <controls:IconButton Text="&#xf0e2;" Type="Solid" AbsoluteLayout.LayoutBounds="240,352,100,90" BackgroundColor="{StaticResource primaryGray}" BorderRadius="0"/>
         </AbsoluteLayout>
     </Frame>

@@ -127,6 +127,7 @@ namespace Sanaap.App.ViewModels
                 Request.Latitude = position.Latitude;
                 Request.Longitude = position.Longitude;
 
+
                 List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
                 {
                     new ExternalEntityDto{Name="کارت ملی", PrmID=52},
