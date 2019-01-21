@@ -21,7 +21,7 @@ namespace Sanaap.App.ViewModels.Insurance
     {
         private readonly IPolicyService _policyService;
         private readonly IUserDialogs _userDialogs;
-        public InsurancePolicyListViewModel(INavService navigationService, IPolicyService policyService, IUserDialogs userDialogs)
+        public InsurancePolicyListViewModel( IPolicyService policyService, IUserDialogs userDialogs)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
@@ -31,7 +31,7 @@ namespace Sanaap.App.ViewModels.Insurance
                   INavigationParameters parameters = new NavigationParameters();
                   parameters.Add("Method", EditMethod.Create);
 
-                  await navigationService.NavigateAsync(nameof(CreateInsurancePolicyView));
+                  await NavigationService.NavigateAsync(nameof(CreateInsurancePolicyView));
               });
 
             ShowPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
@@ -42,14 +42,14 @@ namespace Sanaap.App.ViewModels.Insurance
                   {
                       parameters.Add("Policy", policy);
 
-                      await navigationService.GoBackAsync(parameters);
+                      await NavigationService.GoBackAsync(parameters);
                   }
                   else
                   {
                       parameters.Add("Policy", policy);
                       parameters.Add("Method", EditMethod.Update);
 
-                      await navigationService.NavigateAsync(nameof(CreateInsurancePolicyView), parameters);
+                      await NavigationService.NavigateAsync(nameof(CreateInsurancePolicyView), parameters);
                   }
               });
         }

@@ -15,12 +15,12 @@ namespace Sanaap.App.ViewModels
         public BitDelegateCommand GotoEvlRequestMapBadane { get; set; }
 
 
-        public MainInsuranceViewModel(INavService navigationService,
+        public MainInsuranceViewModel(
             ISecurityService securityService, IDeviceService deviceService, IUserDialogs userDialogs)
         {
             GotoEvlRequestMapSales = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { nameof(InsuranceType), InsuranceType.Sales }
                 });
@@ -28,7 +28,7 @@ namespace Sanaap.App.ViewModels
 
             GotoEvlRequestMapBadane = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters
                 {
                     { nameof(InsuranceType), InsuranceType.Badane }
                 });

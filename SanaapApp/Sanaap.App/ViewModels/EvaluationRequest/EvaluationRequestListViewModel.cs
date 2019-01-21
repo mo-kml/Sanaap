@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
@@ -21,7 +20,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         private IEvlRequestService _evlRequestService;
         private IDateTimeUtils _dateTimeUtils;
         private readonly IUserDialogs _userDialogs;
-        public EvaluationRequestListViewModel(IEvlRequestService evlRequestService, IDateTimeUtils dateTimeUtils, IUserDialogs userDialogs, INavService navigationService)
+        public EvaluationRequestListViewModel(IEvlRequestService evlRequestService, IDateTimeUtils dateTimeUtils, IUserDialogs userDialogs)
         {
             _evlRequestService = evlRequestService;
             _dateTimeUtils = dateTimeUtils;
@@ -32,7 +31,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 INavigationParameters parameters = new NavigationParameters();
                 parameters.Add(nameof(EvlRequestListItemSource), request);
 
-                await navigationService.NavigateAsync(nameof(EvlRequestProgressView), parameters);
+                await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), parameters);
             });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)

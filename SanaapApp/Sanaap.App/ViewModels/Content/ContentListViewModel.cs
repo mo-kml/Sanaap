@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Sanaap.App.Views.Content;
 using Sanaap.Dto;
@@ -16,7 +15,7 @@ namespace Sanaap.App.ViewModels.Content
     {
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
-        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INavService navigationService)
+        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
@@ -26,7 +25,7 @@ namespace Sanaap.App.ViewModels.Content
                   INavigationParameters parameters = new NavigationParameters();
                   parameters.Add("ContentId", Guid.Parse("890f984f-f5aa-4cd3-870a-02f9e15e1037"));
 
-                  await navigationService.NavigateAsync(nameof(ShowContentView), parameters);
+                  await NavigationService.NavigateAsync(nameof(ShowContentView), parameters);
               });
         }
         public ObservableCollection<ContentListDto> Contents { get; set; }

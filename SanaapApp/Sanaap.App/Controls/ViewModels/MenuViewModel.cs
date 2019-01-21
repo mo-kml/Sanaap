@@ -23,26 +23,26 @@ namespace Sanaap.App.Controls.ViewModels
 
         public SfNavigationDrawer NavigationDrawer { get; set; }
 
-        public MenuViewModel(INavService navigationService, ISecurityService securityService)
+        public MenuViewModel( ISecurityService securityService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
 
                 NavigationDrawer.ToggleDrawer();
-                await navigationService.NavigateAsync(page);
+                await NavigationService.NavigateAsync(page);
             });
 
             Logout = new BitDelegateCommand(async () =>
             {
                 NavigationDrawer.ToggleDrawer();
                 await securityService.Logout();
-                await navigationService.NavigateAsync($"/{nameof(LoginView)}");
+                await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
             });
 
             GoBack = new BitDelegateCommand(async () =>
               {
                   NavigationDrawer.ToggleDrawer();
-                  await navigationService.GoBackAsync();
+                  await NavigationService.GoBackAsync();
               });
 
         }

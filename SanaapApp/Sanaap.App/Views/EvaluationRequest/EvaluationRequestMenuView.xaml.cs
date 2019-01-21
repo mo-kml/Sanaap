@@ -1,21 +1,31 @@
 ﻿using Prism.Events;
 using Sanaap.App.Events;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EvaluationRequestMenuView : ContentPage
+    public partial class EvaluationRequestMenuView : ContentPage, IDisposable
     {
+        private IEventAggregator _eventAggregator;
+        private SubscriptionToken SubscriptionToken;
         public EvaluationRequestMenuView(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+
             InitializeComponent();
 
-            eventAggregator.GetEvent<OpenInsurancePopupEvent>().SubscribeAsync(async (nothing) =>
-            {
-                navigationDrawer.ToggleDrawer();
-            });
+            SubscriptionToken = _eventAggregator.GetEvent<OpenInsurancePopupEvent>().SubscribeAsync(async (nothing) =>
+              {
+                  navigationDrawer.ToggleDrawer();
+              }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
+        }
+
+        public void Dispose()
+        {
+            SubscriptionToken.Dispose();
         }
     }
 }

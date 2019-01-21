@@ -10,7 +10,7 @@
         <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
     </ContentPage.Resources>
 
-    <navigationdrawer:SfNavigationDrawer DrawerHeight="300" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+    <navigationdrawer:SfNavigationDrawer DrawerHeight="450" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
         <navigationdrawer:SfNavigationDrawer.ContentView>
             <StackLayout>
                 <Button Text="درخواست کارشناس بدنه" Command="{Binding EvlRequestBadane}"/>

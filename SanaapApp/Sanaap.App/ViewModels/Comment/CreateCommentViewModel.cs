@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Services;
 using Sanaap.Constants;
 using Sanaap.Dto;
@@ -20,8 +19,8 @@ namespace Sanaap.App.ViewModels.Comment
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService,
             ISanaapAppTranslateService translateService,
-            IODataClient oDataClient,
-            INavService navigationService)
+            IODataClient oDataClient
+            )
         {
             CommentTypes = EnumHelper<CommentType>.GetDisplayValues(CommentType.Complaint);
 
@@ -50,7 +49,7 @@ namespace Sanaap.App.ViewModels.Comment
 
                     await pageDialogService.DisplayAlertAsync("", "پیام شما با موفقیت ثبت شد.", "باشه");
 
-                    await navigationService.GoBackAsync();
+                    await NavigationService.GoBackAsync();
                 }
             });
         }

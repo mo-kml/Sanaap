@@ -16,7 +16,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvlRequestInquiryViewModel : BitViewModelBase
     {
 
-        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService, INavService navigationService, IUserDialogs userDialogs)
+        public EvlRequestInquiryViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService,  IUserDialogs userDialogs)
         {
 
             Inquiry = new BitDelegateCommand(async () =>
@@ -41,7 +41,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                               RequestTypeName = EnumHelper<EvlRequestType>.GetDisplayValue(requestDto.EvlRequestType)
                           });
 
-                          await navigationService.NavigateAsync(nameof(EvlRequestProgressView), parameter);
+                          await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), parameter);
                       }
                   }
               }, () => DocumentNumber != 0);

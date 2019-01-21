@@ -21,7 +21,7 @@ namespace Sanaap.App.ViewModels.Comment
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
         public CommentListViewModel(IODataClient oDataClient,
-            INavService navigationService,
+            
             IUserDialogs userDialogs,
             IPageDialogService pageDialogService)
         {
@@ -30,7 +30,7 @@ namespace Sanaap.App.ViewModels.Comment
 
             CreateComment = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(CreateCommentView));
+                await NavigationService.NavigateAsync(nameof(CreateCommentView));
             });
 
             ShowComment = new BitDelegateCommand<CommentItemSource>(async (comment) =>

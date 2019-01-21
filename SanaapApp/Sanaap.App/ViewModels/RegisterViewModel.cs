@@ -1,8 +1,8 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
-using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Views;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Service.Contracts;
@@ -10,6 +10,7 @@ using Simple.OData.Client;
 using System;
 using System.Threading;
 using System.Timers;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
@@ -31,11 +32,11 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand VerifyCode { get; set; }
 
-        public virtual CustomerDto Customer { get; set; } = new CustomerDto { };
+        public CustomerDto Customer { get; set; } = new CustomerDto();
 
         private CancellationTokenSource registerCancellationTokenSource;
 
-        public RegisterViewModel(INavService navigationService,
+        public RegisterViewModel(
             IODataClient oDataClient,
             ICustomerValidator customerValidator,
             IPageDialogService pageDialogService,
@@ -43,11 +44,6 @@ namespace Sanaap.App.ViewModels
             ISanaapAppTranslateService translateService,
             IUserDialogs userDialogs)
         {
-            //Login = new BitDelegateCommand(async () =>
-            //{
-            //    await navigationService.NavigateAsync("Login");
-            //});
-
             Register = new BitDelegateCommand(async () =>
             {
                 registerCancellationTokenSource?.Cancel();
@@ -134,7 +130,7 @@ namespace Sanaap.App.ViewModels
 
                       await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret", cancellationToken: registerCancellationTokenSource.Token);
 
-                      await navigationService.NavigateAsync("/Menu/Nav/Main");
+                      await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainView)}");
                   }
                   else
                   {

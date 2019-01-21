@@ -1,5 +1,4 @@
 ﻿using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
@@ -36,13 +35,13 @@ namespace Sanaap.App.ViewModels
 
         public string Message { get; set; }
 
-        private readonly INavService _navigationService;
+
         private readonly IPageDialogService _pageDialogService;
         private readonly IDateTimeUtils _dateTimeUtils;
         private readonly IEvlRequestService _evlRequestService;
         private IInitialDataService _initialDataService;
         private readonly HttpClient _httpClient;
-        public EvlRequestWaitViewModel(INavService navigationService,
+        public EvlRequestWaitViewModel(
             IODataClient odataClient,
             IEvlRequestService evlRequestService,
             IDeviceService deviceService,
@@ -54,7 +53,6 @@ namespace Sanaap.App.ViewModels
         {
             _odataClient = odataClient;
             _evlRequestService = evlRequestService;
-            _navigationService = navigationService;
             _pageDialogService = pageDialogService;
             _initialDataService = initialDataService;
             _httpClient = httpClient;
@@ -62,7 +60,7 @@ namespace Sanaap.App.ViewModels
 
             GoToMain = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
             });
 
             Call = new BitDelegateCommand(async () =>
@@ -106,13 +104,13 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-                await _navigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertError, ErrorMessages.Ok);
             }
 
             if (result == "NotResult")
             {
-                await _navigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertNotResult, ErrorMessages.Ok);
                 return;
             }

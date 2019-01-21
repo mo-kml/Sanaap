@@ -23,7 +23,7 @@ namespace Sanaap.App.ViewModels
 
         private CancellationTokenSource registerCancellationTokenSource;
 
-        public LoginViewModel(INavService navigationService,
+        public LoginViewModel(
             ISecurityService securityService,
             ISanaapAppLoginValidator loginValidator,
             IPageDialogService pageDialogService,
@@ -45,7 +45,7 @@ namespace Sanaap.App.ViewModels
                     try
                     {
                         await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                        await navigationService.NavigateAsync($"/{nameof(MainView)}");
+                        await NavigationService.NavigateAsync($"/{nameof(MainView)}");
                     }
                     catch (Exception ex)
                     {
@@ -67,7 +67,7 @@ namespace Sanaap.App.ViewModels
 
             Register = new BitDelegateCommand(async () =>
             {
-                await navigationService.NavigateAsync(nameof(RegisterView));
+                await NavigationService.NavigateAsync(nameof(RegisterView));
             });
         }
     }
