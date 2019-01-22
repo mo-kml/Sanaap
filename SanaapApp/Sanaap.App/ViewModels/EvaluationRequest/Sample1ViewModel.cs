@@ -10,54 +10,45 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         public Sample1ViewModel()
         {
-            Insurers.Add(new InsImage
+
+            Comments.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Code = 123456,
+                StatusTypeName = "پاسخ داده شد",
+                CreatedOn = DateTimeOffset.Now
             });
 
-            Insurers.Add(new InsImage
+            Comments.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Code = 123457,
+                StatusTypeName = "در انتظار پاسخ",
+                CreatedOn = DateTimeOffset.Now
             });
-            Insurers.Add(new InsImage
+
+            Comments.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Code = 123458,
+                StatusTypeName = "پاسخ داده شد",
+                CreatedOn = DateTimeOffset.Now
             });
-            Insurers.Add(new InsImage
+
+            Comments.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Code = 123459,
+                StatusTypeName = "در انتظار پاسخ",
+                CreatedOn = DateTimeOffset.Now
             });
 
         }
 
-        public ObservableCollection<InsImage> Insurers { get; set; } = new ObservableCollection<InsImage>();
+        public ObservableCollection<CommentsList> Comments { get; set; } = new ObservableCollection<CommentsList>();
 
     }
 
-    public class InsImage
+    public class CommentsList
     {
-        public string Image { get; set; }
-        public string Name { get; set; }
-        public bool IsSelected { get; set; }
+        public int Code { get; set; }
+        public string StatusTypeName { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
     }
 }

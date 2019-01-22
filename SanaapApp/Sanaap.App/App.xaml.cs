@@ -72,7 +72,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(CreateInsurancePolicyView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestView)}");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
