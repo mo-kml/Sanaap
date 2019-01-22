@@ -5,7 +5,7 @@
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-             HasSystemPadding="True" Padding="30,125,30,125" SystemPaddingSides="All"
+             HasSystemPadding="True" Padding="30,100,30,100" SystemPaddingSides="All"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
     <popup:PopupPage.Animation>
