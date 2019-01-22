@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             BackgroundColor="White"
              x:Class="Sanaap.App.Views.RegisterView" Title="">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,6 +22,10 @@
                 <Setter Property="FontSize" Value="10"/>
             </Style>
 
+            <Style TargetType="controls:SanaapEntry">
+                <Setter Property="Margin" Value="20,30,20,0"/>
+            </Style>
+            
             <Style TargetType="local:IconButton" x:Key="ProgressIconButton">
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="10"/>
@@ -28,6 +34,7 @@
     </ContentPage.Resources>
     <ScrollView>
         <StackLayout>
+            <!--
             <StackLayout Padding="10" HorizontalOptions="Center" Orientation="Horizontal" Spacing="25">
                 <StackLayout>
                     <Label Style="{StaticResource ProgressLabel}" Text="ورود اطلاعات" TextColor="Green"/>
@@ -43,19 +50,21 @@
                     <Label Text="اتمام" Style="{StaticResource ProgressLabel}"/>
                     <local:IconButton/>
                 </StackLayout>
-            </StackLayout>
+            </StackLayout>-->
 
-            <StackLayout VerticalOptions="Start" IsVisible="{Binding IsEnterDataVisible}">
-                <controls:SanaapEntry MaxLength="20" Placeholder="نام" Margin="15, 30, 15, 0" Text="{Binding Customer.FirstName}" />
-                <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
-                <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
-                <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
-                <Button Text="ثبت نام" Command="{Binding Register}" />
+            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,50,0,0" HeightRequest="150" Source="resource://Sanaap.App.Images.Logo.svg"  />
+
+            <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
+                <controls:SanaapEntry MaxLength="20" Margin="50,30,50,5" Placeholder="نام" Text="{Binding Customer.FirstName}" />
+                <controls:SanaapEntry MaxLength="40" Margin="50,0,50,5" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+                <controls:SanaapEntry MaxLength="10" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
+                <controls:SanaapEntry MaxLength="11" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
+                <Button Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}" Margin="50,20,50,0" />
             </StackLayout>
 
             <StackLayout VerticalOptions="Start" IsVisible="{Binding IsVerifySectionVisible}">
-                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="لطفا کد تایید را وارد نمایید" Margin="15, 30, 15, 0" Text="{Binding VerificationCode}" />
-                <Button Text="تایید" Command="{Binding VerifyCode}" />
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="لطفا کد تایید را وارد نمایید" Margin="50, 30, 50, 0" Text="{Binding VerificationCode}" />
+                <Button Text="تایید" Command="{Binding VerifyCode}" Margin="50,0,50,0" />
                 <Button Text="{Binding TimerValue,StringFormat='ارسال مجدد کد{0}'}" Command="{Binding SendVerificationCodeAgain}" />
             </StackLayout>
 
