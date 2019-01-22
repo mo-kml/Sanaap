@@ -104,7 +104,9 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
+            //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
+            //
             containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();

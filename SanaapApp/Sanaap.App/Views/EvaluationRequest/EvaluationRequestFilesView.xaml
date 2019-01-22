@@ -105,8 +105,8 @@
 
                 
             </StackLayout>
-            <Button Command="{Binding Submit}" AbsoluteLayout.LayoutBounds="50,370,310,90" BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد"/>
-            <Controls:IconButton Text="&#xf0e2;" Type="Solid" AbsoluteLayout.LayoutBounds="-30,372,110,90" CornerRadius="0"/>
+            <Button Command="{Binding Submit}" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1.1,1.2,100" BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد"/>
+            <Controls:IconButton Text="&#xf0e2;" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="-.2,1.103,.35,100" Type="Solid"  CornerRadius="0"/>
         </AbsoluteLayout>
     </Frame>
 </popup:PopupPage>

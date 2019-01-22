@@ -11,44 +11,28 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public Sample1ViewModel()
         {
 
-            Comments.Add(new CommentsList
+            Progresses.Add(new CommentsList
             {
-                Code = 123456,
-                StatusTypeName = "پاسخ داده شد",
-                CreatedOn = DateTimeOffset.Now
+                Status = "Test1",
+                Date="1398/5/6"
             });
 
-            Comments.Add(new CommentsList
+            Progresses.Add(new CommentsList
             {
-                Code = 123457,
-                StatusTypeName = "در انتظار پاسخ",
-                CreatedOn = DateTimeOffset.Now
-            });
-
-            Comments.Add(new CommentsList
-            {
-                Code = 123458,
-                StatusTypeName = "پاسخ داده شد",
-                CreatedOn = DateTimeOffset.Now
-            });
-
-            Comments.Add(new CommentsList
-            {
-                Code = 123459,
-                StatusTypeName = "در انتظار پاسخ",
-                CreatedOn = DateTimeOffset.Now
+                Status = "Test2",
+                Date = "1398/5/7"
             });
 
         }
 
-        public ObservableCollection<CommentsList> Comments { get; set; } = new ObservableCollection<CommentsList>();
+        public ObservableCollection<CommentsList> Progresses { get; set; } = new ObservableCollection<CommentsList>();
+        public long RequestCode { get; set; }
 
     }
 
     public class CommentsList
     {
-        public int Code { get; set; }
-        public string StatusTypeName { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
+        public string Status { get; set; }
+        public string Date { get; set; }
     }
 }
