@@ -15,6 +15,7 @@
 
             <Color x:Key="primaryGray">#e2e2e2</Color>
             <Color x:Key="primaryBlue">#172CCB</Color>
+            <Color x:Key="primaryBackGround">#f2f2f2</Color>
 
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="15"/>

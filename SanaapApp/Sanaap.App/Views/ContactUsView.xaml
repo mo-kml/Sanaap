@@ -29,6 +29,26 @@
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 
+            <Style TargetType="local:IconButton">
+                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BackgroundColor" Value="DarkBlue"/>
+                <Setter Property="BorderRadius" Value="19"/>
+                <Setter Property="Margin" Value="15,0,0,0"/>
+                <Setter Property="WidthRequest" Value="38"/>
+                <Setter Property="HeightRequest" Value="38"/>
+                <Setter Property="Type" Value="Solid"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="ButtonsFrame">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="HeightRequest" Value="15"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Margin"   Value="70,200,70,65"/>
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -73,13 +93,13 @@
             
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,150,10,-150">
-                <local:IconButton BorderColor="White" BorderWidth="1" TextColor="Green" BackgroundColor="DarkBlue" BorderRadius="19" Margin="15,0,0,0" WidthRequest="38" HeightRequest="38" Type="Brands" Text="&#xf232;" Command="{Binding WhatsApp}" FontSize="15"/>
-                <local:IconButton BorderColor="White" BorderWidth="1" TextColor="Green" BackgroundColor="DarkBlue" BorderRadius="19" Margin="15,0,0,0" WidthRequest="38" HeightRequest="38" Type="Solid" Text="&#xf2a0;" Command="{Binding Call}" FontSize="15"/>
-                <local:IconButton BorderColor="White" BorderWidth="1" TextColor="Blue" BackgroundColor="DarkBlue" BorderRadius="19" Margin="15,0,0,0" WidthRequest="38" HeightRequest="38" Type="Brands" Text="&#xf2c6;" Command="{Binding Telegram}" FontSize="15"/>
-                <local:IconButton BorderColor="White" BorderWidth="1" TextColor="Red" BackgroundColor="DarkBlue" BorderRadius="19" Margin="15,0,0,0" WidthRequest="38" HeightRequest="38" Type="Brands" Text="&#xf16d;" Command="{Binding Instagram}" FontSize="15"/>
+                <local:IconButton TextColor="Green" Text="&#xf232;" Command="{Binding WhatsApp}" />
+                <local:IconButton TextColor="Green" Text="&#xf2a0;" Command="{Binding Call}"/>
+                <local:IconButton TextColor="Blue" Text="&#xf2c6;" Command="{Binding Telegram}"/>
+                <local:IconButton TextColor="Red"  Text="&#xf16d;" Command="{Binding Instagram}"/>
             </StackLayout>
 
-            <Frame BackgroundColor="White" WidthRequest="100" HeightRequest="15" CornerRadius="10" Margin="70,200,70,65">
+            <Frame Style="{StaticResource ButtonsFrame}">
                 <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalOptions="Center">
                     <Button Text="تماس با ما" TextColor="Black" Margin="10,-15,-10,-15" BackgroundColor="White" Command="{Binding ContactUs}"  />
                     <BoxView BackgroundColor="Black" HeightRequest="50" WidthRequest="1" Margin="0,-20,0,-20"/>

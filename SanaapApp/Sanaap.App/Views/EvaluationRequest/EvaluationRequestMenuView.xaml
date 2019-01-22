@@ -4,17 +4,54 @@
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
              xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
-             x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView">
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
+             BackgroundColor="{StaticResource primaryBackground}">
 
     <ContentPage.Resources>
         <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
+
+        <Style TargetType="Button" x:Key="globalButtonStyle">
+            <Setter Property="Margin" Value="30,0,30,10"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ThisPageButtons" BasedOn="{StaticResource globalButtonStyle}">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="disableButton" BasedOn="{StaticResource globalButtonStyle}">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+        </Style>
+        
     </ContentPage.Resources>
 
     <navigationdrawer:SfNavigationDrawer DrawerHeight="450" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
         <navigationdrawer:SfNavigationDrawer.ContentView>
-            <StackLayout>
-                <Button Text="درخواست کارشناس بدنه" Command="{Binding EvlRequestBadane}"/>
-                <Button Text="درخواست کارشناس ثالث" Command="{Binding EvlRequestSales}"/>
+            <StackLayout >
+
+                <StackLayout BackgroundColor="{StaticResource primaryBlue}" HeightRequest="50">
+                    <Label Text="اعلام خسارت" Style="{StaticResource headerText}" BackgroundColor="{StaticResource primaryBlue}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                </StackLayout>
+                
+                <Label  Margin="150,0,150,0" HorizontalTextAlignment="Center" Text='متنی برای زیر عنوان' WidthRequest="100" FontSize="10"/>
+
+                <Frame  HeightRequest="50" CornerRadius="10" BackgroundColor="{StaticResource primaryBlue}" Margin="280,-80,20,15" HasShadow="False">
+                    <controls:IconLabel HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="&#xf5e1;" Type="Solid" FontSize="25" TextColor="White" />
+                </Frame>
+                
+
+                <Button Text="درخواست کارشناس بدنه" Command="{Binding EvlRequestBadane}" Style="{StaticResource globalButtonStyle}" BackgroundColor="{StaticResource primaryBlue}"/>
+                <Button Text="درخواست کارشناس ثالث" Command="{Binding EvlRequestSales}" Style="{StaticResource ThisPageButtons}"/>
+                <Button Text="درخواست کارشناس درمان" Command="{Binding EvlRequestBadane}"  Style="{StaticResource disableButton}"/>
+                <Button Text="درخواست کارشناس پرونده اموال" Command="{Binding EvlRequestBadane}" Style="{StaticResource disableButton}"/>
+                <Button Text="لیست درخواست ها" Command="{Binding EvlRequestBadane}" Style="{StaticResource disableButton}"/>
+                <Button Text="پیگیری پرونده" Command="{Binding EvlRequestBadane}"  Style="{StaticResource disableButton}"/>
+
             </StackLayout>
         </navigationdrawer:SfNavigationDrawer.ContentView>
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
