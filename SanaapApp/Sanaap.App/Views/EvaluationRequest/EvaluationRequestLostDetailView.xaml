@@ -5,7 +5,7 @@
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-             HasSystemPadding="True" Padding="30,125,30,125" SystemPaddingSides="All"
+             HasSystemPadding="True" Padding="30,100,30,100" SystemPaddingSides="All"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
     <popup:PopupPage.Animation>
@@ -101,8 +101,8 @@
 
 
             </StackLayout>
-            <Button BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد" AbsoluteLayout.LayoutBounds="-50,400,450,99"/>
-            <controls:IconButton Text="&#xf0e2;" Type="Solid" AbsoluteLayout.LayoutBounds="240,352,100,90" BackgroundColor="{StaticResource primaryGray}" BorderRadius="0"/>
+            <Button BackgroundColor="{StaticResource primaryBlue}" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional"  AbsoluteLayout.LayoutBounds="1,1.1,1.2,100" Text="مرحله بعد" />
+            <controls:IconButton Text="&#xf0e2;" Type="Solid" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="1.1,1.105,.25,100" BackgroundColor="{StaticResource primaryGray}" BorderRadius="0"/>
         </AbsoluteLayout>
     </Frame>
 </popup:PopupPage>

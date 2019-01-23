@@ -4,8 +4,53 @@
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              x:Class="Sanaap.App.Views.Content.ShowContentView">
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All">
+        <!--<AbsoluteLayout>-->
+
+            <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
+                <StackLayout>
+                <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="200"/>
+                <!---->
+                    <Grid Margin="10,10,20,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="80*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+                        <Label FontSize="14" Text="1397/10/23" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label FontSize="12" Text="دسته بندی" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <local:IconButton FontSize="12" Padding="0,-10,0,-10" BackgroundColor="White" HeightRequest="30" Type="Solid" Text="&#xf1e0; اشتراک گذاری" Command="{Binding Share}" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
+                            <local:IconButton BackgroundColor="White" Padding="0,-10,0,-10" Type="Solid" Text="&#xf004;  134" Command="{Binding Like}"/>
+                            <Label FontSize="12" Text="134"/>
+                        </StackLayout>
+
+                        <BoxView BackgroundColor="Gray" Grid.Column="1"/>
+                        <BoxView BackgroundColor="Gray" Grid.Column="3"/>
+                        <BoxView BackgroundColor="Gray" Grid.Column="5"/>
+
+                    </Grid>
+
+                <BoxView HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="350" Margin="10,0,0,0" HeightRequest="1" />
+
+                <Label Margin="30,10,30,10" Text="{Binding Content.Title}" FontSize="17" FontAttributes="Bold" TextColor="Black"/>
+                <!---->
+                <BoxView HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="350" Margin="10,0,0,0" HeightRequest="1" />
+
+                <Label Margin="30,10,30,0" Text="{Binding Content.Text}"/>
+                <!---->
+            </StackLayout>
+
+            </ScrollView>
+
+            <!--<ScrollView AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout>
                     <Label Text="{Binding Content.Title}" />
                     <Image Source="{Binding Content.Image}" Aspect="AspectFill"/>
@@ -15,7 +60,7 @@
             <StackLayout AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal" HorizontalOptions="Center">
                 <local:IconButton Type="Solid" Text="&#xf004;" Command="{Binding Like}"/>
                 <local:IconButton Type="Solid" Text="&#xf064;" Command="{Binding Share}"/>
-            </StackLayout>
-        </AbsoluteLayout>
+            </StackLayout>-->
+        <!--</AbsoluteLayout>-->
     </ContentPage.Content>
 </ContentPage>

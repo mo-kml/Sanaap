@@ -19,15 +19,11 @@ using Sanaap.App.ViewModels.Comment;
 using Sanaap.App.ViewModels.Content;
 using Sanaap.App.ViewModels.EvaluationRequest;
 using Sanaap.App.ViewModels.Insurance;
-using Sanaap.App.ViewModels.News;
-using Sanaap.App.ViewModels.TheFiles;
 using Sanaap.App.Views;
 using Sanaap.App.Views.Comment;
 using Sanaap.App.Views.Content;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.App.Views.Insurance;
-using Sanaap.App.Views.News;
-using Sanaap.App.Views.TheFiles;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using Syncfusion.SfNavigationDrawer.XForms;
@@ -108,15 +104,14 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
+            //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
+            //
             containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();
 
-            containerRegistry.RegisterForNav<NewsDetailView, NewsDetailViewModel>();
-            containerRegistry.RegisterForNav<TheFilesView, TheFilesViewModel>();
-            containerRegistry.RegisterForNav<NewsListView, NewsDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestLostDetailView, EvaluationRequestLostDetailViewModel>();
@@ -126,7 +121,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://192.168.143.2:53148/"),
+                HostUri = new Uri("http://8d8c04e1.ngrok.io"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();

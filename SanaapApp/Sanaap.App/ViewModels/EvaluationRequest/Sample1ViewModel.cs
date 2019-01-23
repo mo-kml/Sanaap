@@ -10,54 +10,29 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         public Sample1ViewModel()
         {
-            Insurers.Add(new InsImage
+
+            Progresses.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Status = "Test1",
+                Date="1398/5/6"
             });
 
-            Insurers.Add(new InsImage
+            Progresses.Add(new CommentsList
             {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
-            });
-            Insurers.Add(new InsImage
-            {
-                Image = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png",
-                Name = "Test1",
-                IsSelected = true
+                Status = "Test2",
+                Date = "1398/5/7"
             });
 
         }
 
-        public ObservableCollection<InsImage> Insurers { get; set; } = new ObservableCollection<InsImage>();
+        public ObservableCollection<CommentsList> Progresses { get; set; } = new ObservableCollection<CommentsList>();
+        public long RequestCode { get; set; }
 
     }
 
-    public class InsImage
+    public class CommentsList
     {
-        public string Image { get; set; }
-        public string Name { get; set; }
-        public bool IsSelected { get; set; }
+        public string Status { get; set; }
+        public string Date { get; set; }
     }
 }

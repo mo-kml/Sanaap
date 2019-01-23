@@ -4,7 +4,7 @@
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestProgressView"
              FlowDirection="RightToLeft">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout FlowDirection="RightToLeft">
             <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
 
             <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">

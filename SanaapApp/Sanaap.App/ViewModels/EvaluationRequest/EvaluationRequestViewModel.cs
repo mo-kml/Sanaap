@@ -2,7 +2,9 @@
 using Prism.Events;
 using Prism.Navigation;
 using Sanaap.App.ItemSources;
+using Sanaap.App.Views;
 using Sanaap.App.Views.EvaluationRequest;
+using Sanaap.App.Views.Insurance;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
@@ -27,7 +29,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             }
             else
             {
-                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), parameters);
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView), parameters);
             }
         }
     }
