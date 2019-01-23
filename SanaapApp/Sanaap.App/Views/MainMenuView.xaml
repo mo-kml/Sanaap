@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="Sanaap.App.Views.MainMenuView" Title="سناپ  -  Sanaap" 
+             ControlTemplate="{Binding masterTemplate}"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -47,44 +48,44 @@
 
                 <Frame BackgroundColor="DarkBlue">
                     <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
-                        </Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
+                    </Frame.GestureRecognizers>
                     <Label  TextColor="White" HorizontalTextAlignment="Center" FontFamily="IRYekan.ttf#yekan" Text="اعلام خسارت" VerticalOptions="Center" />
                 </Frame>
 
                 <Frame Grid.Row="1">
                     <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                    </Frame.GestureRecognizers>
                     <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="درخواست آمبولانس" />
                 </Frame>
 
                 <Frame  Grid.Column="1">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </Frame.GestureRecognizers>
-                        <Label Margin="0,-5,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="صدور بیمه نامه" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Margin="0,-5,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="صدور بیمه نامه" />
                 </Frame>
 
                 <Frame Grid.Column="1" Grid.Row="1">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </Frame.GestureRecognizers>
-                        <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="امداد خودرو" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="امداد خودرو" />
                 </Frame>
 
                 <Frame Grid.Column="1" Grid.Row="2">
                     <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </Frame.GestureRecognizers>
-                        <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="تعمیر گاه" />
+                        <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="تعمیر گاه" />
                 </Frame>
 
                 <Frame  Grid.Row="2">
                     <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </Frame.GestureRecognizers>
-                        <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="درخواست جرثقیل" />
+                        <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Margin="0,0,0,0" TextColor="Black" FontFamily="IRYekan.ttf#yekan" Text="درخواست جرثقیل" />
                 </Frame>
 
                 <!--<Frame >
