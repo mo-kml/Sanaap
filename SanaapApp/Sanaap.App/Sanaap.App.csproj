@@ -22,6 +22,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.12.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Vernosion="1.8.0" Version="1.12.0" />
+    <PackageReference Include="NodaTime" Version="2.4.4" />
     <PackageReference Include="Pluralize.NET" Version="0.1.84" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="16.4.0.47" />

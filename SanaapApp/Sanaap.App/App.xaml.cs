@@ -65,15 +65,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            }
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            //}
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -137,6 +137,7 @@ namespace Sanaap.App
             containerRegistry.Register<IInsuranceValidator, DefaultInsuranceValidator>();
             containerRegistry.Register<IEvlRequestValidator, DefaultEvlRequestValidator>();
             containerRegistry.Register<IPolicyService, PolicyService>();
+            containerRegistry.Register<IDateHelper, DateHelper>();
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<IInitialDataService, InitialDataService>();

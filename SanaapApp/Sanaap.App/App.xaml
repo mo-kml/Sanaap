@@ -17,6 +17,8 @@
             <x:String x:Key="Shabnam-FDFont">SHABNAM-FD.TTF#Shabnam FD</x:String>
             <x:String x:Key="Shabnam-LightFont">SHABNAM-LIGHT.TTF#Shabnam Light</x:String>
             <x:String x:Key="Shabnam-Light-FDFont">SHABNAM-LIGHT-FD.TTF#Shabnam Light FD</x:String>
+            <x:String x:Key="Vazir-Black-FD-WOLFont">Vazir-Black-FD-WOL.ttf#Vazir Black FD-WOL</x:String>
+            <x:String x:Key="Vazir-Light-FD-WOLFont">Vazir-Light-FD-WOL.ttf#Vazir Light FD-WOL</x:String>
 
             <Color x:Key="primaryGray">#bfbfbf</Color>
             <Color x:Key="primaryBlue">#183fd8</Color>
@@ -94,31 +96,6 @@
 
             <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
 
-            <Style TargetType="ContentPage" x:Key="contentPage">
-                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
-            </Style>
-
-            <Style TargetType="Button">
-                <Setter Property="BorderRadius" Value="10" />
-                <Setter Property="Margin" Value="15, 2, 15, 2" />
-                <!--<Setter Property="FontSize" Value="Medium" />-->
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-            </Style>
-            <Style TargetType="Entry">
-                <Setter Property="Margin" Value="15, 2, 15, 0" />
-                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-                <!--<Setter Property="HorizontalTextAlignment" Value="End" />-->
-            </Style>
-            <Style TargetType="Label">
-                <!--<Setter Property="FontSize" Value="Medium" />-->
-                <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
-            </Style>
-
-            <Style TargetType="ContentPage">
-                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
-                <Setter Property="FlowDirection" Value="RightToLeft" />
-            </Style>
         </ResourceDictionary>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

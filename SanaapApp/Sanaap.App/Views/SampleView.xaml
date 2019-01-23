@@ -7,6 +7,7 @@
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
+             x:Name="sampleView"
              x:Class="Sanaap.App.Views.SampleView">
 
 
@@ -14,17 +15,43 @@
 
         <StackLayout Padding="10,20">
 
-            <bitControls:BitDatePicker Text="Please select a date!" AutoClose="False"/>
+            <bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
+                SelectedColor="{StaticResource primaryBlue}"
+                TodayColor="{StaticResource primaryBlue}"
+                FontFamily="{StaticResource Vazir-Light-FD-WOLFont}"
+                Culture="Fa"
+                SelectedDate="{Binding SelectedDate}"
+                FlowDirection="RightToLeft"
+                DateDisplayFormat="dd MMM yyyy"
+                AutoClose="True">
+                <bitControls:BitDatePicker.ControlTemplate>
+                    <ControlTemplate>
+                        <Frame HasShadow="False" Padding="1" CornerRadius="5" BorderColor="{StaticResource textPlaceholderColor}" BindingContext="{Binding BindingContext,Source={x:Reference sampleView}}">
+                            <StackLayout Orientation="Horizontal" Padding="10,0">
+                                <Label HorizontalOptions="Start" Margin="10,0,0,0" Text="تاریخ وقوع حادثه" VerticalTextAlignment="Center"/>
 
-            <bitControls:BitDatePicker Text="Please select a date!" AutoClose="True"/>
+                                <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-            <bitControls:BitDatePicker
-          CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
-          Culture="Fa"
-          DateDisplayFormat="dd MMM yyyy"
-          FlowDirection="RightToLeft"
-          Text="لطفا یک روز را انتخاب کنید" />
+                                    <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Day}"/>
+                                    <BoxView Margin="0,15,0,15" Grid.Column="1" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                    <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Month}"/>
+                                    <BoxView Margin="0,15,0,15" Grid.Column="3" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                    <Label TextColor="Black" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Year}" FontFamily="{TemplateBinding FontFamily}" />
+                                </Grid>
 
+                                <controls:IconButton HorizontalOptions="End" BackgroundColor="Transparent" WidthRequest="20" Padding="0,0,0,5" FontSize="20" Command="{TemplateBinding OpenPopupCommand}" Text="&#xf0dd;" Type="Solid" TextColor="{StaticResource textPlaceholderColor}"/>
+                            </StackLayout>
+                        </Frame>
+                    </ControlTemplate>
+                </bitControls:BitDatePicker.ControlTemplate>
+            </bitControls:BitDatePicker>
 
         </StackLayout>
     </ContentPage.Content>
