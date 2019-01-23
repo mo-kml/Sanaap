@@ -6,7 +6,7 @@
              x:Class="Sanaap.App.Views.ContactUsView"
              Title="تماس با ما"
              BackgroundColor="DarkBlue"
-             ControlTemplate="{StaticResource MasterTemplate}">
+             ControlTemplate="{StaticResource masterTemplate}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="local:IconButton">
