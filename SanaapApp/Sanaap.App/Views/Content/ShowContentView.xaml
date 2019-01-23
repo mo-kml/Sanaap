@@ -8,8 +8,8 @@
 
             <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
                 <StackLayout>
-                    <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="150"/>
-
+                <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="200"/>
+                <!---->
                     <Grid Margin="10,10,20,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80*"/>
@@ -24,12 +24,12 @@
                             <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
 
-                        <Label FontSize="9" Text="1397/10/23" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label FontSize="9" Text="دسته بندی" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <local:IconButton FontSize="9" BackgroundColor="White" HeightRequest="30" Type="Solid" Text="&#xf064;" Command="{Binding Share}" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label FontSize="14" Text="1397/10/23" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label FontSize="12" Text="دسته بندی" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <local:IconButton FontSize="12" Padding="0,-10,0,-10" BackgroundColor="White" HeightRequest="30" Type="Solid" Text="&#xf1e0; اشتراک گذاری" Command="{Binding Share}" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
                         <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
-                            <local:IconButton Type="Solid" Text="&#xf004;" Command="{Binding Like}"/>
-                            <Label FontSize="9" Text="134"/>
+                            <local:IconButton BackgroundColor="White" Padding="0,-10,0,-10" Type="Solid" Text="&#xf004;  134" Command="{Binding Like}"/>
+                            <Label FontSize="12" Text="134"/>
                         </StackLayout>
 
                         <BoxView BackgroundColor="Gray" Grid.Column="1"/>
@@ -38,9 +38,14 @@
 
                     </Grid>
 
-                    <Label Margin="0,0,15,0" Text="{Binding Content.Title}" FontSize="17" FontAttributes="Bold" TextColor="Black"/>
-                    <Label Margin="0,0,15,0" Text="{Binding Content.Text}"/>
+                <BoxView HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="350" Margin="10,0,0,0" HeightRequest="1" />
 
+                <Label Margin="30,10,30,10" Text="{Binding Content.Title}" FontSize="17" FontAttributes="Bold" TextColor="Black"/>
+                <!---->
+                <BoxView HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="350" Margin="10,0,0,0" HeightRequest="1" />
+
+                <Label Margin="30,10,30,0" Text="{Binding Content.Text}"/>
+                <!---->
             </StackLayout>
 
             </ScrollView>

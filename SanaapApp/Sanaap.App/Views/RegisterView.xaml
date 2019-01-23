@@ -52,14 +52,14 @@
                 </StackLayout>
             </StackLayout>-->
 
-            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,50,0,0" HeightRequest="150" Source="resource://Sanaap.App.Images.Logo.svg"  />
+            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,50,0,0" HeightRequest="150" Source="resource://Sanaap.App.Images.Asset38xxhdpi.png"  />
 
             <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
                 <controls:SanaapEntry MaxLength="20" Margin="50,30,50,5" Placeholder="نام" Text="{Binding Customer.FirstName}" />
                 <controls:SanaapEntry MaxLength="40" Margin="50,0,50,5" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
                 <controls:SanaapEntry MaxLength="10" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
                 <controls:SanaapEntry MaxLength="11" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
-                <Button Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}" Margin="50,20,50,0" />
+                <Button Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}" Margin="50,40,50,0" />
             </StackLayout>
 
             <StackLayout VerticalOptions="Start" IsVisible="{Binding IsVerifySectionVisible}">
