@@ -54,8 +54,8 @@
 
             </StackLayout>
         </navigationdrawer:SfNavigationDrawer.ContentView>
-        <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        <!--<navigationdrawer:SfNavigationDrawer.DrawerContentView>
             <insurancePopup:InsuranceListPopupView BindingContext="{Binding InsuranceListPopupViewModel,Source={StaticResource insuranceListPopupViewModelLocator}}"/>
-        </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer.DrawerContentView>-->
     </navigationdrawer:SfNavigationDrawer>
 </ContentPage>

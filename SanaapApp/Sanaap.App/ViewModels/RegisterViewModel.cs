@@ -130,7 +130,7 @@ namespace Sanaap.App.ViewModels
 
                       await securityService.LoginWithCredentials(Customer.NationalCode, Customer.Mobile, "SanaapResOwner", "secret", cancellationToken: registerCancellationTokenSource.Token);
 
-                      await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainView)}");
+                      await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
                   }
                   else
                   {

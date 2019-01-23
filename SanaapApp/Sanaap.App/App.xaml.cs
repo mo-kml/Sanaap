@@ -9,6 +9,7 @@ using Prism.Autofac;
 using Prism.Events;
 using Prism.Ioc;
 using Sanaap.App.Controls;
+using Sanaap.App.Controls.ViewModels;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.Helpers.Implementations;
 using Sanaap.App.Services.Contracts;
@@ -64,17 +65,18 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            //if (isLoggedIn)
-            //{
-            //    await NavigationService.NavigateAsync(nameof(MainView));
-            //}
-            //else
-            //{
-            //    await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
-            //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ContentListView)}");
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            }
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
+
 
             //eventAggregator.GetEvent<TokenExpiredEvent>()
             //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
@@ -92,13 +94,10 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
-            //ContentListViewModel
-            containerRegistry.RegisterForNav<ContentListView, Sample1ViewModel>();
+            containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
             containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
-            containerRegistry.RegisterForNav<MainView, MainViewModel>();
-            containerRegistry.RegisterForNav<MainInsuranceView, MainInsuranceViewModel>();
+            containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
-            //containerRegistry.RegisterForNav<Views.MenuView, MenuViewModel>();
             containerRegistry.RegisterForNav<MapView, MapViewModel>();
             containerRegistry.RegisterForNav<EvlRequestWaitView, EvlRequestWaitViewModel>();
             containerRegistry.RegisterForNav<CreateCommentView, CreateCommentViewModel>();
@@ -122,7 +121,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://c690b664.ngrok.io"),
+                HostUri = new Uri("http://8d8c04e1.ngrok.io"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
@@ -145,7 +144,7 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
-            containerBuilder.Register(c => new Controls.ViewModels.MenuViewModel(Container.Resolve<ISecurityService>())).SingleInstance();
+            containerBuilder.Register(c => new MenuViewModel(Container.Resolve<ISecurityService>(), NavigationService));
             containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>()));
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
@@ -155,7 +154,7 @@ namespace Sanaap.App
             base.RegisterTypes(containerRegistry);
         }
 
-        private void ToggleMenu(object sender, EventArgs e)
+        public void ToggleMenu(object sender, EventArgs e)
         {
             ((SfNavigationDrawer)((IconButton)sender).BindingContext).ToggleDrawer();
         }

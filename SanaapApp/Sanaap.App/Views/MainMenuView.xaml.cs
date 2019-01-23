@@ -4,13 +4,15 @@ using Xamarin.Forms;
 
 namespace Sanaap.App.Views
 {
-    public partial class MainView : ContentPage
+    public partial class MainMenuView : ContentPage
     {
         private int count = 0;
         private readonly IAppUtilities _utility;
-        public MainView(IAppUtilities utility)
+        private IUserDialogs _userDialogs;
+        public MainMenuView(IAppUtilities utility, IUserDialogs userDialogs)
         {
-
+            _utility = utility;
+            _userDialogs = userDialogs;
             InitializeComponent();
         }
 
@@ -19,7 +21,7 @@ namespace Sanaap.App.Views
             count++;
             if (count == 1)
             {
-                UserDialogs.Instance.Toast("برای بستن برنامه یک بار دیگر بازگشت را بزنید");
+                _userDialogs.Toast("برای بستن برنامه یک بار دیگر بازگشت را بزنید");
             }
             if (count == 2)
             {

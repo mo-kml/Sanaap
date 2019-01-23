@@ -1,13 +1,13 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
-using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Views;
 using Sanaap.Constants;
 using Sanaap.Service.Contracts;
 using System;
 using System.Threading;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
@@ -45,7 +45,7 @@ namespace Sanaap.App.ViewModels
                     try
                     {
                         await securityService.LoginWithCredentials(NationalCode, Mobile, "SanaapResOwner", "secret");
-                        await NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                        await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
                     }
                     catch (Exception ex)
                     {
