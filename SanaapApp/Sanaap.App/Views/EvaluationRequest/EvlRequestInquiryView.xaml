@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestInquiryView">
     <ContentPage.Content>
         <StackLayout>

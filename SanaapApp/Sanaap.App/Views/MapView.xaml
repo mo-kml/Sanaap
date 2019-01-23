@@ -4,6 +4,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.MapView">
 
     <StackLayout Spacing="0" Padding="0">

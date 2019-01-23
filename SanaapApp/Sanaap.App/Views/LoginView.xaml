@@ -4,10 +4,11 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{StaticResource primaryBlue}"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.LoginView" Title="">
 
     <StackLayout Orientation="Vertical">
-        <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,10,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.Asset38xxhdpi.png"  />
+        <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,100,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.Asset38xxhdpi.png"  />
         <StackLayout VerticalOptions="CenterAndExpand">
             <controls:SanaapEntry MaxLength="10" BackgroundColor="{StaticResource primaryBlue}"  Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding NationalCode}" Margin="50,0,50,10"/>
             <controls:SanaapEntry  BackgroundColor="{StaticResource primaryBlue}"  Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Mobile}" Margin="50,0,50,20" />
