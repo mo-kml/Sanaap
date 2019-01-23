@@ -5,6 +5,7 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.RegisterView" Title="">
     <ContentPage.Resources>
         <ResourceDictionary>

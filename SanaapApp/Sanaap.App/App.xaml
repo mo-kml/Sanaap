@@ -13,9 +13,18 @@
     <bit:BitApplication.Resources>
         <ResourceDictionary>
 
-            <Color x:Key="primaryGray">#e2e2e2</Color>
-            <Color x:Key="primaryBlue">#172CCB</Color>
-            <Color x:Key="primaryBackGround">#f2f2f2</Color>
+            <Color x:Key="primaryGray">#bfbfbf</Color>
+            <Color x:Key="primaryBlue">#183fd8</Color>
+            <Color x:Key="primaryBackGround">#ffffff</Color>
+            <Color x:Key="textBorderColor">#f3f3f3</Color>
+            <Color x:Key="textPlaceholderColor">#b3b3b3</Color>
+            <Color x:Key="buttonBlue">#183dd3</Color>
+            <Color x:Key="buttonTextWhite">#dfebff</Color>
+            <Color x:Key="textHeaderBlue">#40438a</Color>
+            <Color x:Key="labelTextColor">#a6a6a6</Color>
+            <Color x:Key="popupPositionFramColor">#393939</Color>
+            <Color x:Key="blueText">#2a4ac5</Color>
+            <Color x:Key="lightBlueText">#0096ca</Color>
 
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="15"/>

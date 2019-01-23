@@ -5,6 +5,7 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="Sanaap.App.Views.EvlRequestWaitView" BackgroundColor="Transparent"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             NavigationPage.HasNavigationBar="False"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
 
     <StackLayout HorizontalOptions="Center">

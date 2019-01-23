@@ -5,11 +5,12 @@
              FlowDirection="LeftToRight"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
+             NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource MasterTemplate}">
     <ContentPage.Content>
         <AbsoluteLayout>
             <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
-                      ItemsSource="{Binding Contents}">
+                      ItemsSource="{Binding Contents}"  FlowDirection="RightToLeft">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" 
                                               EventArgsParameterPath="Item" 
@@ -23,18 +24,18 @@
                             <Grid Margin="7,5,7,5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="20"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="200*"/>
                                 </Grid.ColumnDefinitions>
-                                <Frame CornerRadius="5" Grid.RowSpan="2" Margin="10,0,0,0">
+                                <Frame CornerRadius="5" Grid.RowSpan="2" HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
                                     <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
                                 </Frame>
-                                <Label TextColor="Black" FontSize="17" FontAttributes="Bold" Text="{Binding Title}"  Grid.Column="1"/>
-                                <!-- Main Text Needed To Add In DTO <Label FontSize="12" Text="{Binding MainText}"  Grid.Column="1" Grid.Row="1" LineBreakMode="TailTruncation" HeightRequest="30"/>-->
+                                <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HeightRequest="50" Text="{Binding Title}" Grid.Column="1"/>
+                                 <Label FontSize="12" Text="{Binding MainText}"  Grid.Column="1" Grid.Row="1" HeightRequest="30"/>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
                                     <local:IconLabel Text="{Binding LikesCount,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
                                         <local:IconLabel.Triggers>
@@ -54,7 +55,8 @@
                                     </local:IconLabel>
                                     
                                 </StackLayout>
-                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>
+                                <!--<Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>-->
+                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate}"/>
                             </Grid>
 
                             <!--<Grid>

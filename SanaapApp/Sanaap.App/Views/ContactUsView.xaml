@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="Sanaap.App.Views.ContactUsView"
+             NavigationPage.HasNavigationBar="False"
              Title="تماس با ما"
              BackgroundColor="DarkBlue"
              ControlTemplate="{StaticResource MasterTemplate}">

@@ -7,6 +7,7 @@
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    NavigationPage.HasNavigationBar="False"
     x:Name="createInsuranceView">
   <ContentPage.Content>
     <ScrollView>

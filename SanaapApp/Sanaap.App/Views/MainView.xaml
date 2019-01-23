@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.MainView" Title="سناپ  -  Sanaap" >
     <ContentPage.Resources>
         <ResourceDictionary>
