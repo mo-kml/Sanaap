@@ -11,21 +11,28 @@
     xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
     <bit:BitApplication.Resources>
         <ResourceDictionary>
+            <x:String x:Key="ShabnamFont">SHABNAM.TTF#Shabnam</x:String>
+            <x:String x:Key="Shabnam-BoldFont">SHABNAM-BOLD.TTF#Shabnam Bold</x:String>
+            <x:String x:Key="Shabnam-Bold-FDFont">SHABNAM-BOLD-FD.TTF#Shabnam Bold FD</x:String>
+            <x:String x:Key="Shabnam-FDFont">SHABNAM-FD.TTF#Shabnam FD</x:String>
+            <x:String x:Key="Shabnam-LightFont">SHABNAM-LIGHT.TTF#Shabnam Light</x:String>
+            <x:String x:Key="Shabnam-Light-FDFont">SHABNAM-LIGHT-FD.TTF#Shabnam Light FD</x:String>
 
             <Color x:Key="primaryGray">#e2e2e2</Color>
             <Color x:Key="primaryBlue">#172CCB</Color>
-            <Color x:Key="primaryBackGround">#f2f2f2</Color>
+            <Color x:Key="primaryBackground">#f2f2f2</Color>
 
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
+
             </Style>
 
             <Style TargetType="Label" x:Key="subHeaderText">
                 <Setter Property="FontSize" Value="10"/>
                 <Setter Property="Text" Value="{StaticResource primaryGray}"/>
             </Style>
-            
+
             <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator" />
 
             <ControlTemplate x:Key="masterTemplate">
