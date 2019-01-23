@@ -8,7 +8,6 @@
     xmlns:convs="clr-namespace:Sanaap.App.Converters"
     xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
-    xmlns:resources="clr-namespace:Sanaap.App"
     xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
     <bit:BitApplication.Resources>
         <ResourceDictionary>
@@ -18,7 +17,8 @@
 
             <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator" />
 
-            <ControlTemplate x:Key="MasterTemplate">
+            <ControlTemplate x:Key="masterTemplate">
+
                 <StackLayout>
                     <navigationdrawer:SfNavigationDrawer
                         x:Name="navigationDrawer"
@@ -59,14 +59,17 @@
                         </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
 
                         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                            <control:MenuView BindingContext="{Binding MenuViewModel, Source={StaticResource menuViewModelLocator}}" NavigationDrawer="{x:Reference navigationDrawer}" />
+                            <control:MenuView BindingContext="{Binding MenuViewModel, Source={StaticResource menuViewModelLocator}}" />
                         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
                     </navigationdrawer:SfNavigationDrawer>
                 </StackLayout>
             </ControlTemplate>
 
             <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
-            <StyleSheet Source="/Views/Styles.css" />
+
+            <Style TargetType="ContentPage" x:Key="contentPage">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+            </Style>
 
             <Style TargetType="Button">
                 <Setter Property="BorderRadius" Value="10" />
@@ -85,14 +88,10 @@
                 <Setter Property="FontFamily" Value="IRYekan.ttf#yekan" />
             </Style>
 
-            <!--<Style TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="Red"/>
-                <Setter Property="ControlTemplate" Value="{StaticResource MasterTemplate}"/>
-            -->
-            <!--<Setter Property="FontSize" Value="Medium" />-->
-            <!--
+            <Style TargetType="ContentPage">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
                 <Setter Property="FlowDirection" Value="RightToLeft" />
-            </Style>-->
+            </Style>
         </ResourceDictionary>
     </bit:BitApplication.Resources>
 </bit:BitApplication>

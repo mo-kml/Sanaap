@@ -6,7 +6,7 @@ using Prism.Ioc;
 using System;
 using System.Collections.Generic;
 
-namespace Sanaap.App.ViewModels
+namespace Sanaap.App.Contracts
 {
     public class SanaapExceptionHandler : BitExceptionHandler
     {

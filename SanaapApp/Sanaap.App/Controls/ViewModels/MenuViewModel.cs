@@ -1,18 +1,19 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Prism.Ioc;
-using Prism.Navigation;
+using PropertyChanged;
 using Sanaap.App.Views;
-using Syncfusion.SfNavigationDrawer.XForms;
+using Xamarin.Forms;
 
 namespace Sanaap.App.Controls.ViewModels
 {
     public class MenuViewModelLocator
     {
-        public MenuViewModel MenuViewModel => ((App)Xamarin.Forms.Application.Current).Container.Resolve<MenuViewModel>();
+        public MenuViewModel MenuViewModel => ((App)Application.Current).Container.Resolve<MenuViewModel>();
     }
 
-    public class MenuViewModel : BitViewModelBase
+    [AddINotifyPropertyChangedInterface]
+    public class MenuViewModel
     {
         public BitDelegateCommand<string> GoToPage { get; set; }
 
@@ -21,31 +22,34 @@ namespace Sanaap.App.Controls.ViewModels
 
         public BitDelegateCommand GoBack { get; set; }
 
-        public SfNavigationDrawer NavigationDrawer { get; set; }
-
-        public MenuViewModel( ISecurityService securityService)
+        public MenuViewModel(ISecurityService securityService, INavService navService)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
-
-                NavigationDrawer.ToggleDrawer();
-                await NavigationService.NavigateAsync(page);
+                //NavigationDrawer.ToggleDrawer();
+                await navService.NavigateAsync(page);
             });
 
             Logout = new BitDelegateCommand(async () =>
             {
-                NavigationDrawer.ToggleDrawer();
+                //NavigationDrawer.ToggleDrawer();
                 await securityService.Logout();
-                await NavigationService.NavigateAsync($"/{nameof(LoginView)}");
+                await navService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(LoginView)}");
             });
 
             GoBack = new BitDelegateCommand(async () =>
               {
-                  NavigationDrawer.ToggleDrawer();
-                  await NavigationService.GoBackAsync();
+
+                  //NavigationDrawer.ToggleDrawer();
+                  await navService.GoBackAsync();
               });
 
         }
         public BitDelegateCommand Submit { get; set; }
+
+        public void Dispose()
+        {
+
+        }
     }
 }

@@ -1,11 +1,8 @@
-﻿using Sanaap.App.Controls.ViewModels;
-using Syncfusion.SfNavigationDrawer.XForms;
+﻿using Syncfusion.SfNavigationDrawer.XForms;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Controls
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuView : ContentView
     {
         public MenuView()
@@ -13,18 +10,11 @@ namespace Sanaap.App.Controls
             InitializeComponent();
         }
 
+        public static BindableProperty TypeProperty = BindableProperty.Create(nameof(NavigationDrawer), typeof(SfNavigationDrawer), typeof(ContentPage), null, BindingMode.TwoWay);
         public SfNavigationDrawer NavigationDrawer
         {
             get => (SfNavigationDrawer)GetValue(TypeProperty);
-            set
-            {
-                SetValue(TypeProperty, value);
-
-                ((MenuViewModel)BindingContext).NavigationDrawer = value;
-            }
+            set => SetValue(TypeProperty, value);
         }
-
-        public static readonly BindableProperty TypeProperty =
-            BindableProperty.Create("NavigationDrawer", typeof(SfNavigationDrawer), typeof(SfNavigationDrawer), null);
     }
 }

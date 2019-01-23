@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\SanaapComboBoxRenderer.cs" />
     <Compile Include="CustomRenderers\SanaapEntryRenderer.cs" />
+    <Compile Include="CustomRenderers\SanaapNavigationPageRenderer.cs" />
     <Compile Include="Helpers\AndroidAppUtilities.cs" />
     <Compile Include="Implementations\DroidRoutingService.cs" />
     <Compile Include="MainActivity.cs" />

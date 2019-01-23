@@ -60,7 +60,7 @@ namespace Sanaap.App.ViewModels
 
             GoToMain = new BitDelegateCommand(async () =>
             {
-                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
             });
 
             Call = new BitDelegateCommand(async () =>
@@ -104,13 +104,13 @@ namespace Sanaap.App.ViewModels
             }
             catch (Exception ex)
             {
-                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertError, ErrorMessages.Ok);
             }
 
             if (result == "NotResult")
             {
-                await NavigationService.NavigateAsync($"/{nameof(MainView)}");
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
                 await _pageDialogService.DisplayAlertAsync("", ConstantStrings.FindNearExpertNotResult, ErrorMessages.Ok);
                 return;
             }
