@@ -53,7 +53,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DarkBlue">
+        <StackLayout BackgroundColor="{StaticResource primaryBlue}">
             
 
             <Grid FlowDirection="RightToLeft" Margin="0,100,0,-100">
