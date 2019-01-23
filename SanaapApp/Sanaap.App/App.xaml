@@ -22,7 +22,7 @@
 
             <Color x:Key="primaryGray">#bfbfbf</Color>
             <Color x:Key="primaryBlue">#183fd8</Color>
-            <Color x:Key="primaryBackGround">#ffffff</Color>
+            <Color x:Key="primaryBackground">#ffffff</Color>
             <Color x:Key="textBorderColor">#f3f3f3</Color>
             <Color x:Key="textPlaceholderColor">#b3b3b3</Color>
             <Color x:Key="buttonBlue">#183dd3</Color>
@@ -32,6 +32,7 @@
             <Color x:Key="popupPositionFramColor">#393939</Color>
             <Color x:Key="blueText">#2a4ac5</Color>
             <Color x:Key="lightBlueText">#0096ca</Color>
+            <Color x:Key="placeHolderColor">#b3b3b3</Color>
 
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="15"/>
