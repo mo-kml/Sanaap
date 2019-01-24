@@ -9,7 +9,6 @@
              BackgroundColor="{StaticResource primaryBackground}">
 
     <ContentPage.Resources>
-        <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
 
         <Style TargetType="Button" x:Key="globalButtonStyle">
             <Setter Property="Margin" Value="30,0,30,10"/>
@@ -55,7 +54,7 @@
             </StackLayout>
         </navigationdrawer:SfNavigationDrawer.ContentView>
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-            <insurancePopup:InsuranceListPopupView BindingContext="{Binding InsuranceListPopupViewModel,Source={StaticResource insuranceListPopupViewModelLocator}}"/>
+            <insurancePopup:InsuranceListPopupView/>
         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
     </navigationdrawer:SfNavigationDrawer>
 </ContentPage>

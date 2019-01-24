@@ -1,30 +1,34 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Bit.ViewModel.Contracts;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Navigation;
+using PropertyChanged;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels.Insurance
 {
     public class InsuranceListPopupViewModelLocator
     {
-        public InsuranceListPopupViewModel InsuranceListPopupViewModel => ((App)Xamarin.Forms.Application.Current).Container.Resolve<InsuranceListPopupViewModel>();
+        public InsuranceListPopupViewModel InsuranceListPopupViewModel => ((App)Application.Current).Container.Resolve<InsuranceListPopupViewModel>();
     }
-    public class InsuranceListPopupViewModel : BitViewModelBase, IDisposable
+
+    [AddINotifyPropertyChangedInterface]
+    public class InsuranceListPopupViewModel
     {
         private readonly IPolicyService _policyService;
         private readonly IUserDialogs _userDialogs;
         private readonly SubscriptionToken SubscriptionToken;
-        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs)
+        public InsuranceListPopupViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, INavService navService)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
@@ -47,26 +51,29 @@ namespace Sanaap.App.ViewModels.Insurance
             {
                 eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
 
-                await NavigationService.NavigateAsync(nameof(EvaluationRequestView), new NavigationParameters {
+                await navService.NavigateAsync(nameof(EvaluationRequestView), new NavigationParameters {
                     { "Insurance",policy},
                     {nameof(EvlRequestItemSource),_request }
                 });
             });
+
+            Test = new BitDelegateCommand(async () =>
+              {
+
+              });
         }
         public ObservableCollection<PolicyItemSource> Insurances { get; set; }
 
         public BitDelegateCommand<PolicyItemSource> SelectPolicy { get; set; }
 
-        public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
+        public BitDelegateCommand Test { get; set; }
 
-        public void Dispose()
-        {
-            SubscriptionToken.Dispose();
-        }
+        public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
 
         public async Task loadInsurances()
         {
-            Insurances = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurances());
+            System.Collections.Generic.List<PolicyItemSource> insurances = await _policyService.LoadAllInsurances();
+            Insurances = new ObservableCollection<PolicyItemSource>(insurances);
         }
     }
 }

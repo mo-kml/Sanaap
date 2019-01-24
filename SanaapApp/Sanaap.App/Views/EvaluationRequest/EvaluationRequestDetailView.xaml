@@ -12,7 +12,7 @@
     xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
     x:Name="requestDetailView"
-    Padding="30,120,30,120"
+    Padding="30,40,30,40"
     HasSystemPadding="True"
     SystemPaddingSides="All">
     <popup:PopupPage.Animation>
