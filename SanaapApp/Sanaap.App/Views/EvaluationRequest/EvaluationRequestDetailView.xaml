@@ -9,7 +9,6 @@
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
     x:Name="requestDetailView"
     Padding="30,40,30,40"
@@ -49,7 +48,7 @@
         </Style>
 
     </popup:PopupPage.Resources>
-    
+
     <popup:PopupPage.Content>
 
         <Frame CornerRadius="10">
@@ -157,7 +156,7 @@
                             <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
                             <Label Text="نام خودرو" />
-                            <syncCombobox:SfComboBox
+                            <controls:SanaapComboBox
                         AllowFiltering="True"
                         DataSource="{Binding Cars}"
                         DisplayMemberPath="Name"

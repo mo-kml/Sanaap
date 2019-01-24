@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:combo="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
@@ -14,8 +13,10 @@
     <ContentPage.Content>
 
         <StackLayout Padding="10,20">
+            <!--<combo:SfComboBox DataSource="{Binding Items}"/>-->
+            <controls:SanaapComboBox Text="دسته بندی" DataSource="{Binding Items}" DisplayMemberPath="Text"/>
 
-            <bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
+            <!--<bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
                 SelectedColor="{StaticResource primaryBlue}"
                 TodayColor="{StaticResource primaryBlue}"
                 FontFamily="{StaticResource Vazir-Light-FD-WOLFont}"
@@ -51,7 +52,7 @@
                         </Frame>
                     </ControlTemplate>
                 </bitControls:BitDatePicker.ControlTemplate>
-            </bitControls:BitDatePicker>
+            </bitControls:BitDatePicker>-->
 
         </StackLayout>
     </ContentPage.Content>

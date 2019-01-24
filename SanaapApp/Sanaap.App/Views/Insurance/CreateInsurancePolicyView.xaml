@@ -6,74 +6,73 @@
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-    xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     NavigationPage.HasNavigationBar="False"
     x:Name="createInsuranceView">
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout>
 
-                <Label Text="افزودن بیمه نامه" Style="{StaticResource headerText}"/>
-                <Label Text="متنی برای زیر عنوان" Style="{StaticResource subHeaderText}" Margin="0,-15,0,0"/>
+        <Label Text="افزودن بیمه نامه" Style="{StaticResource headerText}"/>
+        <Label Text="متنی برای زیر عنوان" Style="{StaticResource subHeaderText}" Margin="0,-15,0,0"/>
 
-                <Label Text="نام خودرو" />
-                <syncCombobox:SfComboBox
-            AllowFiltering="True"
-            DataSource="{Binding Cars}"
-            DisplayMemberPath="Name"
-            IsEditableMode="True"
-            SelectedItem="{Binding SelectedCar}" />
+        <Label Text="نام خودرو" />
+        <controls:SanaapComboBox
+    AllowFiltering="True"
+      DataSource="{Binding Cars}"
+      DisplayMemberPath="Name"
+      IsEditableMode="True"
+      SelectedItem="{Binding SelectedCar}" />
 
-                <Label Text="رنگ خودرو" />
-                <syncCombobox:SfComboBox
-            AllowFiltering="True"
-            DataSource="{Binding Colors}"
-            DisplayMemberPath="Name"
-            IsEditableMode="True"
-            SelectedItem="{Binding SelectedColor}" />
+        <Label Text="رنگ خودرو" />
+        <controls:SanaapComboBox
+    AllowFiltering="True"
+      DataSource="{Binding Colors}"
+      DisplayMemberPath="Name"
+      IsEditableMode="True"
+      SelectedItem="{Binding SelectedColor}" />
 
-                <!--<Label Text="شماره شاسی" />-->
-                <controls:SanaapEntry Text="{Binding Policy.ChasisNo}" Placeholder="شماره شاسی" />
+        <!--<Label Text="شماره شاسی" />-->
+        <controls:SanaapEntry Text="{Binding Policy.ChasisNo}" Placeholder="شماره شاسی" />
 
-                <!--<Label Text="شماره VIN" />-->
-                <controls:SanaapEntry Text="{Binding Policy.VIN}" Placeholder="شماره VIN"/>
+        <!--<Label Text="شماره VIN" />-->
+        <controls:SanaapEntry Text="{Binding Policy.VIN}" Placeholder="شماره VIN"/>
 
-                <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" >
-                    <Label  Text="بیمه" WidthRequest="50" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+        <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" >
+          <Label  Text="بیمه" WidthRequest="50" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
-                    <syncfusion:SfListView Orientation="Horizontal"  ItemsSource="{Binding Insurers}" HeightRequest="80" ItemSize="80" ItemSpacing="10,0,0,0">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
+          <syncfusion:SfListView Orientation="Horizontal"  ItemsSource="{Binding Insurers}" HeightRequest="80" ItemSize="80" ItemSpacing="10,0,0,0">
+            <syncfusion:SfListView.ItemTemplate>
+              <DataTemplate>
 
-                                <Frame BorderColor="Black" CornerRadius="5" >
-                                    <StackLayout >
+                <Frame BorderColor="Black" CornerRadius="5" >
+                  <StackLayout >
 
-                                        <StackLayout.Triggers>
-                                            <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="False">
-                                                <Setter Property="BackgroundColor" Value="White"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="StackLayout"
-                                                 Binding="{Binding IsSelected}" Value="True">
-                                                <Setter Property="BackgroundColor" Value="Gray"/>
-                                            </DataTrigger>
-                                        </StackLayout.Triggers>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference createInsuranceView}}" CommandParameter="{Binding .}"/>
-                                        </StackLayout.GestureRecognizers>
+                    <StackLayout.Triggers>
+                      <DataTrigger TargetType="StackLayout"
+                           Binding="{Binding IsSelected}" Value="False">
+                        <Setter Property="BackgroundColor" Value="White"/>
+                      </DataTrigger>
+                      <DataTrigger TargetType="StackLayout"
+                           Binding="{Binding IsSelected}" Value="True">
+                        <Setter Property="BackgroundColor" Value="Gray"/>
+                      </DataTrigger>
+                    </StackLayout.Triggers>
+                    <StackLayout.GestureRecognizers>
+                      <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference createInsuranceView}}" CommandParameter="{Binding .}"/>
+                    </StackLayout.GestureRecognizers>
 
-                                        <Image BackgroundColor="Gray" VerticalOptions="StartAndExpand" Source="{Binding Image}" Aspect="AspectFill" HeightRequest="80" Margin="-20,-20,-20,-40"/>
+                    <Image BackgroundColor="Gray" VerticalOptions="StartAndExpand" Source="{Binding Image}" Aspect="AspectFill" HeightRequest="80" Margin="-20,-20,-20,-40"/>
 
 
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>
+                  </StackLayout>
+                </Frame>
+              </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+          </syncfusion:SfListView>
 
-                    <!--Prev ListView-->
+          <!--Prev ListView-->
 
-                    <!--<syncfusion:SfListView Orientation="Horizontal" HeightRequest="100" ItemsSource="{Binding Insurers}" >
+          <!--<syncfusion:SfListView Orientation="Horizontal" HeightRequest="100" ItemsSource="{Binding Insurers}" >
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
@@ -97,23 +96,23 @@
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>-->
 
-                    <!--Prev ListView-->
+          <!--Prev ListView-->
 
-                </StackLayout>
-                <!--<Label Text="شماره بیمه نامه" />-->
-                <controls:SanaapEntry Text="{Binding Policy.InsurerNo}" Placeholder="شماره بیمه نامه" />
+        </StackLayout>
+        <!--<Label Text="شماره بیمه نامه" />-->
+        <controls:SanaapEntry Text="{Binding Policy.InsurerNo}" Placeholder="شماره بیمه نامه" />
 
-                <!--<Label Text="پلاک" />-->
-                <controls:SanaapEntry Text="{Binding Policy.PlateNumber}" Placeholder="پلاک" />
+        <!--<Label Text="پلاک" />-->
+        <controls:SanaapEntry Text="{Binding Policy.PlateNumber}" Placeholder="پلاک" />
 
-                <Label Text="نوع بیمه نامه" />
-                <syncCombobox:SfComboBox
-            DataSource="{Binding InsuranceTypes}"
-            DisplayMemberPath="InsuranceTypeName"
-            SelectedItem="{Binding SelectedInsuranceType}" />
+        <Label Text="نوع بیمه نامه" />
+        <controls:SanaapComboBox
+    DataSource="{Binding InsuranceTypes}"
+    DisplayMemberPath="InsuranceTypeName"
+    SelectedItem="{Binding SelectedInsuranceType}" />
 
-                <Button Command="{Binding Submit}" Text="{Binding SubmitButtonText}" Margin="-40,0,-40,0" />
-            </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+        <Button Command="{Binding Submit}" Text="{Binding SubmitButtonText}" Margin="-40,0,-40,0" />
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
 </ContentPage>

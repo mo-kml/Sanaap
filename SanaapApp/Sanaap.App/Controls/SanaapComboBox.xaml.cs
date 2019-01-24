@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Controls
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SanaapComboBox : ContentView
+    [ContentProperty(nameof(Content))]
+    public partial class SanaapComboBox : TemplatedView
     {
         public SanaapComboBox()
         {
             InitializeComponent();
         }
 
-        private void ToggleMenu(object sender, System.EventArgs e)
-        {
-            //combobox.IsDropDownOpen = true;
-        }
+        public virtual View Content { get; set; }
 
         public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#e2e2e2"), BindingMode.TwoWay);
         public Color BorderColor
