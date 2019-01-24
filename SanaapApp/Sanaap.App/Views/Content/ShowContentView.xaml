@@ -7,9 +7,10 @@
     <ContentPage.Content>
         <!--<AbsoluteLayout>-->
 
-            <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
-                <StackLayout>
+        <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
+            <StackLayout>
                 <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="200"/>
+
                 <!---->
                     <Grid Margin="10,10,20,10">
                         <Grid.ColumnDefinitions>
@@ -45,7 +46,12 @@
                 <!---->
                 <BoxView HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="350" Margin="10,0,0,0" HeightRequest="1" />
 
-                <Label Margin="30,10,30,0" Text="{Binding Content.Text}"/>
+                <WebView BackgroundColor="Red" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowDirection="RightToLeft">
+                    <WebView.Source>
+                        <HtmlWebViewSource Html="{Binding Content.Text}"/>
+                    </WebView.Source>
+                </WebView>
+
                 <!---->
             </StackLayout>
 
@@ -62,6 +68,6 @@
                 <local:IconButton Type="Solid" Text="&#xf004;" Command="{Binding Like}"/>
                 <local:IconButton Type="Solid" Text="&#xf064;" Command="{Binding Share}"/>
             </StackLayout>-->
-        <!--</AbsoluteLayout>-->
+                <!--</AbsoluteLayout>-->
     </ContentPage.Content>
 </ContentPage>

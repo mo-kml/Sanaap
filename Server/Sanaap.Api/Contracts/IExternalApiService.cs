@@ -1,4 +1,5 @@
 ﻿using Sanaap.Dto;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,10 @@ namespace Sanaap.Api.Contracts
         Task<IEnumerable<ExternalEntityDto>> GetCars();
 
         Task<IEnumerable<InsurerDto>> GetInsurers();
+
+        Task<IEnumerable<ContentDto>> GetNews();
+
+        Task<ContentDto> GetNewsById(int id, Guid userId);
 
     }
 }

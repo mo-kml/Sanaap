@@ -1,9 +1,9 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
-using Sanaap.Dto;
+using Sanaap.App.ItemSources;
+using Sanaap.App.Services.Contracts;
 using Simple.OData.Client;
-using System;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.Content
@@ -12,31 +12,32 @@ namespace Sanaap.App.ViewModels.Content
     {
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
-        public ShowContentViewModel(IODataClient oDataClient, IUserDialogs userDialogs)
+        private readonly INewsService _newsService;
+        public ShowContentViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INewsService newsService)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
+            _newsService = newsService;
         }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            Guid contentId;
+            int newsId;
 
-            parameters.TryGetValue("ContentId", out contentId);
+            parameters.TryGetValue("NewsId", out newsId);
 
             using (_userDialogs.Loading())
             {
-                await loadContent(contentId);
+                await loadContent(newsId);
             }
         }
 
-        public async Task loadContent(Guid contentId)
+        public async Task loadContent(int newsId)
         {
-            Content = await _oDataClient.For<ContentDto>("Contents")
-                    .Key(contentId)
-                    .FindEntryAsync();
+            Content = await _newsService.GetNewsById(newsId);
         }
-        public ContentDto Content { get; set; }
+
+        public NewsItemSource Content { get; set; }
 
 
     }
