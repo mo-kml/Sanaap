@@ -4,7 +4,8 @@
              x:Class="Sanaap.App.Controls.SanaapComboBox"
              xmlns:control="clr-namespace:Sanaap.App.Controls"
              xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-             x:Name="sanaapComboBox">
+             x:Name="sanaapComboBox"
+               FlowDirection="LeftToRight">
     <TemplatedView.Resources>
         <Style TargetType="control:SanaapComboBox">
             <Setter Property="ControlTemplate">
