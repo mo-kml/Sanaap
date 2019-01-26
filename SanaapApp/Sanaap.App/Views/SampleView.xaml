@@ -14,7 +14,7 @@
 
         <StackLayout Padding="10,20">
             <!--<combo:SfComboBox DataSource="{Binding Items}"/>-->
-            <controls:SanaapComboBox Text="دسته بندی" DataSource="{Binding Items}" DisplayMemberPath="Text"/>
+            <controls:SanaapComboBox Text="دسته بندی" AllowFiltering="True" IsEditableMode="True" DataSource="{Binding Items}" DisplayMemberPath="Text"/>
 
             <!--<bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
                 SelectedColor="{StaticResource primaryBlue}"
