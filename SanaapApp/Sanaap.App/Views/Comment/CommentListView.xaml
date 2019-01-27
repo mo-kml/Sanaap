@@ -71,13 +71,13 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button Text="ثبت پیام یا شکایت جدید +" Clicked="OpenDrawer" AbsoluteLayout.LayoutBounds="0,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Navy"/>
+                    <Button Text="ثبت پیام یا شکایت جدید +" Clicked="OpenDrawer" AbsoluteLayout.LayoutBounds=".5,.98,.9,.08" BorderRadius="10" AbsoluteLayout.LayoutFlags="All" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}"/>
                 </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <StackLayout>
+                <StackLayout BackgroundColor="{StaticResource primaryBackground}" FlowDirection="RightToLeft">
                     <Label Text="ثبت پیام یا شکایت جدید" Margin="10,0,5,0" Style="{StaticResource headerText}"/>
-                    <Label Text="متنی برای زیر عنوان" Margin="10,-15,5,0" Style="{StaticResource subHeaderText}"/>
+                    <Label Text="متنی برای زیر عنوان" Margin="10,-6,5,0" Style="{StaticResource subHeaderText}"/>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -90,25 +90,25 @@
                             <!--<RowDefinition Height="*"/>-->
                         </Grid.RowDefinitions>
 
-                        <controls:SanaapEntry Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="5,0,5,0"/>
+                        <controls:SanaapEntry Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="7,0,7,5"/>
                         <!--<Label Text="نام" Grid.Column="1"/>-->
 
-                        <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Column="1" Padding="5,0,5,0" Placeholder="نام خانوادگی"/>
+                        <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Column="1" Padding="7,0,7,5" Placeholder="نام خانوادگی"/>
                         <!--<Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>-->
 
-                        <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Grid.ColumnSpan="2" Text="{Binding Comment.Mobile}" Padding="5,0,5,0" Placeholder="شماره تماس" Grid.Row="1"/>
+                        <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Grid.ColumnSpan="2" Text="{Binding Comment.Mobile}" Padding="7,0,4,5" Placeholder="شماره تماس" Grid.Row="1"/>
                         <!--<Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>-->
 
 
 
                     </Grid>
 
-                    <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن شکایت / پیشنهاد" HeightRequest="100" Padding="5,0,5,0" />
+                    <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن شکایت / پیشنهاد" HeightRequest="100" Padding="7,0,7,5" />
                     <!--<Label Text="متن شکایت/ پیشنهاد"/>-->
 
-                    <controls:SanaapComboBox DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="5,0,5,0" IsEditableMode="False" />
+                    <controls:SanaapComboBox HeightRequest="40" Text="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="7,0,7,5" IsEditableMode="False" />
 
-                    <Button Text="ثبت" Command="{Binding CreateComment}" Margin="-40,0,-40,0"/>
+                    <Button Text="ثبت" TextColor="{StaticResource buttonTextWhite}" Command="{Binding CreateComment}" HeightRequest="50" BackgroundColor="{StaticResource primaryBlue}" Margin="-5,0,-5,0"/>
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
