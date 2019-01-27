@@ -8,20 +8,21 @@ namespace Sanaap.App.ViewModels
     {
         public SampleViewModel()
         {
-            Items = new ObservableCollection<Test>(
-                new List<Test>
-                {
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
-                }
-                );
+            Policies.Add(new Test
+            {
+                CarName = "پژو",
+                ColorName = "صولتی",
+                InsuranceTypeName = "بیمه ایران",
+                InsImage = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"
+            });
         }
-        public ObservableCollection<Test> Items { get; set; }
+        public ObservableCollection<Test> Policies { get; set; } = new ObservableCollection<Test>();
     }
     public class Test
     {
-        public string Text { get; set; }
+        public string CarName { get; set; }
+        public string ColorName { get; set; }
+        public string InsuranceTypeName { get; set; }
+        public string InsImage { get; set; }
     }
 }

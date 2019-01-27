@@ -65,15 +65,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            }
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestView)}");
+            //}
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(InsurancePolicyListView)}");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -103,7 +103,8 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<CreateCommentView, CreateCommentViewModel>();
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
-            containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
+            //InsurancePolicyListViewModel
+            containerRegistry.RegisterForNav<InsurancePolicyListView, SampleViewModel>();
             //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
             //
