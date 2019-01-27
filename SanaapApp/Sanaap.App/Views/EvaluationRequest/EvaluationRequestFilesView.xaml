@@ -46,7 +46,7 @@
         </Style>
 
     </popup:PopupPage.Resources>
-    <navigationdrawer:SfNavigationDrawer DrawerHeight="150" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+    <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="150" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
         <navigationdrawer:SfNavigationDrawer.ContentView>
             <Frame CornerRadius="10">
 

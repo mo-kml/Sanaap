@@ -143,7 +143,6 @@ namespace Sanaap.App
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<IInitialDataService, InitialDataService>();
-            containerRegistry.RegisterSingleton<IPhotoHelper, PhotoHelper>();
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 

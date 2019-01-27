@@ -9,7 +9,6 @@ using Prism.Services;
 using Sanaap.App.Controls;
 using Sanaap.App.Dto;
 using Sanaap.App.Events;
-using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Views;
 using Sanaap.Constants;
@@ -51,7 +50,6 @@ namespace Sanaap.App.ViewModels
             IODataClient oDataClient,
             IUserDialogs userDialogs,
             IPageDialogService dialogService,
-            IPhotoHelper photoHelper,
             IClientAppProfile clientApp,
             IEventAggregator eventAggregator,
             ISecurityService securityService)
