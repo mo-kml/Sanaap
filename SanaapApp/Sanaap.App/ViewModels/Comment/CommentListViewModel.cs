@@ -1,17 +1,17 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
-using Sanaap.App.Views.Comment;
+using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
+using Sanaap.Service.Contracts;
 using Simple.OData.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.Comment
@@ -20,22 +20,49 @@ namespace Sanaap.App.ViewModels.Comment
     {
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
+        private readonly ICommentValidator _commentValidator;
+        private ICommentService _commentService;
         public CommentListViewModel(IODataClient oDataClient,
-            
+            ICommentValidator commentValidator,
+            ISanaapAppTranslateService translateService,
             IUserDialogs userDialogs,
+            ICommentService commentService,
             IPageDialogService pageDialogService)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
+            _commentService = commentService;
+
+            CommentTypes = EnumHelper<CommentType>.GetDisplayValues(CommentType.Complaint);
+
+            SelectedCommentType = CommentTypes[1];
 
             CreateComment = new BitDelegateCommand(async () =>
             {
-                await NavigationService.NavigateAsync(nameof(CreateCommentView));
+                submitCancellationTokenSource?.Cancel();
+                submitCancellationTokenSource = new CancellationTokenSource();
+
+                using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: submitCancellationTokenSource.Cancel))
+                {
+                    Comment.CommentType = (CommentType)CommentTypes.IndexOf(SelectedCommentType);
+
+                    if (!commentValidator.IsValid(Comment, out string errorMessage))
+                    {
+                        await pageDialogService.DisplayAlertAsync(string.Empty, translateService.Translate(errorMessage), ConstantStrings.Ok);
+                        return;
+                    }
+
+                    Comment = await commentService.AddAsync(Comment);
+
+                    await pageDialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
+
+                    await NavigationService.GoBackAsync();
+                }
             });
 
             ShowComment = new BitDelegateCommand<CommentItemSource>(async (comment) =>
               {
-                  await pageDialogService.DisplayAlertAsync("", string.IsNullOrEmpty(comment.Answer) ? "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است" : comment.Answer, "باشه");
+                  await pageDialogService.DisplayAlertAsync(string.Empty, string.IsNullOrEmpty(comment.Answer) ? ConstantStrings.ResponseNotFoundFromSupport : comment.Answer, ConstantStrings.Ok);
               });
         }
 
@@ -52,29 +79,22 @@ namespace Sanaap.App.ViewModels.Comment
 
         public BitDelegateCommand<CommentItemSource> ShowComment { get; set; }
 
+        public List<string> CommentTypes { get; set; }
+
+        public CommentDto Comment { get; set; } = new CommentDto();
+
+
+        private CancellationTokenSource submitCancellationTokenSource;
+
+        public string SelectedCommentType { get; set; }
+
         public async Task loadComments()
         {
-            IEnumerable<CommentDto> comments = (await _oDataClient.For<CommentDto>("Comments")
-                .Function("LoadComments")
-                .OrderBy(it => it.CreatedOn)
-                .FindEntriesAsync());
+            IEnumerable<CommentItemSource> comments = await _commentService.LoadComments();
 
             if (comments != null)
             {
-                Comments = new ObservableCollection<CommentItemSource>(comments.Select(c => new CommentItemSource
-                {
-                    Answer = c.Answer,
-                    AnswerTime = c.AnswerTime,
-                    CommentType = c.CommentType,
-                    CreatedOn = c.CreatedOn,
-                    Description = c.Description,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    Id = c.Id,
-                    Mobile = c.Mobile,
-                    StatusType = c.StatusType,
-                    Code = c.Code
-                }));
+                Comments = new ObservableCollection<CommentItemSource>(comments);
             }
         }
     }

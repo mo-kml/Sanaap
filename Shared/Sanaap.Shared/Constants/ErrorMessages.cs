@@ -24,6 +24,7 @@
         public static string SuccessfulProcess = "عملیات با موفقیت انجام شد";
         public static string SanapLogin = "sanapLogin";
         public static string RequestDosentExist = "درخواست وارد شده وجود ندارد لطفا دوباره تلاش کنید";
+        public static string ResponseNotFoundFromSupport = "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است";
     }
 
     public class EnumDisplayNames
