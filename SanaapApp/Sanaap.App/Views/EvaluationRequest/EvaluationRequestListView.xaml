@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
 
     <ContentPage.Resources>
@@ -34,48 +35,65 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" 
+        <navigationdrawer:SfNavigationDrawer DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <StackLayout>
+                    <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
+                        <ListView.Behaviors>
+                            <b:EventToCommandBehavior EventName="ItemTapped" 
                                               EventArgsParameterPath="Item" 
                                               Command="{Binding ShowRequestProgress}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Margin="5,10,5,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="1"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="100*"/>
-                                </Grid.ColumnDefinitions>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Margin="5,10,5,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="1"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
 
-                                <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
-                                <Label Text="{Binding RequestId}" Grid.Row="1" HorizontalOptions="Center" Style="{StaticResource NegMargin}"/>
-                                <BoxView Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource PipeBoxView}"/>
-                                <Image Grid.RowSpan="2" Grid.Column="2" Aspect="AspectFill" Source="{Binding Image}" />
-                                <Label Grid.Column="3" Text="پرونده" />
-                                <Label Grid.Column="3" Grid.Row="1" Text="{Binding RequestTypeName}" Style="{StaticResource NegMHL}"/>
-                                <Label Grid.Column="3" Grid.Row="1"/>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Column="4" Grid.Row="1">
-                                    <Label Text="تاریخ ثبت" Style="{StaticResource NegMargin}"/>
-                                    <Label Text="{Binding Date}" Style="{StaticResource NegMargin}"/>
-                                </StackLayout>
+                                        <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
+                                        <Label Text="{Binding RequestId}" Grid.Row="1" HorizontalOptions="Center" Style="{StaticResource NegMargin}"/>
+                                        <BoxView Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource PipeBoxView}"/>
+                                        <Image Grid.RowSpan="2" Grid.Column="2" Aspect="AspectFill" Source="{Binding Image}" />
+                                        <Label Grid.Column="3" Text="پرونده" />
+                                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding RequestTypeName}" Style="{StaticResource NegMHL}"/>
+                                        <Label Grid.Column="3" Grid.Row="1"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Column="4" Grid.Row="1">
+                                            <Label Text="تاریخ ثبت" Style="{StaticResource NegMargin}"/>
+                                            <Label Text="{Binding Date}" Style="{StaticResource NegMargin}"/>
+                                        </StackLayout>
 
 
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Button Text="استعلام پرونده" Clicked="InquiryDocument"/>
+                </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="خودرو"/>
+                        <Button Text="درمان"/>
+                        <Button Text="اموال"/>
+                    </StackLayout>
+                    <Entry Keyboard="Numeric" Text="{Binding DocumentNumber}" Placeholder="شماره پرونده"/>
+                    <Button Text="استعلام" Command="{Binding Inquiry}"/>
+                </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>

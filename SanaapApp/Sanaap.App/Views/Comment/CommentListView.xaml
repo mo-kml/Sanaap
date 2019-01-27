@@ -2,73 +2,115 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.Comment.CommentListView"
-             ControlTemplate="{StaticResource masterTemplate}">
+             xmlns:controls="clr-namespace:Sanaap.App.Controls">
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <ListView HasUnevenRows="True" ItemsSource="{Binding Comments}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" 
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <AbsoluteLayout>
+                    <ListView HasUnevenRows="True" ItemsSource="{Binding Comments}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <ListView.Behaviors>
+                            <b:EventToCommandBehavior EventName="ItemTapped" 
                                               EventArgsParameterPath="Item" 
                                               Command="{Binding ShowComment}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10,10,10,10">
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="75"/>
-                                        <ColumnDefinition Width="5"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="5"/>
-                                        <ColumnDefinition Width="100*"/>
-                                        <ColumnDefinition Width="150"/>
-                                    </Grid.ColumnDefinitions>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="10,10,10,10">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="75"/>
+                                                <ColumnDefinition Width="5"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="5"/>
+                                                <ColumnDefinition Width="100*"/>
+                                                <ColumnDefinition Width="150"/>
+                                            </Grid.ColumnDefinitions>
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="17"/>
-                                        <RowDefinition Height="20*"/>
-                                    </Grid.RowDefinitions>
-
-
-                                    <Label  Text="کد پیگیری" FontSize="12"  HorizontalOptions="Center" Grid.Column="0"/>
-
-                                    <Label Text="{Binding Code}" FontSize="12" Margin="0,-5,0,0" TextColor="Black" Grid.Column="0" HorizontalOptions="Center" FontAttributes="Bold" Grid.Row="1"/>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="17"/>
+                                                <RowDefinition Height="20*"/>
+                                            </Grid.RowDefinitions>
 
 
-                                    <BoxView Margin="0,7,0,7"  WidthRequest="1" Grid.Column="2" Grid.RowSpan="2"  BackgroundColor="Gray"  />
+                                            <Label  Text="کد پیگیری" FontSize="12"  HorizontalOptions="Center" Grid.Column="0"/>
+
+                                            <Label Text="{Binding Code}" FontSize="12" Margin="0,-5,0,0" TextColor="Black" Grid.Column="0" HorizontalOptions="Center" FontAttributes="Bold" Grid.Row="1"/>
+
+
+                                            <BoxView Margin="0,7,0,7"  WidthRequest="1" Grid.Column="2" Grid.RowSpan="2"  BackgroundColor="Gray"  />
 
 
 
-                                    <Label  Text="وضعیت" Grid.Column="4"/>
+                                            <Label  Text="وضعیت" Grid.Column="4"/>
 
-                                    <Label  Text="{Binding StatusTypeName}" Margin="0,-5,0,0" Grid.Column="4" TextColor="Black" FontSize="15" FontAttributes="Bold" Grid.Row="1">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label"
+                                            <Label  Text="{Binding StatusTypeName}" Margin="0,-5,0,0" Grid.Column="4" TextColor="Black" FontSize="15" FontAttributes="Bold" Grid.Row="1">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
                                                      Binding="{Binding StatusTypeName}"
                                                      Value="پاسخ داده شد">
-                                                <Setter Property="TextColor" Value="Navy"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
+                                                        <Setter Property="TextColor" Value="Navy"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
 
 
-                                    <StackLayout Orientation="Horizontal" Grid.Column="5" Margin="0,-7,0,0" HorizontalOptions="End"  Padding="2,5,0,0" Grid.Row="1">
+                                            <StackLayout Orientation="Horizontal" Grid.Column="5" Margin="0,-7,0,0" HorizontalOptions="End"  Padding="2,5,0,0" Grid.Row="1">
 
-                                        <Label Text="تاریخ ثبت" FontSize="12"/>
+                                                <Label Text="تاریخ ثبت" FontSize="12"/>
 
-                                        <Label Text="{Binding CreatedOn,StringFormat='{0:M/d/yy}'}" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
+                                                <Label Text="{Binding CreatedOn,StringFormat='{0:M/d/yy}'}" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
 
+                                            </StackLayout>
+
+                                        </Grid>
                                     </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button Text="ثبت پیام یا شکایت جدید +" Clicked="OpenDrawer" AbsoluteLayout.LayoutBounds="0,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Navy"/>
+                </AbsoluteLayout>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <StackLayout>
+                    <Label Text="ثبت پیام یا شکایت جدید" Margin="10,0,5,0" Style="{StaticResource headerText}"/>
+                    <Label Text="متنی برای زیر عنوان" Margin="10,-15,5,0" Style="{StaticResource subHeaderText}"/>
 
-                                </Grid>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Text="ثبت پیام یا شکایت جدید +" Command="{Binding CreateComment}" AbsoluteLayout.LayoutBounds="0,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Navy"/>
-        </AbsoluteLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <!--<RowDefinition Height="*"/>-->
+                        </Grid.RowDefinitions>
+
+                        <controls:SanaapEntry Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="5,0,5,0"/>
+                        <!--<Label Text="نام" Grid.Column="1"/>-->
+
+                        <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Column="1" Padding="5,0,5,0" Placeholder="نام خانوادگی"/>
+                        <!--<Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>-->
+
+                        <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Grid.ColumnSpan="2" Text="{Binding Comment.Mobile}" Padding="5,0,5,0" Placeholder="شماره تماس" Grid.Row="1"/>
+                        <!--<Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>-->
+
+
+
+                    </Grid>
+
+                    <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن شکایت / پیشنهاد" HeightRequest="100" Padding="5,0,5,0" />
+                    <!--<Label Text="متن شکایت/ پیشنهاد"/>-->
+
+                    <controls:SanaapComboBox DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="5,0,5,0" IsEditableMode="False" />
+
+                    <Button Text="ثبت" Command="{Binding CreateComment}" Margin="-40,0,-40,0"/>
+                </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>
