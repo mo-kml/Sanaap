@@ -10,5 +10,9 @@ namespace Sanaap.App.ItemSources
         public ImageSource Image { get; set; }
 
         public string TypeName { get; set; }
+
+        public bool HasImage { get; set; }
+
+        public bool IsRequired { get; set; }
     }
 }

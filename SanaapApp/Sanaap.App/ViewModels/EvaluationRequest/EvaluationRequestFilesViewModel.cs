@@ -3,9 +3,12 @@ using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Newtonsoft.Json;
 using Plugin.Media.Abstractions;
+using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Controls;
 using Sanaap.App.Dto;
+using Sanaap.App.Events;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Views;
@@ -21,7 +24,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace Sanaap.App.ViewModels
 {
@@ -31,19 +33,27 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Submit { get; set; }
 
+        public BitDelegateCommand<EvlRequestFileItemSource> OpenPhoto { get; set; }
+
         public ObservableCollection<EvlRequestFileItemSource> Files { get; set; }
 
+        public BitDelegateCommand OpenCamera { get; set; }
+
+        public BitDelegateCommand Gallery { get; set; }
+
         public EvlRequestItemSource Request { get; set; }
+
+        private int _fileIndex;
 
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
         public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
-
             IUserDialogs userDialogs,
-            IPageDialogService pageDialogService,
+            IPageDialogService dialogService,
             IPhotoHelper photoHelper,
             IClientAppProfile clientApp,
+            IEventAggregator eventAggregator,
             ISecurityService securityService)
         {
             _oDataClient = oDataClient;
@@ -51,28 +61,79 @@ namespace Sanaap.App.ViewModels
 
             TakePhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (file) =>
             {
+
                 if (file.TypeName == "بیشتر")
                 {
                     Files.Add(new EvlRequestFileItemSource { TypeId = file.TypeId, TypeName = file.TypeName, Image = file.Image });
                 }
 
-                MediaFile mediaFile = await photoHelper.TakePhoto();
+                _fileIndex = Files.IndexOf(file);
 
-                if (mediaFile != null)
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        mediaFile.GetStream().CopyTo(ms);
-                        file.Data = ms.ToArray();
-                    }
-
-                    file.Image = ImageSource.FromStream(() => mediaFile.GetStream());
-                }
+                eventAggregator.GetEvent<TakePhotoEvent>().Publish(new TakePhotoEvent());
             });
+
+            OpenCamera = new BitDelegateCommand(async () =>
+              {
+                  eventAggregator.GetEvent<TakePhotoEvent>().Publish(new TakePhotoEvent());
+
+                  MediaFile mediaFile = await media.TakePhotoAsync(new StoreCameraMediaOptions
+                  {
+                      Directory = "Sanaap",
+                      SaveToAlbum = true,
+                      CompressionQuality = 10,
+                      CustomPhotoSize = 10,
+                      PhotoSize = PhotoSize.Medium,
+                      MaxWidthHeight = 2000,
+                      DefaultCamera = CameraDevice.Rear
+                  });
+
+                  if (mediaFile != null)
+                  {
+                      using (MemoryStream ms = new MemoryStream())
+                      {
+                          mediaFile.GetStream().CopyTo(ms);
+                          Files[_fileIndex].Data = ms.ToArray();
+                      }
+
+                      Files[_fileIndex].Image = ImageSource.FromStream(() => mediaFile.GetStream());
+                      Files[_fileIndex].HasImage = true;
+                  }
+                  else
+                  {
+                      await dialogService.DisplayAlertAsync("خطا", "تصویر انتخاب نشده است", "باشه");
+                  }
+              });
+
+            Gallery = new BitDelegateCommand(async () =>
+              {
+                  eventAggregator.GetEvent<TakePhotoEvent>().Publish(new TakePhotoEvent());
+
+                  MediaFile mediaFile = await media.PickPhotoAsync(new PickMediaOptions
+                  {
+                      PhotoSize = PhotoSize.Medium,
+                      CompressionQuality = 10,
+                  });
+
+                  if (mediaFile != null)
+                  {
+                      using (MemoryStream ms = new MemoryStream())
+                      {
+                          mediaFile.GetStream().CopyTo(ms);
+                          Files[_fileIndex].Data = ms.ToArray();
+                      }
+
+                      Files[_fileIndex].Image = ImageSource.FromStream(() => mediaFile.GetStream());
+                      Files[_fileIndex].HasImage = true;
+                  }
+                  else
+                  {
+                      await dialogService.DisplayAlertAsync("خطا", "تصویر انتخاب نشده است", "باشه");
+                  }
+              });
 
             Submit = new BitDelegateCommand(async () =>
             {
-                if (await pageDialogService.DisplayAlertAsync("مطمئن هستید؟", "درخواست ارسال شود؟", "بله", "خیر"))
+                if (await dialogService.DisplayAlertAsync("مطمئن هستید؟", "درخواست ارسال شود؟", "بله", "خیر"))
                 {
                     using (HttpClient http = new HttpClient())
                     {
@@ -112,21 +173,31 @@ namespace Sanaap.App.ViewModels
                     }
                 }
             });
+
+            OpenPhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (image) =>
+              {
+                  await NavigationService.NavigateAsync(nameof(OpenImagePopup), new NavigationParameters
+                  {
+                      {nameof(image.Image), image.Image}
+                  });
+              });
         }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            if (parameters.GetNavigationMode() == NavigationMode.New)
             {
-                Request = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
+                using (_userDialogs.Loading(ConstantStrings.Loading))
+                {
+                    //Request = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
 
-                parameters.TryGetValue(nameof(Position), out Position position);
+                    //parameters.TryGetValue(nameof(Position), out Position position);
 
-                Request.Latitude = position.Latitude;
-                Request.Longitude = position.Longitude;
+                    //Request.Latitude = position.Latitude;
+                    //Request.Longitude = position.Longitude;
 
 
-                List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
+                    List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
                 {
                     new ExternalEntityDto{Name="کارت ملی", PrmID=52},
                     new ExternalEntityDto{Name="عکس خودرو", PrmID=56},
@@ -135,19 +206,20 @@ namespace Sanaap.App.ViewModels
                     new ExternalEntityDto{Name="بیشتر", PrmID=59},
                 };
 
-                List<EvlRequestFileItemSource> files = ImageFileTypes.Select(i => new EvlRequestFileItemSource { TypeId = i.PrmID, TypeName = i.Name, Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg") }).ToList();
+                    List<EvlRequestFileItemSource> files = ImageFileTypes.Select(i => new EvlRequestFileItemSource { TypeId = i.PrmID, TypeName = i.Name, Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg") }).ToList();
 
-                Files = new ObservableCollection<EvlRequestFileItemSource>(files);
+                    Files = new ObservableCollection<EvlRequestFileItemSource>(files);
 
-                await base.OnNavigatedToAsync(parameters);
+                    await base.OnNavigatedToAsync(parameters);
+                }
             }
         }
 
         public override Task OnNavigatedFromAsync(INavigationParameters parameters)
         {
-            parameters.Add(nameof(EvlRequestItemSource), Request);
-            parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
-            parameters.Add("NextPage", "EvlRequestFile");
+            //parameters.Add(nameof(EvlRequestItemSource), Request);
+            //parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
+            //parameters.Add("NextPage", "EvlRequestFile");
             return base.OnNavigatedFromAsync(parameters);
         }
     }
