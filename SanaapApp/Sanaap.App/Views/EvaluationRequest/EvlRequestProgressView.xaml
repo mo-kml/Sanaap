@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="False"
              HasSystemPadding="True" SystemPaddingSides="All" Padding="30,50,30,50"
              FlowDirection="RightToLeft">
-
+    <Frame CornerRadius="15" BackgroundColor="White">
     <StackLayout >
         <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
 
@@ -23,4 +23,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
+    </Frame>
 </popup:PopupPage>
