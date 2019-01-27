@@ -1,10 +1,6 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Sanaap.App.Views.Insurance
+﻿namespace Sanaap.App.Views.Insurance
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateInsurancePolicyView : ContentPage
+    public partial class CreateInsurancePolicyView
     {
         public CreateInsurancePolicyView()
         {
