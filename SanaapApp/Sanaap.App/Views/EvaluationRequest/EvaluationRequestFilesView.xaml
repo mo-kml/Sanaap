@@ -142,16 +142,23 @@
                         </ScrollView>
 
                     </StackLayout>
-                    <Button Command="{Binding Submit}" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0,1.1,1.2,100" BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد"/>
-                    <Controls:IconButton Text="&#xf0e2;" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="-.2,1.103,.35,100" Type="Solid"  CornerRadius="0"/>
+                    <Button Command="{Binding Submit}" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds=".2,1.05,1.15,70" BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد"/>
+                    <Controls:IconButton Text="&#xf0e2;" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional" AbsoluteLayout.LayoutBounds="-.1,1.05,.25,70" Type="Solid"  CornerRadius="0"/>
                 </AbsoluteLayout>
             </Frame>
         </navigationdrawer:SfNavigationDrawer.ContentView>
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-            <StackLayout>
-                <Button Text="انتخاب از گالری" Command="{Binding Gallery}"/>
-                <Button Text="باز کردن دوربین" Command="{Binding OpenCamera}"/>
+            <!--<Frame CornerRadius="10" HorizontalOptions="CenterAndExpand">-->
+            <StackLayout FlowDirection="RightToLeft" BackgroundColor="{StaticResource primaryBackground}" HorizontalOptions="EndAndExpand">
+                <Label Text="بارگذاری تصاویر" Style="{StaticResource headerText}"/>
+                <Label Text="متنی برای زیر عنوان" Margin="0,-5,0,0" Style="{StaticResource subHeaderText}"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="1"/>
+                <Controls:IconButton Text="انتخاب از گالری &#xf03e;" Type="Regular"  HorizontalOptions="Start" BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Gallery}"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="1"/>
+                <Controls:IconButton Text="باز کردن دوربین &#xf030;" Type="Solid" HorizontalOptions="Start" BackgroundColor="{StaticResource primaryBackground}" Command="{Binding OpenCamera}"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="1"/>
             </StackLayout>
+            <!--</Frame>-->
         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
     </navigationdrawer:SfNavigationDrawer>
 </popup:PopupPage>
