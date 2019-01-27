@@ -1,12 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:props="clr-namespace:Sanaap.App.Props"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestExpertView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <maps:Map AbsoluteLayout.LayoutBounds="0,0,1,0.65" AbsoluteLayout.LayoutFlags="All" x:Name="map"
+                      InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="True" WidthRequest="10"
+                      VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
+
+            
+
+            <StackLayout AbsoluteLayout.LayoutBounds="0,1,1,0.35" AbsoluteLayout.LayoutFlags="All" BackgroundColor="Red">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Padding="10,40,10,10">
+                    <StackLayout>
+                        <Label Text="کارشناس محمد علی تقوی"/>
+                        <Label Text="در حال اعزام"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="کارشناس محمد علی تقوی"/>
+                        <Label Text="در حال اعزام"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Frame BackgroundColor="Green" Padding="1" Margin="10" HasShadow="True" CornerRadius="15">
+                    <Grid ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Text="لغو" BackgroundColor="Gray"/>
+                        <Button Text="تماس با کارشناس" BackgroundColor="Blue" Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+
+
+            </StackLayout>
+            
+            
+            <Image BackgroundColor="Black" Source="Sanaap.App.Images.photo.png" AbsoluteLayout.LayoutBounds="0.5,0.65,80,80" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
