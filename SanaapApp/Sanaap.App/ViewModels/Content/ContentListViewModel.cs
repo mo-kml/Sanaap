@@ -29,10 +29,17 @@ namespace Sanaap.App.ViewModels.Content
 
                   await NavigationService.NavigateAsync(nameof(ShowContentView), parameters);
               });
+
+            FilterContent = new BitDelegateCommand(async () =>
+              {
+
+              });
         }
         public ObservableCollection<NewsItemSource> Contents { get; set; }
 
         public BitDelegateCommand<NewsItemSource> ShowContent { get; set; }
+
+        public BitDelegateCommand FilterContent { get; set; }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {

@@ -1,91 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Sanaap.App.Controls"
              FlowDirection="LeftToRight"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
-             NavigationPage.HasNavigationBar="False"
-             ControlTemplate="{StaticResource masterTemplate}">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <AbsoluteLayout>
+                    <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Contents}"  FlowDirection="RightToLeft">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                        <ListView.Behaviors>
+                            <b:EventToCommandBehavior EventName="ItemTapped" 
                                               EventArgsParameterPath="Item" 
                                               Command="{Binding ShowContent}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Margin="7,5,7,5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="200*"/>
-                                </Grid.ColumnDefinitions>
-                                <Frame CornerRadius="5" Grid.RowSpan="2" HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
-                                    <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
-                                </Frame>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Margin="7,5,7,5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="60"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="200*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame CornerRadius="5" Grid.RowSpan="2" HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
+                                            <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
+                                        </Frame>
 
-                                <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HeightRequest="50" Text="{Binding Title}" Grid.Column="1"/>
-                                <WebView BackgroundColor="Red" HeightRequest="70" Grid.Column="1" Grid.Row="1">
-                                    <WebView.Source>
-                                        <HtmlWebViewSource Html="{Binding Text}"/>
-                                    </WebView.Source>
-                                </WebView>
-                                <!--<Label FontSize="12" Text="{Binding Text}"  Grid.Column="1" Grid.Row="1" HeightRequest="30"/>-->
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
-                                    <local:IconLabel Text="{Binding Likes,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
-                                        <local:IconLabel.Triggers>
-                                            <DataTrigger TargetType="local:IconLabel"
+                                        <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HeightRequest="50" Text="{Binding Title}" Grid.Column="1"/>
+                                        <WebView BackgroundColor="Red" HeightRequest="70" Grid.Column="1" Grid.Row="1">
+                                            <WebView.Source>
+                                                <HtmlWebViewSource Html="{Binding Text}"/>
+                                            </WebView.Source>
+                                        </WebView>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
+                                            <controls:IconLabel Text="{Binding Likes,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
+                                                <controls:IconLabel.Triggers>
+                                                    <DataTrigger TargetType="controls:IconLabel"
                                                      Binding="{Binding YourLike}"
                                                      Value="1">
-                                                <Setter Property="Type" Value="Solid"/>
-                                                <Setter Property="TextColor" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="local:IconLabel"
+                                                        <Setter Property="Type" Value="Solid"/>
+                                                        <Setter Property="TextColor" Value="Red"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="controls:IconLabel"
                                                      Binding="{Binding YourLike}"
                                                      Value="0">
-                                                <Setter Property="Type" Value="Regular"/>
-                                                <Setter Property="TextColor" Value="Black"/>
-                                            </DataTrigger>
-                                        </local:IconLabel.Triggers>
-                                    </local:IconLabel>
+                                                        <Setter Property="Type" Value="Regular"/>
+                                                        <Setter Property="TextColor" Value="Black"/>
+                                                    </DataTrigger>
+                                                </controls:IconLabel.Triggers>
+                                            </controls:IconLabel>
 
-                                </StackLayout>
-                                <!--<Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>-->
-                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding Date}"/>
-                            </Grid>
+                                        </StackLayout>
+                                        <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding Date}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <StackLayout Padding="5">
-                                    <local:IconLabel Type="Solid" Text="{Binding LikesCount,StringFormat='&#xf004; {0}'}" VerticalOptions="StartAndExpand"/>
-
-                                    <Label Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>
-                                </StackLayout>
-
-                                <Label Grid.Column="1" Text="{Binding Title}" HorizontalTextAlignment="End" VerticalOptions="StartAndExpand"/>
-
-                                <Image HeightRequest="80" WidthRequest="80" Grid.Column="2" Source="{Binding Image}" Aspect="AspectFill"/>
-                            </Grid>-->
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <local:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        </AbsoluteLayout>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Clicked="OpenFilter" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                </AbsoluteLayout>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <StackLayout>
+                    <Label Text="فیلتر"/>
+                    <controls:SanaapEntry Placeholder="عنوان خبر"/>
+                    <controls:SanaapComboBox Text="دسته بندی"/>
+                    <StackLayout Orientation="Horizontal">
+                        <controls:SanaapComboBox Text="ماه"/>
+                        <controls:SanaapComboBox Text="سال"/>
+                    </StackLayout>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>
