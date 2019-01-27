@@ -38,7 +38,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                await loadRequests();
+                //await loadRequests();
             }
         }
 

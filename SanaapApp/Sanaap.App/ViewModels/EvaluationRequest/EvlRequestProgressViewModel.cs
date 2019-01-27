@@ -1,12 +1,11 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
+using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
-using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
-using Sanaap.Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,24 +16,24 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvlRequestProgressViewModel : BitViewModelBase
     {
         private readonly IEvlRequestService _evlRequestService;
-        private readonly IDateTimeUtils _dateTimeUtils;
-        private IUserDialogs _userDialogs;
-        public EvlRequestProgressViewModel(IEvlRequestService evlRequestService, IDateTimeUtils dateTimeUtils, IUserDialogs userDialogs)
+        private readonly IUserDialogs _userDialogs;
+        private readonly IDateHelper _dateHelper;
+        public EvlRequestProgressViewModel(IEvlRequestService evlRequestService, IUserDialogs userDialogs, IDateHelper dateHelper)
         {
             _evlRequestService = evlRequestService;
-            _dateTimeUtils = dateTimeUtils;
             _userDialogs = userDialogs;
+            _dateHelper = dateHelper;
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            parameters.TryGetValue(nameof(EvlRequestListItemSource), out EvlRequestListItemSource request);
+            //parameters.TryGetValue(nameof(EvlRequestListItemSource), out EvlRequestListItemSource request);
 
-            RequestCode = request.Code;
+            //RequestCode = request.Code;
 
-            using (_userDialogs.Loading(ConstantStrings.Loading))
-            {
-                await loadProgresses(request.RequestId);
-            }
+            //using (_userDialogs.Loading(ConstantStrings.Loading))
+            //{
+            //    await loadProgresses(request.RequestId);
+            //}
         }
 
         public ObservableCollection<ProgressItemSource> Progresses { get; set; }
@@ -51,7 +50,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 Progresses.Add(new ProgressItemSource
                 {
-                    Date = _dateTimeUtils.ConvertMiladiToShamsi(progress.CreatedOn),
+                    Date = _dateHelper.ToPersianShortDate(progress.CreatedOn.Date),
                     Status = EnumHelper<EvlRequestStatus>.GetDisplayValue(progress.EvlRequestStatus)
                 });
             }
