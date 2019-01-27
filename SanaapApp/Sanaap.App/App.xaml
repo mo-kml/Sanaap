@@ -29,6 +29,7 @@
             <Color x:Key="buttonTextWhite">#dfebff</Color>
             <Color x:Key="textHeaderBlue">#40438a</Color>
             <Color x:Key="labelTextColor">#a6a6a6</Color>
+            <Color x:Key="labelTextColorDark">#505050</Color>
             <Color x:Key="popupPositionFramColor">#393939</Color>
             <Color x:Key="blueText">#2a4ac5</Color>
             <Color x:Key="lightBlueText">#0096ca</Color>
@@ -36,7 +37,7 @@
 
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="15"/>
-                <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
+                <Setter Property="TextColor" Value="{StaticResource textHeaderBlue}"/>
 
             </Style>
 

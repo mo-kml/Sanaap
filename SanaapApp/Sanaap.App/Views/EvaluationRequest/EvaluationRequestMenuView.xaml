@@ -5,6 +5,7 @@
              xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
              xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
              BackgroundColor="{StaticResource primaryBackground}">
 
@@ -33,15 +34,28 @@
         <navigationdrawer:SfNavigationDrawer.ContentView>
             <StackLayout >
 
-                <StackLayout BackgroundColor="{StaticResource primaryBlue}" HeightRequest="50">
-                    <Label Text="اعلام خسارت" Style="{StaticResource headerText}" BackgroundColor="{StaticResource primaryBlue}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-                </StackLayout>
+                <AbsoluteLayout HorizontalOptions="FillAndExpand" FlowDirection="RightToLeft">
+                    <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="19*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label AbsoluteLayout.LayoutFlags="All" VerticalTextAlignment="Center" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" BackgroundColor="{StaticResource primaryBlue}" Text="اعلام خسارت" Style="{StaticResource headerText}"  TextColor="White"/>
+                        <Label HorizontalTextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" Text='متنی برای زیر عنوان' FontSize="10"/>
+                        <Frame Margin="0,0,30,15" HeightRequest="50" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="{StaticResource primaryBlue}"  AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional" HasShadow="False">
+                            <controls:IconLabel HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="&#xf5e1;" Type="Solid" FontSize="25" TextColor="White" />
+                        </Frame>
+                    </Grid>
+                    
 
-                <Label  Margin="150,0,150,0" HorizontalTextAlignment="Center" Text='متنی برای زیر عنوان' WidthRequest="100" FontSize="10"/>
-
-                <Frame  HeightRequest="50" CornerRadius="10" BackgroundColor="{StaticResource primaryBlue}" Margin="280,-80,20,15" HasShadow="False">
-                    <controls:IconLabel HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="&#xf5e1;" Type="Solid" FontSize="25" TextColor="White" />
-                </Frame>
+                </AbsoluteLayout>
+                
+                
 
 
                 <Button Text="درخواست کارشناس بدنه" Command="{Binding EvlRequestBadane}" Style="{StaticResource globalButtonStyle}" BackgroundColor="{StaticResource primaryBlue}"/>

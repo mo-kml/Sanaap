@@ -35,17 +35,20 @@
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+            <Setter Property="TextColor" Value="{StaticResource textPlaceholderColor}"/>
         </Style>
 
         <Style TargetType="Frame" x:Key="TitleFrame">
-            <Setter Property="WidthRequest" Value="18"/>
-            <Setter Property="HeightRequest" Value="18"/>
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="BorderColor" Value="Gray"/>
+            <Setter Property="BorderColor" Value="{StaticResource textPlaceholderColor}"/>
             <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="CornerRadius" Value="10"/>
         </Style>
+        
+        
 
     </popup:PopupPage.Resources>
 
@@ -61,7 +64,7 @@
 
                         <StackLayout Orientation="Horizontal">
                             <StackLayout HorizontalOptions="Start">
-                                <Label Text="اعلام خسارت" FontAttributes="Bold"/>
+                                <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
@@ -69,8 +72,8 @@
                                     <StackLayout Orientation="Horizontal">
 
 
-                                        <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="Black" >
-                                            <Label Text="1 عنوان مرحله" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                        <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                            <Label Text="1 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                         </Frame>
 
                                     </StackLayout>
@@ -80,17 +83,17 @@
 
                                 </StackLayout>
 
-                                <Frame Style="{StaticResource TitleFrame}">
-                                    <Label Text="2" Style="{StaticResource TitleLabel}"/>
+                                <Frame  Style="{StaticResource TitleFrame}">
+                                    <Label Margin=".5,-3,0,0" FontSize="12" FontAttributes="Bold" Text="2" Style="{StaticResource TitleLabel}"/>
                                 </Frame>
                                 <Frame  Style="{StaticResource TitleFrame}">
-                                    <Label Text="3" Style="{StaticResource TitleLabel}"/>
+                                    <Label Margin=".5,-3,0,0" FontSize="12" FontAttributes="Bold" Text="3" Style="{StaticResource TitleLabel}"/>
                                 </Frame>
                                 <Frame Style="{StaticResource TitleFrame}">
-                                    <Label Text="4" Style="{StaticResource TitleLabel}"/>
+                                    <Label Margin=".5,-3,0,0" FontSize="12" FontAttributes="Bold" Text="4" Style="{StaticResource TitleLabel}"/>
                                 </Frame>
                                 <Frame Style="{StaticResource TitleFrame}">
-                                    <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                                    <Label Margin=".5,-3,0,0" FontSize="12" FontAttributes="Bold" Text="5" Style="{StaticResource TitleLabel}"/>
                                 </Frame>
 
                             </StackLayout>
@@ -102,7 +105,7 @@
                             <StackLayout Orientation="Horizontal"  Padding="0,0,0,0" >
                                 <Label Text="اطلاعات بیمه گذار/مقصر"  HorizontalOptions="FillAndExpand"/>
                                 <!--Need More Work On Button-->
-                                <Button  HorizontalOptions="FillAndExpand" Margin="0,0,0,0" CornerRadius="5" HeightRequest="10" FontSize="8" Text="انتخاب" Command="{Binding SelectFromInsurances}" BackgroundColor="{StaticResource primaryBlue}"/>
+                                <Button  HorizontalOptions="FillAndExpand" Padding="0,-10,0,-10" Margin="0,0,0,0" CornerRadius="5" HeightRequest="10" FontSize="10" Text="انتخاب" Command="{Binding SelectFromInsurances}" BackgroundColor="{StaticResource buttonBlue}"/>
                             </StackLayout>
 
                             <!--<Label Text="نام" />-->
@@ -113,7 +116,7 @@
 
                                 <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" Placeholder="نام"/>
 
-                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+                                <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
 
                             </StackLayout>
                             <!--<Label Text="نام خانوادگی" />-->
