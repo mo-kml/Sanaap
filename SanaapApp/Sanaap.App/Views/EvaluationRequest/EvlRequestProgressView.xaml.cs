@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Sanaap.App.Views.EvaluationRequest
+﻿namespace Sanaap.App.Views.EvaluationRequest
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EvlRequestProgressView : ContentPage
-	{
-		public EvlRequestProgressView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    public partial class EvlRequestProgressView
+    {
+        public EvlRequestProgressView()
+        {
+            InitializeComponent();
+        }
+    }
 }

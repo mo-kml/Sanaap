@@ -6,7 +6,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
              NavigationPage.HasNavigationBar="False"
-             ControlTemplate="{StaticResource MasterTemplate}">
+             ControlTemplate="{StaticResource masterTemplate}">
     <ContentPage.Content>
         <AbsoluteLayout>
             <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
@@ -19,8 +19,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-
-
                             <Grid Margin="7,5,7,5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
@@ -34,29 +32,35 @@
                                 <Frame CornerRadius="5" Grid.RowSpan="2" HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
                                     <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
                                 </Frame>
+
                                 <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HeightRequest="50" Text="{Binding Title}" Grid.Column="1"/>
-                                 <Label FontSize="12" Text="{Binding MainText}"  Grid.Column="1" Grid.Row="1" HeightRequest="30"/>
+                                <WebView BackgroundColor="Red" HeightRequest="70" Grid.Column="1" Grid.Row="1">
+                                    <WebView.Source>
+                                        <HtmlWebViewSource Html="{Binding Text}"/>
+                                    </WebView.Source>
+                                </WebView>
+                                <!--<Label FontSize="12" Text="{Binding Text}"  Grid.Column="1" Grid.Row="1" HeightRequest="30"/>-->
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
-                                    <local:IconLabel Text="{Binding LikesCount,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
+                                    <local:IconLabel Text="{Binding Likes,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
                                         <local:IconLabel.Triggers>
                                             <DataTrigger TargetType="local:IconLabel"
-                                                     Binding="{Binding IsLiked}"
-                                                     Value="true">
+                                                     Binding="{Binding YourLike}"
+                                                     Value="1">
                                                 <Setter Property="Type" Value="Solid"/>
-                                                <Setter Property="TextColor" Value="Green"/>
+                                                <Setter Property="TextColor" Value="Red"/>
                                             </DataTrigger>
                                             <DataTrigger TargetType="local:IconLabel"
-                                                     Binding="{Binding IsLiked}"
-                                                     Value="false">
+                                                     Binding="{Binding YourLike}"
+                                                     Value="0">
                                                 <Setter Property="Type" Value="Regular"/>
                                                 <Setter Property="TextColor" Value="Black"/>
                                             </DataTrigger>
                                         </local:IconLabel.Triggers>
                                     </local:IconLabel>
-                                    
+
                                 </StackLayout>
                                 <!--<Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate,StringFormat='{0:M/d/yy}'}"/>-->
-                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding CreateDate}"/>
+                                <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding Date}"/>
                             </Grid>
 
                             <!--<Grid>

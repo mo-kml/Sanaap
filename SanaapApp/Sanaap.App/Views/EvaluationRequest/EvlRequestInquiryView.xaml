@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestInquiryView">
-    <ContentPage.Content>
-        <StackLayout>
+  <ContentPage.Content>
+    <StackLayout>
 
-            <Label Text="شماره پرونده"/>
-            <controls:SanaapEntry Text="{Binding DocumentNumber}" Keyboard="Numeric"/>
+      <Label Text="شماره پرونده"/>
+      <controls:SanaapEntry Text="{Binding DocumentNumber}" Keyboard="Numeric"/>
 
-            <Button Text="استعلام" Command="{Binding Inquiry}"/>
+      <Button Text="استعلام" Command="{Binding Inquiry}"/>
 
-        </StackLayout>
-    </ContentPage.Content>
+    </StackLayout>
+  </ContentPage.Content>
 </ContentPage>

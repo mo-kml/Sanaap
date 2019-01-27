@@ -4,6 +4,7 @@ using Sanaap.Dto;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Sanaap.Api.Implementations
@@ -20,6 +21,7 @@ namespace Sanaap.Api.Implementations
         private IEnumerable<ExternalEntityDto> colors;
         private IEnumerable<ExternalEntityDto> cars;
         private IEnumerable<InsurerDto> insurers;
+        private IEnumerable<ContentDto> news;
 
         public async Task<IEnumerable<ExternalEntityDto>> GetCars()
         {
@@ -69,6 +71,32 @@ namespace Sanaap.Api.Implementations
             return colors;
         }
 
+        public async Task<IEnumerable<ContentDto>> GetNews()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (news == null)
+            {
+                HttpResponseMessage result = await httpClient.PostAsync("GetNewsList", new StringContent("{page:1}", UnicodeEncoding.UTF8, "application/json"));
+
+                if (result.IsSuccessStatusCode)
+                {
+                    NewsList newsList = JsonConvert.DeserializeObject<NewsList>(await result.Content.ReadAsStringAsync());
+
+                    news = newsList.Items;
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return news;
+        }
+
         public async Task<IEnumerable<InsurerDto>> GetInsurers()
         {
             if (httpClient == null)
@@ -96,6 +124,24 @@ namespace Sanaap.Api.Implementations
             return insurers;
         }
 
+        public async Task<ContentDto> GetNewsById(int id, Guid userId)
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            HttpResponseMessage result = await httpClient.GetAsync($"GetNews?Id={id}&usid={userId}");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ContentDto>(await result.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+        }
     }
 
     public class InitialData

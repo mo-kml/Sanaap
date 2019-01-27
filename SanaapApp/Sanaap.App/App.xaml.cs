@@ -71,9 +71,9 @@ namespace Sanaap.App
             //}
             //else
             //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestView)}");
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(InsurancePolicyListView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
@@ -99,12 +99,12 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
             containerRegistry.RegisterForNav<MapView, MapViewModel>();
+            containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvlRequestWaitView, EvlRequestWaitViewModel>();
             containerRegistry.RegisterForNav<CreateCommentView, CreateCommentViewModel>();
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
-            //InsurancePolicyListViewModel
-            containerRegistry.RegisterForNav<InsurancePolicyListView, SampleViewModel>();
+            containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
             //
@@ -122,7 +122,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://8d8c04e1.ngrok.io"),
+                HostUri = new Uri("http://192.168.143.2:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
@@ -137,16 +137,17 @@ namespace Sanaap.App
             containerRegistry.Register<ICommentValidator, DefaultCommentValidator>();
             containerRegistry.Register<IInsuranceValidator, DefaultInsuranceValidator>();
             containerRegistry.Register<IEvlRequestValidator, DefaultEvlRequestValidator>();
+            containerRegistry.Register<INewsService, NewsService>();
             containerRegistry.Register<IPolicyService, PolicyService>();
+            containerRegistry.Register<IDateHelper, DateHelper>();
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
             containerRegistry.RegisterSingleton<IInitialDataService, InitialDataService>();
-            containerRegistry.RegisterSingleton<IPhotoHelper, PhotoHelper>();
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
             containerBuilder.Register(c => new MenuViewModel(Container.Resolve<ISecurityService>(), NavigationService));
-            containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>()));
+            containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>(), NavigationService));
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
 

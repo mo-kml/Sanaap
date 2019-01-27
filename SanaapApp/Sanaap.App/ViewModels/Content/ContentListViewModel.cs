@@ -1,10 +1,10 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
+using Sanaap.App.ItemSources;
+using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.Content;
-using Sanaap.Dto;
 using Simple.OData.Client;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -15,22 +15,24 @@ namespace Sanaap.App.ViewModels.Content
     {
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
-        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs)
+        private readonly INewsService _newsService;
+        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INewsService newsService)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
+            _newsService = newsService;
 
-            ShowContent = new BitDelegateCommand<ContentListDto>(async (content) =>
+            ShowContent = new BitDelegateCommand<NewsItemSource>(async (content) =>
               {
                   INavigationParameters parameters = new NavigationParameters();
-                  parameters.Add("ContentId", Guid.Parse("890f984f-f5aa-4cd3-870a-02f9e15e1037"));
+                  parameters.Add("NewsId", content.NewsID);
 
                   await NavigationService.NavigateAsync(nameof(ShowContentView), parameters);
               });
         }
-        public ObservableCollection<ContentListDto> Contents { get; set; }
+        public ObservableCollection<NewsItemSource> Contents { get; set; }
 
-        public BitDelegateCommand<ContentListDto> ShowContent { get; set; }
+        public BitDelegateCommand<NewsItemSource> ShowContent { get; set; }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
@@ -42,13 +44,11 @@ namespace Sanaap.App.ViewModels.Content
 
         public async Task loadContents()
         {
-            IEnumerable<ContentListDto> contents = await _oDataClient.For<ContentListDto>("ContentLists")
-                    .Function("GetAllContents")
-                    .FindEntriesAsync();
+            List<NewsItemSource> contents = await _newsService.GetNews();
 
             if (contents != null)
             {
-                Contents = new ObservableCollection<ContentListDto>(contents);
+                Contents = new ObservableCollection<NewsItemSource>(contents);
             }
         }
     }

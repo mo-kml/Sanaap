@@ -2,12 +2,25 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="False"
-             x:Class="Sanaap.App.Views.Insurance.InsuranceListPopupView">
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
+             x:Class="Sanaap.App.Views.Insurance.InsuranceListPopupView"
+             x:Name="insurancePopup">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:Name="stackLayout" BindingContext="{Binding Source={StaticResource insuranceListPopupViewModelLocator},Path=InsuranceListPopupViewModel}">
             <Label Text="لیست بیمه نامه های ثبت شده" />
             <Label Text="زیر عنوان" />
-            <ListView ItemsSource="{Binding Insurances}">
+            <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                              EventArgsParameterPath="Item" 
+                                              Command="{Binding SelectPolicy}" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

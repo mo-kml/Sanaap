@@ -9,10 +9,9 @@
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-    xmlns:syncCombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
     x:Name="requestDetailView"
-    Padding="30,120,30,120"
+    Padding="30,40,30,40"
     HasSystemPadding="True"
     SystemPaddingSides="All">
     <popup:PopupPage.Animation>
@@ -52,7 +51,7 @@
         
 
     </popup:PopupPage.Resources>
-    
+
     <popup:PopupPage.Content>
 
         <Frame CornerRadius="10">
@@ -160,7 +159,7 @@
                             <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
                             <Label Text="نام خودرو" />
-                            <syncCombobox:SfComboBox
+                            <controls:SanaapComboBox
                         AllowFiltering="True"
                         DataSource="{Binding Cars}"
                         DisplayMemberPath="Name"
@@ -169,12 +168,12 @@
 
 
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="پلاک" />
+                                <Label Text="پلاک" VerticalOptions="Center"/>
                                 <!--<controls:SanaapEntry Text="{Binding Request.PlateNumber}" />-->
-                                <controls:SanaapEntry Placeholder="ایران"/>
-                                <controls:SanaapEntry WidthRequest="70" HorizontalOptions="FillAndExpand"/>
-                                <controls:SanaapEntry WidthRequest="70" HorizontalOptions="FillAndExpand" />
-                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"/>
+                                <controls:SanaapEntry HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
+                                <controls:SanaapEntry MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                                <controls:SanaapComboBox Text="حرف" HorizontalOptions="FillAndExpand" />
+                                <controls:SanaapEntry MaxLength="2" Keyboard="Numeric" />
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>

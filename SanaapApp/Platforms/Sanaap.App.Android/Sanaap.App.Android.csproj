@@ -70,6 +70,7 @@
     <Compile Include="CustomRenderers\SanaapComboBoxRenderer.cs" />
     <Compile Include="CustomRenderers\SanaapEntryRenderer.cs" />
     <Compile Include="CustomRenderers\SanaapNavigationPageRenderer.cs" />
+    <Compile Include="CustomRenderers\SanaapWebViewRenderer.cs" />
     <Compile Include="Helpers\AndroidAppUtilities.cs" />
     <Compile Include="Implementations\DroidRoutingService.cs" />
     <Compile Include="MainActivity.cs" />
@@ -89,6 +90,8 @@
     <AndroidAsset Include="Assets\SHABNAM-BOLD-FD.TTF" />
     <AndroidAsset Include="Assets\SHABNAM-FD.TTF" />
     <AndroidAsset Include="Assets\SHABNAM-LIGHT.TTF" />
+    <AndroidAsset Include="Assets\Vazir-Black-FD-WOL.ttf" />
+    <AndroidAsset Include="Assets\Vazir-Light-FD-WOL.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

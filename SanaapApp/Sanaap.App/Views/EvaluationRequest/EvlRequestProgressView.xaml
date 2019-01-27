@@ -1,25 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestProgressView"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"             
              NavigationPage.HasNavigationBar="False"
+             HasSystemPadding="True" SystemPaddingSides="All" Padding="30,50,30,50"
              FlowDirection="RightToLeft">
-    <ContentPage.Content>
-        <StackLayout FlowDirection="RightToLeft">
-            <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
 
-            <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Date}"/>
-                                <Label Text="{Binding Status}"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    <StackLayout >
+        <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
+
+        <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Date}"/>
+                            <Label Text="{Binding Status}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</popup:PopupPage>

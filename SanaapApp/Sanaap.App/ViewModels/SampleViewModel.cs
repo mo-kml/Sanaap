@@ -1,4 +1,6 @@
 ﻿using Bit.ViewModel;
+using Sanaap.App.Helpers.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -6,23 +8,46 @@ namespace Sanaap.App.ViewModels
 {
     public class SampleViewModel : BitViewModelBase
     {
-        public SampleViewModel()
+        private readonly IDateHelper _dateHelper;
+        public SampleViewModel(IDateHelper dateHelper)
         {
-            Policies.Add(new Test
-            {
-                CarName = "پژو",
-                ColorName = "صولتی",
-                InsuranceTypeName = "بیمه ایران",
-                InsImage = "https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"
-            });
+            _dateHelper = dateHelper;
+            Items = new ObservableCollection<Test>(
+                new List<Test>
+                {
+                    new Test{Text="fdgsdfgsgs"},
+                    new Test{Text="fdgsdfgsgs"},
+                    new Test{Text="fdgsdfgsgs"},
+                    new Test{Text="fdgsdfgsgs"},
+                }
+                );
+
+
         }
-        public ObservableCollection<Test> Policies { get; set; } = new ObservableCollection<Test>();
+        public ObservableCollection<Test> Items { get; set; }
+
+
+        public string Month { get; set; }
+
+        public string Year { get; set; }
+
+        public string Day { get; set; }
+
+        public DateTime? SelectedDate { get; set; }
+
+        public void OnSelectedDateChanged()
+        {
+            _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
+
+            Year = year;
+            Month = month;
+            Day = day;
+        }
+
+        public BitDelegateCommand Select { get; set; }
     }
     public class Test
     {
-        public string CarName { get; set; }
-        public string ColorName { get; set; }
-        public string InsuranceTypeName { get; set; }
-        public string InsImage { get; set; }
+        public string Text { get; set; }
     }
 }
