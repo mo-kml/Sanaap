@@ -20,7 +20,7 @@
             <Setter Property="BorderColor" Value="{StaticResource blueBorderColor}"/>
             <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
             <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
-            <Setter Property="FontSize" Value="{StaticResource XLargeFontSize}"/>
+            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
         </Style>
 
     </ContentPage.Resources>
