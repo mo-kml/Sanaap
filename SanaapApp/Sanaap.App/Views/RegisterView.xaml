@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"
@@ -24,7 +25,7 @@
             </Style>
 
             <Style TargetType="controls:SanaapEntry">
-                <Setter Property="Margin" Value="20,30,20,0"/>
+                <Setter Property="BackgroundColor" Value="White"/>
             </Style>
             
             <Style TargetType="local:IconButton" x:Key="ProgressIconButton">
@@ -34,33 +35,18 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-        <StackLayout>
-            <!--
-            <StackLayout Padding="10" HorizontalOptions="Center" Orientation="Horizontal" Spacing="25">
-                <StackLayout>
-                    <Label Style="{StaticResource ProgressLabel}" Text="ورود اطلاعات" TextColor="Green"/>
-                    <local:IconButton Type="Solid" TextColor="Green" BorderColor="Green" Text="&#xf00c;"/>
-                </StackLayout>
-
-                <StackLayout>
-                    <Label Style="{StaticResource ProgressLabel}" Text="اهراز هویت" TextColor="Green"/>
-                    <local:IconButton/>
-                </StackLayout>
-
-                <StackLayout>
-                    <Label Text="اتمام" Style="{StaticResource ProgressLabel}"/>
-                    <local:IconButton/>
-                </StackLayout>
-            </StackLayout>-->
-
-            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,50,0,0" HeightRequest="150" Source="resource://Sanaap.App.Images.Asset38xxhdpi.png"  />
-
-            <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
-                <controls:SanaapEntry MaxLength="20" Margin="50,30,50,5" Placeholder="نام" Text="{Binding Customer.FirstName}" />
-                <controls:SanaapEntry MaxLength="40" Margin="50,0,50,5" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
-                <controls:SanaapEntry MaxLength="10" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="کد ملی" Text="{Binding Customer.NationalCode}" />
-                <controls:SanaapEntry MaxLength="11" Margin="50,0,50,5" Keyboard="Numeric" Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Customer.Mobile}" />
-                <Button Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}" Margin="50,40,50,0" />
+        <StackLayout Padding="15" VerticalOptions="Center">
+            
+            <StackLayout>
+                <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image Source=SannapLogoWithIcon.png}" Aspect="AspectFit"  />
+            </StackLayout>
+            
+            <StackLayout Spacing="15" Padding="30" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
+                <controls:SanaapEntry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
+                <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+                <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="شماره ملی" Text="{Binding Customer.NationalCode}" />
+                <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره همراه" Text="{Binding Customer.Mobile}" />
+                <Button TextColor="White" BorderRadius="5" Margin="0,30,0,0" Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}"/>
             </StackLayout>
 
             <StackLayout VerticalOptions="Start" IsVisible="{Binding IsVerifySectionVisible}">
@@ -68,11 +54,6 @@
                 <Button Text="تایید" Command="{Binding VerifyCode}" Margin="50,0,50,0" />
                 <Button Text="{Binding TimerValue,StringFormat='ارسال مجدد کد{0}'}" Command="{Binding SendVerificationCodeAgain}" />
             </StackLayout>
-
-            <!--<StackLayout VerticalOptions="EndAndExpand">
-                <Label HorizontalTextAlignment="Center" Text="قبلا ثبت نام کرده اید؟"/>
-                <Button Text="وارد شوید" BackgroundColor="Purple" Command="{Binding Login}" Margin="15,0,15,5" />
-            </StackLayout>-->
 
         </StackLayout>
     </ScrollView>

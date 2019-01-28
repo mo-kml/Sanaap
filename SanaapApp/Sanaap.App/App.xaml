@@ -23,8 +23,8 @@
             <Color x:Key="primaryGray">#bfbfbf</Color>
             <Color x:Key="primaryBlue">#1f49cf</Color>
             <Color x:Key="primaryBackground">#ffffff</Color>
-            <Color x:Key="textBorderColor">#f3f3f3</Color>
-            <Color x:Key="textPlaceholderColor">#b3b3b3</Color>
+            <Color x:Key="textBorderColor">#e8e8e8</Color>
+            <Color x:Key="textPlaceholderColor">#b7b7b7</Color>
             <Color x:Key="buttonBlue">#183dd3</Color>
             <Color x:Key="buttonTextWhite">#dfebff</Color>
             <Color x:Key="textHeaderBlue">#40438a</Color>
@@ -55,6 +55,8 @@
 
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>
+                <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource textPlaceholderColor}"/>
                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             </Style>
 
