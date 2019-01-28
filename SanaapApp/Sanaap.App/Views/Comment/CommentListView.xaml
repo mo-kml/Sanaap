@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
-                <AbsoluteLayout>
+                <AbsoluteLayout FlowDirection="RightToLeft">
                     <ListView HasUnevenRows="True" ItemsSource="{Binding Comments}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                         <ListView.Behaviors>
                             <b:EventToCommandBehavior EventName="ItemTapped" 
@@ -21,7 +21,7 @@
                                     <StackLayout Padding="10,10,10,10">
                                         <Grid >
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="75"/>
+                                                <ColumnDefinition Width="50"/>
                                                 <ColumnDefinition Width="5"/>
                                                 <ColumnDefinition Width="1"/>
                                                 <ColumnDefinition Width="5"/>
