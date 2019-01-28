@@ -12,19 +12,18 @@ namespace Sanaap.App.ViewModels
         public SampleViewModel(IDateHelper dateHelper)
         {
             _dateHelper = dateHelper;
-            Items = new ObservableCollection<Test>(
+            Policies = new ObservableCollection<Test>(
                 new List<Test>
                 {
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
-                    new Test{Text="fdgsdfgsgs"},
+                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
+                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
+                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
                 }
                 );
 
 
         }
-        public ObservableCollection<Test> Items { get; set; }
+        public ObservableCollection<Test> Policies { get; set; }
 
 
         public string Month { get; set; }
@@ -48,6 +47,11 @@ namespace Sanaap.App.ViewModels
     }
     public class Test
     {
-        public string Text { get; set; }
+        public string InsuranceImage { get; set; }
+        public string CarName { get; set; }
+        public string ColorName { get; set; }
+        public string InsuranceTypeName { get; set; }
+        public string InsuranceEndDate { get; set; }
+        public string PlateNumber { get; set; }
     }
 }

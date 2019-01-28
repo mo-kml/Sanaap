@@ -4,6 +4,7 @@ using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using System;
@@ -28,7 +29,7 @@ namespace Sanaap.App.ViewModels
 
             GoToEvalutionRequestMenu = new BitDelegateCommand(async () =>
               {
-                  await NavigationService.NavigateAsync(nameof(EvaluationRequestMenuView));
+                  await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView));
               });
 
         }

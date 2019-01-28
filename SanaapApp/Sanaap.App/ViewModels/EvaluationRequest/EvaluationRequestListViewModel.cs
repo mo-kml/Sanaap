@@ -97,5 +97,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public int DocumentNumber { get; set; }
 
         public BitDelegateCommand<EvlRequestListItemSource> ShowRequestProgress { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

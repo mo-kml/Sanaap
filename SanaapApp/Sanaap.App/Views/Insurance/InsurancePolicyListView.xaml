@@ -4,8 +4,25 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView"
              NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="LableMargin" TargetType="Label">
+            <Setter Property="Margin" Value="0,0,5,0"/>
+        </Style>
+        <Style x:Key="AddButton" TargetType="Button">
+            <Setter Property="BorderRadius" Value="10"/>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="130 , 700 , 120 , 50"/>
+            <Setter Property="BackgroundColor" Value="Navy"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style x:Key="CarName" TargetType="Label" BasedOn="{StaticResource LableMargin}" >
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <AbsoluteLayout>
+        <AbsoluteLayout FlowDirection="RightToLeft">
             <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Policies}">
                 <ListView.Behaviors>
@@ -16,12 +33,43 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding CarName}"/>
-                                <Label Text="{Binding ColorName}"/>
-                                <Label Text="{Binding InsuranceTypeName}"/>
-                                <Label Text="{Binding PlateNumber}"/>
-                            </StackLayout>
+
+                            <Grid Margin="10,50,10,50">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer/>
+                                </Grid.GestureRecognizers>
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+
+                                <Image Aspect="AspectFill" Source="{Binding InsuranceImage}" BackgroundColor="Gray" Grid.RowSpan="3"/>
+
+                                <Label Text="{Binding CarName}" Margin="0,-5,0,0" Style="{StaticResource CarName}" Grid.Column="2"/>
+                                <Label Text="{Binding ColorName}" Margin="0,-6,0,0" Style="{StaticResource LableMargin}" Grid.Column="2" Grid.Row="1"/>
+                                <Label Text="{Binding InsuranceTypeName}" Margin="0,-6,0,0" Style="{StaticResource LableMargin}" Grid.Column="2" Grid.Row="2"/>
+
+                                
+                                <Label Grid.Column="4" Grid.ColumnSpan="2" Margin="0,-5,0,0" HorizontalOptions="Center" Text="اتمام بیمه" />
+                                <Label HorizontalOptions="End" Grid.Column="5" Margin="0,-5,0,0" Text="{Binding InsuranceEndDate}" />
+                                
+
+                                <Image HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Aspect="AspectFill" Source="{Binding PlateNumber}" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"/>
+
+                            </Grid>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

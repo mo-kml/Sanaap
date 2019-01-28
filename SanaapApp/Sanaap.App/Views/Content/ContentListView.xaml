@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
-                <AbsoluteLayout>
+                <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}">
                     <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Contents}"  FlowDirection="RightToLeft">
                         <ListView.Behaviors>
@@ -67,19 +67,20 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Clicked="OpenFilter" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Clicked="OpenFilter" BorderRadius="35" BackgroundColor="{StaticResource primaryBlue}" TextColor="{StaticResource buttonTextWhite}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <StackLayout>
-                    <Label Text="فیلتر"/>
-                    <controls:SanaapEntry Placeholder="عنوان خبر"/>
-                    <controls:SanaapComboBox Text="دسته بندی"/>
-                    <StackLayout Orientation="Horizontal">
-                        <controls:SanaapComboBox Text="ماه"/>
-                        <controls:SanaapComboBox Text="سال"/>
+                <StackLayout BackgroundColor="{StaticResource primaryBackground}" FlowDirection="RightToLeft">
+                    <Label Text="فیلتر و جست و جو" Style="{StaticResource headerText}"/>
+                    <Label Text="متنی برای زیر عنوان" Style="{StaticResource subHeaderText}"/>
+                    <controls:SanaapEntry Margin="10,0,10,0" Placeholder="عنوان خبر"/>
+                    <controls:SanaapComboBox Margin="10,0,10,0" Text="دسته بندی"/>
+                    <StackLayout Orientation="Horizontal" Margin="10,0,10,0" HorizontalOptions="CenterAndExpand">
+                        <controls:SanaapComboBox WidthRequest="190" Text="ماه" HorizontalOptions="StartAndExpand"/>
+                        <controls:SanaapComboBox WidthRequest="190" Text="سال" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
-                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" HorizontalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}" BorderRadius="25"/>
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>

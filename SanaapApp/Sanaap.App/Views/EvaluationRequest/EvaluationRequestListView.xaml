@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
 
@@ -27,10 +28,13 @@
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="BackgroundColor" Value="DarkBlue"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="WidthRequest" Value="150"/>
             <Setter Property="BorderRadius" Value="10"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+        <Style TargetType="Frame" x:Key="selectionFrame">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
         </Style>
     </ContentPage.Resources>
 
@@ -72,8 +76,9 @@
                                             <Label Text="تاریخ ثبت" Style="{StaticResource NegMargin}"/>
                                             <Label Text="{Binding Date}" Style="{StaticResource NegMargin}"/>
                                         </StackLayout>
-
-
+                                            
+                                        
+                                        
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
@@ -84,14 +89,91 @@
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                <StackLayout FlowDirection="LeftToRight" Margin="10,0,10,0"  BackgroundColor="{StaticResource primaryBackground}">
+
+                    <!--<StackLayout Orientation="Horizontal">
                         <Button Text="خودرو"/>
                         <Button Text="درمان"/>
                         <Button Text="اموال"/>
                     </StackLayout>
                     <Entry Keyboard="Numeric" Text="{Binding DocumentNumber}" Placeholder="شماره پرونده"/>
-                    <Button Text="استعلام" Command="{Binding Inquiry}"/>
+                    <Button Text="استعلام" Command="{Binding Inquiry}"/>-->
+                    <Label Style="{StaticResource headerText}" Text="استعلام پرونده"/>
+                    <Label Style="{StaticResource subHeaderText}" Text="متنی برای زیر عنوان"/>
+                    <StackLayout Margin="10,0,10,0" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
+                            <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer/>
+                                </Frame.GestureRecognizers>
+                                <Frame.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <StackLayout>
+                                    <Image Source="resource://Sanaap.App.Images.0.75x.MedKit.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
+                                    <Label HorizontalTextAlignment="Center" Text="درمان"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer/>
+                                </Frame.GestureRecognizers>
+                                <Frame.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <StackLayout>
+                                    <Image Source="resource://Sanaap.App.Images.0.75x.Houce.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
+                                    <Label HorizontalTextAlignment="Center" Text="اموال"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer/>
+                                </Frame.GestureRecognizers>
+                                <Frame.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <StackLayout>
+                                    <Image Source="resource://Sanaap.App.Images.0.75x.Car.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
+                                    <Label HorizontalTextAlignment="Center" Text="خودرو"/>
+                                </StackLayout>
+                            </Frame>
+
+
+                        </StackLayout>
+
+                        <controls:SanaapEntry  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
+                    </StackLayout>
+                    <Button Text="استعلام" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
