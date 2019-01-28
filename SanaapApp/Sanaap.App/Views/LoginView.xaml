@@ -8,31 +8,31 @@
              x:Class="Sanaap.App.Views.LoginView" Title="">
 
 
-    <ContentPage.Resources>
-        <Style TargetType="StackLayout" x:Key="mainStackLayout">
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-        </Style>
+  <ContentPage.Resources>
+    <Style TargetType="StackLayout" x:Key="mainStackLayout">
+      <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+    </Style>
 
-        <Style TargetType="controls:SanaapEntry" >
-            <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
-            <Setter Property="Keyboard" Value="Numeric"/>
-            <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
-            <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
-            <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
-            <Setter Property="HeightRequest" Value="50"/>
-        </Style>
-        
-    </ContentPage.Resources>
-    
-    <ContentPage.Content>
-        <StackLayout>
-            <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,100,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.3x.SannapLogoWithIcon.png"  />
-            <StackLayout Style="{StaticResource mainStackLayout}">
-                <controls:SanaapEntry MaxLength="10" Placeholder="کد ملی" Text="{Binding NationalCode}" Margin="50,0,50,10"/>
-                <controls:SanaapEntry Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Mobile}" Margin="50,0,50,10"/>
-                <Button Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}" Margin="50,20,50,20" />
-                <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}" Margin="50,0,50,0"/>
-            </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
+    <Style TargetType="controls:SanaapEntry" >
+      <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
+      <Setter Property="Keyboard" Value="Numeric"/>
+      <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+      <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
+      <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
+      <Setter Property="HeightRequest" Value="50"/>
+    </Style>
+
+  </ContentPage.Resources>
+
+  <ContentPage.Content>
+    <StackLayout>
+      <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,100,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.SannapLogoWithIcon.png"  />
+      <StackLayout Style="{StaticResource mainStackLayout}">
+        <controls:SanaapEntry MaxLength="10" Placeholder="کد ملی" Text="{Binding NationalCode}" Margin="50,0,50,10"/>
+        <controls:SanaapEntry Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Mobile}" Margin="50,0,50,10"/>
+        <Button Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}" Margin="50,20,50,20" />
+        <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}" Margin="50,0,50,0"/>
+      </StackLayout>
+    </StackLayout>
+  </ContentPage.Content>
 </ContentPage>

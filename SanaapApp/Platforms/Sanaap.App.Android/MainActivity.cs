@@ -8,6 +8,7 @@ using Bit;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
 using FFImageLoading.Svg.Forms;
+using ImageCircle.Forms.Plugin.Droid;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -50,6 +51,8 @@ namespace Sanaap.App.Droid
             BitCSharpClientControls.Init();
 
             Forms.Init(this, bundle);
+
+            ImageCircleRenderer.Init();
 
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
