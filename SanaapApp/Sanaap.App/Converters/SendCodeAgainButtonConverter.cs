@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Converters
 {
-    public class ByteArrayToImageSourceConverter : IValueConverter
+    public class SendCodeAgainButtonConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ImageSource retSource = null;
-
-            if (value != null)
-            {
-                byte[] imageAsBytes = (byte[])value;
-                retSource = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
-            }
-
-            return retSource;
+            return (int)value == 0 ? true : false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

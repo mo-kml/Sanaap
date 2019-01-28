@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
+             xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"
@@ -27,20 +28,22 @@
             <Style TargetType="controls:SanaapEntry">
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
-            
+
             <Style TargetType="local:IconButton" x:Key="ProgressIconButton">
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="10"/>
             </Style>
+
+            <converters:SendCodeAgainButtonConverter x:Key="sendCodeAgainConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
         <StackLayout Padding="15" VerticalOptions="Center">
-            
-            <StackLayout>
+
+            <StackLayout VerticalOptions="StartAndExpand">
                 <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image Source=SannapLogoWithIcon.png}" Aspect="AspectFit"  />
             </StackLayout>
-            
+
             <StackLayout Spacing="15" Padding="30" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
                 <controls:SanaapEntry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
                 <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
@@ -49,10 +52,20 @@
                 <Button TextColor="White" BorderRadius="5" Margin="0,30,0,0" Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}"/>
             </StackLayout>
 
-            <StackLayout VerticalOptions="Start" IsVisible="{Binding IsVerifySectionVisible}">
-                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="لطفا کد تایید را وارد نمایید" Margin="50, 30, 50, 0" Text="{Binding VerificationCode}" />
-                <Button Text="تایید" Command="{Binding VerifyCode}" Margin="50,0,50,0" />
-                <Button Text="{Binding TimerValue,StringFormat='ارسال مجدد کد{0}'}" Command="{Binding SendVerificationCodeAgain}" />
+            <StackLayout Spacing="20" Padding="30" VerticalOptions="End" IsVisible="{Binding IsVerifySectionVisible}">
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="کد پیامک شده" Text="{Binding VerificationCode}" />
+                <Button Text="تایید" Command="{Binding VerifyCode}" CornerRadius="5" TextColor="White" BackgroundColor="{StaticResource buttonBlue}"/>
+                <Button Command="{Binding SendVerificationCodeAgain}" BackgroundColor="Transparent" >
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding TimerValue,Converter={StaticResource sendCodeAgainConverter}}" Value="True">
+                            <Setter Property="Text" Value="ارسال مجدد کد"/>
+                            <Setter Property="TextColor" Value="{StaticResource blueText}"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding TimerValue,Converter={StaticResource sendCodeAgainConverter}}" Value="False">
+                            <Setter Property="Text" Value="{Binding TimerValue,StringFormat='ارسال مجدد کد در {0} ثانیه'}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </StackLayout>
 
         </StackLayout>
