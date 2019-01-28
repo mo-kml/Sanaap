@@ -81,20 +81,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\motorcycle.json" />
-    <AndroidAsset Include="Assets\IRYekan.ttf" />
     <AndroidAsset Include="Assets\fa-brands-400.ttf" />
     <AndroidAsset Include="Assets\fa-solid-900.ttf" />
     <AndroidAsset Include="Assets\fa-regular-400.ttf" />
-    <AndroidAsset Include="Assets\Yekan.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT-FD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-BOLD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-BOLD-FD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-FD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT.TTF" />
+    <AndroidAsset Include="Assets\SHABNAM.ttf" />
     <AndroidAsset Include="Assets\Vazir-Black-FD-WOL.ttf" />
     <AndroidAsset Include="Assets\Vazir-Light-FD-WOL.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-BOLD-FD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-BOLD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-FD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-LIGHT-FD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-LIGHT.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

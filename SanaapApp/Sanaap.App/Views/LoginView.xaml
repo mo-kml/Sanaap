@@ -2,37 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:extensions="clr-namespace:Sanaap.App.Extensions"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{StaticResource primaryBlue}"
              NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.LoginView" Title="">
 
 
-  <ContentPage.Resources>
-    <Style TargetType="StackLayout" x:Key="mainStackLayout">
-      <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-    </Style>
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout" x:Key="mainStackLayout">
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        </Style>
 
-    <Style TargetType="controls:SanaapEntry" >
-      <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
-      <Setter Property="Keyboard" Value="Numeric"/>
-      <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
-      <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
-      <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
-      <Setter Property="HeightRequest" Value="50"/>
-    </Style>
+        <Style TargetType="controls:SanaapEntry" >
+            <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
+            <Setter Property="Keyboard" Value="Numeric"/>
+            <Setter Property="BorderColor" Value="{StaticResource blueBorderColor}"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
+            <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
+            <Setter Property="FontSize" Value="{StaticResource XLargeFontSize}"/>
+        </Style>
 
-  </ContentPage.Resources>
+    </ContentPage.Resources>
 
-  <ContentPage.Content>
-    <StackLayout>
-      <ff:SvgCachedImage BackgroundColor="Transparent" Margin="0,100,0,-15" HeightRequest="150" Source="resource://Sanaap.App.Images.SannapLogoWithIcon.png"  />
-      <StackLayout Style="{StaticResource mainStackLayout}">
-        <controls:SanaapEntry MaxLength="10" Placeholder="کد ملی" Text="{Binding NationalCode}" Margin="50,0,50,10"/>
-        <controls:SanaapEntry Placeholder="شماره موبایل (شروع با 09)" Text="{Binding Mobile}" Margin="50,0,50,10"/>
-        <Button Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}" Margin="50,20,50,20" />
-        <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}" Margin="50,0,50,0"/>
-      </StackLayout>
-    </StackLayout>
-  </ContentPage.Content>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Padding="20" Spacing="15">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150" HeightRequest="100">
+                <Image BackgroundColor="Transparent" Aspect="AspectFit" Source="{extensions:Image Source=sanaapLogoWithIconWhite.png}" />
+            </StackLayout>
+            
+            <StackLayout Style="{StaticResource mainStackLayout}" Margin="0,50,0,0" Spacing="15" Padding="30,0">
+                <controls:SanaapEntry MaxLength="10" Placeholder="شماره ملی" Text="{Binding NationalCode}"/>
+                <controls:SanaapEntry MaxLength="11" Placeholder="شماره همراه" Text="{Binding Mobile}"/>
+            </StackLayout>
+            
+            <Button CornerRadius="5" Margin="30,10" Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}"/>
+
+            <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

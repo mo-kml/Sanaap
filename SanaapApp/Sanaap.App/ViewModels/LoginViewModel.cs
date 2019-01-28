@@ -21,6 +21,8 @@ namespace Sanaap.App.ViewModels
 
         public BitDelegateCommand Register { get; set; }
 
+        public ImageSource Image { get; set; }
+
         private CancellationTokenSource registerCancellationTokenSource;
 
         public LoginViewModel(

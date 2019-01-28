@@ -198,6 +198,102 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\OpenImagePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\SanaapComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\SanaapEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\SanaapMap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Comment\CommentListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ContactUsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Content\ContentListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Content\ShowContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestDescriptionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestExpertView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestFilesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestLostDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestMapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvaluationRequestWaitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvlRequestInquiryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvaluationRequest\EvlRequestProgressView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\EvlRequestWaitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Insurance\CreateInsurancePolicyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Insurance\InsuranceListPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Insurance\InsurancePolicyListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\RegisterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\SampleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
   <Import Project="..\..\Shared\Sanaap.Shared\Sanaap.Shared.projitems" Label="Shared" />
 
 </Project>
