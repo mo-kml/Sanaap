@@ -2,7 +2,7 @@
 using Bit.ViewModel;
 using Prism.Navigation;
 using Sanaap.App.ItemSources;
-using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using System.Threading;
 using System.Threading.Tasks;

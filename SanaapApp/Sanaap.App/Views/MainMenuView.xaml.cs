@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Sanaap.App.Helpers;
-using System;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Views
@@ -17,18 +16,18 @@ namespace Sanaap.App.Views
             _userDialogs = userDialogs;
             InitializeComponent();
 
-            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
-            {
-                if (slideCount < 3)
-                {
-                    Carousel.Position = slideCount++;
-                }
-                else
-                {
-                    slideCount = 0;
-                }
-                return true;
-            });
+            //Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            //{
+            //    if (slideCount < 3)
+            //    {
+            //        Carousel.Position = slideCount++;
+            //    }
+            //    else
+            //    {
+            //        slideCount = 0;
+            //    }
+            //    return true;
+            //});
         }
 
         protected override bool OnBackButtonPressed()

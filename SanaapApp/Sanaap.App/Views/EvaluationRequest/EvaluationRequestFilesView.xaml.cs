@@ -1,10 +1,9 @@
 ﻿using Prism.Events;
-using Rg.Plugins.Popup.Pages;
 using Sanaap.App.Events;
 
-namespace Sanaap.App.Views
+namespace Sanaap.App.Views.EvaluationRequest
 {
-    public partial class EvaluationRequestFilesView : PopupPage
+    public partial class EvaluationRequestFilesView
     {
         public EvaluationRequestFilesView(IEventAggregator eventAggregator)
         {
