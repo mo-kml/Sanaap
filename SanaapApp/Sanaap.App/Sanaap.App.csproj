@@ -27,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="LiveXAML" Version="2.1.63" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.12.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Vernosion="1.8.0" Version="1.12.0" />
     <PackageReference Include="NodaTime" Version="2.4.4" />
@@ -46,7 +47,6 @@
     <PackageReference Include="Xamarin.Forms.CarouselView" Version="2.3.0-pre2" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.4" />
     <PackageReference Condition=" '$(Configuration)' == 'Debug' " Include="Xamarin.LiveReload" Version="0.3.27" />
-    <PackageReference Condition=" '$(Configuration)' == 'Debug' " Include="LiveXAML" Version="2.1.59" />
   </ItemGroup>
 
   <ItemGroup>

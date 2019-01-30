@@ -6,14 +6,16 @@
              xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              NavigationPage.HasNavigationBar="False"
+             xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
-             BackgroundColor="{StaticResource primaryBackground}">
+             BackgroundColor="{StaticResource grayBackround}">
 
     <ContentPage.Resources>
 
         <Style TargetType="Button" x:Key="globalButtonStyle">
             <Setter Property="Margin" Value="30,0,30,10"/>
             <Setter Property="TextColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="7"/>
         </Style>
 
         <Style TargetType="Button" x:Key="thisPageButtons" BasedOn="{StaticResource globalButtonStyle}">
@@ -44,24 +46,24 @@
                             <ColumnDefinition Width="10*"/>
                             <ColumnDefinition Width="19*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Label AbsoluteLayout.LayoutFlags="All" VerticalTextAlignment="Center" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" BackgroundColor="{StaticResource primaryBlue}" Text="اعلام خسارت" Style="{StaticResource headerText}"  TextColor="White"/>
                         <Label HorizontalTextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" Text='متنی برای زیر عنوان' FontSize="10"/>
                         <Frame Margin="0,0,30,15" HeightRequest="50" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="{StaticResource primaryBlue}"  AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional" HasShadow="False">
-                            <controls:IconLabel HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="&#xf5e1;" Type="Solid" FontSize="25" TextColor="White" />
+                            <Image VerticalOptions="Center" HorizontalOptions="Center" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" Source="{extentions:Image FileName=TransparentCarCrash.png}"/>
                         </Frame>
                     </Grid>
-                    
+
 
                 </AbsoluteLayout>
-                
-                
 
 
-                <Button Text="درخواست کارشناس بدنه" Command="{Binding EvlRequestBadane}" Style="{StaticResource globalButtonStyle}" BackgroundColor="{StaticResource primaryBlue}"/>
-                <Button Text="درخواست کارشناس ثالث" Command="{Binding EvlRequestSales}" Style="{StaticResource thisPageButtons}"/>
-                <Button Text="درخواست کارشناس درمان" Style="{StaticResource disableButton}"/>
-                <Button Text="درخواست کارشناس پرونده اموال" Style="{StaticResource disableButton}"/>
+
+
+                <Button Text="کارشناس پرونده بدنه" Command="{Binding EvlRequestBadane}" Style="{StaticResource thisPageButtons}"/>
+                <Button Text="کارشناس  پرونده ثالث" Command="{Binding EvlRequestSales}" Style="{StaticResource globalButtonStyle}" BackgroundColor="{StaticResource primaryBlue}" />
+                <Button Text="کارشناس پرونده درمان" Style="{StaticResource disableButton}"/>
+                <Button Text="کارشناس پرونده اموال" Style="{StaticResource disableButton}"/>
                 <Button Text="لیست درخواست ها" Style="{StaticResource disableButton}"/>
                 <Button Text="پیگیری پرونده"  Style="{StaticResource disableButton}"/>
 

@@ -44,7 +44,7 @@ namespace Sanaap.App.ViewModels
                 {
                     if (IsSynced == false)
                     {
-                        //await syncInitialData();
+                        await syncInitialData();
 
                         IsSynced = true;
                     }

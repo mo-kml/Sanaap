@@ -18,7 +18,6 @@
         </ResourceDictionary>-->
         <ResourceDictionary>
             <Style x:Key="NavigationButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Navy"/>
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 

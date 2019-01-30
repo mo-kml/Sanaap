@@ -6,7 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
-using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -35,7 +35,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             _initialDataService = initialDataService;
 
 
-            
+
 
             SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
             {
@@ -76,10 +76,16 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       }
 
                       INavigationParameters Parameters = new NavigationParameters();
-                      Parameters.Add(nameof(EvlRequestItemSource), Request);
-                      Parameters.Add("NextPage", "EvlRequestFile");
+                      Parameters.Add(nameof(Request), Request);
 
-                      await NavigationService.NavigateAsync(nameof(MapView), Parameters);
+                      if (Request.InsuranceType == InsuranceType.Badane)
+                      {
+                          await NavigationService.NavigateAsync(nameof(EvaluationRequestDescriptionView), Parameters);
+                      }
+                      else
+                      {
+                          await NavigationService.NavigateAsync(nameof(EvaluationRequestLostDetailView), Parameters);
+                      }
                   }
               }, () => SelectedCar != null && SelectedInsurer != null);
             SelectViewPlace.ObservesProperty(() => SelectedCar);
@@ -104,7 +110,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
             {
-                // await syncData();
+                await syncData();
             }
 
             if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
