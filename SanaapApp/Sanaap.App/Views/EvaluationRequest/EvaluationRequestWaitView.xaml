@@ -7,15 +7,16 @@
              BackgroundColor="{StaticResource primaryBlue}">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout VerticalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand" Spacing="20">
                 <Frame HorizontalOptions="CenterAndExpand" VerticalOptions="Center" BackgroundColor="White" WidthRequest="100" HeightRequest="100" CornerRadius="100">
                     <ffimageloading:SvgCachedImage DownsampleToViewSize="True" WidthRequest="100" HeightRequest="100" Source="resource://Sanaap.App.Images.carGifwithLOGO.gif" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </Frame>
-                <Label Text="در حال جستجوی کارشناس" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Label Text="متن زیر عنوان" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="در حال جستجوی کارشناس" FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="{StaticResource lightBlueColor}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="متن زیر عنوان" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-                <Button Text="لغو" BackgroundColor="Transparent" Margin="0,20,0,0" BorderColor="Black" BorderWidth="1" VerticalOptions="Center" HeightRequest="30" BorderRadius="15" HorizontalOptions="Center" Padding="0"/>
+                <Button Margin="50" Text="لغو" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="1" VerticalOptions="Center" HeightRequest="30" BorderRadius="10" HorizontalOptions="Center" Padding="0"/>
             </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
