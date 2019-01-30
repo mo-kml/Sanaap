@@ -1,4 +1,5 @@
 ﻿using Bit.ViewModel;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
 {
@@ -6,7 +7,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         public EvaluationRequestExpertViewModel()
         {
-            string[] a = typeof(MapViewModel).Assembly.GetManifestResourceNames();
+            Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg");
         }
+
+        public ImageSource Image { get; set; }
     }
 }
