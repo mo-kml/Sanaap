@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class SampleView : ContentPage
     {
         public SampleView()

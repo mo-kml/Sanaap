@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.Content
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class ShowContentView : ContentPage
     {
         public ShowContentView()

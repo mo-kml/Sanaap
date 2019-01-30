@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class EvaluationRequestListView : ContentPage
     {
         public EvaluationRequestListView()

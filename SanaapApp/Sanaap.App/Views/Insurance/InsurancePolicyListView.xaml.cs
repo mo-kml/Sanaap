@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.Insurance
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class InsurancePolicyListView : ContentPage
     {
         public InsurancePolicyListView()

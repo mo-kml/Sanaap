@@ -99,7 +99,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
-            containerRegistry.RegisterForNav<MapView, MapViewModel>();
+            containerRegistry.RegisterForNav<EvaluationRequestMapView, EvaluationRequestMapViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvlRequestWaitView, EvlRequestWaitViewModel>();
