@@ -9,36 +9,36 @@
              x:Class="Sanaap.App.Views.LoginView" Title="">
 
 
-    <ContentPage.Resources>
-        <Style TargetType="StackLayout" x:Key="mainStackLayout">
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-        </Style>
+  <ContentPage.Resources>
+    <Style TargetType="StackLayout" x:Key="mainStackLayout">
+      <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+    </Style>
 
-        <Style TargetType="controls:SanaapEntry" >
-            <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
-            <Setter Property="Keyboard" Value="Numeric"/>
-            <Setter Property="BorderColor" Value="{StaticResource blueBorderColor}"/>
-            <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
-            <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
-            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
-        </Style>
+    <Style TargetType="controls:SanaapEntry" >
+      <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
+      <Setter Property="Keyboard" Value="Numeric"/>
+      <Setter Property="BorderColor" Value="{StaticResource blueBorderColor}"/>
+      <Setter Property="PlaceholderColor" Value="{StaticResource buttonTextWhite}"/>
+      <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
+      <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+    </Style>
 
-    </ContentPage.Resources>
+  </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" Padding="20" Spacing="15">
-            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150" HeightRequest="100">
-                <Image BackgroundColor="Transparent" Aspect="AspectFit" Source="{extensions:Image Source=sanaapLogoWithIconWhite.png}" />
-            </StackLayout>
-            
-            <StackLayout Style="{StaticResource mainStackLayout}" Margin="0,50,0,0" Spacing="15" Padding="30,0">
-                <controls:SanaapEntry MaxLength="10" Placeholder="شماره ملی" Text="{Binding NationalCode}"/>
-                <controls:SanaapEntry MaxLength="11" Placeholder="شماره همراه" Text="{Binding Mobile}"/>
-            </StackLayout>
-            
-            <Button CornerRadius="5" Margin="30,10" Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}"/>
+  <ContentPage.Content>
+    <StackLayout VerticalOptions="Center" Padding="20" Spacing="15">
+      <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150" HeightRequest="100">
+        <Image BackgroundColor="Transparent" Aspect="AspectFit" Source="{extensions:Image FileName=sanaapLogoWithIconWhite.png}" />
+      </StackLayout>
 
-            <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}"/>
-        </StackLayout>
-    </ContentPage.Content>
+      <StackLayout Style="{StaticResource mainStackLayout}" Margin="0,50,0,0" Spacing="15" Padding="30,0">
+        <controls:SanaapEntry MaxLength="10" Placeholder="شماره ملی" Text="{Binding NationalCode}"/>
+        <controls:SanaapEntry MaxLength="11" Placeholder="شماره همراه" Text="{Binding Mobile}"/>
+      </StackLayout>
+
+      <Button CornerRadius="5" Margin="30,10" Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}"/>
+
+      <Button Text="ثبت نام"  BackgroundColor="Transparent" Command="{Binding Register}" TextColor="{StaticResource buttonTextWhite}"/>
+    </StackLayout>
+  </ContentPage.Content>
 </ContentPage>

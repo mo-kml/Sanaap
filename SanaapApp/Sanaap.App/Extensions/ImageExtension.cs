@@ -4,18 +4,23 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Extensions
 {
-    public class ImageExtension : IMarkupExtension
+    public class ImageExtension : BindableObject, IMarkupExtension
     {
-        public string Source { get; set; }
+        public static BindableProperty FileNameProperty = BindableProperty.Create(nameof(FileName), typeof(string), typeof(ImageExtension), null, BindingMode.TwoWay);
+        public string FileName
+        {
+            get => (string)GetValue(FileNameProperty);
+            set => SetValue(FileNameProperty, value);
+        }
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (Source == null)
+            if (FileName == null)
             {
                 return null;
             }
 
-            return ImageSource.FromResource($"Sanaap.App.Images.{Source}");
+            return ImageSource.FromResource($"Sanaap.App.Images.{FileName}");
         }
     }
 }

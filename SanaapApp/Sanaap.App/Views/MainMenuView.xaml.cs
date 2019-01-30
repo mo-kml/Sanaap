@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Sanaap.App.Helpers;
+using System;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Views
@@ -7,6 +8,7 @@ namespace Sanaap.App.Views
     public partial class MainMenuView : ContentPage
     {
         private int count = 0;
+        private int slideCount;
         private readonly IAppUtilities _utility;
         private IUserDialogs _userDialogs;
         public MainMenuView(IAppUtilities utility, IUserDialogs userDialogs)
@@ -14,6 +16,19 @@ namespace Sanaap.App.Views
             _utility = utility;
             _userDialogs = userDialogs;
             InitializeComponent();
+
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            {
+                if (slideCount < 3)
+                {
+                    Carousel.Position = slideCount++;
+                }
+                else
+                {
+                    slideCount = 0;
+                }
+                return true;
+            });
         }
 
         protected override bool OnBackButtonPressed()
