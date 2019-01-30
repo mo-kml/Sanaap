@@ -55,7 +55,7 @@
     <popup:PopupPage.Content>
         <Frame CornerRadius="15" Padding="0">
             <AbsoluteLayout IsClippedToBounds="True">
-                <Frame AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
+                <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
 
                     <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
 

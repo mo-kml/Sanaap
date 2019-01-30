@@ -6,7 +6,9 @@
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             HasSystemPadding="True" Padding="30,235,30,235" SystemPaddingSides="All"
+             HasSystemPadding="True" Padding="30,120" SystemPaddingSides="All"
+                 x:Name="descriptionView"
+                 FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDescriptionView">
     <popup:PopupPage.Animation>
         <animations:ScaleAnimation 
@@ -41,45 +43,51 @@
         </Style>
 
     </popup:PopupPage.Resources>
-    <Frame CornerRadius="10">
-        <AbsoluteLayout>
-            <StackLayout BackgroundColor="White" Padding="0" Spacing="15" FlowDirection="RightToLeft">
+    <popup:PopupPage.Content>
+        <Frame CornerRadius="15" Padding="0">
+            <AbsoluteLayout IsClippedToBounds="True">
+                <Frame AbsoluteLayout.LayoutBounds="0,0,1,0.9" CornerRadius="15" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
 
-                <StackLayout Orientation="Horizontal">
-                    <StackLayout HorizontalOptions="Start">
-                        <Label Text="اعلام خسارت" FontAttributes="Bold"/>
-                    </StackLayout>
+                    <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-                    <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
-                        <StackLayout HorizontalOptions="Start">
+                        <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
+
                             <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="Start">
+                                    <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
+                                </StackLayout>
 
-                                <Frame Style="{StaticResource TitleFrame}">
-                                    <Label Text="1" Style="{StaticResource TitleLabel}"/>
-                                </Frame>
-                                <Frame  Style="{StaticResource TitleFrame}">
-                                    <Label Text="2" Style="{StaticResource TitleLabel}"/>
-                                </Frame>
-                                <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="Black" >
-                                    <Label Text="3 عنوان مرحله" TextColor="White" Style="{StaticResource TitleLabel}"/>
-                                </Frame>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                                    <StackLayout HorizontalOptions="Start">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame  Style="{StaticResource TitleFrame}">
+                                                <Label Text="1" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+                                            <Frame  Style="{StaticResource TitleFrame}">
+                                                <Label Text="2" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+
+                                            <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                                <Label Text="3 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+
+                                        </StackLayout>
+                                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
+                                    </StackLayout>
+
+                                    <Frame Style="{StaticResource TitleFrame}">
+                                        <Label Text="4" Style="{StaticResource TitleLabel}"/>
+                                    </Frame>
+                                    <Frame Style="{StaticResource TitleFrame}">
+                                        <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                                    </Frame>
+
+                                </StackLayout>
 
                             </StackLayout>
-                            <BoxView HeightRequest="1" BackgroundColor="{StaticResource primaryGray}"/>
-                        </StackLayout>
 
-                        <Frame Style="{StaticResource TitleFrame}">
-                            <Label Text="4" Style="{StaticResource TitleLabel}"/>
-                        </Frame>
-                        <Frame Style="{StaticResource TitleFrame}">
-                            <Label Text="5" Style="{StaticResource TitleLabel}"/>
-                        </Frame>
-                    </StackLayout>
-
-                </StackLayout>
-
-
-                <bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
+                            <StackLayout Padding="0,30">
+                                <bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
                 SelectedColor="{StaticResource primaryBlue}"
                 TodayColor="{StaticResource primaryBlue}"
                 FontFamily="{StaticResource Vazir-Light-FD-WOLFont}"
@@ -88,39 +96,59 @@
                 FlowDirection="RightToLeft"
                 DateDisplayFormat="dd MMM yyyy"
                 AutoClose="True">
-                    <bitControls:BitDatePicker.ControlTemplate>
-                        <ControlTemplate>
-                            <Frame HasShadow="False" Padding="1" CornerRadius="5" BorderColor="{StaticResource textPlaceholderColor}" BindingContext="{Binding BindingContext,Source={x:Reference sampleView}}">
-                                <StackLayout Orientation="Horizontal" Padding="10,0">
-                                    <Label HorizontalOptions="Start" Margin="10,0,0,0" Text="تاریخ وقوع حادثه" VerticalTextAlignment="Center"/>
+                                    <bitControls:BitDatePicker.ControlTemplate>
+                                        <ControlTemplate>
+                                            <Frame HasShadow="False" Padding="1" CornerRadius="5" BorderColor="{StaticResource textBorderColor}" BindingContext="{Binding BindingContext,Source={x:Reference descriptionView}}">
+                                                <StackLayout Orientation="Horizontal" Padding="10,0">
+                                                    <Label HorizontalOptions="Start" Margin="10,0,0,0" Text="تاریخ وقوع حادثه" VerticalTextAlignment="Center"/>
 
-                                    <Grid HorizontalOptions="FillAndExpand">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="1"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="1"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                                    <Grid HorizontalOptions="FillAndExpand">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="1"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="1"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
 
-                                        <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Day}"/>
-                                        <BoxView Margin="0,15,0,15" Grid.Column="1" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
-                                        <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Month}"/>
-                                        <BoxView Margin="0,15,0,15" Grid.Column="3" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
-                                        <Label TextColor="Black" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Year}" FontFamily="{TemplateBinding FontFamily}" />
-                                    </Grid>
+                                                        <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Day}"/>
+                                                        <BoxView Margin="0,15,0,15" Grid.Column="1" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                                        <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Month}"/>
+                                                        <BoxView Margin="0,15,0,15" Grid.Column="3" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                                        <Label TextColor="Black" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Year}" FontFamily="{TemplateBinding FontFamily}" />
+                                                    </Grid>
 
-                                    <controls:IconButton HorizontalOptions="End" BackgroundColor="Transparent" WidthRequest="20" Padding="0,0,0,5" FontSize="20" Command="{TemplateBinding OpenPopupCommand}" Text="&#xf0dd;" Type="Solid" TextColor="{StaticResource textPlaceholderColor}"/>
-                                </StackLayout>
-                            </Frame>
-                        </ControlTemplate>
-                    </bitControls:BitDatePicker.ControlTemplate>
-                </bitControls:BitDatePicker>
+                                                    <controls:IconButton HorizontalOptions="End" BackgroundColor="Transparent" WidthRequest="20" Padding="0,0,0,5" FontSize="20" Command="{TemplateBinding OpenPopupCommand}" Text="&#xf0dd;" Type="Solid" TextColor="{StaticResource textPlaceholderColor}"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </ControlTemplate>
+                                    </bitControls:BitDatePicker.ControlTemplate>
+                                </bitControls:BitDatePicker>
 
-                <controls:SanaapEntry Placeholder="علت وقوع حادثه" HeightRequest="80" HorizontalOptions="CenterAndExpand" WidthRequest="300"/>
-            </StackLayout>
-            <Button AbsoluteLayout.LayoutBounds="50,200,300,90" BackgroundColor="{StaticResource primaryBlue}" Text="مرحله بعد"/>
-            <controls:IconButton Text="&#xf0e2;" Type="Solid" AbsoluteLayout.LayoutBounds="-20,202,100,90" BackgroundColor="{StaticResource primaryGray}" BorderRadius="0"/>
-        </AbsoluteLayout>
-    </Frame>
+                                <controls:SanaapEntry Placeholder="علت وقوع حادثه"/>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+
+                </Frame>
+                <Grid AbsoluteLayout.LayoutBounds="1,1.01,1,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
+
+                </Grid>
+
+
+            </AbsoluteLayout>
+        </Frame>
+    </popup:PopupPage.Content>
+
 </popup:PopupPage>

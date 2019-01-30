@@ -27,7 +27,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             }
             else
             {
-                await NavigationService.NavigateAsync(nameof(EvaluationRequestLostDetailView), parameters);
+                await NavigationService.NavigateAsync(nameof(EvaluationRequestDescriptionView), parameters);
             }
         }
     }
