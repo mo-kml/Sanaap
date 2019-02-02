@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
@@ -22,7 +24,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <AbsoluteLayout FlowDirection="RightToLeft">
+        <StackLayout FlowDirection="RightToLeft">
             <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
                       ItemsSource="{Binding Policies}">
                 <ListView.Behaviors>
@@ -34,49 +36,46 @@
                     <DataTemplate>
                         <ViewCell>
 
-                            <Grid Margin="10,50,10,50">
-
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer/>
-                                </Grid.GestureRecognizers>
-
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="15*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="15*"/>
-                                    <ColumnDefinition Width="20*"/>
-                                    <ColumnDefinition Width="20*"/>
-                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
+                                <StackLayout Padding="20">
+                                    <Image Source="{extentions:Image FileName=photo.jpg}"/>
+                                </StackLayout>
+                                
+                                <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                    <Label Text="پژو 405" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                                    <Label Text="نقره ای" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
+                                    <Label Text="بیمه ثالث" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
+                                </StackLayout>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="10"/>
-                                </Grid.RowDefinitions>
-
-                                <Image Aspect="AspectFill" Source="{Binding InsuranceImage}" BackgroundColor="Gray" Grid.RowSpan="3"/>
-
-                                <Label Text="{Binding CarName}" Margin="0,-5,0,0" Style="{StaticResource CarName}" Grid.Column="2"/>
-                                <Label Text="{Binding ColorName}" Margin="0,-6,0,0" Style="{StaticResource LableMargin}" Grid.Column="2" Grid.Row="1"/>
-                                <Label Text="{Binding InsuranceTypeName}" Margin="0,-6,0,0" Style="{StaticResource LableMargin}" Grid.Column="2" Grid.Row="2"/>
-
-
-                                <Label Grid.Column="4" Grid.ColumnSpan="2" Margin="0,-5,0,0" HorizontalOptions="Center" Text="اتمام بیمه" />
-                                <Label HorizontalOptions="End" Grid.Column="5" Margin="0,-5,0,0" Text="{Binding InsuranceEndDate}" />
-
-
-                                <Image HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Aspect="AspectFill" Source="{Binding PlateNumber}" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"/>
-
+                                <StackLayout Grid.Column="2" HeightRequest="30" Padding="10" VerticalOptions="Center" WidthRequest="130" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
+                                    <AbsoluteLayout VerticalOptions="Start">
+                                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                    </AbsoluteLayout>
+                                    <AbsoluteLayout VerticalOptions="Start">
+                                        <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                    </AbsoluteLayout>
+                                </StackLayout>
                             </Grid>
-
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Text="اضافه کردن بیمه نامه" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding CreatePolicy}"/>
+            <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
+                <StackLayout Orientation="Horizontal">
+                    <controls:IconLabel Text="&#xf067;" Type="Solid" TextColor="{StaticResource actionBlueButton}" VerticalOptions="Center"/>
+                    <Label Text="افزودن بیمه نامه" TextColor="{StaticResource buttonTextWhite}"/>
+                </StackLayout>
+            </Frame>
+            
 
-        </AbsoluteLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
