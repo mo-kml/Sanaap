@@ -5,106 +5,143 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="Sanaap.App.Views.ContactUsView"
              NavigationPage.HasNavigationBar="False"
-             Title="تماس با ما"
-             BackgroundColor="DarkBlue"
+             xmlns:extenstions="clr-namespace:Sanaap.App.Extensions"
+             Title="تماس"
+             BackgroundColor="{StaticResource primaryBlue}"
              ControlTemplate="{StaticResource masterTemplate}">
     <ContentPage.Resources>
         <ResourceDictionary>
 
             <Style TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="Blue"/>
-                <Setter Property="Margin" Value="0,.5,0,0"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource blueBoxViewColor}"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="headLabel">
-                <Setter Property="TextColor" Value="Blue"/>
+            <Style TargetType="Label" x:Key="labelButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="{StaticResource blueText}"/>
+                <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="headerLabel">
+                <Setter Property="TextColor" Value="{StaticResource lightBlueColor}"/>
                 <Setter Property="HorizontalOptions" Value="Start"/>
                 <Setter Property="Margin" Value="0,0,10,0"/>
             </Style>
 
             <Style TargetType="Label" x:Key="valueLabel">
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
 
-            <!--<Style TargetType="local:IconButton">
-                <Setter Property="BorderColor" Value="White"/>
-                <Setter Property="BorderWidth" Value="1"/>
-                <Setter Property="BackgroundColor" Value="DarkBlue"/>
-                <Setter Property="BorderRadius" Value="19"/>
-                <Setter Property="Margin" Value="15,0,0,0"/>
-                <Setter Property="WidthRequest" Value="38"/>
-                <Setter Property="HeightRequest" Value="38"/>
-                <Setter Property="Type" Value="Solid"/>
-                <Setter Property="FontSize" Value="15"/>
-            </Style>-->
-
-            <Style TargetType="Frame" x:Key="ButtonsFrame">
-                <Setter Property="BackgroundColor" Value="White"/>
-                <Setter Property="WidthRequest" Value="100"/>
-                <Setter Property="HeightRequest" Value="15"/>
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="Margin"   Value="70,200,70,65"/>
+            <Style TargetType="Image">
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="25"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
             </Style>
-
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource primaryBlue}">
-
-
-            <Grid FlowDirection="RightToLeft" Margin="0,100,0,-100">
+        <StackLayout Padding="0,40,0,0" Spacing="30" FlowDirection="RightToLeft">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="1"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="1"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="1"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="1"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200*"/>
-                </Grid.ColumnDefinitions>
+                <Label Text="نشانی" Style="{StaticResource headerLabel}" Grid.Column="0"/>
+                <Label Text="تهران - خیابان ولی عصر - ابتدای یوسف آباد (خیابان سید جمال الدین اسد آبادی) - خیابان هفتم - پلاک 14 - ساختمان ایرانیان پوشش" Style="{StaticResource valueLabel}" Grid.Column="1" HorizontalOptions="Start"/>
 
-                <Label Text="نشانی" Style="{StaticResource headLabel}" Grid.Row="0" Grid.Column="0"/>
-                <Label Text="تهران - خیابان ولی عصر - ابتدای یوسف آباد (خیابان سید جمال الدین اسد آبادی) - خیابان هفتم - پلاک 14 - ساختمان ایرانیان پوشش" Style="{StaticResource valueLabel}" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start"/>
                 <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1"/>
-                <Label Text="شماره تماس " Style="{StaticResource headLabel}" Grid.Row="2" Grid.Column="0"/>
-                <Label Text="77499855" Style="{StaticResource valueLabel}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start"/>
-                <BoxView  Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1"/>
-                <Label Text="فکس" Style="{StaticResource headLabel}" Grid.Row="4" Grid.Column="0"/>
-                <Label Text="5 - 88552084 - 021" Style="{StaticResource valueLabel}" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="شماره تماس " Style="{StaticResource headerLabel}" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="84228 -021" Style="{StaticResource valueLabel}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="84229 -021" Style="{StaticResource valueLabel}" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="(هزار خط) 999 الی 84229000-021" Style="{StaticResource valueLabel}" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start"/>
+
                 <BoxView  Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="1"/>
-                <Label Text="وب سایت" Style="{StaticResource headLabel}" Grid.Row="6" Grid.Column="0"/>
-                <Label Text="ipinsur.ir" Style="{StaticResource valueLabel}" Grid.Row="6" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="فکس" Style="{StaticResource headerLabel}" Grid.Row="6" Grid.Column="0"/>
+                <Label Text="5 - 88552084 - 021" Style="{StaticResource valueLabel}" Grid.Row="6" Grid.Column="1" HorizontalOptions="Start"/>
+
                 <BoxView  Grid.Row="7" Grid.ColumnSpan="2" HeightRequest="1"/>
-                <Label Text="ساعات کاری" Style="{StaticResource headLabel}" Grid.Row="8" Grid.Column="0"/>
-                <Label Text="8 الی 16" Style="{StaticResource valueLabel}" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start"/>
-                
+                <Label Text="وب سایت" Style="{StaticResource headerLabel}" Grid.Row="8"/>
+                <Label Text="ipinsur.ir" Style="{StaticResource valueLabel}" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <BoxView  Grid.Row="9" Grid.ColumnSpan="2" HeightRequest="1"/>
+                <Label Text="ساعات کاری" Style="{StaticResource headerLabel}" Grid.Row="10" Grid.Column="0"/>
+                <Label Text="8 الی 16" Style="{StaticResource valueLabel}" Grid.Row="10" Grid.Column="1" HorizontalOptions="Start"/>
+
 
             </Grid>
 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15" Margin="20">
+                <Image Source="{extenstions:Image FileName=TransparentInstagram.png}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Instagram}"/>
+                    </Image.GestureRecognizers>
+                </Image>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,150,10,-150">
-                <!--<local:IconButton TextColor="Green" Text="&#xf232;" Command="{Binding WhatsApp}" />
-                <local:IconButton TextColor="Green" Text="&#xf2a0;" Command="{Binding Call}"/>
-                <local:IconButton TextColor="Blue" Text="&#xf2c6;" Command="{Binding Telegram}"/>
-                <local:IconButton TextColor="Red"  Text="&#xf16d;" Command="{Binding Instagram}"/>-->
+                <Image Source="{extenstions:Image FileName=TransparentInstagram.png}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Instagram}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="{extenstions:Image FileName=TransparentWhatsApp.png}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding WhatsApp}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="{extenstions:Image FileName=TransparentTelegram.png}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Telegram}"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
-            <Frame Style="{StaticResource ButtonsFrame}">
-                <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalOptions="Center">
-                    <Button TextColor="{StaticResource primaryBlue}" Text="تماس با ما" Margin="10,-15,-10,-15" BackgroundColor="White" Command="{Binding ContactUs}"  />
-                    <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="50" WidthRequest="1" Margin="0,-20,0,-20"/>
-                    <Button Text="مسیریابی" Margin="-10,-15,15,-15" TextColor="{StaticResource primaryBlue}" BackgroundColor="White" Command="{Binding Route}" />
-                </StackLayout>
-            </Frame>
-            <maps:Map x:Name="map" Margin="0,-100,0,0" AbsoluteLayout.LayoutBounds="0,.5,1,.5" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
 
+            <AbsoluteLayout VerticalOptions="FillAndExpand">
+                <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
+                <local:SanaapFrame Padding="0" ShadowOffset="20" CornerRadius="10" AbsoluteLayout.LayoutBounds="0.5,-.15,0.6,0.3" AbsoluteLayout.LayoutFlags="All">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                        <Label Style="{StaticResource labelButton}" Text="تماس با ما">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ContactUs}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <BoxView BackgroundColor="{StaticResource primaryGray}" VerticalOptions="FillAndExpand" WidthRequest="1"/>
+                        <Label Style="{StaticResource labelButton}" Text="مسیریابی">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Route}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+
+                        <!--<Button TextColor="{StaticResource primaryBlue}" Text="تماس با ما" BackgroundColor="White" Command="{Binding ContactUs}"  />
+                        <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="50" WidthRequest="1"/>
+                        <Button Text="مسیریابی" TextColor="{StaticResource primaryBlue}" BackgroundColor="White" Command="{Binding Route}" />-->
+                    </StackLayout>
+                </local:SanaapFrame>
+               
+            </AbsoluteLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

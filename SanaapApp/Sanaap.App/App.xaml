@@ -86,6 +86,7 @@
 
             <ControlTemplate x:Key="masterTemplate">
                 <navigationdrawer:SfNavigationDrawer
+                    FlowDirection="LeftToRight"
                         x:Name="navigationDrawer"
                         DrawerFooterHeight="0"
                         DrawerHeaderHeight="0"
@@ -93,7 +94,7 @@
                         Position="Right"
                         VerticalOptions="FillAndExpand">
                     <navigationdrawer:SfNavigationDrawer.ContentView>
-                        <StackLayout>
+                        <StackLayout Spacing="0">
                                 <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -111,6 +112,8 @@
                                         Type="Solid" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        VerticalTextAlignment="Center"
+                                        FontFamily="{StaticResource Shabnam-Bold-FDFont}"
                                         FontSize="{StaticResource mediumFontSize}"
                                         TextColor="{StaticResource buttonTextWhite}"
                                         Text="{TemplateBinding Title}" />
