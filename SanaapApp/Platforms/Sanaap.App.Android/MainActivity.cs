@@ -7,6 +7,7 @@ using Android.Support.V7.App;
 using Bit;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
+using CarouselView.FormsPlugin.Android;
 using FFImageLoading.Svg.Forms;
 using ImageCircle.Forms.Plugin.Droid;
 using Microsoft.AppCenter;
@@ -51,6 +52,8 @@ namespace Sanaap.App.Droid
             BitCSharpClientControls.Init();
 
             Forms.Init(this, bundle);
+
+            CarouselViewRenderer.Init();
 
             ImageCircleRenderer.Init();
 

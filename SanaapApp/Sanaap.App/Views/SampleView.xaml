@@ -7,6 +7,7 @@
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
+             NavigationPage.HasNavigationBar="False"
              x:Name="sampleView"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.SampleView">
@@ -23,38 +24,6 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-
-        <StackLayout Padding="10">
-            <Label Style="{StaticResource headerText}" Text="بارگذاری تصاdویر"/>
-            <Label Style="{StaticResource subHeaderText}" Text="متنی برای زیر عنوان"/>
-
-            <StackLayout Spacing="15" Padding="15">
-                <BoxView HeightRequest="1" Color="{StaticResource textBorderColor}"/>
-
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <controls:IconLabel Type="Regular" Text="&#xf03e;"/>
-                    <Label Style="{StaticResource buttonLabel}" Text="انتخاب از گالری"/>
-                </StackLayout>
-
-                <BoxView HeightRequest="1" Color="{StaticResource textBorderColor}"/>
-
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <controls:IconLabel Text="&#xf030;" Type="Solid"/>
-                    <Label Style="{StaticResource buttonLabel}" Text="باز کردن دوربین"/>
-                </StackLayout>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Spacing="0">
-                <AbsoluteLayout>
-                    <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource largeFontSize}" VerticalTextAlignment="End" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="0.1,0,0.8,1" AbsoluteLayout.LayoutFlags="All"/>
-                </AbsoluteLayout>
-
-                <AbsoluteLayout>
-                    <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource largeFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11 ب 253" AbsoluteLayout.LayoutBounds="0.1,0,0.8,1" AbsoluteLayout.LayoutFlags="All"/>
-                </AbsoluteLayout>
-            </StackLayout>
-        </StackLayout>
+        <controls:MenuView/>
     </ContentPage.Content>
 </ContentPage>

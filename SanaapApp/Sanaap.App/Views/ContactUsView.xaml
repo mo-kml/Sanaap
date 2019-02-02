@@ -10,10 +10,6 @@
              ControlTemplate="{StaticResource masterTemplate}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="local:IconButton">
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
 
             <Style TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="Blue"/>
@@ -54,7 +50,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource primaryBlue}">
-            
+
 
             <Grid FlowDirection="RightToLeft" Margin="0,100,0,-100">
                 <Grid.RowDefinitions>
@@ -88,10 +84,10 @@
                 <BoxView  Grid.Row="7" Grid.ColumnSpan="2" HeightRequest="1"/>
                 <Label Text="ساعات کاری" Style="{StaticResource headLabel}" Grid.Row="8" Grid.Column="0"/>
                 <Label Text="6-12" Style="{StaticResource valueLabel}" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start"/>
-                
+
 
             </Grid>
-            
+
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,150,10,-150">
                 <local:IconButton TextColor="Green" Text="&#xf232;" Command="{Binding WhatsApp}" />

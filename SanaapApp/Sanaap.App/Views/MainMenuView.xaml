@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:carousel="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             x:Class="Sanaap.App.Views.MainMenuView" Title="سناپ  -  Sanaap" 
+             x:Class="Sanaap.App.Views.MainMenuView" Title="سناپ  -  Sanaap"
+             ControlTemplate="{StaticResource masterTemplate}"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,7 +45,25 @@
     <ScrollView BackgroundColor="Transparent">
 
         <AbsoluteLayout>
-        <ContentView AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
+
+            <carousel:CarouselViewControl Orientation="Horizontal"  AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
+                <carousel:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>1.jpg</x:String>
+                        <x:String>2.jpg</x:String>
+                        <x:String>3.jpg</x:String>
+                    </x:Array>
+                </carousel:CarouselViewControl.ItemsSource>
+                <carousel:CarouselViewControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Image Aspect="AspectFill" Source="{Binding .,Converter={StaticResource imageConverter}}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </carousel:CarouselViewControl.ItemTemplate>
+            </carousel:CarouselViewControl>
+
+            <!--<ContentView AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
             <ContentView.Content>
                 <carousel:CarouselView x:Name="Carousel">
                     <carousel:CarouselView.ItemsSource>
@@ -63,7 +82,7 @@
                     </carousel:CarouselView.ItemTemplate>
                 </carousel:CarouselView>
             </ContentView.Content>
-        </ContentView>
+        </ContentView>-->
 
             <StackLayout Spacing="15" Margin="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,1,1,0.72" AbsoluteLayout.LayoutFlags="PositionProportional,SizeProportional">
                 <StackLayout Orientation="Horizontal" Spacing="15">
@@ -135,7 +154,7 @@
                 </StackLayout>
 
             </StackLayout>
-    </AbsoluteLayout>
+        </AbsoluteLayout>
     </ScrollView>
 
 </ContentPage>

@@ -10,7 +10,7 @@ using Sanaap.App.Controls;
 using Sanaap.App.Dto;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
-using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Simple.OData.Client;
@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Sanaap.App.ViewModels
+namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestFilesViewModel : BitViewModelBase
     {
@@ -162,7 +162,7 @@ namespace Sanaap.App.ViewModels
 
                             Request = JsonConvert.DeserializeObject<EvlRequestItemSource>(await submitEvlRequestExpertResponse.Content.ReadAsStringAsync());
 
-                            await NavigationService.NavigateAsync(nameof(EvlRequestWaitView), new NavigationParameters
+                            await NavigationService.NavigateAsync(nameof(EvaluationRequestWaitView), new NavigationParameters
                             {
                                 { nameof(EvlRequestItemSource), Request }
                             });
