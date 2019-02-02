@@ -30,7 +30,7 @@
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 
-            <Style TargetType="local:IconButton">
+            <!--<Style TargetType="local:IconButton">
                 <Setter Property="BorderColor" Value="White"/>
                 <Setter Property="BorderWidth" Value="1"/>
                 <Setter Property="BackgroundColor" Value="DarkBlue"/>
@@ -40,7 +40,7 @@
                 <Setter Property="HeightRequest" Value="38"/>
                 <Setter Property="Type" Value="Solid"/>
                 <Setter Property="FontSize" Value="15"/>
-            </Style>
+            </Style>-->
 
             <Style TargetType="Frame" x:Key="ButtonsFrame">
                 <Setter Property="BackgroundColor" Value="White"/>
@@ -75,39 +75,39 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Text="نشانی" Style="{StaticResource headLabel}" Grid.Row="0" Grid.Column="0"/>
-                <Label Text="میرداماد - خیابان" Style="{StaticResource valueLabel}" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="تهران - خیابان ولی عصر - ابتدای یوسف آباد (خیابان سید جمال الدین اسد آبادی) - خیابان هفتم - پلاک 14 - ساختمان ایرانیان پوشش" Style="{StaticResource valueLabel}" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start"/>
                 <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1"/>
                 <Label Text="شماره تماس " Style="{StaticResource headLabel}" Grid.Row="2" Grid.Column="0"/>
                 <Label Text="77499855" Style="{StaticResource valueLabel}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start"/>
                 <BoxView  Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1"/>
                 <Label Text="فکس" Style="{StaticResource headLabel}" Grid.Row="4" Grid.Column="0"/>
-                <Label Text="4645645" Style="{StaticResource valueLabel}" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="5 - 88552084 - 021" Style="{StaticResource valueLabel}" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start"/>
                 <BoxView  Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="1"/>
                 <Label Text="وب سایت" Style="{StaticResource headLabel}" Grid.Row="6" Grid.Column="0"/>
-                <Label Text="google.com" Style="{StaticResource valueLabel}" Grid.Row="6" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="ipinsur.ir" Style="{StaticResource valueLabel}" Grid.Row="6" Grid.Column="1" HorizontalOptions="Start"/>
                 <BoxView  Grid.Row="7" Grid.ColumnSpan="2" HeightRequest="1"/>
                 <Label Text="ساعات کاری" Style="{StaticResource headLabel}" Grid.Row="8" Grid.Column="0"/>
-                <Label Text="6-12" Style="{StaticResource valueLabel}" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start"/>
+                <Label Text="8 الی 16" Style="{StaticResource valueLabel}" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start"/>
                 
 
             </Grid>
             
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,150,10,-150">
-                <local:IconButton TextColor="Green" Text="&#xf232;" Command="{Binding WhatsApp}" />
+                <!--<local:IconButton TextColor="Green" Text="&#xf232;" Command="{Binding WhatsApp}" />
                 <local:IconButton TextColor="Green" Text="&#xf2a0;" Command="{Binding Call}"/>
                 <local:IconButton TextColor="Blue" Text="&#xf2c6;" Command="{Binding Telegram}"/>
-                <local:IconButton TextColor="Red"  Text="&#xf16d;" Command="{Binding Instagram}"/>
+                <local:IconButton TextColor="Red"  Text="&#xf16d;" Command="{Binding Instagram}"/>-->
             </StackLayout>
 
             <Frame Style="{StaticResource ButtonsFrame}">
                 <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalOptions="Center">
-                    <Button Text="تماس با ما" TextColor="Black" Margin="10,-15,-10,-15" BackgroundColor="White" Command="{Binding ContactUs}"  />
-                    <BoxView BackgroundColor="Black" HeightRequest="50" WidthRequest="1" Margin="0,-20,0,-20"/>
-                    <Button Text="مسیریابی" Margin="-10,-15,15,-15" TextColor="Black" BackgroundColor="White" Command="{Binding Route}" />
+                    <Button TextColor="{StaticResource primaryBlue}" Text="تماس با ما" Margin="10,-15,-10,-15" BackgroundColor="White" Command="{Binding ContactUs}"  />
+                    <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="50" WidthRequest="1" Margin="0,-20,0,-20"/>
+                    <Button Text="مسیریابی" Margin="-10,-15,15,-15" TextColor="{StaticResource primaryBlue}" BackgroundColor="White" Command="{Binding Route}" />
                 </StackLayout>
             </Frame>
-            <maps:Map x:Name="map" Margin="0,-100,0,0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
+            <maps:Map x:Name="map" Margin="0,-100,0,0" AbsoluteLayout.LayoutBounds="0,.5,1,.5" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
 
         </StackLayout>
     </ContentPage.Content>
