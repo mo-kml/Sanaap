@@ -6,6 +6,7 @@
     xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.Prism"
     xmlns:control="clr-namespace:Sanaap.App.Controls"
     xmlns:convs="clr-namespace:Sanaap.App.Converters"
+    xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
     xmlns:syncfusionCombo="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
@@ -87,11 +88,6 @@
                 <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
             </Style>
 
-
-
-
-            <viewModels:MenuViewModelLocator x:Key="menuViewModelLocator" />
-
             <ControlTemplate x:Key="masterTemplate">
                 <navigationdrawer:SfNavigationDrawer
                     FlowDirection="LeftToRight"
@@ -127,12 +123,12 @@
                                         Text="{TemplateBinding Title}" />
                             </Grid>
 
-                            <ContentPresenter VerticalOptions="FillAndExpand" />
+                            <ContentPresenter x:Name="ContentPresenter" VerticalOptions="FillAndExpand" />
 
                         </StackLayout>
                     </navigationdrawer:SfNavigationDrawer.ContentView>
                     <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                        <control:MenuView BindingContext="{Binding MenuViewModel, Source={StaticResource menuViewModelLocator}}" />
+                        <control:MenuView NavigationDrawer="{x:Reference navigationDrawer}" bitViewProps:PartialViewProps.PartialViewParentPage="{TemplateBinding}"/>
                     </navigationdrawer:SfNavigationDrawer.DrawerContentView>
                 </navigationdrawer:SfNavigationDrawer>
             </ControlTemplate>

@@ -10,6 +10,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Sanaap.App.Controls;
 using Sanaap.App.Controls.ViewModels;
+using Sanaap.App.Events;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.Helpers.Implementations;
 using Sanaap.App.Services.Contracts;
@@ -47,19 +48,14 @@ namespace Sanaap.App
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
-#if DEBUG
-
             InitializeComponent();
-
-            LiveReload.Init();
-#endif
         }
 
         protected override async Task OnInitializedAsync()
         {
             InitializeComponent();
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjI1MUAzMTM2MmUzMjJlMzBMc1YxeXdSMEJCd0pWcUI0STRtL2djTGFkQUhVUTdXVGtoQm0rRGZZUlRBPQ==;MjI1MkAzMTM2MmUzMjJlMzBHK1VXS3MrZFFqQmNFK3RtR0FaTGRCaWY2VHFRdGhZbDJCS3ZyZmRsUzBZPQ==;MjI1M0AzMTM2MmUzMjJlMzBrbU1DU3orbUJaeFY4Q1cybTFpU0dzTVZNSWF1dHd3OUVuRFA2VVN1SmFrPQ==;MjI1NEAzMTM2MmUzMjJlMzBkSUhlT1VHU3ZYMjhRSVdCcFFhY1dXdTVuYmMrN1ZBckY1SlZRVHAxc2VVPQ==;MjI1NUAzMTM2MmUzMjJlMzBvb2V4WHZ1bk40cjVmRmVKcnk1ZUp3MHFLVUJhK3FlczlteUpwUEh6YUxVPQ==;MjI1NkAzMTM2MmUzMjJlMzBjWWhadEF1eHFTQzd0RHU0ZVVQN1FoUlBRcWZTdm8zamtEVXZXVEZCQ2w0PQ==;MjI1N0AzMTM2MmUzMjJlMzBMTUxaNXdiYkJ6ejBEKzg5VlM4SzN5ZDNvUUV3VElaVXM2SnkvaFIvejA0PQ==;MjI1OEAzMTM2MmUzMjJlMzBrRlE3Ykp2dTBnWEpVTlZwYWJyQW9CYkExTUl3SVI3TGE0ZUFmNWxUaXlJPQ==;NTQ5MzJAMzEzNjJlMzQyZTMwRUhkejlFelR5REwzVVNTRC8zaGtOWEZJNWxxRUJxTW9ZbWRUelNNWEJoTT0=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDM0QDMxMzYyZTMzMmUzMENvVC95ZVRKQUVLdjJMMjJ6MGNXOFBkanNnR3hIVkpDTnJIVkh6b3VQWXc9;NDM1QDMxMzYyZTMzMmUzMFdaTUFWU21TK3hZV3MzUUNxWWZJTWtPRmkxZGllakNndE5ZSDIxRUhEWHM9;NDM2QDMxMzYyZTMzMmUzMGZLMmJzTFhoQWJRS081Mk56VTFISlQxOThMVzZiS3J2WTdsR0sveU1CcG89;NDM3QDMxMzYyZTMzMmUzMEhpS2gza1NzNlhrMWtjS0tZanRpWG10NzEwcjYwb1hqUnNoOEZqWmZCa2M9;NDM4QDMxMzYyZTMzMmUzMFhpUUtnY1NXMFN5b1o4Nmd3cVpTUXA1NzdGZTQ1bmM5bElQL0NLY1Q1b0U9;NDM5QDMxMzYyZTMzMmUzMEJFcUduNHd3aG9tQUNLdnhEWUpycW5abUtpWmhJZVlkMFk3QkZKZjJVUXc9;NDQwQDMxMzYyZTMzMmUzMFNHM2Z2RmphRGZWTUtGRThDTWFaNmNlU0p6aFpRaC9OQmhUWkxNQ1RRZFE9;NDQxQDMxMzYyZTMzMmUzMFZ6WFUwWm81ZDMvTG8weDVybFBUQ1U0S1J5M2tHekxqaVdUTnVFTWJoVjg9;NDQyQDMxMzYyZTMzMmUzMERlVlkvRjZ2WnlkcmFuTm5SQUdPQ2tVVHNYY1Jla0UyeVVSZFdIaGRaVlk9;");
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
@@ -79,6 +75,10 @@ namespace Sanaap.App
 
             //eventAggregator.GetEvent<TokenExpiredEvent>()
             //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
+
+            eventAggregator.GetEvent<ToggleMenuEvent>()
+                .SubscribeAsync(async drawer => drawer.ToggleDrawer(), ThreadOption.UIThread);
+
 
             await CrossMedia.Current.Initialize();
 
@@ -104,7 +104,7 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestWaitView, EvaluationRequestWaitViewModel>();
-            //
+            containerRegistry.RegisterPartialView<MenuView, MenuViewModel>();
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
@@ -150,7 +150,6 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
-            containerBuilder.Register(c => new MenuViewModel(Container.Resolve<ISecurityService>(), NavigationService));
             containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>(), NavigationService));
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();

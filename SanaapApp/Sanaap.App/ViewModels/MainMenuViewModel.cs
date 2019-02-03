@@ -6,7 +6,6 @@ using Prism.Services;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
-using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,7 +34,7 @@ namespace Sanaap.App.ViewModels
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            try
+            if (parameters.GetNavigationMode() == NavigationMode.New)
             {
                 loginCancellationToken?.Cancel();
                 loginCancellationToken = new CancellationTokenSource();
@@ -49,10 +48,6 @@ namespace Sanaap.App.ViewModels
                         IsSynced = true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
             }
         }
 
