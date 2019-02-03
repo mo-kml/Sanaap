@@ -61,6 +61,7 @@ namespace Sanaap.App.ViewModels
                         }
                         else
                         {
+                            string error = ex.ToString();
                             throw;
                         }
                     }

@@ -71,7 +71,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ShowContentView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -93,8 +93,10 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
+            //ContentListViewModel
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
-            containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
+            //ShowContentViewModel
+            containerRegistry.RegisterForNav<ShowContentView, SampleViewModel>();
             //
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
@@ -102,8 +104,8 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestWaitView, EvaluationRequestWaitViewModel>();
-            //CommentListViewModel
-            containerRegistry.RegisterForNav<CommentListView, SampleViewModel>();
+            //
+            containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             //
@@ -123,7 +125,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://192.168.143.2:53148/"),
+                HostUri = new Uri("http://192.168.43.249:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
