@@ -73,7 +73,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(InsurancePolicyListView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestListView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -97,19 +97,21 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
             containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
+            //
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMapView, EvaluationRequestMapViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestWaitView, EvaluationRequestWaitViewModel>();
+            //
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
-            //
-            containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
+            //EvaluationRequestListViewModel
+            containerRegistry.RegisterForNav<EvaluationRequestListView, SampleViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();
