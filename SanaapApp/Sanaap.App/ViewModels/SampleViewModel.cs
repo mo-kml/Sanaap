@@ -12,18 +12,20 @@ namespace Sanaap.App.ViewModels
         public SampleViewModel(IDateHelper dateHelper)
         {
             _dateHelper = dateHelper;
-            Policies = new ObservableCollection<Test>(
+            Requests = new ObservableCollection<Test>(
                 new List<Test>
                 {
-                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
-                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
-                    new Test{ CarName="پژو 405", ColorName="صولتی", InsuranceEndDate="1398/2/3", InsuranceTypeName="شخص ثالث", PlateNumber="https://setare.com/files/fa/news/1394/2/27/306_232.png",InsuranceImage="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png"},
+                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
+                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
+                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
+                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
+                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"}
                 }
                 );
 
 
         }
-        public ObservableCollection<Test> Policies { get; set; }
+        public ObservableCollection<Test> Requests { get; set; }
 
 
         public string Month { get; set; }
@@ -47,11 +49,9 @@ namespace Sanaap.App.ViewModels
     }
     public class Test
     {
-        public string InsuranceImage { get; set; }
-        public string CarName { get; set; }
-        public string ColorName { get; set; }
-        public string InsuranceTypeName { get; set; }
-        public string InsuranceEndDate { get; set; }
-        public string PlateNumber { get; set; }
+        public int RequestId { get; set; }
+        public string RequestTypeName { get; set; }
+        public string Date { get; set; }
+        
     }
 }

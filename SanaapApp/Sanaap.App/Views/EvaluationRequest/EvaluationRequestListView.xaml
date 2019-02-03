@@ -4,25 +4,30 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             xmlns:extensions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
 
     <ContentPage.Resources>
-        <Style TargetType="Image">
-            <Setter Property="BackgroundColor" Value="Gray"/>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Light-FDFont}"/>
         </Style>
-        <Style x:Name="NegMargin" x:Key="NegMargin" TargetType="Label">
-            <Setter Property="Margin" Value="0,-10,0,0"/>
+        <Style TargetType="Label" x:Key="DateLabel">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Light-FDFont}"/>
         </Style>
         <Style x:Key="PipeBoxView" TargetType="BoxView">
             <Setter Property="WidthRequest" Value="1"/>
-            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
         </Style>
         <Style x:Name="HeaderLabel" x:Key="Header" TargetType="Label">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-        </Style>
-        <Style x:Key="NegMHL" BasedOn="HeaderLabel" TargetType="Label">
-            <Setter Property="Margin" Value="0,-10,0,0"/>
+            <Setter Property="FontFamily" Value="{StaticResource ShabnamFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -32,7 +37,7 @@
             <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
         <Style TargetType="Frame" x:Key="selectionFrame">
-            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="CornerRadius" Value="5"/>
             <Setter Property="HasShadow" Value="False"/>
             <Setter Property="Margin" Value="5,0,0,0"/>
         </Style>
@@ -41,7 +46,7 @@
     <ContentPage.Content>
         <navigationdrawer:SfNavigationDrawer DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
-                <StackLayout>
+                <StackLayout FlowDirection="RightToLeft">
                     <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
                         <ListView.Behaviors>
                             <b:EventToCommandBehavior EventName="ItemTapped" 
@@ -51,130 +56,143 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Margin="5,10,5,10">
+                                    <Grid Margin="0,20,0,10" >
+
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="1"/>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="100*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="1.7*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
-                                        <Label Text="{Binding RequestId}" Grid.Row="1" HorizontalOptions="Center" Style="{StaticResource NegMargin}"/>
-                                        <BoxView Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource PipeBoxView}"/>
-                                        <Image Grid.RowSpan="2" Grid.Column="2" Aspect="AspectFill" Source="{Binding Image}" />
-                                        <Label Grid.Column="3" Text="پرونده" />
-                                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding RequestTypeName}" Style="{StaticResource NegMHL}"/>
-                                        <Label Grid.Column="3" Grid.Row="1"/>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Column="4" Grid.Row="1">
-                                            <Label Text="تاریخ ثبت" Style="{StaticResource NegMargin}"/>
-                                            <Label Text="{Binding Date}" Style="{StaticResource NegMargin}"/>
+                                        <StackLayout Spacing="0">
+                                            <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
+                                            <Label Text="{Binding RequestId}" HorizontalOptions="Center"/>
                                         </StackLayout>
-                                            
                                         
+                                        <BoxView Grid.Column="1" Style="{StaticResource PipeBoxView}"/>
+
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal">
+                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=Car.png}" BackgroundColor="Transparent" />
+                                            <StackLayout Spacing="0">
+                                                <Label  Text="پرونده" Style="{StaticResource Header}" />
+                                                <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>
+                                            </StackLayout>
+                                        </StackLayout>
                                         
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Column="3">
+                                            <Label Text="تاریخ ثبت" Style="{StaticResource Header}" />
+                                            <Label Text="{Binding Date}"/>
+                                        </StackLayout>
+
+
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Button Text="استعلام پرونده" Clicked="InquiryDocument"/>
+                    <controls:SanaapFrame ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label Text="استعلام پرونده" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
+                        </StackLayout>
+                    </controls:SanaapFrame>
+
+                    <!--<Button Text="استعلام پرونده" Clicked="InquiryDocument"/>-->
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <StackLayout FlowDirection="LeftToRight" Margin="10,0,10,0"  BackgroundColor="{StaticResource primaryBackground}">
+                <AbsoluteLayout FlowDirection="RightToLeft" BackgroundColor="{StaticResource primaryBackground}">
 
-                    <!--<StackLayout Orientation="Horizontal">
-                        <Button Text="خودرو"/>
-                        <Button Text="درمان"/>
-                        <Button Text="اموال"/>
-                    </StackLayout>
-                    <Entry Keyboard="Numeric" Text="{Binding DocumentNumber}" Placeholder="شماره پرونده"/>
-                    <Button Text="استعلام" Command="{Binding Inquiry}"/>-->
-                    <Label Style="{StaticResource headerText}" Text="استعلام پرونده"/>
-                    <Label Style="{StaticResource subHeaderText}" Text="متنی برای زیر عنوان"/>
-                    <StackLayout Margin="10,0,10,0" HorizontalOptions="CenterAndExpand">
-                        <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                            <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer/>
-                                </Frame.GestureRecognizers>
-                                <Frame.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <StackLayout>
-                                    <Image Source="resource://Sanaap.App.Images.0.75x.MedKit.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
-                                    <Label HorizontalTextAlignment="Center" Text="درمان"/>
-                                </StackLayout>
-                            </Frame>
-
-                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer/>
-                                </Frame.GestureRecognizers>
-                                <Frame.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <StackLayout>
-                                    <Image Source="resource://Sanaap.App.Images.0.75x.Houce.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
-                                    <Label HorizontalTextAlignment="Center" Text="اموال"/>
-                                </StackLayout>
-                            </Frame>
-
-                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer/>
-                                </Frame.GestureRecognizers>
-                                <Frame.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                        <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <StackLayout>
-                                    <Image Source="resource://Sanaap.App.Images.0.75x.Car.png" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill"/>
-                                    <Label HorizontalTextAlignment="Center" Text="خودرو"/>
-                                </StackLayout>
-                            </Frame>
-
-
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0,20,0,0">
+                            <Label Style="{StaticResource headerText}" Text="استعلام پرونده"/>
+                            <Label Style="{StaticResource subHeaderText}" Text="متنی برای زیر عنوان"/>
                         </StackLayout>
 
-                        <controls:SanaapEntry  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
+                        <StackLayout VerticalOptions="Start" Spacing="20">
+                            <StackLayout Orientation="Horizontal" >
+
+                                <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer/>
+                                    </Frame.GestureRecognizers>
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <StackLayout>
+                                        <Image Source="{extensions:Image FileName=Car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer/>
+                                    </Frame.GestureRecognizers>
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <StackLayout>
+                                        <Image Source="{extensions:Image FileName=Houce.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer/>
+                                    </Frame.GestureRecognizers>
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="false"
+                                                 TargetType="Frame">
+                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <StackLayout>
+                                        <Image Source="{extensions:Image FileName=Medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
+                                    </StackLayout>
+                                </Frame>
+
+
+                            </StackLayout>
+
+                            <controls:SanaapEntry  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
+                        </StackLayout>
+
                     </StackLayout>
-                    <Button Text="استعلام" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
-                </StackLayout>
+                    <!--<Button  Text="استعلام" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,60"  HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>-->
+                        <controls:SanaapFrame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,.17" ShadowOffset="50" CornerRadius="0" BackgroundColor="{StaticResource primaryBlue}" >
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label Text="استعلام" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+                    </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
