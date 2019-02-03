@@ -40,8 +40,6 @@ namespace Sanaap.App.Droid
             SvgCachedImage.Init();
             UserDialogs.Init(this);
 
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
 

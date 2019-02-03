@@ -23,6 +23,9 @@
         <StackLayout x:Name="stackLayout" Padding="10" BindingContext="{Binding Source={StaticResource insuranceListPopupViewModelLocator},Path=InsuranceListPopupViewModel}">
             <Label Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
             <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="Item"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

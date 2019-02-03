@@ -4,7 +4,7 @@
              x:Class="Sanaap.App.Controls.MenuView"
              FlowDirection="LeftToRight"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
-             BackgroundColor="{StaticResource blueBackgroundColor}">
+             BackgroundColor="{StaticResource blueBackgroundColor}" >
     <ContentView.Resources>
         <!--<ResourceDictionary>
             <Style TargetType="Frame">
@@ -43,7 +43,7 @@
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding GoToPage}" CommandParameter="MainMenuView" />
                         </Label.GestureRecognizers>
-                    </Label> 
+                    </Label>
                     <BoxView/>
                     <Label Text="پرونده ها" >
                         <Label.GestureRecognizers>
