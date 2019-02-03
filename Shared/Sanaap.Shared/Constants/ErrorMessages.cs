@@ -33,7 +33,7 @@
         public const string TaeenKarshenas = "تعیین کارشناس";
         public const string Cancel = "انصراف";
         public const string Complete = "تکمیل فرایند";
-        public const string Sales = "ثالث";
-        public const string Badane = "بدنه";
+        public const string Sales = "بیمه ثالث";
+        public const string Badane = "بیمه بدنه";
     }
 }

@@ -72,8 +72,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
         public async Task loadInsurances()
         {
-            System.Collections.Generic.List<PolicyItemSource> insurances = await _policyService.LoadAllInsurances();
-            Insurances = new ObservableCollection<PolicyItemSource>(insurances);
+            Insurances = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurances());
         }
     }
 }
