@@ -9,11 +9,12 @@ namespace Sanaap.App.Controls
         public SanaapComboBox()
         {
             InitializeComponent();
+
         }
 
         public virtual View Content { get; set; }
 
-        public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#e2e2e2"), BindingMode.TwoWay);
+        public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#e8e8e8"), BindingMode.TwoWay);
         public Color BorderColor
         {
             get => (Color)GetValue(BorderColorProperty);
@@ -27,6 +28,13 @@ namespace Sanaap.App.Controls
             set => SetValue(TextProperty, value);
         }
 
+        public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(SanaapComboBox), null, BindingMode.TwoWay);
+        public string Placeholder
+        {
+            get => (string)GetValue(PlaceholderProperty);
+            set => SetValue(PlaceholderProperty, value);
+        }
+
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(SanaapComboBox), null, BindingMode.TwoWay);
         public string FontFamily
         {
@@ -34,7 +42,7 @@ namespace Sanaap.App.Controls
             set => SetValue(FontFamilyProperty, value);
         }
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SanaapComboBox), Color.Black, BindingMode.TwoWay);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#bfbfbf"), BindingMode.TwoWay);
         public Color TextColor
         {
             get => (Color)GetValue(TextColorProperty);

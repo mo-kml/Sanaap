@@ -69,6 +69,9 @@
             </ListView>
 
             <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreatePolicy}"/>
+                </Frame.GestureRecognizers>
                 <StackLayout Orientation="Horizontal">
                     <controls:IconLabel Text="&#xf067;" Type="Solid" TextColor="{StaticResource actionBlueButton}" VerticalOptions="Center"/>
                     <Label Text="افزودن بیمه نامه" TextColor="{StaticResource buttonTextWhite}"/>

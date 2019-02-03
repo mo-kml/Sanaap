@@ -137,7 +137,7 @@
                                 <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
                                 <controls:SanaapComboBox
-                                Text="fdfasd"
+                                Text="نام خودرو"
                                 AllowFiltering="True"
                                 DataSource="{Binding Cars}"
                                 DisplayMemberPath="Name"
@@ -150,7 +150,7 @@
                                     <!--<controls:SanaapEntry Text="{Binding Request.PlateNumber}" />-->
                                     <controls:SanaapEntry HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
                                     <controls:SanaapEntry MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
-                                    <controls:SanaapComboBox Text="حdddرف" HorizontalOptions="FillAndExpand" />
+                                    <controls:SanaapComboBox Text="حرف" HorizontalOptions="FillAndExpand" />
                                     <controls:SanaapEntry MaxLength="2" Keyboard="Numeric" />
                                 </StackLayout>
                             </StackLayout>

@@ -8,115 +8,79 @@
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     NavigationPage.HasNavigationBar="False"
+    xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     Padding="30,40,30,40"
     HasSystemPadding="True"
     SystemPaddingSides="All"
     x:Name="createInsuranceView">
-    <Frame CornerRadius="15" BackgroundColor="White">
-        <ScrollView>
-            <StackLayout>
+    <Frame CornerRadius="15" Padding="0">
+        <AbsoluteLayout IsClippedToBounds="True">
+            <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
 
-                <Label Text="افزودن بیمه نامه" Style="{StaticResource headerText}"/>
-                <Label Text="متنی برای زیر عنوان" Style="{StaticResource subHeaderText}" Margin="0,-15,0,0"/>
+                <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-                <Label Text="نام خودرو" />
-                <controls:SanaapComboBox
-    AllowFiltering="True"
-      DataSource="{Binding Cars}"
-      DisplayMemberPath="Name"
-      IsEditableMode="True"
-      SelectedItem="{Binding SelectedCar}" />
+                    <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
+                        <StackLayout Padding="0,0,0,30" Spacing="10">
 
-                <Label Text="رنگ خودرو" />
-                <controls:SanaapComboBox
-    AllowFiltering="True"
-      DataSource="{Binding Colors}"
-      DisplayMemberPath="Name"
-      IsEditableMode="True"
-      SelectedItem="{Binding SelectedColor}" />
+                            <Label Text="افزودن بیمه نامه" Style="{StaticResource headerText}"/>
 
-                <!--<Label Text="شماره شاسی" />-->
-                <controls:SanaapEntry Text="{Binding Policy.ChasisNo}" Placeholder="شماره شاسی" />
+                            <StackLayout Orientation="Horizontal" >
+                                <controls:SanaapComboBox
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="نام خودرو"
+                                    AllowFiltering="True"
+                                    DataSource="{Binding Cars}"
+                                    DisplayMemberPath="Name"
+                                    IsEditableMode="True"
+                                    SelectedItem="{Binding SelectedCar}" />
+                                <controls:SanaapComboBox Text="رنگ خودرو" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
 
-                <!--<Label Text="شماره VIN" />-->
-                <controls:SanaapEntry Text="{Binding Policy.VIN}" Placeholder="شماره VIN"/>
-
-                <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft" >
-                    <Label  Text="بیمه" WidthRequest="50" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                    <syncfusion:SfListView Orientation="Horizontal"  ItemsSource="{Binding Insurers}" HeightRequest="80" ItemSize="80" ItemSpacing="10,0,0,0">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-
-                                <Frame BorderColor="Black" CornerRadius="5" >
-                                    <StackLayout >
-
-                                        <StackLayout.Triggers>
-                                            <DataTrigger TargetType="StackLayout"
-                           Binding="{Binding IsSelected}" Value="False">
-                                                <Setter Property="BackgroundColor" Value="White"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="StackLayout"
-                           Binding="{Binding IsSelected}" Value="True">
-                                                <Setter Property="BackgroundColor" Value="Gray"/>
-                                            </DataTrigger>
-                                        </StackLayout.Triggers>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference createInsuranceView}}" CommandParameter="{Binding .}"/>
-                                        </StackLayout.GestureRecognizers>
-
-                                        <Image BackgroundColor="Gray" VerticalOptions="StartAndExpand" Source="{Binding Image}" Aspect="AspectFill" HeightRequest="80" Margin="-20,-20,-20,-40"/>
+                            <controls:SanaapEntry Placeholder="شماره شاسی" Text="{Binding Request.InsurerNo}" />
+                            <controls:SanaapEntry Placeholder="شماره VIN" Text="{Binding Request.InsurerNo}" />
+                            <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
 
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>
+                            <StackLayout Orientation="Horizontal">
 
-                    <!--Prev ListView-->
+                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                    <!--<syncfusion:SfListView Orientation="Horizontal" HeightRequest="100" ItemsSource="{Binding Insurers}" >
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout"
-                           Binding="{Binding IsSelected}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="White"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="StackLayout"
-                           Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectInsurer,Source={x:Reference requestDetailView}}" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <Image Source="{Binding Image}" HeightRequest="60"/>
-                                    <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>-->
+                                <syncfusion:SfListView FocusBorderColor="Red" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60" TapCommand="{Binding SelectInsurer}" TapCommandParameter="Item">
+                                    <syncfusion:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
+                                                <StackLayout >
+                                                    <Image HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </syncfusion:SfListView.ItemTemplate>
+                                </syncfusion:SfListView>
 
-                    <!--Prev ListView-->
+                            </StackLayout>
 
-                </StackLayout>
-                <!--<Label Text="شماره بیمه نامه" />-->
-                <controls:SanaapEntry Text="{Binding Policy.InsurerNo}" Placeholder="شماره بیمه نامه" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="پلاک" VerticalOptions="Center"/>
+                                <!--<controls:SanaapEntry Text="{Binding Request.PlateNumber}" />-->
+                                <controls:SanaapEntry HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
+                                <controls:SanaapEntry MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                                <controls:SanaapComboBox Text="حرف" HorizontalOptions="FillAndExpand" />
+                                <controls:SanaapEntry MaxLength="2" Keyboard="Numeric" />
+                            </StackLayout>
 
-                <!--<Label Text="پلاک" />-->
-                <controls:SanaapEntry Text="{Binding Policy.PlateNumber}" Placeholder="پلاک" />
+                            <controls:SanaapComboBox Text="{Binding Request.InsurerNo}" />
 
-                <Label Text="نوع بیمه نامه" />
-                <controls:SanaapComboBox
-    DataSource="{Binding InsuranceTypes}"
-    DisplayMemberPath="InsuranceTypeName"
-    SelectedItem="{Binding SelectedInsuranceType}" />
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
 
-                <Button Command="{Binding Submit}" Text="{Binding SubmitButtonText}" Margin="-40,0,-40,0" />
-            </StackLayout>
-        </ScrollView>
+            </Frame>
+            <Label AbsoluteLayout.LayoutBounds="1,1.01,1,0.15" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </AbsoluteLayout>
     </Frame>
 </popup:PopupPage>

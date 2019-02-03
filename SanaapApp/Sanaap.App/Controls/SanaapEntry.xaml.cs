@@ -10,7 +10,7 @@ namespace Sanaap.App.Controls
             InitializeComponent();
         }
 
-        public static BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(SanaapEntry), Color.FromHex("#e2e2e2"), BindingMode.TwoWay);
+        public static BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(SanaapEntry), Color.FromHex("#bfbfbf"), BindingMode.TwoWay);
         public Color BorderColor
         {
             get => (Color)GetValue(BorderColorProperty);
@@ -38,7 +38,7 @@ namespace Sanaap.App.Controls
             set => SetValue(PlaceholderProperty, value);
         }
 
-        public static BindableProperty PlaceholderColorProperty = BindableProperty.Create(nameof(PlaceholderColor), typeof(Color), typeof(SanaapEntry), Color.FromHex("#e2e2e2"), BindingMode.TwoWay);
+        public static BindableProperty PlaceholderColorProperty = BindableProperty.Create(nameof(PlaceholderColor), typeof(Color), typeof(SanaapEntry), Color.FromHex("#bfbfbf"), BindingMode.TwoWay);
         public Color PlaceholderColor
         {
             get => (Color)GetValue(PlaceholderColorProperty);

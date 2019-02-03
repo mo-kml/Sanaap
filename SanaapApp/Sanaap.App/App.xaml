@@ -6,6 +6,7 @@
     xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.Prism"
     xmlns:control="clr-namespace:Sanaap.App.Controls"
     xmlns:convs="clr-namespace:Sanaap.App.Converters"
+    xmlns:syncfusionCombo="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
@@ -79,6 +80,13 @@
                 <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
             </Style>
 
+            <Style TargetType="syncfusionCombo:SfComboBox">
+                <Setter Property="TextSize" Value="{StaticResource ultraSmallFontSize}"/>
+                <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+                <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+                <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+            </Style>
+
 
 
 
@@ -95,12 +103,12 @@
                         VerticalOptions="FillAndExpand">
                     <navigationdrawer:SfNavigationDrawer.ContentView>
                         <StackLayout Spacing="0">
-                                <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="40" />
-                                    </Grid.ColumnDefinitions>
-                                    <control:IconButton
+                            <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <control:IconButton
                                         Grid.Column="1"
                                         BackgroundColor="Transparent"
                                         BindingContext="{x:Reference navigationDrawer}"
@@ -110,18 +118,18 @@
                                         HorizontalOptions="End"
                                         Text="&#xf0c9;"
                                         Type="Solid" />
-                                    <Label
+                                <Label
                                         HorizontalTextAlignment="Start"
                                         VerticalTextAlignment="Center"
                                         FontFamily="{StaticResource Shabnam-Bold-FDFont}"
                                         FontSize="{StaticResource mediumFontSize}"
                                         TextColor="{StaticResource buttonTextWhite}"
                                         Text="{TemplateBinding Title}" />
-                                </Grid>
-                                
-                        <ContentPresenter VerticalOptions="FillAndExpand" />
-                        
-                            </StackLayout>
+                            </Grid>
+
+                            <ContentPresenter VerticalOptions="FillAndExpand" />
+
+                        </StackLayout>
                     </navigationdrawer:SfNavigationDrawer.ContentView>
                     <navigationdrawer:SfNavigationDrawer.DrawerContentView>
                         <control:MenuView BindingContext="{Binding MenuViewModel, Source={StaticResource menuViewModelLocator}}" />
