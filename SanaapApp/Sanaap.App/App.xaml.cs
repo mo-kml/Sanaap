@@ -108,8 +108,8 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
-            //EvaluationRequestListViewModel
-            containerRegistry.RegisterForNav<EvaluationRequestListView, SampleViewModel>();
+            //
+            containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();
