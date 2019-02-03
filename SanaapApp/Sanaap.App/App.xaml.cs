@@ -73,7 +73,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestListView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(CommentListView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -104,14 +104,14 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestWaitView, EvaluationRequestWaitViewModel>();
-            //
-            containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
+            //CommentListViewModel
+            containerRegistry.RegisterForNav<CommentListView, SampleViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
-            //EvaluationRequestListViewModel
-            containerRegistry.RegisterForNav<EvaluationRequestListView, SampleViewModel>();
+            //
+            containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();

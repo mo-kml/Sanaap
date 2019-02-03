@@ -12,20 +12,20 @@ namespace Sanaap.App.ViewModels
         public SampleViewModel(IDateHelper dateHelper)
         {
             _dateHelper = dateHelper;
-            Requests = new ObservableCollection<Test>(
+            Comments = new ObservableCollection<Test>(
                 new List<Test>
                 {
-                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
-                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
-                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
-                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"},
-                    new Test{ RequestId=1235673, RequestTypeName="خودرو", Date="1398/2/3"}
+                    new Test{ Code=1235673, StatusTypeName="پاسخ داده شده", CreatedOn=DateTimeOffset.Now},
+                    new Test{ Code=1235673, StatusTypeName="در حال برسی", CreatedOn=DateTimeOffset.Now},
+                    new Test{ Code=1235673, StatusTypeName="پاسخ داده شده", CreatedOn=DateTimeOffset.Now},
+                    new Test{ Code=1235673, StatusTypeName="در حال برسی", CreatedOn=DateTimeOffset.Now},
+                    new Test{ Code=1235673, StatusTypeName="پاسخ داده شده", CreatedOn=DateTimeOffset.Now}
                 }
                 );
 
 
         }
-        public ObservableCollection<Test> Requests { get; set; }
+        public ObservableCollection<Test> Comments { get; set; }
 
 
         public string Month { get; set; }
@@ -49,9 +49,9 @@ namespace Sanaap.App.ViewModels
     }
     public class Test
     {
-        public int RequestId { get; set; }
-        public string RequestTypeName { get; set; }
-        public string Date { get; set; }
+        public int Code { get; set; }
+        public string StatusTypeName { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
         
     }
 }

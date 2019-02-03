@@ -5,8 +5,23 @@
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.Comment.CommentListView"
              xmlns:controls="clr-namespace:Sanaap.App.Controls">
+
+    <ContentPage.Resources>
+        <Style x:Key="HeaderLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource ShabnamFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+        </Style>
+        
+    </ContentPage.Resources>
+    
+    
     <ContentPage.Content>
-        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="460" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <AbsoluteLayout FlowDirection="RightToLeft">
                     <ListView HasUnevenRows="True" ItemsSource="{Binding Comments}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
@@ -18,48 +33,48 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Padding="10,10,10,10">
-                                        <Grid >
+                                    <StackLayout>
+                                        <Grid Margin="10,15,10,15">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="5"/>
-                                                <ColumnDefinition Width="1"/>
-                                                <ColumnDefinition Width="5"/>
-                                                <ColumnDefinition Width="100*"/>
-                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width=".8"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1.5*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="17"/>
-                                                <RowDefinition Height="20*"/>
-                                            </Grid.RowDefinitions>
 
 
-                                            <Label  Text="کد پیگیری" FontSize="12"  HorizontalOptions="Center" Grid.Column="0"/>
+                                            <StackLayout Grid.Column="0" Spacing="0">
 
-                                            <Label Text="{Binding Code}" FontSize="12" Margin="0,-5,0,0" TextColor="Black" Grid.Column="0" HorizontalOptions="Center" FontAttributes="Bold" Grid.Row="1"/>
+                                                <Label  Text="کد پیگیری" Style="{StaticResource HeaderLabel}"  HorizontalOptions="Center" Grid.Column="0"/>
 
+                                                <Label Text="{Binding Code}"   TextColor="Black" Grid.Column="0" HorizontalOptions="Center" FontAttributes="Bold"/>
 
-                                            <BoxView Margin="0,7,0,7"  WidthRequest="1" Grid.Column="2" Grid.RowSpan="2"  BackgroundColor="Gray"  />
-
-
-
-                                            <Label  Text="وضعیت" Grid.Column="4"/>
-
-                                            <Label  Text="{Binding StatusTypeName}" Margin="0,-5,0,0" Grid.Column="4" TextColor="Black" FontSize="15" FontAttributes="Bold" Grid.Row="1">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label"
-                                                     Binding="{Binding StatusTypeName}"
-                                                     Value="پاسخ داده شد">
-                                                        <Setter Property="TextColor" Value="Navy"/>
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
+                                            </StackLayout>
+                                            
 
 
-                                            <StackLayout Orientation="Horizontal" Grid.Column="5" Margin="0,-7,0,0" HorizontalOptions="End"  Padding="2,5,0,0" Grid.Row="1">
+                                            <BoxView   Grid.Column="1"   BackgroundColor="{StaticResource primaryGray}"  />
 
-                                                <Label Text="تاریخ ثبت" FontSize="12"/>
+
+                                            <StackLayout Grid.Column="2" Margin="0,0,10,0" Spacing="0">
+                                                <Label Style="{StaticResource HeaderLabel}" Text="وضعیت" />
+
+                                                <Label  Text="{Binding StatusTypeName}"  TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontAttributes="Bold" >
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label"
+                                                         Binding="{Binding StatusTypeName}"
+                                                         Value="پاسخ داده شده">
+                                                            <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
+                                                            <Setter Property="FontFamily" Value="{StaticResource Shabnam-BoldFont}"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Grid.Column="3" HorizontalOptions="End" VerticalOptions="EndAndExpand">
+
+                                                <Label Text="تاریخ ثبت" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
 
                                                 <Label Text="{Binding CreatedOn,StringFormat='{0:M/d/yy}'}" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
 
@@ -75,41 +90,29 @@
                 </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <StackLayout BackgroundColor="{StaticResource primaryBackground}" FlowDirection="RightToLeft">
-                    <Label FontFamily="{StaticResource Shabnam-BoldFont}" Text="ثبت پیام یا شکایت جدید" Margin="0,0,7,0" Style="{StaticResource headerText}"/>
-                    <Label Text="متنی برای زیر عنوان" Margin="0,-6,7,0" Style="{StaticResource subHeaderText}" />
+                <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}" FlowDirection="RightToLeft">
+                    <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="5,10,10,0">
+                        <StackLayout Spacing="0" Margin="0,0,15,10">
+                            <Label Text="ثبت پیام یا شکایت جدید" Style="{StaticResource headerText}"/>
+                        </StackLayout>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <!--<RowDefinition Height="*"/>-->
-                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Horizontal">
+                            <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="7,0,0,5"/>
 
-                        <controls:SanaapEntry  Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="7,0,0,5"/>
-                        <!--<Label Text="نام" Grid.Column="1"/>-->
+                            <controls:SanaapEntry HorizontalOptions="FillAndExpand" Text="{Binding Comment.LastName}" Padding="7,0,0,5" Placeholder="نام خانوادگی"/>
+                        </StackLayout>
+                        <controls:SanaapEntry Keyboard="Numeric" MaxLength="11"  Text="{Binding Comment.Mobile}" Padding="7,0,0,5" Placeholder="شماره تماس"/>
 
-                        <controls:SanaapEntry Text="{Binding Comment.LastName}" Grid.Column="1" Padding="7,0,0,5" Placeholder="نام خانوادگی"/>
-                        <!--<Label Text="نام خانوادگی" Grid.Row="1" Grid.Column="1"/>-->
+                        <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن " HeightRequest="150" Padding="7,0,0,5" />
 
-                        <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Grid.ColumnSpan="2" Text="{Binding Comment.Mobile}" Padding="7,0,0,5" Placeholder="شماره تماس" Grid.Row="1"/>
-                        <!--<Label Text="شماره تماس" Grid.Row="2" Grid.Column="1"/>-->
-
-
-
-                    </Grid>
-
-                    <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن " HeightRequest="100" Padding="7,0,0,5" />
-                    <!--<Label Text="متن شکایت/ پیشنهاد"/>-->
-
-                    <controls:SanaapComboBox HeightRequest="40" Text="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
-
-                    <Button Text="ثبت" FontFamily="{StaticResource Shabnam-BoldFont}" FontSize="20" TextColor="{StaticResource buttonTextWhite}" Command="{Binding CreateComment}" HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}" Margin="-5,10,-5,0"/>
-                </StackLayout>
+                        <controls:SanaapComboBox HeightRequest="40" Text="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
+                    </StackLayout>
+                    <controls:SanaapFrame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,.14" ShadowOffset="50" CornerRadius="0" BackgroundColor="{StaticResource primaryBlue}" >
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label Text="ثبت" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="{StaticResource buttonTextWhite}"/>
+                        </StackLayout>
+                    </controls:SanaapFrame>
+                </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
