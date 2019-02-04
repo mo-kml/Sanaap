@@ -36,7 +36,6 @@
             <StackLayout>
                 <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="200"/>
 
-                <!---->
                     <Grid Margin="10,10,20,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -53,11 +52,7 @@
 
                         <Label FontSize="{StaticResource smallFontSize}" Text="1397/10/23" Style="{StaticResource TopLabels}"/>
                         <Label FontSize="{StaticResource smallFontSize}" Text="دسته بندی" Grid.Column="2" Style="{StaticResource TopLabels}"/>
-                        <!--<local:IconLabel FontSize="{StaticResource smallFontSize}"  BackgroundColor="{StaticResource primaryBackground}" VerticalOptions="CenterAndExpand" Type="Solid" Text="&#xf1e0; اشتراک گذاری"  Grid.Column="4" HorizontalOptions="Center">
-                            <local:IconLabel.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Share}"/>
-                            </local:IconLabel.GestureRecognizers>
-                        </local:IconLabel>-->
+
                 <StackLayout Orientation="Horizontal" Grid.Column="4">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Share}"/>
@@ -65,50 +60,45 @@
                     <Image Source="{extentions:Image FileName=Share.png}" VerticalOptions="CenterAndExpand" Aspect="AspectFit" WidthRequest="15" HeightRequest="15"/>
                     <Label Text="اشتراک گذاری" FontFamily="{StaticResource Shabnam-FDFont}" TextColor="{StaticResource primaryGray}" VerticalTextAlignment="Center"/>
                 </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
+                <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Like}"/>
                     </StackLayout.GestureRecognizers>
                     <Label Text="{Binding Content.Likes}" FontFamily="{StaticResource Shabnam-FDFont}" TextColor="{StaticResource primaryGray}"/>
                     <local:IconLabel BackgroundColor="{StaticResource primaryBackground}" Style="{StaticResource Like}" Text="&#xf004;">
-                            
-                            
-                            
-                            <local:IconLabel.Triggers>
-                                <DataTrigger Binding="{Binding Content.YourLike}"
+
+                        <local:IconLabel.Triggers>
+                            <DataTrigger Binding="{Binding Content.YourLike}"
                                          Value="True"
                                          TargetType="local:IconLabel">
-                                    <Setter Property="TextColor" Value="Red"/>
-                                    <Setter Property="Type" Value="Solid"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Content.YourLike}"
+                                <Setter Property="TextColor" Value="Red"/>
+                                <Setter Property="Type" Value="Solid"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Content.YourLike}"
                                          Value="False"
                                          TargetType="local:IconLabel">
-                                    <Setter Property="TextColor" Value="Black"/>
-                                    <Setter Property="Type" Value="Regular"/>
-                                </DataTrigger>
-                            </local:IconLabel.Triggers>
-                            <!--<local:IconLabel.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Like}"/>
-                            </local:IconLabel.GestureRecognizers>-->
-                        </local:IconLabel>
+                                <Setter Property="TextColor" Value="Black"/>
+                                <Setter Property="Type" Value="Regular"/>
+                            </DataTrigger>
+                        </local:IconLabel.Triggers>
+                    </local:IconLabel>
 
-                    
+
 
 
                 </StackLayout>
 
-                        <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="1"/>
-                        <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="3"/>
-                        <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="5"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="1"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="3"/>
+                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="5"/>
 
-                    </Grid>
+                </Grid>
 
                 <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource primaryGray}" Margin="10,0,10,0" HeightRequest=".5" />
 
                 <Label Margin="30,10,30,10" VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Content.Title}" Style="{StaticResource Title}" TextColor="Black"/>
-                <!---->
+
                 <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource primaryGray}"  Margin="10,0,10,0" HeightRequest=".5" />
 
                 <WebView BackgroundColor="Red" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowDirection="RightToLeft" Margin="10,0,10,0">
@@ -116,23 +106,8 @@
                         <HtmlWebViewSource Html="{Binding Content.Text}"/>
                     </WebView.Source>
                 </WebView>
-
-                <!---->
             </StackLayout>
 
-            </ScrollView>
-
-            <!--<ScrollView AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout>
-                    <Label Text="{Binding Content.Title}" />
-                    <Image Source="{Binding Content.Image}" Aspect="AspectFill"/>
-                    <Label Text="{Binding Content.Text}" LineBreakMode="WordWrap"/>
-                </StackLayout>
-            </ScrollView>
-            <StackLayout AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal" HorizontalOptions="Center">
-                <local:IconButton Type="Solid" Text="&#xf004;" Command="{Binding Like}"/>
-                <local:IconButton Type="Solid" Text="&#xf064;" Command="{Binding Share}"/>
-            </StackLayout>-->
-                <!--</AbsoluteLayout>-->
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
