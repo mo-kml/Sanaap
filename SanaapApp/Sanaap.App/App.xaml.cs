@@ -67,7 +67,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ShowContentView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -93,10 +93,10 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
-            //ContentListViewModel
+            //
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
-            //ShowContentViewModel
-            containerRegistry.RegisterForNav<ShowContentView, SampleViewModel>();
+            //
+            containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
             //
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();

@@ -7,11 +7,26 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
              NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Like">
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Title">
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
+            <Setter Property="FontSize" Value="{StaticResource mediumFontSize}"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="320" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}">
-                    <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                    <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" SeparatorVisibility="None"
                       ItemsSource="{Binding Contents}"  FlowDirection="RightToLeft">
                         <ListView.Behaviors>
                             <b:EventToCommandBehavior EventName="ItemTapped" 
@@ -21,47 +36,67 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Margin="7,5,7,5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="60"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="150"/>
-                                            <ColumnDefinition Width="200*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Frame CornerRadius="5" Grid.RowSpan="2" HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
-                                            <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
-                                        </Frame>
+                                    <StackLayout>
+                                        <Grid Margin="5,10,5,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="6*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
 
-                                        <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HeightRequest="50" Text="{Binding Title}" Grid.Column="1"/>
-                                        <WebView BackgroundColor="Red" HeightRequest="70" Grid.Column="1" Grid.Row="1">
-                                            <WebView.Source>
-                                                <HtmlWebViewSource Html="{Binding Text}"/>
-                                            </WebView.Source>
-                                        </WebView>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="2" Margin="0,0,0,-5">
-                                            <controls:IconLabel Text="{Binding Likes,StringFormat='&#xf004; {0}'}" Margin="0,0,0,-5" FontSize="12">
-                                                <controls:IconLabel.Triggers>
-                                                    <DataTrigger TargetType="controls:IconLabel"
+                                            </Grid.RowDefinitions>
+
+                                            <Frame CornerRadius="5" Grid.Column="0"  HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
+                                                <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
+                                            </Frame>
+
+                                            <StackLayout Grid.Column="1" Spacing="0">
+                                                <Label TextColor="Black" Style="{StaticResource Title}" Text="{Binding Title}" Grid.Column="1"/>
+
+                                                <WebView BackgroundColor="Red" HeightRequest="70" Margin="5,0,5,0">
+                                                    <WebView.Source>
+                                                        <HtmlWebViewSource Html="{Binding Text}"/>
+                                                    </WebView.Source>
+                                                </WebView>
+
+                                                <!--<Label Text="{Binding Text}" MaxLines="3" LineBreakMode="TailTruncation"/>-->
+
+
+                                            </StackLayout>
+
+                                        </Grid>
+
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10,0,10,0">
+
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Like}"/>
+                                                </StackLayout.GestureRecognizers>
+                                                
+                                                <Label Text="{Binding Likes}" Style="{StaticResource Like}"/>
+                                                <controls:IconLabel Text="&#xf004;" HorizontalOptions="Start" Style="{StaticResource Like}">
+                                                    <controls:IconLabel.Triggers>
+                                                        <DataTrigger TargetType="controls:IconLabel"
                                                      Binding="{Binding YourLike}"
                                                      Value="1">
-                                                        <Setter Property="Type" Value="Solid"/>
-                                                        <Setter Property="TextColor" Value="Red"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger TargetType="controls:IconLabel"
+                                                            <Setter Property="Type" Value="Solid"/>
+                                                            <Setter Property="TextColor" Value="Red"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="controls:IconLabel"
                                                      Binding="{Binding YourLike}"
                                                      Value="0">
-                                                        <Setter Property="Type" Value="Regular"/>
-                                                        <Setter Property="TextColor" Value="Black"/>
-                                                    </DataTrigger>
-                                                </controls:IconLabel.Triggers>
-                                            </controls:IconLabel>
+                                                            <Setter Property="Type" Value="Regular"/>
+                                                            <Setter Property="TextColor" Value="Black"/>
+                                                        </DataTrigger>
+                                                    </controls:IconLabel.Triggers>
+                                                </controls:IconLabel>
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0,10,0" HeightRequest=".5"/>
 
+                                            <Label HorizontalOptions="End" VerticalOptions="Center" Text="{Binding Date}"/>
                                         </StackLayout>
-                                        <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="End" Font="13" Text="{Binding Date}"/>
-                                    </Grid>
+                                    </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -72,15 +107,15 @@
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
                 <StackLayout BackgroundColor="{StaticResource primaryBackground}" FlowDirection="RightToLeft">
-                    <Label Text="فیلتر و جست و جو" Style="{StaticResource headerText}"/>
-                    <Label Text="متنی برای زیر عنوان" Style="{StaticResource subHeaderText}"/>
-                    <controls:SanaapEntry Margin="10,0,10,0" Placeholder="عنوان خبر"/>
+                    <Label Text="فیلتر و جست و جو" Style="{StaticResource headerText}" Margin="0,10,10,10"/>
+                    
+                    <controls:SanaapEntry Margin="10,10,10,10" Placeholder="عنوان خبر"/>
                     <controls:SanaapComboBox Margin="10,0,10,0" Text="دسته بندی"/>
-                    <StackLayout Orientation="Horizontal" Margin="10,0,10,0" HorizontalOptions="CenterAndExpand">
-                        <controls:SanaapComboBox WidthRequest="190" Text="ماه" HorizontalOptions="StartAndExpand"/>
-                        <controls:SanaapComboBox WidthRequest="190" Text="سال" HorizontalOptions="EndAndExpand"/>
+                    <StackLayout Orientation="Horizontal" Margin="10,10,10,10">
+                        <controls:SanaapComboBox Text="ماه" HorizontalOptions="FillAndExpand"/>
+                        <controls:SanaapComboBox Text="سال" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" HorizontalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}" BorderRadius="25"/>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}" BorderRadius="25"/>
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
