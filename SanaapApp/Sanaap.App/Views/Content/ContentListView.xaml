@@ -43,23 +43,22 @@
                                                 <ColumnDefinition Width="6*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
-
                                             </Grid.RowDefinitions>
 
-                                            <Frame CornerRadius="5" Grid.Column="0"  HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
-                                                <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  Margin="-20,-20,-20,-20"/>
+                                            <Frame Padding="0" CornerRadius="5" Grid.Column="0"  HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
+                                                <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  />
                                             </Frame>
 
                                             <StackLayout Grid.Column="1" Spacing="0">
                                                 <Label TextColor="Black" Style="{StaticResource Title}" Text="{Binding Title}" Grid.Column="1"/>
-
-                                                <WebView BackgroundColor="Red" HeightRequest="70" Margin="5,0,5,0">
+                                                <!--HeightRequest="70"-->
+                                                <WebView BackgroundColor="Red" HeightRequest="35" Margin="5,0,5,0">
                                                     <WebView.Source>
                                                         <HtmlWebViewSource Html="{Binding Text}"/>
                                                     </WebView.Source>
                                                 </WebView>
 
-                                                <!--<Label Text="{Binding Text}" MaxLines="3" LineBreakMode="TailTruncation"/>-->
+                                                <!--<Label Text="{Binding Text}" MaxLines="2" LineBreakMode="TailTruncation" HeightRequest="35" />-->
 
 
                                             </StackLayout>
