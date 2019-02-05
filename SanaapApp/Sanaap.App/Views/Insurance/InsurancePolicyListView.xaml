@@ -34,21 +34,32 @@
                                     <Image Source="{extentions:Image FileName=photo.jpg}"/>
                                 </StackLayout>
 
-                                <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">
                                     <Label Text="پژو 405" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
-                                    <Label Text="نقره ای" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
-                                    <Label Text="بیمه ثالث" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
+                                    <Label Text="نقره ای" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                    <Label Text="بیمه ثالث" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
                                 </StackLayout>
 
-                                <StackLayout Grid.Column="2" HeightRequest="30" Padding="10" VerticalOptions="Center" WidthRequest="130" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
+                                <StackLayout Orientation="Vertical" Grid.Column="2" VerticalOptions="Center" Spacing="0">
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="اتمام بیمه" TextColor="{StaticResource primaryGray}" FontFamily="{StaticResource Shabnam-FDFont}"/>
+                                        <Label Text="1397/04/23" TextColor="Black" FontFamily="{StaticResource Shabnam-FDFont}"/>
+                                    </StackLayout>
+
+
+                                    <!--WidthRequest="130"-->
+                                    <!--HeightRequest="30"-->
+                                    <StackLayout  Padding="10"  HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
+                                        <AbsoluteLayout VerticalOptions="Start">
+                                            <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                        </AbsoluteLayout>
+                                        <AbsoluteLayout VerticalOptions="Start">
+                                            <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                        </AbsoluteLayout>
+                                    </StackLayout>
                                 </StackLayout>
                             </Grid>
                         </ViewCell>

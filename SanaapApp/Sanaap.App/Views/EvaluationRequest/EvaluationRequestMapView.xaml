@@ -20,6 +20,10 @@
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
         </Style>
 
+        <Style TargetType="controls:IconLabel" x:Key="Return">
+            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+        </Style>
+        
         <Style TargetType="Frame" x:Key="TitleFrame">
             <Setter Property="WidthRequest" Value="18"/>
             <Setter Property="HeightRequest" Value="18"/>
@@ -97,7 +101,7 @@
                             <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
+                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
 
                 </Grid>
 

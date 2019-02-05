@@ -65,7 +65,7 @@ namespace Sanaap.App
             }
             else
             {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
             }
             //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
 
@@ -108,7 +108,6 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
-            containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>();
