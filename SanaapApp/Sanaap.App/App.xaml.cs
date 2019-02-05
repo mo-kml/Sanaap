@@ -59,15 +59,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            }
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            //}
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -93,7 +93,9 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
+            //
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
+            //
             containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
@@ -119,7 +121,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://9a7abeb3.ngrok.io/"),
+                HostUri = new Uri("http://192.168.143.2:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
