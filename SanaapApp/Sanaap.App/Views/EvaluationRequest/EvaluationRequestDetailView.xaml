@@ -15,8 +15,8 @@
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
     x:Name="requestDetailView"
-    Padding="30,40,30,40"
-    HasSystemPadding="True"
+    Padding="30,70"
+    HasSystemPadding="False"
     SystemPaddingSides="All">
     <popup:PopupPage.Animation>
         <animations:ScaleAnimation

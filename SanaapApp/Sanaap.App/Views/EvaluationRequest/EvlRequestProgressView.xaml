@@ -7,21 +7,21 @@
              HasSystemPadding="True" SystemPaddingSides="All" Padding="30,50,30,50"
              FlowDirection="RightToLeft">
     <Frame CornerRadius="15" BackgroundColor="White">
-    <StackLayout >
-        <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
+        <StackLayout >
+            <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
 
-        <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Date}"/>
-                            <Label Text="{Binding Status}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+            <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Date}"/>
+                                <Label Text="{Binding Status}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </Frame>
 </popup:PopupPage>

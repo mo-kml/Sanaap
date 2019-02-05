@@ -42,6 +42,8 @@ namespace Sanaap.App.Droid
 
             base.OnCreate(bundle);
 
+            Xamarin.Essentials.Platform.Init(this, bundle);
+
             CrossCurrentActivity.Current.Init(this, bundle);
 
             FormsGoogleMaps.Init(this, bundle);

@@ -2,7 +2,7 @@
 <popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             HasSystemPadding="True" Padding="30" SystemPaddingSides="All"
+             HasSystemPadding="False" Padding="30,70" BackgroundColor="Gray"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
@@ -55,7 +55,7 @@
                                             <Label Text="3" Style="{StaticResource TitleLabel}"/>
                                         </Frame>
                                         <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                            <Label Text="1 محل حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                            <Label Text="4 محل حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                         </Frame>
                                     </StackLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
