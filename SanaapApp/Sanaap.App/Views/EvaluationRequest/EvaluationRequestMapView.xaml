@@ -54,8 +54,8 @@
                                         <Frame Style="{StaticResource TitleFrame}">
                                             <Label Text="3" Style="{StaticResource TitleLabel}"/>
                                         </Frame>
-                                        <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                            <Label Text="4 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                        <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                            <Label Text="1 محل حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                         </Frame>
                                     </StackLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>

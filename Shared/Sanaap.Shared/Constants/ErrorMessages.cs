@@ -13,6 +13,7 @@
     {
         public static string Ok = "باشه";
         public static string Error = "خطا";
+        public static string NumberPlateIsNotValid = "لطفا شماره پلاک را درست وارد کنید";
         public static string Loading = "در حال پردازش ...";
         public static string Loading_Cancel = "";
         public static string SendingRequestAndPictures = "ارسال درخواست ...";

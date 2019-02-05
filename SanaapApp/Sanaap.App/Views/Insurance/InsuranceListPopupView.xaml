@@ -11,8 +11,6 @@
              x:Name="insurancePopup">
     <ContentView.Resources>
         <ResourceDictionary>
-            <viewModels:InsuranceListPopupViewModelLocator x:Key="insuranceListPopupViewModelLocator"/>
-
             <Style TargetType="Label" x:Key="grayLabel">
                 <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
                 <Setter Property="TextColor" Value="{StaticResource textPlaceholderColor}"/>
@@ -20,8 +18,9 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout x:Name="stackLayout" Padding="10" BindingContext="{Binding Source={StaticResource insuranceListPopupViewModelLocator},Path=InsuranceListPopupViewModel}">
+        <StackLayout x:Name="stackLayout" Padding="10">
             <Label Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
+            <Label Style="{StaticResource headerText}" Text="{Binding Name}" />
             <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="Item"/>

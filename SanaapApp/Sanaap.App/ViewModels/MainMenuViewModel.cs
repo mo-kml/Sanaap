@@ -64,6 +64,8 @@ namespace Sanaap.App.ViewModels
             await _initialDataService.GetCurrentUserInfo();
 
             await _initialDataService.GetInsurers();
+
+            await _initialDataService.GetAlphabets();
         }
     }
 }

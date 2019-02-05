@@ -1,4 +1,5 @@
-﻿using Sanaap.App.ItemSources;
+﻿using Sanaap.App.Helpers.Contracts;
+using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Dto;
 using Simple.OData.Client;
@@ -14,11 +15,13 @@ namespace Sanaap.App.Services.Implementations
         private readonly IODataClient _oDataClient;
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
-        public PolicyService(HttpClient httpClient, IODataClient oDataClient, IInitialDataService initialDataService) : base(oDataClient)
+        private readonly ILicenseHelper _licenseHelper;
+        public PolicyService(HttpClient httpClient, IODataClient oDataClient, IInitialDataService initialDataService, ILicenseHelper licenseHelper) : base(oDataClient)
         {
             _oDataClient = oDataClient;
             _httpClient = httpClient;
             _initialDataService = initialDataService;
+            _licenseHelper = licenseHelper;
         }
 
         public async Task<List<PolicyItemSource>> LoadAllInsurances()
@@ -36,7 +39,7 @@ namespace Sanaap.App.Services.Implementations
 
             foreach (InsurancePolicyDto insurance in insurances)
             {
-                policyItemSource.Add(new PolicyItemSource
+                PolicyItemSource policy = new PolicyItemSource
                 {
                     CarId = insurance.CarId,
                     InsuranceType = insurance.InsuranceType,
@@ -49,7 +52,11 @@ namespace Sanaap.App.Services.Implementations
                     VIN = insurance.VIN,
                     ColorName = colors.FirstOrDefault(c => c.PrmID == insurance.ColorId)?.Name,
                     CarName = cars.FirstOrDefault(c => c.PrmID == insurance.CarId)?.Name,
-                });
+                };
+
+                policy.LicensePlateItemSource = _licenseHelper.ConvertToItemSource(policy.PlateNumber);
+
+                policyItemSource.Add(policy);
             }
 
             return policyItemSource;

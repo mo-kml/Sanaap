@@ -22,6 +22,7 @@ namespace Sanaap.Api.Implementations
         private IEnumerable<ExternalEntityDto> cars;
         private IEnumerable<InsurerDto> insurers;
         private IEnumerable<ContentDto> news;
+        private IEnumerable<ExternalEntityDto> alphabets;
 
         public async Task<IEnumerable<ExternalEntityDto>> GetCars()
         {
@@ -69,6 +70,30 @@ namespace Sanaap.Api.Implementations
             }
 
             return colors;
+        }
+
+        public async Task<IEnumerable<ExternalEntityDto>> GetNumberplateAlphabets()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (alphabets == null)
+            {
+                HttpResponseMessage result = await httpClient.GetAsync("GetParameter?type=31");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    alphabets = JsonConvert.DeserializeObject<IEnumerable<ExternalEntityDto>>(await result.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return alphabets;
         }
 
         public async Task<IEnumerable<ContentDto>> GetNews()

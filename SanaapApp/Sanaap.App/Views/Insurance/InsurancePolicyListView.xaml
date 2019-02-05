@@ -8,19 +8,7 @@
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
-        <Style x:Key="LableMargin" TargetType="Label">
-            <Setter Property="Margin" Value="0,0,5,0"/>
-        </Style>
-        <Style x:Key="AddButton" TargetType="Button">
-            <Setter Property="BorderRadius" Value="10"/>
-            <Setter Property="AbsoluteLayout.LayoutBounds" Value="130 , 700 , 120 , 50"/>
-            <Setter Property="BackgroundColor" Value="Navy"/>
-            <Setter Property="TextColor" Value="White"/>
-        </Style>
 
-        <Style x:Key="CarName" TargetType="Label" BasedOn="{StaticResource LableMargin}" >
-            <Setter Property="FontAttributes" Value="Bold"/>
-        </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
@@ -45,7 +33,7 @@
                                 <StackLayout Padding="20">
                                     <Image Source="{extentions:Image FileName=photo.jpg}"/>
                                 </StackLayout>
-                                
+
                                 <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
                                     <Label Text="پژو 405" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
                                     <Label Text="نقره ای" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource ultraSmallFontSize}"/>
@@ -77,7 +65,7 @@
                     <Label Text="افزودن بیمه نامه" TextColor="{StaticResource buttonTextWhite}"/>
                 </StackLayout>
             </Frame>
-            
+
 
         </StackLayout>
     </ContentPage.Content>

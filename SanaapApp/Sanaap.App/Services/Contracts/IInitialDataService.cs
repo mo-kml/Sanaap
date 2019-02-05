@@ -14,5 +14,7 @@ namespace Sanaap.App.Services.Contracts
         Task<CustomerDto> GetCurrentUserInfo();
 
         Task<List<InsurersItemSource>> GetInsurers();
+
+        Task<List<ExternalEntityDto>> GetAlphabets();
     }
 }

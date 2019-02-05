@@ -59,15 +59,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            //if (isLoggedIn)
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            //}
-            //else
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            }
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -95,35 +95,31 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
             containerRegistry.RegisterForNav<ShowContentView, ShowContentViewModel>();
-            //
             containerRegistry.RegisterForNav<MainMenuView, MainMenuViewModel>();
             containerRegistry.RegisterForNav<RegisterView, RegisterViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMapView, EvaluationRequestMapViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestExpertView, EvaluationRequestExpertViewModel>();
             containerRegistry.RegisterForNav<OpenImagePopup, OpenImagePopupViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestWaitView, EvaluationRequestWaitViewModel>();
-            containerRegistry.RegisterPartialView<MenuView, MenuViewModel>();
             containerRegistry.RegisterForNav<CommentListView, CommentListViewModel>();
             containerRegistry.RegisterForNav<CreateInsurancePolicyView, CreateInsurancePolicyViewModel>();
             containerRegistry.RegisterForNav<InsurancePolicyListView, InsurancePolicyListViewModel>();
-            //
             containerRegistry.RegisterForNav<EvlRequestProgressView, EvlRequestProgressViewModel>();
-            //
             containerRegistry.RegisterForNav<EvaluationRequestListView, EvaluationRequestListViewModel>();
             containerRegistry.RegisterForNav<EvlRequestInquiryView, EvlRequestInquiryViewModel>();
-            containerRegistry.RegisterForNav<EvaluationRequestView, EvaluationRequestViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestMenuView, EvaluationRequestMenuViewModel>();
-
             containerRegistry.RegisterForNav<EvaluationRequestDetailView, EvaluationRequestDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestLostDetailView, EvaluationRequestLostDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestDescriptionView, EvaluationRequestDescriptionViewModel>();
 
+            containerRegistry.RegisterPartialView<MenuView, MenuViewModel>();
+            containerRegistry.RegisterPartialView<InsuranceListPopupView, InsuranceListPopupViewModel>();
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://192.168.143.2:53148/"),
+                HostUri = new Uri("http://9a7abeb3.ngrok.io/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
@@ -141,6 +137,7 @@ namespace Sanaap.App
             containerRegistry.Register<INewsService, NewsService>();
             containerRegistry.Register<IPolicyService, PolicyService>();
             containerRegistry.Register<IDateHelper, DateHelper>();
+            containerRegistry.Register<ILicenseHelper, LicenseHelper>();
             containerRegistry.Register<ICommentService, CommentService>();
             containerRegistry.Register<IEvlRequestService, EvlRequestService>();
             containerRegistry.Register<ISanaapAppLoginValidator, SanaapAppLoginValidator>();
@@ -148,7 +145,6 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
-            containerBuilder.Register(c => new InsuranceListPopupViewModel(Container.Resolve<IEventAggregator>(), Container.Resolve<IPolicyService>(), Container.Resolve<IUserDialogs>(), NavigationService));
             containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
             containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
 

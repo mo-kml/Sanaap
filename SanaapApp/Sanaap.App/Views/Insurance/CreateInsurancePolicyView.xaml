@@ -33,7 +33,7 @@
                                     DisplayMemberPath="Name"
                                     IsEditableMode="True"
                                     SelectedItem="{Binding SelectedCar}" />
-                                <controls:SanaapComboBox Text="رنگ خودرو" HorizontalOptions="FillAndExpand" />
+                                <controls:SanaapComboBox Text="رنگ خودرو" DataSource="{Binding Colors}" HorizontalOptions="FillAndExpand" />
                             </StackLayout>
 
                             <controls:SanaapEntry Placeholder="شماره شاسی" Text="{Binding Request.InsurerNo}" />
