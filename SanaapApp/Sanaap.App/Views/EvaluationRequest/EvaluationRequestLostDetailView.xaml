@@ -4,7 +4,7 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
-             
+             BackgroundColor="Gray"
              HasSystemPadding="True" Padding="30,100,30,100" SystemPaddingSides="All"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
@@ -66,8 +66,8 @@
                                                 <Label Text="1" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
-                                            <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="2 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                            <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                                <Label Text="2 اطلاعات زیان دیده" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
                                         </StackLayout>
@@ -93,18 +93,18 @@
 
                             <StackLayout Padding="0,30" Spacing="10">
 
-                                
-                                    <Label Text="اطلاعات زیان دیده" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
+
+                                <Label Text="اطلاعات زیان دیده" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
 
 
                                 <StackLayout Orientation="Horizontal" >
 
-                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" Placeholder="نام"/>
+                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.LostFirstName, Mode=TwoWay}" Placeholder="نام"/>
 
-                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.LostLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
 
                                 </StackLayout>
-                               
+
                                 <controls:SanaapComboBox
                                 Text="fdfasd"
                                 AllowFiltering="True"
@@ -116,10 +116,10 @@
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="پلاک" VerticalOptions="Center" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
-                                    <controls:SanaapEntry HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
-                                    <controls:SanaapEntry MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
-                                    <controls:SanaapComboBox Text="حرف" HorizontalOptions="FillAndExpand" />
-                                    <controls:SanaapEntry MaxLength="2" Keyboard="Numeric" />
+                                    <controls:SanaapEntry Text="{Binding LostLicense.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
+                                    <controls:SanaapEntry Text="{Binding LostLicense.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                                    <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Text="حرف" HorizontalOptions="FillAndExpand" />
+                                    <controls:SanaapEntry Text="{Binding LostLicense.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
@@ -133,13 +133,13 @@
                     </Grid.ColumnDefinitions>
                     <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
+                            <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
                     <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
-                    
+
                 </Grid>
-                
+
 
             </AbsoluteLayout>
         </Frame>

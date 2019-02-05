@@ -30,6 +30,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 Position centerPosition = map.VisibleRegion.Center;
 
+                Request.Latitude = centerPosition.Latitude;
+                Request.Longitude = centerPosition.Longitude;
+
                 await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView), new NavigationParameters
                 {
                     {nameof(Request),Request }

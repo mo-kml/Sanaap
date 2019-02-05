@@ -17,5 +17,7 @@ namespace Sanaap.Api.Contracts
 
         Task<ContentDto> GetNewsById(int id, Guid userId);
 
+        Task<IEnumerable<ExternalEntityDto>> GetNumberplateAlphabets();
+
     }
 }

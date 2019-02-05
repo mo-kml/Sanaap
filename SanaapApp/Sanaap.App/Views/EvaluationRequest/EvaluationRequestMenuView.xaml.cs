@@ -2,11 +2,10 @@
 using Sanaap.App.Events;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
-    
+
     public partial class EvaluationRequestMenuView : ContentPage, IDisposable
     {
         private IEventAggregator _eventAggregator;

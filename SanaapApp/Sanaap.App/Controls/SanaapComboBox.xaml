@@ -14,13 +14,13 @@
                         <Frame BackgroundColor="White" HasShadow="False" Padding="1" CornerRadius="5" Margin="0">
                             <comboBox:SfComboBox FlowDirection="RightToLeft" BindingContext="{TemplateBinding}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
                                                      ShowBorder="False"
-                                                     Watermark="{Binding Text}"
+                                                     Watermark="{Binding Placeholder}"
+                                                     WatermarkColor="{Binding PlaceholderColor}"
                                                      DataSource="{Binding DataSource}"  
                                                      AllowFiltering="{Binding AllowFiltering}" 
                                                      FontFamily="{Binding FontFamily}" 
                                                      TextColor="{Binding TextColor}"
                                                      TextSize="{Binding FontSize}"
-                                                     WatermarkColor="{Binding TextColor}"
                                                      IsEditableMode="{Binding IsEditableMode}"
                                                      DisplayMemberPath="{Binding DisplayMemberPath}"
                                                      SelectedItem="{Binding SelectedItem}">

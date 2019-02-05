@@ -13,5 +13,7 @@ namespace Sanaap.App.ItemSources
         public string CarName { get; set; }
 
         public string InsuranceTypeName => EnumHelper<InsuranceType>.GetDisplayValue(InsuranceType);
+
+        public LicensePlateItemSource LicensePlateItemSource { get; set; }
     }
 }

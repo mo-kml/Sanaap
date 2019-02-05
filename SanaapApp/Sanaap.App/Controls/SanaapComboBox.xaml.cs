@@ -42,11 +42,18 @@ namespace Sanaap.App.Controls
             set => SetValue(FontFamilyProperty, value);
         }
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#bfbfbf"), BindingMode.TwoWay);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SanaapComboBox), Color.Black, BindingMode.TwoWay);
         public Color TextColor
         {
             get => (Color)GetValue(TextColorProperty);
             set => SetValue(TextColorProperty, value);
+        }
+
+        public static readonly BindableProperty PlaceholderColorProperty = BindableProperty.Create(nameof(PlaceholderColor), typeof(Color), typeof(SanaapComboBox), Color.FromHex("#bfbfbf"), BindingMode.TwoWay);
+        public Color PlaceholderColor
+        {
+            get => (Color)GetValue(PlaceholderColorProperty);
+            set => SetValue(PlaceholderColorProperty, value);
         }
 
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(int), typeof(SanaapComboBox), 15, BindingMode.TwoWay);

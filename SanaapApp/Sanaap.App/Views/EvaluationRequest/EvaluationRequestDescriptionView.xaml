@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             BackgroundColor="Gray"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
@@ -67,8 +68,8 @@
                                                 <Label Text="2" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
-                                            <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="3 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                            <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                                <Label Text="1 جزئیات حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
                                         </StackLayout>
@@ -125,7 +126,7 @@
                                     </bitControls:BitDatePicker.ControlTemplate>
                                 </bitControls:BitDatePicker>
 
-                                <controls:SanaapEntry Placeholder="علت وقوع حادثه"/>
+                                <controls:SanaapEntry Text="{Binding Request.AccidentReason}" Placeholder="علت وقوع حادثه"/>
 
                             </StackLayout>
                         </StackLayout>
@@ -139,14 +140,15 @@
                     </Grid.ColumnDefinitions>
                     <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
+                            <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
-
+                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;">
+                        <controls:IconLabel.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoBack}"/>
+                        </controls:IconLabel.GestureRecognizers>
+                    </controls:IconLabel>
                 </Grid>
-
-
             </AbsoluteLayout>
         </Frame>
     </popup:PopupPage.Content>

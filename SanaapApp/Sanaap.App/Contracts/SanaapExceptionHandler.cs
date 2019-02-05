@@ -19,7 +19,7 @@ namespace Sanaap.App.Contracts
                 IUserDialogs userDialog = BitApplication.Current.Container.Resolve<IUserDialogs>();
                 await userDialog.AlertAsync(message: exp.ToString(), title: exp.GetType().ToString());
 
-                //throw exp;
+                throw exp;
             }
             catch (Exception ex)
             {

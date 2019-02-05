@@ -22,5 +22,11 @@ namespace Sanaap.Api.Controllers
             return await ExternalApiService.GetCars();
         }
 
+        [Function]
+        public async Task<IEnumerable<ExternalEntityDto>> GetAlphabets()
+        {
+            return await ExternalApiService.GetNumberplateAlphabets();
+        }
+
     }
 }
