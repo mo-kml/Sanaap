@@ -91,7 +91,7 @@
                             <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=Transparentcrash.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crashWhite.png}"/>
                             <Label TextColor="White" Text="اعلام خسارت"/>
                         </StackLayout>
                     </controls:SanaapFrame>
