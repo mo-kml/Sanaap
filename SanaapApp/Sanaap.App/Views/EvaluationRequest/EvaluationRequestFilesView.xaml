@@ -64,7 +64,7 @@
                         <StackLayout Margin="0">
 
                             <StackLayout Orientation="Horizontal" Padding="15">
-                                <StackLayout HorizontalOptions="Start">
+                                <StackLayout HorizontalOptions="FillAndExpand" >
                                     <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
                                 </StackLayout>
 
@@ -84,7 +84,7 @@
                                                 <Label Text="4" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
                                             <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="5 عنوان مرحله" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                                <Label Text="5 اعلام خسارت" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
 
@@ -150,7 +150,7 @@
                     </Frame>
                     <Grid AbsoluteLayout.LayoutBounds="1,1.01,1,0.15" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition Width="2.5*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
