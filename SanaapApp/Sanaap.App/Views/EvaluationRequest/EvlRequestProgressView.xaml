@@ -15,7 +15,7 @@
 
     <Frame Padding="0" CornerRadius="15" BackgroundColor="White">
         <AbsoluteLayout>
-            <StackLayout Padding="15" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <StackLayout Padding="15" AbsoluteLayout.LayoutBounds="0,0,1,0.85" AbsoluteLayout.LayoutFlags="All" >
                 <Label Style="{StaticResource headerText}" Text="وضعیت پرونده"/>
                 <Label Style="{StaticResource subHeaderText}" Text="{Binding RequestCode,StringFormat='شماره {0}'}"/>
 
