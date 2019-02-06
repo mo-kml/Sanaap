@@ -1,4 +1,5 @@
-﻿using Sanaap.Dto;
+﻿using Sanaap.App.ItemSources;
+using Sanaap.Dto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,9 +8,9 @@ namespace Sanaap.App.Services.Contracts
 {
     public interface IEvlRequestService : IService<EvlRequestDto>
     {
-        Task<IEnumerable<EvlRequestDto>> GetAllRequests();
+        Task<IEnumerable<EvlRequestListItemSource>> GetAllRequests();
 
-        Task<IEnumerable<EvlRequestProgressDto>> GetAllProgressesByRequestId(Guid requestId);
+        Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(Guid requestId);
 
         Task<EvlRequestDto> SearchByCode(int code);
 

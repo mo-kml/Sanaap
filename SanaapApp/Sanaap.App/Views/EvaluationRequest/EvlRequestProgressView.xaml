@@ -4,24 +4,85 @@
              x:Class="Sanaap.App.Views.EvaluationRequest.EvlRequestProgressView"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"             
              NavigationPage.HasNavigationBar="False"
-             HasSystemPadding="True" SystemPaddingSides="All" Padding="30,50,30,50"
+             HasSystemPadding="False" SystemPaddingSides="All" Padding="30,80"
+             CloseWhenBackgroundIsClicked="False"
              FlowDirection="RightToLeft">
-    <Frame CornerRadius="15" BackgroundColor="White">
-        <StackLayout >
-            <Label Text="{Binding RequestCode,StringFormat='وضعیت پرونده شماره {0}'}"/>
+    <popup:PopupPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+        </Style>
+    </popup:PopupPage.Resources>
 
-            <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Date}"/>
-                                <Label Text="{Binding Status}"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+    <Frame Padding="0" CornerRadius="15" BackgroundColor="White">
+        <AbsoluteLayout>
+            <StackLayout Padding="15" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+                <Label Style="{StaticResource headerText}" Text="وضعیت پرونده"/>
+                <Label Style="{StaticResource subHeaderText}" Text="{Binding RequestCode,StringFormat='شماره {0}'}"/>
+
+                <ListView ItemsSource="{Binding Progresses}" HasUnevenRows="True" SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+
+                                <Grid VerticalOptions="Start" RowSpacing="0" HorizontalOptions="Start" Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="{StaticResource smallFontSize}"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button VerticalOptions="Center" BackgroundColor="{StaticResource primaryGray}" HeightRequest="6" WidthRequest="6" CornerRadius="7">
+                                        <Button.Triggers>
+                                            <DataTrigger Binding="{Binding IsLatest}"
+                                                             TargetType="Button"
+                                                             Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource primaryBlue}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsLatest}"
+                                                             TargetType="Button"
+                                                             Value="False">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                    <StackLayout Grid.Row="1" VerticalOptions="Start">
+                                        <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="Center" WidthRequest="1.5">
+                                            <BoxView.Triggers>
+                                                <DataTrigger Binding="{Binding IsLatest}"
+                                                             TargetType="BoxView"
+                                                             Value="True">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsLatest}"
+                                                             TargetType="BoxView"
+                                                             Value="False">
+                                                    <Setter Property="IsVisible" Value="True"/>
+                                                </DataTrigger>
+                                            </BoxView.Triggers>
+                                        </BoxView>
+
+                                    </StackLayout>
+
+                                    <Label Grid.Column="1" VerticalOptions="Start" VerticalTextAlignment="Center" Text="{Binding Status}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"/>
+
+
+                                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                                        <Label Text="{Binding Date}"/>
+                                        <BoxView HeightRequest="10" VerticalOptions="Center" WidthRequest="1" BackgroundColor="{StaticResource primaryGray}"/>
+                                        <Label Text="{Binding Time,StringFormat='ساعت {0}'}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Button Command="{Binding ClosePopup}" FontSize="{StaticResource mediumFontSize}" Text="بستن" BackgroundColor="{StaticResource cancelGrayColor}" TextColor="White" AbsoluteLayout.LayoutBounds="0,1,1,0.15" AbsoluteLayout.LayoutFlags="All"/>
+        </AbsoluteLayout>
+
     </Frame>
+
+
 </popup:PopupPage>
