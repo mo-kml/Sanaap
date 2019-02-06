@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Sanaap.App.Events;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views.Comment;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
@@ -69,7 +70,15 @@ namespace Sanaap.App.ViewModels.Comment
 
             ShowComment = new BitDelegateCommand<CommentItemSource>(async (comment) =>
               {
-                  await pageDialogService.DisplayAlertAsync(string.Empty, string.IsNullOrEmpty(comment.Answer) ? ConstantStrings.ResponseNotFoundFromSupport : comment.Answer, ConstantStrings.Ok);
+                  if (string.IsNullOrEmpty(comment.Answer))
+                  {
+                      comment.Answer = ConstantStrings.ResponseNotFoundFromSupport;
+                  }
+
+                  await NavigationService.NavigateAsync(nameof(CommentAnswerPopupView), new NavigationParameters
+                  {
+                      {nameof(Comment),comment }
+                  });
               });
 
             OpenCreatePopup = new BitDelegateCommand(async () =>

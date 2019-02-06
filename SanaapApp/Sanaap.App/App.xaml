@@ -69,7 +69,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
-            
+
             <!--font size style wont set-->
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>
