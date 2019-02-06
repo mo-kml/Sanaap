@@ -28,6 +28,7 @@ namespace Sanaap.App.Services.Implementations
         {
             List<ExternalEntityDto> cars = new List<ExternalEntityDto>();
             List<ExternalEntityDto> colors = new List<ExternalEntityDto>();
+            List<InsurersItemSource> insureres = new List<InsurersItemSource>();
             List<PolicyItemSource> policyItemSource = new List<PolicyItemSource>();
 
             IEnumerable<InsurancePolicyDto> insurances = await _oDataClient.For<InsurancePolicyDto>(controllerName)
@@ -36,6 +37,8 @@ namespace Sanaap.App.Services.Implementations
             cars = (await _initialDataService.GetCars()).ToList();
 
             colors = (await _initialDataService.GetColors()).ToList();
+
+            insureres = (await _initialDataService.GetInsurers()).ToList();
 
             foreach (InsurancePolicyDto insurance in insurances)
             {
@@ -52,6 +55,7 @@ namespace Sanaap.App.Services.Implementations
                     VIN = insurance.VIN,
                     ColorName = colors.FirstOrDefault(c => c.PrmID == insurance.ColorId)?.Name,
                     CarName = cars.FirstOrDefault(c => c.PrmID == insurance.CarId)?.Name,
+                    Image = insureres.FirstOrDefault(c => c.ID == insurance.InsurerId)?.Photo,
                 };
 
                 policy.LicensePlateItemSource = _licenseHelper.ConvertToItemSource(policy.PlateNumber);

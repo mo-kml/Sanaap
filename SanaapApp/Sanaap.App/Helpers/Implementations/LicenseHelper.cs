@@ -46,7 +46,7 @@ namespace Sanaap.App.Helpers.Implementations
                 throw new ArgumentNullException(nameof(licensePlateItemSource));
             }
 
-            if (licensePlateItemSource.FirstNumber.Length != 2 && string.IsNullOrEmpty(licensePlateItemSource.Alphabet) && licensePlateItemSource.SecondNumber.Length != 3 && licensePlateItemSource.ProvinceNumber.Length != 2)
+            if (licensePlateItemSource.FirstNumber.Length != 2 || string.IsNullOrEmpty(licensePlateItemSource.Alphabet) || licensePlateItemSource.SecondNumber.Length != 3 || licensePlateItemSource.ProvinceNumber.Length != 2)
             {
                 _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NumberPlateIsNotValid, ConstantStrings.Ok);
 

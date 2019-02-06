@@ -76,7 +76,7 @@
 
                         <AbsoluteLayout>
                             <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
-                                    InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="True" WidthRequest="10"
+                                    InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="False" WidthRequest="10"
                                     VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
                             <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.14,0.14" Source="{extentions:Image FileName=Icon.png}">
