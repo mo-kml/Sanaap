@@ -74,7 +74,7 @@
                                         <BoxView Grid.Column="1" Style="{StaticResource PipeBoxView}"/>
 
                                         <StackLayout Grid.Column="2" Orientation="Horizontal">
-                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=Car.png}" BackgroundColor="Transparent" />
+                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=car.png}" BackgroundColor="Transparent" />
                                             <StackLayout Spacing="0">
                                                 <Label  Text="پرونده" Style="{StaticResource Header}" />
                                                 <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>

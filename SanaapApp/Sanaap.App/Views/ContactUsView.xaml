@@ -95,19 +95,19 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Image Source="{extenstions:Image FileName=TransparentInstagram.png}">
+                <Image Source="{extenstions:Image FileName=instagramWhite.png}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Instagram}"/>
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Image Source="{extenstions:Image FileName=TransparentWhatsApp.png}">
+                <Image Source="{extenstions:Image FileName=whatsappWhite.png}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding WhatsApp}"/>
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Image Source="{extenstions:Image FileName=TransparentTelegram.png}">
+                <Image Source="{extenstions:Image FileName=telegramWhite.png}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Telegram}"/>
                     </Image.GestureRecognizers>

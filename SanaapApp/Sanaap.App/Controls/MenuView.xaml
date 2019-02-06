@@ -37,7 +37,7 @@
     <ContentView.Content>
         <ScrollView>
             <StackLayout>
-                <Image Margin="0,40" Source="{extentions:Image FileName=sanaapLogoWithIconWhite.png}" WidthRequest="60" HeightRequest="60"/>
+                <Image Margin="0,40" Source="{extentions:Image FileName=logoIconWhite.png}" WidthRequest="60" HeightRequest="60"/>
                 <StackLayout Spacing="11">
                     <Label Text="صفحه اصلی">
                         <Label.GestureRecognizers>

@@ -91,7 +91,7 @@
                             <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=TransparentCarCrash.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crashWhite.png}"/>
                             <Label TextColor="White" Text="اعلام خسارت"/>
                         </StackLayout>
                     </controls:SanaapFrame>
@@ -101,7 +101,7 @@
                             <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=Document.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=document.png}"/>
                             <Label Text="صدور بیمه نامه"/>
                         </StackLayout>
                     </controls:SanaapFrame>
@@ -114,7 +114,7 @@
                             <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=Ambulance.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=ambulance.png}"/>
                             <Label Text="درخواست آمبولانس"/>
                         </StackLayout>
                     </controls:SanaapFrame>
@@ -124,7 +124,7 @@
                             <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=CarWrench2.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench2.png}"/>
                             <Label Text="امداد خودرو"/>
                         </StackLayout>
                     </controls:SanaapFrame>
@@ -137,7 +137,7 @@
                             <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=CarCrane.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crane.png}"/>
                             <Label Text="درخواست جرثقیل"/>
                         </StackLayout>
                     </controls:SanaapFrame>
@@ -147,7 +147,7 @@
                             <TapGestureRecognizer Command="{Binding EvlRequest}"/>
                         </controls:SanaapFrame.GestureRecognizers>
                         <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=CarWrench.png}"/>
+                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench.png}"/>
                             <Label Text="تعمیرگاه"/>
                         </StackLayout>
                     </controls:SanaapFrame>
