@@ -137,7 +137,7 @@
                                 <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
                                 <controls:SanaapComboBox
-                                Text="نام خودرو"
+                                Placeholder="نام خودرو"
                                 AllowFiltering="True"
                                 DataSource="{Binding Cars}"
                                 DisplayMemberPath="Name"

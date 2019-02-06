@@ -27,16 +27,23 @@ namespace Sanaap.App.ViewModels
 
             //Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")),
 
-            Policies = new ObservableCollection<Test>(
+            Contents = new ObservableCollection<Test>(
 
                 new List<Test>
                 {
-                    new Test{LastNumber = 11}
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 157 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 137 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 0},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 155 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 457 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 127 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 0},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 156 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 0},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 257 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
+                    new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 187 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
                 });
 
 
         }
-        public ObservableCollection<Test> Policies { get; set; }
+        public ObservableCollection<Test> Contents { get; set; }
 
         
 
@@ -65,7 +72,19 @@ namespace Sanaap.App.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class Test
     {
-        public int LastNumber { get; set; }
+        public ImageSource Image { get; set; }
+
+        public string Title { get; set; }
+
+        public string Text { get; set; }
+
+        public int Likes { get; set; }
+
+        public int YourLike { get; set; }
+
+        public string Date { get; set; }
+
+
 
     }
 

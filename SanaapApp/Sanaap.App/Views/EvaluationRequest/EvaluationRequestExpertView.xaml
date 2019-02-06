@@ -24,11 +24,11 @@
                     <StackLayout HorizontalOptions="Start" VerticalOptions="Start" Spacing="0">
                         <StackLayout HeightRequest="30" Padding="0" VerticalOptions="Start" WidthRequest="110" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
                             <AbsoluteLayout VerticalOptions="Start">
-                                <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,80,1" AbsoluteLayout.LayoutFlags="XProportional,YProportional,HeightProportional" Source="{extentions:Image FileName=pelak1.png}"/>
                                 <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="0.1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
                             </AbsoluteLayout>
                             <AbsoluteLayout VerticalOptions="Start">
-                                <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                <Image AbsoluteLayout.LayoutBounds="0,0,24,1" AbsoluteLayout.LayoutFlags="XProportional,YProportional,HeightProportional" Source="{extentions:Image FileName=pelak2.png}"/>
                                 <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
                             </AbsoluteLayout>
                         </StackLayout>

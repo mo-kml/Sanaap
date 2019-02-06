@@ -60,7 +60,7 @@
                                             <StackLayout Grid.Column="2" Margin="0,0,10,0" Spacing="0">
                                                 <Label Style="{StaticResource HeaderLabel}" Text="وضعیت" />
 
-                                                <Label  Text="{Binding StatusTypeName}"  TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontAttributes="Bold" >
+                                                <Label Text="{Binding StatusTypeName}"  TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontAttributes="Bold" >
                                                     <Label.Triggers>
                                                         <DataTrigger TargetType="Label"
                                                          Binding="{Binding StatusTypeName}"
@@ -105,7 +105,7 @@
 
                         <controls:SanaapEntry Text="{Binding Comment.Description}" Placeholder="متن " HeightRequest="150" Padding="7,0,0,5" />
 
-                        <controls:SanaapComboBox HeightRequest="40" Text="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
+                        <controls:SanaapComboBox HeightRequest="40" Placeholder="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
                     </StackLayout>
                     <controls:SanaapFrame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,.14" ShadowOffset="50" CornerRadius="0" BackgroundColor="{StaticResource primaryBlue}" >
                         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
