@@ -107,7 +107,7 @@
                     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                         <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0,20,0,0">
                             <Label Style="{StaticResource headerText}" Text="استعلام پرونده"/>
-                            <Label Style="{StaticResource subHeaderText}" Text="متنی برای زیر عنوان"/>
+                            
                         </StackLayout>
 
                         <StackLayout VerticalOptions="Start" Spacing="20">
@@ -117,18 +117,6 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer/>
                                     </Frame.GestureRecognizers>
-                                    <Frame.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                        </DataTrigger>
-                                    </Frame.Triggers>
                                     <StackLayout>
                                         <Image Source="{extensions:Image FileName=Car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
@@ -139,18 +127,7 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer/>
                                     </Frame.GestureRecognizers>
-                                    <Frame.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                        </DataTrigger>
-                                    </Frame.Triggers>
+                                    
                                     <StackLayout>
                                         <Image Source="{extensions:Image FileName=Houce.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
@@ -161,18 +138,7 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer/>
                                     </Frame.GestureRecognizers>
-                                    <Frame.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="True"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryBlue}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                 Value="false"
-                                                 TargetType="Frame">
-                                            <Setter Property="BorderColor" Value="{StaticResource primaryGray}"/>
-                                        </DataTrigger>
-                                    </Frame.Triggers>
+                                    
                                     <StackLayout>
                                         <Image Source="{extensions:Image FileName=Medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
