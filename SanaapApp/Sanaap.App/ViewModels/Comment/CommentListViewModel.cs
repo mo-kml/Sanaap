@@ -1,7 +1,9 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Events;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
 using Sanaap.Dto;
@@ -26,6 +28,7 @@ namespace Sanaap.App.ViewModels.Comment
             ICommentValidator commentValidator,
             ISanaapAppTranslateService translateService,
             IUserDialogs userDialogs,
+            IEventAggregator eventAggregator,
             ICommentService commentService,
             IPageDialogService pageDialogService)
         {
@@ -56,13 +59,22 @@ namespace Sanaap.App.ViewModels.Comment
 
                     await pageDialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
 
-                    await NavigationService.GoBackAsync();
+                    Comment = new CommentDto();
+
+                    eventAggregator.GetEvent<OpenCreateCommentPopupEvent>().Publish(new OpenCreateCommentPopupEvent());
+
+                    await loadComments();
                 }
             });
 
             ShowComment = new BitDelegateCommand<CommentItemSource>(async (comment) =>
               {
                   await pageDialogService.DisplayAlertAsync(string.Empty, string.IsNullOrEmpty(comment.Answer) ? ConstantStrings.ResponseNotFoundFromSupport : comment.Answer, ConstantStrings.Ok);
+              });
+
+            OpenCreatePopup = new BitDelegateCommand(async () =>
+              {
+                  eventAggregator.GetEvent<OpenCreateCommentPopupEvent>().Publish(new OpenCreateCommentPopupEvent());
               });
         }
 
@@ -82,6 +94,8 @@ namespace Sanaap.App.ViewModels.Comment
         public List<string> CommentTypes { get; set; }
 
         public CommentDto Comment { get; set; } = new CommentDto();
+
+        public BitDelegateCommand OpenCreatePopup { get; set; }
 
 
         private CancellationTokenSource submitCancellationTokenSource;

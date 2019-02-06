@@ -1,7 +1,7 @@
 ﻿using Bit.Core.Contracts;
-using Bit.Data.Contracts;
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
+using Sanaap.Data.Contracts;
 using Sanaap.Dto;
 using Sanaap.Model;
 using System;
@@ -17,7 +17,7 @@ namespace Sanaap.Api.Controllers
 
         public virtual IDtoEntityMapper<CommentDto, Comment> Mapper { get; set; }
 
-        public virtual IRepository<Comment> Repository { get; set; }
+        public virtual ISanaapRepository<Comment> CommentRepository { get; set; }
 
         [Function]
         public virtual async Task<IQueryable<CommentDto>> LoadComments(CancellationToken cancellationToken)
@@ -29,15 +29,15 @@ namespace Sanaap.Api.Controllers
                 .Where(comment => comment.CustomerId == customerId));
         }
 
-        public override Task<CommentDto> Create(CommentDto dto, CancellationToken cancellationToken)
+        public override async Task<CommentDto> Create(CommentDto dto, CancellationToken cancellationToken)
         {
             Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
             dto.CustomerId = customerId;
 
-            dto.Code = DateTimeOffset.UtcNow.Ticks;
+            dto.Code = await CommentRepository.GetNextSequenceValue();
 
-            return base.Create(dto, cancellationToken);
+            return await base.Create(dto, cancellationToken);
         }
     }
 }

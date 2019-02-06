@@ -62,6 +62,15 @@
                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             </Style>
 
+            <Style TargetType="control:SanaapEditor">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource textPlaceholderColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+            
+            <!--font size style wont set-->
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>

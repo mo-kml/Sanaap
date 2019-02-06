@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sanaap.App.Controls.SanaapEntry" x:Name="sanaapEntry" Padding="0" Margin="0"
              FlowDirection="RightToLeft">
-  <ContentView.Content>
-    <Frame BindingContext="{x:Reference sanaapEntry}" Padding="0.3" BackgroundColor="{Binding BorderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False" CornerRadius="3">
-      <Frame BackgroundColor="{Binding BorderColor}" HasShadow="False" Padding="1" CornerRadius="5" Margin="0">
-        <Entry Margin="0" MaxLength="{Binding MaxLength}" FontSize="{Binding FontSize}" TextColor="{Binding TextColor}" Keyboard="{Binding Keyboard}" Text="{Binding Text}" FontFamily="{Binding FontFamily}" BackgroundColor="{Binding BackgroundColor}" Placeholder="{Binding Placeholder}" PlaceholderColor="{Binding PlaceholderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" WidthRequest="40"/>
-      </Frame>
-    </Frame>
-  </ContentView.Content>
+    <ContentView.Content>
+        <Frame BindingContext="{x:Reference sanaapEntry}" Padding="0.3" BackgroundColor="{Binding BorderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False" CornerRadius="3">
+            <Frame BackgroundColor="{Binding BorderColor}" HasShadow="False" Padding="1" CornerRadius="5" Margin="0">
+                <Entry Margin="0" MaxLength="{Binding MaxLength}" FontSize="{Binding FontSize}" TextColor="{Binding TextColor}" Keyboard="{Binding Keyboard}" Text="{Binding Text}" FontFamily="{Binding FontFamily}" BackgroundColor="{Binding BackgroundColor}" Placeholder="{Binding Placeholder}" PlaceholderColor="{Binding PlaceholderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" WidthRequest="40"/>
+            </Frame>
+        </Frame>
+    </ContentView.Content>
 </ContentView>

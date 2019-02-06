@@ -31,48 +31,7 @@
     <ContentPage.Content>
         <StackLayout x:Name="stackLayout" Padding="10">
             <Label Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
-            <ListView HasUnevenRows="True" ItemsSource="{Binding Requests}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="1.5*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <StackLayout Padding="7">
-                                <Image HeightRequest="35" WidthRequest="35" Source="{extentions:Image FileName=photo.jpg}"/>
-                                </StackLayout>
-                                
-                                <StackLayout Grid.Column="1" VerticalOptions="End">
-                                    <Label Text="پژو 405" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"/>
-                                    <StackLayout Orientation="Horizontal" VerticalOptions="End">
-                                        <Label Text="نقره ای" Style="{StaticResource grayLabel}"/>
-                                        <Label Text="بیمه ثالث" Style="{StaticResource grayLabel}"/>
-                                    </StackLayout>
-                                </StackLayout>
-
-                                <Label FontSize="{StaticResource ultraSmallFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" Text="1378/11/05" Grid.Column="2" VerticalTextAlignment="End"/>
-
-
-                                <StackLayout Grid.Column="3" HeightRequest="30" Padding="10" VerticalOptions="Center" WidthRequest="110" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
-                                </StackLayout>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <controls:SanaapEditor HeightRequest="400" Placeholder="fsfdfsa"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

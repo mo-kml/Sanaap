@@ -12,7 +12,7 @@ namespace Sanaap.App.Views.EvaluationRequest
         {
             InitializeComponent();
 
-            eventAggregator.GetEvent<OpenInquiryPopup>().SubscribeAsync(async (nothing) =>
+            eventAggregator.GetEvent<OpenInquiryPopupEvent>().SubscribeAsync(async (nothing) =>
             {
                 navigationDrawer.ToggleDrawer();
             }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);

@@ -8,15 +8,12 @@ namespace Sanaap.App.Views.EvaluationRequest
 
     public partial class EvaluationRequestMenuView : ContentPage, IDisposable
     {
-        private IEventAggregator _eventAggregator;
         private SubscriptionToken SubscriptionToken;
         public EvaluationRequestMenuView(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
-
             InitializeComponent();
 
-            SubscriptionToken = _eventAggregator.GetEvent<OpenInsurancePopupEvent>().SubscribeAsync(async (nothing) =>
+            SubscriptionToken = eventAggregator.GetEvent<OpenInsurancePopupEvent>().SubscribeAsync(async (nothing) =>
               {
                   navigationDrawer.ToggleDrawer();
               }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
