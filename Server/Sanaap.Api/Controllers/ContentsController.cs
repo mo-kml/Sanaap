@@ -5,6 +5,7 @@ using Sanaap.Dto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Sanaap.Api.Controllers
 {
@@ -15,10 +16,10 @@ namespace Sanaap.Api.Controllers
         public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
 
-        [Function]
-        public async Task<IEnumerable<ContentDto>> GetNews()
+        [Action]
+        public async Task<IEnumerable<ContentDto>> GetNews([FromBody]FilterNewsDto filterNewsDto)
         {
-            return await ExternalApiService.GetNews();
+            return await ExternalApiService.GetNews(filterNewsDto);
         }
 
         [Function]

@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Prism.Events;
+using Sanaap.App.Events;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.Content
 {
-    
+
     public partial class ContentListView : ContentPage
     {
-        public ContentListView()
+        public ContentListView(IEventAggregator eventAggregator)
         {
             InitializeComponent();
-        }
 
-        private void OpenFilter(object sender, EventArgs e)
-        {
-            navigationDrawer.ToggleDrawer();
+            eventAggregator.GetEvent<OpenNewsFilterPopupEvent>().SubscribeAsync(async (nothing) =>
+            {
+                navigationDrawer.ToggleDrawer();
+            }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
         }
     }
 }

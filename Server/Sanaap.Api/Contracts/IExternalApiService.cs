@@ -13,7 +13,7 @@ namespace Sanaap.Api.Contracts
 
         Task<IEnumerable<InsurerDto>> GetInsurers();
 
-        Task<IEnumerable<ContentDto>> GetNews();
+        Task<IEnumerable<ContentDto>> GetNews(FilterNewsDto filterNewsDto);
 
         Task<ContentDto> GetNewsById(int id, Guid userId);
 
