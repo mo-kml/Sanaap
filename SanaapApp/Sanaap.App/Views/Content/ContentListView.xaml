@@ -17,8 +17,8 @@
             <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
         </Style>
         <Style TargetType="Label" x:Key="Title">
-            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
-            <Setter Property="FontSize" Value="{StaticResource mediumFontSize}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
         </Style>
     </ContentPage.Resources>
     
@@ -52,13 +52,13 @@
                                             <StackLayout Grid.Column="1" Spacing="0">
                                                 <Label TextColor="Black" Style="{StaticResource Title}" MaxLines="2" LineBreakMode="TailTruncation" Margin="10,0,0,0" Text="{Binding Title}" Grid.Column="1"/>
                                                 <!--HeightRequest="70"-->
-                                                <!--<WebView BackgroundColor="Red" HeightRequest="35" Margin="10,0,0,0">
+                                                <!--<WebView HeightRequest="43" Margin="10,0,0,0">
                                                     <WebView.Source>
                                                         <HtmlWebViewSource Html="{Binding Text}"/>
                                                     </WebView.Source>
                                                 </WebView>-->
 
-                                                <Label Text="{Binding Text}" MaxLines="2" LineBreakMode="TailTruncation" HeightRequest="35" Margin="10,0,0,0" />
+                                                <Label Text="{Binding Text}" MaxLines="3" FontSize="{StaticResource ultraSmallFontSize}" LineBreakMode="TailTruncation" HeightRequest="45" Margin="10,0,0,0" />
 
 
                                             </StackLayout>
@@ -75,20 +75,7 @@
                                                 
                                                 <Label Text="{Binding Likes}" Style="{StaticResource Like}"/>
                                                 <controls:IconLabel Text="&#xf004;" HorizontalOptions="Start" Style="{StaticResource Like}">
-                                                    <controls:IconLabel.Triggers>
-                                                        <DataTrigger TargetType="controls:IconLabel"
-                                                     Binding="{Binding YourLike}"
-                                                     Value="1">
-                                                            <Setter Property="Type" Value="Solid"/>
-                                                            <Setter Property="TextColor" Value="Red"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="controls:IconLabel"
-                                                     Binding="{Binding YourLike}"
-                                                     Value="0">
-                                                            <Setter Property="Type" Value="Regular"/>
-                                                            <Setter Property="TextColor" Value="Black"/>
-                                                        </DataTrigger>
-                                                    </controls:IconLabel.Triggers>
+                                                    
                                                 </controls:IconLabel>
                                             </StackLayout>
                                             <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0,10,0" HeightRequest=".5"/>
