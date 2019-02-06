@@ -16,11 +16,9 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource blueBoxViewColor}"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="labelButton">
+            <Style TargetType="Button" x:Key="labelButton">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="TextColor" Value="{StaticResource blueText}"/>
                 <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -91,9 +89,9 @@
             </Grid>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15" Margin="20">
-                <Image Source="{extenstions:Image FileName=instagramWhite.png}">
+                <Image Source="{extenstions:Image FileName=call.png}">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Instagram}"/>
+                        <TapGestureRecognizer Command="{Binding Call}"/>
                     </Image.GestureRecognizers>
                 </Image>
 
@@ -119,24 +117,11 @@
 
             <AbsoluteLayout VerticalOptions="FillAndExpand">
                 <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
-                <local:SanaapFrame Padding="0" ShadowOffset="20" CornerRadius="10" AbsoluteLayout.LayoutBounds="0.5,-25,0.6,50" AbsoluteLayout.LayoutFlags="WidthProportional,XProportional">
+                <local:SanaapFrame Padding="0" ShadowOffset="30" CornerRadius="10" AbsoluteLayout.LayoutBounds="0.5,-25,0.6,50" AbsoluteLayout.LayoutFlags="WidthProportional,XProportional">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
-                        <Label Style="{StaticResource labelButton}" Text="تماس با ما">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ContactUs}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <Button Style="{StaticResource labelButton}" Text="تماس با ما" Command="{Binding Call}"/>
                         <BoxView BackgroundColor="{StaticResource primaryGray}" VerticalOptions="FillAndExpand" WidthRequest="1"/>
-                        <Label Style="{StaticResource labelButton}" Text="مسیریابی">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Route}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-
-
-                        <!--<Button TextColor="{StaticResource primaryBlue}" Text="تماس با ما" BackgroundColor="White" Command="{Binding ContactUs}"  />
-                        <BoxView BackgroundColor="{StaticResource primaryGray}" HeightRequest="50" WidthRequest="1"/>
-                        <Button Text="مسیریابی" TextColor="{StaticResource primaryBlue}" BackgroundColor="White" Command="{Binding Route}" />-->
+                        <Button Style="{StaticResource labelButton}" Text="مسیریابی" Command="{Binding Route}"/>
                     </StackLayout>
                 </local:SanaapFrame>
 

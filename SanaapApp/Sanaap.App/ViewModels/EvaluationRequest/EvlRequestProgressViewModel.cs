@@ -4,10 +4,8 @@ using Prism.Navigation;
 using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
-using Sanaap.Dto;
-using Sanaap.Enums;
+using Sanaap.Constants;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -23,37 +21,33 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             _evlRequestService = evlRequestService;
             _userDialogs = userDialogs;
             _dateHelper = dateHelper;
+
+            ClosePopup = new BitDelegateCommand(async () =>
+              {
+                  await NavigationService.GoBackAsync();
+              });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            //parameters.TryGetValue(nameof(EvlRequestListItemSource), out EvlRequestListItemSource request);
+            parameters.TryGetValue(nameof(EvlRequestListItemSource), out EvlRequestListItemSource request);
 
-            //RequestCode = request.Code;
+            RequestCode = request.Code;
 
-            //using (_userDialogs.Loading(ConstantStrings.Loading))
-            //{
-            //    await loadProgresses(request.RequestId);
-            //}
+            using (_userDialogs.Loading(ConstantStrings.Loading))
+            {
+                await loadProgresses(request.RequestId);
+            }
         }
 
         public ObservableCollection<ProgressItemSource> Progresses { get; set; }
 
         public long RequestCode { get; set; }
 
+        public BitDelegateCommand ClosePopup { get; set; }
+
         public async Task loadProgresses(Guid requestId)
         {
-            IEnumerable<EvlRequestProgressDto> progresses = await _evlRequestService.GetAllProgressesByRequestId(requestId);
-
-            Progresses = new ObservableCollection<ProgressItemSource>();
-
-            foreach (EvlRequestProgressDto progress in progresses)
-            {
-                Progresses.Add(new ProgressItemSource
-                {
-                    Date = _dateHelper.ToPersianShortDate(progress.CreatedOn.Date),
-                    Status = EnumHelper<EvlRequestStatus>.GetDisplayValue(progress.EvlRequestStatus)
-                });
-            }
+            Progresses = new ObservableCollection<ProgressItemSource>(await _evlRequestService.GetAllProgressesByRequestId(requestId));
         }
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              HasSystemPadding="False" Padding="30,70" BackgroundColor="Gray"
+                 HasKeyboardOffset="False"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"

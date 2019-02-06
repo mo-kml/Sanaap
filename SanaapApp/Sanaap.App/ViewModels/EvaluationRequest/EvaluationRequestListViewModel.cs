@@ -1,16 +1,16 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
+using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Enums;
-using Sanaap.Service.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -19,23 +19,28 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvaluationRequestListViewModel : BitViewModelBase
     {
         private IEvlRequestService _evlRequestService;
-        private IDateTimeUtils _dateTimeUtils;
         private readonly IUserDialogs _userDialogs;
         private readonly IPageDialogService _dialogService;
-        public EvaluationRequestListViewModel(IEvlRequestService evlRequestService, IDateTimeUtils dateTimeUtils, IUserDialogs userDialogs, IPageDialogService dialogService)
+        private readonly IEventAggregator _eventAggregator;
+        public EvaluationRequestListViewModel(IEvlRequestService evlRequestService, IUserDialogs userDialogs, IPageDialogService dialogService, IEventAggregator eventAggregator)
         {
             _evlRequestService = evlRequestService;
-            _dateTimeUtils = dateTimeUtils;
             _userDialogs = userDialogs;
             _dialogService = dialogService;
+            _eventAggregator = eventAggregator;
 
             ShowRequestProgress = new BitDelegateCommand<EvlRequestListItemSource>(async (request) =>
             {
-                INavigationParameters parameters = new NavigationParameters();
-                parameters.Add(nameof(EvlRequestListItemSource), request);
-
-                await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), parameters);
+                await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), new NavigationParameters
+                {
+                    {nameof(EvlRequestListItemSource),request }
+                });
             });
+
+            OpenInquiryBox = new BitDelegateCommand(async () =>
+              {
+                  eventAggregator.GetEvent<OpenInquiryPopup>().Publish(new OpenInquiryPopup());
+              });
 
             Inquiry = new BitDelegateCommand(async () =>
             {
@@ -51,6 +56,10 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     }
                     else
                     {
+                        DocumentNumber = 0;
+
+                        eventAggregator.GetEvent<OpenInquiryPopup>().Publish(new OpenInquiryPopup());
+
                         INavigationParameters parameter = new NavigationParameters();
                         parameter.Add(nameof(EvlRequestListItemSource), new EvlRequestListItemSource
                         {
@@ -69,30 +78,19 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                //await loadRequests();
+                await loadRequests();
             }
         }
 
         public async Task loadRequests()
         {
-            IEnumerable<EvlRequestDto> requests = await _evlRequestService.GetAllRequests();
-
-            Requests = new ObservableCollection<EvlRequestListItemSource>();
-
-            foreach (EvlRequestDto r in requests)
-            {
-                Requests.Add(new EvlRequestListItemSource
-                {
-                    Code = r.Code,
-                    RequestTypeName = EnumHelper<EvlRequestType>.GetDisplayValue(r.EvlRequestType),
-                    Date = _dateTimeUtils.ConvertMiladiToShamsi(r.CreatedOn),
-                    RequestId = r.Id
-                });
-            }
+            Requests = new ObservableCollection<EvlRequestListItemSource>(await _evlRequestService.GetAllRequests());
         }
         public ObservableCollection<EvlRequestListItemSource> Requests { get; set; }
 
         public BitDelegateCommand Inquiry { get; set; }
+
+        public BitDelegateCommand OpenInquiryBox { get; set; }
 
         public int DocumentNumber { get; set; }
 

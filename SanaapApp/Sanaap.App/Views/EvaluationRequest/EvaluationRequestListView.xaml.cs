@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Prism.Events;
+using Sanaap.App.Events;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
-    
+
     public partial class EvaluationRequestListView : ContentPage
     {
-        public EvaluationRequestListView()
+        public EvaluationRequestListView(IEventAggregator eventAggregator)
         {
             InitializeComponent();
-        }
 
-        private void InquiryDocument(object sender, EventArgs e)
-        {
-            navigationDrawer.ToggleDrawer();
+            eventAggregator.GetEvent<OpenInquiryPopup>().SubscribeAsync(async (nothing) =>
+            {
+                navigationDrawer.ToggleDrawer();
+            }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
         }
     }
 }

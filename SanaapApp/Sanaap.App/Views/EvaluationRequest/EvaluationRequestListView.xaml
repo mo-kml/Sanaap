@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             NavigationPage.HasNavigationBar="False"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:extensions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
@@ -44,7 +45,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <navigationdrawer:SfNavigationDrawer DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <StackLayout FlowDirection="RightToLeft">
                     <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
@@ -56,20 +57,20 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Margin="0,20,0,10" >
+                                    <Grid Margin="10" >
 
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1"/>
-                                            <ColumnDefinition Width="3*"/>
-                                            <ColumnDefinition Width="1.7*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="0.7"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
 
                                         <StackLayout Spacing="0">
                                             <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
-                                            <Label Text="{Binding RequestId}" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding Code}" HorizontalOptions="Center"/>
                                         </StackLayout>
-                                        
+
                                         <BoxView Grid.Column="1" Style="{StaticResource PipeBoxView}"/>
 
                                         <StackLayout Grid.Column="2" Orientation="Horizontal">
@@ -79,10 +80,10 @@
                                                 <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>
                                             </StackLayout>
                                         </StackLayout>
-                                        
+
                                         <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Column="3">
-                                            <Label Text="تاریخ ثبت" Style="{StaticResource Header}" />
-                                            <Label Text="{Binding Date}"/>
+                                            <Label VerticalTextAlignment="Center" Text="تاریخ ثبت" Style="{StaticResource Header}" />
+                                            <Label VerticalTextAlignment="Center" Text="{Binding Date}"/>
                                         </StackLayout>
 
 
@@ -93,72 +94,53 @@
                     </ListView>
 
                     <controls:SanaapFrame ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
-                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                            <Label Text="استعلام پرونده" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
-                        </StackLayout>
+                        <controls:SanaapFrame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenInquiryBox}"/>
+                        </controls:SanaapFrame.GestureRecognizers>
+                        <Label HorizontalTextAlignment="Center" Text="استعلام پرونده" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
                     </controls:SanaapFrame>
-
-                    <!--<Button Text="استعلام پرونده" Clicked="InquiryDocument"/>-->
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                <AbsoluteLayout FlowDirection="RightToLeft" BackgroundColor="{StaticResource primaryBackground}">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" BackgroundColor="White">
 
-                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                        <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0,20,0,0">
-                            <Label Style="{StaticResource headerText}" Text="استعلام پرونده"/>
-                            
+                    <Label Style="{StaticResource headerText}" Text="استعلام پرونده" Margin="10"/>
+
+                    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center" Spacing="20" Padding="10">
+                        <StackLayout Orientation="Horizontal" >
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=Medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=Houce.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=Car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
+                                </StackLayout>
+                            </Frame>
                         </StackLayout>
 
-                        <StackLayout VerticalOptions="Start" Spacing="20">
-                            <StackLayout Orientation="Horizontal" >
-
-                                <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer/>
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout>
-                                        <Image Source="{extensions:Image FileName=car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
-                                    </StackLayout>
-                                </Frame>
-
-                                <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer/>
-                                    </Frame.GestureRecognizers>
-                                    
-                                    <StackLayout>
-                                        <Image Source="{extensions:Image FileName=house.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
-                                    </StackLayout>
-                                </Frame>
-
-                                <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer/>
-                                    </Frame.GestureRecognizers>
-                                    
-                                    <StackLayout>
-                                        <Image Source="{extensions:Image FileName=medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
-                                    </StackLayout>
-                                </Frame>
-
-
-                            </StackLayout>
-
-                            <controls:SanaapEntry  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
-                        </StackLayout>
-
+                        <controls:SanaapEntry Text="{Binding DocumentNumber}"  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
                     </StackLayout>
-                    <!--<Button  Text="استعلام" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,60"  HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>-->
-                        <controls:SanaapFrame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,.17" ShadowOffset="50" CornerRadius="0" BackgroundColor="{StaticResource primaryBlue}" >
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
-                                <Label Text="استعلام" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
-                            </StackLayout>
-                        </controls:SanaapFrame>
-                    </AbsoluteLayout>
+
+
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="استعلام"  FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Inquiry}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>

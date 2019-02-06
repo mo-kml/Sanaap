@@ -6,6 +6,7 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
+                 HasKeyboardOffset="False"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestFilesView"
