@@ -49,6 +49,17 @@
         <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
         <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="شماره ملی" Text="{Binding Customer.NationalCode}" />
         <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره همراه" Text="{Binding Customer.Mobile}" />
+
+
+                <!--<local:SanaapFrame ShadowOffset="20" Margin="0,30,0,0" CornerRadius="5" BackgroundColor="{StaticResource primaryBlue}">
+
+                    <local:SanaapFrame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Register}"/>
+                    </local:SanaapFrame.GestureRecognizers>
+                    
+                    <Label TextColor="White" Text="ثبت نام" HorizontalOptions="Center"/>
+                </local:SanaapFrame>-->
+          
         <Button TextColor="White" BorderRadius="5" Margin="0,30,0,0" Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}"/>
       </StackLayout>
 

@@ -35,7 +35,9 @@
             <Setter Property="CornerRadius" Value="18"/>
         </Style>
 
-
+        <Style TargetType="controls:IconLabel" x:Key="Return">
+            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+        </Style>
 
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="FontSize" Value="10"/>
@@ -67,7 +69,7 @@
                                             </Frame>
 
                                             <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="2 اطلاعات زیان دیده" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                                <Label Text="2 زیان دیده" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
                                         </StackLayout>
@@ -136,7 +138,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
+                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
 
                 </Grid>
 

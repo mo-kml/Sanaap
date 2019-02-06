@@ -27,13 +27,13 @@
                             <StackLayout Orientation="Horizontal" >
                                 <controls:SanaapComboBox
                                     HorizontalOptions="FillAndExpand"
-                                    Text="نام خودرو"
+                                    Placeholder="نام خودرو"
                                     AllowFiltering="True"
                                     DataSource="{Binding Cars}"
                                     DisplayMemberPath="Name"
                                     IsEditableMode="True"
                                     SelectedItem="{Binding SelectedCar}" />
-                                <controls:SanaapComboBox Text="رنگ خودرو" DataSource="{Binding Colors}" HorizontalOptions="FillAndExpand" />
+                                <controls:SanaapComboBox Placeholder="رنگ خودرو" DataSource="{Binding Colors}" HorizontalOptions="FillAndExpand" />
                             </StackLayout>
 
                             <controls:SanaapEntry Placeholder="شماره شاسی" Text="{Binding Request.InsurerNo}" />
@@ -68,7 +68,7 @@
                                 <controls:SanaapEntry MaxLength="2" Keyboard="Numeric" />
                             </StackLayout>
 
-                            <controls:SanaapComboBox Text="{Binding Request.InsurerNo}" />
+                            <controls:SanaapComboBox Placeholder="نوع بیمه" />
 
                         </StackLayout>
                     </StackLayout>

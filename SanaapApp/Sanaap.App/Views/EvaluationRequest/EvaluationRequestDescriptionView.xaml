@@ -42,6 +42,9 @@
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="CornerRadius" Value="18"/>
         </Style>
+        <Style TargetType="controls:IconLabel" x:Key="Return">
+            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+        </Style>
 
     </popup:PopupPage.Resources>
     <popup:PopupPage.Content>
@@ -135,7 +138,7 @@
                 </Frame>
                 <Grid AbsoluteLayout.LayoutBounds="1,1.01,1,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -143,7 +146,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;">
+                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;">
                         <controls:IconLabel.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding GoBack}"/>
                         </controls:IconLabel.GestureRecognizers>
