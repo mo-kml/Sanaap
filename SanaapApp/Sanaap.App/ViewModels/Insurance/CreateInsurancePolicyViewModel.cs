@@ -2,6 +2,7 @@
 using Bit.ViewModel;
 using Prism.Navigation;
 using Prism.Services;
+using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
@@ -26,6 +27,7 @@ namespace Sanaap.App.ViewModels.Insurance
         private readonly HttpClient _httpClient;
         private readonly IInitialDataService _initialDataService;
         private readonly IUserDialogs _userDialogs;
+        private readonly ILicenseHelper _licenseHelper;
         public CreateInsurancePolicyViewModel(
             IUserDialogs userDialogs,
             HttpClient httpClient,
@@ -34,14 +36,14 @@ namespace Sanaap.App.ViewModels.Insurance
             IInsuranceValidator insuranceValidator,
             IPageDialogService pageDialogService,
             IPolicyService policyService,
-
+            ILicenseHelper licenseHelper,
             ISanaapAppTranslateService translateService
             )
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
-
+            _licenseHelper = licenseHelper;
 
 
             foreach (InsuranceType item in (InsuranceType[])Enum.GetValues(typeof(InsuranceType)))
@@ -61,6 +63,17 @@ namespace Sanaap.App.ViewModels.Insurance
 
                   using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
                   {
+                      License.Alphabet = SelectedAlphabet.Name;
+
+                      if (licenseHelper.ConvertToPlateNumber(License, out string licensePlate))
+                      {
+                          Policy.PlateNumber = licensePlate;
+                      }
+                      else
+                      {
+                          return;
+                      }
+
                       if (!insuranceValidator.IsValid(Policy, out string errorMessage))
                       {
                           await pageDialogService.DisplayAlertAsync(string.Empty, translateService.Translate(errorMessage), ConstantStrings.Ok);
@@ -71,6 +84,7 @@ namespace Sanaap.App.ViewModels.Insurance
                       Policy.CarId = SelectedCar.PrmID;
                       Policy.InsuranceType = SelectedInsuranceType.InsuranceType;
                       Policy.InsurerId = SelectedInsurer.ID;
+
 
                       policyCancellationTokenSource?.Cancel();
                       policyCancellationTokenSource = new CancellationTokenSource();
@@ -91,11 +105,12 @@ namespace Sanaap.App.ViewModels.Insurance
 
                   await NavigationService.GoBackAsync();
 
-              }, () => SelectedCar != null && SelectedColor != null && SelectedInsuranceType != null && SelectedInsurer != null);
+              }, () => SelectedCar != null && SelectedColor != null && SelectedInsuranceType != null && SelectedInsurer != null && SelectedAlphabet != null);
             Submit.ObservesProperty(() => SelectedCar);
             Submit.ObservesProperty(() => SelectedColor);
             Submit.ObservesProperty(() => SelectedInsuranceType);
             Submit.ObservesProperty(() => SelectedInsurer);
+            Submit.ObservesProperty(() => SelectedAlphabet);
 
             SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
             {
@@ -140,16 +155,8 @@ namespace Sanaap.App.ViewModels.Insurance
                     SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Policy.CarId);
                     SelectedInsuranceType = InsuranceTypes.FirstOrDefault(c => c.InsuranceType == Policy.InsuranceType);
                     SelectedInsurer = Insurers.FirstOrDefault(c => c.ID == Policy.InsurerId);
-                    SelectedInsurer.IsSelected = true;
-                }
-
-                if (method == EditMethod.Create)
-                {
-                    SubmitButtonText = "اضافه کردن";
-                }
-                else
-                {
-                    SubmitButtonText = "ویرایش";
+                    License = _licenseHelper.ConvertToItemSource(policy.PlateNumber);
+                    SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
                 }
             }
         }
@@ -161,19 +168,19 @@ namespace Sanaap.App.ViewModels.Insurance
             Colors = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetColors());
 
             Insurers = new ObservableCollection<InsurersItemSource>(await _initialDataService.GetInsurers());
+
+            Alphabets = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetAlphabets());
         }
 
         public InsurancePolicyDto Policy { get; set; } = new InsurancePolicyDto();
+
+        public LicensePlateItemSource License { get; set; } = new LicensePlateItemSource();
 
         public BitDelegateCommand Submit { get; set; }
 
         public BitDelegateCommand SearchInCars { get; set; }
 
         public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
-
-        public string CarSearchText { get; set; }
-
-        public string SubmitButtonText { get; set; }
 
         public ObservableCollection<ExternalEntityDto> Colors { get; set; }
 
@@ -185,12 +192,15 @@ namespace Sanaap.App.ViewModels.Insurance
 
         public List<InsuranceTypeItemSource> InsuranceTypes { get; set; } = new List<InsuranceTypeItemSource>();
 
+        public ObservableCollection<ExternalEntityDto> Alphabets { get; set; }
+
         public InsuranceTypeItemSource SelectedInsuranceType { get; set; }
 
         public ExternalEntityDto SelectedColor { get; set; }
 
         public ExternalEntityDto SelectedCar { get; set; }
 
+        public ExternalEntityDto SelectedAlphabet { get; set; }
 
         public BitDelegateCommand<InsurersItemSource> SelectInsurer { get; set; }
 
