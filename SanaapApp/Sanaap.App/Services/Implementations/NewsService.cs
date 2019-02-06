@@ -17,11 +17,12 @@ namespace Sanaap.App.Services.Implementations
             _oDataClient = oDataClient;
         }
 
-        public async Task<List<NewsItemSource>> GetNews()
+        public async Task<List<NewsItemSource>> GetNews(FilterNewsDto filterNewsDto)
         {
             List<ContentDto> news = (await _oDataClient.For<ContentDto>("Contents")
-                .Function("GetNews")
-                .FindEntriesAsync()).ToList();
+                .Action("GetNews")
+                .Set(filterNewsDto)
+                .ExecuteAsEnumerableAsync()).ToList();
 
             List<NewsItemSource> newsItemSources = new List<NewsItemSource>();
 
@@ -47,8 +48,6 @@ namespace Sanaap.App.Services.Implementations
 
         public async Task<NewsItemSource> GetNewsById(int id)
         {
-
-
             ContentDto news = await _oDataClient.For<ContentDto>("Contents")
                             .Function("GetNewsById")
                             .Set(new { newsId = id })

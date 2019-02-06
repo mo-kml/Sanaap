@@ -23,10 +23,11 @@ using System.Threading.Tasks;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace Sanaap.App.Droid
 {
-    [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
+    [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -61,8 +62,8 @@ namespace Sanaap.App.Droid
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));
 
 
-            //Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
-            //    .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Unspecified);
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
+                .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Pan);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)

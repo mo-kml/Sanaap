@@ -39,7 +39,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             OpenInquiryBox = new BitDelegateCommand(async () =>
               {
-                  eventAggregator.GetEvent<OpenInquiryPopup>().Publish(new OpenInquiryPopup());
+                  eventAggregator.GetEvent<OpenInquiryPopupEvent>().Publish(new OpenInquiryPopupEvent());
               });
 
             Inquiry = new BitDelegateCommand(async () =>
@@ -58,7 +58,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     {
                         DocumentNumber = 0;
 
-                        eventAggregator.GetEvent<OpenInquiryPopup>().Publish(new OpenInquiryPopup());
+                        eventAggregator.GetEvent<OpenInquiryPopupEvent>().Publish(new OpenInquiryPopupEvent());
 
                         INavigationParameters parameter = new NavigationParameters();
                         parameter.Add(nameof(EvlRequestListItemSource), new EvlRequestListItemSource

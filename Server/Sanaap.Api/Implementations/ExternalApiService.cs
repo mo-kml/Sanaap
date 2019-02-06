@@ -21,7 +21,6 @@ namespace Sanaap.Api.Implementations
         private IEnumerable<ExternalEntityDto> colors;
         private IEnumerable<ExternalEntityDto> cars;
         private IEnumerable<InsurerDto> insurers;
-        private IEnumerable<ContentDto> news;
         private IEnumerable<ExternalEntityDto> alphabets;
 
         public async Task<IEnumerable<ExternalEntityDto>> GetCars()
@@ -96,30 +95,34 @@ namespace Sanaap.Api.Implementations
             return alphabets;
         }
 
-        public async Task<IEnumerable<ContentDto>> GetNews()
+        public async Task<IEnumerable<ContentDto>> GetNews(FilterNewsDto filterNewsDto)
         {
             if (httpClient == null)
             {
                 httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
             }
 
-            if (news == null)
+            filterNewsDto.Page = 1;
+
+            string json = JsonConvert.SerializeObject(filterNewsDto, Formatting.None,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore
+                        });
+
+            HttpResponseMessage result = await httpClient.PostAsync("GetNewsList", new StringContent(json, UnicodeEncoding.UTF8, "application/json"));
+
+            if (result.IsSuccessStatusCode)
             {
-                HttpResponseMessage result = await httpClient.PostAsync("GetNewsList", new StringContent("{page:1}", UnicodeEncoding.UTF8, "application/json"));
+                NewsList newsList = JsonConvert.DeserializeObject<NewsList>(await result.Content.ReadAsStringAsync());
 
-                if (result.IsSuccessStatusCode)
-                {
-                    NewsList newsList = JsonConvert.DeserializeObject<NewsList>(await result.Content.ReadAsStringAsync());
-
-                    news = newsList.Items;
-                }
-                else
-                {
-                    throw new Exception(result.ReasonPhrase);
-                }
+                return newsList.Items;
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
             }
 
-            return news;
         }
 
         public async Task<IEnumerable<InsurerDto>> GetInsurers()

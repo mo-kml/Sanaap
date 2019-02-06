@@ -6,6 +6,7 @@
     xmlns:bit="clr-namespace:Bit;assembly=Bit.CSharpClient.Prism"
     xmlns:control="clr-namespace:Sanaap.App.Controls"
     xmlns:convs="clr-namespace:Sanaap.App.Converters"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
     xmlns:syncfusionCombo="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
@@ -62,6 +63,15 @@
                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             </Style>
 
+            <Style TargetType="control:SanaapEditor">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource textPlaceholderColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+
+            <!--font size style wont set-->
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
@@ -86,6 +96,10 @@
                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
                 <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
                 <Setter Property="BorderColor" Value="{StaticResource textBorderColor}"/>
+            </Style>
+
+            <Style TargetType="popup:PopupPage">
+                <Setter Property="BackgroundColor" Value="#CC000000"/>
             </Style>
 
             <ControlTemplate x:Key="masterTemplate">

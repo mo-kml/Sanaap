@@ -16,5 +16,9 @@ namespace Sanaap.App.Services.Contracts
         Task<List<InsurersItemSource>> GetInsurers();
 
         Task<List<ExternalEntityDto>> GetAlphabets();
+
+        Task<MonthItemSource[]> GetMonths();
+
+        Task<YearItemSource[]> GetYears();
     }
 }

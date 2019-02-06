@@ -12,6 +12,7 @@
     BackgroundColor="Gray"
     xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     Padding="30,40,30,40"
+    HasKeyboardOffset="False"
     HasSystemPadding="True"
     SystemPaddingSides="All"
     x:Name="createInsuranceView">

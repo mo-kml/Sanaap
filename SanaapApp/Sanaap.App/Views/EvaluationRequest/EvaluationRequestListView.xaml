@@ -4,6 +4,8 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              NavigationPage.HasNavigationBar="False"
+             Title="پرونده ها"
+             ControlTemplate="{StaticResource masterTemplate}"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:extensions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">

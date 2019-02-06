@@ -4,6 +4,8 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             Title="بیمه ها"
+             ControlTemplate="{StaticResource masterTemplate}"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              NavigationPage.HasNavigationBar="False">

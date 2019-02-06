@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="sanaapEditor"
+             FlowDirection="RightToLeft"
+             x:Class="Sanaap.App.Controls.SanaapEditor">
+    <ContentView.Content>
+        <Frame BindingContext="{x:Reference sanaapEditor}" Padding="0.3" BackgroundColor="{Binding BorderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False" CornerRadius="3">
+            <Frame BackgroundColor="{Binding BorderColor}" HasShadow="False" Padding="1" CornerRadius="5" Margin="0">
+                <Editor Margin="0" HeightRequest="{Binding HeightRequest}" MaxLength="{Binding MaxLength}" FontSize="{Binding FontSize}" TextColor="{Binding TextColor}" Keyboard="{Binding Keyboard}" Text="{Binding Text}" FontFamily="{Binding FontFamily}" BackgroundColor="{Binding BackgroundColor}" Placeholder="{Binding Placeholder}" PlaceholderColor="{Binding PlaceholderColor}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"/>
+            </Frame>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

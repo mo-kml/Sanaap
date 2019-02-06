@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 NavigationPage.HasNavigationBar="False"
+                 Padding="30,40,30,40"
+                 BackgroundColor="#CC000000"
+                 HasKeyboardOffset="False"
+                 HasSystemPadding="True"
+                 SystemPaddingSides="All"
+                 CloseWhenBackgroundIsClicked="False"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 FlowDirection="RightToLeft"
+             x:Class="Sanaap.App.Views.Comment.CommentAnswerPopupView">
+    <Frame Padding="0" CornerRadius="15" BackgroundColor="White">
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,0.85" AbsoluteLayout.LayoutFlags="All" >
+
+                <StackLayout Padding="15" Spacing="20">
+
+                    <Label Text="1565656" FontFamily="{StaticResource Shabnam-Bold-FDFont}" Style="{StaticResource headerText}"/>
+
+                    <StackLayout>
+                        <Label Text="پیام شما" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+
+                        <Label Text="{Binding Comment.Description}"/>
+
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="پاسخ کارشناس" FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="{StaticResource primaryBlue}"/>
+
+                        <Label Text="{Binding Comment.Answer}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+            <Button Command="{Binding ClosePopup}" FontSize="{StaticResource mediumFontSize}" Text="بستن" BackgroundColor="{StaticResource cancelGrayColor}" TextColor="White" AbsoluteLayout.LayoutBounds="0,1,1,0.15" AbsoluteLayout.LayoutFlags="All"/>
+        </AbsoluteLayout>
+    </Frame>
+</popup:PopupPage>

@@ -1,6 +1,6 @@
 ﻿using Bit;
 using Prism.Ioc;
-using Sanaap.Service.Contracts;
+using Sanaap.App.Helpers.Contracts;
 using System;
 using System.Globalization;
 using Xamarin.Forms;
@@ -9,13 +9,12 @@ namespace Sanaap.App.Converters
 {
     public class DateTimeOffsetToSolarDateConverter : IValueConverter
     {
-        private static readonly Lazy<IDateTimeUtils> DateTimeUtils = new Lazy<IDateTimeUtils>(((BitApplication)App.Current).Container.Resolve<IDateTimeUtils>);
-
+        private static readonly Lazy<IDateHelper> DateHelper = new Lazy<IDateHelper>(BitApplication.Current.Container.Resolve<IDateHelper>);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is DateTimeOffset dateTimeOffset)
             {
-                return DateTimeUtils.Value.ConvertMiladiToShamsi(dateTimeOffset);
+                return DateHelper.Value.ToPersianShortDate(dateTimeOffset.Date);
             }
 
             return string.Empty;
