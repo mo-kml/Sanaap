@@ -9,6 +9,7 @@
     xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
     xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
     BackgroundColor="Gray"
+    HasKeyboardOffset="False"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
