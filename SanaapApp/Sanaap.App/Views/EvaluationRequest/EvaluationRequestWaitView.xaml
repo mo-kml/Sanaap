@@ -9,7 +9,7 @@
         <StackLayout>
             <StackLayout VerticalOptions="CenterAndExpand" Spacing="20">
                 <Frame HorizontalOptions="CenterAndExpand" VerticalOptions="Center" BackgroundColor="White" WidthRequest="100" HeightRequest="100" CornerRadius="100">
-                    <ffimageloading:SvgCachedImage DownsampleToViewSize="True" WidthRequest="100" HeightRequest="100" Source="resource://Sanaap.App.Images.carGifwithLOGO.gif" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <ffimageloading:SvgCachedImage DownsampleToViewSize="True" WidthRequest="100" HeightRequest="100" Source="resource://Sanaap.App.Images.carGif.gif" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </Frame>
                 <Label Text="در حال جستجوی کارشناس" FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="{StaticResource lightBlueColor}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 <Label Text="متن زیر عنوان" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>

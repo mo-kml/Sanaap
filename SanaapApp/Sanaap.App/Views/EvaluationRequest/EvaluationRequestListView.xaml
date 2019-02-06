@@ -73,7 +73,7 @@
                                         <BoxView Grid.Column="1" Style="{StaticResource PipeBoxView}"/>
 
                                         <StackLayout Grid.Column="2" Orientation="Horizontal">
-                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=Car.png}" BackgroundColor="Transparent" />
+                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=car.png}" BackgroundColor="Transparent" />
                                             <StackLayout Spacing="0">
                                                 <Label  Text="پرونده" Style="{StaticResource Header}" />
                                                 <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>
@@ -118,7 +118,7 @@
                                         <TapGestureRecognizer/>
                                     </Frame.GestureRecognizers>
                                     <StackLayout>
-                                        <Image Source="{extensions:Image FileName=Car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Image Source="{extensions:Image FileName=car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
                                     </StackLayout>
                                 </Frame>
@@ -129,7 +129,7 @@
                                     </Frame.GestureRecognizers>
                                     
                                     <StackLayout>
-                                        <Image Source="{extensions:Image FileName=Houce.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Image Source="{extensions:Image FileName=house.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
                                     </StackLayout>
                                 </Frame>
@@ -140,7 +140,7 @@
                                     </Frame.GestureRecognizers>
                                     
                                     <StackLayout>
-                                        <Image Source="{extensions:Image FileName=Medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                        <Image Source="{extensions:Image FileName=medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                         <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
                                     </StackLayout>
                                 </Frame>

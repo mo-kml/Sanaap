@@ -41,7 +41,7 @@
     <StackLayout Padding="15" VerticalOptions="Center">
 
       <StackLayout VerticalOptions="StartAndExpand">
-        <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image FileName=SannapLogoWithIcon.png}" Aspect="AspectFit"  />
+        <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image FileName=logoIcon.png}" Aspect="AspectFit"  />
       </StackLayout>
 
       <StackLayout Spacing="15" Padding="30" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">

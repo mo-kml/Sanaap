@@ -57,7 +57,7 @@
                         <Label AbsoluteLayout.LayoutFlags="All" VerticalTextAlignment="Center" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" BackgroundColor="{StaticResource primaryBlue}" Text="اعلام خسارت" Style="{StaticResource headerText}"  TextColor="White"/>
                         
                         <Frame Margin="0,0,30,15" HeightRequest="50" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="{StaticResource primaryBlue}"  AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional" HasShadow="False">
-                            <Image VerticalOptions="Center" HorizontalOptions="Center" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" Source="{extentions:Image FileName=TransparentCarCrash.png}"/>
+                            <Image VerticalOptions="Center" HorizontalOptions="Center" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" Source="{extentions:Image FileName=Transparentcrash.png}"/>
                         </Frame>
                     </Grid>
 

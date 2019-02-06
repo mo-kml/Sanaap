@@ -28,7 +28,7 @@
   <ContentPage.Content>
     <StackLayout VerticalOptions="Center" Padding="20" Spacing="15">
       <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150" HeightRequest="100">
-        <Image BackgroundColor="Transparent" Aspect="AspectFit" Source="{extensions:Image FileName=sanaapLogoWithIconWhite.png}" />
+        <Image BackgroundColor="Transparent" Aspect="AspectFit" Source="{extensions:Image FileName=logoIconWhite.png}" />
       </StackLayout>
 
       <StackLayout Style="{StaticResource mainStackLayout}" Margin="0,50,0,0" Spacing="15" Padding="30,0">

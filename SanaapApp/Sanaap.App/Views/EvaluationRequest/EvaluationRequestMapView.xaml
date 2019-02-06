@@ -21,7 +21,7 @@
         </Style>
 
         <Style TargetType="controls:IconLabel" x:Key="Return">
-            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+            <Setter Property="FontSize" Value="{StaticResource largeFontSize}"/>
         </Style>
         
         <Style TargetType="Frame" x:Key="TitleFrame">
@@ -79,7 +79,7 @@
                                     InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="False" WidthRequest="10"
                                     VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-                            <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.14,0.14" Source="{extentions:Image FileName=Icon.png}">
+                            <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.14,0.14" Source="{extentions:Image FileName=icon.png}">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
                                 </Image.GestureRecognizers>
@@ -93,7 +93,7 @@
                 </Frame>
                 <Grid AbsoluteLayout.LayoutBounds="1,1.01,1,0.15" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="2.5*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
