@@ -20,8 +20,8 @@
             <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
         </Style>
         <Style TargetType="Label" x:Key="Title">
-            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
-            <Setter Property="FontSize" Value="{StaticResource mediumFontSize}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
         </Style>
     </ContentPage.Resources>
 
@@ -61,7 +61,7 @@
                                                     </WebView.Source>
                                                 </WebView>-->
 
-                                                <Label Text="{Binding Text}" MaxLines="2" LineBreakMode="TailTruncation" HeightRequest="35" Margin="10,0,0,0" />
+                                                <Label Text="{Binding Text}" MaxLines="3" FontSize="{StaticResource ultraSmallFontSize}" LineBreakMode="TailTruncation" HeightRequest="45" Margin="10,0,0,0" />
 
 
                                             </StackLayout>
