@@ -40,43 +40,37 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout>
-                                        <Grid Margin="5,10,5,10">
+                                        <Grid Margin="10,15">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="4*"/>
-                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                             </Grid.RowDefinitions>
 
-                                            <Frame Padding="0" CornerRadius="5" Grid.Column="0"  HeightRequest="50" WidthRequest="100" Margin="10,0,0,0">
-                                                <Image Aspect="AspectFill"  Source="{Binding Image}"  BackgroundColor="Gray"  />
-                                            </Frame>
+                                            <controls:SanaapFrame ShadowOffset="20" Padding="0" CornerRadius="5" Grid.Column="0"  HeightRequest="40" WidthRequest="100" Margin="10,0,0,0">
+                                                <Image Aspect="Fill"  Source="{Binding Image}"  BackgroundColor="Gray"  />
+                                            </controls:SanaapFrame>
 
                                             <StackLayout Grid.Column="1" Spacing="0">
                                                 <Label TextColor="Black" Style="{StaticResource Title}" MaxLines="2" LineBreakMode="TailTruncation" Margin="10,0,0,0" Text="{Binding Title}" Grid.Column="1"/>
-                                                <!--HeightRequest="70"-->
-                                                <!--<WebView BackgroundColor="Red" HeightRequest="50" WidthRequest="50" Margin="10,0,0,0">
-                                                    <WebView.Source>
-                                                        <HtmlWebViewSource Html="{Binding Text}"/>
-                                                    </WebView.Source>
-                                                </WebView>-->
 
                                                 <Label Text="{Binding Text}" MaxLines="3" FontSize="{StaticResource ultraSmallFontSize}" LineBreakMode="TailTruncation" HeightRequest="45" Margin="10,0,0,0" />
-
-
+                                                
                                             </StackLayout>
 
                                         </Grid>
 
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10,0,10,0">
 
-                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="2">
-                                                <Label VerticalOptions="Center" Text="{Binding Likes}" Style="{StaticResource Like}"/>
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="4">
                                                 <controls:IconLabel VerticalOptions="Center" Text="&#xf004;" HorizontalOptions="Start" Style="{StaticResource Like}"/>
-                                            </StackLayout>
-                                            <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0" HeightRequest="0.7"/>
 
-                                            <Label HorizontalOptions="End" VerticalOptions="Center" Text="{Binding Date,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}"/>
+                                                <Label FontSize="{StaticResource ultraSmallFontSize}" VerticalOptions="Center" Text="{Binding Likes}" Style="{StaticResource Like}"/>
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0" HeightRequest="0.6"/>
+
+                                            <Label HorizontalOptions="End" FontSize="{StaticResource ultraSmallFontSize}" VerticalOptions="Center" Text="{Binding Date,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
@@ -84,7 +78,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding OpenFilterPopup}}" BorderRadius="35" BackgroundColor="{StaticResource primaryBlue}" TextColor="{StaticResource buttonTextWhite}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding OpenFilterPopup}" BorderRadius="35" BackgroundColor="{StaticResource primaryBlue}" TextColor="{StaticResource buttonTextWhite}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>

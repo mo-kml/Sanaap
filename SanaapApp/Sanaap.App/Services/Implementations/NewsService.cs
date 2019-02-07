@@ -20,11 +20,7 @@ namespace Sanaap.App.Services.Implementations
 
         private string StripHTML(string input)
         {
-            string text = Regex.Replace(input, "<.*?>", string.Empty);
-
-            text = Regex.Replace(text, "&*?;", string.Empty);
-
-            return text.Trim();
+            return Regex.Replace(input, @"<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;", string.Empty).Trim();
         }
 
         public async Task<List<NewsItemSource>> GetNews(FilterNewsDto filterNewsDto)
