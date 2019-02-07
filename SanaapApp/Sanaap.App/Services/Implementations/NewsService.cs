@@ -18,7 +18,7 @@ namespace Sanaap.App.Services.Implementations
             _oDataClient = oDataClient;
         }
 
-        private string StripHTML(string input)
+        public static string StripHTML(string input)
         {
             return Regex.Replace(input, @"<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;", string.Empty).Trim();
         }
@@ -63,7 +63,6 @@ namespace Sanaap.App.Services.Implementations
                 Date = news.Date,
                 Text = news.Text,
                 Id = news.Id,
-                Image = ImageSource.FromUri(new System.Uri(news.Photo)),
                 NewsID = news.NewsID,
                 Photo = news.Photo,
                 Likes = news.Likes,
@@ -71,6 +70,14 @@ namespace Sanaap.App.Services.Implementations
                 Title = news.Title,
                 YourLike = news.YourLike
             };
+        }
+
+        public async Task<bool> LikeNews(int id)
+        {
+            return await _oDataClient.For<ContentDto>("Contents")
+                            .Function("LikeNews")
+                            .Set(new { newsId = id })
+                            .ExecuteAsScalarAsync<bool>();
         }
     }
 }

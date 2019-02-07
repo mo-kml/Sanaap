@@ -1,4 +1,5 @@
-﻿using Bit.Model.Contracts;
+﻿using Bit.Model;
+using Bit.Model.Contracts;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace Sanaap.Dto
     {
         public List<ContentDto> Items { get; set; }
     }
-    public class ContentDto : IDto
+    public class ContentDto : Bindable, IDto
     {
         public int NewsID { get; set; }
 
@@ -24,7 +25,7 @@ namespace Sanaap.Dto
 
         public int Likes { get; set; }
 
-        public int YourLike { get; set; }
+        public bool YourLike { get; set; }
 
         public virtual Guid Id { get; set; }
 
