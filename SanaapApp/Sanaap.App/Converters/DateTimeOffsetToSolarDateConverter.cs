@@ -16,6 +16,10 @@ namespace Sanaap.App.Converters
             {
                 return DateHelper.Value.ToPersianShortDate(dateTimeOffset.Date);
             }
+            else if (value is DateTime dateTime)
+            {
+                return DateHelper.Value.ToPersianShortDate(dateTime);
+            }
 
             return string.Empty;
         }

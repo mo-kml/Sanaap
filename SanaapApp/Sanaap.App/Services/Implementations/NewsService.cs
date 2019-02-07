@@ -4,6 +4,7 @@ using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,6 +18,15 @@ namespace Sanaap.App.Services.Implementations
             _oDataClient = oDataClient;
         }
 
+        private string StripHTML(string input)
+        {
+            string text = Regex.Replace(input, "<.*?>", string.Empty);
+
+            text = Regex.Replace(text, "&*?;", string.Empty);
+
+            return text.Trim();
+        }
+
         public async Task<List<NewsItemSource>> GetNews(FilterNewsDto filterNewsDto)
         {
             List<ContentDto> news = (await _oDataClient.For<ContentDto>("Contents")
@@ -25,13 +35,12 @@ namespace Sanaap.App.Services.Implementations
                 .ExecuteAsEnumerableAsync()).ToList();
 
             List<NewsItemSource> newsItemSources = new List<NewsItemSource>();
-
             foreach (ContentDto item in news)
             {
                 newsItemSources.Add(new NewsItemSource
                 {
                     Date = item.Date,
-                    Text = item.Text,
+                    Text = StripHTML(item.Text),
                     Id = item.Id,
                     Image = ImageSource.FromUri(new System.Uri(item.Photo)),
                     NewsID = item.NewsID,

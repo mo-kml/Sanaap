@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              FlowDirection="LeftToRight"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
+        <converters:DateTimeOffsetToSolarDateConverter x:Key="dateTimeOffsetToSolarDateConverter"/>
+
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
         </Style>
@@ -23,7 +26,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="320" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="280" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}">
                     <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" SeparatorVisibility="None"
@@ -52,7 +55,7 @@
                                             <StackLayout Grid.Column="1" Spacing="0">
                                                 <Label TextColor="Black" Style="{StaticResource Title}" MaxLines="2" LineBreakMode="TailTruncation" Margin="10,0,0,0" Text="{Binding Title}" Grid.Column="1"/>
                                                 <!--HeightRequest="70"-->
-                                                <!--<WebView BackgroundColor="Red" HeightRequest="35" Margin="10,0,0,0">
+                                                <!--<WebView BackgroundColor="Red" HeightRequest="50" WidthRequest="50" Margin="10,0,0,0">
                                                     <WebView.Source>
                                                         <HtmlWebViewSource Html="{Binding Text}"/>
                                                     </WebView.Source>
@@ -67,33 +70,13 @@
 
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10,0,10,0">
 
-                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-
-                                                <StackLayout.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Like}"/>
-                                                </StackLayout.GestureRecognizers>
-
-                                                <Label Text="{Binding Likes}" Style="{StaticResource Like}"/>
-                                                <controls:IconLabel Text="&#xf004;" HorizontalOptions="Start" Style="{StaticResource Like}">
-                                                    <controls:IconLabel.Triggers>
-                                                        <DataTrigger TargetType="controls:IconLabel"
-                                                     Binding="{Binding YourLike}"
-                                                     Value="1">
-                                                            <Setter Property="Type" Value="Solid"/>
-                                                            <Setter Property="TextColor" Value="Red"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="controls:IconLabel"
-                                                     Binding="{Binding YourLike}"
-                                                     Value="0">
-                                                            <Setter Property="Type" Value="Regular"/>
-                                                            <Setter Property="TextColor" Value="Black"/>
-                                                        </DataTrigger>
-                                                    </controls:IconLabel.Triggers>
-                                                </controls:IconLabel>
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="2">
+                                                <Label VerticalOptions="Center" Text="{Binding Likes}" Style="{StaticResource Like}"/>
+                                                <controls:IconLabel VerticalOptions="Center" Text="&#xf004;" HorizontalOptions="Start" Style="{StaticResource Like}"/>
                                             </StackLayout>
-                                            <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0,10,0" HeightRequest=".5"/>
+                                            <BoxView BackgroundColor="{StaticResource primaryGray}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,0" HeightRequest="0.7"/>
 
-                                            <Label HorizontalOptions="End" VerticalOptions="Center" Text="{Binding Date}"/>
+                                            <Label HorizontalOptions="End" VerticalOptions="Center" Text="{Binding Date,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
