@@ -1,7 +1,8 @@
 ﻿using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
+using Prism.Events;
+using Sanaap.App.Events;
 using Sanaap.App.Views;
-using Syncfusion.SfNavigationDrawer.XForms;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Controls.ViewModels
@@ -14,26 +15,29 @@ namespace Sanaap.App.Controls.ViewModels
 
         public BitDelegateCommand GoBack { get; set; }
 
-        public SfNavigationDrawer NavigationDrawer { get; set; }
+        public AbsoluteLayout Menu { get; set; }
 
-        public MenuViewModel(ISecurityService securityService)
+        public MenuViewModel(ISecurityService securityService, IEventAggregator eventAggregator)
         {
             GoToPage = new BitDelegateCommand<string>(async (page) =>
             {
-                NavigationDrawer.ToggleDrawer();
+                eventAggregator.GetEvent<ToggleMenuEvent>().Publish(Menu);
+
                 await NavigationService.NavigateAsync(page);
             });
 
             Logout = new BitDelegateCommand(async () =>
             {
-                NavigationDrawer.ToggleDrawer();
+                eventAggregator.GetEvent<ToggleMenuEvent>().Publish(Menu);
+
                 await securityService.Logout();
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(LoginView)}");
             });
 
             GoBack = new BitDelegateCommand(async () =>
               {
-                  NavigationDrawer.ToggleDrawer();
+                  eventAggregator.GetEvent<ToggleMenuEvent>().Publish(Menu);
+
                   await NavigationService.GoBackAsync();
               });
 

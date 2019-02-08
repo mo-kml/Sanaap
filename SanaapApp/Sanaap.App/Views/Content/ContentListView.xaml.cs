@@ -14,7 +14,7 @@ namespace Sanaap.App.Views.Content
 
             eventAggregator.GetEvent<OpenNewsFilterPopupEvent>().SubscribeAsync(async (nothing) =>
             {
-                navigationDrawer.ToggleDrawer();
+                //navigationDrawer.ToggleDrawer();
             }, keepSubscriberReferenceAlive: true, threadOption: ThreadOption.UIThread);
         }
     }

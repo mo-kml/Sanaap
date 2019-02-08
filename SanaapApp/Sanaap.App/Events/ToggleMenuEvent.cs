@@ -1,9 +1,9 @@
 ﻿using Prism.Events;
-using Syncfusion.SfNavigationDrawer.XForms;
+using Xamarin.Forms;
 
 namespace Sanaap.App.Events
 {
-    public class ToggleMenuEvent : PubSubEvent<SfNavigationDrawer>
+    public class ToggleMenuEvent : PubSubEvent<AbsoluteLayout>
     {
     }
 }

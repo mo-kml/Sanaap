@@ -116,7 +116,7 @@
 
 
             <AbsoluteLayout VerticalOptions="FillAndExpand">
-                <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" MyLocationEnabled="True" VerticalOptions="FillAndExpand"/>
+                <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" InitialCameraUpdate="35.7232935,51.4135174, 17, 0, 0" VerticalOptions="FillAndExpand"/>
                 <local:SanaapFrame Padding="0" ShadowOffset="30" CornerRadius="10" AbsoluteLayout.LayoutBounds="0.5,-25,0.6,50" AbsoluteLayout.LayoutFlags="WidthProportional,XProportional">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
                         <Button Style="{StaticResource labelButton}" Text="تماس با ما" Command="{Binding Call}"/>

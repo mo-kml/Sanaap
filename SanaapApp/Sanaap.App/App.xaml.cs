@@ -27,9 +27,9 @@ using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.App.Views.Insurance;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
-using Syncfusion.SfNavigationDrawer.XForms;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -67,7 +67,7 @@ namespace Sanaap.App
             //{
             //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
             //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ContentListView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -77,8 +77,7 @@ namespace Sanaap.App
             //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
 
             eventAggregator.GetEvent<ToggleMenuEvent>()
-                .SubscribeAsync(async drawer => drawer.ToggleDrawer(), ThreadOption.UIThread);
-
+                .SubscribeAsync(async menu => ToggleMenu(menu), ThreadOption.UIThread, true);
 
             await CrossMedia.Current.Initialize();
 
@@ -120,7 +119,7 @@ namespace Sanaap.App
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
                 //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://fbee733d.ngrok.io/"),
+                HostUri = new Uri("http://192.168.143.2:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
@@ -154,9 +153,36 @@ namespace Sanaap.App
             base.RegisterTypes(containerRegistry);
         }
 
-        public void ToggleMenu(object sender, EventArgs e)
+        public void ToggleMenu(AbsoluteLayout menu)
         {
-            ((SfNavigationDrawer)((IconButton)sender).BindingContext).ToggleDrawer();
+            if (menu.TranslationX == 0)
+            {
+                menu.FindByName<Button>("menuButton").IsVisible = false;
+
+                menu.TranslateTo(DeviceDisplay.MainDisplayInfo.Width, 0, 350);
+            }
+            else
+            {
+                menu.TranslateTo(0, 0, 350);
+
+                menu.FindByName<Button>("menuButton").IsVisible = true;
+            }
+        }
+
+        public void ToggleMenuButton(object sender, EventArgs e)
+        {
+            AbsoluteLayout menu;
+
+            if (sender is IconButton iconButton)
+            {
+                menu = ((AbsoluteLayout)((IconButton)sender).BindingContext);
+            }
+            else
+            {
+                menu = ((AbsoluteLayout)((Button)sender).Parent);
+            }
+
+            ToggleMenu(menu);
         }
     }
 }
