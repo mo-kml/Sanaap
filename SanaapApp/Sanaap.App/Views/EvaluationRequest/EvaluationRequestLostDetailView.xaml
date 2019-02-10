@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              BackgroundColor="Gray"
              HasKeyboardOffset="False"
+             CloseWhenBackgroundIsClicked="False"
              HasSystemPadding="False" Padding="30,120"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
@@ -139,7 +140,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
+                    <controls:IconButton Style="{StaticResource returnButton}"/>
 
                 </Grid>
 

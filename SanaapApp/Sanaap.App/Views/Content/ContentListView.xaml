@@ -28,19 +28,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <navigationdrawer:SfNavigationDrawer>
-                <navigationdrawer:SfNavigationDrawer.ContentView>
-                    <StackLayout>
-                        <Label Text="gdfsgfd"/>
-                        <Label Text="gdfsgfd"/>
-                        <Label Text="gdfsgfd"/>
-                        <Label Text="gdfsgfd"/>
-                    </StackLayout>
-                </navigationdrawer:SfNavigationDrawer.ContentView>
-            </navigationdrawer:SfNavigationDrawer>
-        </StackLayout>
-        <!--<navigationdrawer:SfNavigationDrawer IsOpen="False" DrawerHeight="280" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer IsOpen="False" DrawerHeight="280" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}">
                     <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" SeparatorVisibility="None"
@@ -107,6 +95,6 @@
                     <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding FilterContent}" Margin="10" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}" BorderRadius="25"/>
                 </StackLayout>
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
-        </navigationdrawer:SfNavigationDrawer>-->
+        </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>

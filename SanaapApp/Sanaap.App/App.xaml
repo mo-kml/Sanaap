@@ -71,6 +71,16 @@
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
 
+            <Style TargetType="control:IconButton" x:Key="returnButton">
+                <Setter Property="Command" Value="{Binding GoBack}"/>
+                <Setter Property="FontSize" Value="{StaticResource largeFontSize}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Type" Value="Solid"/>
+                <Setter Property="Text" Value="&#xf2ea;"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+
             <!--font size style wont set-->
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>

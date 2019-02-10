@@ -49,6 +49,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
             return base.OnNavigatedToAsync(parameters);
         }
+
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
+        }
         public string Month { get; set; }
 
         public string Year { get; set; }

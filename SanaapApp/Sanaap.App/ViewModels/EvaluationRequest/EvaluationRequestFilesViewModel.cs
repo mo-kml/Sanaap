@@ -40,6 +40,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand Gallery { get; set; }
 
+        public BitDelegateCommand GoBack { get; set; }
+
         public EvlRequestItemSource Request { get; set; }
 
         private int _fileIndex;
@@ -68,6 +70,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 _fileIndex = Files.IndexOf(file);
 
                 eventAggregator.GetEvent<TakePhotoEvent>().Publish(new TakePhotoEvent());
+            });
+
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
             });
 
             OpenCamera = new BitDelegateCommand(async () =>
@@ -230,9 +237,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public override Task OnNavigatedFromAsync(INavigationParameters parameters)
         {
-            //parameters.Add(nameof(EvlRequestItemSource), Request);
-            //parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
-            //parameters.Add("NextPage", "EvlRequestFile");
+            parameters.Add(nameof(Request), Request);
             return base.OnNavigatedFromAsync(parameters);
         }
     }
