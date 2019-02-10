@@ -20,5 +20,9 @@ namespace Sanaap.Api.Contracts
 
         Task<IEnumerable<ExternalEntityDto>> GetNumberplateAlphabets();
 
+        Task<IEnumerable<PhotoTypeDto>> GetSalesPhotos();
+
+        Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos();
+
     }
 }

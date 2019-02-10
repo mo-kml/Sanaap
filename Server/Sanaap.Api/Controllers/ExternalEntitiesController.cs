@@ -28,5 +28,17 @@ namespace Sanaap.Api.Controllers
             return await ExternalApiService.GetNumberplateAlphabets();
         }
 
+        [Function]
+        public async Task<IEnumerable<PhotoTypeDto>> GetSalesPhotos()
+        {
+            return await ExternalApiService.GetSalesPhotos();
+        }
+
+        [Function]
+        public async Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos()
+        {
+            return await ExternalApiService.GetBadanePhotos();
+        }
+
     }
 }

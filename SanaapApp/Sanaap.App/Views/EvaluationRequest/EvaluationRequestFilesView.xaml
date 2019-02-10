@@ -121,7 +121,7 @@
 
                                                         <Image Source="{extentions:Image FileName=addBlue.png}" HeightRequest="25" WidthRequest="25"/>
                                                         <Label Text="{Binding TypeName}" HorizontalTextAlignment="Center"/>
-                                                        <Label Text="ضروری" TextColor="Red" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"/>
+                                                        <Label IsVisible="{Binding IsRequired}" Text="ضروری" TextColor="Red" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"/>
                                                     </StackLayout>
                                                     <StackLayout>
                                                         <StackLayout.Triggers>

@@ -20,5 +20,9 @@ namespace Sanaap.App.Services.Contracts
         Task<MonthItemSource[]> GetMonths();
 
         Task<YearItemSource[]> GetYears();
+
+        Task<List<PhotoTypeDto>> GetBadanePhotos();
+
+        Task<List<PhotoTypeDto>> GetSalesPhotos();
     }
 }

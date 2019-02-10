@@ -12,6 +12,8 @@
     public class ConstantStrings
     {
         public static string Ok = "باشه";
+        public static string Yes = "بله";
+        public static string No = "خیر";
         public static string Error = "خطا";
         public static string NumberPlateIsNotValid = "لطفا شماره پلاک را درست وارد کنید";
         public static string Loading = "در حال پردازش ...";
@@ -24,6 +26,9 @@
         public static string InvalidVerifyCode = "کد تایید وارد شده معتبر نیست لطفا دوباره تلاش کنید";
         public static string SuccessfulProcess = "عملیات با موفقیت انجام شد";
         public static string SanapLogin = "sanapLogin";
+        public static string PictureIsNull = "تصویر انتخاب نشده است";
+        public static string PictureIsRequired = "لطفا تصاویر ضروری را وارد نمایید";
+        public static string AreYouSure = "از فرستادن درخواست مطمئن هستید؟";
         public static string RequestDosentExist = "درخواست وارد شده وجود ندارد لطفا دوباره تلاش کنید";
         public static string ResponseNotFoundFromSupport = "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است";
     }
