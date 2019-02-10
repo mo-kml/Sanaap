@@ -35,10 +35,15 @@ namespace Sanaap.Api.Controllers
 
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
 
-        [Function]
-        public virtual async Task<EvlRequestExpertDto> FindEvlRequestExpert(Guid evlRequestId, CancellationToken cancellationToken)
+        public class FindEvlReqeustExpertArgs
         {
-            EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, evlRequestId);
+            public Guid requestId { get; set; }
+        }
+
+        [Action]
+        public virtual async Task<EvlRequestExpertDto> FindEvlRequestExpert(FindEvlReqeustExpertArgs args, CancellationToken cancellationToken)
+        {
+            EvlRequest evlRequest = await EvlRequestsRepository.GetByIdAsync(cancellationToken, args.requestId);
             if (evlRequest == null)
             {
                 throw new ResourceNotFoundException("evlRequest is null");
@@ -78,6 +83,8 @@ namespace Sanaap.Api.Controllers
             {
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
+
+            string test = await findExpertRawResponse.Content.ReadAsStringAsync();
 
             EvlRequestExpertDto evlRequestExpertDto = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
 

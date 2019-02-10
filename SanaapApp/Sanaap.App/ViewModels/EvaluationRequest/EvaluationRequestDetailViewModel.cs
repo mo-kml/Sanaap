@@ -43,7 +43,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     });
               });
 
-            Submit = new BitDelegateCommand(async () =>
+            GoToNextLevel = new BitDelegateCommand(async () =>
               {
                   requestCancellationTokenSource?.Cancel();
                   requestCancellationTokenSource = new CancellationTokenSource();
@@ -82,9 +82,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       }
                   }
               }, () => SelectedCar != null && SelectedInsurer != null && SelectedAlphabet != null);
-            Submit.ObservesProperty(() => SelectedCar);
-            Submit.ObservesProperty(() => SelectedInsurer);
-            Submit.ObservesProperty(() => SelectedAlphabet);
+            GoToNextLevel.ObservesProperty(() => SelectedCar);
+            GoToNextLevel.ObservesProperty(() => SelectedInsurer);
+            GoToNextLevel.ObservesProperty(() => SelectedAlphabet);
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
@@ -156,7 +156,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public ExternalEntityDto SelectedCar { get; set; }
 
-        public BitDelegateCommand Submit { get; set; }
+        public BitDelegateCommand GoToNextLevel { get; set; }
 
         public BitDelegateCommand SelectFromInsurances { get; set; }
 

@@ -141,6 +141,27 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                         using (userDialogs.Loading(ConstantStrings.SendingRequestAndPictures))
                         {
+                            //EvlRequestDto evlRequest = new EvlRequestDto
+                            //{
+                            //    AccidentDate = Request.AccidentDate,
+                            //    AccidentReason = Request.AccidentReason,
+                            //    CarId = Request.CarId,
+                            //    EvlRequestType = Request.EvlRequestType,
+                            //    InsuranceType = Request.InsuranceType,
+                            //    InsurerId = Request.InsurerId,
+                            //    InsurerNo = Request.InsurerNo,
+                            //    Latitude = Request.Latitude,
+                            //    Longitude = Request.Longitude,
+                            //    LostCarId = Request.LostCarId,
+                            //    LostFirstName = Request.LostFirstName,
+                            //    LostLastName = Request.LostLastName,
+                            //    LostPlateNumber = Request.LostPlateNumber,
+                            //    OwnerFirstName = Request.OwnerFirstName,
+                            //    OwnerLastName = Request.OwnerLastName,
+                            //    PlateNumber = Request.PlateNumber,
+                            //    Status = Request.Status
+                            //};
+
                             MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
                             {
                                 new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
@@ -164,7 +185,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                             await NavigationService.NavigateAsync(nameof(EvaluationRequestWaitView), new NavigationParameters
                             {
-                                { nameof(EvlRequestItemSource), Request }
+                                { nameof(Request), Request }
                             });
                         }
 
@@ -187,13 +208,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 using (_userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    //Request = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
-
-                    //parameters.TryGetValue(nameof(Position), out Position position);
-
-                    //Request.Latitude = position.Latitude;
-                    //Request.Longitude = position.Longitude;
-
+                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
                     List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
                 {

@@ -80,7 +80,7 @@
                                     InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="False" WidthRequest="10"
                                     VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-                            <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.14,0.14" Source="{extentions:Image FileName=icon.png}">
+                            <Image AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,40,40" Source="{extentions:Image FileName=icon.png}">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
                                 </Image.GestureRecognizers>

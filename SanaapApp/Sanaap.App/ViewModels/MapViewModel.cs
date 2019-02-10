@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
-using Bit.ViewModel.Contracts;
 using Prism.Navigation;
 using Prism.Services;
 using Sanaap.Constants;
@@ -62,7 +61,7 @@ namespace Sanaap.App.ViewModels
                         throw new ArgumentNullException(nameof(NextPage));
                     }
 
-                    CurrentPosition = await GeolocationExtensions.GetLocation();
+                    //CurrentPosition = await GeolocationExtensions.GetLocation();
                 }
 
                 if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.Back)

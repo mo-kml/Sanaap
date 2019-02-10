@@ -8,7 +8,6 @@
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              NavigationPage.HasNavigationBar="False"
              Title="فارسی"
-             ControlTemplate="{StaticResource masterTemplate}"
              x:Name="sampleView"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.SampleView">
@@ -37,6 +36,8 @@
             <Label Text="dfasdfsdfas"/>
             <Label Text="dfasdfsdfas"/>
             <Label Text="dfasdfsdfas"/>
+
+            <Button Text="click" Command="{Binding Select}"/>
         </StackLayout>
 
     </ContentPage.Content>
