@@ -4,6 +4,7 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              HasSystemPadding="False" Padding="30,70" BackgroundColor="Gray"
                  HasKeyboardOffset="False"
+                 CloseWhenBackgroundIsClicked="False"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
@@ -24,7 +25,7 @@
         <Style TargetType="controls:IconLabel" x:Key="Return">
             <Setter Property="FontSize" Value="{StaticResource largeFontSize}"/>
         </Style>
-        
+
         <Style TargetType="Frame" x:Key="TitleFrame">
             <Setter Property="WidthRequest" Value="18"/>
             <Setter Property="HeightRequest" Value="18"/>
@@ -102,7 +103,7 @@
                             <TapGestureRecognizer Command="{Binding SelectViewPlace}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;"/>
+                    <controls:IconButton Style="{StaticResource returnButton}"/>
 
                 </Grid>
 

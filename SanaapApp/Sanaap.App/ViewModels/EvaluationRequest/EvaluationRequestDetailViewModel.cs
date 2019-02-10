@@ -43,6 +43,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     });
               });
 
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
+
             GoToNextLevel = new BitDelegateCommand(async () =>
               {
                   requestCancellationTokenSource?.Cancel();
@@ -149,6 +154,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public ObservableCollection<ExternalEntityDto> Alphabets { get; set; }
 
         public ObservableCollection<InsurersItemSource> Insurers { get; set; }
+
+        public BitDelegateCommand GoBack { get; set; }
 
         public InsurersItemSource SelectedInsurer { get; set; }
 

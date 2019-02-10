@@ -30,6 +30,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             _initialDataService = initialDataService;
             _userDialogs = userDialogs;
 
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
+
             GoToNextLevel = new BitDelegateCommand(async () =>
             {
                 requestCancellationTokenSource?.Cancel();
@@ -71,6 +76,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             await syncData();
         }
 
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
+        }
+
         public async Task syncData()
         {
             Cars = new ObservableCollection<ExternalEntityDto>(await _initialDataService.GetCars());
@@ -87,6 +98,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public LicensePlateItemSource LostLicense { get; set; } = new LicensePlateItemSource();
 
         public ObservableCollection<ExternalEntityDto> Cars { get; set; }
+
+        public BitDelegateCommand GoBack { get; set; }
 
         public ExternalEntityDto SelectedCar { get; set; }
 

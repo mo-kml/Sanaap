@@ -5,6 +5,7 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              BackgroundColor="Gray"
              HasKeyboardOffset="False"
+                 CloseWhenBackgroundIsClicked="False"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
@@ -147,11 +148,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;">
-                        <controls:IconLabel.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoBack}"/>
-                        </controls:IconLabel.GestureRecognizers>
-                    </controls:IconLabel>
+                    <controls:IconButton Style="{StaticResource returnButton}"/>
                 </Grid>
             </AbsoluteLayout>
         </Frame>

@@ -19,6 +19,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public EvlRequestItemSource Request { get; set; }
 
+        public BitDelegateCommand GoBack { get; set; }
+
         private CancellationTokenSource registerCancellationTokenSource;
 
         private readonly IUserDialogs _userDialogs;
@@ -37,6 +39,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 {
                     {nameof(Request),Request }
                 });
+            });
+
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
             });
         }
 
@@ -66,6 +73,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 await base.OnNavigatedToAsync(parameters);
             }
+        }
+
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
         }
     }
 }
