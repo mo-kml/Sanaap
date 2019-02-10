@@ -88,7 +88,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding OpenFilterPopup}}" BorderRadius="35" BackgroundColor="{StaticResource primaryBlue}" TextColor="{StaticResource buttonTextWhite}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    <controls:IconButton Type="Solid" Text="&#xf0b0;" Command="{Binding OpenFilterPopup}" BorderRadius="35" BackgroundColor="{StaticResource primaryBlue}" TextColor="{StaticResource buttonTextWhite}" Margin="10" AbsoluteLayout.LayoutBounds="0,1,70,70" AbsoluteLayout.LayoutFlags="PositionProportional"/>
                 </AbsoluteLayout>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
