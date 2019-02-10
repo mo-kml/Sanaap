@@ -40,6 +40,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand Gallery { get; set; }
 
+        public BitDelegateCommand GoBack { get; set; }
+
         public EvlRequestItemSource Request { get; set; }
 
         private int _fileIndex;
@@ -68,6 +70,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 _fileIndex = Files.IndexOf(file);
 
                 eventAggregator.GetEvent<TakePhotoEvent>().Publish(new TakePhotoEvent());
+            });
+
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
             });
 
             OpenCamera = new BitDelegateCommand(async () =>
@@ -141,6 +148,27 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                         using (userDialogs.Loading(ConstantStrings.SendingRequestAndPictures))
                         {
+                            //EvlRequestDto evlRequest = new EvlRequestDto
+                            //{
+                            //    AccidentDate = Request.AccidentDate,
+                            //    AccidentReason = Request.AccidentReason,
+                            //    CarId = Request.CarId,
+                            //    EvlRequestType = Request.EvlRequestType,
+                            //    InsuranceType = Request.InsuranceType,
+                            //    InsurerId = Request.InsurerId,
+                            //    InsurerNo = Request.InsurerNo,
+                            //    Latitude = Request.Latitude,
+                            //    Longitude = Request.Longitude,
+                            //    LostCarId = Request.LostCarId,
+                            //    LostFirstName = Request.LostFirstName,
+                            //    LostLastName = Request.LostLastName,
+                            //    LostPlateNumber = Request.LostPlateNumber,
+                            //    OwnerFirstName = Request.OwnerFirstName,
+                            //    OwnerLastName = Request.OwnerLastName,
+                            //    PlateNumber = Request.PlateNumber,
+                            //    Status = Request.Status
+                            //};
+
                             MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
                             {
                                 new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
@@ -164,7 +192,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                             await NavigationService.NavigateAsync(nameof(EvaluationRequestWaitView), new NavigationParameters
                             {
-                                { nameof(EvlRequestItemSource), Request }
+                                { nameof(Request), Request }
                             });
                         }
 
@@ -187,13 +215,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 using (_userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    //Request = parameters.GetValue<EvlRequestItemSource>(nameof(EvlRequestItemSource));
-
-                    //parameters.TryGetValue(nameof(Position), out Position position);
-
-                    //Request.Latitude = position.Latitude;
-                    //Request.Longitude = position.Longitude;
-
+                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
                     List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
                 {
@@ -211,13 +233,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     await base.OnNavigatedToAsync(parameters);
                 }
             }
+
         }
 
         public override Task OnNavigatedFromAsync(INavigationParameters parameters)
         {
-            //parameters.Add(nameof(EvlRequestItemSource), Request);
-            //parameters.Add(nameof(Position), new Position(Request.Latitude, Request.Longitude));
-            //parameters.Add("NextPage", "EvlRequestFile");
+            parameters.Add(nameof(Request), Request);
             return base.OnNavigatedFromAsync(parameters);
         }
     }

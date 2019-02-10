@@ -8,10 +8,5 @@ namespace Sanaap.App.Views.EvaluationRequest
         {
             InitializeComponent();
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return true;
-        }
     }
 }

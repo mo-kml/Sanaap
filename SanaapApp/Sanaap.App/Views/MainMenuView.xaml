@@ -5,9 +5,10 @@
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
              xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             x:Class="Sanaap.App.Views.MainMenuView" Title="سناپ  -  Sanaap"
-             ControlTemplate="{StaticResource masterTemplate}"
+             x:Class="Sanaap.App.Views.MainMenuView"
+             x:Name="mainMenuView"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -42,119 +43,122 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView BackgroundColor="Transparent">
 
-        <AbsoluteLayout>
+    <AbsoluteLayout FlowDirection="LeftToRight">
+        <ScrollView BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
 
-            <carousel:CarouselViewControl Orientation="Horizontal"  AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
-                <carousel:CarouselViewControl.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>1.jpg</x:String>
-                        <x:String>2.jpg</x:String>
-                        <x:String>3.jpg</x:String>
-                    </x:Array>
-                </carousel:CarouselViewControl.ItemsSource>
-                <carousel:CarouselViewControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Image Aspect="AspectFill" Source="{Binding .,Converter={StaticResource imageConverter}}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </carousel:CarouselViewControl.ItemTemplate>
-            </carousel:CarouselViewControl>
-
-            <!--<ContentView AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
-            <ContentView.Content>
-                <carousel:CarouselView x:Name="Carousel">
-                    <carousel:CarouselView.ItemsSource>
+            <AbsoluteLayout>
+                <carousel:CarouselViewControl x:Name="Carousel" Orientation="Horizontal"  AbsoluteLayout.LayoutBounds="0,0,1,0.4" AbsoluteLayout.LayoutFlags="All">
+                    <carousel:CarouselViewControl.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>1.jpg</x:String>
-                            <x:String>2.jpg</x:String>
                             <x:String>3.jpg</x:String>
+                            <x:String>2.jpg</x:String>
+                            <x:String>1.jpg</x:String>
                         </x:Array>
-                    </carousel:CarouselView.ItemsSource>
-                    <carousel:CarouselView.ItemTemplate>
+                    </carousel:CarouselViewControl.ItemsSource>
+                    <carousel:CarouselViewControl.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
                                 <Image Aspect="AspectFill" Source="{Binding .,Converter={StaticResource imageConverter}}"/>
                             </StackLayout>
                         </DataTemplate>
-                    </carousel:CarouselView.ItemTemplate>
-                </carousel:CarouselView>
-            </ContentView.Content>
-        </ContentView>-->
+                    </carousel:CarouselViewControl.ItemTemplate>
+                </carousel:CarouselViewControl>
 
-            <StackLayout Spacing="15" Margin="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,1,1,0.72" AbsoluteLayout.LayoutFlags="PositionProportional,SizeProportional">
-                <StackLayout Orientation="Horizontal" Spacing="15">
-                    <controls:SanaapFrame BackgroundColor="{StaticResource buttonBlue}">
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crashWhite.png}"/>
-                            <Label TextColor="White" Text="اعلام خسارت"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
+                <StackLayout Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,0.01,0.2,0.05" AbsoluteLayout.LayoutFlags="All">
+                   
+                    <Image VerticalOptions="Center" WidthRequest="40" HeightRequest="40" Source="{extentions:Image FileName=logo.png}"/>
 
-                    <controls:SanaapFrame Grid.Row="1" VerticalOptions="FillAndExpand">
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=document.png}"/>
-                            <Label Text="صدور بیمه نامه"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
+                    <controls:IconButton BackgroundColor="Transparent"
+                                         WidthRequest="30"
+                                         Padding="0"
+                                         VerticalOptions="Center"
+                                        BindingContext="{x:Reference menu}"
+                                        Clicked="ToggleMenuButton"
+                                        TextColor="Black"
+                                        FontSize="{StaticResource largeFontSize}"
+                                        HorizontalOptions="Center"
+                                        Text="&#xf0c9;"
+                                        Type="Solid" />
+                </StackLayout>
+                
+                <StackLayout Spacing="15" Margin="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,1,1,0.72" AbsoluteLayout.LayoutFlags="PositionProportional,SizeProportional">
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <controls:SanaapFrame BackgroundColor="{StaticResource buttonBlue}">
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crashWhite.png}"/>
+                                <Label TextColor="White" Text="اعلام خسارت"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+
+                        <controls:SanaapFrame Grid.Row="1" VerticalOptions="FillAndExpand">
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=document.png}"/>
+                                <Label Text="صدور بیمه نامه"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <controls:SanaapFrame>
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=ambulance.png}"/>
+                                <Label Text="درخواست آمبولانس"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+
+                        <controls:SanaapFrame Grid.Column="1" Grid.Row="1">
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench2.png}"/>
+                                <Label Text="امداد خودرو"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+                    </StackLayout>
+
+
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <controls:SanaapFrame>
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crane.png}"/>
+                                <Label Text="درخواست جرثقیل"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+
+                        <controls:SanaapFrame>
+                            <controls:SanaapFrame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EvlRequest}"/>
+                            </controls:SanaapFrame.GestureRecognizers>
+                            <StackLayout Style="{StaticResource itemStackLayout}">
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench.png}"/>
+                                <Label Text="تعمیرگاه"/>
+                            </StackLayout>
+                        </controls:SanaapFrame>
+                    </StackLayout>
 
                 </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Spacing="15">
-                    <controls:SanaapFrame>
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=ambulance.png}"/>
-                            <Label Text="درخواست آمبولانس"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
-
-                    <controls:SanaapFrame Grid.Column="1" Grid.Row="1">
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench2.png}"/>
-                            <Label Text="امداد خودرو"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
-                </StackLayout>
-
-
-                <StackLayout Orientation="Horizontal" Spacing="15">
-                    <controls:SanaapFrame>
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crane.png}"/>
-                            <Label Text="درخواست جرثقیل"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
-
-                    <controls:SanaapFrame>
-                        <controls:SanaapFrame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EvlRequest}"/>
-                        </controls:SanaapFrame.GestureRecognizers>
-                        <StackLayout Style="{StaticResource itemStackLayout}">
-                            <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=carWrench.png}"/>
-                            <Label Text="تعمیرگاه"/>
-                        </StackLayout>
-                    </controls:SanaapFrame>
-                </StackLayout>
-
-            </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+        <AbsoluteLayout TranslationX="4000" x:Name="menu" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <controls:SanaapFrame Padding="0" CornerRadius="0" AbsoluteLayout.LayoutBounds="1,0,0.7,1" AbsoluteLayout.LayoutFlags="All" >
+                <controls:MenuView Menu="{x:Reference menu}" bitViewProps:PartialViewProps.PartialViewParentPage="{x:Reference mainMenuView}"/>
+            </controls:SanaapFrame>
+            <Button x:Name="menuButton" BackgroundColor="#40000000" Clicked="ToggleMenuButton" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
         </AbsoluteLayout>
-    </ScrollView>
-
+    </AbsoluteLayout>
 </ContentPage>

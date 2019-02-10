@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
              NavigationPage.HasNavigationBar="False"
+             Title="فارسی"
              x:Name="sampleView"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.SampleView">
@@ -29,9 +29,16 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout x:Name="stackLayout" Padding="10">
-            <Label Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
-            <controls:SanaapEditor HeightRequest="400" Placeholder="fsfdfsa"/>
+        <StackLayout>
+            <Label Text="dfasdfsdfas"/>
+            <Label Text="dfasdfsdfas"/>
+            <Label Text="dfasdfsdfas"/>
+            <Label Text="dfasdfsdfas"/>
+            <Label Text="dfasdfsdfas"/>
+            <Label Text="dfasdfsdfas"/>
+
+            <Button Text="click" Command="{Binding Select}"/>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

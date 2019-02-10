@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
 using Bit;
+using Bit.Droid;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
 using CarouselView.FormsPlugin.Android;
@@ -22,13 +23,12 @@ using Sanaap.App.Helpers;
 using System.Threading.Tasks;
 using Xamarin;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace Sanaap.App.Droid
 {
     [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
-    public class MainActivity : FormsAppCompatActivity
+    public class MainActivity : BitFormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -42,6 +42,8 @@ namespace Sanaap.App.Droid
 
 
             base.OnCreate(bundle);
+
+            UseDefaultConfiguration(bundle);
 
             Xamarin.Essentials.Platform.Init(this, bundle);
 
@@ -68,6 +70,7 @@ namespace Sanaap.App.Droid
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

@@ -5,25 +5,13 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              BackgroundColor="Gray"
              HasKeyboardOffset="False"
+                 CloseWhenBackgroundIsClicked="False"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              HasSystemPadding="False" Padding="30,120" SystemPaddingSides="All"
                  x:Name="descriptionView"
                  FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDescriptionView">
-    <popup:PopupPage.Animation>
-        <animations:ScaleAnimation 
-      PositionIn="Center"
-      PositionOut="Center"
-      ScaleIn="1.2"
-      ScaleOut="0.8"
-      DurationIn="400"
-      DurationOut="300"
-      EasingIn="SinOut"
-      EasingOut="SinIn"
-      HasBackgroundAnimation="True"/>
-    </popup:PopupPage.Animation>
     <popup:PopupPage.Resources>
 
         <Style TargetType="Label" x:Key="TitleLabel">
@@ -147,11 +135,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconLabel BackgroundColor="{StaticResource primaryGray}" Style="{StaticResource Return}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Type="Solid" Text="&#xf2ea;">
-                        <controls:IconLabel.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoBack}"/>
-                        </controls:IconLabel.GestureRecognizers>
-                    </controls:IconLabel>
+                    <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
                 </Grid>
             </AbsoluteLayout>
         </Frame>

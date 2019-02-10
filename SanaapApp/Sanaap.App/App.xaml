@@ -71,6 +71,15 @@
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
 
+            <Style TargetType="control:IconButton" x:Key="returnButton">
+                <Setter Property="FontSize" Value="{StaticResource largeFontSize}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Type" Value="Solid"/>
+                <Setter Property="Text" Value="&#xf2ea;"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+
             <!--font size style wont set-->
             <Style TargetType="control:SanaapEntry">
                 <Setter Property="FontSize" Value="12"/>
@@ -102,49 +111,53 @@
                 <Setter Property="BackgroundColor" Value="#CC000000"/>
             </Style>
 
+            <ControlTemplate x:Key="sampleTemplate">
+                <StackLayout>
+                    <Label Text="fadfdsffads" BackgroundColor="Red"/>
+                    <ContentPresenter />
+                </StackLayout>
+            </ControlTemplate>
+
             <ControlTemplate x:Key="masterTemplate">
-                <navigationdrawer:SfNavigationDrawer
-                    FlowDirection="LeftToRight"
-                        x:Name="navigationDrawer"
-                        DrawerFooterHeight="0"
-                        DrawerHeaderHeight="0"
-                        DrawerWidth="260"
-                        Position="Right"
-                        VerticalOptions="FillAndExpand">
-                    <navigationdrawer:SfNavigationDrawer.ContentView>
-                        <StackLayout Spacing="0">
-                            <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="40" />
-                                </Grid.ColumnDefinitions>
-                                <control:IconButton
+
+                <AbsoluteLayout FlowDirection="LeftToRight">
+                    <StackLayout Spacing="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <control:IconButton
                                         Grid.Column="1"
                                         BackgroundColor="Transparent"
-                                        BindingContext="{x:Reference navigationDrawer}"
-                                        Clicked="ToggleMenu"
+                                        BindingContext="{x:Reference menu}"
+                                        Clicked="ToggleMenuButton"
                                         TextColor="{StaticResource buttonTextWhite}"
                                         FontSize="{StaticResource largeFontSize}"
                                         HorizontalOptions="End"
                                         Text="&#xf0c9;"
                                         Type="Solid" />
-                                <Label
+                            <Label
                                         HorizontalTextAlignment="Start"
                                         VerticalTextAlignment="Center"
                                         FontFamily="{StaticResource Shabnam-Bold-FDFont}"
                                         FontSize="{StaticResource mediumFontSize}"
                                         TextColor="{StaticResource buttonTextWhite}"
                                         Text="{TemplateBinding Title}" />
-                            </Grid>
+                        </Grid>
 
-                            <ContentPresenter x:Name="ContentPresenter" VerticalOptions="FillAndExpand" />
+                        <ContentPresenter HorizontalOptions="FillAndExpand" x:Name="ContentPresenter" VerticalOptions="FillAndExpand" />
+                    </StackLayout>
 
-                        </StackLayout>
-                    </navigationdrawer:SfNavigationDrawer.ContentView>
-                    <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                        <control:MenuView NavigationDrawer="{x:Reference navigationDrawer}" bitViewProps:PartialViewProps.PartialViewParentPage="{TemplateBinding}"/>
-                    </navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                </navigationdrawer:SfNavigationDrawer>
+                    <AbsoluteLayout TranslationX="4000" x:Name="menu" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+
+                        <control:SanaapFrame Padding="0" ShadowOffset="500"  AbsoluteLayout.LayoutBounds="1,0,0.7,1" AbsoluteLayout.LayoutFlags="All">
+                            <control:MenuView Menu="{x:Reference menu}" bitViewProps:PartialViewProps.PartialViewParentPage="{TemplateBinding}"/>
+                        </control:SanaapFrame>
+                        <Button x:Name="menuButton" BackgroundColor="#40000000" Clicked="ToggleMenuButton" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+                    </AbsoluteLayout>
+                </AbsoluteLayout>
             </ControlTemplate>
             <convs:DateTimeOffsetToSolarDateConverter x:Key="DateTimeOffsetToSolarDateConverter" />
 

@@ -1,5 +1,4 @@
 ﻿using Sanaap.App.Controls.ViewModels;
-using Syncfusion.SfNavigationDrawer.XForms;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Controls
@@ -17,15 +16,15 @@ namespace Sanaap.App.Controls
 
             if (BindingContext != null)
             {
-                ((MenuViewModel)BindingContext).NavigationDrawer = NavigationDrawer;
+                ((MenuViewModel)BindingContext).Menu = Menu;
             }
         }
 
-        public static BindableProperty NavigationDrawerProperty = BindableProperty.Create(nameof(NavigationDrawer), typeof(SfNavigationDrawer), typeof(ContentPage), null, BindingMode.TwoWay);
-        public SfNavigationDrawer NavigationDrawer
+        public static BindableProperty MenuProperty = BindableProperty.Create(nameof(Menu), typeof(AbsoluteLayout), typeof(ContentPage), null, BindingMode.TwoWay);
+        public AbsoluteLayout Menu
         {
-            get => (SfNavigationDrawer)GetValue(NavigationDrawerProperty);
-            set => SetValue(NavigationDrawerProperty, value);
+            get => (AbsoluteLayout)GetValue(MenuProperty);
+            set => SetValue(MenuProperty, value);
         }
     }
 }

@@ -10,6 +10,7 @@ using Sanaap.Constants;
 using Sanaap.Dto;
 using Sanaap.Service.Contracts;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         private IInitialDataService _initialDataService;
         private readonly IUserDialogs _userDialogs;
+        private readonly ILicenseHelper _licenseHelper;
         public EvaluationRequestLostDetailViewModel(
             IUserDialogs userDialogs,
             ILicenseHelper licenseHelper,
@@ -29,6 +31,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             _initialDataService = initialDataService;
             _userDialogs = userDialogs;
+            _licenseHelper = licenseHelper;
+
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
 
             GoToNextLevel = new BitDelegateCommand(async () =>
             {
@@ -66,9 +74,22 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
+            if (parameters.GetNavigationMode() == NavigationMode.New)
+            {
+                await syncData();
+            }
+
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
-            await syncData();
+            SelectedCar = Request.LostCarId != 0 ? Cars.FirstOrDefault(c => c.PrmID == Request.LostCarId) : new ExternalEntityDto();
+            LostLicense = !string.IsNullOrEmpty(Request.LostPlateNumber) ? _licenseHelper.ConvertToItemSource(Request.LostPlateNumber) : new LicensePlateItemSource();
+            SelectedAlphabet = LostLicense != null ? Alphabets.FirstOrDefault(c => c.Name == LostLicense.Alphabet) : new ExternalEntityDto();
+        }
+
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
         }
 
         public async Task syncData()
@@ -87,6 +108,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public LicensePlateItemSource LostLicense { get; set; } = new LicensePlateItemSource();
 
         public ObservableCollection<ExternalEntityDto> Cars { get; set; }
+
+        public BitDelegateCommand GoBack { get; set; }
 
         public ExternalEntityDto SelectedCar { get; set; }
 

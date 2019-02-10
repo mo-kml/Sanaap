@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bit.Core.Contracts;
+using Newtonsoft.Json;
 using Sanaap.Api.Contracts;
 using Sanaap.Dto;
 using System;
@@ -12,6 +13,8 @@ namespace Sanaap.Api.Implementations
     public class ExternalApiService : IExternalApiService
     {
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
+
+        public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
         public virtual ISanaapTokenService SanaapTokenService { get; set; }
 
@@ -152,18 +155,38 @@ namespace Sanaap.Api.Implementations
             return insurers;
         }
 
-        public async Task<ContentDto> GetNewsById(int id, Guid userId)
+        public async Task<ContentDto> GetNewsById(int id)
         {
             if (httpClient == null)
             {
                 httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
             }
 
-            HttpResponseMessage result = await httpClient.GetAsync($"GetNews?Id={id}&usid={userId}");
+            HttpResponseMessage result = await httpClient.GetAsync($"GetNews?Id={id}&usid={Guid.Parse(UserInformationProvider.GetCurrentUserId())}");
 
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<ContentDto>(await result.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+        }
+
+
+        public async Task<bool> LikeNews(int id)
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            HttpResponseMessage result = await httpClient.GetAsync($"LikeNews?Id={id}&usid={Guid.Parse(UserInformationProvider.GetCurrentUserId())}");
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
             }
             else
             {

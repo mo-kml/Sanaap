@@ -3,6 +3,7 @@ using Autofac;
 using Bit;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
+using Microsoft.Extensions.DependencyInjection;
 using Plugin.Media;
 using Prism;
 using Prism.Autofac;
@@ -27,9 +28,9 @@ using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.App.Views.Insurance;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
-using Syncfusion.SfNavigationDrawer.XForms;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -59,15 +60,15 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            //if (isLoggedIn)
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            //}
-            //else
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            //}
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ContentListView)}");
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            }
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -77,21 +78,19 @@ namespace Sanaap.App
             //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
 
             eventAggregator.GetEvent<ToggleMenuEvent>()
-                .SubscribeAsync(async drawer => drawer.ToggleDrawer(), ThreadOption.UIThread);
-
+                .SubscribeAsync(async menu => ToggleMenu(menu), ThreadOption.UIThread, true);
 
             await CrossMedia.Current.Initialize();
 
             await base.OnInitializedAsync();
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        protected override void RegisterTypes(IContainerRegistry containerRegistry, ContainerBuilder containerBuilder, IServiceCollection services)
         {
-            ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
-
             containerRegistry.RegisterForNav<NavigationPage>();
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
+            containerRegistry.RegisterForNav<MapView, MapViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
             //
@@ -151,12 +150,39 @@ namespace Sanaap.App
 
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
 
-            base.RegisterTypes(containerRegistry);
+            base.RegisterTypes(containerRegistry, containerBuilder, services);
         }
 
-        public void ToggleMenu(object sender, EventArgs e)
+        public void ToggleMenu(AbsoluteLayout menu)
         {
-            ((SfNavigationDrawer)((IconButton)sender).BindingContext).ToggleDrawer();
+            if (menu.TranslationX == 0)
+            {
+                menu.FindByName<Button>("menuButton").IsVisible = false;
+
+                menu.TranslateTo(DeviceDisplay.MainDisplayInfo.Width, 0, 350);
+            }
+            else
+            {
+                menu.TranslateTo(0, 0, 350);
+
+                menu.FindByName<Button>("menuButton").IsVisible = true;
+            }
+        }
+
+        public void ToggleMenuButton(object sender, EventArgs e)
+        {
+            AbsoluteLayout menu;
+
+            if (sender is IconButton iconButton)
+            {
+                menu = ((AbsoluteLayout)((IconButton)sender).BindingContext);
+            }
+            else
+            {
+                menu = ((AbsoluteLayout)((Button)sender).Parent);
+            }
+
+            ToggleMenu(menu);
         }
     }
 }

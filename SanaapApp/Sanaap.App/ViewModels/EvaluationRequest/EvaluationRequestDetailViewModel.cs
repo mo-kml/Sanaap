@@ -22,6 +22,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         private readonly IUserDialogs _userDialogs;
         private IInitialDataService _initialDataService;
+        private readonly ILicenseHelper _licenseHelper;
         public EvaluationRequestDetailViewModel(
             IUserDialogs userDialogs,
             IEventAggregator eventAggregator,
@@ -33,7 +34,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
-
+            _licenseHelper = licenseHelper;
 
             SelectFromInsurances = new BitDelegateCommand(async () =>
               {
@@ -43,7 +44,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     });
               });
 
-            Submit = new BitDelegateCommand(async () =>
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
+
+            GoToNextLevel = new BitDelegateCommand(async () =>
               {
                   requestCancellationTokenSource?.Cancel();
                   requestCancellationTokenSource = new CancellationTokenSource();
@@ -82,55 +88,56 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       }
                   }
               }, () => SelectedCar != null && SelectedInsurer != null && SelectedAlphabet != null);
-            Submit.ObservesProperty(() => SelectedCar);
-            Submit.ObservesProperty(() => SelectedInsurer);
-            Submit.ObservesProperty(() => SelectedAlphabet);
+            GoToNextLevel.ObservesProperty(() => SelectedCar);
+            GoToNextLevel.ObservesProperty(() => SelectedInsurer);
+            GoToNextLevel.ObservesProperty(() => SelectedAlphabet);
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
             {
                 Request.InsuranceType = insuranceType;
-
-                Request.IsSales = insuranceType == InsuranceType.Sales;
             }
 
-            requestCancellationTokenSource?.Cancel();
-            requestCancellationTokenSource = new CancellationTokenSource();
-
-            if (parameters.TryGetValue(nameof(EvlRequestItemSource), out EvlRequestItemSource requestItemSource))
+            if (parameters.GetNavigationMode() == NavigationMode.New)
             {
-                Request = requestItemSource;
-            }
 
-            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
-            {
-                await syncData();
-            }
 
-            if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
-            {
-                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
 
-                insuranceType = Request.InsuranceType;
+                requestCancellationTokenSource?.Cancel();
+                requestCancellationTokenSource = new CancellationTokenSource();
 
-                Request = new EvlRequestItemSource
+                using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
                 {
-                    OwnerFirstName = customer.FirstName,
-                    OwnerLastName = customer.LastName,
-                    InsurerNo = policy.InsurerNo,
-                    PlateNumber = policy.PlateNumber,
-                    InsuranceType = insuranceType,
-                    IsSales = insuranceType == InsuranceType.Sales
-                };
+                    await syncData();
+                }
 
-                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == policy.InsurerId);
+                if (parameters.TryGetValue(nameof(Request), out EvlRequestItemSource request))
+                {
+                    Request = request;
 
-                SelectedCar = Cars.FirstOrDefault(c => c.PrmID == policy.CarId);
+                    SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == Request.InsurerId);
 
-                License = policy.LicensePlateItemSource;
+                    SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Request.CarId);
 
-                SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
+                    License = _licenseHelper.ConvertToItemSource(Request.PlateNumber);
+
+                    SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
+                }
+            }
+            else if (parameters.GetNavigationMode() == NavigationMode.Back)
+            {
+                Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
+
+                SelectedInsurer = new InsurersItemSource();
+
+                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == Request.InsurerId);
+
+                //SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Request.CarId);
+
+                //License = _licenseHelper.ConvertToItemSource(Request.PlateNumber);
+
+                //SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
             }
         }
 
@@ -150,13 +157,15 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public ObservableCollection<InsurersItemSource> Insurers { get; set; }
 
+        public BitDelegateCommand GoBack { get; set; }
+
         public InsurersItemSource SelectedInsurer { get; set; }
 
         public ExternalEntityDto SelectedAlphabet { get; set; }
 
         public ExternalEntityDto SelectedCar { get; set; }
 
-        public BitDelegateCommand Submit { get; set; }
+        public BitDelegateCommand GoToNextLevel { get; set; }
 
         public BitDelegateCommand SelectFromInsurances { get; set; }
 

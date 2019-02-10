@@ -1,5 +1,4 @@
 ﻿using Sanaap.Dto;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,7 +14,9 @@ namespace Sanaap.Api.Contracts
 
         Task<IEnumerable<ContentDto>> GetNews(FilterNewsDto filterNewsDto);
 
-        Task<ContentDto> GetNewsById(int id, Guid userId);
+        Task<ContentDto> GetNewsById(int id);
+
+        Task<bool> LikeNews(int id);
 
         Task<IEnumerable<ExternalEntityDto>> GetNumberplateAlphabets();
 

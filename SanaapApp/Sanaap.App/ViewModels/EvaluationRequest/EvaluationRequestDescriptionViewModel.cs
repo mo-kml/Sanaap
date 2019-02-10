@@ -36,7 +36,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   {
                       {nameof(Request),Request }
                   });
-              });
+              }, () => SelectedDate != null);
+            GoToNextLevel.ObservesProperty(() => SelectedDate);
 
             GoBack = new BitDelegateCommand(async () =>
               {
@@ -44,10 +45,20 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
               });
         }
 
-        public override Task OnNavigatedToAsync(INavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
-            return base.OnNavigatedToAsync(parameters);
+
+            if (Request.AccidentDate != new DateTimeOffset())
+            {
+                //SelectedDate = DateTime.Now;
+            }
+        }
+
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
         }
         public string Month { get; set; }
 

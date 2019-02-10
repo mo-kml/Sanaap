@@ -1,5 +1,4 @@
-﻿using Bit.Core.Contracts;
-using Bit.OData.ODataControllers;
+﻿using Bit.OData.ODataControllers;
 using Sanaap.Api.Contracts;
 using Sanaap.Dto;
 using System;
@@ -13,8 +12,6 @@ namespace Sanaap.Api.Controllers
     {
         public virtual IExternalApiService ExternalApiService { get; set; }
 
-        public virtual IUserInformationProvider UserInformationProvider { get; set; }
-
 
         [Action]
         public async Task<IEnumerable<ContentDto>> GetNews([FromBody]FilterNewsDto filterNewsDto)
@@ -25,7 +22,13 @@ namespace Sanaap.Api.Controllers
         [Function]
         public async Task<ContentDto> GetNewsById(int newsId)
         {
-            return await ExternalApiService.GetNewsById(newsId, Guid.Parse(UserInformationProvider.GetCurrentUserId()));
+            return await ExternalApiService.GetNewsById(newsId);
+        }
+
+        [Function]
+        public async Task<bool> LikeNews(int newsId)
+        {
+            return await ExternalApiService.LikeNews(newsId);
         }
     }
 }

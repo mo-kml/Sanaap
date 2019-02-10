@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout FlowDirection="RightToLeft">
-            <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All"
+            <ListView HasUnevenRows="True"
                       ItemsSource="{Binding Policies}">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" 

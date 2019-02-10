@@ -19,6 +19,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public EvlRequestItemSource Request { get; set; }
 
+        public BitDelegateCommand GoBack { get; set; }
+
         private CancellationTokenSource registerCancellationTokenSource;
 
         private readonly IUserDialogs _userDialogs;
@@ -38,6 +40,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     {nameof(Request),Request }
                 });
             });
+
+            GoBack = new BitDelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
         }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
@@ -46,18 +53,15 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             registerCancellationTokenSource = new CancellationTokenSource();
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
             {
-                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.New)
-                {
-                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
+                Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
+                if (Request.Latitude == 0)
+                {
                     CurrentPosition = await GeolocationExtensions.GetLocation();
                 }
-
-                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.Back)
+                else
                 {
-                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
-
-                    CurrentPosition = new Xamarin.Essentials.Location
+                    CurrentPosition = new Location
                     {
                         Latitude = Request.Latitude,
                         Longitude = Request.Longitude
@@ -66,6 +70,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 await base.OnNavigatedToAsync(parameters);
             }
+        }
+
+        public override Task OnNavigatedFromAsync(INavigationParameters parameters)
+        {
+            parameters.Add(nameof(Request), Request);
+            return base.OnNavigatedFromAsync(parameters);
         }
     }
 }

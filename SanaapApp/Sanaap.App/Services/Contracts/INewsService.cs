@@ -10,5 +10,7 @@ namespace Sanaap.App.Services.Contracts
         Task<List<NewsItemSource>> GetNews(FilterNewsDto filterNewsDto);
 
         Task<NewsItemSource> GetNewsById(int id);
+
+        Task<bool> LikeNews(int id);
     }
 }

@@ -4,6 +4,7 @@ using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,6 +18,11 @@ namespace Sanaap.App.Services.Implementations
             _oDataClient = oDataClient;
         }
 
+        public static string StripHTML(string input)
+        {
+            return Regex.Replace(input, @"<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;", string.Empty).Trim();
+        }
+
         public async Task<List<NewsItemSource>> GetNews(FilterNewsDto filterNewsDto)
         {
             List<ContentDto> news = (await _oDataClient.For<ContentDto>("Contents")
@@ -25,13 +31,12 @@ namespace Sanaap.App.Services.Implementations
                 .ExecuteAsEnumerableAsync()).ToList();
 
             List<NewsItemSource> newsItemSources = new List<NewsItemSource>();
-
             foreach (ContentDto item in news)
             {
                 newsItemSources.Add(new NewsItemSource
                 {
                     Date = item.Date,
-                    Text = item.Text,
+                    Text = StripHTML(item.Text),
                     Id = item.Id,
                     Image = ImageSource.FromUri(new System.Uri(item.Photo)),
                     NewsID = item.NewsID,
@@ -58,7 +63,6 @@ namespace Sanaap.App.Services.Implementations
                 Date = news.Date,
                 Text = news.Text,
                 Id = news.Id,
-                Image = ImageSource.FromUri(new System.Uri(news.Photo)),
                 NewsID = news.NewsID,
                 Photo = news.Photo,
                 Likes = news.Likes,
@@ -66,6 +70,14 @@ namespace Sanaap.App.Services.Implementations
                 Title = news.Title,
                 YourLike = news.YourLike
             };
+        }
+
+        public async Task<bool> LikeNews(int id)
+        {
+            return await _oDataClient.For<ContentDto>("Contents")
+                            .Function("LikeNews")
+                            .Set(new { newsId = id })
+                            .ExecuteAsScalarAsync<bool>();
         }
     }
 }

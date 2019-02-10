@@ -7,6 +7,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.Comment.CommentListView"
+             ControlTemplate="{StaticResource masterTemplate}"
              xmlns:controls="clr-namespace:Sanaap.App.Controls">
 
     <ContentPage.Resources>
@@ -26,6 +27,18 @@
 
     <ContentPage.Content>
         <StackLayout>
+            <!--<navigationdrawer:SfNavigationDrawer DrawerHeight="460" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+                <navigationdrawer:SfNavigationDrawer.ContentView>
+                    <StackLayout>
+                        <Label Text="dfdsfssdfaf"/>
+                    </StackLayout>
+                </navigationdrawer:SfNavigationDrawer.ContentView>
+                <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                    <StackLayout>
+                        <Label Text="gdgdfgsd"/>
+                    </StackLayout>
+                </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+            </navigationdrawer:SfNavigationDrawer>-->
             <navigationdrawer:SfNavigationDrawer DrawerHeight="460" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
                 <navigationdrawer:SfNavigationDrawer.ContentView>
                     <AbsoluteLayout FlowDirection="RightToLeft">

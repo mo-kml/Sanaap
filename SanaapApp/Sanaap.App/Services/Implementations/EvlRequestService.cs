@@ -23,9 +23,9 @@ namespace Sanaap.App.Services.Implementations
         public async Task<EvlRequestExpertDto> FindEvlRequestExpert(Guid evlRequestId)
         {
             return await _oDataClient.For<EvlRequestExpertDto>("EvlRequestExperts")
-                .Set(evlRequestId)
-                .Function("FindEvlRequestExpert")
-                .FindEntryAsync();
+                .Action("FindEvlRequestExpert")
+                .Set(new { requestId = evlRequestId })
+                .ExecuteAsSingleAsync();
         }
 
         public async Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(Guid requestId)

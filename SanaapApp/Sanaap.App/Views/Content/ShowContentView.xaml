@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Sanaap.App.Controls"
              NavigationPage.HasNavigationBar="False"
+             xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions ="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.Content.ShowContentView">
 
     <ContentPage.Resources>
-
+        <converters:DateTimeOffsetToSolarDateConverter x:Key="dateTimeOffsetToSolarDateConverter" />
         <Style TargetType="local:IconLabel" x:Key="Like">
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -19,8 +20,8 @@
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-            <Setter Property="FontSize" Value="{StaticResource mediumFontSize}"/>
-            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+            <Setter Property="TextColor" Value="{StaticResource labelTextColorDark}"/>
         </Style>
         <Style TargetType="Label" x:Key="Title">
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
@@ -28,70 +29,69 @@
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <!--<AbsoluteLayout>-->
 
         <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
             <StackLayout>
-                <Image Aspect="AspectFill" Source="{Binding Content.Image}" HeightRequest="200"/>
+                <Image Aspect="AspectFill" Source="{Binding Content.Photo}" HeightRequest="200"/>
 
-                    <Grid Margin="10,10,20,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width=".8"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width=".8"/>
-                            <ColumnDefinition Width="1.3*"/>
-                            <ColumnDefinition Width=".8"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
-                        </Grid.RowDefinitions>
+                <Grid Margin="10,10,20,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width=".8"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width=".8"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width=".8"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
 
-                        <Label FontSize="{StaticResource smallFontSize}" Text="1397/10/23" Style="{StaticResource TopLabels}"/>
-                        <Label FontSize="{StaticResource smallFontSize}" Text="دسته بندی" Grid.Column="2" Style="{StaticResource TopLabels}"/>
+                    <Label Text="{Binding Content.Date,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}" Style="{StaticResource TopLabels}"/>
+                    <Label Text="اخبار" Grid.Column="2" Style="{StaticResource TopLabels}"/>
 
-                <StackLayout Orientation="Horizontal" Grid.Column="4">
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Share}"/>
-                    </StackLayout.GestureRecognizers>
-                    <Image Source="{extentions:Image FileName=Share.png}" VerticalOptions="CenterAndExpand" Aspect="AspectFit" WidthRequest="15" HeightRequest="15"/>
-                    <Label Text="اشتراک گذاری" FontFamily="{StaticResource Shabnam-FDFont}" TextColor="{StaticResource primaryGray}" VerticalTextAlignment="Center"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout Orientation="Horizontal" Grid.Column="4">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{extentions:Image FileName=Share.png}" VerticalOptions="CenterAndExpand" Aspect="AspectFit" WidthRequest="15" HeightRequest="15"/>
+                        <Label Text="اشتراک گذاری"  Style="{StaticResource TopLabels}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Like}"/>
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{Binding Content.Likes}" Style="{StaticResource TopLabels}"/>
+                        <local:IconLabel BackgroundColor="{StaticResource primaryBackground}" Style="{StaticResource Like}" Text="&#xf004;">
 
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Like}"/>
-                    </StackLayout.GestureRecognizers>
-                    <Label Text="{Binding Content.Likes}" FontFamily="{StaticResource Shabnam-FDFont}" TextColor="{StaticResource primaryGray}"/>
-                    <local:IconLabel BackgroundColor="{StaticResource primaryBackground}" Style="{StaticResource Like}" Text="&#xf004;">
-
-                        <local:IconLabel.Triggers>
-                            <DataTrigger Binding="{Binding Content.YourLike}"
+                            <local:IconLabel.Triggers>
+                                <DataTrigger Binding="{Binding Content.YourLike}"
                                          Value="True"
                                          TargetType="local:IconLabel">
-                                <Setter Property="TextColor" Value="Red"/>
-                                <Setter Property="Type" Value="Solid"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Content.YourLike}"
+                                    <Setter Property="TextColor" Value="Red"/>
+                                    <Setter Property="Type" Value="Solid"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Content.YourLike}"
                                          Value="False"
                                          TargetType="local:IconLabel">
-                                <Setter Property="TextColor" Value="Black"/>
-                                <Setter Property="Type" Value="Regular"/>
-                            </DataTrigger>
-                        </local:IconLabel.Triggers>
-                    </local:IconLabel>
+                                    <Setter Property="TextColor" Value="Black"/>
+                                    <Setter Property="Type" Value="Regular"/>
+                                </DataTrigger>
+                            </local:IconLabel.Triggers>
+                        </local:IconLabel>
 
 
 
 
-                </StackLayout>
+                    </StackLayout>
 
-                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="1"/>
-                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="3"/>
-                <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="5"/>
+                    <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="1"/>
+                    <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="3"/>
+                    <BoxView BackgroundColor="{StaticResource primaryGray}" Grid.Column="5"/>
 
                 </Grid>
 
