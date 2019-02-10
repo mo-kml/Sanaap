@@ -3,6 +3,7 @@ using Autofac;
 using Bit;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
+using Microsoft.Extensions.DependencyInjection;
 using Plugin.Media;
 using Prism;
 using Prism.Autofac;
@@ -84,10 +85,8 @@ namespace Sanaap.App
             await base.OnInitializedAsync();
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        protected override void RegisterTypes(IContainerRegistry containerRegistry, ContainerBuilder containerBuilder, IServiceCollection services)
         {
-            ContainerBuilder containerBuilder = containerRegistry.GetBuilder();
-
             containerRegistry.RegisterForNav<NavigationPage>();
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
@@ -151,7 +150,7 @@ namespace Sanaap.App
 
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
 
-            base.RegisterTypes(containerRegistry);
+            base.RegisterTypes(containerRegistry, containerBuilder, services);
         }
 
         public void ToggleMenu(AbsoluteLayout menu)
