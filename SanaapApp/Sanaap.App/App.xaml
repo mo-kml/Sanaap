@@ -72,7 +72,6 @@
             </Style>
 
             <Style TargetType="control:IconButton" x:Key="returnButton">
-                <Setter Property="Command" Value="{Binding GoBack}"/>
                 <Setter Property="FontSize" Value="{StaticResource largeFontSize}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
                 <Setter Property="TextColor" Value="White"/>

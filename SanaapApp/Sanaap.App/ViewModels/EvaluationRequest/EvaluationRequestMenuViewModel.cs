@@ -7,6 +7,7 @@ using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
+using Sanaap.Dto;
 using Sanaap.Enums;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -20,7 +21,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         private IPolicyService _policyService;
         private EvlRequestItemSource _request;
         private IUserDialogs _userDialogs;
-        public EvaluationRequestMenuViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs)
+        public EvaluationRequestMenuViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, IInitialDataService initialDataService)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
@@ -47,12 +48,23 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             SelectPolicy = new BitDelegateCommand<PolicyItemSource>(async (policy) =>
             {
-                eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
+                using (_userDialogs.Loading(ConstantStrings.Loading))
+                {
+                    CustomerDto customer = await initialDataService.GetCurrentUserInfo();
 
-                await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters {
-                    { "Insurance",policy},
-                    {nameof(EvlRequestItemSource),_request }
+                    eventAggregator.GetEvent<OpenInsurancePopupEvent>().Publish(new OpenInsurancePopupEvent());
+
+                    _request.InsurerNo = policy.InsurerNo;
+                    _request.InsurerId = policy.InsurerId;
+                    _request.CarId = policy.CarId;
+                    _request.PlateNumber = policy.PlateNumber;
+                    _request.OwnerFirstName = customer.FirstName;
+                    _request.OwnerLastName = customer.LastName;
+
+                    await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters {
+                        {"Request",_request }
                 });
+                }
             });
 
             #endregion

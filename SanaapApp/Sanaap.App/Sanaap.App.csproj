@@ -213,6 +213,9 @@
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\MasterTemplateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\MenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -222,10 +225,16 @@
     <None Update="Controls\SanaapComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\SanaapEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\SanaapEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\SanaapMap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Comment\CommentAnswerPopupView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Comment\CommentListView.xaml">

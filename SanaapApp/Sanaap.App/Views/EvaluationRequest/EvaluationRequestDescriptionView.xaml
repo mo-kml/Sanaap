@@ -8,23 +8,10 @@
                  CloseWhenBackgroundIsClicked="False"
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              HasSystemPadding="False" Padding="30,120" SystemPaddingSides="All"
                  x:Name="descriptionView"
                  FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestDescriptionView">
-    <popup:PopupPage.Animation>
-        <animations:ScaleAnimation 
-      PositionIn="Center"
-      PositionOut="Center"
-      ScaleIn="1.2"
-      ScaleOut="0.8"
-      DurationIn="400"
-      DurationOut="300"
-      EasingIn="SinOut"
-      EasingOut="SinIn"
-      HasBackgroundAnimation="True"/>
-    </popup:PopupPage.Animation>
     <popup:PopupPage.Resources>
 
         <Style TargetType="Label" x:Key="TitleLabel">
@@ -148,7 +135,7 @@
                             <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <controls:IconButton Style="{StaticResource returnButton}"/>
+                    <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
                 </Grid>
             </AbsoluteLayout>
         </Frame>

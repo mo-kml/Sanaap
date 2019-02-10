@@ -160,7 +160,7 @@
                                 <TapGestureRecognizer Command="{Binding Submit}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <controls:IconButton Style="{StaticResource returnButton}"/>
+                        <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
                     </Grid>
 
 

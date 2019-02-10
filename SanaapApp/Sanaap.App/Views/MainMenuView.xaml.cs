@@ -1,5 +1,8 @@
 ﻿using Acr.UserDialogs;
+using Sanaap.App.Controls;
 using Sanaap.App.Helpers;
+using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Views
@@ -16,20 +19,39 @@ namespace Sanaap.App.Views
             _userDialogs = userDialogs;
             InitializeComponent();
 
-            //Device.StartTimer(TimeSpan.FromSeconds(4), () =>
-            //{
-            //    if (slideCount < 3)
-            //    {
-            //        Carousel.Position = slideCount++;
-            //    }
-            //    else
-            //    {
-            //        slideCount = 0;
-            //    }
-            //    return true;
-            //});
+
+        }
+        public void ToggleMenu(AbsoluteLayout menu)
+        {
+            if (menu.TranslationX == 0)
+            {
+                menu.FindByName<Button>("menuButton").IsVisible = false;
+
+                menu.TranslateTo(DeviceDisplay.MainDisplayInfo.Width, 0, 350);
+            }
+            else
+            {
+                menu.TranslateTo(0, 0, 350);
+
+                menu.FindByName<Button>("menuButton").IsVisible = true;
+            }
         }
 
+        public void ToggleMenuButton(object sender, EventArgs e)
+        {
+            AbsoluteLayout menu;
+
+            if (sender is IconButton iconButton)
+            {
+                menu = ((AbsoluteLayout)((IconButton)sender).BindingContext);
+            }
+            else
+            {
+                menu = ((AbsoluteLayout)((Button)sender).Parent);
+            }
+
+            ToggleMenu(menu);
+        }
         protected override bool OnBackButtonPressed()
         {
             count++;
@@ -50,6 +72,19 @@ namespace Sanaap.App.Views
 
         protected override void OnAppearing()
         {
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            {
+                if (slideCount < 3)
+                {
+                    Carousel.Position = slideCount++;
+                }
+                else
+                {
+                    slideCount = 0;
+                }
+                return true;
+            });
+
             count = 0;
         }
     }

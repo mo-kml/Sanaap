@@ -36,7 +36,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   {
                       {nameof(Request),Request }
                   });
-              });
+              }, () => SelectedDate != null);
+            GoToNextLevel.ObservesProperty(() => SelectedDate);
 
             GoBack = new BitDelegateCommand(async () =>
               {
@@ -48,9 +49,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
-            if (Request.AccidentDate != default(DateTimeOffset))
+            if (Request.AccidentDate != new DateTimeOffset())
             {
-                SelectedDate = Request.AccidentDate.DateTime;
+                //SelectedDate = DateTime.Now;
             }
         }
 

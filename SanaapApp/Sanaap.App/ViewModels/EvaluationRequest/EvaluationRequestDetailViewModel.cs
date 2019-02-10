@@ -94,15 +94,15 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
+            if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
+            {
+                Request.InsuranceType = insuranceType;
+            }
+
             if (parameters.GetNavigationMode() == NavigationMode.New)
             {
 
-                if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
-                {
-                    Request.InsuranceType = insuranceType;
 
-                    Request.IsSales = insuranceType == InsuranceType.Sales;
-                }
 
                 requestCancellationTokenSource?.Cancel();
                 requestCancellationTokenSource = new CancellationTokenSource();
@@ -112,27 +112,15 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     await syncData();
                 }
 
-                if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
+                if (parameters.TryGetValue(nameof(Request), out EvlRequestItemSource request))
                 {
-                    CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
+                    Request = request;
 
-                    insuranceType = Request.InsuranceType;
+                    SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == Request.InsurerId);
 
-                    Request = new EvlRequestItemSource
-                    {
-                        OwnerFirstName = customer.FirstName,
-                        OwnerLastName = customer.LastName,
-                        InsurerNo = policy.InsurerNo,
-                        PlateNumber = policy.PlateNumber,
-                        InsuranceType = insuranceType,
-                        IsSales = insuranceType == InsuranceType.Sales
-                    };
+                    SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Request.CarId);
 
-                    SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == policy.InsurerId);
-
-                    SelectedCar = Cars.FirstOrDefault(c => c.PrmID == policy.CarId);
-
-                    License = policy.LicensePlateItemSource;
+                    License = _licenseHelper.ConvertToItemSource(Request.PlateNumber);
 
                     SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
                 }
