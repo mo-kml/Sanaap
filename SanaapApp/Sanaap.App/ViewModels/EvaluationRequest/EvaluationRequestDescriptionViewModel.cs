@@ -44,10 +44,14 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
               });
         }
 
-        public override Task OnNavigatedToAsync(INavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
-            return base.OnNavigatedToAsync(parameters);
+
+            if (Request.AccidentDate != default(DateTimeOffset))
+            {
+                SelectedDate = Request.AccidentDate.DateTime;
+            }
         }
 
         public override Task OnNavigatedFromAsync(INavigationParameters parameters)

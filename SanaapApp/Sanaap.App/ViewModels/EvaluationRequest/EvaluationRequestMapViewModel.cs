@@ -53,18 +53,15 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             registerCancellationTokenSource = new CancellationTokenSource();
             using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
             {
-                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.New)
-                {
-                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
+                Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
+                if (Request.Latitude == 0)
+                {
                     CurrentPosition = await GeolocationExtensions.GetLocation();
                 }
-
-                if (parameters.GetNavigationMode() == Prism.Navigation.NavigationMode.Back)
+                else
                 {
-                    Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
-
-                    CurrentPosition = new Xamarin.Essentials.Location
+                    CurrentPosition = new Location
                     {
                         Latitude = Request.Latitude,
                         Longitude = Request.Longitude

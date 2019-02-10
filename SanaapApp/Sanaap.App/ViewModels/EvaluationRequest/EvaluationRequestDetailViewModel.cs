@@ -22,6 +22,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     {
         private readonly IUserDialogs _userDialogs;
         private IInitialDataService _initialDataService;
+        private readonly ILicenseHelper _licenseHelper;
         public EvaluationRequestDetailViewModel(
             IUserDialogs userDialogs,
             IEventAggregator eventAggregator,
@@ -33,7 +34,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
-
+            _licenseHelper = licenseHelper;
 
             SelectFromInsurances = new BitDelegateCommand(async () =>
               {
@@ -93,49 +94,62 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
+            if (parameters.GetNavigationMode() == NavigationMode.New)
             {
-                Request.InsuranceType = insuranceType;
 
-                Request.IsSales = insuranceType == InsuranceType.Sales;
-            }
-
-            requestCancellationTokenSource?.Cancel();
-            requestCancellationTokenSource = new CancellationTokenSource();
-
-            if (parameters.TryGetValue(nameof(EvlRequestItemSource), out EvlRequestItemSource requestItemSource))
-            {
-                Request = requestItemSource;
-            }
-
-            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
-            {
-                await syncData();
-            }
-
-            if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
-            {
-                CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
-
-                insuranceType = Request.InsuranceType;
-
-                Request = new EvlRequestItemSource
+                if (parameters.TryGetValue(nameof(InsuranceType), out InsuranceType insuranceType))
                 {
-                    OwnerFirstName = customer.FirstName,
-                    OwnerLastName = customer.LastName,
-                    InsurerNo = policy.InsurerNo,
-                    PlateNumber = policy.PlateNumber,
-                    InsuranceType = insuranceType,
-                    IsSales = insuranceType == InsuranceType.Sales
-                };
+                    Request.InsuranceType = insuranceType;
 
-                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == policy.InsurerId);
+                    Request.IsSales = insuranceType == InsuranceType.Sales;
+                }
 
-                SelectedCar = Cars.FirstOrDefault(c => c.PrmID == policy.CarId);
+                requestCancellationTokenSource?.Cancel();
+                requestCancellationTokenSource = new CancellationTokenSource();
 
-                License = policy.LicensePlateItemSource;
+                using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
+                {
+                    await syncData();
+                }
 
-                SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
+                if (parameters.TryGetValue("Insurance", out PolicyItemSource policy))
+                {
+                    CustomerDto customer = await _initialDataService.GetCurrentUserInfo();
+
+                    insuranceType = Request.InsuranceType;
+
+                    Request = new EvlRequestItemSource
+                    {
+                        OwnerFirstName = customer.FirstName,
+                        OwnerLastName = customer.LastName,
+                        InsurerNo = policy.InsurerNo,
+                        PlateNumber = policy.PlateNumber,
+                        InsuranceType = insuranceType,
+                        IsSales = insuranceType == InsuranceType.Sales
+                    };
+
+                    SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == policy.InsurerId);
+
+                    SelectedCar = Cars.FirstOrDefault(c => c.PrmID == policy.CarId);
+
+                    License = policy.LicensePlateItemSource;
+
+                    SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
+                }
+            }
+            else if (parameters.GetNavigationMode() == NavigationMode.Back)
+            {
+                Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
+
+                SelectedInsurer = new InsurersItemSource();
+
+                SelectedInsurer = Insurers.FirstOrDefault(i => i.ID == Request.InsurerId);
+
+                //SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Request.CarId);
+
+                //License = _licenseHelper.ConvertToItemSource(Request.PlateNumber);
+
+                //SelectedAlphabet = Alphabets.FirstOrDefault(a => a.Name == License.Alphabet);
             }
         }
 
