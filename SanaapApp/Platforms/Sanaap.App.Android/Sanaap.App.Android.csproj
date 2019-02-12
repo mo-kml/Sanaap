@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -42,7 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidSupportedAbis />
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AotAssemblies>false</AotAssemblies>
@@ -52,6 +52,8 @@
     <EnableProguard>false</EnableProguard>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -91,14 +93,10 @@
     <AndroidAsset Include="Assets\fa-brands-400.ttf" />
     <AndroidAsset Include="Assets\fa-solid-900.ttf" />
     <AndroidAsset Include="Assets\fa-regular-400.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM.ttf" />
     <AndroidAsset Include="Assets\Vazir-Black-FD-WOL.ttf" />
     <AndroidAsset Include="Assets\Vazir-Light-FD-WOL.ttf" />
     <AndroidAsset Include="Assets\SHABNAM-BOLD-FD.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM-BOLD.ttf" />
     <AndroidAsset Include="Assets\SHABNAM-FD.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT-FD.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +126,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <LinkDescription Include="LinkerConfig.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
@@ -146,6 +141,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\rounded_corner_background.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <LinkDescription Include="LinkerConfig.xml">
+      <SubType>Designer</SubType>
+    </LinkDescription>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

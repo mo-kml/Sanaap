@@ -65,18 +65,19 @@
                     </carousel:CarouselViewControl.ItemTemplate>
                 </carousel:CarouselViewControl>
 
-                <StackLayout Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,0.01,0.2,0.05" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0.92,0.01,0.2,0.05" AbsoluteLayout.LayoutFlags="All">
                    
-                    <Image VerticalOptions="Center" WidthRequest="40" HeightRequest="40" Source="{extentions:Image FileName=logo.png}"/>
+                    <Image VerticalOptions="Center" WidthRequest="50" HeightRequest="50" Source="{extentions:Image FileName=logo.png}"/>
 
                     <controls:IconButton BackgroundColor="Transparent"
-                                         WidthRequest="30"
+                                         WidthRequest="50"
                                          Padding="0"
+                                         
                                          VerticalOptions="Center"
                                         BindingContext="{x:Reference menu}"
                                         Clicked="ToggleMenuButton"
                                         TextColor="Black"
-                                        FontSize="{StaticResource largeFontSize}"
+                                        FontSize="{StaticResource xXLargeFontSize}"
                                         HorizontalOptions="Center"
                                         Text="&#xf0c9;"
                                         Type="Solid" />

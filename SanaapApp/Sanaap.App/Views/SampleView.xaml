@@ -9,6 +9,7 @@
              NavigationPage.HasNavigationBar="False"
              Title="فارسی"
              x:Name="sampleView"
+             ControlTemplate="{StaticResource masterTemplate}"
              FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.SampleView">
     <ContentPage.Resources>
