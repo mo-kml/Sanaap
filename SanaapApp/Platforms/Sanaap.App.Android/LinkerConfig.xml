@@ -1,17 +1,67 @@
-<linker>
+﻿<linker>
+
+  <!-- Bit.CSharpClient.Prism -->
+
   <assembly fullname="Prism.Forms">
     <type fullname="*" />
   </assembly>
   <assembly fullname="Prism">
     <type fullname="*" />
   </assembly>
-  <assembly fullname="Bit.CSharpClient.All">
+  <assembly fullname="Prism.Plugin.Popups">
     <type fullname="*" />
   </assembly>
-  <assembly fullname="Sanaap.App">
+  <assembly fullname="Autofac">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Bit.CSharpClient.Prism">
+    <type fullname="*" />
+  </assembly>
+
+  <!-- Bit.CSharpClient.OData -->
+
+
+  <assembly fullname="Bit.CSharpClient.OData">
     <type fullname="*" />
   </assembly>
   <assembly fullname="Simple.OData.Client.V4.Adapter">
     <type fullname="*" />
   </assembly>
+
+  <!-- Bit.CSharpClient.Rest -->
+
+
+  <assembly fullname="Bit.CSharpClient.Rest">
+    <type fullname="*" />
+  </assembly>
+
+
+  <!-- Bit.CSharpClient.Controls -->
+
+  <assembly fullname="Rg.Plugins.Popup">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Bit.CSharpClient.Controls">
+    <type fullname="*" />
+  </assembly>
+
+  <!-- App -->
+
+  <assembly fullname="Sanaap.App.Android">
+    <type fullname="*" />
+  </assembly>
+  <assembly fullname="Sanaap.App">
+    <type fullname="*" />
+  </assembly>
+
+  <!-- Other -->
+
+  <assembly fullname="System.Core">
+    <type fullname="*" />
+  </assembly>
+
+  <assembly fullname="NodaTime">
+    <type fullname="*" />
+  </assembly>
+
 </linker>

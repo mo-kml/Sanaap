@@ -65,7 +65,7 @@ namespace Sanaap.App.Droid
 
 
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
-                .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Pan);
+                .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
