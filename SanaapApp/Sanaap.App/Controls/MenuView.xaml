@@ -6,19 +6,7 @@
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              BackgroundColor="{StaticResource blueBackgroundColor}" >
     <ContentView.Resources>
-        <!--<ResourceDictionary>
-            <Style TargetType="Frame">
-                <Setter Property="HeightRequest" Value="200"/>
-                <Setter Property="WidthRequest" Value="200"/>
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="BorderColor" Value="Green"/>
-                <Setter Property="BorderWidth" Value="0.5"/>
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="TextColor" Value="Gray"/>
-                <Setter Property="Margin" Value="10,10"/>
-            </Style>
-        </ResourceDictionary>-->
+
         <ResourceDictionary>
             <Style TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="{StaticResource blueBoxViewColor}"/>
@@ -26,6 +14,8 @@
             </Style>
 
             <Style TargetType="Label">
+                <Setter Property="HeightRequest" Value="55"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
                 <Setter Property="TextColor" Value="{StaticResource buttonTextWhite}"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="Margin" Value="20,0"/>
@@ -38,7 +28,7 @@
         <ScrollView>
             <StackLayout>
                 <Image Margin="0,40" Source="{extentions:Image FileName=logoIconWhite.png}" WidthRequest="60" HeightRequest="60"/>
-                <StackLayout Spacing="11">
+                <StackLayout Spacing="0">
                     <Label Text="صفحه اصلی">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding GoToPage}" CommandParameter="MainMenuView" />

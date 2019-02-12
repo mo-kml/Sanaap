@@ -125,7 +125,7 @@
                         <Grid HeightRequest="60" BackgroundColor="{StaticResource primaryBlue}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
                             <control:IconButton
                                         Grid.Column="1"
@@ -133,7 +133,7 @@
                                         BindingContext="{x:Reference menu}"
                                         Clicked="ToggleMenuButton"
                                         TextColor="{StaticResource buttonTextWhite}"
-                                        FontSize="{StaticResource largeFontSize}"
+                                        FontSize="{StaticResource xXLargeFontSize}"
                                         HorizontalOptions="End"
                                         Text="&#xf0c9;"
                                         Type="Solid" />
