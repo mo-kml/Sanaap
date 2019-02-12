@@ -125,7 +125,7 @@
                     </ScrollView>
 
                 </Frame>
-                <Grid AbsoluteLayout.LayoutBounds="1,1.01,1,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
+                <Grid AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
