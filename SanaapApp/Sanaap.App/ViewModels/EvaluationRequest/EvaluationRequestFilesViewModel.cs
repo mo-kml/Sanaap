@@ -10,9 +10,11 @@ using Sanaap.App.Controls;
 using Sanaap.App.Dto;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
+using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
+using Sanaap.Enums;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,9 +50,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         private readonly IODataClient _oDataClient;
         private readonly IUserDialogs _userDialogs;
+        private readonly IInitialDataService _initialDataService;
         public EvaluationRequestFilesViewModel(IMedia media,
             IODataClient oDataClient,
             IUserDialogs userDialogs,
+            IInitialDataService initialDataService,
             IPageDialogService dialogService,
             IClientAppProfile clientApp,
             IEventAggregator eventAggregator,
@@ -58,11 +62,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
+            _initialDataService = initialDataService;
 
             TakePhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (file) =>
             {
-
-                if (file.TypeName == "بیشتر")
+                //500 is ID for More pictures
+                if (file.TypeId == 500)
                 {
                     Files.Add(new EvlRequestFileItemSource { TypeId = file.TypeId, TypeName = file.TypeName, Image = file.Image });
                 }
@@ -105,7 +110,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   }
                   else
                   {
-                      await dialogService.DisplayAlertAsync("خطا", "تصویر انتخاب نشده است", "باشه");
+                      await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.PictureIsNull, ConstantStrings.Ok);
                   }
               });
 
@@ -132,13 +137,20 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   }
                   else
                   {
-                      await dialogService.DisplayAlertAsync("خطا", "تصویر انتخاب نشده است", "باشه");
+                      await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.PictureIsNull, ConstantStrings.Ok);
                   }
               });
 
             Submit = new BitDelegateCommand(async () =>
             {
-                if (await dialogService.DisplayAlertAsync("مطمئن هستید؟", "درخواست ارسال شود؟", "بله", "خیر"))
+                if (Files.Any(f => f.IsRequired && f.HasImage == false))
+                {
+                    await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.PictureIsRequired, ConstantStrings.Ok);
+
+                    return;
+                }
+
+                if (await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.AreYouSure, ConstantStrings.Yes, ConstantStrings.No))
                 {
                     using (HttpClient http = new HttpClient())
                     {
@@ -148,27 +160,6 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                         using (userDialogs.Loading(ConstantStrings.SendingRequestAndPictures))
                         {
-                            //EvlRequestDto evlRequest = new EvlRequestDto
-                            //{
-                            //    AccidentDate = Request.AccidentDate,
-                            //    AccidentReason = Request.AccidentReason,
-                            //    CarId = Request.CarId,
-                            //    EvlRequestType = Request.EvlRequestType,
-                            //    InsuranceType = Request.InsuranceType,
-                            //    InsurerId = Request.InsurerId,
-                            //    InsurerNo = Request.InsurerNo,
-                            //    Latitude = Request.Latitude,
-                            //    Longitude = Request.Longitude,
-                            //    LostCarId = Request.LostCarId,
-                            //    LostFirstName = Request.LostFirstName,
-                            //    LostLastName = Request.LostLastName,
-                            //    LostPlateNumber = Request.LostPlateNumber,
-                            //    OwnerFirstName = Request.OwnerFirstName,
-                            //    OwnerLastName = Request.OwnerLastName,
-                            //    PlateNumber = Request.PlateNumber,
-                            //    Status = Request.Status
-                            //};
-
                             MultipartFormDataContent submitEvlRequestContents = new MultipartFormDataContent
                             {
                                 new StringContent(JsonConvert.SerializeObject(Request), Encoding.UTF8, "application/json")
@@ -217,16 +208,25 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 {
                     Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
-                    List<ExternalEntityDto> ImageFileTypes = new List<ExternalEntityDto>
-                {
-                    new ExternalEntityDto{Name="کارت ملی", PrmID=52},
-                    new ExternalEntityDto{Name="عکس خودرو", PrmID=56},
-                    new ExternalEntityDto{Name="بیمه نامه ثالث", PrmID=58},
-                    new ExternalEntityDto{Name="شناسنامه", PrmID=57},
-                    new ExternalEntityDto{Name="بیشتر", PrmID=59},
-                };
+                    List<PhotoTypeDto> photos;
 
-                    List<EvlRequestFileItemSource> files = ImageFileTypes.Select(i => new EvlRequestFileItemSource { TypeId = i.PrmID, TypeName = i.Name, Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg") }).ToList();
+                    if (Request.InsuranceType == InsuranceType.Sales)
+                    {
+                        photos = await _initialDataService.GetSalesPhotos();
+                    }
+                    else
+                    {
+                        photos = await _initialDataService.GetBadanePhotos();
+                    }
+
+                    List<EvlRequestFileItemSource> files = photos.Select(i =>
+                    new EvlRequestFileItemSource
+                    {
+                        IsRequired = i.IsRequired,
+                        TypeId = i.ID,
+                        TypeName = i.Name,
+                        Image = ImageSource.FromResource("Sanaap.App.Images.photo.jpg")
+                    }).ToList();
 
                     Files = new ObservableCollection<EvlRequestFileItemSource>(files);
 

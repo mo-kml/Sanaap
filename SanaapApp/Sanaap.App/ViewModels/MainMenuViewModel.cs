@@ -57,6 +57,10 @@ namespace Sanaap.App.ViewModels
 
         public async Task syncInitialData()
         {
+            await _initialDataService.GetSalesPhotos();
+
+            await _initialDataService.GetBadanePhotos();
+
             await _initialDataService.GetCars();
 
             await _initialDataService.GetColors();

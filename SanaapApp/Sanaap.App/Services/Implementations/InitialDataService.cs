@@ -17,6 +17,8 @@ namespace Sanaap.App.Services.Implementations
         private List<ExternalEntityDto> cars;
         private List<ExternalEntityDto> alphabets;
         private List<ExternalEntityDto> colors;
+        private List<PhotoTypeDto> salesPhotos;
+        private List<PhotoTypeDto> badanePhotos;
         private List<InsurersItemSource> insurers;
         private CustomerDto customerDto;
 
@@ -47,6 +49,44 @@ namespace Sanaap.App.Services.Implementations
             }
 
             return colors;
+        }
+
+        public async Task<List<PhotoTypeDto>> GetSalesPhotos()
+        {
+            if (salesPhotos == null)
+            {
+                salesPhotos = (await _oDataClient.For<PhotoTypeDto>("ExternalEntities")
+                    .Function("GetSalesPhotos")
+                    .FindEntriesAsync()).ToList();
+
+                salesPhotos.Add(new PhotoTypeDto
+                {
+                    ID = 500,
+                    IsRequired = false,
+                    Name = "بیشتر"
+                });
+            }
+
+            return salesPhotos;
+        }
+
+        public async Task<List<PhotoTypeDto>> GetBadanePhotos()
+        {
+            if (badanePhotos == null)
+            {
+                badanePhotos = (await _oDataClient.For<PhotoTypeDto>("ExternalEntities")
+                    .Function("GetBadanePhotos")
+                    .FindEntriesAsync()).ToList();
+
+                badanePhotos.Add(new PhotoTypeDto
+                {
+                    ID = 500,
+                    IsRequired = false,
+                    Name = "بیشتر"
+                });
+            }
+
+            return badanePhotos;
         }
 
         public async Task<List<ExternalEntityDto>> GetAlphabets()

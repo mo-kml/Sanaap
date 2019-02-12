@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dto\InsurerDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ISanaapDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\OperatorDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\PhotoTypeDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\SosRequestPhoneDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\VehicleKindDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\CommentType.cs" />

@@ -1,5 +1,6 @@
 ﻿using Bit.Core.Contracts;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Sanaap.Api.Contracts;
 using Sanaap.Dto;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Sanaap.Api.Implementations
 {
+    //this class is a mess and absolutely needs to optimize
     public class ExternalApiService : IExternalApiService
     {
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
@@ -23,6 +25,8 @@ namespace Sanaap.Api.Implementations
         private HttpClient httpClient;
         private IEnumerable<ExternalEntityDto> colors;
         private IEnumerable<ExternalEntityDto> cars;
+        private IEnumerable<PhotoTypeDto> salesPhotos;
+        private IEnumerable<PhotoTypeDto> badanePhotos;
         private IEnumerable<InsurerDto> insurers;
         private IEnumerable<ExternalEntityDto> alphabets;
 
@@ -72,6 +76,58 @@ namespace Sanaap.Api.Implementations
             }
 
             return colors;
+        }
+
+        public async Task<IEnumerable<PhotoTypeDto>> GetSalesPhotos()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (colors == null)
+            {
+                HttpResponseMessage result = await httpClient.GetAsync("GetInitData");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    JObject jObject = JObject.Parse(await result.Content.ReadAsStringAsync());
+
+                    salesPhotos = JsonConvert.DeserializeObject<IEnumerable<PhotoTypeDto>>(jObject["SalesPhotos"].ToString());
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return salesPhotos;
+        }
+
+        public async Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (colors == null)
+            {
+                HttpResponseMessage result = await httpClient.GetAsync("GetInitData");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    JObject jObject = JObject.Parse(await result.Content.ReadAsStringAsync());
+
+                    badanePhotos = JsonConvert.DeserializeObject<IEnumerable<PhotoTypeDto>>(jObject["BadanePhotos"].ToString());
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return badanePhotos;
         }
 
         public async Task<IEnumerable<ExternalEntityDto>> GetNumberplateAlphabets()
