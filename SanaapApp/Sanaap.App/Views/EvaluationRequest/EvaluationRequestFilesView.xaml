@@ -86,7 +86,7 @@
                                                 <Label Text="4" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
                                             <Frame CornerRadius="5" WidthRequest="75" Padding="3" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="5 اعلام خسارت" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                                <Label Text="5 تصاویر" Margin="0,0,8,0" TextColor="White" Style="{StaticResource TitleLabel}"/>
                                             </Frame>
 
 
