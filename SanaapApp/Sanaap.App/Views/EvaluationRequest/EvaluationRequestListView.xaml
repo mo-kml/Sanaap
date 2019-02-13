@@ -16,16 +16,14 @@
             <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-Light-FDFont}"/>
         </Style>
-        <Style TargetType="Label" x:Key="DateLabel">
-            <Setter Property="TextColor" Value="Black"/>
+        <Style TargetType="Label" x:Key="dateLabel">
             <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
-            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Light-FDFont}"/>
         </Style>
-        <Style x:Key="PipeBoxView" TargetType="BoxView">
+        <Style x:Key="pipeBoxView" TargetType="BoxView">
             <Setter Property="WidthRequest" Value="1"/>
             <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
         </Style>
-        <Style x:Name="HeaderLabel" x:Key="Header" TargetType="Label">
+        <Style TargetType="Label" x:Key="Header">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
@@ -73,7 +71,7 @@
                                             <Label Text="{Binding Code}" HorizontalOptions="Center"/>
                                         </StackLayout>
 
-                                        <BoxView Grid.Column="1" Style="{StaticResource PipeBoxView}"/>
+                                        <BoxView Grid.Column="1" Style="{StaticResource pipeBoxView}"/>
 
                                         <StackLayout Grid.Column="2" Orientation="Horizontal">
                                             <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=car.png}" BackgroundColor="Transparent" />
@@ -113,21 +111,21 @@
 
                             <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
                                 <StackLayout>
-                                    <Image Source="{extensions:Image FileName=Medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Image Source="{extensions:Image FileName=medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                     <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
                                 </StackLayout>
                             </Frame>
 
                             <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
                                 <StackLayout>
-                                    <Image Source="{extensions:Image FileName=Houce.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Image Source="{extensions:Image FileName=house.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                     <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
                                 </StackLayout>
                             </Frame>
 
                             <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
                                 <StackLayout>
-                                    <Image Source="{extensions:Image FileName=Car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Image Source="{extensions:Image FileName=car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
                                     <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
                                 </StackLayout>
                             </Frame>
