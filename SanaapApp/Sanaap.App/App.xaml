@@ -14,13 +14,9 @@
     xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
     <bit:BitApplication.Resources>
         <ResourceDictionary>
-            <x:String x:Key="ShabnamFont">SHABNAM.ttf#Shabnam</x:String>
-            <x:String x:Key="Shabnam-BoldFont">SHABNAM-BOLD.ttf#Shabnam Bold</x:String>
             <x:String x:Key="Shabnam-Bold-FDFont">SHABNAM-BOLD-FD.ttf#Shabnam Bold FD</x:String>
             <x:String x:Key="Shabnam-FDFont">SHABNAM-FD.ttf#Shabnam FD</x:String>
-            <x:String x:Key="Shabnam-LightFont">SHABNAM-LIGHT.ttf#Shabnam Light</x:String>
             <x:String x:Key="Shabnam-Light-FDFont">SHABNAM-LIGHT-FD.ttf#Shabnam Light FD</x:String>
-            <x:String x:Key="Vazir-Black-FD-WOLFont">Vazir-Black-FD-WOL.ttf#Vazir Black FD-WOL</x:String>
             <x:String x:Key="Vazir-Light-FD-WOLFont">Vazir-Light-FD-WOL.ttf#Vazir Light FD-WOL</x:String>
 
             <Color x:Key="primaryGray">#bfbfbf</Color>
