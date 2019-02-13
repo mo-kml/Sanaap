@@ -1,7 +1,7 @@
 ﻿[
   {
     "Name": "Development",
-    "IsActive": true,
+    "IsActive": false,
     "DebugMode": false,
     "AppInfo": {
       "Name": "Sanaap",
@@ -15,6 +15,25 @@
       {
         "Key": "SanaapDbConnectionString",
         "Value": "Data Source=.;Initial Catalog=SanaapDb;Integrated Security=True"
+      }
+    ]
+  },
+  {
+    "Name": "Release",
+    "IsActive": true,
+    "DebugMode": false,
+    "AppInfo": {
+      "Name": "Sanaap",
+      "Version": "1"
+    },
+    "Configs": [
+      {
+        "Key": "IdentityCertificatePassword",
+        "Value": "P@ssw0rd"
+      },
+      {
+        "Key": "SanaapDbConnectionString",
+        "Value": "Data Source=.;Initial Catalog=SanapDB;uid=sanap;pwd=10431044;"
       }
     ]
   }

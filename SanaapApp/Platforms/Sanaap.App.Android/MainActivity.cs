@@ -40,7 +40,6 @@ namespace Sanaap.App.Droid
             SvgCachedImage.Init();
             UserDialogs.Init(this);
 
-
             base.OnCreate(bundle);
 
             UseDefaultConfiguration(bundle);

@@ -4,7 +4,6 @@ using Sanaap.App.Helpers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
@@ -18,11 +17,6 @@ namespace Sanaap.App.ViewModels
 
             Select = new BitDelegateCommand(async () =>
               {
-                  Location location;
-                  MainThread.BeginInvokeOnMainThread(async () =>
-                  {
-                      location = await GeolocationExtensions.GetLocation();
-                  });
               });
             //Contents = new ObservableCollection<Test>(
             //    new List<Test>

@@ -43,7 +43,6 @@ namespace Sanaap.App
         public App()
             : this(null)
         {
-
         }
 
         public App(IPlatformInitializer initializer)
@@ -60,16 +59,16 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            }
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            //}
 
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestMenuView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -116,6 +115,7 @@ namespace Sanaap.App
 
             containerRegistry.RegisterPartialView<MenuView, MenuViewModel>();
             containerRegistry.RegisterPartialView<InsuranceListPopupView, InsuranceListPopupViewModel>();
+
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {

@@ -57,7 +57,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 if (Request.Latitude == 0)
                 {
-                    CurrentPosition = await GeolocationExtensions.GetLocation();
+                    CurrentPosition = await Geolocation.GetLocationAsync();
                 }
                 else
                 {
