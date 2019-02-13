@@ -58,7 +58,7 @@
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShareCommand}"/>
                         </StackLayout.GestureRecognizers>
-                        <Image Source="{extentions:Image FileName=Share.png}" VerticalOptions="CenterAndExpand" Aspect="AspectFit" WidthRequest="15" HeightRequest="15"/>
+                        <Image Source="{extentions:Image FileName=share.png}" VerticalOptions="CenterAndExpand" Aspect="AspectFit" WidthRequest="15" HeightRequest="15"/>
                         <Label Text="اشتراک گذاری"  Style="{StaticResource TopLabels}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">
