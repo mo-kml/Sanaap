@@ -7,6 +7,7 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
+             xmlns:converters="clr-namespace:Sanaap.App.Converters"
              NavigationPage.HasNavigationBar="False"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
@@ -14,6 +15,8 @@
              BackgroundColor="{StaticResource grayBackround}">
 
     <ContentPage.Resources>
+        <converters:LicensePlateConverter x:Key="licensePlateConverter"/>
+
         <Style TargetType="Label" x:Key="grayLabel">
             <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
             <Setter Property="TextColor" Value="{StaticResource textPlaceholderColor}"/>
@@ -55,7 +58,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label AbsoluteLayout.LayoutFlags="All" VerticalTextAlignment="Center" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" BackgroundColor="{StaticResource primaryBlue}" Text="اعلام خسارت" Style="{StaticResource headerText}"  TextColor="White"/>
-                        
+
                         <Frame Margin="0,0,30,15" HeightRequest="50" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="{StaticResource primaryBlue}"  AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional" HasShadow="False">
                             <Image VerticalOptions="Center" HorizontalOptions="Center" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" Source="{extentions:Image FileName=crashWhite.png}"/>
                         </Frame>
@@ -88,38 +91,32 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="75"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="110"/>
                                     </Grid.ColumnDefinitions>
-
-                                    <StackLayout Padding="7">
-                                        <Image HeightRequest="35" WidthRequest="35" Source="{extentions:Image FileName=photo.jpg}"/>
+                                    <StackLayout Padding="20">
+                                        <Image Source="{Binding Image}" Aspect="AspectFit"/>
                                     </StackLayout>
 
-                                    <StackLayout Grid.Column="1" VerticalOptions="End">
-                                        <Label Text="{Binding CarName}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"/>
-
-                                        <Label Text="{Binding ColorName}" Style="{StaticResource grayLabel}"/>
+                                    <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">
+                                        <Label Text="{Binding CarName}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                                        <Label Text="{Binding ColorName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                        <Label Text="{Binding InsuranceTypeName}" VerticalTextAlignment="Start" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
                                     </StackLayout>
 
-                                    <Label Grid.Column="2" VerticalTextAlignment="End" Text="{Binding InsuranceTypeName}" Style="{StaticResource grayLabel}"/>
 
-                                    <Label FontSize="{StaticResource ultraSmallFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" Text="1378/11/05" Grid.Column="3" VerticalTextAlignment="End"/>
-
-
-                                    <StackLayout Grid.Column="4" HeightRequest="30" Padding="10" VerticalOptions="Center" WidthRequest="110" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
+                                    <StackLayout WidthRequest="130" Grid.Column="2" VerticalOptions="Center" Padding="10"  HorizontalOptions="Start" Orientation="Horizontal" Spacing="-1">
                                         <AbsoluteLayout VerticalOptions="Start">
-                                            <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                            <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
                                         </AbsoluteLayout>
                                         <AbsoluteLayout VerticalOptions="Start">
                                             <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                            <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
                                         </AbsoluteLayout>
                                     </StackLayout>
+
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
