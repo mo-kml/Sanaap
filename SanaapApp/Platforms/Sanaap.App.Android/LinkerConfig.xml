@@ -64,4 +64,27 @@
     <type fullname="*" />
   </assembly>
 
+  <assembly fullname="mscorlib">
+    <type fullname="System.String">
+      <method name="Compare"></method>
+      <method name="CompareTo"></method>
+      <method name="ToUpper"></method>
+      <method name="ToLower"></method>
+    </type>
+    <type fullname="System.Math">
+      <method name="Abs"></method>
+      <method name="Max"></method>
+      <method name="Min"></method>
+      <method name="Round"></method>
+    </type>
+    <type fullname="System.DateTime">
+      <method name="AddYears"></method>
+      <method name="AddMonths"></method>
+      <method name="AddDays"></method>
+      <method name="AddHours"></method>
+      <method name="AddMinutes"></method>
+      <method name="AddSeconds"></method>
+    </type>
+  </assembly>
+
 </linker>

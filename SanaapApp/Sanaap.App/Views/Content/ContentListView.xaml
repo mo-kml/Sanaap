@@ -28,7 +28,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <navigationdrawer:SfNavigationDrawer IsOpen="False" DrawerHeight="280" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="280" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <AbsoluteLayout BackgroundColor="{StaticResource primaryBackground}">
                     <ListView HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" SeparatorVisibility="None"

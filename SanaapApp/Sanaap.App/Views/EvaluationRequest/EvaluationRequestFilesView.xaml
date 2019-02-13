@@ -157,7 +157,7 @@
                         </Grid.ColumnDefinitions>
                         <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
+                                <TapGestureRecognizer Command="{Binding Submit}"/>
                             </Label.GestureRecognizers>
                         </Label>
                         <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>

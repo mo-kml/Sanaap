@@ -69,7 +69,7 @@ namespace Sanaap.App
                 await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             }
 
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestMenuView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -119,8 +119,7 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                //HostUri = new Uri("http://84.241.25.3:8220/"),         // Server
-                HostUri = new Uri("http://192.168.1.95:53148/"),
+                HostUri = new Uri("http://192.168.143.2:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();

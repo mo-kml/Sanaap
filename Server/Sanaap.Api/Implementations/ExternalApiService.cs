@@ -1,5 +1,4 @@
-﻿using Bit.Core.Contracts;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sanaap.Api.Contracts;
 using Sanaap.Dto;
@@ -15,8 +14,6 @@ namespace Sanaap.Api.Implementations
     public class ExternalApiService : IExternalApiService
     {
         public virtual IHttpClientFactory HttpClientFactory { get; set; }
-
-        public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
         public virtual ISanaapTokenService SanaapTokenService { get; set; }
 
@@ -211,14 +208,14 @@ namespace Sanaap.Api.Implementations
             return insurers;
         }
 
-        public async Task<ContentDto> GetNewsById(int id)
+        public async Task<ContentDto> GetNewsById(int id, Guid userId)
         {
             if (httpClient == null)
             {
                 httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
             }
 
-            HttpResponseMessage result = await httpClient.GetAsync($"GetNews?Id={id}&usid={Guid.Parse(UserInformationProvider.GetCurrentUserId())}");
+            HttpResponseMessage result = await httpClient.GetAsync($"GetNews?Id={id}&usid={userId}");
 
             if (result.IsSuccessStatusCode)
             {
@@ -231,14 +228,14 @@ namespace Sanaap.Api.Implementations
         }
 
 
-        public async Task<bool> LikeNews(int id)
+        public async Task<bool> LikeNews(int id, Guid userId)
         {
             if (httpClient == null)
             {
                 httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
             }
 
-            HttpResponseMessage result = await httpClient.GetAsync($"LikeNews?Id={id}&usid={Guid.Parse(UserInformationProvider.GetCurrentUserId())}");
+            HttpResponseMessage result = await httpClient.GetAsync($"LikeNews?Id={id}&usid={userId}");
 
             if (result.IsSuccessStatusCode)
             {
