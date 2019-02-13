@@ -10,8 +10,8 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <maps:Map AbsoluteLayout.LayoutBounds="0,0,1,0.65" AbsoluteLayout.LayoutFlags="All" x:Name="map"
-                      InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="True" WidthRequest="10"
-                      VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
+                      InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="False" HasScrollEnabled="False" WidthRequest="10"
+                      VerticalOptions="FillAndExpand" props:MapProps.UpdateToCenterRegion="{Binding CurrentPosition}"/>
 
 
 
