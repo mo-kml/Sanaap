@@ -97,10 +97,10 @@
     <AndroidAsset Include="Assets\Vazir-Light-FD-WOL.ttf" />
     <AndroidAsset Include="Assets\SHABNAM-BOLD-FD.ttf" />
     <AndroidAsset Include="Assets\SHABNAM-FD.ttf" />
-    <AndroidAsset Include="Assets\SHABNAM-BOLD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT-FD.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM-LIGHT.TTF" />
-    <AndroidAsset Include="Assets\SHABNAM.TTF" />
+    <AndroidAsset Include="Assets\SHABNAM-BOLD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-LIGHT-FD.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM-LIGHT.ttf" />
+    <AndroidAsset Include="Assets\SHABNAM.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
