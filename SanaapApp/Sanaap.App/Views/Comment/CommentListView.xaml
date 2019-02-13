@@ -13,7 +13,7 @@
     <ContentPage.Resources>
         <converters:DateTimeOffsetToSolarDateConverter x:Key="dateTimeOffsetToSolarDateConverter"/>
         <Style x:Key="HeaderLabel" TargetType="Label">
-            <Setter Property="FontFamily" Value="{StaticResource ShabnamFont}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
             <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
         </Style>
@@ -84,7 +84,7 @@
                                                          Binding="{Binding StatusTypeName}"
                                                          Value="پاسخ داده شده">
                                                                 <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
-                                                                <Setter Property="FontFamily" Value="{StaticResource Shabnam-BoldFont}"/>
+                                                                <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
                                                             </DataTrigger>
                                                         </Label.Triggers>
                                                     </Label>

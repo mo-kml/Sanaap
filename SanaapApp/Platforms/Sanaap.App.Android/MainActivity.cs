@@ -32,7 +32,7 @@ namespace Sanaap.App.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
-            AppCenter.Start("7f0039a1-0052-4787-93af-36c5e1617617", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("9c1f248c-5434-458f-9c4c-f69b39722c1f", typeof(Analytics), typeof(Crashes));
 
             BitExceptionHandler.Current = new SanaapExceptionHandler();
 

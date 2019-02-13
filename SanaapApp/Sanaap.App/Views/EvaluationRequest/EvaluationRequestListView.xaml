@@ -26,7 +26,7 @@
         <Style TargetType="Label" x:Key="Header">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontFamily" Value="{StaticResource ShabnamFont}"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
             <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
             <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
         </Style>
