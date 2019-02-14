@@ -5,6 +5,7 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions ="clr-namespace:Sanaap.App.Extensions"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Sanaap.App.Views.Content.ShowContentView">
 
     <ContentPage.Resources>
@@ -35,7 +36,7 @@
 
         <ScrollView FlowDirection="RightToLeft" BackgroundColor="White">
             <StackLayout>
-                <Image Aspect="AspectFill" Source="{Binding Content.Photo}" HeightRequest="200"/>
+                <ffimageloading:CachedImage DownsampleToViewSize="True" Aspect="AspectFill" Source="{Binding Content.Photo}" HeightRequest="200"/>
 
                 <Grid Margin="10,10,20,10">
                     <Grid.ColumnDefinitions>

@@ -8,6 +8,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              x:Class="Sanaap.App.Views.Content.ContentListView"
              Title="اخبار و اطلاعیه ها"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              ControlTemplate="{StaticResource masterTemplate}"
              NavigationPage.HasNavigationBar="False">
 
@@ -51,7 +52,7 @@
                                             </Grid.RowDefinitions>
 
                                             <controls:SanaapFrame ShadowOffset="20" Padding="0" CornerRadius="5" Grid.Column="0"  HeightRequest="40" WidthRequest="100" Margin="10,0,0,0">
-                                                <Image Aspect="Fill"  Source="{Binding Image}"  BackgroundColor="Gray"  />
+                                                <ffimageloading:CachedImage DownsampleToViewSize="True" Aspect="Fill"  Source="{Binding Image}"  BackgroundColor="Gray"/>
                                             </controls:SanaapFrame>
 
                                             <StackLayout Grid.Column="1" Spacing="0">
