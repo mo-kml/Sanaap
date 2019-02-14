@@ -8,6 +8,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              NavigationPage.HasNavigationBar="False"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
@@ -96,7 +97,7 @@
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackLayout Padding="20">
-                                        <Image Source="{Binding Image}" Aspect="AspectFit"/>
+                                        <ffimageloading:SvgCachedImage DownsampleToViewSize="True" Source="{Binding Image}" Aspect="AspectFit"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">

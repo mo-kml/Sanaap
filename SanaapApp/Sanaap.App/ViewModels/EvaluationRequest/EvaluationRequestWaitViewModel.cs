@@ -1,27 +1,58 @@
 ﻿using Bit.ViewModel;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
+using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
+using Sanaap.Constants;
 using Sanaap.Dto;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestWaitViewModel : BitViewModelBase
     {
-        private IEvlRequestService _evlRequestService;
-        public EvaluationRequestWaitViewModel(IEvlRequestService evlRequestService)
+        private readonly IEvlRequestService _evlRequestService;
+        private readonly IPageDialogService _dialogService;
+        public EvaluationRequestWaitViewModel(IEvlRequestService evlRequestService, IPageDialogService dialogService)
         {
             _evlRequestService = evlRequestService;
+            _dialogService = dialogService;
+
+            Cancel = new BitDelegateCommand(async () =>
+              {
+                  if (await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.AreYouSure, ConstantStrings.Yes, ConstantStrings.No))
+                  {
+                      await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+                  }
+              });
         }
 
         public EvlRequestItemSource Request { get; set; }
+
+        public BitDelegateCommand Cancel { get; set; }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
             EvlRequestExpertDto expertDto = await _evlRequestService.FindEvlRequestExpert(Request.Id);
+
+            if (expertDto.Expert == null)
+            {
+                await _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.FindNearExpertError, ConstantStrings.Ok);
+
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"/{nameof(EvaluationRequestExpertView)}", new NavigationParameters
+                {
+                    {"Expert",expertDto }
+                });
+            }
         }
     }
 }

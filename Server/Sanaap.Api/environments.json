@@ -1,7 +1,7 @@
 ﻿[
   {
     "Name": "Development",
-    "IsActive": false,
+    "IsActive": true,
     "DebugMode": false,
     "AppInfo": {
       "Name": "Sanaap",
@@ -20,7 +20,7 @@
   },
   {
     "Name": "Release",
-    "IsActive": true,
+    "IsActive": false,
     "DebugMode": false,
     "AppInfo": {
       "Name": "Sanaap",

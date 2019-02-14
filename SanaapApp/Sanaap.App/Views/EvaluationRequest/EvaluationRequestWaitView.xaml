@@ -12,9 +12,9 @@
                     <ffimageloading:SvgCachedImage DownsampleToViewSize="True" WidthRequest="100" HeightRequest="100" Source="resource://Sanaap.App.Images.carGif.gif" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </Frame>
                 <Label Text="در حال جستجوی کارشناس" FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="{StaticResource lightBlueColor}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                
 
-                <Button Margin="50" Text="لغو" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="1" VerticalOptions="Center" HeightRequest="30" BorderRadius="10" HorizontalOptions="Center" Padding="0"/>
+
+                <Button Margin="50" Text="لغو" Command="{Binding Cancel}"  TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="1" VerticalOptions="Center" HeightRequest="30" BorderRadius="10" HorizontalOptions="Center" Padding="0"/>
             </StackLayout>
 
         </StackLayout>

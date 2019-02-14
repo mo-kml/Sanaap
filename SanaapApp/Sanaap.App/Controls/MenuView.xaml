@@ -70,7 +70,6 @@
                             <TapGestureRecognizer Command="{Binding Logout}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <BoxView/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

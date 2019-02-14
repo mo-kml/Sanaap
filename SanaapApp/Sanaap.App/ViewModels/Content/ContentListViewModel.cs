@@ -2,6 +2,7 @@
 using Bit.ViewModel;
 using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
@@ -21,7 +22,7 @@ namespace Sanaap.App.ViewModels.Content
         private readonly IUserDialogs _userDialogs;
         private readonly INewsService _newsService;
         private readonly IInitialDataService _initialDataService;
-        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INewsService newsService, IInitialDataService initialDataService, IEventAggregator eventAggregator)
+        public ContentListViewModel(IODataClient oDataClient, IUserDialogs userDialogs, INewsService newsService, IInitialDataService initialDataService, IEventAggregator eventAggregator, IPageDialogService dialogService)
         {
             _oDataClient = oDataClient;
             _userDialogs = userDialogs;
@@ -38,6 +39,15 @@ namespace Sanaap.App.ViewModels.Content
 
             FilterContent = new BitDelegateCommand(async () =>
               {
+                  if (FilterDto.Month != null || FilterDto.Year != null)
+                  {
+                      if (FilterDto.Month == null || FilterDto.Year == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NewsFilterNotValid, ConstantStrings.Ok);
+                          return;
+                      }
+                  }
+
                   using (_userDialogs.Loading(ConstantStrings.Loading))
                   {
                       await loadContents(FilterDto);

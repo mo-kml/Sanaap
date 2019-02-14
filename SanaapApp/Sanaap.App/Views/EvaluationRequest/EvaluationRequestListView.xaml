@@ -14,7 +14,6 @@
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
-            <Setter Property="FontFamily" Value="{StaticResource Shabnam-Light-FDFont}"/>
         </Style>
         <Style TargetType="Label" x:Key="dateLabel">
             <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
@@ -93,7 +92,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <controls:SanaapFrame ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
+                    <controls:SanaapFrame Margin="0,0,0,10" ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" CornerRadius="10">
                         <controls:SanaapFrame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenInquiryBox}"/>
                         </controls:SanaapFrame.GestureRecognizers>
@@ -131,7 +130,7 @@
                             </Frame>
                         </StackLayout>
 
-                        <controls:SanaapEntry Text="{Binding DocumentNumber}"  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
+                        <controls:SanaapEntry Keyboard="Numeric" Text="{Binding DocumentNumber}"  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
                     </StackLayout>
 
 

@@ -9,7 +9,7 @@
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     NavigationPage.HasNavigationBar="False"
-    
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     Padding="30,40,30,40"
     HasKeyboardOffset="False"
@@ -60,7 +60,7 @@
                                         <DataTemplate>
                                             <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
                                                 <StackLayout >
-                                                    <Image HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
+                                                    <ffimageloading:SvgCachedImage DownsampleToViewSize="True" HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
                                                 </StackLayout>
                                             </Frame>
                                         </DataTemplate>

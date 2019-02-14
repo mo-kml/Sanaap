@@ -35,6 +35,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 Request.Latitude = centerPosition.Latitude;
                 Request.Longitude = centerPosition.Longitude;
 
+                //Geocoder geocoder = new Geocoder();
+                //Request.Address = (await geocoder.GetAddressesForPositionAsync(centerPosition)).FirstOrDefault();
+
                 await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView), new NavigationParameters
                 {
                     {nameof(Request),Request }

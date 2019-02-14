@@ -26,7 +26,7 @@ namespace System
         {
             FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
 
-            DisplayAttribute descriptionAttribute = fieldInfo.GetCustomAttributes<DisplayAttribute>().FirstOrDefault();
+            DisplayAttribute descriptionAttribute = fieldInfo?.GetCustomAttributes<DisplayAttribute>().FirstOrDefault();
 
             if (descriptionAttribute == null)
             {

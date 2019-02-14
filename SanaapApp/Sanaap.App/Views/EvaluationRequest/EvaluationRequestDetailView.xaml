@@ -7,6 +7,7 @@
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:prop="clr-namespace:Sanaap.App.Props"
     CloseWhenBackgroundIsClicked="False"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
     xmlns:insurancePopup="clr-namespace:Sanaap.App.Views.Insurance"
     BackgroundColor="Gray"
@@ -127,8 +128,8 @@
                                         <syncfusion:SfListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
-                                                    <StackLayout >
-                                                        <Image HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
+                                                    <StackLayout>
+                                                        <ffimageloading:SvgCachedImage DownsampleToViewSize="True" HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
                                                     </StackLayout>
                                                 </Frame>
                                             </DataTemplate>

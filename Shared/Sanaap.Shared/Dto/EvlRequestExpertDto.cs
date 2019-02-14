@@ -1,5 +1,7 @@
 ﻿using Bit.Model.Contracts;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sanaap.Dto
 {
@@ -12,6 +14,7 @@ namespace Sanaap.Dto
         public string ExpertDistance { get; set; }
     }
 
+    [ComplexType]
     public class EvlRequestExpertExpertDto
     {
         public int ID { get; set; }
@@ -19,14 +22,16 @@ namespace Sanaap.Dto
         public string Name { get; set; }
         public string Mobile { get; set; }
         public string Photo { get; set; }
-        public string MapLat { get; set; }
-        public string MapLng { get; set; }
-        public string TodayRequest { get; set; }
-        public string TodayCancelation { get; set; }
-        public string TotalRequest { get; set; }
-        public string TotalCancelation { get; set; }
-        public string Score { get; set; }
-        public string LastRequestTime { get; set; }
+        public double MapLat { get; set; }
+        public double MapLng { get; set; }
+        public string CarName { get; set; }
+        public string CarPlate { get; set; }
+        public int TodayRequest { get; set; }
+        public int TodayCancelation { get; set; }
+        public int TotalRequest { get; set; }
+        public int TotalCancelation { get; set; }
+        public int Score { get; set; }
+        public DateTime LastRequestTime { get; set; }
         public string ConnectionId { get; set; }
         public bool IsBusy { get; set; }
     }

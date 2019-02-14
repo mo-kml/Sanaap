@@ -4,9 +4,11 @@ using Sanaap.Api.Contracts;
 using Sanaap.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static Sanaap.Api.Controllers.EvlRequestExpertsController;
 
 namespace Sanaap.Api.Implementations
 {
@@ -196,7 +198,7 @@ namespace Sanaap.Api.Implementations
                 {
                     InitialData initialData = JsonConvert.DeserializeObject<InitialData>(await result.Content.ReadAsStringAsync());
 
-                    insurers = initialData.Insurance;
+                    insurers = initialData.Insurance.Where(i => i.IsContract);
                 }
                 else
                 {
@@ -220,6 +222,27 @@ namespace Sanaap.Api.Implementations
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<ContentDto>(await result.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+        }
+
+        public async Task<ExpertPositionDto> GetExpertPosition(GetPositionArgs positionArgs)
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+            StringContent content = new StringContent(JsonConvert.SerializeObject(positionArgs), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await httpClient.PostAsync($"GetExpertPosition", content);
+
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ExpertPositionDto>(await result.Content.ReadAsStringAsync());
             }
             else
             {

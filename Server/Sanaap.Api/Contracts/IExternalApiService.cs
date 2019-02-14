@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Sanaap.Api.Controllers.EvlRequestExpertsController;
 
 namespace Sanaap.Api.Contracts
 {
@@ -24,6 +25,8 @@ namespace Sanaap.Api.Contracts
         Task<IEnumerable<PhotoTypeDto>> GetSalesPhotos();
 
         Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos();
+
+        Task<ExpertPositionDto> GetExpertPosition(GetPositionArgs positionArgs);
 
     }
 }

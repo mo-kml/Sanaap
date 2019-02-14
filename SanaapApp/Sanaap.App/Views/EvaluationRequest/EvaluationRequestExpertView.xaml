@@ -5,8 +5,14 @@
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
+             xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:circleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestExpertView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:LicensePlateConverter x:Key="licensePlateConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
             <maps:Map AbsoluteLayout.LayoutBounds="0,0,1,0.65" AbsoluteLayout.LayoutFlags="All" x:Name="map"
@@ -16,30 +22,31 @@
 
 
             <StackLayout Spacing="20" Padding="25,0" AbsoluteLayout.LayoutBounds="0,1,1,0.35" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{StaticResource grayBackround}">
-                <Grid Padding="0,30,0,0">
+                <Grid Padding="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
                     <StackLayout HorizontalOptions="Start" VerticalOptions="Start" Spacing="0">
-                        <StackLayout HeightRequest="30" Padding="0" VerticalOptions="Start" WidthRequest="110" HorizontalOptions="Start" Orientation="Horizontal" Spacing="0">
+
+                        <StackLayout FlowDirection="RightToLeft" Grid.Column="2" VerticalOptions="Center"  HorizontalOptions="Start" Orientation="Horizontal" Spacing="-1">
                             <AbsoluteLayout VerticalOptions="Start">
-                                <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,80,1" AbsoluteLayout.LayoutFlags="XProportional,YProportional,HeightProportional" Source="{extentions:Image FileName=pelak1.png}"/>
-                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="345 ب 12" AbsoluteLayout.LayoutBounds="0.1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding License.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
                             </AbsoluteLayout>
-                            <AbsoluteLayout VerticalOptions="Start">
-                                <Image AbsoluteLayout.LayoutBounds="0,0,24,1" AbsoluteLayout.LayoutFlags="XProportional,YProportional,HeightProportional" Source="{extentions:Image FileName=pelak2.png}"/>
-                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="11" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                            <AbsoluteLayout>
+                                <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding License,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
                             </AbsoluteLayout>
                         </StackLayout>
-                        <StackLayout HorizontalOptions="Start" Orientation="Horizontal" Spacing="5">
-                            <Label Text="پراید سفید" FontFamily="{StaticResource Shabnam-Bold-FDFont}" />
+                        <StackLayout HorizontalOptions="End" Orientation="Horizontal" Spacing="5">
+                            <Label Text="{Binding Expert.Expert.CarName}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" />
                             <Label Text="نوع خودرو:" TextColor="{StaticResource labelTextColor}"/>
                         </StackLayout>
                     </StackLayout>
 
                     <StackLayout Grid.Column="1">
-                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" Text="کارشناس محمد علی تقوی"  FontSize="{StaticResource mediumFontSize}"/>
+                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" Text="{Binding Expert.Expert.Name}"  FontSize="{StaticResource mediumFontSize}"/>
                         <Label FontSize="{StaticResource ultraSmallFontSize}" TextColor="{StaticResource labelTextColorDark}" Text="در حال اعزام به محل حادثه است"/>
                     </StackLayout>
                 </Grid>
@@ -51,15 +58,15 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="لغو" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource cancelGrayColor}"/>
-                        <Button Text="تماس با کارشناس" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource buttonBlue}" Grid.Column="1"/>
+                        <Button Text="لغو" Command="{Binding Cancel}"  TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource cancelGrayColor}"/>
+                        <Button Text="تماس با کارشناس" Command="{Binding Call}" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource buttonBlue}" Grid.Column="1"/>
                     </Grid>
                 </controls:SanaapFrame>
 
 
             </StackLayout>
             <Frame HasShadow="False" Padding="5" BackgroundColor="{StaticResource grayBackround}" IsClippedToBounds="True" AbsoluteLayout.LayoutBounds="0.5,0.66,80,80" AbsoluteLayout.LayoutFlags="PositionProportional" CornerRadius="80">
-                <circleImage:CircleImage Source="{Binding Image}" Aspect="AspectFill" WidthRequest="60" HeightRequest="60"/>
+                <circleImage:CircleImage Source="{Binding Expert.Expert.Photo}" Aspect="AspectFill" WidthRequest="60" HeightRequest="60"/>
             </Frame>
 
 

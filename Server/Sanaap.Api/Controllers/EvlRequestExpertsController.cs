@@ -4,9 +4,9 @@ using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Bit.Owin.Exceptions;
 using Newtonsoft.Json;
+using Sanaap.Api.Contracts;
 using Sanaap.Data.Contracts;
 using Sanaap.Dto;
-using Sanaap.Enums;
 using Sanaap.Model;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
@@ -30,6 +30,8 @@ namespace Sanaap.Api.Controllers
         public virtual IDtoEntityMapper<EvlRequestExpertDto, EvlRequestExpert> EvlRequestExpertDtoEntityMapper { get; set; }
 
         public virtual IMapper Mapper { get; set; }
+
+        public virtual IExternalApiService ExternalApiService { get; set; }
 
         public virtual ISanaapRepository<Customer> CustomersRepository { get; set; }
 
@@ -57,20 +59,21 @@ namespace Sanaap.Api.Controllers
             HttpClient httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
 
             Customer customer = await CustomersRepository.GetByIdAsync(cancellationToken, Guid.Parse(UserInformationProvider.GetCurrentUserId()));
+
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceType == InsuranceType.Sales ? "2" : "1";
+            soltaniFindExpertParams.Type = (short)evlRequest.InsuranceType;
             DefaultDateTimeUtils defaultDateTimeUtils = new DefaultDateTimeUtils();
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
-            soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
-            soltaniFindExpertParams.MapLng = evlRequest.Longitude.ToString();
-            soltaniFindExpertParams.LostName = evlRequest.LostFirstName;
-            soltaniFindExpertParams.LostFamily = evlRequest.LostLastName;
-            soltaniFindExpertParams.LostInsuranceID = "1"; // 1
-            soltaniFindExpertParams.LostCarID = evlRequest.LostCarId.ToString(); // 12608
-            soltaniFindExpertParams.LostCarType = "415"; // 415
-            soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";
+            soltaniFindExpertParams.MapLat = evlRequest.Latitude;
+            soltaniFindExpertParams.MapLng = evlRequest.Longitude;
+            soltaniFindExpertParams.LostName = evlRequest.LostFirstName ?? "a";
+            soltaniFindExpertParams.LostFamily = evlRequest.LostLastName ?? "a";
+            soltaniFindExpertParams.LostMobile = "0";
+            soltaniFindExpertParams.LostInsuranceID = 1;
+            soltaniFindExpertParams.LostCarID = evlRequest.LostCarId == 0 ? 1 : evlRequest.LostCarId; // 12608
+            soltaniFindExpertParams.Address = "111";
 
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(soltaniFindExpertParams), UnicodeEncoding.UTF8, "application/json");
 
@@ -84,42 +87,38 @@ namespace Sanaap.Api.Controllers
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
 
-            string test = await findExpertRawResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
 
-            EvlRequestExpertDto evlRequestExpertDto = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+            //evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
+            //await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
+            //EvlRequestExpertExpertDto result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
 
-            if (evlRequestExpertDto.Expert == null || evlRequestExpertDto.FileID == 0)
-            {
-                throw new DomainLogicException("NotFound");
-            }
+            //evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.Token;
+            //evlRequest.EvlRequestExpert.FileID = evlRequestExpertDto.FileID;
+            //evlRequest.EvlRequestExpert.Expert.ID = result.ID;
+            //evlRequest.EvlRequestExpert.Expert.ExpertID = result.ExpertID;
+            //evlRequest.EvlRequestExpert.Expert.Name = result.Name;
+            //evlRequest.EvlRequestExpert.Expert.Mobile = result.Mobile;
+            //evlRequest.EvlRequestExpert.Expert.MapLat = result.MapLat;
+            //evlRequest.EvlRequestExpert.Expert.MapLng = result.MapLng;
+            //evlRequest.EvlRequestExpert.Expert.Photo = result.Photo;
 
-            evlRequest.EvlRequestExpert = Mapper.Map<EvlRequestExpert>(evlRequestExpertDto);
-            await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
-            EvlRequestExpertExpertDto result = Mapper.Map<EvlRequestExpertExpertDto>(evlRequestExpertDto.Expert);
+            //EvlRequestsRepository.Update(evlRequest);
 
-            evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.Token;
-            evlRequest.EvlRequestExpert.FileID = evlRequestExpertDto.FileID;
-            evlRequest.EvlRequestExpert.Expert.ID = result.ID;
-            evlRequest.EvlRequestExpert.Expert.ExpertID = result.ExpertID;
-            evlRequest.EvlRequestExpert.Expert.Name = result.Name;
-            evlRequest.EvlRequestExpert.Expert.Mobile = result.Mobile;
-            evlRequest.EvlRequestExpert.Expert.MapLat = result.MapLat;
-            evlRequest.EvlRequestExpert.Expert.MapLng = result.MapLng;
-            evlRequest.EvlRequestExpert.Expert.Photo = result.Photo;
-            evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.ExpertDistance;
-            EvlRequestsRepository.Update(evlRequest);
+            //return evlRequestExpertDto;
+        }
+        public class GetPositionArgs
+        {
+            public string Token { get; set; }
+        }
 
-            //return SingleResult.Create(new EvlRequestExpertDto[] { evlRequestExpertDto }).ToArray();// evlRequestExpertDto;
-
-            //return SingleResult.Create(new[] { evlRequestExpertDto }.AsQueryable());
-
-            //ExpertResultDto expertResult = new ExpertResultDto();
-            //expertResult.Name = result.Name;
-            //expertResult.Mobile = result.Mobile;
-            //expertResult.Photo = result.Photo;
-            return evlRequestExpertDto;
+        [Action]
+        public virtual async Task<string> GetExpertPosition([FromBody]GetPositionArgs args)
+        {
+            return JsonConvert.SerializeObject(await ExternalApiService.GetExpertPosition(args));
         }
     }
+
 
 
 
@@ -127,15 +126,13 @@ namespace Sanaap.Api.Controllers
     {
         public string UserID { get; set; }
         public string RequestID { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
         public string AccidentDate { get; set; }
         public string Address { get; set; }
-        public string MapLat { get; set; }
-        public string MapLng { get; set; }
-        public string LostInsuranceID { get; set; }
-        public string LostInsuranceNO { get; set; }
-        public string LostCarType { get; set; }
-        public string LostCarID { get; set; }
+        public double MapLat { get; set; }
+        public double MapLng { get; set; }
+        public int LostInsuranceID { get; set; }
+        public int LostCarID { get; set; }
         public string LostName { get; set; }
         public string LostFamily { get; set; }
         public string LostMobile { get; set; }
@@ -185,16 +182,15 @@ namespace Sanaap.Api.Controllers
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = UserInformationProvider.GetCurrentUserId();
             soltaniFindExpertParams.RequestID = evlRequest.Id.ToString();
-            soltaniFindExpertParams.Type = evlRequest.InsuranceType == InsuranceType.Sales ? "3" : "1";
+            soltaniFindExpertParams.Type = (short)evlRequest.InsuranceType;
             DefaultDateTimeUtils defaultDateTimeUtils = new DefaultDateTimeUtils();
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
-            soltaniFindExpertParams.MapLat = evlRequest.Latitude.ToString();
-            soltaniFindExpertParams.MapLng = evlRequest.Longitude.ToString();
+            soltaniFindExpertParams.MapLat = evlRequest.Latitude;
+            soltaniFindExpertParams.MapLng = evlRequest.Longitude;
             soltaniFindExpertParams.LostName = evlRequest.LostFirstName;
             soltaniFindExpertParams.LostFamily = evlRequest.LostLastName;
-            soltaniFindExpertParams.LostInsuranceID = "1"; // 1
-            soltaniFindExpertParams.LostCarID = "12608"; // 12608
-            soltaniFindExpertParams.LostCarType = "415"; // 415
+            soltaniFindExpertParams.LostInsuranceID = 1; // 1
+            soltaniFindExpertParams.LostCarID = 12608; // 12608
             soltaniFindExpertParams.Address = "یوسف آباد کوچه هفتم";
             HttpRequestMessage findNearExpertRequest = new HttpRequestMessage(HttpMethod.Post, "api/Portal/FindNearExpertTest")
             {
@@ -223,8 +219,8 @@ namespace Sanaap.Api.Controllers
             evlRequest.EvlRequestExpert.Expert.ExpertID = result.ExpertID;
             evlRequest.EvlRequestExpert.Expert.Name = result.Name;
             evlRequest.EvlRequestExpert.Expert.Mobile = result.Mobile;
-            evlRequest.EvlRequestExpert.Expert.MapLat = result.MapLat;
-            evlRequest.EvlRequestExpert.Expert.MapLng = result.MapLng;
+            //evlRequest.EvlRequestExpert.Expert.MapLat = result.MapLat;
+            //evlRequest.EvlRequestExpert.Expert.MapLng = result.MapLng;
             evlRequest.EvlRequestExpert.Expert.Photo = result.Photo;
             evlRequest.EvlRequestExpert.Token = evlRequestExpertDto.ExpertDistance;
             EvlRequestsRepository.Update(evlRequest);

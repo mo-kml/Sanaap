@@ -1,4 +1,5 @@
-﻿using Sanaap.App.Helpers.Contracts;
+﻿using Newtonsoft.Json;
+using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Dto;
@@ -78,6 +79,16 @@ namespace Sanaap.App.Services.Implementations
             return await _oDataClient.For<EvlRequestDto>(controllerName)
                .Filter(x => x.Code == code)
                .FindEntryAsync();
+        }
+
+        public async Task<ExpertPositionDto> UpdateExpertPosition(string token)
+        {
+            string expertPosition = await _oDataClient.For<EvlRequestExpertDto>("EvlRequestExperts")
+               .Action("GetExpertPosition")
+               .Set(new { Token = token })
+               .ExecuteAsScalarAsync<string>();
+
+            return JsonConvert.DeserializeObject<ExpertPositionDto>(expertPosition);
         }
     }
 }

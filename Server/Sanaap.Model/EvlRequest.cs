@@ -23,6 +23,8 @@ namespace Sanaap.Model
 
         public string InsurerNo { get; set; }
 
+        public string Address { get; set; }
+
         public int InsurerId { get; set; }
 
         public int CarId { get; set; }

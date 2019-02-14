@@ -15,5 +15,7 @@ namespace Sanaap.App.Services.Contracts
         Task<EvlRequestDto> SearchByCode(int code);
 
         Task<EvlRequestExpertDto> FindEvlRequestExpert(Guid evlRequestId);
+
+        Task<ExpertPositionDto> UpdateExpertPosition(string token);
     }
 }

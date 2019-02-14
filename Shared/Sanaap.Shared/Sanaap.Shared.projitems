@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ContentListDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\EvlRequestProgressDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dto\ExpertPositionDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\ExternalEntityDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CommentDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dto\CompanyDto.cs" />

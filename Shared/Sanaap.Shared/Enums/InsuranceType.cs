@@ -6,9 +6,9 @@ namespace Sanaap.Enums
     public enum InsuranceType
     {
         [Display(Name = EnumDisplayNames.Sales)]
-        Sales,
+        Sales = 2,
 
         [Display(Name = EnumDisplayNames.Badane)]
-        Badane
+        Badane = 1
     }
 }
