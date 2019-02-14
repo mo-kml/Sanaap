@@ -64,6 +64,10 @@
     <type fullname="*" />
   </assembly>
 
+  <assembly fullname="System.Globalization">
+    <type fullname="*" />
+  </assembly>
+
   <assembly fullname="mscorlib">
     <type fullname="System.String">
       <method name="Compare"></method>
@@ -86,5 +90,6 @@
       <method name="AddSeconds"></method>
     </type>
   </assembly>
+
 
 </linker>

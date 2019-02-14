@@ -30,7 +30,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             Cancel = new BitDelegateCommand(async () =>
             {
-                if (await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.AreYouSure, ConstantStrings.Yes, ConstantStrings.No))
+                if (await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.AreYouSureToCancel, ConstantStrings.Yes, ConstantStrings.No))
                 {
                     await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
                 }
