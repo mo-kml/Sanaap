@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using Autofac;
 using Bit;
+using Bit.Model.Events;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ using Sanaap.App.Views.Insurance;
 using Sanaap.Service.Contracts;
 using Sanaap.Service.Implementations;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -55,6 +57,8 @@ namespace Sanaap.App
         {
             InitializeComponent();
 
+            CultureInfo.CurrentUICulture = new CultureInfo("en");
+
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDM0QDMxMzYyZTMzMmUzMENvVC95ZVRKQUVLdjJMMjJ6MGNXOFBkanNnR3hIVkpDTnJIVkh6b3VQWXc9;NDM1QDMxMzYyZTMzMmUzMFdaTUFWU21TK3hZV3MzUUNxWWZJTWtPRmkxZGllakNndE5ZSDIxRUhEWHM9;NDM2QDMxMzYyZTMzMmUzMGZLMmJzTFhoQWJRS081Mk56VTFISlQxOThMVzZiS3J2WTdsR0sveU1CcG89;NDM3QDMxMzYyZTMzMmUzMEhpS2gza1NzNlhrMWtjS0tZanRpWG10NzEwcjYwb1hqUnNoOEZqWmZCa2M9;NDM4QDMxMzYyZTMzMmUzMFhpUUtnY1NXMFN5b1o4Nmd3cVpTUXA1NzdGZTQ1bmM5bElQL0NLY1Q1b0U9;NDM5QDMxMzYyZTMzMmUzMEJFcUduNHd3aG9tQUNLdnhEWUpycW5abUtpWmhJZVlkMFk3QkZKZjJVUXc9;NDQwQDMxMzYyZTMzMmUzMFNHM2Z2RmphRGZWTUtGRThDTWFaNmNlU0p6aFpRaC9OQmhUWkxNQ1RRZFE9;NDQxQDMxMzYyZTMzMmUzMFZ6WFUwWm81ZDMvTG8weDVybFBUQ1U0S1J5M2tHekxqaVdUTnVFTWJoVjg9;NDQyQDMxMzYyZTMzMmUzMERlVlkvRjZ2WnlkcmFuTm5SQUdPQ2tVVHNYY1Jla0UyeVVSZFdIaGRaVlk9;");
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
@@ -68,14 +72,15 @@ namespace Sanaap.App
                 await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             }
 
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestExpertView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
 
-            //eventAggregator.GetEvent<TokenExpiredEvent>()
-            //    .SubscribeAsync(async tokenExpiredEvent => await NavigationService.NavigateAsync(nameof(LoginView)), ThreadOption.UIThread);
+            eventAggregator.GetEvent<TokenExpiredEvent>()
+                .SubscribeAsync(async tokenExpiredEvent =>
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(LoginView)}"), ThreadOption.UIThread);
 
             eventAggregator.GetEvent<ToggleMenuEvent>()
                 .SubscribeAsync(async menu => ToggleMenu(menu), ThreadOption.UIThread, true);
@@ -118,7 +123,7 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://247af3a9.ngrok.io/"),
+                HostUri = new Uri("http://192.168.143.2:53148/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
@@ -144,8 +149,9 @@ namespace Sanaap.App
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
             containerRegistry.RegisterSingleton<ISanaapAppTranslateService, SanaapAppTranslateService>();
 
-            containerBuilder.Register(c => CrossMedia.Current).SingleInstance();
-            containerBuilder.Register(c => UserDialogs.Instance).SingleInstance();
+
+            containerRegistry.RegisterInstance(CrossMedia.Current);
+            containerRegistry.RegisterInstance(UserDialogs.Instance);
 
             containerRegistry.RegisterSingleton<IDateTimeUtils, DefaultDateTimeUtils>();
 

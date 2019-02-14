@@ -148,5 +148,8 @@
       <SubType>Designer</SubType>
     </LinkDescription>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\carPin.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

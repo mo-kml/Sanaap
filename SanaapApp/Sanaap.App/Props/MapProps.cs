@@ -41,6 +41,7 @@ namespace Sanaap.App.Props
 
                       map.Pins.Add(new Pin
                       {
+                          Icon = BitmapDescriptorFactory.FromBundle("carPin.png"),
                           Label = "",
                           Position = new Position(position.Latitude, position.Longitude)
                       });
