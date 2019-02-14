@@ -9,7 +9,6 @@ using Bit.Droid;
 using Bit.ViewModel;
 using Bit.ViewModel.Implementations;
 using CarouselView.FormsPlugin.Android;
-using FFImageLoading.Svg.Forms;
 using ImageCircle.Forms.Plugin.Droid;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -36,11 +35,11 @@ namespace Sanaap.App.Droid
 
             BitExceptionHandler.Current = new SanaapExceptionHandler();
 
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: false);
-            SvgCachedImage.Init();
             UserDialogs.Init(this);
 
             base.OnCreate(bundle);
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
             UseDefaultConfiguration(bundle);
 

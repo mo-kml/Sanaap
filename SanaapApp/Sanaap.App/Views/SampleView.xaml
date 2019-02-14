@@ -6,6 +6,7 @@
              xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              NavigationPage.HasNavigationBar="False"
              Title="فارسی"
              x:Name="sampleView"
@@ -37,6 +38,9 @@
             <Label Text="dfasdfsdfas"/>
             <Label Text="dfasdfsdfas"/>
             <Label Text="dfasdfsdfas"/>
+            <ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+            WidthRequest="300" HeightRequest="300" Source = "http://raw.githubusercontent.com/recurser/exif-orientation-examples/master/Landscape_3.jpg"/>
+
 
             <Button Text="click" Command="{Binding Select}"/>
         </StackLayout>

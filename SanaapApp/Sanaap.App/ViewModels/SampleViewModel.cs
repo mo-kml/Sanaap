@@ -45,12 +45,12 @@ namespace Sanaap.App.ViewModels
                     new Test{ Image = ImageSource.FromUri(new Uri("https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png")), Likes = 187 , Date = "1397/11/17" , Text = "متنی برای آزمایش میزان درستی قرار گیری اشیاء در کنار یکدیگر این یک متن آزمایشی است و این موضوع صرفا جهت طولانی تر شدن متن بوده و دلیل دیگری ندارد", Title = "عنوان آزمایشی برای برسی چگونگی قرارگیری اشیاء در کنار یکدیگر", YourLike = 1},
                 });
 
-
+            Image = "https://raw.githubusercontent.com/recurser/exif-orientation-examples/master/Landscape_3.jpg";
         }
         public ObservableCollection<Test> Contents { get; set; }
 
 
-
+        public string Image { get; set; }
 
         //public Test Content { get; set; }
 

@@ -68,7 +68,7 @@ namespace Sanaap.App
                 await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
             }
 
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestExpertView)}");
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SampleView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
@@ -90,7 +90,6 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<NavigationPage>();
             containerRegistry.RegisterForNav<SampleView, SampleViewModel>();
             containerRegistry.RegisterForNav<LoginView, LoginViewModel>();
-            containerRegistry.RegisterForNav<MapView, MapViewModel>();
             containerRegistry.RegisterForNav<ContactUsView, ContactUsViewModel>();
             containerRegistry.RegisterForNav<ContentListView, ContentListViewModel>();
             //
@@ -119,7 +118,7 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://192.168.143.2:53148/"),
+                HostUri = new Uri("http://247af3a9.ngrok.io/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
