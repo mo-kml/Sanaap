@@ -3,6 +3,7 @@ using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Dto;
 using Simple.OData.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -30,9 +31,12 @@ namespace Sanaap.App.Services.Implementations
             List<ExternalEntityDto> colors = new List<ExternalEntityDto>();
             List<InsurersItemSource> insureres = new List<InsurersItemSource>();
             List<PolicyItemSource> policyItemSource = new List<PolicyItemSource>();
+            Guid customerId = (await _initialDataService.GetCurrentUserInfo()).Id;
 
-            IEnumerable<InsurancePolicyDto> insurances = await _oDataClient.For<InsurancePolicyDto>(controllerName)
-                .FindEntriesAsync();
+            IEnumerable<InsurancePolicyDto> insurances = (await _oDataClient.For<InsurancePolicyDto>(controllerName)
+                .Function("LoadInsurances")
+                .OrderBy(it => it.CreatedOn)
+                .FindEntriesAsync());
 
             cars = (await _initialDataService.GetCars()).ToList();
 
