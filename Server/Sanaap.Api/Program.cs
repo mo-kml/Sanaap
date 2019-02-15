@@ -10,12 +10,14 @@ namespace Sanaap.Api
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            BitWebHost.CreateDefaultBuilder(args)
-                .UseStartup<AppStartup>()
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return BitWebHost.CreateDefaultBuilder(args)
+.UseStartup<AppStartup>()
 #if DEBUG
                 .UseUrls("http://*:53148/")
 #endif
                 .Build();
+        }
     }
 }

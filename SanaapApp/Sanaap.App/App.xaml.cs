@@ -123,7 +123,7 @@ namespace Sanaap.App
 
             containerRegistry.GetBuilder().Register<IClientAppProfile>(c => new DefaultClientAppProfile
             {
-                HostUri = new Uri("http://192.168.143.2:53148/"),
+                HostUri = new Uri("http://35ee0b71.ngrok.io/"),
                 AppName = "Sanaap",
                 ODataRoute = "odata/Sanaap/"
             }).SingleInstance();
