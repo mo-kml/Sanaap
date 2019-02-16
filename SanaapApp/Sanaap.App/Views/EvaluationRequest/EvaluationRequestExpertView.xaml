@@ -58,7 +58,7 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="لغو" Command="{Binding Cancel}"  TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource cancelGrayColor}"/>
+                        <Button Text="لغو" Command="{Binding Cancel}"  TextColor="White" BackgroundColor="{StaticResource cancelGrayColor}"/>
                         <Button Text="تماس با کارشناس" Command="{Binding Call}" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource buttonBlue}" Grid.Column="1"/>
                     </Grid>
                 </controls:SanaapFrame>
