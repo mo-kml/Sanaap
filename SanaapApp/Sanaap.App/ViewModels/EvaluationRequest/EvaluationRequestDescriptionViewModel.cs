@@ -14,6 +14,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
     public class EvaluationRequestDescriptionViewModel : BitViewModelBase
     {
         private readonly IDateHelper _dateHelper;
+        private readonly IPageDialogService _dialogService;
         public EvaluationRequestDescriptionViewModel(
             IDateHelper dateHelper,
             ISanaapAppTranslateService translateService,
@@ -21,6 +22,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             IEvlRequestValidator evlRequestValidator)
         {
             _dateHelper = dateHelper;
+            _dialogService = dialogService;
 
             GoToNextLevel = new BitDelegateCommand(async () =>
               {
@@ -77,6 +79,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public void OnSelectedDateChanged()
         {
             _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
+
+            if (SelectedDate.Value.Date > DateTime.Now)
+            {
+                _dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.DateNotValid, ConstantStrings.Ok);
+                return;
+            }
 
             Year = year;
             Month = month;

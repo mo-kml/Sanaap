@@ -33,6 +33,7 @@
         public static string RequestDosentExist = "درخواست وارد شده وجود ندارد لطفا دوباره تلاش کنید";
         public static string ResponseNotFoundFromSupport = "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است";
         public static string NewsFilterNotValid = "لطفا ماه و سال را انتخاب نمایید";
+        public static string DateNotValid = "تاریخ وارد شده اشتباه است. لطفا دوباره تلاش کنید.";
     }
 
     public class EnumDisplayNames
