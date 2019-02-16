@@ -83,6 +83,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             if (SelectedDate.Value.Date > DateTime.Now)
             {
                 _dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.DateNotValid, ConstantStrings.Ok);
+
+                SelectedDate = null;
+
                 return;
             }
 
