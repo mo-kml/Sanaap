@@ -5,7 +5,6 @@ using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -39,8 +38,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 Request.Latitude = centerPosition.Latitude;
                 Request.Longitude = centerPosition.Longitude;
 
-                Geocoder geoCoder = new Geocoder();
-                Request.Address = (await geoCoder.GetAddressesForPositionAsync(centerPosition)).FirstOrDefault();
+                //Geocoder geoCoder = new Geocoder();
+                //Request.Address = (await geoCoder.GetAddressesForPositionAsync(centerPosition)).FirstOrDefault();
 
                 await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView), new NavigationParameters
                 {
