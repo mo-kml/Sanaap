@@ -78,16 +78,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public void OnSelectedDateChanged()
         {
-            _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
-
             if (SelectedDate.Value.Date > DateTime.Now)
             {
-                _dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.DateNotValid, ConstantStrings.Ok);
-
-                SelectedDate = null;
-
-                return;
+                SelectedDate = DateTime.Now;
             }
+
+            _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
 
             Year = year;
             Month = month;
