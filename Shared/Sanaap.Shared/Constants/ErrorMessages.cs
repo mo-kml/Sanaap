@@ -15,9 +15,10 @@
         public static string Yes = "بله";
         public static string No = "خیر";
         public static string Error = "خطا";
+        public static string UnknownError = "متاسفانه خطایی رخ داده است.";
         public static string NumberPlateIsNotValid = "لطفا شماره پلاک را درست وارد کنید";
-        public static string Loading = "در حال پردازش ...";
-        public static string Loading_Cancel = "";
+        public static string Loading = "لطفا منتظر بمانید...";
+        public static string Loading_Cancel = "انصراف";
         public static string SendingRequestAndPictures = "ارسال درخواست ...";
         public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما تعیین شد منتظر تماس کارشناس باشید";
         public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
@@ -34,6 +35,7 @@
         public static string ResponseNotFoundFromSupport = "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است";
         public static string NewsFilterNotValid = "لطفا ماه و سال را انتخاب نمایید";
         public static string DateNotValid = "تاریخ وارد شده اشتباه است. لطفا دوباره تلاش کنید.";
+        public static string GPSNotEnable = "امکان دریافت موقعیت وجود ندارد. لطفا GPS خود را روشن نمایید.";
     }
 
     public class EnumDisplayNames
