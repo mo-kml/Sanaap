@@ -22,7 +22,6 @@ using Sanaap.App.Helpers;
 using System.Threading.Tasks;
 using Xamarin;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace Sanaap.App.Droid
 {
@@ -62,8 +61,8 @@ namespace Sanaap.App.Droid
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));
 
 
-            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
-                .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+            //Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
+            //    .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)

@@ -1,12 +1,10 @@
 ﻿using Prism.Events;
 using Sanaap.App.Events;
 
-using Xamarin.Forms;
-
 namespace Sanaap.App.Views.EvaluationRequest
 {
 
-    public partial class EvaluationRequestListView : ContentPage
+    public partial class EvaluationRequestListView
     {
         public EvaluationRequestListView(IEventAggregator eventAggregator)
         {

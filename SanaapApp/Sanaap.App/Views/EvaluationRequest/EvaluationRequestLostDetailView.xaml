@@ -1,28 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              BackgroundColor="Gray"
-             HasKeyboardOffset="False"
-             CloseWhenBackgroundIsClicked="False"
-             HasSystemPadding="False" Padding="30,120"
+             NavigationPage.HasNavigationBar="False"
              FlowDirection="RightToLeft"
+             Padding="30,80"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
-    <popup:PopupPage.Animation>
-        <animations:ScaleAnimation 
-      PositionIn="Center"
-      PositionOut="Center"
-      ScaleIn="1.2"
-      ScaleOut="0.8"
-      DurationIn="400"
-      DurationOut="300"
-      EasingIn="SinOut"
-      EasingOut="SinIn"
-      HasBackgroundAnimation="True"/>
-    </popup:PopupPage.Animation>
-    <popup:PopupPage.Resources>
+    <ContentPage.Resources>
         <Style TargetType="Entry">
             <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
         </Style>
@@ -48,8 +33,8 @@
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
         </Style>
-    </popup:PopupPage.Resources>
-    <popup:PopupPage.Content>
+    </ContentPage.Resources>
+    <ContentPage.Content>
         <Frame CornerRadius="15" Padding="0">
             <AbsoluteLayout IsClippedToBounds="True">
                 <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
@@ -146,5 +131,5 @@
 
             </AbsoluteLayout>
         </Frame>
-    </popup:PopupPage.Content>
-</popup:PopupPage>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             HasSystemPadding="False" Padding="30,70" BackgroundColor="Gray"
-                 HasKeyboardOffset="False"
-                 CloseWhenBackgroundIsClicked="False"
+             Padding="30,70" BackgroundColor="Gray"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             NavigationPage.HasNavigationBar="False"
              xmlns:props="clr-namespace:Sanaap.App.Props"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
-                 FlowDirection="RightToLeft"
+             FlowDirection="RightToLeft"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMapView">
 
-    <popup:PopupPage.Resources>
+    <ContentPage.Resources>
 
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="FontSize" Value="10"/>
@@ -36,8 +34,8 @@
             <Setter Property="CornerRadius" Value="18"/>
         </Style>
 
-    </popup:PopupPage.Resources>
-    <popup:PopupPage.Content>
+    </ContentPage.Resources>
+    <ContentPage.Content>
         <Frame CornerRadius="15" Padding="0">
             <AbsoluteLayout IsClippedToBounds="True">
                 <Frame Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,0.88" CornerRadius="15" AbsoluteLayout.LayoutFlags="All" HasShadow="False">
@@ -109,5 +107,5 @@
 
             </AbsoluteLayout>
         </Frame>
-    </popup:PopupPage.Content>
-</popup:PopupPage>
+    </ContentPage.Content>
+</ContentPage>

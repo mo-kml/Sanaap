@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="AiForms.Layouts" Version="1.1.0" />
-    <PackageReference Include="Bit.CSharpClient.OData" Version="1.8.0" />
+    <PackageReference Include="Bit.CSharpClient.OData" Version="1.8.1" />
     <PackageReference Include="BitCodeAnalyzer" Version="1.8.0" />
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Fody" Version="4.0.0">
@@ -36,6 +36,7 @@
     <PackageReference Include="NodaTime" Version="2.4.4" />
     <PackageReference Include="Pluralize.NET" Version="0.1.84" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.193" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="16.3.0.36" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.36" />
     <PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="16.3.0.36" />

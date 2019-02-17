@@ -107,12 +107,9 @@
                 <Setter Property="BackgroundColor" Value="#CC000000"/>
             </Style>
 
-            <ControlTemplate x:Key="sampleTemplate">
-                <StackLayout>
-                    <Label Text="fadfdsffads" BackgroundColor="Red"/>
-                    <ContentPresenter />
-                </StackLayout>
-            </ControlTemplate>
+            <Style TargetType="ContentPage">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+            </Style>
 
             <ControlTemplate x:Key="masterTemplate">
 

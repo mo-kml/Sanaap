@@ -2,7 +2,7 @@
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
-    public partial class EvaluationRequestLostDetailView : PopupPage
+    public partial class EvaluationRequestLostDetailView
     {
         public EvaluationRequestLostDetailView()
         {
