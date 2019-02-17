@@ -80,7 +80,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             if (SelectedDate.Value.Date > DateTime.Now)
             {
-                SelectedDate = DateTime.Now;
+                SelectedDate = DateTime.Now.Date;
             }
 
             _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
