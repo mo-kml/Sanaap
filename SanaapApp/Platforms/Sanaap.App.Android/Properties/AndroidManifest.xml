@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ir.ipinsur.Sanaap" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="28" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<application android:label="Sanaap" android:supportsRtl="true" android:theme="@style/MainTheme" android:usesCleartextTraffic="true">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC_cLyrwnJ1VYT5dJDOpFxKTEoYx1Y4SPA" />
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">

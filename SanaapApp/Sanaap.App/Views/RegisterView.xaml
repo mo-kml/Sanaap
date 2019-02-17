@@ -9,77 +9,63 @@
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"
              x:Class="Sanaap.App.Views.RegisterView" Title="">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <Style TargetType="local:IconButton">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="FontSize" Value="30"/>
-        <Setter Property="BorderColor" Value="Black"/>
-        <Setter Property="BorderWidth" Value="1"/>
-        <Setter Property="WidthRequest" Value="60"/>
-        <Setter Property="CornerRadius" Value="100"/>
-        <Setter Property="HeightRequest" Value="60"/>
-      </Style>
-      <Style TargetType="Label" x:Key="ProgressLabel">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="FontSize" Value="10"/>
-      </Style>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="local:IconButton">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="100"/>
+                <Setter Property="HeightRequest" Value="60"/>
+            </Style>
+            <Style TargetType="Label" x:Key="ProgressLabel">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
 
-      <Style TargetType="controls:SanaapEntry">
-        <Setter Property="BackgroundColor" Value="White"/>
-      </Style>
+            <Style TargetType="controls:SanaapEntry">
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
 
-      <Style TargetType="local:IconButton" x:Key="ProgressIconButton">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="FontSize" Value="10"/>
-      </Style>
+            <Style TargetType="local:IconButton" x:Key="ProgressIconButton">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
 
-      <converters:SendCodeAgainButtonConverter x:Key="sendCodeAgainConverter"/>
-    </ResourceDictionary>
-  </ContentPage.Resources>
-  <ScrollView>
-    <StackLayout Padding="15" VerticalOptions="Center">
+            <converters:SendCodeAgainButtonConverter x:Key="sendCodeAgainConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout Padding="15" VerticalOptions="Center">
 
-      <StackLayout VerticalOptions="StartAndExpand">
-        <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image FileName=logoIcon.png}" Aspect="AspectFit"  />
-      </StackLayout>
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Image HeightRequest="100" WidthRequest="120" Source="{extentions:Image FileName=logoIcon.png}" Aspect="AspectFit"  />
+            </StackLayout>
 
-      <StackLayout Spacing="15" Padding="30" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
-        <controls:SanaapEntry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
-        <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
-        <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="شماره ملی" Text="{Binding Customer.NationalCode}" />
-        <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره همراه" Text="{Binding Customer.Mobile}" />
+            <StackLayout Spacing="15" Padding="30" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsEnterDataVisible}">
+                <controls:SanaapEntry MaxLength="20" Placeholder="نام" Text="{Binding Customer.FirstName}" />
+                <controls:SanaapEntry MaxLength="40" Placeholder="نام خانوادگی" Text="{Binding Customer.LastName}" />
+                <controls:SanaapEntry MaxLength="10" Keyboard="Numeric" Placeholder="شماره ملی" Text="{Binding Customer.NationalCode}" />
+                <controls:SanaapEntry MaxLength="11" Keyboard="Numeric" Placeholder="شماره همراه" Text="{Binding Customer.Mobile}" />
 
+                <Button TextColor="White" BorderRadius="5" Margin="0,30,0,0" Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}"/>
+            </StackLayout>
 
-                <!--<local:SanaapFrame ShadowOffset="20" Margin="0,30,0,0" CornerRadius="5" BackgroundColor="{StaticResource primaryBlue}">
+            <StackLayout Spacing="20" Padding="30" VerticalOptions="End" IsVisible="{Binding IsVerifySectionVisible}">
+                <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="کد پیامک شده" Text="{Binding VerificationCode}" />
+                <Button Text="تایید" Command="{Binding VerifyCode}" CornerRadius="5" TextColor="White" BackgroundColor="{StaticResource buttonBlue}"/>
+                <Button Command="{Binding SendVerificationCodeAgain}" Text="ارسال مجدد کد" BackgroundColor="Transparent">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding TimerValue,Converter={StaticResource sendCodeAgainConverter}}" Value="False">
+                            <Setter Property="Text" Value="{Binding TimerValue,StringFormat='ارسال مجدد کد در {0} ثانیه'}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
 
-                    <local:SanaapFrame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Register}"/>
-                    </local:SanaapFrame.GestureRecognizers>
-                    
-                    <Label TextColor="White" Text="ثبت نام" HorizontalOptions="Center"/>
-                </local:SanaapFrame>-->
-          
-        <Button TextColor="White" BorderRadius="5" Margin="0,30,0,0" Text="ثبت نام" Command="{Binding Register}" BackgroundColor="{StaticResource primaryBlue}"/>
-      </StackLayout>
-
-      <StackLayout Spacing="20" Padding="30" VerticalOptions="End" IsVisible="{Binding IsVerifySectionVisible}">
-        <controls:SanaapEntry Keyboard="Numeric" MaxLength="5" Placeholder="کد پیامک شده" Text="{Binding VerificationCode}" />
-        <Button Text="تایید" Command="{Binding VerifyCode}" CornerRadius="5" TextColor="White" BackgroundColor="{StaticResource buttonBlue}"/>
-        <Button Command="{Binding SendVerificationCodeAgain}" BackgroundColor="Transparent" >
-          <Button.Triggers>
-            <DataTrigger TargetType="Button" Binding="{Binding TimerValue,Converter={StaticResource sendCodeAgainConverter}}" Value="True">
-              <Setter Property="Text" Value="ارسال مجدد کد"/>
-              <Setter Property="TextColor" Value="{StaticResource blueText}"/>
-            </DataTrigger>
-            <DataTrigger TargetType="Button" Binding="{Binding TimerValue,Converter={StaticResource sendCodeAgainConverter}}" Value="False">
-              <Setter Property="Text" Value="{Binding TimerValue,StringFormat='ارسال مجدد کد در {0} ثانیه'}"/>
-            </DataTrigger>
-          </Button.Triggers>
-        </Button>
-      </StackLayout>
-
-    </StackLayout>
-  </ScrollView>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
