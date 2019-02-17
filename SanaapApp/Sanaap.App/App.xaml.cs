@@ -139,6 +139,7 @@ namespace Sanaap.App
 
 
             containerRegistry.Register<ICustomerValidator, DefaultCustomerValidator>();
+            containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<ICommentValidator, DefaultCommentValidator>();
             containerRegistry.Register<IInsuranceValidator, DefaultInsuranceValidator>();
             containerRegistry.Register<IEvlRequestValidator, DefaultEvlRequestValidator>();
