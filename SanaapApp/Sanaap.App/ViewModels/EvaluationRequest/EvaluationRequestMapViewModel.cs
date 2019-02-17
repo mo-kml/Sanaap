@@ -1,9 +1,11 @@
 ﻿using Acr.UserDialogs;
 using Bit.ViewModel;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -24,9 +26,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         private CancellationTokenSource registerCancellationTokenSource;
 
         private readonly IUserDialogs _userDialogs;
-        public EvaluationRequestMapViewModel(IUserDialogs userDialogs)
+        private readonly IPageDialogService _dialogService;
+        public EvaluationRequestMapViewModel(IUserDialogs userDialogs, IPageDialogService dialogService)
         {
             _userDialogs = userDialogs;
+            _dialogService = dialogService;
 
             UpdateLocation = new BitDelegateCommand<Xamarin.Forms.GoogleMaps.Map>(async (map) =>
             {
@@ -35,8 +39,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 Request.Latitude = centerPosition.Latitude;
                 Request.Longitude = centerPosition.Longitude;
 
-                //Geocoder geocoder = new Geocoder();
-                //Request.Address = (await geocoder.GetAddressesForPositionAsync(centerPosition)).FirstOrDefault();
+                Geocoder geoCoder = new Geocoder();
+                Request.Address = (await geoCoder.GetAddressesForPositionAsync(centerPosition)).FirstOrDefault();
 
                 await NavigationService.NavigateAsync(nameof(EvaluationRequestFilesView), new NavigationParameters
                 {
@@ -60,7 +64,16 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 if (Request.Latitude == 0)
                 {
-                    CurrentPosition = await Geolocation.GetLocationAsync();
+                    try
+                    {
+                        CurrentPosition = await Geolocation.GetLocationAsync();
+                    }
+                    catch (FeatureNotEnabledException ex)
+                    {
+                        await _dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.GPSNotEnable, ConstantStrings.Ok);
+
+                        await NavigationService.GoBackAsync();
+                    }
                 }
                 else
                 {
