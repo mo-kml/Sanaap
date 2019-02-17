@@ -16,5 +16,10 @@ namespace Sanaap.App.Views
             //popupLayout.Show();
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return base.OnBackButtonPressed();
+        }
+
     }
 }

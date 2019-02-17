@@ -1,22 +1,36 @@
-﻿using Bit.ViewModel;
+﻿using Acr.UserDialogs;
+using Bit.ViewModel;
 using PropertyChanged;
 using Sanaap.App.Helpers.Contracts;
+using Sanaap.Constants;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
     public class SampleViewModel : BitViewModelBase
     {
+        private CancellationTokenSource registerCancellationTokenSource;
+
+
         private readonly IDateHelper _dateHelper;
-        public SampleViewModel(IDateHelper dateHelper)
+        public SampleViewModel(IDateHelper dateHelper, IUserDialogs userDialogs)
         {
             _dateHelper = dateHelper;
+            registerCancellationTokenSource?.Cancel();
+            registerCancellationTokenSource = new CancellationTokenSource();
 
             Select = new BitDelegateCommand(async () =>
               {
+                  using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
+                  {
+
+                      await Task.Delay(10000);
+                  }
               });
             //Contents = new ObservableCollection<Test>(
             //    new List<Test>

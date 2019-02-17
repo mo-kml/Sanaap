@@ -13,6 +13,8 @@
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
              x:Name="evlMenuView"
+             Title="سناپ"
+             ControlTemplate="{StaticResource masterTemplate}"
              BackgroundColor="{StaticResource grayBackround}">
 
     <ContentPage.Resources>

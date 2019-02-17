@@ -171,7 +171,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public CancellationTokenSource requestCancellationTokenSource { get; set; }
 
-        public LicensePlateItemSource License { get; set; }
+        public LicensePlateItemSource License { get; set; } = new LicensePlateItemSource();
 
     }
 

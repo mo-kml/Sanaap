@@ -17,7 +17,7 @@
 
                 <StackLayout Padding="15" Spacing="20">
 
-                    <Label Text="1565656" FontFamily="{StaticResource Shabnam-Bold-FDFont}" Style="{StaticResource headerText}"/>
+                    <Label Text="{Binding Comment.Code}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" Style="{StaticResource headerText}"/>
 
                     <StackLayout>
                         <Label Text="پیام شما" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
