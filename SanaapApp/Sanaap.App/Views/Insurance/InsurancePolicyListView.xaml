@@ -6,9 +6,10 @@
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              Title="بیمه ها"
              ControlTemplate="{StaticResource masterTemplate}"
-          xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
@@ -16,63 +17,66 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout FlowDirection="RightToLeft">
-            <ListView HasUnevenRows="True"
+        <!--the only reason to use navigationDrawer was the master template is somehow just working correctly by drawer and i dont have time to find this out-->
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <StackLayout FlowDirection="RightToLeft">
+                    <ListView HasUnevenRows="True"
                       ItemsSource="{Binding Policies}">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                        <ListView.Behaviors>
+                            <b:EventToCommandBehavior EventName="ItemTapped" 
                                               EventArgsParameterPath="Item" 
                                               Command="{Binding ShowPolicy}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-                                <StackLayout Padding="20">
-                                    <ffimageloading:CachedImage DownsampleToViewSize="True" Source="{Binding Image}" Aspect="AspectFit"/>
-                                </StackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Padding="20">
+                                            <ffimageloading:CachedImage DownsampleToViewSize="True" Source="{Binding Image}" Aspect="AspectFit"/>
+                                        </StackLayout>
 
-                                <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">
-                                    <Label Text="{Binding CarName}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
-                                    <Label Text="{Binding ColorName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
-                                    <Label Text="{Binding InsuranceTypeName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
-                                </StackLayout>
+                                        <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">
+                                            <Label Text="{Binding CarName}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                                            <Label Text="{Binding ColorName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                            <Label Text="{Binding InsuranceTypeName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                        </StackLayout>
 
 
-                                <StackLayout WidthRequest="130" Grid.Column="2" VerticalOptions="Center" Padding="10"  HorizontalOptions="Start" Orientation="Horizontal" Spacing="-1">
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
-                                    <AbsoluteLayout VerticalOptions="Start">
-                                        <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                    </AbsoluteLayout>
-                                </StackLayout>
+                                        <StackLayout WidthRequest="130" Grid.Column="2" VerticalOptions="Center" Padding="10"  HorizontalOptions="Start" Orientation="Horizontal" Spacing="-1">
+                                            <AbsoluteLayout VerticalOptions="Start">
+                                                <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                            </AbsoluteLayout>
+                                            <AbsoluteLayout VerticalOptions="Start">
+                                                <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                            </AbsoluteLayout>
+                                        </StackLayout>
 
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-            <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CreatePolicy}"/>
-                </Frame.GestureRecognizers>
-                <StackLayout Orientation="Horizontal">
-                    <controls:IconLabel Text="&#xf067;" Type="Solid" TextColor="{StaticResource actionBlueButton}" VerticalOptions="Center"/>
-                    <Label Text="افزودن بیمه نامه" TextColor="{StaticResource buttonTextWhite}"/>
+                    <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CreatePolicy}"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <controls:IconLabel Text="&#xf067;" Type="Solid" TextColor="{StaticResource actionBlueButton}" VerticalOptions="Center"/>
+                            <Label Text="افزودن بیمه نامه" TextColor="{StaticResource buttonTextWhite}"/>
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-            </Frame>
-
-
-        </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+        </navigationdrawer:SfNavigationDrawer>
     </ContentPage.Content>
 </ContentPage>
