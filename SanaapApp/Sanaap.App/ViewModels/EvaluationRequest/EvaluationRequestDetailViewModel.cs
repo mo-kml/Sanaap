@@ -101,9 +101,6 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             if (parameters.GetNavigationMode() == NavigationMode.New)
             {
-
-
-
                 requestCancellationTokenSource?.Cancel();
                 requestCancellationTokenSource = new CancellationTokenSource();
 

@@ -86,15 +86,14 @@
                                     <l:RepeatableWrapLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Margin="0" CornerRadius="0" HasShadow="False" WidthRequest="80" HeightRequest="80" Padding="0" BorderColor="{StaticResource primaryGray}">
-
                                                 <Frame.Triggers>
                                                     <DataTrigger TargetType="Frame"
                                                                  Binding="{Binding IsRequired}"
-                                                                 Value="true">
-                                                        <Setter Property="BorderColor" Value="#e74c3c"/>
+                                                                 Value="True">
+                                                        <Setter Property="BorderColor" Value="{StaticResource primaryRed}"/>
                                                     </DataTrigger>
                                                 </Frame.Triggers>
-                                                
+
                                                 <StackLayout Padding="0" Margin="0">
                                                     <StackLayout Spacing="0" Padding="10">
                                                         <StackLayout.Triggers>

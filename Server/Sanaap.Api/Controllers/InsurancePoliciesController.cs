@@ -3,6 +3,7 @@ using Bit.Data.Contracts;
 using Bit.Model.Contracts;
 using Bit.OData.ODataControllers;
 using Sanaap.Dto;
+using Sanaap.Enums;
 using Sanaap.Model;
 using System;
 using System.Linq;
@@ -45,6 +46,16 @@ namespace Sanaap.Api.Controllers
             return Mapper.FromEntityQueryToDtoQuery((await Repository
                 .GetAllAsync(cancellationToken))
                 .Where(insurance => insurance.CustomerId == customerId));
+        }
+
+        [Function]
+        public virtual async Task<IQueryable<InsurancePolicyDto>> LoadInsurancesByType(InsuranceType insuranceType, CancellationToken cancellationToken)
+        {
+            Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+
+            return Mapper.FromEntityQueryToDtoQuery((await Repository
+                .GetAllAsync(cancellationToken))
+                .Where(insurance => insurance.CustomerId == customerId && insurance.InsuranceType == insuranceType));
         }
     }
 }

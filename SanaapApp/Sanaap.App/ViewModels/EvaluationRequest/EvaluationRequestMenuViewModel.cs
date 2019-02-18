@@ -2,6 +2,7 @@
 using Bit.ViewModel;
 using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using Sanaap.App.Events;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
@@ -21,7 +22,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         private IPolicyService _policyService;
         private EvlRequestItemSource _request;
         private IUserDialogs _userDialogs;
-        public EvaluationRequestMenuViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, IInitialDataService initialDataService)
+        public EvaluationRequestMenuViewModel(IEventAggregator eventAggregator, IPolicyService policyService, IUserDialogs userDialogs, IInitialDataService initialDataService, IPageDialogService dialogService)
         {
             _policyService = policyService;
             _userDialogs = userDialogs;
@@ -62,7 +63,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                     _request.OwnerLastName = customer.LastName;
 
                     await NavigationService.NavigateAsync(nameof(EvaluationRequestDetailView), new NavigationParameters {
-                        {"Request",_request }
+                        {"Request",_request },
                 });
                 }
             });
@@ -83,7 +84,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
                 {
-                    await loadInsurances();
+                    await loadInsurances(_request.InsuranceType);
                 }
             }
         }
@@ -100,9 +101,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public CancellationTokenSource insuranceCancellationTokenSource { get; set; }
 
-        public async Task loadInsurances()
+        public async Task loadInsurances(InsuranceType insuranceType)
         {
-            Insurances = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurances());
+            Insurances = new ObservableCollection<PolicyItemSource>(await _policyService.LoadAllInsurancesByType(insuranceType));
         }
         #endregion
     }

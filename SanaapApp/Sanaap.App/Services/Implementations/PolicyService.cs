@@ -2,6 +2,7 @@
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Dto;
+using Sanaap.Enums;
 using Simple.OData.Client;
 using System;
 using System.Collections.Generic;
@@ -27,16 +28,33 @@ namespace Sanaap.App.Services.Implementations
 
         public async Task<List<PolicyItemSource>> LoadAllInsurances()
         {
-            List<ExternalEntityDto> cars = new List<ExternalEntityDto>();
-            List<ExternalEntityDto> colors = new List<ExternalEntityDto>();
-            List<InsurersItemSource> insureres = new List<InsurersItemSource>();
-            List<PolicyItemSource> policyItemSource = new List<PolicyItemSource>();
-            Guid customerId = (await _initialDataService.GetCurrentUserInfo()).Id;
-
             IEnumerable<InsurancePolicyDto> insurances = (await _oDataClient.For<InsurancePolicyDto>(controllerName)
                 .Function("LoadInsurances")
                 .OrderBy(it => it.CreatedOn)
                 .FindEntriesAsync());
+
+            return await ConvertPolicyToItemSource(insurances);
+        }
+
+        public async Task<List<PolicyItemSource>> LoadAllInsurancesByType(InsuranceType insuranceType)
+        {
+            IEnumerable<InsurancePolicyDto> insurances = (await _oDataClient.For<InsurancePolicyDto>(controllerName)
+                .Function("LoadInsurancesByType")
+                .Set(new { insuranceType })
+                .OrderBy(it => it.CreatedOn)
+                .FindEntriesAsync());
+
+            return await ConvertPolicyToItemSource(insurances);
+        }
+
+        public async Task<List<PolicyItemSource>> ConvertPolicyToItemSource(IEnumerable<InsurancePolicyDto> insurances)
+        {
+            List<ExternalEntityDto> cars = new List<ExternalEntityDto>();
+            List<ExternalEntityDto> colors = new List<ExternalEntityDto>();
+            List<InsurersItemSource> insureres = new List<InsurersItemSource>();
+            List<PolicyItemSource> policyItemSource = new List<PolicyItemSource>();
+
+            Guid customerId = (await _initialDataService.GetCurrentUserInfo()).Id;
 
             cars = (await _initialDataService.GetCars()).ToList();
 
@@ -69,5 +87,6 @@ namespace Sanaap.App.Services.Implementations
 
             return policyItemSource;
         }
+
     }
 }
