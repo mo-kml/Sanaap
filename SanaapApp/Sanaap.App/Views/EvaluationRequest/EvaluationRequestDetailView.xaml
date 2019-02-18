@@ -10,7 +10,7 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     x:Name="requestDetailView"
-    Padding="30,70">
+    Padding="30,50">
     <ContentPage.Resources>
 
         <Style TargetType="Label" x:Key="TitleLabel">

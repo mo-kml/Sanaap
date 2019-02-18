@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.App;
 using Bit;
@@ -19,13 +20,14 @@ using Prism.Ioc;
 using Sanaap.App.Contracts;
 using Sanaap.App.Droid.Helpers;
 using Sanaap.App.Helpers;
+using System;
 using System.Threading.Tasks;
 using Xamarin;
 using Xamarin.Forms;
 
 namespace Sanaap.App.Droid
 {
-    [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
+    [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", WindowSoftInputMode = Android.Views.SoftInput.StateHidden | Android.Views.SoftInput.AdjustResize | Android.Views.SoftInput.AdjustNothing, ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
     public class MainActivity : BitFormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -60,10 +62,35 @@ namespace Sanaap.App.Droid
 
             LoadApplication(new App(new SanaapAppDroidInitializer(this)));
 
-
             //Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>()
             //    .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+
+            Android.Views.View root = FindViewById(Android.Resource.Id.Content);
+            Rect r = new Rect();
+            {
+                root.GetWindowVisibleDisplayFrame(r);
+            }
+
+            root.ViewTreeObserver.GlobalLayout += (object sender, EventArgs e) =>
+            {
+                Rect r2 = new Rect();
+                root.GetWindowVisibleDisplayFrame(r2);
+                int keyboardHeight = r.Height() - r2.Height();
+                root.ScrollTo(0, 20);
+
+                if (keyboardHeight > 100)
+                {
+                    root.ScrollTo(0, 300);
+                }
+                else
+                {
+                    root.ScrollTo(0, 0);
+                }
+            };
+
         }
+
+
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {

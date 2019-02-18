@@ -87,5 +87,17 @@ namespace Sanaap.Api.Controllers
 
             return SingleResult.Create(DtoEntityMapper.FromEntityQueryToDtoQuery((await CustomersRepository.GetAllAsync(cancellationToken)).Where(c => c.Id == customerId)));
         }
+
+        [Action]
+        public virtual async Task<CustomerDto> ActiveCustomer(CancellationToken cancellationToken)
+        {
+            Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
+
+            Customer customer = await (await CustomersRepository.GetAllAsync(cancellationToken)).FirstOrDefaultAsync(c => c.Id == customerId);
+
+            customer.IsActive = true;
+
+            return DtoEntityMapper.FromEntityToDto(await CustomersRepository.UpdateAsync(customer, cancellationToken));
+        }
     }
 }

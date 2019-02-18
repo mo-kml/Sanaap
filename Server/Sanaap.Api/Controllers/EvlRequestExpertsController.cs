@@ -62,7 +62,7 @@ namespace Sanaap.Api.Controllers
             soltaniFindExpertParams.AccidentDate = defaultDateTimeUtils.ConvertMiladiToShamsi(evlRequest.AccidentDate);
             soltaniFindExpertParams.MapLat = evlRequest.Latitude;
             soltaniFindExpertParams.MapLng = evlRequest.Longitude;
-            soltaniFindExpertParams.Address = evlRequest.Address;
+            soltaniFindExpertParams.Address = "آدرس تستی";
 
             if (evlRequest.InsuranceType == Enums.InsuranceType.Badane)
             {

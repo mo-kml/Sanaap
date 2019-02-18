@@ -38,9 +38,17 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
-            EvlRequestExpertDto expertDto = await _evlRequestService.FindEvlRequestExpert(Request.Id);
+            EvlRequestExpertDto expertDto = null;
 
-            if (expertDto.Expert == null)
+            try
+            {
+                expertDto = await _evlRequestService.FindEvlRequestExpert(Request.Id);
+            }
+            catch (System.Exception)
+            {
+            }
+
+            if (expertDto?.Expert == null)
             {
                 await _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.FindNearExpertError, ConstantStrings.Ok);
 

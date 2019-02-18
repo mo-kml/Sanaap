@@ -26,7 +26,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             GoToNextLevel = new BitDelegateCommand(async () =>
               {
-                  Request.AccidentDate = new DateTimeOffset((DateTime)SelectedDate, TimeSpan.Zero);
+                  Request.AccidentDate = new DateTimeOffset((DateTime)SelectedDate, DateTimeOffset.Now.Offset);
 
                   if (!evlRequestValidator.IsDescriptionValid(Request, out string message))
                   {

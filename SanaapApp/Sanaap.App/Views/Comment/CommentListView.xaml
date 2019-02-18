@@ -39,14 +39,14 @@
                     </StackLayout>
                 </navigationdrawer:SfNavigationDrawer.DrawerContentView>
             </navigationdrawer:SfNavigationDrawer>-->
-            <navigationdrawer:SfNavigationDrawer DrawerHeight="460" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="400" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
                 <navigationdrawer:SfNavigationDrawer.ContentView>
                     <AbsoluteLayout FlowDirection="RightToLeft">
                         <ListView HasUnevenRows="True" ItemsSource="{Binding Comments}" AbsoluteLayout.LayoutBounds="0,0,1,0.875" AbsoluteLayout.LayoutFlags="All">
                             <ListView.Behaviors>
-                                <b:EventToCommandBehavior EventName="ItemTapped" 
-                                              EventArgsParameterPath="Item" 
-                                              Command="{Binding ShowComment}" />
+                                <b:EventToCommandBehavior EventName="ItemTapped"
+                              EventArgsParameterPath="Item"
+                              Command="{Binding ShowComment}" />
                             </ListView.Behaviors>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -81,8 +81,8 @@
                                                     <Label Text="{Binding StatusTypeName}"  TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontAttributes="Bold" >
                                                         <Label.Triggers>
                                                             <DataTrigger TargetType="Label"
-                                                         Binding="{Binding StatusTypeName}"
-                                                         Value="پاسخ داده شده">
+                           Binding="{Binding StatusTypeName}"
+                           Value="پاسخ داده شده">
                                                                 <Setter Property="TextColor" Value="{StaticResource primaryBlue}"/>
                                                                 <Setter Property="FontFamily" Value="{StaticResource Shabnam-Bold-FDFont}"/>
                                                             </DataTrigger>
@@ -116,31 +116,33 @@
                     </AbsoluteLayout>
                 </navigationdrawer:SfNavigationDrawer.ContentView>
                 <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-                    <AbsoluteLayout>
-                        <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{StaticResource primaryBackground}">
-                            <StackLayout Spacing="0" Margin="0,0,15,10">
-                                <Label Text="ثبت پیام یا شکایت جدید" Style="{StaticResource headerText}"/>
+                    <ScrollView>
+                        <AbsoluteLayout>
+                            <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{StaticResource primaryBackground}">
+                                <StackLayout Spacing="0" Margin="0,0,15,10">
+                                    <Label Text="ثبت پیام یا شکایت جدید" Style="{StaticResource headerText}"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand" Text="{Binding Comment.LastName}" Padding="7,0,0,5" Placeholder="نام خانوادگی"/>
+
+                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="7,0,0,5"/>
+                                </StackLayout>
+                                <controls:SanaapEntry Keyboard="Numeric" MaxLength="11"  Text="{Binding Comment.Mobile}" Padding="7,0,0,5" Placeholder="شماره تماس"/>
+
+                                <controls:SanaapEditor Text="{Binding Comment.Description}" Placeholder="متن " HeightRequest="100" Padding="7,0,0,5" />
+
+                                <controls:SanaapComboBox HeightRequest="40" Placeholder="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
+
+
                             </StackLayout>
-
-                            <StackLayout Orientation="Horizontal">
-                                <controls:SanaapEntry HorizontalOptions="FillAndExpand" Text="{Binding Comment.LastName}" Padding="7,0,0,5" Placeholder="نام خانوادگی"/>
-
-                                <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Comment.FirstName}" Placeholder="نام" Padding="7,0,0,5"/>
-                            </StackLayout>
-                            <controls:SanaapEntry Keyboard="Numeric" MaxLength="11"  Text="{Binding Comment.Mobile}" Padding="7,0,0,5" Placeholder="شماره تماس"/>
-
-                            <controls:SanaapEditor Text="{Binding Comment.Description}" Placeholder="متن " HeightRequest="150" Padding="7,0,0,5" />
-
-                            <controls:SanaapComboBox HeightRequest="40" Placeholder="نوع پیام" DataSource="{Binding CommentTypes}" SelectedItem="{Binding SelectedCommentType}" Margin="0,0,7,5" IsEditableMode="False" />
-
-
-                        </StackLayout>
-                        <Label AbsoluteLayout.LayoutBounds="1,1.01,1,0.15" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding CreateComment}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </AbsoluteLayout>
+                            <Label AbsoluteLayout.LayoutBounds="1,1.01,1,0.15" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CreateComment}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </AbsoluteLayout>
+                    </ScrollView>
                 </navigationdrawer:SfNavigationDrawer.DrawerContentView>
             </navigationdrawer:SfNavigationDrawer>
         </StackLayout>
