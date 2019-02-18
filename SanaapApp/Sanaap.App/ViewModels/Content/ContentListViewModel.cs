@@ -39,11 +39,18 @@ namespace Sanaap.App.ViewModels.Content
 
             FilterContent = new BitDelegateCommand(async () =>
               {
+                  FilterDto.Month = SelectedMonth?.Number;
+                  FilterDto.Year = SelectedYear?.Number;
+
                   if (FilterDto.Month != null || FilterDto.Year != null)
                   {
                       if (FilterDto.Month == null || FilterDto.Year == null)
                       {
                           await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NewsFilterNotValid, ConstantStrings.Ok);
+
+                          SelectedYear = null;
+                          SelectedMonth = null;
+
                           return;
                       }
                   }
@@ -56,6 +63,8 @@ namespace Sanaap.App.ViewModels.Content
                   eventAggregator.GetEvent<OpenNewsFilterPopupEvent>().Publish(new OpenNewsFilterPopupEvent());
 
                   FilterDto = new FilterNewsDto();
+                  SelectedYear = null;
+                  SelectedMonth = null;
               });
 
             OpenFilterPopup = new BitDelegateCommand(async () =>
@@ -71,6 +80,7 @@ namespace Sanaap.App.ViewModels.Content
         public MonthItemSource SelectedMonth { get; set; }
 
         public YearItemSource[] Years { get; set; }
+
         public YearItemSource SelectedYear { get; set; }
 
         public FilterNewsDto FilterDto { get; set; } = new FilterNewsDto();
