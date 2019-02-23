@@ -2,6 +2,7 @@
 using Autofac;
 using Bit;
 using Bit.Model.Events;
+using Bit.ViewModel;
 using Bit.ViewModel.Contracts;
 using Bit.ViewModel.Implementations;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,7 @@ namespace Sanaap.App
 {
     public partial class App : BitApplication
     {
+        private IEventAggregator _eventAggregator;
         public App()
             : this(null)
         {
@@ -51,6 +53,13 @@ namespace Sanaap.App
             : base(initializer)
         {
             InitializeComponent();
+
+            OpenMenu = new BitDelegateCommand<IconButton>(async (button) =>
+            {
+                AbsoluteLayout menu = ((AbsoluteLayout)button.BindingContext);
+
+                ToggleMenu(menu);
+            });
         }
 
         protected override async Task OnInitializedAsync()
@@ -61,22 +70,23 @@ namespace Sanaap.App
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDM0QDMxMzYyZTMzMmUzMENvVC95ZVRKQUVLdjJMMjJ6MGNXOFBkanNnR3hIVkpDTnJIVkh6b3VQWXc9;NDM1QDMxMzYyZTMzMmUzMFdaTUFWU21TK3hZV3MzUUNxWWZJTWtPRmkxZGllakNndE5ZSDIxRUhEWHM9;NDM2QDMxMzYyZTMzMmUzMGZLMmJzTFhoQWJRS081Mk56VTFISlQxOThMVzZiS3J2WTdsR0sveU1CcG89;NDM3QDMxMzYyZTMzMmUzMEhpS2gza1NzNlhrMWtjS0tZanRpWG10NzEwcjYwb1hqUnNoOEZqWmZCa2M9;NDM4QDMxMzYyZTMzMmUzMFhpUUtnY1NXMFN5b1o4Nmd3cVpTUXA1NzdGZTQ1bmM5bElQL0NLY1Q1b0U9;NDM5QDMxMzYyZTMzMmUzMEJFcUduNHd3aG9tQUNLdnhEWUpycW5abUtpWmhJZVlkMFk3QkZKZjJVUXc9;NDQwQDMxMzYyZTMzMmUzMFNHM2Z2RmphRGZWTUtGRThDTWFaNmNlU0p6aFpRaC9OQmhUWkxNQ1RRZFE9;NDQxQDMxMzYyZTMzMmUzMFZ6WFUwWm81ZDMvTG8weDVybFBUQ1U0S1J5M2tHekxqaVdUTnVFTWJoVjg9;NDQyQDMxMzYyZTMzMmUzMERlVlkvRjZ2WnlkcmFuTm5SQUdPQ2tVVHNYY1Jla0UyeVVSZFdIaGRaVlk9;");
 
-            bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
+            //bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            if (isLoggedIn)
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            }
-            else
-            {
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            }
+            //if (isLoggedIn)
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            //}
+            //else
+            //{
+            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            //}
 
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(CommentListView)}");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestMenuView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
 
+            _eventAggregator = eventAggregator;
 
             eventAggregator.GetEvent<TokenExpiredEvent>()
                 .SubscribeAsync(async tokenExpiredEvent =>
@@ -194,5 +204,7 @@ namespace Sanaap.App
 
             ToggleMenu(menu);
         }
+
+        public BitDelegateCommand<IconButton> OpenMenu { get; set; }
     }
 }

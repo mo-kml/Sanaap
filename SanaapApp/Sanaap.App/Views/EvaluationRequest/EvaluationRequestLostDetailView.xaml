@@ -7,129 +7,129 @@
              FlowDirection="RightToLeft"
              Padding="30,80"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestLostDetailView">
-    <ContentPage.Resources>
-        <Style TargetType="Entry">
-            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
-        </Style>
+  <ContentPage.Resources>
+    <Style TargetType="Entry">
+      <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+    </Style>
 
-        <Style TargetType="Frame" x:Key="TitleFrame">
-            <Setter Property="WidthRequest" Value="18"/>
-            <Setter Property="HeightRequest" Value="18"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="BorderColor" Value="Gray"/>
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="CornerRadius" Value="18"/>
-        </Style>
+    <Style TargetType="Frame" x:Key="TitleFrame">
+      <Setter Property="WidthRequest" Value="18"/>
+      <Setter Property="HeightRequest" Value="18"/>
+      <Setter Property="VerticalOptions" Value="Center"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="BorderColor" Value="Gray"/>
+      <Setter Property="BackgroundColor" Value="White"/>
+      <Setter Property="CornerRadius" Value="18"/>
+    </Style>
 
-        <Style TargetType="controls:IconLabel" x:Key="Return">
-            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
-        </Style>
+    <Style TargetType="controls:IconLabel" x:Key="Return">
+      <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+    </Style>
 
-        <Style TargetType="Label" x:Key="TitleLabel">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="VerticalTextAlignment" Value="Center"/>
-            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
-            <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
-        </Style>
-    </ContentPage.Resources>
-    <ContentPage.Content>
-        <Frame CornerRadius="15" Padding="0">
-            <AbsoluteLayout IsClippedToBounds="True">
-                <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
+    <Style TargetType="Label" x:Key="TitleLabel">
+      <Setter Property="FontSize" Value="10"/>
+      <Setter Property="HorizontalTextAlignment" Value="Center"/>
+      <Setter Property="VerticalTextAlignment" Value="Center"/>
+      <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
+      <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+    </Style>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <Frame CornerRadius="15" Padding="0">
+      <AbsoluteLayout IsClippedToBounds="True">
+        <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
 
-                    <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
+          <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-                        <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
+            <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
 
-                            <StackLayout Orientation="Horizontal">
-                                <StackLayout HorizontalOptions="Start">
-                                    <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
-                                </StackLayout>
+              <StackLayout Orientation="Horizontal">
+                <StackLayout HorizontalOptions="Start">
+                  <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
+                </StackLayout>
 
-                                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
-                                    <StackLayout HorizontalOptions="Start">
-                                        <StackLayout Orientation="Horizontal">
-                                            <Frame  Style="{StaticResource TitleFrame}">
-                                                <Label Text="1" Style="{StaticResource TitleLabel}"/>
-                                            </Frame>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                  <StackLayout HorizontalOptions="Start">
+                    <StackLayout Orientation="Horizontal">
+                      <Frame  Style="{StaticResource TitleFrame}">
+                        <Label Text="1" Style="{StaticResource TitleLabel}"/>
+                      </Frame>
 
-                                            <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                                <Label Text="2 زیان دیده" TextColor="White" Style="{StaticResource TitleLabel}"/>
-                                            </Frame>
+                      <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                        <Label Text="2 زیان دیده" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                      </Frame>
 
-                                        </StackLayout>
-                                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
-
-
-
-                                    </StackLayout>
-
-                                    <Frame  Style="{StaticResource TitleFrame}">
-                                        <Label Text="3" Style="{StaticResource TitleLabel}"/>
-                                    </Frame>
-                                    <Frame Style="{StaticResource TitleFrame}">
-                                        <Label Text="4" Style="{StaticResource TitleLabel}"/>
-                                    </Frame>
-                                    <Frame Style="{StaticResource TitleFrame}">
-                                        <Label Text="5" Style="{StaticResource TitleLabel}"/>
-                                    </Frame>
-
-                                </StackLayout>
-
-                            </StackLayout>
-
-                            <StackLayout Padding="0,30" Spacing="10">
+                    </StackLayout>
+                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
 
 
-                                <Label Text="اطلاعات زیان دیده" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
+
+                  </StackLayout>
+
+                  <Frame  Style="{StaticResource TitleFrame}">
+                    <Label Text="3" Style="{StaticResource TitleLabel}"/>
+                  </Frame>
+                  <Frame Style="{StaticResource TitleFrame}">
+                    <Label Text="4" Style="{StaticResource TitleLabel}"/>
+                  </Frame>
+                  <Frame Style="{StaticResource TitleFrame}">
+                    <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                  </Frame>
+
+                </StackLayout>
+
+              </StackLayout>
+
+              <StackLayout Padding="0,30" Spacing="10">
 
 
-                                <StackLayout Orientation="Horizontal" >
-
-                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.LostFirstName, Mode=TwoWay}" Placeholder="نام"/>
-
-                                    <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.LostLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
-
-                                </StackLayout>
-
-                                <controls:SanaapComboBox
-                                Placeholder="نام خودرو"
-                                AllowFiltering="True"
-                                DataSource="{Binding Cars}"
-                                DisplayMemberPath="Name"
-                                IsEditableMode="True"
-                                SelectedItem="{Binding SelectedCar}" />
+                <Label Text="اطلاعات زیان دیده" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
 
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="پلاک" VerticalOptions="Center" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
-                                    <controls:SanaapEntry Text="{Binding LostLicense.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
-                                    <controls:SanaapEntry Text="{Binding LostLicense.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
-                                    <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Placeholder="حرف" HorizontalOptions="FillAndExpand" />
-                                    <controls:SanaapEntry Text="{Binding LostLicense.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
-                                </StackLayout>
-                            </StackLayout>
-                        </StackLayout>
-                    </ScrollView>
+                <StackLayout Orientation="Horizontal" >
 
-                </Frame>
-                <Grid AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
-                </Grid>
+                  <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.LostFirstName, Mode=TwoWay}" Placeholder="نام"/>
+
+                  <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.LostLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+
+                </StackLayout>
+
+                <controls:SanaapComboBox
+                Placeholder="نام خودرو"
+                AllowFiltering="True"
+                DataSource="{Binding Cars}"
+                DisplayMemberPath="Name"
+                IsEditableMode="True"
+                SelectedItem="{Binding SelectedCar}" />
 
 
-            </AbsoluteLayout>
+                <StackLayout Orientation="Horizontal">
+                  <Label Text="پلاک" VerticalOptions="Center" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                  <controls:SanaapEntry Text="{Binding LostLicense.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" HorizontalTextAlignment="End" Keyboard="Numeric" Placeholder="ایران"/>
+                  <controls:SanaapEntry Text="{Binding LostLicense.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                  <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Placeholder="حرف" HorizontalOptions="FillAndExpand" />
+                  <controls:SanaapEntry Text="{Binding LostLicense.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
+                </StackLayout>
+              </StackLayout>
+            </StackLayout>
+          </ScrollView>
+
         </Frame>
-    </ContentPage.Content>
+        <Grid AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Label.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
+            </Label.GestureRecognizers>
+          </Label>
+          <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
+        </Grid>
+
+
+      </AbsoluteLayout>
+    </Frame>
+  </ContentPage.Content>
 </ContentPage>

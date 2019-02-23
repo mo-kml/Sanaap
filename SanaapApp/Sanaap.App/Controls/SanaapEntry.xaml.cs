@@ -56,7 +56,15 @@ namespace Sanaap.App.Controls
         public Keyboard Keyboard
         {
             get => (Keyboard)GetValue(KeyboardProperty);
-            set => SetValue(KeyboardProperty, value);
+            set
+            {
+                SetValue(KeyboardProperty, value);
+
+                if (value == Keyboard.Numeric)
+                {
+                    HorizontalTextAlignment = TextAlignment.End;
+                }
+            }
         }
 
         public static BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SanaapEntry), Color.Black, BindingMode.TwoWay);
@@ -71,6 +79,13 @@ namespace Sanaap.App.Controls
         {
             get => (int)GetValue(FontSizeProperty);
             set => SetValue(FontSizeProperty, value);
+        }
+
+        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create(nameof(HorizontalTextAlignment), typeof(TextAlignment), typeof(SanaapEntry), TextAlignment.Start, BindingMode.TwoWay);
+        public TextAlignment HorizontalTextAlignment
+        {
+            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty);
+            set => SetValue(HorizontalTextAlignmentProperty, value);
         }
     }
 }

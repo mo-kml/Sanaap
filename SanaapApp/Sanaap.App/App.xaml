@@ -123,6 +123,7 @@
                                 <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
                             <control:IconButton
+                                        x:Name="menuIcon"
                                         Grid.Column="1"
                                         BackgroundColor="Transparent"
                                         BindingContext="{x:Reference menu}"
@@ -141,7 +142,12 @@
                                         Text="{TemplateBinding Title}" />
                         </Grid>
 
-                        <ContentPresenter HorizontalOptions="FillAndExpand" x:Name="ContentPresenter" VerticalOptions="FillAndExpand" />
+                        <ContentPresenter HorizontalOptions="FillAndExpand" x:Name="ContentPresenter" VerticalOptions="FillAndExpand" >
+                            <ContentPresenter.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenMenu}" CommandParameter="{x:Reference menuIcon}"/>
+                                <SwipeGestureRecognizer Threshold="100" Direction="Left" Command="{Binding OpenMenu}" CommandParameter="{x:Reference menuIcon}"/>
+                            </ContentPresenter.GestureRecognizers>
+                        </ContentPresenter>
                     </StackLayout>
 
                     <AbsoluteLayout TranslationX="4000" x:Name="menu" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">

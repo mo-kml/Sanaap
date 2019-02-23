@@ -71,8 +71,8 @@
 
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="پلاک" VerticalOptions="Center"/>
-                                <controls:SanaapEntry Text="{Binding License.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" Keyboard="Numeric" Placeholder="ایران"/>
-                                <controls:SanaapEntry Text="{Binding License.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                                <controls:SanaapEntry Text="{Binding License.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" HorizontalTextAlignment="End" Keyboard="Numeric" Placeholder="ایران"/>
+                                <controls:SanaapEntry Text="{Binding License.SecondNumber}" MaxLength="3" HorizontalTextAlignment="End" Keyboard="Numeric" HorizontalOptions="Fill" />
                                 <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Text="حرف" HorizontalOptions="FillAndExpand" />
                                 <controls:SanaapEntry Text="{Binding License.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
                             </StackLayout>

@@ -66,7 +66,7 @@
                 </carousel:CarouselViewControl>
 
                 <StackLayout Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0.92,0.01,0.2,0.05" AbsoluteLayout.LayoutFlags="All">
-                   
+
                     <Image VerticalOptions="Center" WidthRequest="50" HeightRequest="50" Source="{extentions:Image FileName=logo.png}"/>
 
                     <controls:IconButton BackgroundColor="Transparent"
@@ -82,15 +82,16 @@
                                         Text="&#xf0c9;"
                                         Type="Solid" />
                 </StackLayout>
-                
+
                 <StackLayout Spacing="15" Margin="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,1,1,0.72" AbsoluteLayout.LayoutFlags="PositionProportional,SizeProportional">
                     <StackLayout Orientation="Horizontal" Spacing="15">
-                        <controls:SanaapFrame BackgroundColor="{StaticResource buttonBlue}">
+                        <controls:SanaapFrame>
+
                             <controls:SanaapFrame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding GoToEvalutionRequestMenu}"/>
                             </controls:SanaapFrame.GestureRecognizers>
                             <StackLayout Style="{StaticResource itemStackLayout}">
-                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crashWhite.png}"/>
+                                <Image Style="{StaticResource iconImage}" Source="{extentions:Image FileName=crash.png}"/>
                                 <Label TextColor="White" Text="اعلام خسارت"/>
                             </StackLayout>
                         </controls:SanaapFrame>

@@ -32,8 +32,8 @@
             </StackLayout>
 
             <StackLayout Style="{StaticResource mainStackLayout}" Margin="0,50,0,0" Spacing="15" Padding="30,0">
-                <controls:SanaapEntry Keyboard="Numeric" MaxLength="10" Placeholder="شماره ملی" Text="{Binding NationalCode}"/>
-                <controls:SanaapEntry Keyboard="Numeric" MaxLength="11" Placeholder="شماره همراه" Text="{Binding Mobile}"/>
+                <controls:SanaapEntry HorizontalTextAlignment="End" Keyboard="Numeric" MaxLength="10" Placeholder="شماره ملی" Text="{Binding NationalCode}"/>
+                <controls:SanaapEntry HorizontalTextAlignment="End" Keyboard="Numeric" MaxLength="11" Placeholder="شماره همراه" Text="{Binding Mobile}"/>
             </StackLayout>
 
             <Button CornerRadius="5" Margin="30,10" Text="ورود"  BackgroundColor="{StaticResource primaryBackground}" Command="{Binding Login}" TextColor="{StaticResource primaryBlue}"/>
