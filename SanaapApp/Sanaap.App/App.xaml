@@ -9,6 +9,7 @@
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:bitViewProps="clr-namespace:Bit.View.Props;assembly=Bit.CSharpClient.Prism"
     xmlns:syncfusionCombo="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:syncfusionListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:ff="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
     xmlns:viewModels="clr-namespace:Sanaap.App.Controls.ViewModels">
@@ -90,7 +91,11 @@
             <Style TargetType="Label" x:Key="headerText">
                 <Setter Property="FontSize" Value="{StaticResource mediumFontSize}"/>
                 <Setter Property="TextColor" Value="{StaticResource blueText}"/>
+            </Style>
 
+            <Style TargetType="syncfusionListView:SfListView">
+                <Setter Property="SelectionBackgroundColor" Value="{StaticResource primaryBlue}"/>
+                <Setter Property="AutoFitMode" Value="Height"/>
             </Style>
 
             <Style TargetType="Label" x:Key="subHeaderText">

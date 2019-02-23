@@ -101,7 +101,7 @@
 
                   <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                  <syncfusion:SfListView prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" SelectedItem="{Binding SelectedInsurer}" AllowKeyboardNavigation="True" FocusBorderColor="Red" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60">
+                  <syncfusion:SfListView AutoFitMode="None" prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" SelectedItem="{Binding SelectedInsurer}" AllowKeyboardNavigation="True" FocusBorderColor="Red" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60">
                     <syncfusion:SfListView.ItemTemplate>
                       <DataTemplate>
                         <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
@@ -114,7 +114,7 @@
                   </syncfusion:SfListView>
 
                 </StackLayout>
-                <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
+                <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
                 <controls:SanaapComboBox
                 Placeholder="نام خودرو"

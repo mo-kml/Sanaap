@@ -46,9 +46,9 @@
                                     HorizontalOptions="FillAndExpand" />
                             </StackLayout>
 
-                            <controls:SanaapEntry Placeholder="شماره شاسی" Text="{Binding Policy.ChasisNo}" />
-                            <controls:SanaapEntry Placeholder="شماره VIN" Text="{Binding Policy.VIN}" />
-                            <controls:SanaapEntry Placeholder="شماره بیمه نامه" Text="{Binding Policy.InsurerNo}" />
+                            <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره شاسی" Text="{Binding Policy.ChasisNo}" />
+                            <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره VIN" Text="{Binding Policy.VIN}" />
+                            <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره بیمه نامه" Text="{Binding Policy.InsurerNo}" />
 
 
                             <StackLayout Orientation="Horizontal">

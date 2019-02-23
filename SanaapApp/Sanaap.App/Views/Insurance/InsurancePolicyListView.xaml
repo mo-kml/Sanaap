@@ -5,6 +5,7 @@
              x:Class="Sanaap.App.Views.Insurance.InsurancePolicyListView"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              Title="بیمه ها"
+             xmlns:syncfusionListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              ControlTemplate="{StaticResource masterTemplate}"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
@@ -21,14 +22,11 @@
         <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <StackLayout FlowDirection="RightToLeft">
-                    <ListView HasUnevenRows="True"
-                      ItemsSource="{Binding Policies}">
-                        <ListView.Behaviors>
-                            <b:EventToCommandBehavior EventName="ItemTapped" 
-                                              EventArgsParameterPath="Item" 
-                                              Command="{Binding ShowPolicy}" />
-                        </ListView.Behaviors>
-                        <ListView.ItemTemplate>
+                    <syncfusionListView:SfListView ItemsSource="{Binding Policies}">
+                        <syncfusionListView:SfListView.Behaviors>
+                            <b:EventToCommandBehavior Command="{Binding ShowPolicy}" EventArgsParameterPath="ItemData" EventName="ItemTapped"/>
+                        </syncfusionListView:SfListView.Behaviors>
+                        <syncfusionListView:SfListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
 
@@ -63,8 +61,8 @@
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </syncfusionListView:SfListView.ItemTemplate>
+                    </syncfusionListView:SfListView>
 
                     <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
                         <Frame.GestureRecognizers>

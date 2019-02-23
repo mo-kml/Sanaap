@@ -6,6 +6,7 @@
              xmlns:converters="clr-namespace:Sanaap.App.Converters"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              NavigationPage.HasNavigationBar="False"
+             xmlns:syncfusionListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestMenuView"
              x:Name="evlMenuView"
@@ -102,11 +103,11 @@
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
             <StackLayout x:Name="stackLayout" Padding="2" FlowDirection="RightToLeft" BackgroundColor="White">
                 <Label Margin="10" Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
-                <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
-                    <ListView.Behaviors>
-                        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="Item"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
+                <syncfusionListView:SfListView ItemsSource="{Binding Insurances}">
+                    <syncfusionListView:SfListView.Behaviors>
+                        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="ItemData"/>
+                    </syncfusionListView:SfListView.Behaviors>
+                    <syncfusionListView:SfListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
@@ -140,8 +141,8 @@
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </syncfusionListView:SfListView.ItemTemplate>
+                </syncfusionListView:SfListView>
             </StackLayout>
         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
     </navigationdrawer:SfNavigationDrawer>

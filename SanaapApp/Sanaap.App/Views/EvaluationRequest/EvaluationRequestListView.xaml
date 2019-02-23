@@ -7,140 +7,139 @@
              Title="پرونده ها"
              ControlTemplate="{StaticResource masterTemplate}"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             xmlns:syncfusionListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:extensions="clr-namespace:Sanaap.App.Extensions"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestListView">
 
-  <ContentPage.Resources>
-    <Style TargetType="Label">
-      <Setter Property="TextColor" Value="Black"/>
-      <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
-    </Style>
-    <Style TargetType="Label" x:Key="dateLabel">
-      <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
-    </Style>
-    <Style x:Key="pipeBoxView" TargetType="BoxView">
-      <Setter Property="WidthRequest" Value="1"/>
-      <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
-    </Style>
-    <Style TargetType="Label" x:Key="Header">
-      <Setter Property="FontSize" Value="10"/>
-      <Setter Property="FontAttributes" Value="Bold"/>
-      <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
-      <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
-      <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
-    </Style>
-    <Style TargetType="Button">
-      <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-      <Setter Property="BackgroundColor" Value="DarkBlue"/>
-      <Setter Property="TextColor" Value="White"/>
-      <Setter Property="BorderRadius" Value="10"/>
-      <Setter Property="Margin" Value="0,0,0,20"/>
-    </Style>
-    <Style TargetType="Frame" x:Key="selectionFrame">
-      <Setter Property="CornerRadius" Value="5"/>
-      <Setter Property="HasShadow" Value="False"/>
-      <Setter Property="Margin" Value="5,0,0,0"/>
-    </Style>
-  </ContentPage.Resources>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="{StaticResource smallFontSize}"/>
+        </Style>
+        <Style TargetType="Label" x:Key="dateLabel">
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+        </Style>
+        <Style x:Key="pipeBoxView" TargetType="BoxView">
+            <Setter Property="WidthRequest" Value="1"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource primaryGray}"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Header">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontFamily" Value="{StaticResource Shabnam-FDFont}"/>
+            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+            <Setter Property="FontSize" Value="{StaticResource ultraSmallFontSize}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="BackgroundColor" Value="DarkBlue"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BorderRadius" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+        <Style TargetType="Frame" x:Key="selectionFrame">
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
+    </ContentPage.Resources>
 
-  <ContentPage.Content>
-    <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
-      <navigationdrawer:SfNavigationDrawer.ContentView>
-        <StackLayout FlowDirection="RightToLeft">
-          <ListView ItemsSource="{Binding Requests}" HasUnevenRows="True">
-            <ListView.Behaviors>
-              <b:EventToCommandBehavior EventName="ItemTapped"
-                                EventArgsParameterPath="Item"
-                                Command="{Binding ShowRequestProgress}" />
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <Grid Margin="10" >
+    <ContentPage.Content>
+        <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <StackLayout FlowDirection="RightToLeft">
+                    <syncfusionListView:SfListView  ItemsSource="{Binding Requests}">
+                        <syncfusionListView:SfListView.Behaviors>
+                            <b:EventToCommandBehavior Command="{Binding ShowRequestProgress}" EventArgsParameterPath="ItemData" EventName="ItemTapped"/>
+                        </syncfusionListView:SfListView.Behaviors>
+                        <syncfusionListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Margin="10" >
 
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="auto"/>
-                      <ColumnDefinition Width="0.7"/>
-                      <ColumnDefinition Width="*"/>
-                      <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="0.7"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                    <StackLayout Spacing="0">
-                      <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
-                      <Label Text="{Binding Code}" HorizontalOptions="Center"/>
+                                        <StackLayout Spacing="0">
+                                            <Label Text="کد پیگیری" HorizontalOptions="Center" Style="{StaticResource Header}"/>
+                                            <Label Text="{Binding Code}" HorizontalOptions="Center"/>
+                                        </StackLayout>
+
+                                        <BoxView Grid.Column="1" Style="{StaticResource pipeBoxView}"/>
+
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal">
+                                            <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=car.png}" BackgroundColor="Transparent" />
+                                            <StackLayout Spacing="0">
+                                                <Label  Text="پرونده" Style="{StaticResource Header}" />
+                                                <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Column="3">
+                                            <Label VerticalTextAlignment="Center" Text="تاریخ ثبت" Style="{StaticResource Header}" />
+                                            <Label VerticalTextAlignment="Center" Text="{Binding Date}"/>
+                                        </StackLayout>
+
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </syncfusionListView:SfListView.ItemTemplate>
+                    </syncfusionListView:SfListView>
+
+                    <controls:SanaapFrame Margin="0,0,0,10" ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" CornerRadius="10">
+                        <controls:SanaapFrame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenInquiryBox}"/>
+                        </controls:SanaapFrame.GestureRecognizers>
+                        <Label HorizontalTextAlignment="Center" Text="استعلام پرونده" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
+                    </controls:SanaapFrame>
+                </StackLayout>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" BackgroundColor="White">
+
+                    <Label Style="{StaticResource headerText}" Text="استعلام پرونده" Margin="10"/>
+
+                    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center" Spacing="20" Padding="10">
+                        <StackLayout Orientation="Horizontal" >
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=house.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
+                                <StackLayout>
+                                    <Image Source="{extensions:Image FileName=car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
+                                    <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <controls:SanaapEntry HorizontalTextAlignment="End" Keyboard="Numeric" Text="{Binding DocumentNumber}"  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
                     </StackLayout>
 
-                    <BoxView Grid.Column="1" Style="{StaticResource pipeBoxView}"/>
 
-                    <StackLayout Grid.Column="2" Orientation="Horizontal">
-                      <Image WidthRequest="30" HeightRequest="35" Margin="7,0,7,0" Aspect="AspectFit" Source="{extensions:Image FileName=car.png}" BackgroundColor="Transparent" />
-                      <StackLayout Spacing="0">
-                        <Label  Text="پرونده" Style="{StaticResource Header}" />
-                        <Label  FontSize="{StaticResource mediumFontSize}" Text="{Binding RequestTypeName}"/>
-                      </StackLayout>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Column="3">
-                      <Label VerticalTextAlignment="Center" Text="تاریخ ثبت" Style="{StaticResource Header}" />
-                      <Label VerticalTextAlignment="Center" Text="{Binding Date}"/>
-                    </StackLayout>
-
-
-                  </Grid>
-                </ViewCell>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
-
-          <controls:SanaapFrame Margin="0,0,0,10" ShadowOffset="50" WidthRequest="150" BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" CornerRadius="10">
-            <controls:SanaapFrame.GestureRecognizers>
-              <TapGestureRecognizer Command="{Binding OpenInquiryBox}"/>
-            </controls:SanaapFrame.GestureRecognizers>
-            <Label HorizontalTextAlignment="Center" Text="استعلام پرونده" FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}"/>
-          </controls:SanaapFrame>
-        </StackLayout>
-      </navigationdrawer:SfNavigationDrawer.ContentView>
-      <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Spacing="20" BackgroundColor="White">
-
-          <Label Style="{StaticResource headerText}" Text="استعلام پرونده" Margin="10"/>
-
-          <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center" Spacing="20" Padding="10">
-            <StackLayout Orientation="Horizontal" >
-
-              <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                <StackLayout>
-                  <Image Source="{extensions:Image FileName=medkit.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                  <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="درمان"/>
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="استعلام"  FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Inquiry}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
-              </Frame>
-
-              <Frame BorderColor="{StaticResource primaryGray}" Style="{StaticResource selectionFrame}">
-                <StackLayout>
-                  <Image Source="{extensions:Image FileName=house.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                  <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryGray}" Text="اموال"/>
-                </StackLayout>
-              </Frame>
-
-              <Frame BorderColor="{StaticResource primaryBlue}" Style="{StaticResource selectionFrame}">
-                <StackLayout>
-                  <Image Source="{extensions:Image FileName=car.png}" BackgroundColor="{StaticResource primaryBackground}" WidthRequest="40" HeightRequest="40" Aspect="AspectFit"/>
-                  <Label HorizontalTextAlignment="Center" TextColor="{StaticResource primaryBlue}" Text="خودرو"/>
-                </StackLayout>
-              </Frame>
-            </StackLayout>
-
-            <controls:SanaapEntry HorizontalTextAlignment="End" Keyboard="Numeric" Text="{Binding DocumentNumber}"  Placeholder="شماره پرونده" FlowDirection="RightToLeft"/>
-          </StackLayout>
-
-
-          <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="استعلام"  FontSize="{StaticResource mediumFontSize}" TextColor="{StaticResource buttonTextWhite}" BackgroundColor="{StaticResource primaryBlue}">
-            <Label.GestureRecognizers>
-              <TapGestureRecognizer Command="{Binding Inquiry}"/>
-            </Label.GestureRecognizers>
-          </Label>
-        </StackLayout>
-      </navigationdrawer:SfNavigationDrawer.DrawerContentView>
-    </navigationdrawer:SfNavigationDrawer>
-  </ContentPage.Content>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        </navigationdrawer:SfNavigationDrawer>
+    </ContentPage.Content>
 </ContentPage>

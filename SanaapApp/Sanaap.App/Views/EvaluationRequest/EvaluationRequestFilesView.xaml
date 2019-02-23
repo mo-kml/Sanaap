@@ -5,9 +5,10 @@
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="Gray"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestFilesView"
-             xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              FlowDirection="RightToLeft"
              Padding="30,70"
              x:Name="evlRequestFile">
@@ -82,8 +83,14 @@
 
 
                             <ScrollView Padding="5">
-                                <l:RepeatableWrapLayout Spacing="7" UniformColumns="3" ItemsSource="{Binding Files}" HorizontalOptions="FillAndExpand">
-                                    <l:RepeatableWrapLayout.ItemTemplate>
+                                <syncfusion:SfListView ItemSpacing="5" ItemsSource="{Binding Files}" HorizontalOptions="FillAndExpand">
+                                    <syncfusion:SfListView.Behaviors>
+                                        <b:EventToCommandBehavior Command="{Binding DeletePhoto}" EventArgsParameterPath="ItemData" EventName="ItemHolding"/>
+                                    </syncfusion:SfListView.Behaviors>
+                                    <syncfusion:SfListView.LayoutManager>
+                                        <syncfusion:GridLayout SpanCount="3"/>
+                                    </syncfusion:SfListView.LayoutManager>
+                                    <syncfusion:SfListView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Margin="0" CornerRadius="0" HasShadow="False" WidthRequest="80" HeightRequest="80" Padding="0" BorderColor="{StaticResource primaryGray}">
                                                 <Frame.Triggers>
@@ -134,8 +141,8 @@
                                                 </StackLayout>
                                             </Frame>
                                         </DataTemplate>
-                                    </l:RepeatableWrapLayout.ItemTemplate>
-                                </l:RepeatableWrapLayout>
+                                    </syncfusion:SfListView.ItemTemplate>
+                                </syncfusion:SfListView>
                             </ScrollView>
 
                         </StackLayout>

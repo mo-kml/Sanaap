@@ -44,6 +44,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand GoBack { get; set; }
 
+        public BitDelegateCommand<EvlRequestFileItemSource> DeletePhoto { get; set; }
+
         public EvlRequestItemSource Request { get; set; }
 
         private int _fileIndex;
@@ -198,6 +200,22 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                       {nameof(image.Image), image.Image}
                   });
               });
+
+            DeletePhoto = new BitDelegateCommand<EvlRequestFileItemSource>(async (image) =>
+            {
+                if (image.HasImage == false)
+                {
+                    return;
+                }
+
+                if (await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.AreYouSureToDelete, ConstantStrings.Yes, ConstantStrings.No))
+                {
+                    await NavigationService.GoBackAsync();
+
+                    image.Image = null;
+                    image.HasImage = false;
+                }
+            });
         }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)

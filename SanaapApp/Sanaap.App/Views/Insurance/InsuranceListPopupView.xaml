@@ -5,6 +5,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:viewModels="clr-namespace:Sanaap.App.ViewModels.Insurance"
              xmlns:extentions="clr-namespace:Sanaap.App.Extensions"
+             xmlns:syncfusionListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="Sanaap.App.Views.Insurance.InsuranceListPopupView"
              FlowDirection="RightToLeft"
              BackgroundColor="White"
@@ -21,11 +22,8 @@
         <StackLayout x:Name="stackLayout" Padding="10">
             <Label Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
             <Label Style="{StaticResource headerText}" Text="{Binding Name}" />
-            <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="Item"/>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
+            <syncfusionListView:SfListView ItemsSource="{Binding Insurances}" TapCommand="{Binding SelectPolicy}">
+                <syncfusionListView:SfListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
@@ -65,8 +63,8 @@
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </syncfusionListView:SfListView.ItemTemplate>
+            </syncfusionListView:SfListView>
         </StackLayout>
 
     </ContentView.Content>

@@ -30,6 +30,7 @@
         public static string PictureIsNull = "تصویر انتخاب نشده است";
         public static string PictureIsRequired = "لطفا تصاویر ضروری را وارد نمایید";
         public static string AreYouSure = "از فرستادن درخواست مطمئن هستید؟";
+        public static string AreYouSureToDelete = "از پاک کردن این عکس مطمئن هستید؟";
         public static string AreYouSureToCancel = "با اینکار درخواست شما خاتمه می یابد. ادامه میدهید؟";
         public static string RequestDosentExist = "درخواست وارد شده وجود ندارد لطفا دوباره تلاش کنید";
         public static string ResponseNotFoundFromSupport = "هنوز پاسخی از سمت کارشناسان برای این پیام دریافت نشده است";
