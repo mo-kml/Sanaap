@@ -50,7 +50,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             if (expertDto?.Expert == null)
             {
-                await _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.FindNearExpertError, ConstantStrings.Ok);
+                await _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.FindNearExpertError + System.Environment.NewLine + Request.Code, ConstantStrings.Ok);
 
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
             }

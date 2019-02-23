@@ -26,7 +26,7 @@
         public static string SendingRequestAndPictures = "ارسال درخواست ...";
         public static string ExpertFind = "کارشناس ارزیاب اتومبیل شما تعیین شد منتظر تماس کارشناس باشید";
         public static string ExpertFinding = "در حال یافتن نزدیکترین کارشناس ارزیاب اتومبیل ...";
-        public static string FindNearExpertError = "کارشناس مورد نظر یافت نشد. در اسرع وقت با شما تماس گرفته خواهد شد";
+        public static string FindNearExpertError = "کارشناس مورد نظر یافت نشد. در اسرع وقت با شما تماس گرفته خواهد شد. کد پیگیری: ";
         public static string FindNearExpertNotResult = "کارشناسی پاسخ گو نیست";
         public static string InvalidVerifyCode = "کد تایید وارد شده معتبر نیست لطفا دوباره تلاش کنید";
         public static string SuccessfulProcess = "عملیات با موفقیت انجام شد";

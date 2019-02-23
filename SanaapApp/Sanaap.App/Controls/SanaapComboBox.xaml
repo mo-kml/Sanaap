@@ -14,8 +14,11 @@
                         <Frame BackgroundColor="White" HasShadow="False" Padding="1" CornerRadius="5" Margin="0">
                             <comboBox:SfComboBox FlowDirection="RightToLeft" BindingContext="{TemplateBinding}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
                                                      ShowBorder="False"
-                                                     SuggestionBoxPlacement="Top"
+                                                     SuggestionBoxPlacement="Bottom"
                                                      SuggestionMode="Contains"
+                                                     PopupDelay="0"
+                                                 DropDownItemFontFamily=""
+                                                     MaximumDropDownHeight="160"
                                                      Watermark="{Binding Placeholder}"
                                                      WatermarkColor="{Binding PlaceholderColor}"
                                                      DataSource="{Binding DataSource}"  
