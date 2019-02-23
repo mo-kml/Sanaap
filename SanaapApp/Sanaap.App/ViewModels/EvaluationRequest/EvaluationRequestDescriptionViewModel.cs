@@ -26,6 +26,12 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             GoToNextLevel = new BitDelegateCommand(async () =>
               {
+                  if (SelectedDate == null)
+                  {
+                      await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.AccidentDateIsNull, ConstantStrings.Ok);
+                      return;
+                  }
+
                   Request.AccidentDate = new DateTimeOffset((DateTime)SelectedDate, DateTimeOffset.Now.Offset);
 
                   if (!evlRequestValidator.IsDescriptionValid(Request, out string message))
@@ -38,8 +44,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   {
                       {nameof(Request),Request }
                   });
-              }, () => SelectedDate != null);
-            GoToNextLevel.ObservesProperty(() => SelectedDate);
+              });
 
             GoBack = new BitDelegateCommand(async () =>
               {
@@ -51,9 +56,13 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
-            if (Request.AccidentDate != new DateTimeOffset())
+            if (Request.AccidentDate == default(DateTimeOffset))
             {
-                //SelectedDate = DateTime.Now;
+                SelectedDate = DateTime.Now;
+            }
+            else
+            {
+                SelectedDate = Request.AccidentDate.DateTime;
             }
         }
 
@@ -80,6 +89,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         {
             if (SelectedDate.Value.Date > DateTime.Now)
             {
+                _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.DateNotValid, ConstantStrings.Ok);
+
                 SelectedDate = DateTime.Now.Date;
             }
 

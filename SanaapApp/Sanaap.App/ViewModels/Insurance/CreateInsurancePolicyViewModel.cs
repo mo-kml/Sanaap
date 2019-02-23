@@ -34,7 +34,7 @@ namespace Sanaap.App.ViewModels.Insurance
             IInitialDataService initialDataService,
             IODataClient oDataClient,
             IInsuranceValidator insuranceValidator,
-            IPageDialogService pageDialogService,
+            IPageDialogService dialogService,
             IPolicyService policyService,
             ILicenseHelper licenseHelper,
             ISanaapAppTranslateService translateService
@@ -55,6 +55,8 @@ namespace Sanaap.App.ViewModels.Insurance
                 });
             }
 
+            SelectedInsuranceType = InsuranceTypes[0];
+
             Submit = new BitDelegateCommand(async () =>
               {
 
@@ -63,6 +65,27 @@ namespace Sanaap.App.ViewModels.Insurance
 
                   using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: insuranceCancellationTokenSource.Cancel))
                   {
+                      if (SelectedCar == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.CarIsNull, ConstantStrings.Ok);
+                          return;
+                      }
+                      if (SelectedInsurer == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.InsurerIsNull, ConstantStrings.Ok);
+                          return;
+                      }
+                      if (SelectedAlphabet == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NumberPlateIsNotValid, ConstantStrings.Ok);
+                          return;
+                      }
+                      if (SelectedColor == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.ColorIsNull, ConstantStrings.Ok);
+                          return;
+                      }
+
                       License.Alphabet = SelectedAlphabet.Name;
 
                       if (licenseHelper.ConvertToPlateNumber(License, out string licensePlate))
@@ -76,7 +99,7 @@ namespace Sanaap.App.ViewModels.Insurance
 
                       if (!insuranceValidator.IsValid(Policy, out string errorMessage))
                       {
-                          await pageDialogService.DisplayAlertAsync(string.Empty, translateService.Translate(errorMessage), ConstantStrings.Ok);
+                          await dialogService.DisplayAlertAsync(string.Empty, translateService.Translate(errorMessage), ConstantStrings.Ok);
                           return;
                       }
 
@@ -101,16 +124,12 @@ namespace Sanaap.App.ViewModels.Insurance
                           }
                       }
                   }
-                  await pageDialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
+                  await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.SuccessfulProcess, ConstantStrings.Ok);
 
                   await NavigationService.GoBackAsync();
 
-              }, () => SelectedCar != null && SelectedColor != null && SelectedInsuranceType != null && SelectedInsurer != null && SelectedAlphabet != null);
-            Submit.ObservesProperty(() => SelectedCar);
-            Submit.ObservesProperty(() => SelectedColor);
-            Submit.ObservesProperty(() => SelectedInsuranceType);
-            Submit.ObservesProperty(() => SelectedInsurer);
-            Submit.ObservesProperty(() => SelectedAlphabet);
+              });
+
 
             SelectInsurer = new BitDelegateCommand<InsurersItemSource>(async (parameter) =>
             {

@@ -50,6 +50,13 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 {
                     ExpertPositionDto postion = await _evlRequestService.UpdateExpertPosition(Expert.Token);
 
+                    if (postion.Lat == 0 && postion.Lng == 0)
+                    {
+                        await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+
+                        return;
+                    }
+
                     CurrentPosition = new Location { Latitude = postion.Lat, Longitude = postion.Lng };
                 });
 

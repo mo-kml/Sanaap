@@ -15,6 +15,10 @@
         public static string Yes = "بله";
         public static string No = "خیر";
         public static string Error = "خطا";
+        public static string AccidentDateIsNull = "تاریخ وقوع حادثه انتخاب نشده است";
+        public static string CarIsNull = "نام خودرو انتخاب نشده است";
+        public static string InsurerIsNull = "شرکت بیمه انتخاب نشده است";
+        public static string ColorIsNull = "رنگ ماشین انتخاب نشده است";
         public static string UnknownError = "متاسفانه خطایی رخ داده است.";
         public static string NumberPlateIsNotValid = "لطفا شماره پلاک را درست وارد کنید";
         public static string Loading = "لطفا منتظر بمانید...";

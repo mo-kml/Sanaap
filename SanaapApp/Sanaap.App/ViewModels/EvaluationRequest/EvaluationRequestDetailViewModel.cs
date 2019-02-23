@@ -56,6 +56,22 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                   using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
                   {
+                      if (SelectedCar == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.CarIsNull, ConstantStrings.Ok);
+                          return;
+                      }
+                      if (SelectedInsurer == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.InsurerIsNull, ConstantStrings.Ok);
+                          return;
+                      }
+                      if (SelectedAlphabet == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NumberPlateIsNotValid, ConstantStrings.Ok);
+                          return;
+                      }
+
                       Request.CarId = SelectedCar.PrmID;
                       Request.InsurerId = SelectedInsurer.ID;
 
@@ -87,10 +103,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                           await NavigationService.NavigateAsync(nameof(EvaluationRequestLostDetailView), Parameters);
                       }
                   }
-              }, () => SelectedCar != null && SelectedInsurer != null && SelectedAlphabet != null);
-            GoToNextLevel.ObservesProperty(() => SelectedCar);
-            GoToNextLevel.ObservesProperty(() => SelectedInsurer);
-            GoToNextLevel.ObservesProperty(() => SelectedAlphabet);
+              });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {

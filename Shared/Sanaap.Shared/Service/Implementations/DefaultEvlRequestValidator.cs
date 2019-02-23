@@ -54,12 +54,6 @@ namespace Sanaap.Service.Implementations
                 return false;
             }
 
-            if (request.AccidentDate == null)
-            {
-                message = $"{nameof(EvlRequestDto.AccidentDate)}IsEmpty";
-                return false;
-            }
-
             message = null;
 
             return true;

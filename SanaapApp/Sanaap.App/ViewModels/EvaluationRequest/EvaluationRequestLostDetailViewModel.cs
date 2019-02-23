@@ -45,6 +45,17 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: requestCancellationTokenSource.Cancel))
                 {
+                    if (SelectedCar == null)
+                    {
+                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.CarIsNull, ConstantStrings.Ok);
+                        return;
+                    }
+                    if (SelectedAlphabet == null)
+                    {
+                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.NumberPlateIsNotValid, ConstantStrings.Ok);
+                        return;
+                    }
+
                     Request.LostCarId = SelectedCar.PrmID;
 
                     LostLicense.Alphabet = SelectedAlphabet.Name;
@@ -68,9 +79,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                         { nameof(Request),Request}
                     });
                 }
-            }, () => SelectedCar != null && SelectedAlphabet != null);
-            GoToNextLevel.ObservesProperty(() => SelectedCar);
-            GoToNextLevel.ObservesProperty(() => SelectedAlphabet);
+            });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
