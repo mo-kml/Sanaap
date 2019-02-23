@@ -34,12 +34,6 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                   Request.AccidentDate = new DateTimeOffset((DateTime)SelectedDate, DateTimeOffset.Now.Offset);
 
-                  if (!evlRequestValidator.IsDescriptionValid(Request, out string message))
-                  {
-                      await dialogService.DisplayAlertAsync(string.Empty, translateService.Translate(message), ConstantStrings.Ok);
-                      return;
-                  }
-
                   await NavigationService.NavigateAsync(nameof(EvaluationRequestMapView), new NavigationParameters
                   {
                       {nameof(Request),Request }

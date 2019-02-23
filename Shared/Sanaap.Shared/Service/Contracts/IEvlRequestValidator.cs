@@ -6,6 +6,5 @@ namespace Sanaap.Service.Contracts
     {
         bool IsDetailValid(EvlRequestDto requestDto, out string errorMessage);
         bool IsLostDetailValid(EvlRequestDto requestDto, out string errorMessage);
-        bool IsDescriptionValid(EvlRequestDto requestDto, out string errorMessage);
     }
 }

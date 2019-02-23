@@ -41,23 +41,7 @@ namespace Sanaap.Service.Implementations
 
             return true;
         }
-        public bool IsDescriptionValid(EvlRequestDto request, out string message)
-        {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
 
-            if (string.IsNullOrEmpty(request.AccidentReason))
-            {
-                message = $"{nameof(EvlRequestDto.AccidentReason)}IsEmpty";
-                return false;
-            }
-
-            message = null;
-
-            return true;
-        }
         public bool IsLostDetailValid(EvlRequestDto request, out string message)
         {
             if (request == null)
