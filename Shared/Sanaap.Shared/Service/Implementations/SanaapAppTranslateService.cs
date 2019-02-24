@@ -41,6 +41,8 @@ namespace Sanaap.Service.Implementations
             { $"{nameof(EvlRequestDto.LostLastName)}IsEmpty" , "لطفا نام خانوادگی زیان دیده را وارد کنید" },
             { $"{nameof(EvlRequestDto.LostPlateNumber)}IsEmpty" , "لطفا شماره پلاک زیان دیده را وارد کنید" },
             { $"{nameof(EvlRequestDto.LostCarId)}IsEmpty" , "لطفا خودرو زیان دیده را انتخاب کنید" },
+            { $"{nameof(CommentDto.Description)}IsEmpty" , "لطفا توضیحات پیام را وارد نمایید" },
+
     };
     }
 }

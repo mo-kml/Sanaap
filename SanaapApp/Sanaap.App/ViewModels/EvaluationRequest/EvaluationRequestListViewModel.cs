@@ -12,6 +12,7 @@ using Sanaap.Dto;
 using Sanaap.Enums;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
@@ -46,17 +47,24 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 using (userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    EvlRequestDto requestDto = await evlRequestService.SearchByCode(DocumentNumber);
+                    if (string.IsNullOrEmpty(DocumentNumber) || !Requests.Any(r => r.Code == int.Parse(DocumentNumber)))
+                    {
+                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.DocumentNumberIsInvalid, ConstantStrings.Ok);
+                        DocumentNumber = null;
+                        return;
+                    }
+
+                    EvlRequestDto requestDto = await evlRequestService.SearchByCode(int.Parse(DocumentNumber));
 
                     if (requestDto == null)
                     {
                         await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.RequestDosentExist, ConstantStrings.Ok);
-                        DocumentNumber = 0;
+                        DocumentNumber = null;
                         return;
                     }
                     else
                     {
-                        DocumentNumber = 0;
+                        DocumentNumber = null;
 
                         eventAggregator.GetEvent<OpenInquiryPopupEvent>().Publish(new OpenInquiryPopupEvent());
 
@@ -71,8 +79,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                         await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), parameter);
                     }
                 }
-            }, () => DocumentNumber != 0);
-            Inquiry.ObservesProperty(() => DocumentNumber);
+            });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
@@ -92,7 +99,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand OpenInquiryBox { get; set; }
 
-        public int DocumentNumber { get; set; }
+        public string DocumentNumber { get; set; }
 
         public BitDelegateCommand<EvlRequestListItemSource> ShowRequestProgress { get; set; }
 

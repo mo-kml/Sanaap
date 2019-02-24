@@ -5,7 +5,6 @@ using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -35,7 +34,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             using (_userDialogs.Loading(ConstantStrings.Loading))
             {
-                await loadProgresses(request.RequestId);
+                await loadProgresses(request.Code);
             }
         }
 
@@ -45,9 +44,13 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand ClosePopup { get; set; }
 
-        public async Task loadProgresses(Guid requestId)
+        public async Task loadProgresses(int fileId)
         {
-            Progresses = new ObservableCollection<ProgressItemSource>(await _evlRequestService.GetAllProgressesByRequestId(requestId));
+            try
+            {
+                Progresses = new ObservableCollection<ProgressItemSource>(await _evlRequestService.GetAllProgressesByRequestId(fileId));
+            }
+            catch (System.Exception) { }
         }
     }
 }

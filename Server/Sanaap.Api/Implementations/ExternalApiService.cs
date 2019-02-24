@@ -24,6 +24,7 @@ namespace Sanaap.Api.Implementations
         private HttpClient httpClient;
         private IEnumerable<ExternalEntityDto> colors;
         private IEnumerable<ExternalEntityDto> cars;
+        private IEnumerable<ExternalEntityDto> accidentReasons;
         private IEnumerable<PhotoTypeDto> salesPhotos;
         private IEnumerable<PhotoTypeDto> badanePhotos;
         private IEnumerable<InsurerDto> insurers;
@@ -101,6 +102,32 @@ namespace Sanaap.Api.Implementations
             }
 
             return salesPhotos;
+        }
+
+        public async Task<IEnumerable<ExternalEntityDto>> GetAccidentReasons()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (accidentReasons == null)
+            {
+                HttpResponseMessage result = await httpClient.GetAsync("GetInitData");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    JObject jObject = JObject.Parse(await result.Content.ReadAsStringAsync());
+
+                    accidentReasons = JsonConvert.DeserializeObject<IEnumerable<ExternalEntityDto>>(jObject["AccidentReason"].ToString());
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return accidentReasons;
         }
 
         public async Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos()
@@ -243,6 +270,26 @@ namespace Sanaap.Api.Implementations
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<ExpertPositionDto>(await result.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+        }
+
+        public async Task<IEnumerable<EvlRequestProgressDto>> GetFileProgress(int fileId)
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+            StringContent content = new StringContent(JsonConvert.SerializeObject(new { fid = fileId }), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await httpClient.PostAsync($"CheckFileStatus", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<IEnumerable<EvlRequestProgressDto>>(await result.Content.ReadAsStringAsync());
             }
             else
             {

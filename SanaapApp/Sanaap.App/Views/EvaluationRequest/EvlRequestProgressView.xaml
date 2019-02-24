@@ -65,7 +65,7 @@
 
                                     </StackLayout>
 
-                                    <Label Grid.Column="1" VerticalOptions="Start" VerticalTextAlignment="Center" Text="{Binding Status}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"/>
+                                    <Label Grid.Column="1" VerticalOptions="Start" VerticalTextAlignment="Center" Text="{Binding Status}" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource smallFontSize}"/>
 
 
                                     <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">

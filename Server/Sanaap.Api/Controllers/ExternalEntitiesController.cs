@@ -35,6 +35,12 @@ namespace Sanaap.Api.Controllers
         }
 
         [Function]
+        public async Task<IEnumerable<ExternalEntityDto>> GetAccidentReasons()
+        {
+            return await ExternalApiService.GetAccidentReasons();
+        }
+
+        [Function]
         public async Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos()
         {
             return await ExternalApiService.GetBadanePhotos();

@@ -104,13 +104,13 @@
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
             <StackLayout x:Name="stackLayout" Padding="2" FlowDirection="RightToLeft" BackgroundColor="White">
                 <Label Margin="10" Style="{StaticResource headerText}" Text="لیست بیمه نامه های ثبت شده" />
-                <syncfusionListView:SfListView ItemsSource="{Binding Insurances}">
-                    <syncfusionListView:SfListView.Behaviors>
-                        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="ItemData"/>
-                    </syncfusionListView:SfListView.Behaviors>
-                    <syncfusionListView:SfListView.ItemTemplate>
+                <ListView HasUnevenRows="True" ItemsSource="{Binding Insurances}">
+                    <ListView.Behaviors>
+                        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectPolicy}" EventArgsParameterPath="Item"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell Tapped="ViewCell_Tapped">
                                 <StackLayout>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -148,8 +148,8 @@
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-                    </syncfusionListView:SfListView.ItemTemplate>
-                </syncfusionListView:SfListView>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
     </navigationdrawer:SfNavigationDrawer>

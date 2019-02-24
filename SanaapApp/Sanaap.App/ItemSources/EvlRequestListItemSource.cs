@@ -4,7 +4,7 @@ namespace Sanaap.App.ItemSources
 {
     public class EvlRequestListItemSource
     {
-        public long Code { get; set; }
+        public int Code { get; set; }
 
         public string RequestTypeName { get; set; }
 
