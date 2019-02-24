@@ -47,21 +47,27 @@
                                                 <Label Text="{Binding InsuranceTypeName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
                                             </StackLayout>
 
-                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Grid.Column="2">
-                                                <Label VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" Text="تاریخ انقضاء" FontSize="{StaticResource ultraSmallFontSize}"/>
-                                                <Label VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" Text="{Binding ExpirationDate,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}" TextColor="Black"/>
-                                            </StackLayout>
+                                            <AbsoluteLayout VerticalOptions="Center" Grid.Column="2">
+                                                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal" Grid.Column="2">
+                                                    <Label HorizontalOptions="FillAndExpand" Text="تاریخ انقضاء" FontSize="{StaticResource ultraSmallFontSize}"/>
+                                                    <Label HorizontalOptions="FillAndExpand" Text="{Binding ExpirationDate,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}" TextColor="Black"/>
+                                                </StackLayout>
 
-                                            <StackLayout HeightRequest="60" WidthRequest="130" Grid.Column="2" Spacing="-1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  Orientation="Horizontal">
-                                                <AbsoluteLayout VerticalOptions="FillAndExpand">
-                                                    <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
-                                                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                                </AbsoluteLayout>
-                                                <AbsoluteLayout VerticalOptions="FillAndExpand">
-                                                    <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
-                                                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
-                                                </AbsoluteLayout>
-                                            </StackLayout>
+                                                <StackLayout AbsoluteLayout.LayoutBounds="0,0.7,1,0.7" AbsoluteLayout.LayoutFlags="All" Padding="0,0,10,0" Grid.Column="2" Spacing="-1" HorizontalOptions="StartAndExpand"  Orientation="Horizontal">
+                                                    <AbsoluteLayout VerticalOptions="FillAndExpand">
+                                                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFit" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak2.png}"/>
+                                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource.ProvinceNumber}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                                    </AbsoluteLayout>
+                                                    <AbsoluteLayout VerticalOptions="FillAndExpand">
+                                                        <Image Aspect="AspectFit" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{extentions:Image FileName=pelak1.png}"/>
+                                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding LicensePlateItemSource,Converter={StaticResource licensePlateConverter}}" AbsoluteLayout.LayoutBounds="1,0,1.1,1" AbsoluteLayout.LayoutFlags="All"/>
+                                                    </AbsoluteLayout>
+                                                </StackLayout>
+
+                                                <Image IsVisible="{Binding IsExpired}" AbsoluteLayout.LayoutBounds="-0.25,0.1,35,35" AbsoluteLayout.LayoutFlags="PositionProportional" Aspect="AspectFit" Source="{extentions:Image FileName=isExpired.png}"/>
+
+                                            </AbsoluteLayout>
+                                            
                                         </Grid>
                                         <BoxView HeightRequest="0.7" BackgroundColor="{StaticResource primaryGray}"/>
                                     </StackLayout>

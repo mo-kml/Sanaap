@@ -16,6 +16,8 @@ namespace Sanaap.App.ItemSources
 
         public string Image { get; set; }
 
+        public bool IsExpired { get; set; }
+
         public LicensePlateItemSource LicensePlateItemSource { get; set; }
     }
 }

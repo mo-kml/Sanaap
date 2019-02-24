@@ -44,6 +44,8 @@ namespace Sanaap.App.Services.Implementations
                 .OrderBy(it => it.CreatedOn)
                 .FindEntriesAsync());
 
+            insurances = insurances.Where(i => i.ExpirationDate >= DateTimeOffset.Now.AddMonths(-2));
+
             return await ConvertPolicyToItemSource(insurances);
         }
 
@@ -79,6 +81,7 @@ namespace Sanaap.App.Services.Implementations
                     ColorName = colors.FirstOrDefault(c => c.PrmID == insurance.ColorId)?.Name,
                     CarName = cars.FirstOrDefault(c => c.PrmID == insurance.CarId)?.Name,
                     Image = insureres.FirstOrDefault(c => c.ID == insurance.InsurerId)?.Photo,
+                    IsExpired = insurance.ExpirationDate <= DateTimeOffset.Now.AddMonths(1)
                 };
 
                 policy.LicensePlateItemSource = _licenseHelper.ConvertToItemSource(policy.PlateNumber);
