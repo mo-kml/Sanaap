@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Views;
 using Bit;
 using Bit.Droid;
 using Bit.ViewModel;
@@ -30,6 +31,8 @@ namespace Sanaap.App.Droid
     [Activity(Label = "Sanaap", Icon = "@drawable/launcher_foreground", WindowSoftInputMode = Android.Views.SoftInput.StateHidden | Android.Views.SoftInput.AdjustResize | Android.Views.SoftInput.AdjustNothing, ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.Orientation)]
     public class MainActivity : BitFormsAppCompatActivity
     {
+        private static int clickYPosition;
+
         protected override void OnCreate(Bundle bundle)
         {
             AppCenter.Start("9c1f248c-5434-458f-9c4c-f69b39722c1f", typeof(Analytics), typeof(Crashes));
@@ -71,16 +74,19 @@ namespace Sanaap.App.Droid
                 root.GetWindowVisibleDisplayFrame(r);
             }
 
+            root.ViewTreeObserver.GlobalFocusChange += ViewTreeObserver_GlobalFocusChange;
             root.ViewTreeObserver.GlobalLayout += (object sender, EventArgs e) =>
             {
                 Rect r2 = new Rect();
                 root.GetWindowVisibleDisplayFrame(r2);
-                int keyboardHeight = r.Height() - r2.Height();
+
+                int keyboardHeight = r2.Height();
+
                 root.ScrollTo(0, 20);
 
-                if (keyboardHeight > 100)
+                if (clickYPosition > keyboardHeight)
                 {
-                    root.ScrollTo(0, 250);
+                    root.ScrollTo(0, clickYPosition - keyboardHeight + 30);
                 }
                 else
                 {
@@ -90,7 +96,14 @@ namespace Sanaap.App.Droid
 
         }
 
+        private void ViewTreeObserver_GlobalFocusChange(object sender, ViewTreeObserver.GlobalFocusChangeEventArgs e)
+        {
+            int[] screenLocation = new int[2];
 
+            e.NewFocus.GetLocationInWindow(screenLocation);
+
+            clickYPosition = screenLocation[1];
+        }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
