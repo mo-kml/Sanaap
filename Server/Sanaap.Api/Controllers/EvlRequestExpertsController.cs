@@ -10,6 +10,7 @@ using Sanaap.Dto;
 using Sanaap.Model;
 using Sanaap.Service.Implementations;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
@@ -25,6 +26,8 @@ namespace Sanaap.Api.Controllers
         public virtual IUserInformationProvider UserInformationProvider { get; set; }
 
         public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
+
+        public virtual ISanaapRepository<EvlRequestFile> EvlRequestFileRepository { get; set; }
 
         public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> EvlRequestDtoEntityMapper { get; set; }
 
@@ -53,6 +56,8 @@ namespace Sanaap.Api.Controllers
                 throw new ResourceNotFoundException("evlRequest is null");
             }
 
+            List<EvlRequestFile> requestFiles = await (await EvlRequestFileRepository.GetAllAsync(cancellationToken)).Where(e => e.EvlRequestId == evlRequest.Id).ToListAsync();
+
             HttpClient httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
             SoltaniFindExpertRequest soltaniFindExpertParams = new SoltaniFindExpertRequest();
             soltaniFindExpertParams.UserID = evlRequest.CustomerId;
@@ -63,6 +68,12 @@ namespace Sanaap.Api.Controllers
             soltaniFindExpertParams.MapLat = evlRequest.Latitude;
             soltaniFindExpertParams.MapLng = evlRequest.Longitude;
             soltaniFindExpertParams.Address = "آدرس تستی";
+
+            requestFiles.ForEach(r => soltaniFindExpertParams.Photos.Add(new RequestPhoto
+            {
+                Data = Convert.ToBase64String(r.File),
+                Type = r.TypeId
+            }));
 
             if (evlRequest.InsuranceType == Enums.InsuranceType.Badane)
             {
@@ -122,7 +133,12 @@ namespace Sanaap.Api.Controllers
             return JsonConvert.SerializeObject(await ExternalApiService.GetExpertPosition(args));
         }
     }
+    public class RequestPhoto
+    {
+        public int Type { set; get; }
+        public string Data { set; get; }
 
+    }
     public class SoltaniFindExpertRequest
     {
         public Guid UserID { set; get; }
@@ -155,10 +171,11 @@ namespace Sanaap.Api.Controllers
         public string LostFamily { set; get; }
         public string LostMobile { set; get; }
 
-        //public List<RequestPhoto> Photos { set; get; }
-        //public SoltaniFindExpertRequest()
-        //{
-        //    Photos = new List<RequestPhoto>();
-        //}
+        public List<RequestPhoto> Photos { set; get; }
+
+        public SoltaniFindExpertRequest()
+        {
+            Photos = new List<RequestPhoto>();
+        }
     }
 }
