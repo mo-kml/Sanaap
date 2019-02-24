@@ -17,5 +17,7 @@ namespace Sanaap.App.Services.Contracts
         Task<ExpertPositionDto> UpdateExpertPosition(string token);
 
         Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(int fileId);
+
+        Task<EvlRequestDto> UpdateRank(EvlRequestDto evlRequest);
     }
 }

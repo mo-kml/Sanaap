@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Sanaap.App.Views.EvaluationRequest
+﻿namespace Sanaap.App.Views.EvaluationRequest
 {
-	public partial class EvaluationRequestExpertRankView
-	{
-		public EvaluationRequestExpertRankView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    public partial class EvaluationRequestExpertRankView
+    {
+        public EvaluationRequestExpertRankView()
+        {
+            InitializeComponent();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+    }
 }

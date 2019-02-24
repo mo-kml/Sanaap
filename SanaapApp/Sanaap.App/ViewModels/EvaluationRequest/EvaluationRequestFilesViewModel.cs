@@ -92,8 +92,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   {
                       Directory = "Sanaap",
                       SaveToAlbum = true,
-                      CompressionQuality = 10,
-                      CustomPhotoSize = 10,
+                      CompressionQuality = 40,
+                      CustomPhotoSize = 40,
                       PhotoSize = PhotoSize.Medium,
                       MaxWidthHeight = 2000,
                       DefaultCamera = CameraDevice.Rear

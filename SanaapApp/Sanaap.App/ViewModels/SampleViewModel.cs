@@ -2,19 +2,18 @@
 using Bit.ViewModel;
 using PropertyChanged;
 using Sanaap.App.Helpers.Contracts;
-using Sanaap.Constants;
+using Sanaap.App.Views.EvaluationRequest;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Sanaap.App.ViewModels
 {
     public class SampleViewModel : BitViewModelBase
     {
-        private CancellationTokenSource registerCancellationTokenSource;
+        private readonly CancellationTokenSource registerCancellationTokenSource;
 
 
         private readonly IDateHelper _dateHelper;
@@ -26,11 +25,7 @@ namespace Sanaap.App.ViewModels
 
             Select = new BitDelegateCommand(async () =>
               {
-                  using (userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: registerCancellationTokenSource.Cancel))
-                  {
-
-                      await Task.Delay(10000);
-                  }
+                  await NavigationService.NavigateAsync(nameof(EvaluationRequestExpertRankView));
               });
             //Contents = new ObservableCollection<Test>(
             //    new List<Test>

@@ -58,9 +58,10 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             }
             else
             {
-                await NavigationService.NavigateAsync($"/{nameof(EvaluationRequestExpertView)}", new NavigationParameters
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(EvaluationRequestExpertView)}", new NavigationParameters
                 {
-                    {"Expert",expertDto }
+                    {"Expert",expertDto },
+                    {nameof(Request),Request}
                 });
             }
         }

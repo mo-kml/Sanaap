@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage
+<ContentPage
+             BackgroundColor="Gray"
+             NavigationPage.HasNavigationBar="False"
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Sanaap.App.Controls"
              xmlns:circleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             xmlns:Rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
-             Padding="30,130"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             Padding="30,80"
              x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestExpertRankView"
              >
-    <popup:PopupPage.Resources>
+    <ContentPage.Resources>
         <Style TargetType="Entry">
             <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
         </Style>
@@ -34,44 +36,38 @@
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
         </Style>
-    </popup:PopupPage.Resources>
-    <popup:PopupPage.Content>
-        <Frame CornerRadius="15" Padding="0">
-            <AbsoluteLayout IsClippedToBounds="True">
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
 
-                <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
-
-                    <StackLayout BackgroundColor="White">
-
-                        <StackLayout Spacing="0" HorizontalOptions="CenterAndExpand" Padding="0" Margin="0,20,0,20">
-                            <Label HorizontalTextAlignment="Center" Text="کارشناس محمد علی تقوی"/>
-                            <Label HorizontalOptions="Center" Text="به نظر شما درمجموع چگونه بوده؟"/>
+            <Frame AbsoluteLayout.LayoutBounds="0,0.3,1,1" Margin="0,50,0,0" AbsoluteLayout.LayoutFlags="All" Grid.Row="1" CornerRadius="15" Padding="0">
+                <AbsoluteLayout Padding="0,20,0,0">
+                    <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False">
+                        <StackLayout BackgroundColor="White">
+                            <StackLayout Spacing="0" HorizontalOptions="CenterAndExpand" Padding="0" Margin="0,20">
+                                <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" HorizontalTextAlignment="Center" Text="{Binding Expert.Expert.Name,StringFormat='کارشناس {0}'}"/>
+                                <Label HorizontalOptions="Center" Text="به نظر شما درمجموع چگونه بوده؟" FontSize="{StaticResource ultraSmallFontSize}"/>
+                            </StackLayout>
+                            <rating:SfRating Value="{Binding Request.RankValue}"  Precision="Standard" HorizontalOptions="Center" WidthRequest="140" ItemSpacing="10" ItemSize="20" Margin="0,0,0,30">
+                                <rating:SfRating.RatingSettings>
+                                    <rating:SfRatingSettings RatedFill="{StaticResource lightBlueColor}" RatedStrokeWidth="0" UnRatedStrokeWidth="1" />
+                                </rating:SfRating.RatingSettings>
+                            </rating:SfRating>
+                            <controls:SanaapEditor Text="{Binding Request.RankDescription}" HeightRequest="80" Placeholder="متن"/>
                         </StackLayout>
-
-                        <Rating:SfRating Precision="Standard" HorizontalOptions="Center" WidthRequest="140" ItemSpacing="10" ItemSize="20" Margin="0,0,0,20"/>
-
-                        <controls:SanaapEntry HeightRequest="80" Placeholder="متن"/>
-
-                    </StackLayout>
-
-                </Frame>
-
-                <Frame HasShadow="False" Padding="5" BackgroundColor="{StaticResource grayBackround}" IsClippedToBounds="True" AbsoluteLayout.LayoutBounds="0.5,-0.15,0.2,0.2" AbsoluteLayout.LayoutFlags="All" CornerRadius="80">
-                    <circleImage:CircleImage Source="https://img.game.co.uk/ml2/7/3/0/3/730331_scr3_a.png" Aspect="AspectFill" WidthRequest="60" HeightRequest="60"/>
-
-                    <!--{Binding Expert.Expert.Photo}-->
-
-                </Frame>
-                <Label AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    </Frame>
 
 
-
-            </AbsoluteLayout>
-        </Frame>
-    </popup:PopupPage.Content>
-</popup:PopupPage>
-
+                    <Label AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SubmitRank}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </AbsoluteLayout>
+            </Frame>
+            <Frame BackgroundColor="White" CornerRadius="50" AbsoluteLayout.LayoutBounds="0.5,0,100,100" AbsoluteLayout.LayoutFlags="PositionProportional" Padding="5">
+                <circleImage:CircleImage Source="{Binding Expert.Expert.Photo}" Aspect="AspectFill"/>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

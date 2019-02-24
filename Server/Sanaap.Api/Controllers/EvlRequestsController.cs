@@ -9,6 +9,7 @@ using Sanaap.Enums;
 using Sanaap.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -35,6 +36,15 @@ namespace Sanaap.Api.Controllers
             public EvlRequestStatus status { get; set; }
         }
 
+        public class SubmitRankArgs
+        {
+            public Guid evlRequestId { get; set; }
+
+            public int Rank { get; set; }
+
+            public string Description { get; set; }
+        }
+
         [Action]
         public virtual async Task UpdateRequestStatus(UpdateRequestStatusArgs args, CancellationToken cancellationToken)
         {
@@ -49,6 +59,17 @@ namespace Sanaap.Api.Controllers
             Guid customerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
 
             return Mapper.FromEntityQueryToDtoQuery((await EvlRequestsRepository.GetAllAsync(cancellationToken)).Where(r => r.CustomerId == customerId));
+        }
+
+        [Action]
+        public virtual async Task<EvlRequestDto> UpdateRank(SubmitRankArgs args, CancellationToken cancellationToken)
+        {
+            EvlRequest evlRequest = await (await EvlRequestsRepository.GetAllAsync(cancellationToken)).FirstOrDefaultAsync(r => r.Id == args.evlRequestId);
+
+            evlRequest.RankValue = args.Rank;
+            evlRequest.RankDescription = args.Description;
+
+            return Mapper.FromEntityToDto((await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken)));
         }
 
         [Function]

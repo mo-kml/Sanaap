@@ -5,6 +5,7 @@ using Sanaap.App.Helpers.Contracts;
 using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.App.Views;
+using Sanaap.App.Views.EvaluationRequest;
 using Sanaap.Constants;
 using Sanaap.Dto;
 using System;
@@ -33,38 +34,47 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                 if (await dialogService.DisplayAlertAsync(string.Empty, ConstantStrings.AreYouSureToCancel, ConstantStrings.Yes, ConstantStrings.No))
                 {
                     await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+                    return;
                 }
             });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             Expert = parameters.GetValue<EvlRequestExpertDto>(nameof(Expert));
+            Request = parameters.GetValue<EvlRequestItemSource>(nameof(Request));
 
             CurrentPosition = new Location { Latitude = Expert.Expert.MapLat, Longitude = Expert.Expert.MapLng };
 
             License = _licenseHelper.ConvertToItemSource(Expert.Expert.CarPlate);
 
-            Device.StartTimer(TimeSpan.FromSeconds(7), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
             {
                 Task.Run(async () =>
                 {
                     ExpertPositionDto postion = await _evlRequestService.UpdateExpertPosition(Expert.Token);
 
-                    if (postion.Lat == 0 && postion.Lng == 0)
-                    {
-                        await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainMenuView)}");
 
-                        return;
-                    }
 
                     CurrentPosition = new Location { Latitude = postion.Lat, Longitude = postion.Lng };
                 });
+
+                if (CurrentPosition.Latitude == 0 && CurrentPosition.Longitude == 0)
+                {
+                    NavigationService.NavigateAsync(nameof(EvaluationRequestExpertRankView), new NavigationParameters {
+                            {nameof(Request),Request },
+                            {nameof(Expert),Expert }
+                        });
+
+                    return false;
+                }
 
                 return true;
             });
         }
 
         public EvlRequestExpertDto Expert { get; set; }
+
+        public EvlRequestItemSource Request { get; set; }
 
         public Location CurrentPosition { get; set; }
 

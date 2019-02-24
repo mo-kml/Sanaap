@@ -29,6 +29,14 @@ namespace Sanaap.App.Services.Implementations
                 .ExecuteAsSingleAsync();
         }
 
+        public async Task<EvlRequestDto> UpdateRank(EvlRequestDto evlRequest)
+        {
+            return await _oDataClient.For<EvlRequestDto>(controllerName)
+                .Action("UpdateRank")
+                .Set(new { evlRequestId = evlRequest.Id, Rank = evlRequest.RankValue, Description = evlRequest.RankDescription })
+                .ExecuteAsSingleAsync();
+        }
+
         public async Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(int fileId)
         {
             IEnumerable<EvlRequestProgressDto> progresses = await _oDataClient.For<EvlRequestProgressDto>("EvlRequestProgresses")

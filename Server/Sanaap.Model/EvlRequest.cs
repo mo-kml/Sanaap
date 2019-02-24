@@ -31,6 +31,10 @@ namespace Sanaap.Model
 
         public string PlateNumber { get; set; }
 
+        public int RankValue { get; set; }
+
+        public string RankDescription { get; set; }
+
         public InsuranceType InsuranceType { get; set; }
 
         public DateTimeOffset AccidentDate { get; set; }

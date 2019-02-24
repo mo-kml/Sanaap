@@ -112,8 +112,6 @@ namespace Sanaap.Api.Controllers
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
 
-
-
             EvlRequestExpertDto evlRequestExpert = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
 
             evlRequest.Code = evlRequestExpert.FileID;
