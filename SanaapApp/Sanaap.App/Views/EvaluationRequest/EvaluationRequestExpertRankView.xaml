@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             xmlns:controls="clr-namespace:Sanaap.App.Controls"
+             
+             Padding="30,100"
+             x:Class="Sanaap.App.Views.EvaluationRequest.EvaluationRequestExpertRankView">
+
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="{StaticResource primaryGray}"/>
+        </Style>
+
+        <Style TargetType="Frame" x:Key="TitleFrame">
+            <Setter Property="WidthRequest" Value="18"/>
+            <Setter Property="HeightRequest" Value="18"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderColor" Value="Gray"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="18"/>
+        </Style>
+
+        <Style TargetType="controls:IconLabel" x:Key="Return">
+            <Setter Property="FontSize" Value="{StaticResource xLargeFontSize}"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="TitleLabel">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,22,22"/>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Frame CornerRadius="15" Padding="0">
+            <AbsoluteLayout IsClippedToBounds="True">
+                <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.88" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
+
+                    <StackLayout>
+
+                        <StackLayout HorizontalOptions="CenterAndExpand" Padding="0" Spacing="0" Margin="0,0,0,20">
+                            <Label HorizontalOptions="CenterAndExpand" Text="نام کارشناس"/>
+                            <Label HorizontalOptions="CenterAndExpand" Text="نظر شما در مجموع چگونه بوده؟"/>
+                        </StackLayout>
+
+                        <Label Text="RatePlaceHolder" Margin="0,0,0,20"/>
+
+                        <controls:SanaapEntry HeightRequest="80" Placeholder="متن"/>
+
+                        
+                    </StackLayout>
+
+                </Frame>
+                
+                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                   
+
+
+            </AbsoluteLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>
