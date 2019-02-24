@@ -65,22 +65,23 @@
                     </carousel:CarouselViewControl.ItemTemplate>
                 </carousel:CarouselViewControl>
 
-                <StackLayout Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0.92,0.01,0.2,0.05" AbsoluteLayout.LayoutFlags="All">
-
-                    <Image VerticalOptions="Center" WidthRequest="50" HeightRequest="50" Source="{extentions:Image FileName=logo.png}"/>
+                <StackLayout BindingContext="{x:Reference menu}" VerticalOptions="End" Spacing="0" Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,0.01,0.27,0.05" AbsoluteLayout.LayoutFlags="All">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToggleMenuButton"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image VerticalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" Source="{extentions:Image FileName=logo.png}"/>
 
                     <controls:IconButton BackgroundColor="Transparent"
                                          WidthRequest="50"
-                                         Padding="0"
-                                         
+                                         Padding="0"         
                                          VerticalOptions="Center"
-                                        BindingContext="{x:Reference menu}"
-                                        Clicked="ToggleMenuButton"
-                                        TextColor="Black"
-                                        FontSize="35"
-                                        HorizontalOptions="Center"
-                                        Text="&#xf0c9;"
-                                        Type="Solid" />
+                                         BindingContext="{x:Reference menu}"
+                                         Clicked="ToggleMenuButton"
+                                         TextColor="Black"
+                                         FontSize="35"
+                                         HorizontalOptions="End"
+                                         Text="&#xf0c9;"
+                                         Type="Solid" />
                 </StackLayout>
 
                 <StackLayout Spacing="15" Margin="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,1,1,0.72" AbsoluteLayout.LayoutFlags="PositionProportional,SizeProportional">

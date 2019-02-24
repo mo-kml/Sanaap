@@ -43,7 +43,11 @@ namespace Sanaap.App.Views
 
             if (sender is IconButton iconButton)
             {
-                menu = ((AbsoluteLayout)((IconButton)sender).BindingContext);
+                menu = (AbsoluteLayout)iconButton.BindingContext;
+            }
+            else if (sender is StackLayout stackLayout)
+            {
+                menu = (AbsoluteLayout)stackLayout.BindingContext;
             }
             else
             {
