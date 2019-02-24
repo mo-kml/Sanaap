@@ -1,18 +1,14 @@
-﻿using Sanaap.Enums;
+﻿using Bit.Model.Contracts;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sanaap.Dto
 {
-    public class EvlRequestProgressDto : ISanaapDto
+    public class EvlRequestProgressDto : IDto
     {
-        public Guid Id { get; set; }
-
-        public DateTimeOffset CreatedOn { set; get; }
-
-        public DateTimeOffset ModifiedOn { set; get; }
-
-        public Guid EvlRequestId { get; set; }
-
-        public EvlRequestStatus EvlRequestStatus { get; set; }
+        [Key]
+        public int Stid { set; get; }
+        public DateTime STime { set; get; }
+        public string Desc { set; get; }
     }
 }

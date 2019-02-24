@@ -29,10 +29,11 @@ namespace Sanaap.App.Services.Implementations
                 .ExecuteAsSingleAsync();
         }
 
-        public async Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(Guid requestId)
+        public async Task<IEnumerable<ProgressItemSource>> GetAllProgressesByRequestId(int fileId)
         {
             IEnumerable<EvlRequestProgressDto> progresses = await _oDataClient.For<EvlRequestProgressDto>("EvlRequestProgresses")
-                .Filter(x => x.EvlRequestId == requestId)
+                .Set(new { fileId })
+                .Function("GetAllByRequestId")
                 .FindEntriesAsync();
 
             List<ProgressItemSource> itemSource = new List<ProgressItemSource>();
@@ -40,9 +41,9 @@ namespace Sanaap.App.Services.Implementations
             {
                 itemSource.Add(new ProgressItemSource
                 {
-                    Date = _dateHelper.ToPersianShortDate(progress.CreatedOn.Date),
-                    Time = progress.CreatedOn.ToLocalTime().ToString("HH:mm"),
-                    Status = EnumHelper<EvlRequestStatus>.GetDisplayValue(progress.EvlRequestStatus)
+                    Date = _dateHelper.ToPersianShortDate(progress.STime.Date),
+                    Time = progress.STime.ToLocalTime().ToString("HH:mm"),
+                    Status = progress.Desc
                 });
             }
 

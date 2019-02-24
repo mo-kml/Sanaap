@@ -46,17 +46,23 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 using (userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    EvlRequestDto requestDto = await evlRequestService.SearchByCode(DocumentNumber);
+                    if (string.IsNullOrEmpty(DocumentNumber))
+                    {
+                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.DocumentCodeIsNull, ConstantStrings.Ok);
+                        return;
+                    }
+
+                    EvlRequestDto requestDto = await evlRequestService.SearchByCode(int.Parse(DocumentNumber));
 
                     if (requestDto == null)
                     {
                         await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.RequestDosentExist, ConstantStrings.Ok);
-                        DocumentNumber = 0;
+                        DocumentNumber = null;
                         return;
                     }
                     else
                     {
-                        DocumentNumber = 0;
+                        DocumentNumber = null;
 
                         eventAggregator.GetEvent<OpenInquiryPopupEvent>().Publish(new OpenInquiryPopupEvent());
 
@@ -71,8 +77,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                         await NavigationService.NavigateAsync(nameof(EvlRequestProgressView), parameter);
                     }
                 }
-            }, () => DocumentNumber != 0);
-            Inquiry.ObservesProperty(() => DocumentNumber);
+            });
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
@@ -92,7 +97,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
         public BitDelegateCommand OpenInquiryBox { get; set; }
 
-        public int DocumentNumber { get; set; }
+        public string DocumentNumber { get; set; }
 
         public BitDelegateCommand<EvlRequestListItemSource> ShowRequestProgress { get; set; }
 

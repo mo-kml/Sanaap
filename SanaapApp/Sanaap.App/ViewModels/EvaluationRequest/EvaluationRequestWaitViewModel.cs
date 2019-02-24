@@ -43,6 +43,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             try
             {
                 expertDto = await _evlRequestService.FindEvlRequestExpert(Request.Id);
+
+                Request.Code = expertDto.FileID;
             }
             catch (System.Exception)
             {

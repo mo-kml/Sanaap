@@ -72,8 +72,6 @@ namespace Sanaap.Api.Controllers
 
         public virtual ISanaapRepository<EvlRequest> EvlRequestsRepository { get; set; }
 
-        public virtual ISanaapRepository<EvlRequestProgress> EvlRequestProgressesRepository { get; set; }
-
         public virtual IDtoEntityMapper<EvlRequestDto, EvlRequest> Mapper { get; set; }
 
         public virtual IUserInformationProvider UserInformationProvider { get; set; }
@@ -103,11 +101,8 @@ namespace Sanaap.Api.Controllers
 
                     EvlRequest evlRequest = Mapper.FromDtoToEntity(evlRequestDto);
                     evlRequest.CustomerId = Guid.Parse(UserInformationProvider.GetCurrentUserId());
-                    evlRequest.Code = await EvlRequestsRepository.GetNextSequenceValue();
 
                     evlRequestDto = Mapper.FromEntityToDto(await EvlRequestsRepository.AddAsync(evlRequest, cancellationToken));
-
-                    await EvlRequestProgressesRepository.AddAsync(new EvlRequestProgress { EvlRequestId = evlRequestDto.Id, EvlRequestStatus = EvlRequestStatus.SabteAvalie }, cancellationToken);
 
                     isFirstPart = false;
 

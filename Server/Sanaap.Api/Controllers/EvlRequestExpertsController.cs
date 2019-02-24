@@ -101,7 +101,15 @@ namespace Sanaap.Api.Controllers
                 throw new DomainLogicException("FindNearExpert call failed", ex);
             }
 
-            return JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+
+
+            EvlRequestExpertDto evlRequestExpert = JsonConvert.DeserializeObject<EvlRequestExpertDto>(await findExpertRawResponse.Content.ReadAsStringAsync());
+
+            evlRequest.Code = evlRequestExpert.FileID;
+
+            await EvlRequestsRepository.UpdateAsync(evlRequest, cancellationToken);
+
+            return evlRequestExpert;
         }
         public class GetPositionArgs
         {
@@ -147,6 +155,10 @@ namespace Sanaap.Api.Controllers
         public string LostFamily { set; get; }
         public string LostMobile { set; get; }
 
-
+        //public List<RequestPhoto> Photos { set; get; }
+        //public SoltaniFindExpertRequest()
+        //{
+        //    Photos = new List<RequestPhoto>();
+        //}
     }
 }

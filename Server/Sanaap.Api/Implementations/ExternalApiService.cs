@@ -277,6 +277,26 @@ namespace Sanaap.Api.Implementations
             }
         }
 
+        public async Task<IEnumerable<EvlRequestProgressDto>> GetFileProgress(int fileId)
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+            StringContent content = new StringContent(JsonConvert.SerializeObject(new { fid = fileId }), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await httpClient.PostAsync($"CheckFileStatus", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<IEnumerable<EvlRequestProgressDto>>(await result.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+        }
+
 
         public async Task<bool> LikeNews(int id, Guid userId)
         {
