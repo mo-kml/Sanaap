@@ -20,6 +20,8 @@ namespace Sanaap.Model
 
         public string PlateNumber { get; set; }
 
+        public DateTimeOffset ExpirationDate { get; set; }
+
         public InsuranceType InsuranceType { get; set; }
 
         [ForeignKey(nameof(CustomerId))]

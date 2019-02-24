@@ -28,6 +28,8 @@ namespace Sanaap.App.ViewModels.Insurance
         private readonly IInitialDataService _initialDataService;
         private readonly IUserDialogs _userDialogs;
         private readonly ILicenseHelper _licenseHelper;
+        private IPageDialogService _dialogService;
+        private IDateHelper _dateHelper;
         public CreateInsurancePolicyViewModel(
             IUserDialogs userDialogs,
             HttpClient httpClient,
@@ -37,6 +39,7 @@ namespace Sanaap.App.ViewModels.Insurance
             IPageDialogService dialogService,
             IPolicyService policyService,
             ILicenseHelper licenseHelper,
+            IDateHelper dateHelper,
             ISanaapAppTranslateService translateService
             )
         {
@@ -44,7 +47,8 @@ namespace Sanaap.App.ViewModels.Insurance
             _userDialogs = userDialogs;
             _initialDataService = initialDataService;
             _licenseHelper = licenseHelper;
-
+            _dialogService = dialogService;
+            _dateHelper = dateHelper;
 
             foreach (InsuranceType item in (InsuranceType[])Enum.GetValues(typeof(InsuranceType)))
             {
@@ -86,7 +90,15 @@ namespace Sanaap.App.ViewModels.Insurance
                           return;
                       }
 
+                      if (SelectedDate == null)
+                      {
+                          await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.ExpirationDateIsNotValid, ConstantStrings.Ok);
+                          return;
+                      }
+
                       License.Alphabet = SelectedAlphabet.Name;
+
+                      Policy.ExpirationDate = new DateTimeOffset((DateTime)SelectedDate, DateTimeOffset.Now.Offset);
 
                       if (licenseHelper.ConvertToPlateNumber(License, out string licensePlate))
                       {
@@ -143,6 +155,8 @@ namespace Sanaap.App.ViewModels.Insurance
                 SelectedInsurer = parameter;
             });
         }
+
+
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             insuranceCancellationTokenSource?.Cancel();
@@ -166,10 +180,12 @@ namespace Sanaap.App.ViewModels.Insurance
                         InsuranceType = policy.InsuranceType,
                         InsurerId = policy.InsurerId,
                         InsurerNo = policy.InsurerNo,
+                        ExpirationDate = policy.ExpirationDate,
                         PlateNumber = policy.PlateNumber,
                         VIN = policy.VIN
                     };
 
+                    SelectedDate = Policy.ExpirationDate.DateTime;
                     SelectedColor = Colors.FirstOrDefault(c => c.PrmID == Policy.ColorId);
                     SelectedCar = Cars.FirstOrDefault(c => c.PrmID == Policy.CarId);
                     SelectedInsuranceType = InsuranceTypes.FirstOrDefault(c => c.InsuranceType == Policy.InsuranceType);
@@ -224,6 +240,41 @@ namespace Sanaap.App.ViewModels.Insurance
         public BitDelegateCommand<InsurersItemSource> SelectInsurer { get; set; }
 
         public CancellationTokenSource policyCancellationTokenSource { get; set; }
+
+        public string Month { get; set; }
+
+        public string Year { get; set; }
+
+        public string Day { get; set; }
+
+        public DateTime? SelectedDate { get; set; }
+
+        public async void OnSelectedDateChanged()
+        {
+            if (SelectedDate == null)
+            {
+                return;
+            }
+
+            if (SelectedDate.Value.Date <= DateTime.Now)
+            {
+                await _dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.ExpirationDateIsNotValid, ConstantStrings.Ok);
+
+                Year = string.Empty;
+                Month = string.Empty;
+                Day = string.Empty;
+
+                SelectedDate = null;
+
+                return;
+            }
+
+            _dateHelper.ToPersianLongDate(SelectedDate.Value, out string year, out string month, out string day);
+
+            Year = year;
+            Month = month;
+            Day = day;
+        }
     }
     public class InsuranceTypeItemSource
     {

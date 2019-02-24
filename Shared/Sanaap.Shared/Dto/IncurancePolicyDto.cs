@@ -21,6 +21,8 @@ namespace Sanaap.Dto
 
         public string PlateNumber { get; set; }
 
+        public DateTimeOffset ExpirationDate { get; set; }
+
         public InsuranceType InsuranceType { get; set; }
 
         public Guid CustomerId { get; set; }

@@ -80,7 +80,7 @@ namespace Sanaap.App.Droid
 
                 if (keyboardHeight > 100)
                 {
-                    root.ScrollTo(0, 300);
+                    root.ScrollTo(0, 250);
                 }
                 else
                 {

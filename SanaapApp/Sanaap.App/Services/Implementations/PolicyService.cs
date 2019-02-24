@@ -75,6 +75,7 @@ namespace Sanaap.App.Services.Implementations
                     InsurerId = insurance.InsurerId,
                     PlateNumber = insurance.PlateNumber,
                     VIN = insurance.VIN,
+                    ExpirationDate = insurance.ExpirationDate,
                     ColorName = colors.FirstOrDefault(c => c.PrmID == insurance.ColorId)?.Name,
                     CarName = cars.FirstOrDefault(c => c.PrmID == insurance.CarId)?.Name,
                     Image = insureres.FirstOrDefault(c => c.ID == insurance.InsurerId)?.Photo,

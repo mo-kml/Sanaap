@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage
+<ContentPage
     x:Class="Sanaap.App.Views.Insurance.CreateInsurancePolicyView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    BackgroundColor="Gray"
     xmlns:prop="clr-namespace:Sanaap.App.Props"
-    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:controls="clr-namespace:Sanaap.App.Controls"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     NavigationPage.HasNavigationBar="False"
- xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-    Padding="30,40,30,40"
-    HasKeyboardOffset="False"
-    HasSystemPadding="True"
-    SystemPaddingSides="All"
+    xmlns:noda="clr-namespace:NodaTime;assembly=NodaTime"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    Padding="30,40"
+    xmlns:bitControls="clr-namespace:Bit.CSharpClient.Controls;assembly=Bit.CSharpClient.Controls"
     x:Name="createInsuranceView">
     <Frame CornerRadius="15" Padding="0">
         <AbsoluteLayout IsClippedToBounds="True">
@@ -55,7 +52,7 @@
 
                                 <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                                <syncfusion:SfListView prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" FocusBorderColor="Red" SelectedItem="{Binding SelectedInsurer}" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60">
+                                <syncfusion:SfListView prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" prop:ScrollToItemProps.ScrollToLastItem="{Binding Insurers}" FocusBorderColor="Red" SelectedItem="{Binding SelectedInsurer}" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" AutoFitMode="None" HeightRequest="60">
                                     <syncfusion:SfListView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
@@ -77,6 +74,44 @@
                                 <controls:SanaapEntry Text="{Binding License.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
                             </StackLayout>
 
+                            <bitControls:BitDatePicker CalendarSystem="{x:Static noda:CalendarSystem.PersianArithmetic}"
+                                        SelectedColor="{StaticResource primaryBlue}"
+                                        TodayColor="{StaticResource primaryBlue}"
+                                        FontFamily="{StaticResource Vazir-Light-FD-WOLFont}"
+                                        Culture="Fa"
+                                        SelectedDate="{Binding SelectedDate}"
+                                        FlowDirection="RightToLeft"
+                                        DateDisplayFormat="dd MMM yyyy"
+                                        AutoClose="True">
+                                <bitControls:BitDatePicker.ControlTemplate>
+                                    <ControlTemplate>
+                                        <Frame HasShadow="False" Padding="1" CornerRadius="5" BorderColor="{StaticResource textBorderColor}" BindingContext="{Binding BindingContext,Source={x:Reference createInsuranceView}}">
+                                            <StackLayout Orientation="Horizontal" Padding="10,0">
+                                                <Label HorizontalOptions="Start" Margin="10,0,0,0" Text="تاریخ انقضاء" VerticalTextAlignment="Center"/>
+
+                                                <Grid HorizontalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="1"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="1"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Day}"/>
+                                                    <BoxView Margin="0,15,0,15" Grid.Column="1" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                                    <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" FontFamily="{TemplateBinding FontFamily}"  Text="{Binding Month}"/>
+                                                    <BoxView Margin="0,15,0,15" Grid.Column="3" BackgroundColor="{StaticResource primaryGray}" HeightRequest="3" />
+                                                    <Label TextColor="Black" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Year}" FontFamily="{TemplateBinding FontFamily}" />
+                                                </Grid>
+
+                                                <controls:IconButton HorizontalOptions="End" BackgroundColor="Transparent" WidthRequest="20" Padding="0,0,0,5" FontSize="20" Command="{TemplateBinding OpenPopupCommand}" Text="&#xf0dd;" Type="Solid" TextColor="{StaticResource textPlaceholderColor}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ControlTemplate>
+                                </bitControls:BitDatePicker.ControlTemplate>
+                            </bitControls:BitDatePicker>
+
                             <controls:SanaapComboBox DisplayMemberPath="InsuranceTypeName" DataSource="{Binding InsuranceTypes}" SelectedItem="{Binding SelectedInsuranceType}" Placeholder="نوع بیمه" />
 
                         </StackLayout>
@@ -92,4 +127,4 @@
 
         </AbsoluteLayout>
     </Frame>
-</popup:PopupPage>
+</ContentPage>
