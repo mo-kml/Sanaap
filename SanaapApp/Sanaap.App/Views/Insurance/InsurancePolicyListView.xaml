@@ -23,31 +23,31 @@
         <navigationdrawer:SfNavigationDrawer EnableSwipeGesture="False" DrawerHeight="350" DrawerHeaderHeight="0" DrawerFooterHeight="0" Position="Bottom" x:Name="navigationDrawer" VerticalOptions="FillAndExpand">
             <navigationdrawer:SfNavigationDrawer.ContentView>
                 <StackLayout FlowDirection="RightToLeft">
-                    <syncfusionListView:SfListView ItemsSource="{Binding Policies}">
-                        <syncfusionListView:SfListView.Behaviors>
-                            <b:EventToCommandBehavior Command="{Binding ShowPolicy}" EventArgsParameterPath="ItemData" EventName="ItemTapped"/>
-                        </syncfusionListView:SfListView.Behaviors>
-                        <syncfusionListView:SfListView.ItemTemplate>
+                    <ListView HasUnevenRows="True" ItemsSource="{Binding Policies}">
+                        <ListView.Behaviors>
+                            <b:EventToCommandBehavior Command="{Binding ShowPolicy}" EventArgsParameterPath="Item" EventName="ItemTapped"/>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <ViewCell Tapped="ViewCell_Tapped">
                                     <StackLayout>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="75"/>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackLayout Padding="20">
                                                 <ffimageloading:CachedImage DownsampleToViewSize="True" Source="{Binding Image}" Aspect="AspectFit"/>
                                             </StackLayout>
 
                                             <StackLayout Grid.Column="1"  VerticalOptions="Center" Spacing="0">
-                                                <Label Text="{Binding CarName}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
-                                                <Label Text="{Binding ColorName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
-                                                <Label Text="{Binding InsuranceTypeName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                                <Label HorizontalTextAlignment="Start" Text="{Binding CarName}" TextColor="Black" FontSize="{StaticResource mediumFontSize}" FontFamily="{StaticResource Shabnam-Bold-FDFont}"/>
+                                                <Label HorizontalTextAlignment="Start" Text="{Binding ColorName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
+                                                <Label HorizontalTextAlignment="Start" Text="{Binding InsuranceTypeName}" TextColor="{StaticResource primaryGray}" FontSize="{StaticResource smallFontSize}"/>
                                             </StackLayout>
 
-                                            <AbsoluteLayout VerticalOptions="Center" Grid.Column="2">
+                                            <AbsoluteLayout WidthRequest="130" VerticalOptions="Center" Grid.Column="2">
                                                 <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal" Grid.Column="2">
                                                     <Label HorizontalOptions="FillAndExpand" Text="تاریخ انقضاء" FontSize="{StaticResource ultraSmallFontSize}"/>
                                                     <Label HorizontalOptions="FillAndExpand" Text="{Binding ExpirationDate,Converter={StaticResource dateTimeOffsetToSolarDateConverter}}" TextColor="Black"/>
@@ -67,14 +67,14 @@
                                                 <Image IsVisible="{Binding IsExpired}" AbsoluteLayout.LayoutBounds="-0.25,0.1,35,35" AbsoluteLayout.LayoutFlags="PositionProportional" Aspect="AspectFit" Source="{extentions:Image FileName=isExpired.png}"/>
 
                                             </AbsoluteLayout>
-                                            
+
                                         </Grid>
                                         <BoxView HeightRequest="0.7" BackgroundColor="{StaticResource primaryGray}"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
-                        </syncfusionListView:SfListView.ItemTemplate>
-                    </syncfusionListView:SfListView>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <Frame BackgroundColor="{StaticResource primaryBlue}" HorizontalOptions="Center" Margin="30" CornerRadius="10">
                         <Frame.GestureRecognizers>

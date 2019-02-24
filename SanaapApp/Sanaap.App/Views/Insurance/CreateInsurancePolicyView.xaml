@@ -52,7 +52,7 @@
 
                                 <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                                <syncfusion:SfListView prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" prop:ScrollToItemProps.ScrollToLastItem="{Binding Insurers}" FocusBorderColor="Red" SelectedItem="{Binding SelectedInsurer}" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" AutoFitMode="None" HeightRequest="60">
+                                <syncfusion:SfListView prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" FocusBorderColor="Red" SelectedItem="{Binding SelectedInsurer}" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" AutoFitMode="None" HeightRequest="60">
                                     <syncfusion:SfListView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >

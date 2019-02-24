@@ -32,6 +32,12 @@ namespace Sanaap.Service.Implementations
                 return false;
             }
 
+            if (string.IsNullOrEmpty(comment.Description))
+            {
+                message = $"{nameof(CommentDto.Description)}IsEmpty";
+                return false;
+            }
+
             comment.Mobile = comment.Mobile.Trim();
 
             if (!IsValidMobileNumber(comment.Mobile))
