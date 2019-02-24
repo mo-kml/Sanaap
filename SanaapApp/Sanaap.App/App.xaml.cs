@@ -126,7 +126,6 @@ namespace Sanaap.App
             containerRegistry.RegisterForNav<EvaluationRequestFilesView, EvaluationRequestFilesViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestLostDetailView, EvaluationRequestLostDetailViewModel>();
             containerRegistry.RegisterForNav<EvaluationRequestDescriptionView, EvaluationRequestDescriptionViewModel>();
-            containerRegistry.RegisterForNav<EvaluationRequestExpertRankView, EvaluationRequestExpertRankViewModel>();
 
             containerRegistry.RegisterPartialView<MenuView, MenuViewModel>();
             containerRegistry.RegisterPartialView<InsuranceListPopupView, InsuranceListPopupViewModel>();
