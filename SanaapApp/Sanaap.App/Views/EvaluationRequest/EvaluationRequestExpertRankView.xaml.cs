@@ -9,12 +9,11 @@ using Xamarin.Forms.Xaml;
 
 namespace Sanaap.App.Views.EvaluationRequest
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EvaluationRequestExpertRankView : ContentPage
-    {
-        public EvaluationRequestExpertRankView()
-        {
-            InitializeComponent();
-        }
-    }
+	public partial class EvaluationRequestExpertRankView
+	{
+		public EvaluationRequestExpertRankView ()
+		{
+			InitializeComponent ();
+		}
+	}
 }

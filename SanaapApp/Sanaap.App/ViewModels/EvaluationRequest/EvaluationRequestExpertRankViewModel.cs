@@ -8,5 +8,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 {
     public class EvaluationRequestExpertRankViewModel : BitViewModelBase
     {
+        public EvaluationRequestExpertRankViewModel()
+        {
+
+        }
     }
 }
