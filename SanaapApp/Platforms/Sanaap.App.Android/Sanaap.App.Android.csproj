@@ -74,6 +74,9 @@
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>1.1.5.193</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfRating">
+      <Version>16.3.0.36</Version>
+    </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.2</Version>
     </PackageReference>
