@@ -42,7 +42,7 @@
         public static string DateNotValid = "تاریخ وارد شده اشتباه است. لطفا دوباره تلاش کنید.";
         public static string GPSNotEnable = "امکان دریافت موقعیت وجود ندارد. لطفا GPS خود را روشن نمایید.";
         public static string ExpirationDateIsNotValid = "تاریخ انقضا وارد شده صحیح نمیباشد";
-        public static string DocumentCodeIsNull = "لطفا شماره پرونده را وارد کنید";
+        public static string DocumentNumberIsInvalid = "شماره پرونده وارد شده صحیح نمیباشد";
     }
 
     public class EnumDisplayNames

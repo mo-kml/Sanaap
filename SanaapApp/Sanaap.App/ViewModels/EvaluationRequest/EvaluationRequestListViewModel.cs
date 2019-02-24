@@ -12,6 +12,7 @@ using Sanaap.Dto;
 using Sanaap.Enums;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
@@ -46,9 +47,10 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
             {
                 using (userDialogs.Loading(ConstantStrings.Loading))
                 {
-                    if (string.IsNullOrEmpty(DocumentNumber))
+                    if (string.IsNullOrEmpty(DocumentNumber) || !Requests.Any(r => r.Code == int.Parse(DocumentNumber)))
                     {
-                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.DocumentCodeIsNull, ConstantStrings.Ok);
+                        await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.DocumentNumberIsInvalid, ConstantStrings.Ok);
+                        DocumentNumber = null;
                         return;
                     }
 
