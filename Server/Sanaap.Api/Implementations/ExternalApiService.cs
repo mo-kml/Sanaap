@@ -24,6 +24,7 @@ namespace Sanaap.Api.Implementations
         private HttpClient httpClient;
         private IEnumerable<ExternalEntityDto> colors;
         private IEnumerable<ExternalEntityDto> cars;
+        private IEnumerable<ExternalEntityDto> accidentReasons;
         private IEnumerable<PhotoTypeDto> salesPhotos;
         private IEnumerable<PhotoTypeDto> badanePhotos;
         private IEnumerable<InsurerDto> insurers;
@@ -101,6 +102,32 @@ namespace Sanaap.Api.Implementations
             }
 
             return salesPhotos;
+        }
+
+        public async Task<IEnumerable<ExternalEntityDto>> GetAccidentReasons()
+        {
+            if (httpClient == null)
+            {
+                httpClient = HttpClientFactory.CreateClient("SoltaniHttpClient");
+            }
+
+            if (accidentReasons == null)
+            {
+                HttpResponseMessage result = await httpClient.GetAsync("GetInitData");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    JObject jObject = JObject.Parse(await result.Content.ReadAsStringAsync());
+
+                    accidentReasons = JsonConvert.DeserializeObject<IEnumerable<ExternalEntityDto>>(jObject["AccidentReason"].ToString());
+                }
+                else
+                {
+                    throw new Exception(result.ReasonPhrase);
+                }
+            }
+
+            return accidentReasons;
         }
 
         public async Task<IEnumerable<PhotoTypeDto>> GetBadanePhotos()

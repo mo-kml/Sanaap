@@ -24,5 +24,7 @@ namespace Sanaap.App.Services.Contracts
         Task<List<PhotoTypeDto>> GetBadanePhotos();
 
         Task<List<PhotoTypeDto>> GetSalesPhotos();
+
+        Task<List<ExternalEntityDto>> GetAccidentReasons();
     }
 }

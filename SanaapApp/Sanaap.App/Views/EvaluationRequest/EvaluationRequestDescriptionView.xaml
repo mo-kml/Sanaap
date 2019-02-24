@@ -115,8 +115,11 @@
                                     </bitControls:BitDatePicker.ControlTemplate>
                                 </bitControls:BitDatePicker>
 
-                                <controls:SanaapEntry Text="{Binding Request.AccidentReason}" Placeholder="علت وقوع حادثه"/>
-
+                                <controls:SanaapComboBox
+                                    Placeholder="علت وقوع حادثه"
+                                    DataSource="{Binding AccidentReasons}"
+                                    DisplayMemberPath="Name"
+                                    SelectedItem="{Binding SelectedAccidentReason}" />
                             </StackLayout>
                         </StackLayout>
                     </ScrollView>

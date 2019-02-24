@@ -16,6 +16,7 @@ namespace Sanaap.App.Services.Implementations
         private readonly IODataClient _oDataClient;
         private List<ExternalEntityDto> cars;
         private List<ExternalEntityDto> alphabets;
+        private List<ExternalEntityDto> accidentReasons;
         private List<ExternalEntityDto> colors;
         private List<PhotoTypeDto> salesPhotos;
         private List<PhotoTypeDto> badanePhotos;
@@ -100,7 +101,17 @@ namespace Sanaap.App.Services.Implementations
 
             return alphabets;
         }
+        public async Task<List<ExternalEntityDto>> GetAccidentReasons()
+        {
+            if (accidentReasons == null)
+            {
+                accidentReasons = (await _oDataClient.For<ExternalEntityDto>("ExternalEntities")
+                    .Function("GetAccidentReasons")
+                    .FindEntriesAsync()).ToList();
+            }
 
+            return accidentReasons;
+        }
         public async Task<List<InsurersItemSource>> GetInsurers()
         {
             if (insurers == null)

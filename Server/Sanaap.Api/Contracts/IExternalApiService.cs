@@ -28,5 +28,6 @@ namespace Sanaap.Api.Contracts
 
         Task<ExpertPositionDto> GetExpertPosition(GetPositionArgs positionArgs);
 
+        Task<IEnumerable<ExternalEntityDto>> GetAccidentReasons();
     }
 }
