@@ -210,10 +210,10 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
                 if (await dialogService.DisplayAlertAsync(ConstantStrings.Error, ConstantStrings.AreYouSureToDelete, ConstantStrings.Yes, ConstantStrings.No))
                 {
-                    await NavigationService.GoBackAsync();
-
                     image.Image = null;
                     image.HasImage = false;
+
+                    await NavigationService.GoBackAsync();
                 }
             });
         }
