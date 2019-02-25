@@ -10,7 +10,7 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     x:Name="requestDetailView"
-    Padding="30,50">
+    >
   <ContentPage.Resources>
 
     <Style TargetType="Label" x:Key="TitleLabel">
@@ -36,87 +36,91 @@
   </ContentPage.Resources>
 
   <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Padding="30,50">
     <Frame CornerRadius="15" Padding="0">
-      <AbsoluteLayout IsClippedToBounds="True">
-        <Frame CornerRadius="15" AbsoluteLayout.LayoutBounds="0,0,1,0.9" AbsoluteLayout.LayoutFlags="All" HasShadow="False" Padding="15,15,15,0">
 
-          <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">
+            <Frame Padding="0" CornerRadius="15" HasShadow="False">
 
-            <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="65"/>
+                        </Grid.RowDefinitions>
+                        <!--<ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White">-->
+                        <ScrollView Padding="15" >
+                            <StackLayout FlowDirection="RightToLeft">
 
-              <StackLayout Orientation="Horizontal">
-                <StackLayout HorizontalOptions="Start">
-                  <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
-                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="Start">
+                                        <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
+                                    </StackLayout>
 
-                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
-                  <StackLayout HorizontalOptions="Start">
-                    <StackLayout Orientation="Horizontal">
-                      <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                        <Label Text="1 بیمه گذار" TextColor="White" Style="{StaticResource TitleLabel}"/>
-                      </Frame>
-                    </StackLayout>
-                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
-
-
-
-                  </StackLayout>
-
-                  <Frame  Style="{StaticResource TitleFrame}">
-                    <Label Text="2" Style="{StaticResource TitleLabel}"/>
-                  </Frame>
-                  <Frame  Style="{StaticResource TitleFrame}">
-                    <Label Text="3" Style="{StaticResource TitleLabel}"/>
-                  </Frame>
-                  <Frame Style="{StaticResource TitleFrame}">
-                    <Label Text="4" Style="{StaticResource TitleLabel}"/>
-                  </Frame>
-                  <Frame Style="{StaticResource TitleFrame}">
-                    <Label Text="5" Style="{StaticResource TitleLabel}"/>
-                  </Frame>
-
-                </StackLayout>
-
-              </StackLayout>
-
-              <StackLayout Padding="0,30" Spacing="10">
-
-                <StackLayout Orientation="Horizontal">
-                  <Label Text="اطلاعات بیمه گذار/مقصر" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
-                  <!--Need More Work On Button-->
-                  <Button  HorizontalOptions="FillAndExpand" HeightRequest="30" CornerRadius="5" Padding="0" TextColor="White" Text="انتخاب" Command="{Binding SelectFromInsurances}" BackgroundColor="{StaticResource actionBlueButton}"/>
-                </StackLayout>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                                        <StackLayout HorizontalOptions="Start">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                                    <Label Text="1 بیمه گذار" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                                </Frame>
+                                            </StackLayout>
+                                            <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
 
 
-                <StackLayout Orientation="Horizontal" >
 
-                  <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" Placeholder="نام"/>
+                                        </StackLayout>
 
-                  <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+                                        <Frame  Style="{StaticResource TitleFrame}">
+                                            <Label Text="2" Style="{StaticResource TitleLabel}"/>
+                                        </Frame>
+                                        <Frame  Style="{StaticResource TitleFrame}">
+                                            <Label Text="3" Style="{StaticResource TitleLabel}"/>
+                                        </Frame>
+                                        <Frame Style="{StaticResource TitleFrame}">
+                                            <Label Text="4" Style="{StaticResource TitleLabel}"/>
+                                        </Frame>
+                                        <Frame Style="{StaticResource TitleFrame}">
+                                            <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                                        </Frame>
 
-                </StackLayout>
-                <!--<Label Text="نام خانوادگی" />-->
+                                    </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
+                                </StackLayout>
 
-                  <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                                <StackLayout Padding="0,30,0,0" Spacing="10">
 
-                  <syncfusion:SfListView AutoFitMode="None" prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" SelectedItem="{Binding SelectedInsurer}" AllowKeyboardNavigation="True" FocusBorderColor="Red" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60">
-                    <syncfusion:SfListView.ItemTemplate>
-                      <DataTemplate>
-                        <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
-                          <StackLayout>
-                            <ffimageloading:CachedImage DownsampleToViewSize="True" HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
-                          </StackLayout>
-                        </Frame>
-                      </DataTemplate>
-                    </syncfusion:SfListView.ItemTemplate>
-                  </syncfusion:SfListView>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="اطلاعات بیمه گذار/مقصر" FontFamily="{StaticResource Shabnam-Bold-FDFont}" VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand"/>
+                                        <!--Need More Work On Button-->
+                                        <Button  HorizontalOptions="FillAndExpand" HeightRequest="30" CornerRadius="5" Padding="0" TextColor="White" Text="انتخاب" Command="{Binding SelectFromInsurances}" BackgroundColor="{StaticResource actionBlueButton}"/>
+                                    </StackLayout>
 
-                </StackLayout>
-                <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
 
-                <controls:SanaapComboBox
+                                    <StackLayout Orientation="Horizontal" >
+
+                                        <controls:SanaapEntry HorizontalOptions="FillAndExpand"  Text="{Binding Request.OwnerFirstName, Mode=TwoWay}" Placeholder="نام"/>
+
+                                        <controls:SanaapEntry HorizontalOptions="FillAndExpand" Margin="0,0,5,0" Text="{Binding Request.OwnerLastName, Mode=TwoWay}" Placeholder="نام خانوادگی" />
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}"  Text="بیمه" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                                        <syncfusion:SfListView AutoFitMode="None" prop:ScrollToItemProps.ScrollToItem="{Binding SelectedInsurer}" SelectedItem="{Binding SelectedInsurer}" AllowKeyboardNavigation="True" FocusBorderColor="Red" Orientation="Horizontal" ItemSpacing="10,0" ItemsSource="{Binding Insurers}" ItemSize="60" HeightRequest="60">
+                                            <syncfusion:SfListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame Margin="1" Padding="10" BorderColor="{StaticResource textBorderColor}" CornerRadius="5" >
+                                                        <StackLayout>
+                                                            <ffimageloading:CachedImage DownsampleToViewSize="True" HeightRequest="45" VerticalOptions="Center" Source="{Binding Image}" Aspect="AspectFit"/>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </syncfusion:SfListView.ItemTemplate>
+                                        </syncfusion:SfListView>
+
+                                    </StackLayout>
+                                    <controls:SanaapEntry Keyboard="Numeric" HorizontalTextAlignment="End" Placeholder="شماره بیمه نامه" Text="{Binding Request.InsurerNo}" />
+
+                                    <controls:SanaapComboBox
                 Placeholder="نام خودرو"
                 AllowFiltering="True"
                 DataSource="{Binding Cars}"
@@ -125,25 +129,28 @@
                 SelectedItem="{Binding SelectedCar}" />
 
 
-                <StackLayout Orientation="Horizontal">
-                  <Label Text="پلاک" VerticalOptions="Center"/>
-                  <controls:SanaapEntry Text="{Binding License.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" HorizontalTextAlignment="End"  Keyboard="Numeric" Placeholder="ایران"/>
-                  <controls:SanaapEntry Text="{Binding License.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
-                  <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Text="حرف" HorizontalOptions="FillAndExpand" />
-                  <controls:SanaapEntry Text="{Binding License.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
-                </StackLayout>
-              </StackLayout>
-            </StackLayout>
-          </ScrollView>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="پلاک" VerticalOptions="Center"/>
+                                        <controls:SanaapEntry Text="{Binding License.ProvinceNumber}" HorizontalOptions="Center" MaxLength="2" HorizontalTextAlignment="End"  Keyboard="Numeric" Placeholder="ایران"/>
+                                        <controls:SanaapEntry Text="{Binding License.SecondNumber}" MaxLength="3" Keyboard="Numeric" HorizontalOptions="Fill" />
+                                        <controls:SanaapComboBox SelectedItem="{Binding SelectedAlphabet}" DataSource="{Binding Alphabets}" DisplayMemberPath="Name" Text="حرف" HorizontalOptions="FillAndExpand" />
+                                        <controls:SanaapEntry Text="{Binding License.FirstNumber}" MaxLength="2" Keyboard="Numeric" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                        <Label Grid.Row="1" HorizontalOptions="FillAndExpand" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center"  Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalTextAlignment="Center"  VerticalOptions="FillAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
 
-        </Frame>
-        <Label AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.15" AbsoluteLayout.LayoutFlags="All" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <Label.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
-          </Label.GestureRecognizers>
-        </Label>
+                    </Grid>
+                </Frame>
+        
 
-      </AbsoluteLayout>
+      
     </Frame>
-  </ContentPage.Content>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

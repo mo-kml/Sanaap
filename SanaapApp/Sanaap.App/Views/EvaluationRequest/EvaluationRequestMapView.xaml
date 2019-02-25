@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Padding="30,70" BackgroundColor="Gray"
+             BackgroundColor="Gray"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              NavigationPage.HasNavigationBar="False"
              xmlns:props="clr-namespace:Sanaap.App.Props"
@@ -36,76 +36,84 @@
 
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Frame CornerRadius="15" Padding="0">
-            <AbsoluteLayout IsClippedToBounds="True">
-                <Frame Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,0.88" CornerRadius="15" AbsoluteLayout.LayoutFlags="All" HasShadow="False">
-                    <StackLayout Margin="0">
+        <StackLayout VerticalOptions="Center" Padding="30,50">
+            <Frame CornerRadius="15" Padding="0">
+                <Grid RowSpacing="0" Padding="0">
 
-                        <StackLayout Orientation="Horizontal" Padding="15">
-                            <StackLayout HorizontalOptions="Start">
-                                <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
-                            </StackLayout>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="65"/>
+                    </Grid.RowDefinitions>
+                    
+                    
+                        <StackLayout Padding="0" Spacing="0" Margin="0">
 
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                            <StackLayout Orientation="Horizontal" Padding="15">
                                 <StackLayout HorizontalOptions="Start">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Frame  Style="{StaticResource TitleFrame}">
-                                            <Label Text="1" Style="{StaticResource TitleLabel}"/>
-                                        </Frame>
-                                        <Frame  Style="{StaticResource TitleFrame}">
-                                            <Label Text="2" Style="{StaticResource TitleLabel}"/>
-                                        </Frame>
-                                        <Frame Style="{StaticResource TitleFrame}">
-                                            <Label Text="3" Style="{StaticResource TitleLabel}"/>
-                                        </Frame>
-                                        <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
-                                            <Label Text="4 محل حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
-                                        </Frame>
-                                    </StackLayout>
-                                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
+                                    <Label Style="{StaticResource headerText}" Text="اعلام خسارت" FontAttributes="Bold"/>
                                 </StackLayout>
 
-                                <Frame Style="{StaticResource TitleFrame}">
-                                    <Label Text="5" Style="{StaticResource TitleLabel}"/>
-                                </Frame>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                                    <StackLayout HorizontalOptions="Start">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame  Style="{StaticResource TitleFrame}">
+                                                <Label Text="1" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+                                            <Frame  Style="{StaticResource TitleFrame}">
+                                                <Label Text="2" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+                                            <Frame Style="{StaticResource TitleFrame}">
+                                                <Label Text="3" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+                                            <Frame CornerRadius="5" Padding="6" BackgroundColor="{StaticResource popupPositionFramColor}" >
+                                                <Label Text="4 محل حادثه" TextColor="White" Style="{StaticResource TitleLabel}"/>
+                                            </Frame>
+                                        </StackLayout>
+                                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource popupPositionFramColor}"/>
+                                    </StackLayout>
+
+                                    <Frame Style="{StaticResource TitleFrame}">
+                                        <Label Text="5" Style="{StaticResource TitleLabel}"/>
+                                    </Frame>
+
+                                </StackLayout>
 
                             </StackLayout>
 
-                        </StackLayout>
 
-
-                        <AbsoluteLayout VerticalOptions="FillAndExpand">
-                            <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,0.91" AbsoluteLayout.LayoutFlags="All"
+                            <AbsoluteLayout HeightRequest="300" VerticalOptions="FillAndExpand">
+                                <maps:Map x:Name="map" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                                     InitialCameraUpdate="33.5, 53.5, 4.9, 0, 0" MyLocationEnabled="False" WidthRequest="10"
                                     VerticalOptions="FillAndExpand" props:MapProps.CenterRegion="{Binding CurrentPosition}"/>
 
-                            <Image AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,40,40" Source="{extentions:Image FileName=mapPin.png}">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
-                                </Image.GestureRecognizers>
+                                <Image AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,40,40" Source="{extentions:Image FileName=mapPin.png}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
+                                    </Image.GestureRecognizers>
 
-                            </Image>
+                                </Image>
 
-                        </AbsoluteLayout>
+                            </AbsoluteLayout>
 
-                    </StackLayout>
+                        </StackLayout>
 
-                </Frame>
-                <Grid AbsoluteLayout.LayoutBounds="1,1.01,1.01,0.2" AbsoluteLayout.LayoutFlags="All" ColumnSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
+                    
+                    <Grid Grid.Row="1" ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateLocation}" CommandParameter="{x:Reference map} "/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
+                    </Grid>
+
+
                 </Grid>
-
-
-            </AbsoluteLayout>
-        </Frame>
+            </Frame>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
