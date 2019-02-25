@@ -6,6 +6,7 @@ using Sanaap.App.ItemSources;
 using Sanaap.App.Services.Contracts;
 using Sanaap.Constants;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
@@ -32,7 +33,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             RequestCode = request.Code;
 
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            progressCancellationTokenSource?.Cancel();
+            progressCancellationTokenSource = new CancellationTokenSource();
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: progressCancellationTokenSource.Cancel))
             {
                 await loadProgresses(request.Code);
             }
@@ -41,6 +44,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public ObservableCollection<ProgressItemSource> Progresses { get; set; }
 
         public long RequestCode { get; set; }
+
+        private CancellationTokenSource progressCancellationTokenSource;
 
         public BitDelegateCommand ClosePopup { get; set; }
 

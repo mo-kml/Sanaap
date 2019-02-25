@@ -89,7 +89,10 @@ namespace Sanaap.App.ViewModels.Comment
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            submitCancellationTokenSource?.Cancel();
+            submitCancellationTokenSource = new CancellationTokenSource();
+
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: submitCancellationTokenSource.Cancel))
             {
                 await loadComments();
             }
