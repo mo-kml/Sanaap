@@ -13,6 +13,7 @@ using Sanaap.Enums;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.EvaluationRequest
@@ -45,7 +46,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
 
             Inquiry = new BitDelegateCommand(async () =>
             {
-                using (userDialogs.Loading(ConstantStrings.Loading))
+                inquiryCancellationTokenSource?.Cancel();
+                inquiryCancellationTokenSource = new CancellationTokenSource();
+                using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: inquiryCancellationTokenSource.Cancel))
                 {
                     if (string.IsNullOrEmpty(DocumentNumber) || !Requests.Any(r => r.Code == int.Parse(DocumentNumber)))
                     {
@@ -83,7 +86,9 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         }
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            inquiryCancellationTokenSource?.Cancel();
+            inquiryCancellationTokenSource = new CancellationTokenSource();
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: inquiryCancellationTokenSource.Cancel))
             {
                 await loadRequests();
             }
@@ -98,6 +103,8 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
         public BitDelegateCommand Inquiry { get; set; }
 
         public BitDelegateCommand OpenInquiryBox { get; set; }
+
+        private CancellationTokenSource inquiryCancellationTokenSource;
 
         public string DocumentNumber { get; set; }
 

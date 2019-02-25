@@ -12,6 +12,7 @@ using Sanaap.Dto;
 using Simple.OData.Client;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sanaap.App.ViewModels.Content
@@ -55,7 +56,9 @@ namespace Sanaap.App.ViewModels.Content
                       }
                   }
 
-                  using (_userDialogs.Loading(ConstantStrings.Loading))
+                  contentCancellationTokenSource?.Cancel();
+                  contentCancellationTokenSource = new CancellationTokenSource();
+                  using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: contentCancellationTokenSource.Cancel))
                   {
                       await loadContents(FilterDto);
                   }
@@ -88,9 +91,14 @@ namespace Sanaap.App.ViewModels.Content
         public BitDelegateCommand FilterContent { get; set; }
 
         public BitDelegateCommand OpenFilterPopup { get; set; }
+
+        private CancellationTokenSource contentCancellationTokenSource;
+
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            using (_userDialogs.Loading(ConstantStrings.Loading))
+            contentCancellationTokenSource?.Cancel();
+            contentCancellationTokenSource = new CancellationTokenSource();
+            using (_userDialogs.Loading(ConstantStrings.Loading, cancelText: ConstantStrings.Loading_Cancel, onCancel: contentCancellationTokenSource.Cancel))
             {
                 await loadContents(FilterDto);
 
