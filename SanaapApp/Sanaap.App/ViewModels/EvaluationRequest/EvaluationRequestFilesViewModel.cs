@@ -92,10 +92,11 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   {
                       Directory = "Sanaap",
                       SaveToAlbum = true,
-                      CompressionQuality = 40,
-                      CustomPhotoSize = 40,
+                      CompressionQuality = 25,
+                      CustomPhotoSize = 30,
                       PhotoSize = PhotoSize.Medium,
                       MaxWidthHeight = 2000,
+                      AllowCropping = true,
                       DefaultCamera = CameraDevice.Rear
                   });
 
@@ -123,7 +124,7 @@ namespace Sanaap.App.ViewModels.EvaluationRequest
                   MediaFile mediaFile = await media.PickPhotoAsync(new PickMediaOptions
                   {
                       PhotoSize = PhotoSize.Medium,
-                      CompressionQuality = 10,
+                      CompressionQuality = 25,
                   });
 
                   if (mediaFile != null)

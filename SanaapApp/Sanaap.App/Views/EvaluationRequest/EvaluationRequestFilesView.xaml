@@ -132,7 +132,7 @@
                                                                 <Setter Property="IsVisible" Value="False"/>
                                                             </DataTrigger>
                                                         </StackLayout.Triggers>
-                                                        <Image Aspect="Fill" Source="{Binding Image}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                        <Image Aspect="AspectFill" WidthRequest="80" HeightRequest="80" Source="{Binding Image}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                                             <Image.GestureRecognizers>
                                                                 <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenPhoto,Source={x:Reference evlRequestFile}}" CommandParameter="{Binding .}"/>
                                                             </Image.GestureRecognizers>
