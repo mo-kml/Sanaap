@@ -127,11 +127,7 @@
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <Button Command="{Binding GoToNextLevel}" BorderRadius="0" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"  Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                         <controls:IconButton Command="{Binding GoBack}" Style="{StaticResource returnButton}"/>
                     </Grid>
 

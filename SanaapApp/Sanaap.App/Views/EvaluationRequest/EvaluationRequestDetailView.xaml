@@ -139,11 +139,7 @@
                                 </StackLayout>
                             </StackLayout>
                         </ScrollView>
-                        <Label Grid.Row="1" HorizontalOptions="FillAndExpand" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}" VerticalTextAlignment="Center"  Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalTextAlignment="Center"  VerticalOptions="FillAndExpand">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToNextLevel}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <Button Grid.Row="1" Command="{Binding GoToNextLevel}" BorderRadius="0" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"  Text="مرحله بعدی" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
                     </Grid>
                 </Frame>

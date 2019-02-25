@@ -72,16 +72,16 @@ namespace Sanaap.App
 
             bool isLoggedIn = await Container.Resolve<ISecurityService>().IsLoggedInAsync();
 
-            //if (isLoggedIn)
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
-            //}
-            //else
-            //{
-            //    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
-            //}
+            if (isLoggedIn)
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainMenuView)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(LoginView)}");
+            }
 
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestExpertRankView)}");
+            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(EvaluationRequestFilesView)}");
 
 
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
