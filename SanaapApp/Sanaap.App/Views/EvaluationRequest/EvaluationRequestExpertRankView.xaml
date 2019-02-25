@@ -62,7 +62,7 @@
                     </Frame>
 
 
-                    <Button Grid.Row="1" Command="{Binding SubmitRank}" BorderRadius="0" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"  Text="ثبت نظر" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    <Button Grid.Row="1" Command="{Binding SubmitRank}" BorderRadius="0" FontFamily="{StaticResource Shabnam-Bold-FDFont}" FontSize="{StaticResource mediumFontSize}"  Text="ثبت" BackgroundColor="{StaticResource buttonBlue}" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                 </Grid>
             </Frame>
             <Frame BackgroundColor="White" CornerRadius="50" AbsoluteLayout.LayoutBounds="0.5,0,100,100" AbsoluteLayout.LayoutFlags="PositionProportional" Padding="5">
