@@ -1,0 +1,1445 @@
+﻿{
+    "Capital": [
+        {
+            "PrmID": 8658,
+            "Type": 25,
+            "Name": " البرز",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8628,
+            "Type": 25,
+            "Name": "آذربایجان شرقی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8629,
+            "Type": 25,
+            "Name": "آذربایجان غربی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8630,
+            "Type": 25,
+            "Name": "اردبیل",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8631,
+            "Type": 25,
+            "Name": "اصفهان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8632,
+            "Type": 25,
+            "Name": "ایلام",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8633,
+            "Type": 25,
+            "Name": "بوشهر",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8634,
+            "Type": 25,
+            "Name": "تهران",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8635,
+            "Type": 25,
+            "Name": "چهارمحال و بختیاری",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8636,
+            "Type": 25,
+            "Name": "خراسان جنوبی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8637,
+            "Type": 25,
+            "Name": "خراسان رضوی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8638,
+            "Type": 25,
+            "Name": "خراسان شمالی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8639,
+            "Type": 25,
+            "Name": "خوزستان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8640,
+            "Type": 25,
+            "Name": "زنجان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8641,
+            "Type": 25,
+            "Name": "سمنان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8642,
+            "Type": 25,
+            "Name": "سیستان و بلوچستان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8643,
+            "Type": 25,
+            "Name": "فارس",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8644,
+            "Type": 25,
+            "Name": "قزوین",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8645,
+            "Type": 25,
+            "Name": "قم",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8646,
+            "Type": 25,
+            "Name": "کردستان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8647,
+            "Type": 25,
+            "Name": "کرمان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8648,
+            "Type": 25,
+            "Name": "کرمانشاه",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8649,
+            "Type": 25,
+            "Name": "کهگیلویه و بویراحمد",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8650,
+            "Type": 25,
+            "Name": "گلستان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8651,
+            "Type": 25,
+            "Name": "گیلان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8652,
+            "Type": 25,
+            "Name": "لرستان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8653,
+            "Type": 25,
+            "Name": "مازندران",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8654,
+            "Type": 25,
+            "Name": "مرکزی",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8655,
+            "Type": 25,
+            "Name": "هرمزگان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8656,
+            "Type": 25,
+            "Name": "همدان",
+            "ChildOf": 3005
+        },
+        {
+            "PrmID": 8657,
+            "Type": 25,
+            "Name": "یزد",
+            "ChildOf": 3005
+        }
+    ],
+    "PersonType": [
+        {
+            "PrmID": 1,
+            "Type": 1,
+            "Name": "آقا",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 2,
+            "Type": 1,
+            "Name": "خانم",
+            "ChildOf": null
+        }
+    ],
+    "Insurance": [
+        {
+            "Name": "آرمان",
+            "Photo": "http://ipinsur.com/uploads/insurance/9.gif",
+            "ID": 9,
+            "IsContract": true
+        },
+        {
+            "Name": "آسماری",
+            "Photo": "http://ipinsur.com/uploads/insurance/27.gif",
+            "ID": 27,
+            "IsContract": false
+        },
+        {
+            "Name": "آسیا",
+            "Photo": "http://ipinsur.com/uploads/insurance/2.gif",
+            "ID": 2,
+            "IsContract": false
+        },
+        {
+            "Name": "البرز",
+            "Photo": "http://ipinsur.com/uploads/insurance/3.gif",
+            "ID": 3,
+            "IsContract": true
+        },
+        {
+            "Name": "امید",
+            "Photo": "http://ipinsur.com/uploads/insurance/23.gif",
+            "ID": 23,
+            "IsContract": false
+        },
+        {
+            "Name": "ایران",
+            "Photo": "http://ipinsur.com/uploads/insurance/25.gif",
+            "ID": 25,
+            "IsContract": true
+        },
+        {
+            "Name": "ایران معین",
+            "Photo": "http://ipinsur.com/uploads/insurance/36.gif",
+            "ID": 36,
+            "IsContract": true
+        },
+        {
+            "Name": "پارسیان",
+            "Photo": "http://ipinsur.com/uploads/insurance/17.gif",
+            "ID": 17,
+            "IsContract": true
+        },
+        {
+            "Name": "پاسارگاد",
+            "Photo": "http://ipinsur.com/uploads/insurance/18.gif",
+            "ID": 18,
+            "IsContract": false
+        },
+        {
+            "Name": "تجارت نو",
+            "Photo": "http://ipinsur.com/uploads/insurance/31.gif",
+            "ID": 31,
+            "IsContract": true
+        },
+        {
+            "Name": "تعاون",
+            "Photo": "http://ipinsur.com/uploads/insurance/26.gif",
+            "ID": 26,
+            "IsContract": false
+        },
+        {
+            "Name": "حافظ",
+            "Photo": "http://ipinsur.com/uploads/insurance/22.gif",
+            "ID": 22,
+            "IsContract": true
+        },
+        {
+            "Name": "حکمت صبا",
+            "Photo": "http://ipinsur.com/uploads/insurance/35.gif",
+            "ID": 35,
+            "IsContract": true
+        },
+        {
+            "Name": "دانا",
+            "Photo": "http://ipinsur.com/uploads/insurance/4.gif",
+            "ID": 4,
+            "IsContract": false
+        },
+        {
+            "Name": "دی",
+            "Photo": "http://ipinsur.com/uploads/insurance/16.gif",
+            "ID": 16,
+            "IsContract": true
+        },
+        {
+            "Name": "رازی",
+            "Photo": "http://ipinsur.com/uploads/insurance/13.gif",
+            "ID": 13,
+            "IsContract": false
+        },
+        {
+            "Name": "سامان",
+            "Photo": "http://ipinsur.com/uploads/insurance/6.gif",
+            "ID": 6,
+            "IsContract": false
+        },
+        {
+            "Name": "سرمد",
+            "Photo": "http://ipinsur.com/uploads/insurance/28.gif",
+            "ID": 28,
+            "IsContract": false
+        },
+        {
+            "Name": "سینا",
+            "Photo": "http://ipinsur.com/uploads/insurance/5.gif",
+            "ID": 5,
+            "IsContract": true
+        },
+        {
+            "Name": "کارآفرین",
+            "Photo": "http://ipinsur.com/uploads/insurance/7.gif",
+            "ID": 7,
+            "IsContract": false
+        },
+        {
+            "Name": "کوثر",
+            "Photo": "http://ipinsur.com/uploads/insurance/10.gif",
+            "ID": 10,
+            "IsContract": false
+        },
+        {
+            "Name": "ما",
+            "Photo": "http://ipinsur.com/uploads/insurance/11.gif",
+            "ID": 11,
+            "IsContract": false
+        },
+        {
+            "Name": "معلم",
+            "Photo": "http://ipinsur.com/uploads/insurance/15.gif",
+            "ID": 15,
+            "IsContract": false
+        },
+        {
+            "Name": "ملت",
+            "Photo": "http://ipinsur.com/uploads/insurance/8.gif",
+            "ID": 8,
+            "IsContract": true
+        },
+        {
+            "Name": "میهن",
+            "Photo": "http://ipinsur.com/uploads/insurance/20.gif",
+            "ID": 20,
+            "IsContract": false
+        },
+        {
+            "Name": "نوین",
+            "Photo": "http://ipinsur.com/uploads/insurance/12.gif",
+            "ID": 12,
+            "IsContract": false
+        }
+    ],
+    "CarType": [
+        {
+            "PrmID": 415,
+            "Type": 21,
+            "Name": "اتوکار",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 416,
+            "Type": 21,
+            "Name": "بارکش",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 414,
+            "Type": 21,
+            "Name": "سواری",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 418,
+            "Type": 21,
+            "Name": "ماشین آلات کشاورزی-راه سازی وساختمانی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 417,
+            "Type": 21,
+            "Name": "موتور سیکلت",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 419,
+            "Type": 21,
+            "Name": "یدک",
+            "ChildOf": null
+        }
+    ],
+    "NumberplateType": [
+        {
+            "PrmID": 8411,
+            "Type": 27,
+            "Name": "آب پاش",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8412,
+            "Type": 27,
+            "Name": "آتش نشانی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8371,
+            "Type": 27,
+            "Name": "آتش نشانی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8372,
+            "Type": 27,
+            "Name": "آژانس",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8373,
+            "Type": 27,
+            "Name": "آمبولانس",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8399,
+            "Type": 27,
+            "Name": "آمبولانس",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8413,
+            "Type": 27,
+            "Name": "آمبولانس",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8374,
+            "Type": 27,
+            "Name": "آموزشی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8455,
+            "Type": 27,
+            "Name": "آموزشی",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8456,
+            "Type": 27,
+            "Name": "اداری",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8375,
+            "Type": 27,
+            "Name": "اداری",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8400,
+            "Type": 27,
+            "Name": "اداری",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8414,
+            "Type": 27,
+            "Name": "اداری",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8376,
+            "Type": 27,
+            "Name": "امور شرکت",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8415,
+            "Type": 27,
+            "Name": "بارکش",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8461,
+            "Type": 27,
+            "Name": "بارکش",
+            "ChildOf": 418
+        },
+        {
+            "PrmID": 8416,
+            "Type": 27,
+            "Name": "بالابر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8417,
+            "Type": 27,
+            "Name": "برف روب",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8462,
+            "Type": 27,
+            "Name": "برف روب",
+            "ChildOf": 418
+        },
+        {
+            "PrmID": 8418,
+            "Type": 27,
+            "Name": "بونکر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8401,
+            "Type": 27,
+            "Name": "بین شهری و خارج شهر(پلاک کرایه)",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8419,
+            "Type": 27,
+            "Name": "پمپ بتن",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8402,
+            "Type": 27,
+            "Name": "پول رسان",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8377,
+            "Type": 27,
+            "Name": "تاکسی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8379,
+            "Type": 27,
+            "Name": "تاکسی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8380,
+            "Type": 27,
+            "Name": "تاکسی (داخل وخارج شهر)",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8420,
+            "Type": 27,
+            "Name": "تاکسی بار",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8378,
+            "Type": 27,
+            "Name": "تاکسی بیسیم",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8381,
+            "Type": 27,
+            "Name": "تاکسی خطی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8382,
+            "Type": 27,
+            "Name": "تاکسی کیش (ویژه قرارداد 1322)",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8421,
+            "Type": 27,
+            "Name": "تانکر (بدون تشدید خطر)",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8466,
+            "Type": 27,
+            "Name": "تانکر (حمل مواد سریع الاشتعال)",
+            "ChildOf": 419
+        },
+        {
+            "PrmID": 8422,
+            "Type": 27,
+            "Name": "تانکر آب با پمپ واتر جت",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8423,
+            "Type": 27,
+            "Name": "تانکرحمل روغن نباتی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8424,
+            "Type": 27,
+            "Name": "ترابری",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8384,
+            "Type": 27,
+            "Name": "تشریفات",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8385,
+            "Type": 27,
+            "Name": "تعلیم رانندگی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8403,
+            "Type": 27,
+            "Name": "تعلیم رانندگی",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8425,
+            "Type": 27,
+            "Name": "تعلیم رانندگی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8426,
+            "Type": 27,
+            "Name": "جرثقیل",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8427,
+            "Type": 27,
+            "Name": "حمل آب",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8428,
+            "Type": 27,
+            "Name": "حمل احشام",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8429,
+            "Type": 27,
+            "Name": "حمل پول",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8386,
+            "Type": 27,
+            "Name": "حمل پول",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8387,
+            "Type": 27,
+            "Name": "حمل جنازه",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8430,
+            "Type": 27,
+            "Name": "حمل چهارمواد سوختی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8431,
+            "Type": 27,
+            "Name": "حمل خودرو",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8388,
+            "Type": 27,
+            "Name": "حمل خون",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8404,
+            "Type": 27,
+            "Name": "حمل خون و خونگیری",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8432,
+            "Type": 27,
+            "Name": "حمل خون ووسایل رادیولوژی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8433,
+            "Type": 27,
+            "Name": "حمل زباله",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8434,
+            "Type": 27,
+            "Name": "حمل سیمان",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8435,
+            "Type": 27,
+            "Name": "حمل شیر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8436,
+            "Type": 27,
+            "Name": "حمل قیر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8437,
+            "Type": 27,
+            "Name": "حمل کپسول گاز",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8438,
+            "Type": 27,
+            "Name": "حمل گوشت",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8439,
+            "Type": 27,
+            "Name": "حمل مواد سریع الاشتعال",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8440,
+            "Type": 27,
+            "Name": "حمل مواد سوختی مایع و گازی شکل",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8441,
+            "Type": 27,
+            "Name": "حمل مواد شیمیائی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8442,
+            "Type": 27,
+            "Name": "حمل مواد نفتی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8443,
+            "Type": 27,
+            "Name": "حمل موتور سیکلت",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8444,
+            "Type": 27,
+            "Name": "خط کش معابر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8445,
+            "Type": 27,
+            "Name": "خیابان پاک کن",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8389,
+            "Type": 27,
+            "Name": "دولتی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8457,
+            "Type": 27,
+            "Name": "دولتی",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8463,
+            "Type": 27,
+            "Name": "راه سازی",
+            "ChildOf": 418
+        },
+        {
+            "PrmID": 8446,
+            "Type": 27,
+            "Name": "راهسازی و ساختمانی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8464,
+            "Type": 27,
+            "Name": "ساختمانی",
+            "ChildOf": 418
+        },
+        {
+            "PrmID": 8390,
+            "Type": 27,
+            "Name": "سرویس",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8405,
+            "Type": 27,
+            "Name": "سرویس دانشجویان و محصلین",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8406,
+            "Type": 27,
+            "Name": "سرویس کارکنان بیمه گزار",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8458,
+            "Type": 27,
+            "Name": "سیاسی",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8391,
+            "Type": 27,
+            "Name": "سیاسی 1",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8392,
+            "Type": 27,
+            "Name": "سیاسی 2",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8393,
+            "Type": 27,
+            "Name": "شخصی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8407,
+            "Type": 27,
+            "Name": "شخصی",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8459,
+            "Type": 27,
+            "Name": "شخصی",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8408,
+            "Type": 27,
+            "Name": "عمومی شهری",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8409,
+            "Type": 27,
+            "Name": "عیب یاب",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8453,
+            "Type": 27,
+            "Name": "کارواش",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8447,
+            "Type": 27,
+            "Name": "کانتینر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8394,
+            "Type": 27,
+            "Name": "کرایه بیابانی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8395,
+            "Type": 27,
+            "Name": "کرایه شهری",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8448,
+            "Type": 27,
+            "Name": "کشاورزی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8465,
+            "Type": 27,
+            "Name": "کشاورزی",
+            "ChildOf": 418
+        },
+        {
+            "PrmID": 8449,
+            "Type": 27,
+            "Name": "کمپرسی",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8450,
+            "Type": 27,
+            "Name": "لجن کش",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8396,
+            "Type": 27,
+            "Name": "مسابقات رالی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8460,
+            "Type": 27,
+            "Name": "مسابقات رالی",
+            "ChildOf": 417
+        },
+        {
+            "PrmID": 8397,
+            "Type": 27,
+            "Name": "مسافربر",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8410,
+            "Type": 27,
+            "Name": "مسافربری",
+            "ChildOf": 415
+        },
+        {
+            "PrmID": 8451,
+            "Type": 27,
+            "Name": "میکسر",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8398,
+            "Type": 27,
+            "Name": "نظامی",
+            "ChildOf": 414
+        },
+        {
+            "PrmID": 8452,
+            "Type": 27,
+            "Name": "نمک پاش",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8454,
+            "Type": 27,
+            "Name": "یخچالدار",
+            "ChildOf": 416
+        },
+        {
+            "PrmID": 8467,
+            "Type": 27,
+            "Name": "یدک",
+            "ChildOf": 419
+        }
+    ],
+    "AccidentReason": [
+        {
+            "PrmID": 8483,
+            "Type": 29,
+            "Name": "آتش سوزی بر اثر حادثه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8501,
+            "Type": 29,
+            "Name": "آتش سوزی در هنگام سوخت گیری غیر مجاز",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8479,
+            "Type": 29,
+            "Name": "آتش سوزی دراثر نقص فنی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8478,
+            "Type": 29,
+            "Name": "آتش سوزی عمدی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8475,
+            "Type": 29,
+            "Name": "انحراف به راست",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8491,
+            "Type": 29,
+            "Name": "تجاوز از سرعت مجاز",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8474,
+            "Type": 29,
+            "Name": "تجاوز یا انحراف به سمت چپ معابر",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8471,
+            "Type": 29,
+            "Name": "تغییر مسیر ناگهانی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8484,
+            "Type": 29,
+            "Name": "حادثه در پارک",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8485,
+            "Type": 29,
+            "Name": "حرکات نمایشی و آکروباتیک",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8492,
+            "Type": 29,
+            "Name": "حرکت بصورت مارپیچ در راه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8476,
+            "Type": 29,
+            "Name": "حرکت غیرضروربادنده عقب",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8482,
+            "Type": 29,
+            "Name": "خستگی وخواب آلودگی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8486,
+            "Type": 29,
+            "Name": "دور زدن در محل ممنوع",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8496,
+            "Type": 29,
+            "Name": "روشن نکردن چراغ در شب در مواقع لزوم",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8481,
+            "Type": 29,
+            "Name": "سایر",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8490,
+            "Type": 29,
+            "Name": "سبقت غیر مجاز",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8472,
+            "Type": 29,
+            "Name": "عبور از چراغ قرمز",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8489,
+            "Type": 29,
+            "Name": "عبور از محل ممنوع (ورود ممنوع)",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8487,
+            "Type": 29,
+            "Name": "عبور وسیله نقلیه از پیاده رو",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8502,
+            "Type": 29,
+            "Name": "عدم توانایی در کنترل وسیله نقلیه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8468,
+            "Type": 29,
+            "Name": "عدم توجه به جلو",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8473,
+            "Type": 29,
+            "Name": "عدم رعایت حق تقدم",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8498,
+            "Type": 29,
+            "Name": "عدم رعایت شرایط مندرج در گواهینامه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8470,
+            "Type": 29,
+            "Name": "عدم رعایت فاصله جانبی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8469,
+            "Type": 29,
+            "Name": "عدم رعایت فاصله طولی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8493,
+            "Type": 29,
+            "Name": "گردش به چپ",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8494,
+            "Type": 29,
+            "Name": "گردش به راست",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8495,
+            "Type": 29,
+            "Name": "گردش به محل ممنوع",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8500,
+            "Type": 29,
+            "Name": "مصرف مشروبات الکلی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8499,
+            "Type": 29,
+            "Name": "مصرف مواد مخدر یا روان گردان",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8488,
+            "Type": 29,
+            "Name": "نقص سیستم روشنایی به هنگام شب",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8477,
+            "Type": 29,
+            "Name": "نقص فنی حادث",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8497,
+            "Type": 29,
+            "Name": "نقص فنی مستمر",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 8480,
+            "Type": 29,
+            "Name": "وقوع بلایای طبیعی",
+            "ChildOf": null
+        }
+    ],
+    "NumberplateAlphabet": [
+        {
+            "PrmID": 13765,
+            "Type": 31,
+            "Name": "D",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 13766,
+            "Type": 31,
+            "Name": "S",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4132,
+            "Type": 31,
+            "Name": "الف",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4133,
+            "Type": 31,
+            "Name": "ب",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4151,
+            "Type": 31,
+            "Name": "پ",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4134,
+            "Type": 31,
+            "Name": "ت",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 13764,
+            "Type": 31,
+            "Name": "ث",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4135,
+            "Type": 31,
+            "Name": "ج",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4136,
+            "Type": 31,
+            "Name": "د",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4148,
+            "Type": 31,
+            "Name": "ر",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 13761,
+            "Type": 31,
+            "Name": "ز",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4150,
+            "Type": 31,
+            "Name": "ژ",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4137,
+            "Type": 31,
+            "Name": "س",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 13762,
+            "Type": 31,
+            "Name": "ش",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4138,
+            "Type": 31,
+            "Name": "ص",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4139,
+            "Type": 31,
+            "Name": "ط",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4140,
+            "Type": 31,
+            "Name": "ع",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4141,
+            "Type": 31,
+            "Name": "ق",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4149,
+            "Type": 31,
+            "Name": "ک",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 13763,
+            "Type": 31,
+            "Name": "گ",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4142,
+            "Type": 31,
+            "Name": "ل",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4143,
+            "Type": 31,
+            "Name": "م",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4144,
+            "Type": 31,
+            "Name": "ن",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4145,
+            "Type": 31,
+            "Name": "و",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4146,
+            "Type": 31,
+            "Name": "ه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4147,
+            "Type": 31,
+            "Name": "ی",
+            "ChildOf": null
+        }
+    ],
+    "FileType": [
+        {
+            "PrmID": 1,
+            "Type": 0,
+            "Name": "بازدید اولیه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 2,
+            "Type": 0,
+            "Name": "بازدید سلامت",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 3,
+            "Type": 0,
+            "Name": "ثالث مالی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 4,
+            "Type": 0,
+            "Name": "ثالث جانی",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 5,
+            "Type": 0,
+            "Name": "بدنه",
+            "ChildOf": null
+        },
+        {
+            "PrmID": 6,
+            "Type": 0,
+            "Name": "ثالث سرنشین",
+            "ChildOf": null
+        }
+    ],
+    "SalesPhotos": [
+        {
+            "ID": 1,
+            "Name": "گواهینامه مقصر",
+            "IsRequired": true
+        },
+        {
+            "ID": 2,
+            "Name": "گواهینامه زیان دیده",
+            "IsRequired": false
+        },
+        {
+            "ID": 3,
+            "Name": "بیمه ثالث مقصر",
+            "IsRequired": true
+        },
+        {
+            "ID": 4,
+            "Name": "کارت ماشین زیان دیده",
+            "IsRequired": false
+        },
+        {
+            "ID": 5,
+            "Name": "کارت ماشین مقصر",
+            "IsRequired": false
+        },
+        {
+            "ID": 6,
+            "Name": "عکس خودرو",
+            "IsRequired": false
+        }
+    ],
+    "BadanePhotos": [
+        {
+            "ID": 21,
+            "Name": "گواهینامه",
+            "IsRequired": true
+        },
+        {
+            "ID": 22,
+            "Name": "بیمه ثالث",
+            "IsRequired": false
+        },
+        {
+            "ID": 23,
+            "Name": "بیمه بدنه",
+            "IsRequired": true
+        },
+        {
+            "ID": 24,
+            "Name": "کارت ماشین",
+            "IsRequired": false
+        },
+        {
+            "ID": 25,
+            "Name": "عکس خودرو",
+            "IsRequired": false
+        }
+    ]
+}

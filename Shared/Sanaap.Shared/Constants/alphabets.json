@@ -1,0 +1,158 @@
+﻿[
+    {
+        "PrmID": 13765,
+        "Type": 31,
+        "Name": "D",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 13766,
+        "Type": 31,
+        "Name": "S",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4132,
+        "Type": 31,
+        "Name": "الف",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4133,
+        "Type": 31,
+        "Name": "ب",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4151,
+        "Type": 31,
+        "Name": "پ",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4134,
+        "Type": 31,
+        "Name": "ت",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 13764,
+        "Type": 31,
+        "Name": "ث",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4135,
+        "Type": 31,
+        "Name": "ج",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4136,
+        "Type": 31,
+        "Name": "د",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4148,
+        "Type": 31,
+        "Name": "ر",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 13761,
+        "Type": 31,
+        "Name": "ز",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4150,
+        "Type": 31,
+        "Name": "ژ",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4137,
+        "Type": 31,
+        "Name": "س",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 13762,
+        "Type": 31,
+        "Name": "ش",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4138,
+        "Type": 31,
+        "Name": "ص",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4139,
+        "Type": 31,
+        "Name": "ط",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4140,
+        "Type": 31,
+        "Name": "ع",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4141,
+        "Type": 31,
+        "Name": "ق",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4149,
+        "Type": 31,
+        "Name": "ک",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 13763,
+        "Type": 31,
+        "Name": "گ",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4142,
+        "Type": 31,
+        "Name": "ل",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4143,
+        "Type": 31,
+        "Name": "م",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4144,
+        "Type": 31,
+        "Name": "ن",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4145,
+        "Type": 31,
+        "Name": "و",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4146,
+        "Type": 31,
+        "Name": "ه",
+        "ChildOf": null
+    },
+    {
+        "PrmID": 4147,
+        "Type": 31,
+        "Name": "ی",
+        "ChildOf": null
+    }
+]

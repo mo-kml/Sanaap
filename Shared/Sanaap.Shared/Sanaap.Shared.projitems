@@ -59,4 +59,10 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Constants\alphabets.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Constants\cars.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Constants\colors.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Constants\initialData.json" />
+  </ItemGroup>
 </Project>
